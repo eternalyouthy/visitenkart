@@ -1,0 +1,7 @@
+{
+  "name": "visitenkarte",
+  "private": true,
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  // Cloudflare Worker + static assets (the "Workers" deploy path).
+  // Deploy command in the dashboard: npx wrangler deploy
+  "name": "visitenkarte",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-01",
+
+  // Static site lives in ./public and is served automatically.
+  // The Worker (src/index.js) only runs for requests that don't match a file,
+  // e.g. POST /api/email. "binding" lets the Worker serve assets explicitly too.
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "none"
+  }
+
+  // Do NOT put TURNSTILE_SECRET / CONTACT_EMAIL here.
+  // Set them in dashboard → Settings → Variables and secrets (secret = encrypted),
+  // or via:  npx wrangler secret put TURNSTILE_SECRET
+}
