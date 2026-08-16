@@ -1,9 +1,10 @@
 {
   // Cloudflare Worker + static assets (the "Workers" deploy path).
   // Deploy command in the dashboard: npx wrangler deploy
-  "name": "visitenkarte",
+  "name": "visitenkart",
   "main": "src/index.js",
   "compatibility_date": "2026-07-01",
+  "keep_vars": true,
 
   // Static site lives in ./public and is served automatically.
   // The Worker (src/index.js) only runs for requests that don't match a file,
