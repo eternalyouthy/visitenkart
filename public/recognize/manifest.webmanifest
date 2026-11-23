@@ -2,6 +2,7 @@
   "name": "ETRNL",
   "short_name": "ETRNL",
   "description": "Personal multilingual trainer (German, English, Russian): words, IT & security, chunks, grammar, roots, spaced repetition.",
+  "id": "/etrnl.recognize/",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

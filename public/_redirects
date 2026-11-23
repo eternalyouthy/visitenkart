@@ -1,0 +1,3 @@
+/etrnl.recognize /recognize/ 308
+/etrnl.recognize/ /recognize/ 308
+/etrnl.recognize/* /recognize/:splat 308

@@ -2,5 +2,5 @@ node_modules/
 .wrangler/
 .env
 
-# Source copy used for importing the trainer; deploy public/etrnl.recognize/.
+# Source copy used for importing the trainer; deploy public/recognize/.
 /german train/

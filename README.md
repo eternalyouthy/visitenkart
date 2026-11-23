@@ -6,7 +6,7 @@ A personal site with my background, current work, and projects. It also hosts ET
 ## Run and deploy
 
 - `/` serves the personal site from `public/index.html`.
-- `/etrnl.recognize/` serves the language trainer from `public/etrnl.recognize/`. The app, its language packs, and its offline assets are included in this repository.
+- `/recognize/#/start` opens the language trainer served from `public/recognize/`. Bookmarks to `/etrnl.recognize/` redirect to the new path.
 - `/api/email` remains the Turnstile-gated contact endpoint.
 
 Run `npm install`, then `npx wrangler dev` and open the HTTP URL that Wrangler prints. One Cloudflare Workers deployment serves the portfolio and trainer from the same `public/` directory.
