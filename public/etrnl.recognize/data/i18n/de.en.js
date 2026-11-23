@@ -1,0 +1,147 @@
+/* OVERLAY · English meanings for the GERMAN pack ("I know: English · I learn: German").
+ * The German data stays Russian-first; this file adds English glosses by id. Entries without an English gloss
+ * fall back to Russian and are marked "RU". Extend in batches: GT.localize('en', { '<id>': { gloss, note?, examples? } }). */
+(function () {
+  var P = GT._target;   // the German pack while it loads
+  GT.localize('en', {
+    // Words · Everyday Core / Work (B1)
+    'b1-everyday-obwohl': { gloss: 'although' },
+    'b1-everyday-trotzdem': { gloss: 'nevertheless, still, anyway' },
+    'b1-everyday-erledigen': { gloss: 'to get done, to take care of, to settle' },
+    'b1-work-bewerben': { gloss: 'to apply (for a job)' },
+    'b1-work-erfahrung': { gloss: 'experience' },
+    'b1-work-besprechung': { gloss: 'meeting, discussion' },
+    'b1-work-kuendigen': { gloss: 'to resign; to dismiss (someone); to terminate (a contract)' },
+    'b1-work-abteilung': { gloss: 'department' },
+    'b1-work-vertrag': { gloss: 'contract' },
+    'b1-work-ueberstunde': { gloss: 'hour of overtime' },
+    'b1-work-verantwortlich': { gloss: 'responsible (for)' },
+    // Words · B2 Beruf
+    'b2-beruf-werdegang': { gloss: 'career path, professional background' },
+    'b2-beruf-laufbahn': { gloss: 'career' },
+    'b2-beruf-quereinsteiger': { gloss: 'career changer (entering a field without the usual training)' },
+    'b2-beruf-weiterentwickeln': { gloss: 'to develop further, to grow (professionally)' },
+    'b2-beruf-aufstiegsmoeglichkeit': { gloss: 'opportunity for promotion' },
+    'b2-beruf-gehaltsverhandlung': { gloss: 'salary negotiation' },
+    'b2-beruf-fachkraft': { gloss: 'skilled worker, specialist' },
+    'b2-beruf-selbststaendig': { gloss: 'to become self-employed, to start one’s own business' },
+    'b2-beruf-einarbeitung': { gloss: 'onboarding, induction, training-in' },
+    'b2-beruf-probezeit': { gloss: 'probation period' },
+    'b2-beruf-befoerderung': { gloss: 'promotion; transport (of passengers, goods)' },
+    'b2-beruf-arbeitszeugnis': { gloss: 'employer’s reference (formal work certificate)' },
+    'b2-beruf-betriebsrat': { gloss: 'works council (elected employee representation)' },
+    'b2-beruf-weiterbildung': { gloss: 'further training, continuing education' },
+    'b2-beruf-kuendigungsfrist': { gloss: 'notice period' },
+    'b2-beruf-eigeninitiative': { gloss: 'personal initiative' },
+    'b2-beruf-belastbarkeit': { gloss: 'resilience, ability to work under pressure' },
+    'b2-beruf-teamfaehigkeit': { gloss: 'ability to work in a team' },
+    'b2-beruf-arbeitsmarkt': { gloss: 'labour market' },
+    'b2-beruf-bewerbungsunterlagen': { gloss: 'application documents (CV, cover letter, references)' },
+    // Professional · Work & Office, IT & Development, Infrastructure
+    'it-comm-ticket': { gloss: 'ticket, request' },
+    'it-comm-meeting': { gloss: 'meeting' },
+    'it-comm-fehler': { gloss: 'error, mistake; bug' },
+    'it-comm-beheben': { gloss: 'to fix, to resolve (a problem, an error)' },
+    'it-comm-rueckmeldung': { gloss: 'reply, feedback' },
+    'pro-office-frist': { gloss: 'deadline (official), time limit' },
+    'pro-office-zustaendig': { gloss: 'responsible (for an area), in charge' },
+    'pro-office-vertretung': { gloss: 'cover, stand-in (during leave or illness); representative' },
+    'pro-office-absprache': { gloss: 'agreement, arrangement' },
+    'pro-office-ruecksprache': { gloss: 'consultation, checking back (with a manager or colleague)' },
+    'pro-office-abstimmen': { gloss: 'to coordinate, to agree on; to vote (über + acc.)' },
+    'pro-office-kapazitaet': { gloss: 'capacity (free time in a team; server capacity)' },
+    'pro-office-prioritaet': { gloss: 'priority' },
+    'pro-office-schnittstelle': { gloss: 'interface (API); link between departments' },
+    'pro-office-urlaubsantrag': { gloss: 'leave request' },
+    'pro-office-protokoll': { gloss: 'minutes (of a meeting); network protocol; log' },
+    'pro-office-zeitnah': { gloss: 'promptly, at short notice' },
+    'pro-office-abstimmung': { gloss: 'coordination, alignment; vote' },
+    'pro-office-auslastung': { gloss: 'workload, utilisation (of a team or server)' },
+    'it-dev-deployen': { gloss: 'to deploy' },
+    'it-dev-anforderung': { gloss: 'requirement' },
+    'it-dev-commit': { gloss: 'commit' },
+    'it-infra-server': { gloss: 'server' },
+    'it-infra-ausfall': { gloss: 'outage, failure, downtime' },
+    'it-infra-netzwerk': { gloss: 'network' },
+    // Expressions · Idioms
+    'exp-idiom-uhren-anders': { gloss: 'Things work differently here; different rules apply here.' },
+    'exp-idiom-bahnhof': { gloss: 'It’s all Greek to me.' },
+    'exp-idiom-nicht-mein-bier': { gloss: 'That’s not my business / not my problem.' },
+    'exp-idiom-nagel-kopf': { gloss: 'To hit the nail on the head.' },
+    'exp-idiom-kaltes-wasser': { gloss: 'To jump in at the deep end.' },
+    'exp-idiom-daumen-druecken': { gloss: 'To keep one’s fingers crossed for someone.' },
+    'exp-idiom-schlauch-stehen': { gloss: 'To be slow on the uptake (to have a mental block).' },
+    'exp-idiom-tellerrand': { gloss: 'To think outside the box, to look beyond one’s own field.' },
+    'exp-idiom-eis-brechen': { gloss: 'To break the ice.' },
+    'exp-idiom-vier-augen': { gloss: 'To talk in private (one-to-one).' },
+    'exp-idiom-nerven-gehen': { gloss: 'To get on someone’s nerves.' },
+    'exp-idiom-selben-boot': { gloss: 'To be in the same boat.' },
+    'exp-idiom-eine-karte': { gloss: 'To put all one’s eggs in one basket.' },
+    'exp-idiom-gruenes-licht': { gloss: 'To give the green light.' },
+    'exp-idiom-kirche-im-dorf': { gloss: 'Not to get carried away; to keep things in proportion.' },
+    // Expressions · Everyday Phrases
+    'exp-day-kommt-drauf-an': { gloss: 'It depends.' },
+    'exp-day-mal-sehen': { gloss: 'We’ll see.' },
+    'exp-day-kriegen-wir-hin': { gloss: 'We’ll manage that. / We’ll sort it out.' },
+    'exp-day-macht-nichts': { gloss: 'Never mind. / No problem.' },
+    'exp-day-klingt-gut': { gloss: 'Sounds good!' },
+    'exp-day-geht-klar': { gloss: 'All right, will do. / No problem.' },
+    'exp-day-ehrlich-gesagt': { gloss: 'To be honest, …' },
+    'exp-day-so-oder-so': { gloss: 'Either way; one way or another.' },
+    'exp-day-lohnt-sich': { gloss: 'It’s (not) worth it.' },
+    'exp-day-hauptsache': { gloss: 'The main thing is [X].' },
+    'exp-day-macht-sinn': { gloss: 'That makes sense.' },
+    'exp-day-nur-zur-info': { gloss: 'Just FYI: [X].' },
+    'exp-day-gleich-wieder-da': { gloss: 'I’ll be right back.' },
+    'exp-day-kein-ding': { gloss: 'No problem! / Don’t mention it!' },
+    'exp-day-schauen-wir-mal': { gloss: 'Let’s have a look (together).' },
+    // Chunks
+    'ch-opinion-meiner-meinung-nach': { gloss: 'In my opinion …' },
+    'ch-opinion-ich-bin-der-meinung': { gloss: 'I believe that [X].' },
+    'ch-agree-da-hast-du-recht': { gloss: 'You’re right there, but [X].' },
+    'ch-agree-anderer-meinung': { gloss: 'I see it differently. / I disagree.' },
+    'ch-clarify-erklaeren': { gloss: 'Could you please explain [X] to me?' },
+    'ch-clarify-was-meinen-sie': { gloss: 'What exactly do you mean by [X]?' },
+    'ch-clarify-richtig-verstanden': { gloss: 'Did I understand you correctly that [X]?' },
+    'ch-complain-beschweren': { gloss: 'I would like to complain about [X].' },
+    'ch-problem-problem-mit': { gloss: 'I have a problem with [X].' },
+    'ch-problem-funktioniert-nicht-mehr': { gloss: '[X] hasn’t worked since [time].' },
+    'ch-problem-seit-beschwerden': { gloss: 'I’ve had [symptoms] for [time].' },
+    'ch-phone-krankmelden': { gloss: 'I’d like to call in sick today.' },
+    'ch-appointments-termin-bei': { gloss: 'I’d like an appointment with [X].' },
+    'ch-appointments-verschieben': { gloss: 'Unfortunately I have to reschedule my appointment.' },
+    'ch-appointments-passt-es': { gloss: 'Does [day] at [time] suit you?' },
+    'ch-phone-verbinden': { gloss: 'Could you put me through to [X], please?' },
+    'ch-phone-wegen': { gloss: 'I’m calling about [X].' },
+    'ch-email-sehr-geehrte': { gloss: 'Dear Sir or Madam,' },
+    'ch-email-freue-mich-auf': { gloss: 'I look forward to hearing from you.' },
+    'ch-smalltalk-wochenende': { gloss: 'How was your weekend?' },
+    'ch-standup-gestern-heute': { gloss: 'Yesterday I worked on [X], today I’ll take care of [Y].' },
+    'ch-bug-wenn-ich': { gloss: 'When I [X], [Y] happens. It should actually [Z].' },
+    'ch-help-komme-nicht-weiter': { gloss: 'Got a minute? I’m stuck with [X].' },
+    'ch-meeting-sehe-das-anders': { gloss: 'I see that a little differently, because [X].' },
+    'ch-meeting-waere-es-nicht-besser': { gloss: 'Wouldn’t it be better if we [X]?' }
+  }, {
+    'words.everyday': { scenario: 'a chat with a neighbour on the stairs about the past week and plans. You are the neighbour.' },
+    'words.health': { scenario: 'an appointment with a GP (Hausarzt). You are the doctor; I am the patient with symptoms and need a sick note for work.' },
+    'words.work': { scenario: 'a job interview at a German IT security company. You are the team lead.' },
+    'it.b2_beruf': { scenario: 'a career consultation. You are the coach; I talk about my path, growing in cybersecurity and a possible salary negotiation.' },
+    'it.workcomm': { scenario: 'a daily stand-up and then agreeing tasks and deadlines with a colleague from another department. You are the colleague and scrum master.' },
+    'it.security': { scenario: 'I explain a security incident to a non-technical department head. You are that manager and ask simple but persistent questions.' }
+  });
+
+  /* Word families, grammar page summaries */
+  var ROOTS = { bauen: 'to build', stellen: 'to put (upright)', ziehen: 'to pull; to move (house)', setzen: 'to set, to seat; (sich) to sit down',
+    legen: 'to lay (flat)', nehmen: 'to take', geben: 'to give', halten: 'to hold; to stop', kommen: 'to come, to arrive', gehen: 'to go, to walk',
+    schlagen: 'to hit, to beat', sprechen: 'to speak, to talk', sehen: 'to see, to look', fallen: 'to fall', stehen: 'to stand', tragen: 'to carry; to wear', 'führen': 'to lead, to guide' };
+  Object.keys(ROOTS).forEach(function (id) { if (P.roots[id]) P.roots[id].en = ROOTS[id]; });
+  var GR = {
+    konjunktiv2: 'Wishes, advice, polite requests and unreal conditions: würde, hätte, wäre, könnte.',
+    nebensaetze: 'weil, dass, obwohl, wenn vs als, damit vs um … zu, indirect questions with ob and W-words.',
+    passiv: 'werden + past participle in the present, past, perfect and with modal verbs.'
+  };
+  Object.keys(GR).forEach(function (id) {
+    var g = P.grammar[id];
+    if (g) { g.i18n = g.i18n || {}; g.i18n.en = Object.assign(g.i18n.en || {}, { summary: GR[id] }); }
+  });
+})();

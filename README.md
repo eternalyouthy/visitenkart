@@ -1,7 +1,17 @@
 Personal Website
 ================
 
-A simple digital business card focused on my background, current work, and projects in Identity & Access Management. The website was built with AI assistance. I reviewed and implemented the security-sensitive parts myself, including server-side email handling, Cloudflare Turnstile verification, and secure secret management.
+A personal site with my background, current work, and projects. It also hosts ETRNL, my multilingual vocabulary trainer. The website was built with AI assistance. I reviewed and implemented the security-sensitive parts myself, including server-side email handling, Cloudflare Turnstile verification, and secure secret management.
+
+## Run and deploy
+
+- `/` serves the personal site from `public/index.html`.
+- `/etrnl.recognize/` serves the language trainer from `public/etrnl.recognize/`. The app, its language packs, and its offline assets are included in this repository.
+- `/api/email` remains the Turnstile-gated contact endpoint.
+
+Run `npm install`, then `npx wrangler dev` and open the HTTP URL that Wrangler prints. One Cloudflare Workers deployment serves the portfolio and trainer from the same `public/` directory.
+
+ETRNL progress is stored by browser origin. To move progress from another hostname, use **User → Sync & Backup → Export** there and **Import & merge** on this site. For Google Drive sync, authorize the site's HTTPS origin in the Google OAuth client configuration.
 
 * * *
 

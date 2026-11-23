@@ -1,0 +1,57 @@
+/* RUSSIAN ROOT -ДЕЛ- (делать “to do, to make”). Prefix + -делать is perfective, the imperfective partner
+ * has -делывать (переделать → переделывать). Compare German machen → nachmachen, fertigmachen, umbauen.
+ * Note: делить / отделить (“to divide”) is a different root. Original examples. */
+GT.registerRoot({
+  id: 'дел', verb: 'д+елать', t: 'д+елать', label: 'ДЕЛАТЬ', sub: 'root -дел- (дело)',
+  en: 'to do, to make', de: 'machen, tun',
+  note: {
+    en: 'Делать covers both English do and make. Its perfective is сделать; other prefixes add a meaning: переделать — redo, доделать — finish, подделать — fake. Делить (to divide) only looks similar.',
+    de: 'Делать deckt machen und tun ab. Perfektiv: сделать; andere Präfixe fügen eine Bedeutung hinzu: переделать — umarbeiten, доделать — fertig machen, подделать — fälschen. Делить (teilen) sieht nur ähnlich aus.'
+  },
+  words: [
+    { id: 'ru-r-del-delat', base: true, core: true, pos: 'verb', aspect: 'impf', level: 'A1', t: 'д+елать',
+      forms: { praes: 'д+елаю, д+елаешь', praet: 'д+елал', perf: 'pf. сд+елать' },
+      en: 'to do, to make', de: 'machen, tun',
+      examples: [{ t: 'Что ты [[д+елаешь]] в в+ыходные?', en: 'What are you doing at the weekend?', de: 'Was machst du am Wochenende?' }] },
+    { id: 'ru-r-del-peredelyvat', core: true, pos: 'verb', aspect: 'impf', level: 'B1', prefix: 'пере', t: 'перед+елывать',
+      forms: { praes: 'перед+елываю, перед+елываешь', praet: 'перед+елывал', perf: 'pf. перед+елать' },
+      en: 'to redo, to remake; to alter', de: 'umarbeiten, neu machen; ändern',
+      examples: [{ t: 'Нач+альник поп+росил [[перед+елать]] презент+ацию.', en: 'The boss asked me to redo the presentation.', de: 'Der Chef hat mich gebeten, die Präsentation zu überarbeiten.' }],
+      prefixDrill: { ex: 0, meaning: 1, explain: { en: 'пере- = again, anew: the presentation is done a second time.', de: 'пере- = noch einmal: die Präsentation wird neu gemacht.' } },
+      transparency: 'transparent' },
+    { id: 'ru-r-del-dodelyvat', core: true, pos: 'verb', aspect: 'impf', level: 'B1', prefix: 'до', t: 'дод+елывать',
+      forms: { praes: 'дод+елываю, дод+елываешь', praet: 'дод+елывал', perf: 'pf. дод+елать' },
+      en: 'to finish (doing)', de: 'fertig machen, zu Ende machen',
+      examples: [{ t: 'Мне н+адо [[дод+елать]] отчёт до в+ечера.', en: 'I need to finish the report by this evening.', de: 'Ich muss den Bericht bis heute Abend fertig machen.' }],
+      prefixDrill: { ex: 0, meaning: 0, explain: { en: 'до- = up to the end point: the report is finished.', de: 'до- = bis zum Endpunkt: der Bericht wird fertig.' } },
+      transparency: 'transparent' },
+    { id: 'ru-r-del-poddelyvat', core: true, pos: 'verb', aspect: 'impf', level: 'B2', prefix: 'под', t: 'подд+елывать',
+      forms: { praes: 'подд+елываю, подд+елываешь', praet: 'подд+елывал', perf: 'pf. подд+елать' },
+      en: 'to fake, to forge', de: 'fälschen',
+      examples: [{ t: 'Мош+енники [[подд+елали]] с+айт б+анка.', en: 'Fraudsters faked the bank’s website.', de: 'Betrüger haben die Website der Bank gefälscht.' }],
+      prefixDrill: { ex: 0, meaning: 2, explain: { en: 'под- = slightly, on the side: made to look like the original, but secretly different.', de: 'под- = nebenbei, heimlich: es sieht aus wie das Original, ist aber anders.' } },
+      transparency: 'figurative' },
+    { id: 'ru-r-del-prodelyvat', pos: 'verb', aspect: 'impf', level: 'B2', prefix: 'про', t: 'прод+елывать',
+      forms: { praes: 'прод+елываю, прод+елываешь', praet: 'прод+елывал', perf: 'pf. прод+елать' },
+      en: 'to carry out, to get done (a lot of work); to make (a hole)', de: 'leisten, erledigen; durchbohren',
+      examples: [{ t: 'Ком+анда [[прод+елала]] огр+омную раб+оту.', en: 'The team has done a huge amount of work.', de: 'Das Team hat enorme Arbeit geleistet.' }],
+      prefixDrill: { ex: 0, meaning: 0, explain: { en: 'про- = through: the work has been done all the way through.', de: 'про- = durch: die Arbeit wurde ganz durchgezogen.' } },
+      transparency: 'figurative' },
+    { id: 'ru-r-del-nadelat', pos: 'verb', aspect: 'pf', level: 'B2', prefix: 'на', t: 'над+елать',
+      forms: { praes: '—', praet: 'над+елал', perf: '—' },
+      en: 'to make a lot of (mistakes, noise, trouble)', de: 'eine Menge … machen (Fehler, Lärm)',
+      examples: [{ t: 'Я [[над+елал]] в т+есте к+учу ош+ибок.', en: 'I made loads of mistakes in the test.', de: 'Ich habe im Test jede Menge Fehler gemacht.' }],
+      transparency: 'figurative',
+      note: { en: 'на- here means “a large amount”: наделать ошибок, накупить, наговорить.', de: 'на- heißt hier „eine große Menge“: наделать ошибок, накупить, наговорить.' } },
+    { id: 'ru-r-del-delo', pos: 'noun', gender: 'n', level: 'A2', t: 'д+ело',
+      en: 'matter, business; case; deed', de: 'die Sache, das Geschäft; der Fall',
+      examples: [{ t: '+Это не твоё [[д+ело]].', en: 'That’s none of your business.', de: 'Das geht dich nichts an.' }],
+      note: { en: 'Как дела? — How are things? В чём дело? — What’s the matter?', de: 'Как дела? — Wie geht’s? В чём дело? — Worum geht es?' } },
+    { id: 'ru-r-del-sdelka', pos: 'noun', gender: 'f', level: 'B2', t: 'сд+елка',
+      en: 'deal, transaction', de: 'das Geschäft, der Deal',
+      examples: [{ t: '[[Сд+елка]] сорвал+ась в посл+едний мом+ент.', en: 'The deal fell through at the last moment.', de: 'Das Geschäft ist im letzten Moment geplatzt.' }] },
+    { id: 'ru-r-del-poddelka', pos: 'noun', gender: 'f', level: 'B2', t: 'подд+елка',
+      en: 'fake, forgery', de: 'die Fälschung',
+      examples: [{ t: '+Эта с+умка — дешёвая [[подд+елка]].', en: 'This bag is a cheap fake.', de: 'Diese Tasche ist eine billige Fälschung.' }] }
+  ]
+});

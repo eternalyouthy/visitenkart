@@ -1,0 +1,177 @@
+/* Data manifest for every language pack. (Works in the page and in the service worker, hence `self`.)
+ *
+ * GT_DATA_FILES  — the German pack (files in data/). Add new German batches here, as before.
+ * GT_PACKS       — every learnable language: { dir, files } in load order. A pack is loaded on demand
+ *                  when the learner picks it under "I learn" (js/loader.js); the service worker precaches all.
+ * Adding a language = a new GT_PACKS entry + GT.LANGS / GT.HINTS entries in js/i18n.js (see README.md). */
+self.GT_DATA_FILES = [
+  // Words: B1 (Goethe list)
+  'words_everyday.js',
+  'words_health.js',
+  'words_health_2.js',
+  'words_health_3.js',
+  'words_health_4.js',
+  'words_work.js',
+  'words_b1_daily.js',
+  'words_b1_services.js',
+  'words_b1_community.js',
+  'words_b1_more.js',
+  // Words: B2 themes
+  'words_b2_beruf.js',
+  'words_b2_beruf_2.js',
+  'words_b2_arbeitswelt.js',
+  'words_b2_psyche.js',
+  'words_b2_medien.js',
+  'words_b2_umwelt.js',
+  'words_b2_wirtschaft.js',
+  'words_b2_gesellschaft.js',
+  'words_b2_bildung.js',
+  // Words: B2 everyday topics
+  'words_b2_wohnen.js',
+  'words_b2_beziehungen.js',
+  'words_b2_wissenschaft.js',
+  'words_b2_recht.js',
+  'words_b2_gesundheit.js',
+  'words_b2_reisen.js',
+  'words_b2_kultur.js',
+  'words_b2_more.js',
+  'words_b2_everyday_2.js',
+  // Professional / IT & Security
+  'it_security.js',
+  'it_security_2.js',
+  'it_security_3.js',
+  'it_security_4.js',
+  'it_workcomm.js',
+  'pro_work_office.js',
+  'it_dev.js',
+  'it_infra.js',
+  'it_dev_infra_2.js',
+  // Expressions (Chunks, Idioms, Everyday Phrases)
+  'chunks_sample.js',
+  'chunks_more.js',
+  'expressions_idioms.js',
+  'expressions_everyday.js',
+  'expressions_more.js',
+  // Roots, prefixes, suffixes & classical roots
+  'roots_bauen.js',
+  'roots_stellen.js',
+  'roots_ziehen.js',
+  'roots_setzen.js',
+  'roots_legen.js',
+  'roots_nehmen.js',
+  'roots_geben.js',
+  'roots_halten.js',
+  'roots_kommen.js',
+  'roots_gehen.js',
+  'roots_schlagen.js',
+  'roots_sprechen.js',
+  'roots_sehen.js',
+  'roots_fallen.js',
+  'roots_stehen.js',
+  'roots_tragen.js',
+  'roots_fuehren.js',
+  'roots_schreiben.js',
+  'roots_brechen.js',
+  'roots_laufen.js',
+  'prefixes.js',
+  'suffixes.js',
+  'classical_roots.js',
+  // Grammar
+  'grammar_wortstellung.js',
+  'grammar_perfekt.js',
+  'grammar_konjunktiv2.js',
+  'grammar_nebensaetze.js',
+  'grammar_passiv.js',
+  'grammar_kasus.js',
+  'grammar_adjektive.js',
+  // Late topic memberships (must stay last)
+  'memberships.js'
+];
+
+self.GT_PACKS = {
+  // German: legacy files write German text in `de`; explanations Russian. English glosses & notes come from the overlay.
+  de: { dir: 'data/', files: self.GT_DATA_FILES.concat(['i18n/de.en.js', 'i18n/de.en.2.js', 'i18n/de.en.3.js', 'i18n/de.en.ex1.js', 'i18n/de.en.ex2.js', 'i18n/de.en.ex3.js', 'i18n/de.en.ex4.js', 'i18n/de.en.ex5.js', 'i18n/de.en.grammar.js', 'i18n/de.en.notes1.js', 'i18n/de.en.notes2.js', 'i18n/de.en.notes3.js', 'i18n/de.en.notes4.js']) },
+  // English: the standalone English catalogue (english/) is reused as-is, then adapted into the shared engine.
+  en: {
+    dir: '',
+    files: [
+      'english/js/catalog.js',
+      'english/data/families-01.js',
+      'english/data/families-02.js',
+      'english/data/curriculum.js',
+      'english/data/grammar-expanded.js',
+      'english/data/reference.js',
+      'english/data/evidence.js',
+      'english/data/dictionary-lookups.js',
+      'english/data/oxford-ratings.js',
+      'english/data/reviewed-content.js',
+      'english/data/additional-senses.js',
+      'english/data/topics-vocabulary.js',
+      'english/data/topics-chunks.js',
+      'english/data/topics.js',
+      'english/data/expressions-professional.js',
+      'english/data/content-expansion-01.js',
+      'english/data/families-grammar-03.js',
+      'js/packs/en.js',
+      'data/i18n/en.de.js',
+      'data/i18n/en.de.2.js',
+      'data/i18n/en.de.3.js',
+      'data/i18n/en.de.4.js',
+      'data/i18n/en.de.notes1.js',
+      'data/i18n/en.de.notes2.js',
+      'data/i18n/en.de.notes3.js',
+      'data/i18n/en.de.meta.js',
+      'data/en/verbs_particles.js',
+      'data/en/verbs_families.js',
+      'data/en/verbs_families_2.js',
+      'data/en/words_more.js', 'data/en/words_more_2.js', 'data/en/expressions_more.js'
+    ]
+  },
+  // Russian: written natively for the shared engine (target `t`, glosses en/de, explanations { en, de }).
+  ru: {
+    dir: 'data/ru/',
+    files: [
+      'config.js',
+      'words_everyday.js',
+      'words_topics.js',
+      'words_topics_expanded.js',
+      'words_b2.js',
+      'words_more.js',
+      'words_b2_everyday.js',
+      'words_more_2.js',
+      'pro.js',
+      'expressions.js',
+      'expressions_more.js',
+      'roots_hod.js',
+      'roots_pis.js',
+      'roots_vod.js',
+      'roots_stav.js',
+      'roots_voz.js',
+      'roots_nos.js',
+      'roots_da.js',
+      'roots_zna.js',
+      'roots_br.js',
+      'roots_ezd.js',
+      'roots_smotr.js',
+      'roots_lozh.js',
+      'roots_govor.js',
+      'roots_del.js',
+      'affixes.js',
+      'roots_layout.js',
+      'grammar_aspect.js',
+      'grammar_cases.js',
+      'grammar_motion.js',
+      'grammar_genitive.js',
+      'grammar_dative.js',
+      'grammar_instrumental.js',
+      'grammar_adjectives.js',
+      'grammar_reflexive.js'
+    ]
+  }
+};
+
+// Always-loaded cross-language sense links (small; carry display text so other packs stay lazy).
+self.GT_LINK_FILES = [
+  'data/links/cross.js',
+  'data/links/families.js'
+];

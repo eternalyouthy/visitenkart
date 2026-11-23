@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ETRNL</title>
+<meta name="description" content="Personal multilingual vocabulary trainer (German, English, Russian) with roots, grammar and spaced repetition.">
+<meta name="theme-color" content="#04060a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ETRNL">
+<link rel="icon" href="icons/icon.svg?v=3" type="image/svg+xml">
+<link rel="icon" href="icons/icon-192.png?v=3" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<!-- Fonts: loaded online, cached by the service worker when hosted. Offline on file:// falls back to system fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/app.css">
+<script>
+  // Apply saved theme before first paint (avoids a flash of the wrong theme).
+  try {
+    var t = localStorage.getItem('gt.theme');
+    if (t === 'system') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    if (t) document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+<svg class="constellation" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g>
+    <line x1="1312" y1="100" x2="1404" y2="168"/><line x1="1404" y1="168" x2="1490" y2="133"/><line x1="1490" y1="133" x2="1560" y2="236"/>
+    <line x1="1404" y1="168" x2="1380" y2="270"/><line x1="1380" y1="270" x2="1458" y2="295"/><line x1="1560" y1="236" x2="1576" y2="560"/>
+    <line x1="1240" y1="777" x2="1345" y2="855"/><line x1="1345" y1="855" x2="1446" y2="824"/><line x1="1446" y1="824" x2="1546" y2="912"/>
+    <line x1="1345" y1="855" x2="1400" y2="945"/>
+    <line x1="120" y1="805" x2="100" y2="890"/><line x1="100" y1="890" x2="200" y2="958"/>
+  </g>
+  <g>
+    <circle cx="1312" cy="100" r="2"/><circle cx="1404" cy="168" r="2.5"/><circle cx="1490" cy="133" r="2"/><circle cx="1560" cy="236" r="2"/>
+    <circle cx="1380" cy="270" r="1.6"/><circle cx="1458" cy="295" r="1.6"/><circle cx="1576" cy="560" r="2"/>
+    <circle cx="1240" cy="777" r="2"/><circle cx="1345" cy="855" r="2.5"/><circle cx="1446" cy="824" r="2"/><circle cx="1546" cy="912" r="2"/><circle cx="1400" cy="945" r="2"/>
+    <circle cx="120" cy="805" r="2"/><circle cx="100" cy="890" r="2"/><circle cx="200" cy="958" r="2"/>
+  </g>
+</svg>
+<div id="app">
+  <header class="topbar">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open topics" type="button"></button>
+    <div class="brand-group">
+      <a class="brand" href="#/start" aria-label="ETRNL start page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2.5 21.5 12 12 21.5 2.5 12Z"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>
+        <span class="logo">ETRNL <b>/</b> <span class="logo-lang">DEUTSCH</span><span class="logo-code">DE</span></span>
+      </a>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+    <div class="top-right">
+      <button class="icon-btn lang-btn" id="langBtn" type="button" aria-label="Languages: I know / I learn" aria-haspopup="dialog" aria-expanded="false" aria-controls="langPop"><span class="lang-pair" id="langPair">RU → DE</span></button>
+      <div class="lang-pop" id="langPop" role="dialog" aria-label="Language pair" hidden></div>
+      <button class="icon-btn" id="settingsBtn" type="button" data-act="toggle-settings" aria-label="Settings"></button>
+    </div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Topics"></aside>
+    <div class="scrim" id="scrim"></div>
+    <main class="main" id="main">
+      <p class="loading">LOADING…</p>
+    </main>
+  </div>
+  <nav class="bottomnav" id="bottomnav" aria-label="Sections"></nav>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<!-- Shared engine (no build step; works from file:// and static hosting). Language packs (data) are
+     loaded on demand by js/loader.js from the lists in data/manifest.js. -->
+<script src="js/core.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/topics.js"></script>
+<script src="data/about.js"></script>
+<script src="data/manifest.js"></script>
+<script src="data/links/cross.js"></script>
+<script src="data/links/families.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/validate.js"></script>
+<script src="js/fsrs.js"></script>
+<script src="js/store.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
