@@ -23,7 +23,7 @@
   /* Main navigation: top tabs with hover/focus dropdowns (`items` for Language & Expressions; Professional uses proGroups()). */
   GT.NAV = [
     {
-      id: 'language', label: 'Language', short: 'Lang', icon: 'book', href: '#/words',
+      id: 'language', label: 'Language', short: 'Grund', icon: 'book', href: '#/words',
       items: [
         { label: 'Words', href: '#/words', match: ['words'] },
         { label: 'Roots', href: '#/roots', match: ['roots'] },
@@ -32,7 +32,7 @@
       ]
     },
     {
-      id: 'professional', label: 'Professional', short: 'Pro', icon: 'shield', href: '#/professional',
+      id: 'professional', label: 'Professional', short: 'Job', icon: 'shield', href: '#/professional',
       items: [
         { label: 'Work & Office', href: '#/it/workcomm', tab: 'it', topic: 'workcomm' },
         { label: 'IT & Development', href: '#/it/dev', tab: 'it', topic: 'dev' },

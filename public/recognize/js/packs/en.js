@@ -286,9 +286,9 @@
       'Word-building families': { ru: 'Словообразование: от одной основы — существительные, прилагательные, наречия (act → action, active, actor).', de: 'Wortbildung: von einem Stamm zu Substantiven, Adjektiven, Adverbien (act → action, active, actor).' }
     },
     NAV: [
-      { id: 'language', label: 'Language', short: 'Lang', icon: 'book', href: '#/words',
+      { id: 'language', label: 'Language', short: 'Grund', icon: 'book', href: '#/words',
         items: [{ label: 'Words', href: '#/words', match: ['words'] }, { label: 'Roots', href: '#/roots', match: ['roots'] }, { label: 'Grammar', href: '#/grammar', match: ['grammar'] }] },
-      { id: 'professional', label: 'Professional', short: 'Pro', icon: 'shield', href: '#/professional',
+      { id: 'professional', label: 'Professional', short: 'Job', icon: 'shield', href: '#/professional',
         items: [
           { label: 'Work & Office', href: '#/it/work', tab: 'it', topic: 'work' },
           { label: 'IT & Development', href: '#/it/dev', tab: 'it', topic: 'dev' },

@@ -184,9 +184,9 @@
     ROOT_PLAN: ['ход', 'пис', 'вод', 'став', 'воз', 'нос', 'да', 'зна', 'бр'],
     PREFIX_PLAN: ['при', 'у', 'вы', 'в', 'пере', 'за', 'под', 'от'],
     NAV: [
-      { id: 'language', label: 'Language', short: 'Lang', icon: 'book', href: '#/words',
+      { id: 'language', label: 'Language', short: 'Grund', icon: 'book', href: '#/words',
         items: [{ label: 'Words', href: '#/words', match: ['words'] }, { label: 'Roots', href: '#/roots', match: ['roots'] }, { label: 'Grammar', href: '#/grammar', match: ['grammar'] }] },
-      { id: 'professional', label: 'Professional', short: 'Pro', icon: 'shield', href: '#/professional',
+      { id: 'professional', label: 'Professional', short: 'Job', icon: 'shield', href: '#/professional',
         items: [
           { label: 'Work & Office', href: '#/it/workcomm', tab: 'it', topic: 'workcomm' },
           { label: 'IT & Development', href: '#/it/dev', tab: 'it', topic: 'dev' },

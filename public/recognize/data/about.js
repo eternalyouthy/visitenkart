@@ -120,7 +120,7 @@ GT.ABOUT = {
 };
 
 /* Start page side panel: "Good to know" + "Latest update". Follows the article language buttons (RU / EN / DE).
- * `onlyKnow` notes are shown only on that language's article. Newest update entries go first. */
+ * `onlyKnow` notes are shown only on that language's article. `news` = groups { date, items }, newest first: the first group is open, older ones fold. */
 GT.START_NOTES = {
   ru: {
     goodTitle: 'Полезно знать',
@@ -129,11 +129,23 @@ GT.START_NOTES = {
       { h: 'Где хранятся твои данные', p: 'Никаких данных о тебе не собирается. Сервера с базой данных нет, потому что, честно говоря, мне было лень. Весь прогресс хранится в кэше браузера на этом устройстве. Если очистишь данные сайта, прогресс пропадёт.' },
       { h: 'Почему интерфейс полностью не на русском', p: 'Сайт переведён на русский не полностью, и это осознанно. Объяснения и переводы идут на русском, а кнопки и меню остаются на английском. Чтобы пользоваться сайтом, хватит английского на уровне A1. Мне кажется, что полностью русский интерфейс выглядел бы менее эстетично.' }
     ],
-    newsTitle: 'Последнее обновление',
+    newsTitle: 'Последние обновления',
     news: [
-      { h: 'Сленг', p: 'По 40 карточек уличного сленга на каждый язык: три примера, происхождение слова и отдельная категория мата (18+).' },
-      { h: 'Литература', p: 'В Expressions появились фразы из классики с разбором.' },
-      { h: 'Темы', p: 'Четыре новые темы: Holo Glass, Nordlicht, Autobahn и Swiss.' }
+      { date: '24.11.2026 · вечер', items: [
+        { h: 'Новый режим: артикли', p: 'В Language появился раздел с артиклями и интерактивной игрой для всех языков. Артикль не угадывается в отрыве от контекста: он выбирается прямо внутри предложения.' },
+        { h: 'Обновления разделов', p: 'Пополнились почти все разделы. Больше всего изменился Professional: его переделали, и профессий стало намного больше.' },
+        { h: 'Навигация на телефоне', p: 'Вкладки внизу теперь называются Grund и Job, а в Grund появились кнопки разделов: Words, Roots, Grammar и артикли.' },
+        { h: 'Исправления', p: 'Крупное исправление багов, особенно на телефоне и в темах оформления.' }
+      ] },
+      { date: '24.11.2026 · ночь', items: [
+        { h: 'Сленг', p: 'По 40 карточек уличного сленга на каждый язык: три примера, происхождение слова и отдельная категория мата (18+).' },
+        { h: 'Литература', p: 'В Expressions появились фразы из классики с разбором.' },
+        { h: 'Темы', p: 'Четыре новые темы: Holo Glass, Nordlicht, Autobahn и Swiss.' },
+        { h: 'Практика', p: 'Learning Studio переделана в песочницу с подсказками и новыми играми.' }
+      ] },
+      { date: '23.11.2026', items: [
+        { h: 'Запуск ETRNL', p: 'Немецкий, английский и русский в любом сочетании: слова, корни, грамматика, профессиональная лексика, выражения и интервальное повторение.' }
+      ] }
     ]
   },
   en: {
@@ -142,11 +154,23 @@ GT.START_NOTES = {
       { h: 'Themes', p: 'Open the settings (the sliders icon, top right) to switch the theme. There are six of them, dark and light. Pick whatever suits your mood.' },
       { h: 'Where your data lives', p: 'Nothing about you is collected. There is no server with a database because, honestly, I couldn’t be bothered. All your progress is stored in this browser’s cache on this device. Clear the site data and your progress is gone.' }
     ],
-    newsTitle: 'Latest update',
+    newsTitle: 'Latest updates',
     news: [
-      { h: 'Slang', p: '40 street-slang cards per language, with three examples, word origins and a separate swearing category (18+).' },
-      { h: 'Literature', p: 'Expressions now includes lines from the classics, with breakdowns.' },
-      { h: 'Themes', p: 'Four new themes: Holo Glass, Nordlicht, Autobahn and Swiss.' }
+      { date: '24 Nov 2026 · evening', items: [
+        { h: 'New mode: articles', p: 'Language now has an articles section with an interactive game for every language. You don’t guess the article out of context: you pick it inside a real sentence.' },
+        { h: 'Section updates', p: 'Almost every section got new content. Professional changed the most: it has been reworked and now covers many more professions.' },
+        { h: 'Phone navigation', p: 'The bottom tabs are now called Grund and Job, and Grund has section buttons: Words, Roots, Grammar and articles.' },
+        { h: 'Fixes', p: 'A big round of bug fixes, especially on phones and in the themes.' }
+      ] },
+      { date: '24 Nov 2026 · night', items: [
+        { h: 'Slang', p: '40 street-slang cards per language, with three examples, word origins and a separate swearing category (18+).' },
+        { h: 'Literature', p: 'Expressions now includes lines from the classics, with breakdowns.' },
+        { h: 'Themes', p: 'Four new themes: Holo Glass, Nordlicht, Autobahn and Swiss.' },
+        { h: 'Practice', p: 'Learning Studio was rebuilt as a sandbox with hints and new games.' }
+      ] },
+      { date: '23 Nov 2026', items: [
+        { h: 'ETRNL launch', p: 'German, English and Russian in any combination: words, roots, grammar, professional vocabulary, expressions and spaced repetition.' }
+      ] }
     ]
   },
   de: {
@@ -155,11 +179,23 @@ GT.START_NOTES = {
       { h: 'Designs', p: 'In den Einstellungen (Regler-Symbol oben rechts) können Sie das Design wechseln. Es gibt sechs, dunkle und helle, ganz nach Laune.' },
       { h: 'Wo Ihre Daten liegen', p: 'Es werden keine Daten über Sie gesammelt. Es gibt keinen Server mit Datenbank, ehrlich gesagt war ich zu faul dafür. Ihr gesamter Fortschritt liegt im Browser-Cache auf diesem Gerät. Wenn Sie die Website-Daten löschen, ist der Fortschritt weg.' }
     ],
-    newsTitle: 'Letztes Update',
+    newsTitle: 'Letzte Updates',
     news: [
-      { h: 'Slang', p: 'Je 40 Karten Straßenslang pro Sprache, mit drei Beispielen, Wortherkunft und einer eigenen Kategorie für Schimpfwörter (18+).' },
-      { h: 'Literatur', p: 'Unter Expressions gibt es jetzt Zeilen aus der Klassik mit Erklärungen.' },
-      { h: 'Designs', p: 'Vier neue Designs: Holo Glass, Nordlicht, Autobahn und Swiss.' }
+      { date: '24.11.2026 · abends', items: [
+        { h: 'Neuer Modus: Artikel', p: 'Unter Language gibt es jetzt einen Bereich zu Artikeln mit einem interaktiven Spiel für alle Sprachen. Der Artikel wird nicht ohne Kontext geraten, sondern direkt im Satz gewählt.' },
+        { h: 'Neues in den Bereichen', p: 'Fast alle Bereiche wurden erweitert. Am meisten hat sich Professional verändert: Der Bereich wurde neu aufgebaut und umfasst jetzt viel mehr Berufe.' },
+        { h: 'Navigation auf dem Handy', p: 'Die Tabs unten heißen jetzt Grund und Job, und in Grund gibt es Buttons für die Bereiche: Words, Roots, Grammar und Artikel.' },
+        { h: 'Fehlerbehebungen', p: 'Viele Fehler wurden behoben, vor allem auf dem Handy und in den Designs.' }
+      ] },
+      { date: '24.11.2026 · nachts', items: [
+        { h: 'Slang', p: 'Je 40 Karten Straßenslang pro Sprache, mit drei Beispielen, Wortherkunft und einer eigenen Kategorie für Schimpfwörter (18+).' },
+        { h: 'Literatur', p: 'Unter Expressions gibt es jetzt Zeilen aus der Klassik mit Erklärungen.' },
+        { h: 'Designs', p: 'Vier neue Designs: Holo Glass, Nordlicht, Autobahn und Swiss.' },
+        { h: 'Übungen', p: 'Das Learning Studio ist jetzt eine Sandbox mit Hinweisen und neuen Spielen.' }
+      ] },
+      { date: '23.11.2026', items: [
+        { h: 'Start von ETRNL', p: 'Deutsch, Englisch und Russisch in jeder Kombination: Wörter, Wortfamilien, Grammatik, Berufswortschatz, Redewendungen und verteilte Wiederholung.' }
+      ] }
     ]
   }
 };
