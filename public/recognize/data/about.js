@@ -118,3 +118,48 @@ GT.ABOUT = {
       <p>Vielleicht wird das Lernen einer neuen Sprache dadurch auch für Sie ein wenig&nbsp;verständlicher.</p>`
   }
 };
+
+/* Start page side panel: "Good to know" + "Latest update". Follows the article language buttons (RU / EN / DE).
+ * `onlyKnow` notes are shown only on that language's article. Newest update entries go first. */
+GT.START_NOTES = {
+  ru: {
+    goodTitle: 'Полезно знать',
+    good: [
+      { h: 'Темы оформления', p: 'В настройках (иконка с ползунками справа вверху) можно сменить тему. Их шесть, тёмные и светлые, выбирай под настроение.' },
+      { h: 'Где хранятся твои данные', p: 'Никаких данных о тебе не собирается. Сервера с базой данных нет, потому что, честно говоря, мне было лень. Весь прогресс хранится в кэше браузера на этом устройстве. Если очистишь данные сайта, прогресс пропадёт.' },
+      { h: 'Почему интерфейс полностью не на русском', p: 'Сайт переведён на русский не полностью, и это осознанно. Объяснения и переводы идут на русском, а кнопки и меню остаются на английском. Чтобы пользоваться сайтом, хватит английского на уровне A1. Мне кажется, что полностью русский интерфейс выглядел бы менее эстетично.' }
+    ],
+    newsTitle: 'Последнее обновление',
+    news: [
+      { h: 'Сленг', p: 'По 40 карточек уличного сленга на каждый язык: три примера, происхождение слова и отдельная категория мата (18+).' },
+      { h: 'Литература', p: 'В Expressions появились фразы из классики с разбором.' },
+      { h: 'Темы', p: 'Четыре новые темы: Holo Glass, Nordlicht, Autobahn и Swiss.' }
+    ]
+  },
+  en: {
+    goodTitle: 'Good to know',
+    good: [
+      { h: 'Themes', p: 'Open the settings (the sliders icon, top right) to switch the theme. There are six of them, dark and light. Pick whatever suits your mood.' },
+      { h: 'Where your data lives', p: 'Nothing about you is collected. There is no server with a database because, honestly, I couldn’t be bothered. All your progress is stored in this browser’s cache on this device. Clear the site data and your progress is gone.' }
+    ],
+    newsTitle: 'Latest update',
+    news: [
+      { h: 'Slang', p: '40 street-slang cards per language, with three examples, word origins and a separate swearing category (18+).' },
+      { h: 'Literature', p: 'Expressions now includes lines from the classics, with breakdowns.' },
+      { h: 'Themes', p: 'Four new themes: Holo Glass, Nordlicht, Autobahn and Swiss.' }
+    ]
+  },
+  de: {
+    goodTitle: 'Gut zu wissen',
+    good: [
+      { h: 'Designs', p: 'In den Einstellungen (Regler-Symbol oben rechts) können Sie das Design wechseln. Es gibt sechs, dunkle und helle, ganz nach Laune.' },
+      { h: 'Wo Ihre Daten liegen', p: 'Es werden keine Daten über Sie gesammelt. Es gibt keinen Server mit Datenbank, ehrlich gesagt war ich zu faul dafür. Ihr gesamter Fortschritt liegt im Browser-Cache auf diesem Gerät. Wenn Sie die Website-Daten löschen, ist der Fortschritt weg.' }
+    ],
+    newsTitle: 'Letztes Update',
+    news: [
+      { h: 'Slang', p: 'Je 40 Karten Straßenslang pro Sprache, mit drei Beispielen, Wortherkunft und einer eigenen Kategorie für Schimpfwörter (18+).' },
+      { h: 'Literatur', p: 'Unter Expressions gibt es jetzt Zeilen aus der Klassik mit Erklärungen.' },
+      { h: 'Designs', p: 'Vier neue Designs: Holo Glass, Nordlicht, Autobahn und Swiss.' }
+    ]
+  }
+};

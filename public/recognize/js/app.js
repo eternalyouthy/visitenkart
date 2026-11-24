@@ -561,6 +561,15 @@
       { href: '#/review', name: 'Review', ct: due ? due + ' due' : '', due: !!due, desc: 'Spaced repetition: come back to the cards you added when they are due.' }
     ];
   }
+  function startNotes(lang) {
+    var n = (GT.START_NOTES || {})[lang];
+    if (!n) return '';
+    function box(title, list) {
+      return '<div class="start-box start-notes" lang="' + lang + '"><span class="label ice">' + esc(title) + '</span><ul class="note-list">' +
+        list.map(function (x) { return '<li><b>' + esc(x.h) + '</b><span>' + esc(x.p) + '</span></li>'; }).join('') + '</ul></div>';
+    }
+    return box(n.goodTitle, n.good) + box(n.newsTitle, n.news);
+  }
   function viewStart(requested) {
     var languages = GT.KNOW_ORDER.filter(function (lang) { return GT.ABOUT[lang]; });
     var lang = languages.indexOf(requested) >= 0 ? requested : GT.know;
@@ -578,6 +587,7 @@
       '<span class="start-arrow" aria-hidden="true">→</span>' +
       '<label class="lang-field"><span class="label">I learn</span>' + langSelect('learn') + '</label></div>' +
       '<p class="start-hint">Meanings and explanations follow <b>I know</b>. You can change this any time with the globe button.</p></div>' +
+      startNotes(lang) +
       '<div class="start-box"><span class="label ice">Where to go</span><ul class="start-list">' + startSections().map(function (s) {
         return '<li><a class="start-link" href="' + s.href + '"><span class="start-link-top"><span class="nm">' + esc(s.name) + '</span>' +
           (s.ct ? '<span class="ct' + (s.due ? ' due' : '') + '">' + esc(s.ct) + '</span>' : '') + '<span class="go" aria-hidden="true">→</span></span>' +
@@ -586,11 +596,20 @@
     /* Phones: the article sits above the panel, collapsed to its first paragraph (Read More / Show Less),
      * Desktop ignores all of this via CSS. */
     var expanded = !!ui.bysExpanded;
-    var article = '<article class="prose about-article' + (expanded ? '' : ' bys-collapsed') + '" id="bys" lang="' + lang + '"><header class="page-head"><span class="eyebrow" lang="en">Before You Start<span class="bys-must"> · Must Read</span></span>' +
-      '<nav class="seg-tabs about-languages" lang="en" aria-label="Article language">' + picker + '</nav></header>' +
+    var mustRead = { ru: 'Важно прочитать', en: 'Before you start', de: 'Unbedingt lesen' };
+    var stickerText = { ru: 'Не пролистывай!', en: 'Don’t skip this!', de: 'Nicht überspringen!' };
+    var labels = languages.map(function (code) {
+      return '<span class="eyebrow bys-label' + (code === lang ? ' active' : '') + '" lang="' + code + '">' + esc(mustRead[code] || 'Before you start') + '</span>';
+    }).join('');
+    var article = '<article class="prose about-article' + (expanded ? '' : ' bys-collapsed') + '" id="bys" lang="' + lang + '"><header class="page-head bys-head">' +
+      '<div class="bys-labels" aria-hidden="true">' + labels + '</div>' +
+      '<nav class="seg-tabs about-languages" lang="en" aria-label="Article language">' + picker + '</nav>' +
+      '<span class="bys-sticker" aria-hidden="true">' + esc(stickerText[lang] || stickerText.en) + '</span></header>' +
       '<h1 class="about-title">' + esc(about.title) + '</h1><div class="about-body" id="bysBody">' + about.body + '</div>' +
       '<div class="bys-controls" lang="en"><button class="bys-btn bys-toggle" type="button" data-act="bys-toggle" aria-controls="bysBody" aria-expanded="' + expanded + '">' +
-      (expanded ? 'Show Less ↑' : 'Read More ↓') + '</button></div></article>';
+      (expanded ? 'Show Less ↑' : 'Read More ↓') + '</button></div>' +
+      '<div class="bys-author" lang="en"><a class="btn" href="https://etrnl.world/" target="_blank" rel="noopener">About the author ↗</a>' +
+      '<a class="btn" href="https://github.com/eternalyouthy/etrnl.recognize" target="_blank" rel="noopener">Project on GitHub ↗</a></div></article>';
     page('<div class="start-grid">' + panel + article + '</div>', 'start');
     if (restoreFocus) $('.about-languages [aria-current="page"]', mainEl).focus({ preventScroll: true });
   }
