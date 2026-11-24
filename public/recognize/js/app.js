@@ -345,6 +345,20 @@
   function closeSidebar() { sideEl.classList.remove('open'); scrimEl.classList.remove('open'); }
   $('#menuBtn').addEventListener('click', function () { sideEl.classList.contains('open') ? closeSidebar() : openSidebar(); });
   scrimEl.addEventListener('click', closeSidebar);
+  /* Desktop: fold the sidebar away (remembered per browser; never auto-collapses). */
+  var sideToggle = $('#sideToggle');
+  function setSideCollapsed(on) {
+    document.body.classList.toggle('side-collapsed', on);
+    var lbl = on ? 'Show sidebar' : 'Hide sidebar';
+    sideToggle.setAttribute('aria-expanded', String(!on));
+    sideToggle.setAttribute('aria-label', lbl); sideToggle.title = lbl;
+  }
+  try { setSideCollapsed(localStorage.getItem('gt.sideCollapsed') === '1'); } catch (e) {}
+  sideToggle.addEventListener('click', function () {
+    var on = !document.body.classList.contains('side-collapsed');
+    setSideCollapsed(on);
+    try { localStorage.setItem('gt.sideCollapsed', on ? '1' : '0'); } catch (e) {}
+  });
   function pad2(n) { return String(n).padStart(2, '0'); }
 
   function proSubFor(tab, topic) {
@@ -2546,39 +2560,50 @@
   /* ---------------- ROOTS tab (Word Families, Prefixes, Suffixes, Classical Roots) ---------------- */
   function rootWords(id) { return (GT.roots[id] ? GT.roots[id].ids : []).map(function (x) { return GT.byId[x]; }); }
   function rootsSidebar(p) {
-    var cur = p[1] || '', h = '', n = 0;
-    rootGroups().forEach(function (g) {
-      h += '<div class="side-label">' + esc(g.name) + '</div>';
-      n = 0;
-      g.ids.forEach(function (id) {
+    /* Same folding groups as Words / Professional / Expressions: one group per section; the one you are in opens. */
+    var cur = p[1] || '', h = '', groups = [];
+    rootGroups().forEach(function (g, gi) {
+      var inner = '', here = false, all = [];
+      g.ids.forEach(function (id, i) {
         var r = GT.roots[id], c = r ? counts(rootWords(id)) : null;
-        h += sideLink('#/roots/' + id, pad2(++n), r ? rootName(r) : id.toUpperCase(), r ? c.known + '/' + c.total : '', { active: cur === id, dim: !r });
+        if (r) all = all.concat(rootWords(id));
+        here = here || cur === id;
+        inner += sideLink('#/roots/' + id, pad2(i + 1), r ? rootName(r) : id.toUpperCase(), r ? c.known + '/' + c.total : '', { active: cur === id, dim: !r });
       });
+      groups.push(['roots-f' + gi, g.name, ctOf(all), here, inner]);
     });
-    prefixGroups().forEach(function (g) {
-      h += '<div class="side-label">' + esc(g.name) + '</div>';
-      n = 0;
-      g.ids.forEach(function (id) {
+    prefixGroups().forEach(function (g, gi) {
+      var inner = '', here = false;
+      g.ids.forEach(function (id, i) {
         var pf = GT.prefixes[id];
-        h += sideLink('#/roots/p-' + id, pad2(++n), pf ? pf.label : id + '-', '', { active: cur === 'p-' + id, dim: !pf });
+        here = here || cur === 'p-' + id;
+        inner += sideLink('#/roots/p-' + id, pad2(i + 1), pf ? pf.label : id + '-', '', { active: cur === 'p-' + id, dim: !pf });
       });
+      groups.push(['roots-p' + gi, g.name, String(g.ids.length), here, inner]);
     });
     if (GT.suffixOrder.length) {
-      h += '<div class="side-label">Suffixes</div>';
-      n = 0;
-      GT.suffixOrder.forEach(function (id) {
+      var sInner = '', sHere = false;
+      GT.suffixOrder.forEach(function (id, i) {
         var sf = GT.suffixes[id], sfg = lxText(sf, 'gender');
-        h += sideLink('#/roots/s-' + id, pad2(++n), sf.label, sfg && sfg !== '—' ? sfg : '', { active: cur === 's-' + id });
+        sHere = sHere || cur === 's-' + id;
+        sInner += sideLink('#/roots/s-' + id, pad2(i + 1), sf.label, sfg && sfg !== '—' ? sfg : '', { active: cur === 's-' + id });
       });
+      groups.push(['roots-s', 'Suffixes', String(GT.suffixOrder.length), sHere, sInner]);
     }
     if (GT.classicalOrder.length) {
-      h += '<div class="side-label">Classical Roots</div>';
-      n = 0;
-      GT.classicalOrder.forEach(function (id) {
+      var cInner = '', cHere = false;
+      GT.classicalOrder.forEach(function (id, i) {
         var cl = GT.classical[id];
-        h += sideLink('#/roots/c-' + id, pad2(++n), cl.label, cl.origin, { active: cur === 'c-' + id });
+        cHere = cHere || cur === 'c-' + id;
+        cInner += sideLink('#/roots/c-' + id, pad2(i + 1), cl.label, cl.origin, { active: cur === 'c-' + id });
       });
+      groups.push(['roots-c', 'Classical Roots', String(GT.classicalOrder.length), cHere, cInner]);
     }
+    var hereKey = null;
+    groups.forEach(function (g) { if (g[3]) hereKey = g[0]; });
+    if (hereKey !== ui.sideHere) { if (hereKey) ui.sideOpen[hereKey] = true; ui.sideHere = hereKey; }
+    if (groups.length) h += '<div class="side-label">Roots</div>';
+    groups.forEach(function (g, i) { h += sideGroup(g[0], pad2(i + 1), g[1], g[2], g[3], g[4], i === groups.length - 1); });
     h += '<div class="side-label">Trainer</div>' +
       (GT.feature('prefixDrill') ? sideLink('#/roots/drill', null, PW() + ' drill', '', { active: cur === 'drill' }) : '') +
       sideLink('#/practice?scope=roots', null, 'Practice Studio →', '', {});

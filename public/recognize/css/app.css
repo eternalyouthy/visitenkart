@@ -185,6 +185,19 @@ code { font-family: var(--font-mono); font-size: 0.9em; color: var(--ice); }
   .sidebar { scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; }
 }
 .sidebar.hidden { display: none; }
+/* Desktop-only collapse toggle (sits in the sidebar's top padding; page content re-centres when collapsed). */
+.side-toggle {
+  position: fixed; top: calc(var(--topbar-h) + 4px); left: calc(var(--sidebar-w) - 40px); z-index: 20;
+  display: grid; place-items: center; width: 28px; height: 28px; padding: 0;
+  background: transparent; border: 1px solid transparent; border-radius: 4px;
+  color: var(--dim); cursor: pointer; opacity: 0.75; transition: color 0.12s, border-color 0.12s, opacity 0.12s;
+}
+.side-toggle:hover, .side-toggle:focus-visible { color: var(--text); border-color: var(--line-2); opacity: 1; background: var(--bg); }
+.side-toggle svg { width: 17px; height: 17px; transition: transform 0.15s; }
+.sidebar.hidden + .side-toggle { display: none; }
+body.side-collapsed .sidebar { display: none; }
+body.side-collapsed .side-toggle { left: 12px; }
+body.side-collapsed .side-toggle svg { transform: scaleX(-1); }
 .side-label { padding: 0 24px 14px 32px; }
 .side-label:not(:first-child) { margin-top: 22px; }
 .side-link {
@@ -741,7 +754,8 @@ input[type="number"] { width: 90px; }
   .brand { font-size: 13px; letter-spacing: 0.28em; }
   .brand svg { width: 18px; height: 18px; }
   .due-chip { display: none; }
-  .sidebar, .sidebar.hidden {
+  .side-toggle { display: none !important; }
+  .sidebar, .sidebar.hidden, body.side-collapsed .sidebar {
     display: flex; position: fixed; top: 0; left: 0; bottom: 0; z-index: 50;
     width: min(86vw, 330px); height: 100%;
     padding-top: calc(28px + env(safe-area-inset-top, 0px));

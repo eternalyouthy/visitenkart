@@ -3,7 +3,7 @@
  * (fresh when online, cached copy when offline); cache-first for Google Fonts.
  * Bump VERSION when you want to force a clean cache. */
 var CACHE_PREFIX = 'etrnl-recognize-';
-var VERSION = CACHE_PREFIX + '125';
+var VERSION = CACHE_PREFIX + '127';
 importScripts('data/manifest.js');
 
 var SHELL = [
