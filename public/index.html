@@ -57,7 +57,8 @@
     grid-template-columns:minmax(0,44fr) minmax(0,49fr);
     align-content:center;align-items:center;
     gap:clamp(28px,5vw,80px);
-    padding:72px clamp(20px,5vw,54px);
+    padding-block:72px;
+    padding-inline:clamp(7rem,12vw,9.375rem) 20px;
     max-width:82.5rem;margin:0 auto;
   }
 
@@ -97,12 +98,22 @@
   }
   .featured-link:hover{background:#d6d6d6}
   .featured-link:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+  body.ready .featured-link-intro{
+    transform-origin:top left;
+    animation:featured-link-settle .8s 3.1s;
+  }
+  @keyframes featured-link-settle{
+    0%{transform:rotate(0);animation-timing-function:cubic-bezier(.5,0,.85,.55)}
+    30%{transform:rotate(2.2deg);animation-timing-function:var(--ease)}
+    66%{transform:rotate(-.5deg);animation-timing-function:ease-in-out}
+    100%{transform:rotate(0)}
+  }
 
   /* ---- right / panels ---- */
   .panel{
     --index-width:1.25rem;
     --index-gap:1rem;
-    opacity:0;transform:translateX(34px);
+    opacity:0;transform:translateX(-34px);
     transition:opacity .9s var(--ease),transform .9s var(--ease);
   }
   body.ready .panel{opacity:1;transform:none}
@@ -191,7 +202,6 @@
   <div class="lang" role="group" aria-label="Language">
     <button data-lang="en" aria-pressed="true">EN</button>
     <button data-lang="de" aria-pressed="false">DE</button>
-    <button data-lang="ru" aria-pressed="false">RU</button>
   </div>
 </div>
 
@@ -228,7 +238,7 @@ const ENTRA_PROJECT = {
 };
 
 /* ============================================================
-   CONTENT — one place, three languages.
+   CONTENT — English and German.
    ============================================================ */
 const DATA = {
   en:{
@@ -287,35 +297,6 @@ const DATA = {
       ]
     },
     contact:{title:"Kontakt", email_label:"E-Mail", reveal:"E-Mail anzeigen", verifying:"Wird geprüft…", error:"Prüfung fehlgeschlagen — erneut versuchen"}
-  },
-
-  ru:{
-    hero_name:"Артём Белый",
-    hero_lede:"Хочу стать архитектором кибербезопасности. Ищу работу SOC-аналитиком.",
-    hero_loc:"Саарланд, Германия",
-    featured:{
-      label:"Последний проект",
-      description:"Учи языки через знакомые слова, корни и выражения.",
-      action:"Попробовать онлайн"
-    },
-    now:{
-      title:"Чем занимаюсь сейчас",
-      text:"Учу языки, повторяю основы кибербезопасности и осваиваю новое, чтобы устроиться на первую работу в этой сфере. В свободное время иногда вайбкожу проекты, которые мне интересны."
-    },
-    bg:{
-      title:"Образование",
-      text:"Бакалавр по кибербезопасности."
-    },
-    proj:{
-      title:"Проекты",
-      list:[
-        {...CCTV_PROJECT, d:"Архитектура контроля федеративного ИИ-поиска по записям камер в независимых зонах с защитой приватности."},
-        {...ENTRA_PROJECT,
-         d:"Автоматизирует жизненный цикл идентичности Joiner–Mover–Leaver в Entra ID через прямые вызовы Microsoft Graph API.",
-         status:{label:"Заморожен", reason:"Сейчас у меня другие дела в приоритете."}}
-      ]
-    },
-    contact:{title:"Контакты", email_label:"Почта", reveal:"Показать почту", verifying:"Проверка…", error:"Проверка не пройдена — попробуйте ещё раз"}
   }
 };
 
@@ -606,6 +587,7 @@ btns.forEach(b=>b.addEventListener("click",()=>{
 
 /* ---------- init ---------- */
 render("en");
+document.querySelector(".featured-link").classList.add("featured-link-intro");
 requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add("ready")));
 </script>
 </body>

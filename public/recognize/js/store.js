@@ -20,7 +20,7 @@
     reviewModes: 'mix',        // 'mix' | 'meaning' | 'cloze' (for #prod cards)
     reviewDirection: 'both',   // 'both' | 'rec' | 'prod'
     retention: 0.9,
-    showMediumWhy: false,      // show WHY? notes with confidence 'medium'
+    showMediumWhy: true,       // show WHY? notes with confidence 'medium'
     hideSidePractice: false,   // hide the "Practice now" box in the sidebar
     theme: 'dark',
     speechRate: 0.9,

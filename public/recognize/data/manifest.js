@@ -16,6 +16,7 @@ self.GT_DATA_FILES = [
   'words_b1_services.js',
   'words_b1_community.js',
   'words_b1_more.js',
+  'words_b1_more_2.js',
   // Words: B2 themes
   'words_b2_beruf.js',
   'words_b2_beruf_2.js',
@@ -36,6 +37,7 @@ self.GT_DATA_FILES = [
   'words_b2_kultur.js',
   'words_b2_more.js',
   'words_b2_everyday_2.js',
+  'words_b2_more_2.js',
   // Professional / IT & Security
   'it_security.js',
   'it_security_2.js',
@@ -46,12 +48,20 @@ self.GT_DATA_FILES = [
   'it_dev.js',
   'it_infra.js',
   'it_dev_infra_2.js',
+  'it_pro_more.js',
+  'it_pro_more_2.js',
+  'it_topics_new.js',
   // Expressions (Chunks, Idioms, Everyday Phrases)
   'chunks_sample.js',
   'chunks_more.js',
+  'chunks_more_2.js',
+  'chunks_more_3.js',
   'expressions_idioms.js',
   'expressions_everyday.js',
   'expressions_more.js',
+  'expressions_more_2.js',
+  'expressions_more_3.js',
+  'literature.js',
   // Roots, prefixes, suffixes & classical roots
   'roots_bauen.js',
   'roots_stellen.js',
@@ -84,6 +94,10 @@ self.GT_DATA_FILES = [
   'grammar_passiv.js',
   'grammar_kasus.js',
   'grammar_adjektive.js',
+  'grammar_verben_praep.js',
+  'grammar_relativsaetze.js',
+  'grammar_konnektoren.js',
+  'grammar_infinitiv.js',
   // Late topic memberships (must stay last)
   'memberships.js'
 ];
@@ -124,7 +138,10 @@ self.GT_PACKS = {
       'data/en/verbs_particles.js',
       'data/en/verbs_families.js',
       'data/en/verbs_families_2.js',
-      'data/en/words_more.js', 'data/en/words_more_2.js', 'data/en/expressions_more.js'
+      'data/en/words_more.js', 'data/en/words_more_2.js', 'data/en/words_more_3.js',
+      'data/en/it_more.js', 'data/en/it_more_2.js', 'data/en/it_topics_new.js',
+      'data/en/expressions_more.js', 'data/en/expressions_more_2.js', 'data/en/expressions_more_3.js',
+      'data/en/literature.js'
     ]
   },
   // Russian: written natively for the shared engine (target `t`, glosses en/de, explanations { en, de }).
@@ -139,9 +156,16 @@ self.GT_PACKS = {
       'words_more.js',
       'words_b2_everyday.js',
       'words_more_2.js',
+      'words_more_3.js',
       'pro.js',
+      'pro_more.js',
+      'pro_more_2.js',
+      'pro_topics_new.js',
       'expressions.js',
       'expressions_more.js',
+      'expressions_more_2.js',
+      'expressions_more_3.js',
+      'literature.js',
       'roots_hod.js',
       'roots_pis.js',
       'roots_vod.js',
@@ -156,6 +180,9 @@ self.GT_PACKS = {
       'roots_lozh.js',
       'roots_govor.js',
       'roots_del.js',
+      'roots_pros.js',
+      'roots_zhiv.js',
+      'roots_bit.js',
       'affixes.js',
       'roots_layout.js',
       'grammar_aspect.js',

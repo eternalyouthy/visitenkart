@@ -16,10 +16,11 @@
     { id: 'roots', label: 'Roots', short: 'Roots', icon: 'roots' },
     { id: 'practice', label: 'Practice', short: 'Practice', icon: 'spark' },
     { id: 'review', label: 'Review', short: 'Review', icon: 'repeat' },
-    { id: 'stats', label: 'Stats', short: 'Stats', icon: 'chart' }
+    { id: 'stats', label: 'Stats', short: 'Stats', icon: 'chart' },
+    { id: 'literature', label: 'Literary Phrases', short: 'Literature', icon: 'book' }
   ];
 
-  /* Top-level navigation: 3 dropdown menus + 3 direct tabs (matching German dark 1px-line design). */
+  /* Main navigation: three dropdown menus and the Practice tab. */
   GT.NAV = [
     {
       id: 'language', label: 'Language', short: 'Lang', icon: 'book', href: '#/words',
@@ -36,6 +37,11 @@
         { label: 'IT & Development', href: '#/it/dev', tab: 'it', topic: 'dev' },
         { label: 'Infrastructure', href: '#/it/infra', tab: 'it', topic: 'infra' },
         { label: 'Security', href: '#/it/security', tab: 'it', topic: 'security' },
+        { label: 'Design, UX & Visuals', href: '#/it/design', tab: 'it', topic: 'design' },
+        { label: 'AI, Data & Analytics', href: '#/it/ai_data', tab: 'it', topic: 'ai_data' },
+        { label: 'Product & Agile', href: '#/it/product', tab: 'it', topic: 'product' },
+        { label: 'Clients & Freelance', href: '#/it/clients', tab: 'it', topic: 'clients' },
+        { label: 'Presentations & Pitching', href: '#/it/presentations', tab: 'it', topic: 'presentations' },
         { label: 'B2 Career Paths', href: '#/it/b2_beruf', tab: 'it', topic: 'b2_beruf' },
         { label: 'B2 World of Work', href: '#/it/b2_arbeitswelt', tab: 'it', topic: 'b2_arbeitswelt' }
       ]
@@ -45,18 +51,11 @@
       items: [
         { label: 'Chunks', href: '#/chunks', match: ['chunks'] },
         { label: 'Idioms', href: '#/expressions/idioms', tab: 'expressions', topic: 'idioms' },
-        { label: 'Everyday Phrases', href: '#/expressions/everyday', tab: 'expressions', topic: 'everyday' }
+        { label: 'Everyday Phrases', href: '#/expressions/everyday', tab: 'expressions', topic: 'everyday' },
+        { label: 'Literary Phrases', href: '#/literature', match: ['literature'] }
       ]
     },
-    { id: 'practice', label: 'Practice', short: 'Practice', icon: 'spark', href: '#/practice' },
-    {
-      id: 'user', label: 'User', short: 'User', icon: 'user', href: '#/user',
-      items: [
-        { label: 'Sync & Backup', href: '#/user', match: ['user'] },
-        { label: 'Review', href: '#/review', match: ['review'] },
-        { label: 'Stats', href: '#/stats', match: ['stats'] }
-      ]
-    }
+    { id: 'practice', label: 'Practice', short: 'Practice', icon: 'spark', href: '#/practice' }
   ];
 
   GT.PRO_SUBS = [
@@ -64,6 +63,11 @@
     { id: 'dev', tab: 'it', topic: 'dev', name: 'IT & Development', desc: 'Code, releases, requirements, version control.' },
     { id: 'infra', tab: 'it', topic: 'infra', name: 'Infrastructure', desc: 'Servers, networks, outages, cloud.' },
     { id: 'security', tab: 'it', topic: 'security', name: 'Security', desc: 'Vulnerabilities, attacks, access, SOC, incidents.' },
+    { id: 'design', tab: 'it', topic: 'design', name: 'Design, UX & Visuals', desc: 'Graphic design, typography, layout, contrast, branding and mockups.' },
+    { id: 'ai_data', tab: 'it', topic: 'ai_data', name: 'AI, Data & Analytics', desc: 'Prompts, models, datasets, metrics, dashboards and automation.' },
+    { id: 'product', tab: 'it', topic: 'product', name: 'Product & Agile', desc: 'Roadmaps, backlogs, sprints, user stories, prototypes and launches.' },
+    { id: 'clients', tab: 'it', topic: 'clients', name: 'Clients & Freelance', desc: 'Briefs, quotes, invoices, scope, retainers and client talks.' },
+    { id: 'presentations', tab: 'it', topic: 'presentations', name: 'Presentations & Pitching', desc: 'Slide decks, structure, charts, transitions and handling Q&A.' },
     { id: 'b2_beruf', tab: 'it', topic: 'b2_beruf', name: 'B2 Career Paths', desc: 'Career changes, further training, promotion, salary talks, self-employment.' },
     { id: 'b2_arbeitswelt', tab: 'it', topic: 'b2_arbeitswelt', name: 'B2 World of Work', desc: 'Remote work, digitalisation, work-life balance, skills shortage.' }
   ];
@@ -131,6 +135,16 @@
         scenario: 'созвон из-за сбоя: сервер упал. Ты — дежурный коллега из эксплуатации; мы решаем, что проверить и как сообщить пользователям.' },
       { id: 'security', name: 'Security', desc: 'Vulnerabilities, attacks, access, SOC, incidents.',
         scenario: 'я объясняю инцидент безопасности руководителю нетехнического отдела. Ты — этот руководитель, задаёшь простые, но настойчивые вопросы.' },
+      { id: 'design', name: 'Design, UX & Visuals', desc: 'Graphic design, typography, layout, contrast, branding and mockups.',
+        scenario: 'дизайн-ревью макета нового сайта и логотипа с заказчиком. Ты — заказчик, я — графический и UX-дизайнер, который объясняет выбор шрифтов, сетки и контраста.' },
+      { id: 'ai_data', name: 'AI, Data & Analytics', desc: 'Prompts, models, datasets, metrics, dashboards and automation.',
+        scenario: 'обсуждение внедрения ИИ-ассистента и дашбордов в команде. Ты — менеджер, задаёшь вопросы о качестве данных, галлюцинациях модели и метриках.' },
+      { id: 'product', name: 'Product & Agile', desc: 'Roadmaps, backlogs, sprints, user stories, prototypes and launches.',
+        scenario: 'обсуждение дорожной карты продукта (Roadmap) и ретроспектива после запуска. Ты — продакт-менеджер, мы согласуем приоритеты и MVP.' },
+      { id: 'clients', name: 'Clients & Freelance', desc: 'Briefs, quotes, invoices, scope, retainers and client talks.',
+        scenario: 'звонок с потенциальным клиентом на фрилансе: обсуждаем бриф, смету, правки и сроки. Ты — клиент, который хочет добавить больше задач в исходный бюджет.' },
+      { id: 'presentations', name: 'Presentations & Pitching', desc: 'Slide decks, structure, charts, transitions and handling Q&A.',
+        scenario: 'репетиция презентации проекта перед руководством (Q&A). Ты — слушатель, задаёшь каверзные вопросы по графикам и итогам.' },
       // B2 career themes (were under Words until v38; ids kept so progress stays attached).
       { id: 'b2_beruf', level: 'b2', name: 'Career Paths (Berufswege)', desc: 'Career changes, further training, promotion, salary talks, self-employment.',
         scenario: 'карьерная консультация (Karriereberatung). Ты — коуч; я рассказываю о своём пути, о желании расти в кибербезопасности и о возможных переговорах о зарплате.' },
@@ -142,6 +156,18 @@
         scenario: 'неформальный разговор с немецким коллегой за кофе, где естественно звучат идиомы и образные выражения. Ты — коллега.' },
       { id: 'everyday', name: 'Everyday Phrases', group: 'Expressions', desc: 'High-frequency conversational phrases: Das kommt darauf an, Mal sehen, Das kriegen wir hin.',
         scenario: 'быстрый рабочий и бытовой диалог с коллегами в офисе и чате, где нужны живые короткие реплики. Ты — коллега.' }
+    ],
+    literature: [
+      { id: 'love', name: 'Love & Devotion', group: 'Literary themes', desc: 'Affection, infatuation, quiet tenderness and the sharp edge of passion.',
+        scenario: { ru: 'откровенный разговор с начитанным немецким другом о чувствах и отношениях, где уместны точные литературные обороты без пафоса. Ты — этот друг.', en: 'a candid conversation with a well-read German friend about love and relationships where literary turns of phrase fit naturally without melodrama. You are that friend.' } },
+      { id: 'longing', name: 'Longing & Melancholy', group: 'Literary themes', desc: 'Restlessness, solitude, homesickness and quiet inner ache.',
+        scenario: { ru: 'поздний разговор с другом в кафе о переменах, усталости, ностальгии и поисках себя. Ты — друг.', en: 'a late-evening café talk with a friend about restlessness, fatigue, nostalgia and searching for direction. You are the friend.' } },
+      { id: 'atmosphere', name: 'Atmosphere & Description', group: 'Literary themes', desc: 'Vivid ways to describe weather, light, rooms, silence, faces and moods.',
+        scenario: { ru: 'обсуждаем книгу, фильм или странный дождливый вечер в городе, описывая атмосферу и детали. Ты — собеседник.', en: 'talking about a book, film or strange rainy evening in the city, describing atmosphere and small details. You are my conversation partner.' } },
+      { id: 'irony', name: 'Irony & Human Nature', group: 'Literary themes', desc: 'Dry wit, social satire and sharp observations on vanity, habit and absurdity.',
+        scenario: { ru: 'ироничный обмен мнениями с коллегой или другом о бюрократии, людских привычках и нелепых ситуациях. Ты — собеседник.', en: 'a wry exchange with a friend or colleague about bureaucracy, human vanity and everyday absurdity. You are my conversation partner.' } },
+      { id: 'fate', name: 'Time, Fate & Turning Points', group: 'Literary themes', desc: 'Memory, passing time, illusions, resolve and moments that change everything.',
+        scenario: { ru: 'разговор о решении, которое меняет жизнь, о прошлом и о том, что нельзя вернуть назад. Ты — близкий друг.', en: 'a conversation about a turning point, memory and choices that cannot be undone. You are a close friend.' } }
     ],
     chunks: [
       { id: 'opinion', name: 'Giving your opinion', group: 'Everyday', scenario: 'дискуссия, в которой мне нужно высказать мнение на разные бытовые темы. Ты — любопытный коллега.' },
@@ -197,7 +223,8 @@
       words: 'B1 topics follow the official Goethe B1 Wortliste. B2 themes train discussion and argument; B2 everyday topics take the B1 life situations one step deeper. Work-related B2 themes are under Professional.',
       it: 'Professional German for your job: Work & Office, IT & Development, Infrastructure, Security, and B2 career themes.',
       chunks: 'Ready-made phrases (Redemittel) for speaking and writing. Use the filter to get phrases for a specific situation.',
-      expressions: 'Idioms, everyday conversational phrases, and ready-made Redemittel for natural German.',
+      expressions: 'Idioms, everyday conversational phrases, ready-made Redemittel and classic literary expressions.',
+      literature: 'Memorable, unusual turns of phrase from classic German literature that modern native speakers still recognise — with author, book and breakdown.',
       grammar: 'A compact B1 reference: short explanations, tables, examples, pitfalls, and quick drills you can add to Review.',
       roots: 'German word families, separable/inseparable prefixes, gender-determining suffixes, and classical Latin/Greek roots.'
     }
@@ -209,7 +236,7 @@
   };
   // Find a topic by id in any tab (used for chunk topic tags like 'health').
   GT.anyTopic = function (id) {
-    var tabs = ['words', 'it', 'chunks', 'expressions', 'grammar', 'roots'];
+    var tabs = ['words', 'it', 'chunks', 'expressions', 'literature', 'grammar', 'roots'];
     for (var i = 0; i < tabs.length; i++) {
       var t = GT.topic(tabs[i], id);
       if (t) return { tab: tabs[i], topic: t };

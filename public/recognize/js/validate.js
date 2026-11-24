@@ -29,6 +29,26 @@
         if (['polysemous', 'figurative', 'colloquial'].indexOf(it.meaningType) < 0) e(id, 'unknown meaningType');
         if (!has(it.meaningExplanation) || !(it.meaningExamples && it.meaningExamples.length)) e(id, 'meaningType without explanation/examples');
       }
+      if (it.tab === 'literature' || it.lit) {
+        var L = it.lit;
+        if (!L || typeof L !== 'object') e(id, 'literature item missing lit object');
+        else {
+          ['workOrig', 'year', 'quote'].forEach(function (f) {
+            if (!has(L[f])) e(id, 'literature item missing ' + f);
+          });
+          var examples = it.examples || [], parts = it.parts || [];
+          if (examples.length !== 2) e(id, 'literature item needs two examples');
+          if (!parts.length) e(id, 'literature item needs grammar notes');
+          Object.keys(GT.LANGS).filter(function (l) { return l !== lang; }).forEach(function (l) {
+            ['author', 'work', 'literal', 'breakdown', 'context', 'tone'].forEach(function (f) {
+              if (!L[f] || !has(L[f][l])) e(id, 'literature item missing ' + l + ' ' + f);
+            });
+            if (!has(it[l]) && l !== base) e(id, 'literature item missing ' + l + ' meaning');
+            if (l !== base && examples.some(function (x) { return !has(x[l]); })) e(id, 'literature example missing ' + l + ' translation');
+            if (parts.some(function (part) { return !part[1] || !has(part[1][l]); })) e(id, 'literature grammar note missing ' + l + ' gloss');
+          });
+        }
+      }
       (Array.isArray(it.prefixDrill) ? it.prefixDrill : it.prefixDrill ? [it.prefixDrill] : []).forEach(function (pd) {
         var pf = p.prefixes[it.prefix];
         if (pf && pf.meanings && !pf.meanings[pd.meaning]) e(id, 'prefixDrill.meaning out of range');

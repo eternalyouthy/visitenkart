@@ -76,6 +76,16 @@
           scenario: { en: 'a call because a server is down. You are the on-call admin.', de: 'ein Anruf, weil ein Server ausgefallen ist. Du bist der Admin in Bereitschaft.' } },
         { id: 'security', name: 'Security', desc: 'Attacks, vulnerabilities, access, incidents, SOC.',
           scenario: { en: 'I explain a security incident to a non-technical manager. You are that manager and ask simple but persistent questions.', de: 'ich erkläre einer nichttechnischen Abteilungsleiterin einen Sicherheitsvorfall. Du bist sie und fragst einfach, aber hartnäckig.' } },
+        { id: 'design', name: 'Design, UX & Visuals', desc: 'Graphic design, typography, layout, contrast, branding and mockups.',
+          scenario: { en: 'a design review of a new website mockup and visual identity. You are the client; I explain the typography, grid and contrast.', de: 'ein Design-Review eines neuen Website-Mockups und Brandings. Du bist der Kunde; ich erkläre Typografie, Raster und Kontrast.' } },
+        { id: 'ai_data', name: 'AI, Data & Analytics', desc: 'Prompts, models, datasets, metrics, dashboards and automation.',
+          scenario: { en: 'a discussion about adding an AI assistant and analytics dashboards. You are a manager asking about data quality and metrics.', de: 'ein Gespräch über den Einsatz eines KI-Assistenten und neuer Dashboards. Du bist der Manager und fragst nach Datenqualität und Kennzahlen.' } },
+        { id: 'product', name: 'Product & Agile', desc: 'Roadmaps, backlogs, sprints, user stories, prototypes and launches.',
+          scenario: { en: 'discussing the product roadmap, MVP scope and sprint retrospective. You are the product manager.', de: 'ein Gespräch über Produkt-Roadmap, MVP und Sprint-Retrospektive. Du bist die Produktmanagerin.' } },
+        { id: 'clients', name: 'Clients & Freelance', desc: 'Briefs, quotes, invoices, scope, retainers and client talks.',
+          scenario: { en: 'a freelance client call about a project brief, quote, revisions and invoice. You are the client.', de: 'ein Gespräch mit einem Freelance-Kunden über Briefing, Angebot, Korrekturschleifen und Rechnung. Du bist der Kunde.' } },
+        { id: 'presentations', name: 'Presentations & Pitching', desc: 'Slide decks, structure, charts, transitions and handling Q&A.',
+          scenario: { en: 'rehearsing a project presentation and Q&A session. You are the audience asking follow-up questions.', de: 'die Generalprobe einer Projektpräsentation mit anschließender Fragerunde. Du bist das Publikum.' } },
         { id: 'b2_work', name: 'B2 World of Work', desc: 'Remote work, digitalisation, careers.', level: 'b2',
           scenario: { en: 'a discussion about remote work and the future of work. You are a sceptical HR manager.', de: 'eine Diskussion über Homeoffice und die Zukunft der Arbeit. Du bist eine skeptische HR-Managerin.' } },
       ],
@@ -113,6 +123,18 @@
         { id: 'everyday', name: 'Everyday Phrases', group: 'Expressions', desc: 'Short high-frequency replies: Ничего страшного, Как скажешь, Посмотрим.',
           scenario: { en: 'quick everyday and work dialogue in the office and in chat. You are a colleague.', de: 'schnelle Alltags- und Arbeitsdialoge im Büro und im Chat. Du bist ein Kollege.' } }
       ],
+      literature: [
+        { id: 'love', name: 'Love & Devotion', group: 'Literary themes', desc: 'Affection, infatuation, quiet tenderness and the sharp edge of passion.',
+          scenario: { en: 'a candid conversation with a well-read Russian friend about love and relationships where classic literary lines come up naturally without melodrama. You are that friend.', de: 'ein offenes Gespräch mit einem belesenen russischen Freund über Liebe und Beziehungen, in dem klassische Literaturzitate ganz natürlich fallen. Du bist dieser Freund.' } },
+        { id: 'longing', name: 'Longing & Melancholy', group: 'Literary themes', desc: 'Restlessness, solitude, homesickness and quiet inner ache.',
+          scenario: { en: 'a late-night kitchen talk with a Russian friend about restlessness, spleen, nostalgia and inertia. You are the friend.', de: 'ein spätes Küchengespräch mit einem russischen Freund über Schwermut, Rastlosigkeit und Fernweh. Du bist der Freund.' } },
+        { id: 'atmosphere', name: 'Atmosphere & Description', group: 'Literary themes', desc: 'Vivid ways to describe weather, light, rooms, silence, faces and moods.',
+          scenario: { en: 'discussing a novel, film or striking winter morning and describing the atmosphere and sharp details. You are my conversation partner.', de: 'wir sprechen über einen Roman, Film oder einen klaren Wintermorgen und beschreiben Atmosphäre und Details. Du bist mein Gesprächspartner.' } },
+        { id: 'irony', name: 'Irony & Human Nature', group: 'Literary themes', desc: 'Dry wit, social satire and sharp observations on vanity, habit and absurdity.',
+          scenario: { en: 'a wry conversation about everyday absurdity, human vanity and social habits where classic Russian satire fits right in. You are a sharp-tongued friend.', de: 'ein ironisches Gespräch über alltägliche Absurdität, Eitelkeit und menschliche Gewohnheiten, zu dem klassische russische Satire passt. Du bist ein schlagfertiger Freund.' } },
+        { id: 'fate', name: 'Time, Fate & Turning Points', group: 'Literary themes', desc: 'Memory, passing time, illusions, resolve and moments that change everything.',
+          scenario: { en: 'a conversation about turning points, endurance, memory and the price of choices. You are a close friend.', de: 'ein Gespräch über Wendepunkte, Erinnerung und den Preis von Entscheidungen. Du bist ein enger Freund.' } }
+      ],
       grammar: [
         { id: 'aspect', name: 'Verb aspect: imperfective vs perfective', group: 'Core grammar' },
         { id: 'cases', name: 'Cases: prepositional & accusative after в / на', group: 'Core grammar' },
@@ -136,13 +158,19 @@
           { label: 'IT & Development', href: '#/it/dev', tab: 'it', topic: 'dev' },
           { label: 'Infrastructure', href: '#/it/infra', tab: 'it', topic: 'infra' },
           { label: 'Security', href: '#/it/security', tab: 'it', topic: 'security' },
+          { label: 'Design, UX & Visuals', href: '#/it/design', tab: 'it', topic: 'design' },
+          { label: 'AI, Data & Analytics', href: '#/it/ai_data', tab: 'it', topic: 'ai_data' },
+          { label: 'Product & Agile', href: '#/it/product', tab: 'it', topic: 'product' },
+          { label: 'Clients & Freelance', href: '#/it/clients', tab: 'it', topic: 'clients' },
+          { label: 'Presentations & Pitching', href: '#/it/presentations', tab: 'it', topic: 'presentations' },
           { label: 'B2 World of Work', href: '#/it/b2_work', tab: 'it', topic: 'b2_work' }
         ] },
       { id: 'expressions', label: 'Expressions', short: 'Phrases', icon: 'quote', href: '#/expressions',
         items: [
           { label: 'Chunks', href: '#/chunks', match: ['chunks'] },
           { label: 'Idioms', href: '#/expressions/idioms', tab: 'expressions', topic: 'idioms' },
-          { label: 'Everyday Phrases', href: '#/expressions/everyday', tab: 'expressions', topic: 'everyday' }
+          { label: 'Everyday Phrases', href: '#/expressions/everyday', tab: 'expressions', topic: 'everyday' },
+          { label: 'Literary Phrases', href: '#/literature', match: ['literature'] }
         ] },
       { id: 'practice', label: 'Practice', short: 'Practice', icon: 'spark', href: '#/practice' },
       { id: 'user', label: 'User', short: 'User', icon: 'user', href: '#/user',
@@ -157,13 +185,19 @@
       { id: 'dev', tab: 'it', topic: 'dev', name: 'IT & Development', desc: 'Code, releases, bugs, testing.' },
       { id: 'infra', tab: 'it', topic: 'infra', name: 'Infrastructure', desc: 'Servers, networks, outages, backups.' },
       { id: 'security', tab: 'it', topic: 'security', name: 'Security', desc: 'Attacks, vulnerabilities, access, incidents, SOC.' },
+      { id: 'design', tab: 'it', topic: 'design', name: 'Design, UX & Visuals', desc: 'Graphic design, typography, layout, contrast, branding and mockups.' },
+      { id: 'ai_data', tab: 'it', topic: 'ai_data', name: 'AI, Data & Analytics', desc: 'Prompts, models, datasets, metrics, dashboards and automation.' },
+      { id: 'product', tab: 'it', topic: 'product', name: 'Product & Agile', desc: 'Roadmaps, backlogs, sprints, user stories, prototypes and launches.' },
+      { id: 'clients', tab: 'it', topic: 'clients', name: 'Clients & Freelance', desc: 'Briefs, quotes, invoices, scope, retainers and client talks.' },
+      { id: 'presentations', tab: 'it', topic: 'presentations', name: 'Presentations & Pitching', desc: 'Slide decks, structure, charts, transitions and handling Q&A.' },
       { id: 'b2_work', tab: 'it', topic: 'b2_work', name: 'B2 World of Work', desc: 'Remote work, digitalisation, careers.' }
     ],
     intro: {
       words: 'A2–B2 Russian for everyday life, work and discussion. Stress is marked with an accent (говори́ть); you never need to type it.',
       it: 'Professional Russian for IT work: office communication, development, infrastructure and security.',
       chunks: 'Ready-made phrases for speaking and writing, organised by communicative function.',
-      expressions: 'Idioms and short everyday phrases for natural Russian.',
+      expressions: 'Idioms, short everyday phrases and classic literary lines for natural Russian.',
+      literature: 'Memorable, unusual lines from classic Russian literature that every native speaker recognises — with author, book and breakdown.',
       grammar: 'The core of Russian grammar for learners: aspect, cases after в / на, and verbs of motion — with tables, pitfalls and drills.',
       roots: 'Russian word families built from one root with prefixes (при-, вы-, пере- …), noun and adjective suffixes, and international classical elements.'
     }

@@ -42,7 +42,7 @@
     var p = GT.packs[lang] || (GT.packs[lang] = blankPack(lang));
     Object.keys(config || {}).forEach(function (k) { p.config[k] = config[k]; });
     var T = p.config.TOPICS;
-    ['words', 'it', 'expressions', 'chunks', 'grammar', 'roots'].forEach(function (tab) { if (!T[tab]) T[tab] = []; });
+    ['words', 'it', 'expressions', 'chunks', 'literature', 'grammar', 'roots'].forEach(function (tab) { if (!T[tab]) T[tab] = []; });
     if (!GT.pack) GT.pack = p;
     return p;
   };
@@ -104,7 +104,7 @@
     (pack.items || []).forEach(function (it) {
       it.tab = it.tab || pack.tab;
       it.topic = it.topic || pack.topic;
-      it.type = it.type || pack.type || (it.tab === 'chunks' ? 'chunk' : 'word');
+      it.type = it.type || pack.type || (it.tab === 'chunks' || it.tab === 'literature' ? 'chunk' : 'word');
       if (p.byId[it.id]) { p.duplicates.push(it.id); return; }
       normalize(p, it);
       p.items.push(it);

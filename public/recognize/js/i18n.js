@@ -43,7 +43,10 @@
       register: {
         formal: 'Формально: вежливая форма, учреждения, письма, незнакомые люди.',
         neutral: 'Нейтрально: подходит почти везде — на работе и в быту.',
-        informal: 'Неформально: с друзьями и близкими коллегами.'
+        informal: 'Неформально: с друзьями и близкими коллегами.',
+        literary: 'Книжно-выразительно: родом из классики, но понятно носителям в живой речи, эссе и разговоре — главное, без пафоса.',
+        ironic: 'Иронично: литературная формула с тонкой усмешкой — уместна в умном разговоре, статье или дружеском споре.',
+        elevated: 'Возвышенно-образно: сильная литературная метафора для точных описаний, писем и глубоких разговоров.'
       },
       studio: {
         mixed: 'Смешанный режим: чередует узнавание в контексте ({LS} → {KS}) и активное воспроизведение (перевод, пропуск, словообразование). Оценка сразу сохраняется в FSRS-5.',
@@ -79,7 +82,10 @@
       register: {
         formal: 'Formal: polite address, offices, letters, people you don’t know.',
         neutral: 'Neutral: fits almost everywhere — at work and in everyday life.',
-        informal: 'Informal: with friends and close colleagues.'
+        informal: 'Informal: with friends and close colleagues.',
+        literary: 'Literary & expressive: born in classic literature, still understood by native speakers in essays and conversation — best used lightly, without melodrama.',
+        ironic: 'Ironic: a literary turn of phrase with dry wit — natural in sharp conversation, essays or friendly debate.',
+        elevated: 'Elevated & vivid: a strong literary image suited to precise descriptions, letters and thoughtful conversation.'
       },
       studio: {
         mixed: 'Mixed mode: alternates recognition in context ({LS} → {KS}) and active recall (translation, cloze, word formation). Ratings go straight into FSRS-5.',
@@ -115,7 +121,10 @@
       register: {
         formal: 'Formell: höfliche Anrede, Behörden, Briefe, fremde Menschen.',
         neutral: 'Neutral: passt fast überall — bei der Arbeit und im Alltag.',
-        informal: 'Informell: mit Freunden und vertrauten Kollegen.'
+        informal: 'Informell: mit Freunden und vertrauten Kollegen.',
+        literary: 'Literarisch-ausdrucksstark: stammt aus der Klassik, ist Muttersprachlern aber heute noch vertraut — am besten ohne Pathos verwendet.',
+        ironic: 'Ironisch: eine literarische Wendung mit trockenem Witz — passt in kluge Gespräche, Essays oder Debatten.',
+        elevated: 'Gehoben & bildhaft: eine prägnante literarische Metapher für genaue Beschreibungen, Briefe und tiefere Gespräche.'
       },
       studio: {
         mixed: 'Gemischter Modus: wechselt zwischen Wiedererkennen im Kontext ({LS} → {KS}) und aktivem Abrufen (Übersetzung, Lückentext, Wortbildung). Die Bewertung geht direkt in FSRS-5.',

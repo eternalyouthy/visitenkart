@@ -38,6 +38,11 @@
     'it.dev': 'Code, releases, requirements, version control.',
     'it.infra': 'Servers, networks, outages, cloud.',
     'it.security': 'Vulnerabilities, attacks, access, SOC, incidents.',
+    'it.design': 'Graphic design, typography, layout, contrast, branding and mockups.',
+    'it.ai_data': 'Prompts, models, datasets, metrics, dashboards and automation.',
+    'it.product': 'Roadmaps, backlogs, sprints, user stories, prototypes and launches.',
+    'it.clients': 'Briefs, quotes, invoices, scope, retainers and client talks.',
+    'it.presentations': 'Slide decks, structure, charts, transitions and handling Q&A.',
     'it.business': 'Negotiation, clients, budgets and business correspondence (B2).',
     'expressions.idioms': 'Common B1–B2 English idioms with literal vs real meaning.',
     'expressions.everyday': 'High-frequency conversational phrases for quick replies and arrangements.'
@@ -52,7 +57,7 @@
     return t.id;
   }
 
-  var TOPICS = { words: [], it: [], chunks: [], expressions: [], grammar: [], roots: [] };
+  var TOPICS = { words: [], it: [], chunks: [], expressions: [], literature: [], grammar: [], roots: [] };
   var membership = {};   // entry id -> [[tab, topic], ...]
   E.sections.forEach(function (sec) {
     var secTab = SECTION_TAB[sec.id];
@@ -79,6 +84,18 @@
     scenario: 'неформальный разговор с коллегой за кофе, где естественно звучат идиомы. Ты — коллега.' });
   TOPICS.expressions.push({ id: 'everyday', name: 'Everyday Phrases', desc: DESC['expressions.everyday'], hidden: true, group: 'Everyday Phrases',
     scenario: 'быстрый рабочий и бытовой диалог с коллегами, где нужны живые короткие реплики. Ты — коллега.' });
+  TOPICS.literature = [
+    { id: 'love', name: 'Love & Devotion', group: 'Literary themes', desc: 'Affection, infatuation, quiet tenderness and the sharp edge of passion.',
+      scenario: { ru: 'откровенный разговор с начитанным другом из Великобритании о любви и близости, где литературные обороты звучат естественно, без наигранности. Ты — друг.', de: 'ein offenes Gespräch mit einem belesenen englischsprachigen Freund über Liebe und Nähe, in dem literarische Wendungen ganz natürlich klingen. Du bist dieser Freund.' } },
+    { id: 'longing', name: 'Longing & Melancholy', group: 'Literary themes', desc: 'Restlessness, solitude, homesickness and quiet inner ache.',
+      scenario: { ru: 'вечерний разговор с другом в кафе об усталости, ностальгии и ощущении времени. Ты — друг.', de: 'ein ruhiges Café-Gespräch über Fernweh, Müdigkeit, Nostalgie und das Gefühl vergehender Zeit. Du bist ein Freund.' } },
+    { id: 'atmosphere', name: 'Atmosphere & Description', group: 'Literary themes', desc: 'Vivid ways to describe weather, light, rooms, silence, faces and moods.',
+      scenario: { ru: 'обсуждаем книгу или странный дождливый вечер в городе, точно описывая атмосферу и детали. Ты — собеседник.', de: 'wir sprechen über ein Buch oder einen seltsamen grauen Abend und beschreiben Atmosphäre und Details. Du bist mein Gesprächspartner.' } },
+    { id: 'irony', name: 'Irony & Human Nature', group: 'Literary themes', desc: 'Dry wit, social satire and sharp observations on vanity, habit and absurdity.',
+      scenario: { ru: 'ироничная беседа о бюрократии, светских привычках и парадоксах повседневной жизни. Ты — собеседник с сухим британским юмором.', de: 'ein ironisches Gespräch über Bürokratie, Eitelkeit und Absurditäten des Alltags. Du bist ein Gesprächspartner mit trockenem Humor.' } },
+    { id: 'fate', name: 'Time, Fate & Turning Points', group: 'Literary themes', desc: 'Memory, passing time, illusions, resolve and moments that change everything.',
+      scenario: { ru: 'разговор о поворотном моменте, памяти и решениях, после которых назад дороги нет. Ты — близкий друг.', de: 'ein Gespräch über Wendepunkte, Erinnerung und Entscheidungen, die alles verändern. Du bist ein enger Freund.' } }
+  ];
   TOPICS.words.push({ id: 'catalogue', name: 'Other catalogue entries', desc: 'Entries that belong only to a word family.', hidden: true, group: 'Catalogue' });
 
   /* ---- entries ---- */
@@ -204,6 +221,17 @@
     TOPICS.grammar.push({ id: id, name: g.label + ' · ' + g.level, group: 'Grammar topics' });
   });
 
+  // New cross-disciplinary Professional topics (Design, AI/Data, Product/Agile, Clients, Presentations)
+  [
+    { id: 'design', name: 'Design, UX & Visuals', scenario: 'дизайн-ревью макета и фирменного стиля с заказчиком. Ты — заказчик, я объясняю выбор типографики, сетки, контраста и макета.' },
+    { id: 'ai_data', name: 'AI, Data & Analytics', scenario: 'обсуждение внедрения ИИ-инструмента и аналитики данных. Ты — менеджер, спрашиваешь про промпты, точность модели, смещение данных и метрики.' },
+    { id: 'product', name: 'Product & Agile', scenario: 'обсуждение дорожной карты продукта, MVP и ретроспективы спринта. Ты — продакт-менеджер.' },
+    { id: 'clients', name: 'Clients & Freelance', scenario: 'переговоры с клиентом на фрилансе по брифу, смете, правкам и счёту. Ты — клиент.' },
+    { id: 'presentations', name: 'Presentations & Pitching', scenario: 'тренировка презентации проекта и секции вопросов и ответов (Q&A). Ты — аудитория.' }
+  ].forEach(function (t) {
+    TOPICS.it.push({ id: t.id, name: t.name, desc: DESC['it.' + t.id], scenario: t.scenario, group: 'Professional', level: 'b1' });
+  });
+
   // Keep the moved B2 career themes after the core Professional topics (stable sort).
   TOPICS.it.sort(function (a, b) { return (WORK_B2[a.id] ? 1 : 0) - (WORK_B2[b.id] ? 1 : 0); });
 
@@ -231,6 +259,11 @@
           { label: 'IT & Development', href: '#/it/dev', tab: 'it', topic: 'dev' },
           { label: 'Infrastructure', href: '#/it/infra', tab: 'it', topic: 'infra' },
           { label: 'Security', href: '#/it/security', tab: 'it', topic: 'security' },
+          { label: 'Design, UX & Visuals', href: '#/it/design', tab: 'it', topic: 'design' },
+          { label: 'AI, Data & Analytics', href: '#/it/ai_data', tab: 'it', topic: 'ai_data' },
+          { label: 'Product & Agile', href: '#/it/product', tab: 'it', topic: 'product' },
+          { label: 'Clients & Freelance', href: '#/it/clients', tab: 'it', topic: 'clients' },
+          { label: 'Presentations & Pitching', href: '#/it/presentations', tab: 'it', topic: 'presentations' },
           { label: 'B2 Business English', href: '#/it/business', tab: 'it', topic: 'business' },
           { label: 'B2 Career Paths', href: '#/it/career-paths', tab: 'it', topic: 'career-paths' },
           { label: 'B2 World of Work', href: '#/it/world-of-work', tab: 'it', topic: 'world-of-work' }
@@ -239,7 +272,8 @@
         items: [
           { label: 'Chunks', href: '#/chunks', match: ['chunks'] },
           { label: 'Idioms', href: '#/expressions/idioms', tab: 'expressions', topic: 'idioms' },
-          { label: 'Everyday Phrases', href: '#/expressions/everyday', tab: 'expressions', topic: 'everyday' }
+          { label: 'Everyday Phrases', href: '#/expressions/everyday', tab: 'expressions', topic: 'everyday' },
+          { label: 'Literary Phrases', href: '#/literature', match: ['literature'] }
         ] },
       { id: 'practice', label: 'Practice', short: 'Practice', icon: 'spark', href: '#/practice' },
       { id: 'user', label: 'User', short: 'User', icon: 'user', href: '#/user',
@@ -254,6 +288,11 @@
       { id: 'dev', tab: 'it', topic: 'dev', name: 'IT & Development', desc: DESC['it.dev'] },
       { id: 'infra', tab: 'it', topic: 'infra', name: 'Infrastructure', desc: DESC['it.infra'] },
       { id: 'security', tab: 'it', topic: 'security', name: 'Security', desc: DESC['it.security'] },
+      { id: 'design', tab: 'it', topic: 'design', name: 'Design, UX & Visuals', desc: DESC['it.design'] },
+      { id: 'ai_data', tab: 'it', topic: 'ai_data', name: 'AI, Data & Analytics', desc: DESC['it.ai_data'] },
+      { id: 'product', tab: 'it', topic: 'product', name: 'Product & Agile', desc: DESC['it.product'] },
+      { id: 'clients', tab: 'it', topic: 'clients', name: 'Clients & Freelance', desc: DESC['it.clients'] },
+      { id: 'presentations', tab: 'it', topic: 'presentations', name: 'Presentations & Pitching', desc: DESC['it.presentations'] },
       { id: 'business', tab: 'it', topic: 'business', name: 'B2 Business English', desc: DESC['it.business'] },
       { id: 'career-paths', tab: 'it', topic: 'career-paths', name: 'B2 Career Paths', desc: DESC['it.career-paths'] },
       { id: 'world-of-work', tab: 'it', topic: 'world-of-work', name: 'B2 World of Work', desc: DESC['it.world-of-work'] }
@@ -262,7 +301,8 @@
       words: 'A2–B2 English for everyday life and B2 discussion topics. Levels shown are dictionary CEFR labels where verified, otherwise study targets.',
       it: 'Professional English for your job: Work & Office, IT & Development, Infrastructure, Security, B2 Business English and B2 career themes.',
       chunks: 'Ready-made phrases for speaking and writing, organised by communicative function.',
-      expressions: 'Idioms, everyday conversational phrases and ready-made chunks for natural English.',
+      expressions: 'Idioms, everyday conversational phrases, ready-made chunks and classic literary expressions for natural English.',
+      literature: 'Memorable, unusual turns of phrase from classic English literature that modern native speakers still recognise — with author, book and breakdown.',
       grammar: 'Essential B1–B2 grammar: a short explanation, an example, a recognition question and a typed production task per topic.',
       roots: 'Start with verbs + particles (take up, take off, take over): the core of everyday English. Then word-building families, prefixes, suffixes and classical Latin/Greek roots.'
     }

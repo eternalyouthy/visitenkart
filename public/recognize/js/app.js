@@ -187,6 +187,7 @@
   }
   function itemsFor(tab, topic) {
     if (tab === 'chunks') return GT.items.filter(function (it) { return chunkMatches(it, topic); });
+    if (tab === 'literature' && topic === 'all') return GT.items.filter(function (it) { return GT.inTab(it, 'literature'); });
     if (tab === 'all') return GT.items.slice();
     return (GT.members[tab + '.' + topic] || []).slice();
   }
@@ -264,7 +265,9 @@
   }
 
   /* ---------------- shell: nav + sidebar ---------------- */
+  var userBtn = $('#userBtn');
   $('#menuBtn').innerHTML = icon('menu');
+  userBtn.innerHTML = icon('user');
   $('#settingsBtn').innerHTML = icon('sliders');
   function openSidebar() { sideEl.classList.add('open'); scrimEl.classList.add('open'); }
   function closeSidebar() { sideEl.classList.remove('open'); scrimEl.classList.remove('open'); }
@@ -279,7 +282,7 @@
     p = p || [];
     if (tab === 'professional' || tab === 'it' || proSubFor(tab, p[1])) return 'professional';
     if (p[0] === 'item' && GT.byId[p[1]] && (GT.byId[p[1]].tab === 'it' || proSubFor(GT.byId[p[1]].tab, GT.byId[p[1]].topic))) return 'professional';
-    if (tab === 'expressions' || tab === 'chunks') return 'expressions';
+    if (tab === 'expressions' || tab === 'chunks' || tab === 'literature') return 'expressions';
     if (tab === 'practice') return 'practice';
     if (tab === 'start' || tab === 'about') return 'start';
     if (tab === 'user' || tab === 'review' || tab === 'stats') return 'user';
@@ -299,7 +302,8 @@
   function renderNav(active, p) {
     p = p || curPath();
     var group = navGroupFor(active, p);
-    var due = dueKeys('all', 'both').length;
+    userBtn.classList.toggle('active', group === 'user');
+    if (active === 'user') userBtn.setAttribute('aria-current', 'page'); else userBtn.removeAttribute('aria-current');
     var brand = $('.brand');
     if (group === 'start') brand.setAttribute('aria-current', 'page'); else brand.removeAttribute('aria-current');
     $('#tabs').innerHTML = GT.NAV.map(function (g, i) {
@@ -314,8 +318,7 @@
       return '<a class="tab' + actCls + '" href="' + g.href + '"><span class="num">' + pad2(i + 1) + '</span>' + esc(g.label) + '</a>';
     }).join('');
     $('#bottomnav').innerHTML = GT.NAV.map(function (g) {
-      return '<a class="bnav' + (g.id === group ? ' active' : '') + '" href="' + g.href + '">' + icon(g.icon) + '<span>' + esc(g.short) + '</span>' +
-        ((g.id === 'user' || g.id === 'review') && due ? '<span class="pip">' + (due > 99 ? '99+' : due) + '</span>' : '') + '</a>';
+      return '<a class="bnav' + (g.id === group ? ' active' : '') + '" href="' + g.href + '">' + icon(g.icon) + '<span>' + esc(g.short) + '</span></a>';
     }).join('');
     renderBrand();
   }
@@ -358,7 +361,7 @@
     var html = '', cur = p[1];
     if (p[0] === 'item') { var it = GT.byId[p[1]]; cur = it ? it.topic : null; }
     var inPro = tab === 'professional' || tab === 'it' || (tab === 'words' && proSubFor('words', cur));
-    var inExp = tab === 'expressions' || tab === 'chunks';
+    var inExp = tab === 'expressions' || tab === 'chunks' || tab === 'literature';
     if (inPro) {
       html += '<div class="side-label">Professional</div>';
       var b2Label = false;
@@ -382,6 +385,15 @@
         var items = itemsFor('expressions', t.id), c = counts(items);
         html += sideLink('#/expressions/' + t.id, pad2(i + 1), t.name, items.length ? c.known + '/' + items.length : '', { active: tab === 'expressions' && cur === t.id, dim: !items.length });
       });
+      var litTopics = (GT.TOPICS.literature || []).filter(visibleTopic);
+      if (litTopics.length) {
+        html += '<div class="side-label">Literary Phrases</div>' +
+          sideLink('#/literature/all', '—', 'All literary', itemsFor('literature', 'all').length, { active: tab === 'literature' && cur === 'all' });
+        litTopics.forEach(function (t, i) {
+          var items = itemsFor('literature', t.id), c = counts(items);
+          html += sideLink('#/literature/' + t.id, pad2(i + 1), t.name, items.length ? c.known + '/' + items.length : '', { active: tab === 'literature' && cur === t.id, dim: !items.length });
+        });
+      }
       html += '<div class="side-label">Chunks</div>' + sideLink('#/chunks/all', '—', 'All chunks', itemsFor('chunks', 'all').length, { active: tab === 'chunks' && cur === 'all' });
       var groupE = null, nE = 0;
       GT.TOPICS.chunks.forEach(function (t) {
@@ -421,7 +433,7 @@
         var f = p[1] || 'all';
         html += '<div class="side-label">Review filter</div>';
         html += sideLink('#/review/all', null, 'Everything', dueTotal || '', { active: f === 'all', due: true });
-        ['words', 'it', 'chunks', 'expressions', 'grammar', 'roots'].forEach(function (tb) {
+        ['words', 'it', 'chunks', 'expressions', 'literature', 'grammar', 'roots'].forEach(function (tb) {
           var tabDef = GT.TABS.find(function (x) { return x.id === tb; });
           html += '<div class="side-label">' + esc(tabDef.label) + '</div>';
           html += sideLink('#/review/' + tb, null, 'All ' + tabDef.label, dueKeys(tb, dir).length || '', { active: f === tb, due: true });
@@ -448,14 +460,14 @@
     var due = dueKeys('all', 'both').length;
     var nWords = GT.items.filter(function (it) { return GT.inTab(it, 'words'); }).length;
     var nPro = GT.items.filter(function (it) { return GT.inTab(it, 'it'); }).length;
-    var nExp = GT.items.filter(function (it) { return GT.inTab(it, 'expressions') || GT.inTab(it, 'chunks'); }).length;
+    var nExp = GT.items.filter(function (it) { return GT.inTab(it, 'expressions') || GT.inTab(it, 'chunks') || GT.inTab(it, 'literature'); }).length;
     var nGr = Object.keys(GT.grammar || {}).length, nRoots = Object.keys(GT.roots || {}).length;
     return [
       { href: '#/words', name: 'Words', ct: nWords ? nWords + ' cards' : '', desc: 'Everyday vocabulary by topic, from core B1 lists to B2 discussion themes.' },
       { href: '#/grammar', name: 'Grammar', ct: nGr ? nGr + ' lessons' : '', desc: 'Short lessons with tables, typical mistakes and drills you can send to Review.' },
       { href: '#/roots', name: 'Roots', ct: nRoots ? nRoots + ' families' : '', desc: 'Learn one root, prefix or suffix and recognise a whole family of words.' },
       { href: '#/professional', name: 'Professional', ct: nPro ? nPro + ' cards' : '', desc: 'Language for work: office, IT, infrastructure, security and B2 career themes.' },
-      { href: '#/expressions', name: 'Expressions', ct: nExp ? nExp + ' phrases' : '', desc: 'Chunks, idioms and everyday phrases you can use in a conversation as they are.' },
+      { href: '#/expressions', name: 'Expressions', ct: nExp ? nExp + ' phrases' : '', desc: 'Chunks, idioms, everyday phrases and classic literary lines with breakdowns.' },
       { href: '#/practice', name: 'Practice', ct: '', desc: 'Drills on recognition, recall and word building, plus a role-play prompt for an AI chat.' },
       { href: '#/review', name: 'Review', ct: due ? due + ' due' : '', due: !!due, desc: 'Spaced repetition: come back to the cards you added when they are due.' }
     ];
@@ -640,15 +652,27 @@
     if (!tip) return;
     tip.classList.remove('below');
     tip.style.left = '';
+    tip.style.right = '';
     tip.style.top = '';
     tip.style.bottom = '';
+    var vw = document.documentElement.clientWidth || window.innerWidth;
+    var vh = window.innerHeight;
     var wr = wrap.getBoundingClientRect();
-    var tw = Math.min(340, window.innerWidth - 24);
-    var th = tip.offsetHeight || 200;
+    var th = tip.offsetHeight || 220;
     var container = wrap.closest('.word-main, .rdetail, .recall, .review-col');
     var hwRow = container && container.querySelector('.hw-row');
     var hwRect = hwRow ? hwRow.getBoundingClientRect() : null;
 
+    if (vw <= 860) {
+      var topMin = 70;
+      var botMax = vh - 80;
+      var desiredTop = (hwRect && hwRect.bottom > wr.bottom) ? Math.round(hwRect.bottom + 10) : Math.round(wr.bottom + 10);
+      var top = Math.max(topMin, Math.min(desiredTop, botMax - th));
+      tip.style.top = top + 'px';
+      return;
+    }
+
+    var tw = Math.min(340, vw - 24);
     if (wr.top - th - 14 >= 76) {
       tip.style.bottom = 'calc(100% + 10px)';
     } else if (hwRect && hwRect.bottom > wr.bottom && hwRect.top < wr.bottom + th + 24) {
@@ -660,11 +684,12 @@
     }
 
     var shift = 0;
-    if (wr.left + tw > window.innerWidth - 12) shift = (window.innerWidth - 12) - (wr.left + tw);
+    if (wr.left + tw > vw - 12) shift = (vw - 12) - (wr.left + tw);
     if (wr.left + shift < 12) shift = 12 - wr.left;
     tip.style.left = Math.round(shift) + 'px';
   }
   function levelLabel(it) {
+    if (it.tab === 'literature') return 'Literary Phrases';
     if (it.level && typeof it.level === 'string' && /^[ABC][12]/i.test(it.level)) return it.level.toUpperCase();
     var t = topicOf(it);
     if (t && t.level === 'b2' && (it.tab === 'words' || it.tab === 'it')) return 'B2';
@@ -684,6 +709,22 @@
     return '<span class="fb-tag" title="' + esc(GT.hint('missing')) + '">' + esc((GT.LANGS[lang] || {}).short || lang) + '</span>';
   }
   function lxText(o, f) { var v = GT.lx(o, f); return v == null ? '' : v; }
+  function litMeta(it) {
+    var lit = it.lit;
+    return { author: lxText(lit, 'author'), work: lxText(lit, 'work'), workOrig: lit.workOrig, year: lit.year };
+  }
+  function litBylineHTML(it, cls) {
+    if (!it.lit) return '';
+    var src = litMeta(it);
+    return '<p class="' + (cls || 'lit-byline') + '" lang="' + GT.know + '">' + esc(src.author) + ' · ' + esc(src.work) + ' (' + esc(src.year) + ')</p>';
+  }
+  function litSearchTerms(it) {
+    if (!it.lit) return '';
+    return ['author', 'authorOrig', 'work', 'workOrig', 'year'].map(function (key) {
+      var val = it.lit[key];
+      return val && typeof val === 'object' ? Object.keys(val).map(function (lang) { return val[lang]; }).join(' ') : val;
+    }).join(' ');
+  }
   function glossText(v) {
     if (v && typeof v === 'object' && !Array.isArray(v)) return v[GT.know] || v[GT.cfg('baseKnown', 'ru')] || '';
     return v || '';
@@ -803,15 +844,33 @@
     return esc(levelLabel(it)) + ' · <a href="#/' + it.tab + '/' + it.topic + '">' + esc(t ? t.name : it.topic) + '</a>' + (extra ? ' · ' + extra : '');
   }
 
+  function literatureSide(it) {
+    var src = litMeta(it), lit = it.lit;
+    var original = src.workOrig && src.workOrig !== src.work ? '<p class="lit-orig" lang="' + GT.learn + '">' + esc(src.workOrig) + '</p>' : '';
+    var quote = '<div class="lit-quote-row"><blockquote class="lit-quote" lang="' + GT.learn + '">' + rich(lit.quote) + '</blockquote>' + speakBtn(lit.quote, 'sm') + '</div>';
+    var parts = (it.parts || []).map(function (part) {
+      return '<dt lang="' + GT.learn + '">' + esc(part[0]) + '</dt><dd lang="' + GT.know + '">' + esc(glossText(part[1])) + '</dd>';
+    }).join('');
+    return '<div class="box navy lit-box"><span class="label">Source</span><p class="lit-src-author" lang="' + GT.know + '">' + esc(src.author) + '</p>' +
+      '<p class="lit-src-work" lang="' + GT.know + '">' + esc(src.work) + ' · ' + esc(src.year) + '</p>' + original + quote +
+      '<p class="note" lang="' + GT.know + '">' + esc(lxText(lit, 'context')) + '</p></div>' +
+      (parts ? '<div class="box"><span class="label">Key words &amp; grammar</span><dl class="parts lit-parts">' + parts + '</dl></div>' : '') +
+      '<div class="box"><span class="label">Tone &amp; usage</span><p class="note muted" lang="' + GT.know + '">' +
+      esc(lxText(lit, 'tone') || GT.hint('register.' + (it.register || 'neutral'))) + '</p></div>' + linksBox(it);
+  }
+
   /** Full word/chunk view. actions = HTML placed under the note */
   function renderItem(it, actions) {
     var main = '', side = '';
     if (it.type === 'chunk') {
-      var fn = GT.topic(it.tab, it.topic);
-      main += '<div class="word-tags"><span class="tag outline">' + esc(it.register || 'neutral') + '</span><span class="mono-muted upper">' + esc(fn ? fn.name : it.topic) + '</span>' + meaningBadgeHTML(it) + '</div>';
+      var fn = GT.topic(it.tab, it.topic), lit = it.lit;
+      main += '<div class="word-tags"><span class="tag outline">' + esc(it.register || 'neutral') + '</span><span class="mono-muted upper">' + esc(fn ? fn.name : it.topic) + '</span>' +
+        (lit && it.level ? '<span class="tag dim">' + esc(it.level) + '</span>' : '') + meaningBadgeHTML(it) + '</div>';
       main += '<div class="hw-row"><h1 class="hw chunk" lang="' + GT.learn + '">' + rich(it.t) + '</h1>' + speakBtn(it.t, true) + whyBtn(it) + '</div>';
-      main += meanings(it);
-      if (it.examples && it.examples.length) main += '<hr class="rule"><span class="label">Examples</span><div style="margin-top:18px">' + examplesHTML(it.examples) + '</div>';
+      main += litBylineHTML(it) + meanings(it);
+      if (lit) main += '<hr class="rule"><span class="label">Breakdown</span><p class="lit-literal" lang="' + GT.know + '">' + esc(lxText(lit, 'literal')) + '</p>' +
+        '<p class="note lit-sub" lang="' + GT.know + '">' + esc(lxText(lit, 'breakdown')) + '</p>';
+      if (it.examples && it.examples.length) main += '<hr class="rule"><span class="label">' + (lit ? 'In use today' : 'Examples') + '</span><div style="margin-top:18px">' + examplesHTML(it.examples) + '</div>';
       if (it.variations && it.variations.length) {
         main += '<hr class="rule"><span class="label">Variations</span><ul class="examples" style="margin-top:18px">' + it.variations.map(function (v) {
           var vt = typeof v === 'string' ? v : v.t, vtr = typeof v === 'string' ? '' : trOf(v);
@@ -819,10 +878,13 @@
         }).join('') + '</ul>';
       }
       if (it.note) main += '<hr class="rule"><span class="label">Note</span><p class="note" style="margin-top:14px" lang="' + GT.lxLang(it, 'note') + '">' + esc(lxText(it, 'note')) + fbTag(GT.lxLang(it, 'note')) + '</p>';
-      side += '<div class="box"><span class="label">Register</span><p class="note muted">' + esc(GT.hint('register.' + (it.register || 'neutral')) || GT.hint('register.neutral')) + '</p></div>';
-      var tags = (it.topics || []).map(function (id) { var t = GT.anyTopic(id); return t ? t.topic.name : null; }).filter(Boolean);
-      side += linksBox(it) + levelBox(it);
-      if (tags.length) side += '<div class="box"><span class="label">Useful for</span><div class="fam">' + tags.map(function (t) { return '<span class="chip small">' + esc(t) + '</span>'; }).join('') + '</div></div>';
+      if (lit) side += literatureSide(it);
+      else {
+        side += '<div class="box"><span class="label">Register</span><p class="note muted">' + esc(GT.hint('register.' + (it.register || 'neutral')) || GT.hint('register.neutral')) + '</p></div>';
+        var tags = (it.topics || []).map(function (id) { var t = GT.anyTopic(id); return t ? t.topic.name : null; }).filter(Boolean);
+        side += linksBox(it) + levelBox(it);
+        if (tags.length) side += '<div class="box"><span class="label">Useful for</span><div class="fam">' + tags.map(function (t) { return '<span class="chip small">' + esc(t) + '</span>'; }).join('') + '</div></div>';
+      }
     } else {
       main += wordTags(it);
       main += '<div class="hw-row"><h1 class="hw' + hwSize(it.t) + '" lang="' + GT.learn + '">' + esc(it.t) + '</h1>' + speakBtn(plainHead(it), true) + whyBtn(it) + '</div>';
@@ -850,13 +912,12 @@
   }
   function viewExpressionsLanding() {
     var h = '<header class="page-head"><span class="eyebrow">03 · Expressions</span><h1>Expressions</h1><p class="lead">' + intro('expressions') + '</p></header>' + reminders();
+    var expTopics = GT.TOPICS.expressions.filter(visibleTopic);
     h += '<h3 class="section-title">Idioms & Everyday Phrases</h3><div class="grid">' +
-      GT.TOPICS.expressions.filter(visibleTopic).map(function (t, i) { return tile('expressions', t, i + 1); }).join('') +
-      (function () {
-        var ch = itemsFor('chunks', 'all'), c = counts(ch), pct = c.total ? Math.round(c.known / c.total * 100) : 0;
-        return '<a class="tile" href="#/chunks"><div class="tile-top"><span>03</span><span class="ct">' + c.known + '/' + c.total + '</span></div><h4>Chunks</h4><p>Ready-made speaking and writing frames organised by communicative function.</p><div class="track"><i style="width:' + pct + '%"></i></div></a>';
-      })() + '</div>';
-    h += '<div class="actions"><a class="btn primary" href="#/practice?scope=expressions">Practice Expressions →</a>' +
+      expTopics.map(function (t, i) { return tile('expressions', t, i + 1); }).join('') +
+      expressionSectionTile('chunks', 'Chunks', expTopics.length + 1) +
+      expressionSectionTile('literature', 'Literary Phrases', expTopics.length + 2) + '</div>';
+    h += '<div class="actions actions-split"><a class="btn primary" href="#/practice?scope=expressions">Practice Expressions →</a>' +
       luckyBtn('phrases', 'Idioms & phrases') + luckyBtn('chunks', 'Chunks') + '</div>';
     // Your phrases (already in the deck) first, then the ones you haven't met yet.
     var all = expressionPool();
@@ -865,16 +926,25 @@
     if (fresh.length) h += '<h3 class="section-title">New phrases · ' + fresh.length + '</h3>' + tilesHTML(fresh, 'newGrid');
     page(h);
   }
+  function expressionSectionTile(tab, label, n) {
+    var c = counts(itemsFor(tab, 'all')), pct = c.total ? Math.round(c.known / c.total * 100) : 0;
+    return '<a class="tile" href="#/' + tab + '"><div class="tile-top"><span>' + pad2(n) + '</span><span class="ct">' + c.known + '/' + c.total + '</span></div><h4>' + label + '</h4><p>' + intro(tab) + '</p><div class="track"><i style="width:' + pct + '%"></i></div></a>';
+  }
   /* "I'm feeling lucky", phrased in the language being learned. */
   var LUCKY = { de: 'Glück!', en: 'Feeling lucky', ru: 'Наудачу' };
   function luckyBtn(kind, label) {
-    return '<button class="btn" data-act="lucky" data-v="' + kind + '" title="Open a random ' + (kind === 'chunks' ? 'chunk' : 'idiom or everyday phrase') + '"><span lang="' + GT.learn + '">' + (LUCKY[GT.learn] || 'Feeling lucky') + '</span> · ' + label + '</button>';
+    var name = { chunks: 'chunk', literature: 'quote', phrases: 'idiom or everyday phrase' };
+    return '<button class="btn btn-lucky" data-act="lucky" data-v="' + kind + '" title="Open a random ' + name[kind] + '">' +
+      '<span class="lucky-tag" lang="' + GT.learn + '">' + (LUCKY[GT.learn] || 'Feeling lucky') + '</span>' +
+      '<span class="lucky-sep" aria-hidden="true">·</span>' +
+      '<span class="lucky-lbl">' + esc(label) + '</span></button>';
   }
-  /** Idioms + everyday phrases ('phrases'), chunks ('chunks'), or all of them, without duplicates. */
+  /** Return a section of Expressions, or all sections without duplicates. */
   function expressionPool(kind) {
     var seen = {}, out = [];
-    if (kind !== 'chunks') GT.TOPICS.expressions.filter(visibleTopic).forEach(function (t) { itemsFor('expressions', t.id).forEach(add); });
-    if (kind !== 'phrases') itemsFor('chunks', 'all').forEach(add);
+    if (!kind || kind === 'phrases') GT.TOPICS.expressions.filter(visibleTopic).forEach(function (t) { itemsFor('expressions', t.id).forEach(add); });
+    if (!kind || kind === 'chunks') itemsFor('chunks', 'all').forEach(add);
+    if (!kind || kind === 'literature') itemsFor('literature', 'all').forEach(add);
     function add(it) { if (it && !seen[it.id]) { seen[it.id] = 1; out.push(it); } }
     return out;
   }
@@ -897,7 +967,10 @@
   }
   function viewLanding(tab) {
     var tdef = GT.TABS.find(function (x) { return x.id === tab; });
-    var h = '<header class="page-head"><span class="eyebrow">' + pad2(GT.TABS.indexOf(tdef) + 1) + ' · Overview</span><h1>' + esc(tdef.label) + '</h1><p class="lead">' + intro(tab) + '</p></header>' + reminders();
+    var eyebrow = tab === 'literature' ? '03 · Expressions · Literary Phrases' : pad2(GT.TABS.indexOf(tdef) + 1) + ' · Overview';
+    var h = '<header class="page-head"><span class="eyebrow">' + eyebrow + '</span><h1>' + esc(tdef.label) + '</h1><p class="lead">' + intro(tab) + '</p></header>' + reminders();
+    if (tab === 'literature') h += '<div class="actions actions-split"><a class="btn primary" href="#/practice?scope=literature">Practice Literary Phrases →</a>' +
+      '<a class="btn" href="#/literature/all/browse">Browse all</a><button class="btn" type="button" data-act="lucky" data-v="literature">Random quote</button></div>';
     if (tab === 'chunks') h += tagFilter();
     if (tab === 'words') h += '<div class="actions-row" style="margin-bottom:28px"><a class="btn" href="#/vocabulary">Search the whole catalogue (' + GT.items.length + ')</a></div>';
     var group = null, n = 0, list = GT.TOPICS[tab].filter(visibleTopic);
@@ -914,10 +987,11 @@
   }
   function findTopic(tab, id) {
     if (tab === 'chunks' && id === 'all') return { id: 'all', name: 'All chunks', desc: 'Every phrase, across all functions.' };
+    if (tab === 'literature' && id === 'all') return { id: 'all', name: 'All literary phrases', desc: 'Every quote, across all five themes.' };
     if (tab === 'all') return { id: 'all', name: 'Whole catalogue', desc: 'Every word and phrase of this language, searchable.' };
     return GT.topic(tab, id);
   }
-  function reviewFilterFor(tab, id) { return tab === 'chunks' && id === 'all' ? 'chunks' : tab + '.' + id; }
+  function reviewFilterFor(tab, id) { return id === 'all' && (tab === 'chunks' || tab === 'literature') ? tab : tab + '.' + id; }
   function topicCrumb(tab, t, extra) {
     var tdef = GT.TABS.find(function (x) { return x.id === tab; }) || { label: 'Catalogue' };
     var lvl = tab === 'words' ? (t.level === 'b2' ? 'B2' : (GT.cfg('levelName') || 'B1')) : tdef.label;
@@ -951,10 +1025,10 @@
   function tilesHTML(items, gridId) {
     var W = { '': 0, learning: 35, review: 70, known: 100 };
     return '<div class="grid word-grid" id="' + (gridId || 'rows') + '">' + items.map(function (it, i) {
-      var hay = norm([plain(it.t), meaningOf(it), it.plural, it.ru, it.en, it.de].join(' '));
+      var hay = norm([plain(it.t), meaningOf(it), it.plural, it.ru, it.en, it.de, litSearchTerms(it)].join(' '));
       var st = stateClass(it.id);
       return '<a class="tile word-tile' + (st === 'known' ? ' is-known' : '') + '" href="#/item/' + encodeURIComponent(it.id) + '" data-hay="' + esc(hay) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + (st || 'new') + '</span></div>' +
-        '<h4 lang="' + GT.learn + '">' + headword(it) + '</h4><p lang="' + GT.glLang(it) + '">' + esc(plain(meaningOf(it))) + '</p><div class="track"><i style="width:' + (W[st] || 0) + '%"></i></div></a>';
+        '<h4 lang="' + GT.learn + '">' + headword(it) + '</h4>' + litBylineHTML(it, 'tile-source') + '<p lang="' + GT.glLang(it) + '">' + esc(plain(meaningOf(it))) + '</p><div class="track"><i style="width:' + (W[st] || 0) + '%"></i></div></a>';
     }).join('') + '</div>';
   }
   function searchBox() {
@@ -962,9 +1036,9 @@
   }
   function rowsHTML(items) {
     return '<div class="rows" id="rows">' + items.map(function (it, i) {
-      var hay = norm([plain(it.t), meaningOf(it), it.plural, it.ru, it.en, it.de].join(' '));
+      var hay = norm([plain(it.t), meaningOf(it), it.plural, it.ru, it.en, it.de, litSearchTerms(it)].join(' '));
       var st = stateClass(it.id);
-      return '<a class="row" href="#/item/' + encodeURIComponent(it.id) + '" data-hay="' + esc(hay) + '"><span class="n">' + pad2(i + 1) + '</span><div class="row-main"><div class="row-de" lang="' + GT.learn + '">' + headword(it) + '</div><div class="row-en" lang="' + GT.glLang(it) + '">' + esc(plain(meaningOf(it))) + '</div></div>' + speakBtn(plainHead(it), 'sm') + '<span class="state ' + st + '">' + (st || 'new') + '</span></a>';
+      return '<a class="row" href="#/item/' + encodeURIComponent(it.id) + '" data-hay="' + esc(hay) + '"><span class="n">' + pad2(i + 1) + '</span><div class="row-main"><div class="row-de" lang="' + GT.learn + '">' + headword(it) + '</div>' + litBylineHTML(it, 'row-src') + '<div class="row-en" lang="' + GT.glLang(it) + '">' + esc(plain(meaningOf(it))) + '</div></div>' + speakBtn(plainHead(it), 'sm') + '<span class="state ' + st + '">' + (st || 'new') + '</span></a>';
     }).join('') + '</div>';
   }
 
@@ -994,11 +1068,11 @@
     var tc = counts(list), pct = tc.total ? Math.round(tc.known / tc.total * 100) : 0;
     var actions;
     if (!pair.rec && !pair.prod) {
-      actions = '<div class="actions"><button class="btn primary" data-act="item-know" data-id="' + esc(id) + '">Know it</button><button class="btn outline" data-act="item-learn" data-id="' + esc(id) + '">Learn it</button></div>';
+      actions = '<div class="actions actions-pair"><button class="btn primary" data-act="item-know" data-id="' + esc(id) + '">Know it</button><button class="btn outline" data-act="item-learn" data-id="' + esc(id) + '">Learn it</button></div>';
     } else if (pair.rec && pair.prod && pair.rec.state === 'known' && pair.prod.state === 'known') {
-      actions = '<div class="actions"><p class="mono-muted" style="width:100%">Marked as known (recognition + production) · ' + fmtDate(pair.prod.known || pair.prod.last || now) + ' · not in reviews</p><button class="btn" data-act="item-learn" data-id="' + esc(id) + '">Add to reviews</button><button class="btn ghost" data-act="item-reset" data-id="' + esc(id) + '">Remove from deck</button></div>';
+      actions = '<div class="actions actions-pair"><p class="mono-muted" style="width:100%">Marked as known (recognition + production) · ' + fmtDate(pair.prod.known || pair.prod.last || now) + ' · not in reviews</p><button class="btn" data-act="item-learn" data-id="' + esc(id) + '">Add to reviews</button><button class="btn ghost" data-act="item-reset" data-id="' + esc(id) + '">Remove from deck</button></div>';
     } else {
-      actions = '<div class="actions"><div class="dir-status">' +
+      actions = '<div class="actions actions-pair"><div class="dir-status">' +
         '<div class="dir-row"><div><span class="label">Recognition · ' + LS() + ' → ' + KS() + '</span><p class="mono-muted">' + esc(cardStatusText(pair.rec, now)) + '</p></div>' +
         (!pair.rec ? '<button class="btn small" data-act="item-add-dir" data-id="' + esc(id) + '" data-dir="rec">+ Add</button>' : '') + '</div>' +
         '<div class="dir-row"><div><span class="label">Production · ' + KS() + ' → ' + LS() + '</span><p class="mono-muted">' + esc(cardStatusText(pair.prod, now)) + '</p></div>' +
@@ -1055,13 +1129,14 @@
     var h = crumbsHTML(topicCrumb(L.tab, L.topic, 'Session done'), 100);
     h += '<header class="page-head"><h1>Session done</h1><p class="lead">' + L.learned.length + ' added to reviews (recognition + production) · ' + L.known.length + ' marked as known · ' + L.later.length + ' for later.</p></header>';
     var due = dueKeys(reviewFilterFor(L.tab, L.id), 'both').length;
-    h += '<div class="actions-row">';
+    h += '<div class="actions-row actions-split">';
     if (due) h += '<a class="btn primary" href="#/review/' + reviewFilterFor(L.tab, L.id) + '/go">Review them now (' + due + ')</a>';
     if (itemsFor(L.tab, L.id).some(function (it) { return !S.hasAnyCard(it.id); })) h += '<button class="btn" data-act="learn-more">Learn more</button>';
     h += '<a class="btn ghost" href="#/' + L.tab + '/' + L.id + '">Back to topic</a></div>';
     if (studied.length) {
       var o = practiceFromItems(studied, L.id);
-      if (L.tab === 'chunks' && L.topic.scenario) { o.topic = L.topic.name; o.scenario = L.topic.scenario; }
+      var scenario = (L.tab === 'chunks' || L.tab === 'literature') && GT.lx(L.topic, 'scenario');
+      if (scenario) { o.topic = L.topic.name; o.scenario = scenario; }
       h += practicePanel(o);
     }
     page(h, 'mid');
@@ -1191,6 +1266,7 @@
     if (q.mode === 'drill') return h;
     if (q.mode === 'rec') {
       h += '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px">' + meanings(it) + (it.type !== 'chunk' ? whyBtn(it) : '') + '</div>';
+      h += litBylineHTML(it);
       var badges = allMeaningBadgesHTML(it);
       if (badges) h += '<div class="word-tags" style="margin-top:12px">' + badges + '</div>';
       if (it.type !== 'chunk') {
@@ -1208,6 +1284,7 @@
       h += wordTags(it);
       h += '<div class="hw-row"><p class="hw' + (hwSize(it.t) || ' long') + '" lang="' + GT.learn + '">' + esc(it.t) + '</p>' + speakBtn(plainHead(it), true) + whyBtn(it) + '</div>';
     }
+    h += litBylineHTML(it);
     if (q.sense && q.mode === 'meaning') h += '<p class="note muted" lang="' + GT.know + '" style="margin-bottom:14px">' + esc(GT.hint('allMeanings')) + ' ' + esc(meaningOf(it)) + '</p>';
     var ex = q.ex != null ? it.examples[q.ex] : (it.examples || [])[0];
     if (ex) {
@@ -1282,7 +1359,7 @@
     var h = '<header class="page-head"><span class="eyebrow">Review · ' + esc(filterLabel(R.filter)) + '</span><h1>' + (R.done ? 'Review done' : 'Session ended') + '</h1><p class="lead">' +
       plural(R.done, 'review') + ' · Again ' + R.counts[1] + ' · Hard ' + R.counts[2] + ' · Good ' + R.counts[3] + ' · Easy ' + R.counts[4] + '</p></header>';
     var left = dueKeys(R.filter, S.settings.reviewDirection || 'both').length;
-    h += '<div class="actions-row">' + (left ? '<a class="btn primary" href="#/review/' + encodeURIComponent(R.filter) + '">' + left + ' still due</a>' : '') + '<a class="btn" href="#/stats">Stats</a></div>';
+    h += '<div class="actions-row actions-pair">' + (left ? '<a class="btn primary" href="#/review/' + encodeURIComponent(R.filter) + '">' + left + ' still due</a>' : '') + '<a class="btn" href="#/stats">Stats</a></div>';
     var items = R.seen.map(function (id) { return GT.byId[id]; }).filter(function (it) { return it && it.type !== 'drill'; });
     if (items.length >= 3) h += practicePanel(practiceFromItems(items), 'You’ve reviewed these. Now use them in conversation.');
     page(h, 'mid');
@@ -1416,7 +1493,7 @@
       days.map(function (x) { return '<div class="' + (x.v ? '' : 'zero') + '" style="height:' + Math.max(3, x.v / max * 100) + '%" title="' + fmtDate(x.d) + ': ' + x.v + '"></div>'; }).join('') +
       '</div><div class="activity-labels"><span>' + fmtDate(days[0].d) + '</span><span>today</span></div></div>';
 
-    ['words', 'it', 'chunks', 'expressions', 'roots'].forEach(function (tab) {
+    ['words', 'it', 'chunks', 'expressions', 'literature', 'roots'].forEach(function (tab) {
       var tdef = GT.TABS.find(function (x) { return x.id === tab; });
       var rows = '', empty = 0;
       GT.TOPICS[tab].filter(visibleTopic).forEach(function (t) {
@@ -1468,7 +1545,7 @@
       '<p class="note muted">' + (granted ? 'Changes auto-merge and save to this file.' : 'Click Resume sync to grant file access for this browser session.') +
       (st.lastSync ? ' Last synced: ' + fmtDateTime(st.lastSync) + '.' : '') + '</p>' +
       (st.error ? '<p class="note" style="color:var(--gold);margin-top:8px">' + esc(st.error) + '</p>' : '') +
-      '<div class="actions-row">' +
+      '<div class="actions-row actions-split">' +
         '<button class="btn primary small" type="button" data-act="sync-now"' + (st.busy ? ' disabled' : '') + '>' + icon('repeat') + (st.busy ? 'Syncing…' : (granted ? 'Sync now' : 'Resume sync')) + '</button>' +
         '<button class="btn small" type="button" data-act="sync-open">Change file…</button>' +
         '<button class="btn ghost small" type="button" data-act="sync-disconnect">Disconnect</button>' +
@@ -1548,7 +1625,6 @@
         tts.ok ? '<select id="voiceSelect" data-set="' + voiceKey() + '" style="max-width:240px"></select>' : '<span class="mono-muted">—</span>') +
       row('Speech rate', 'Applied to all pronunciation buttons.', '<div style="display:flex;gap:8px;align-items:center">' + sel('speechRate', [['0.75', 'Slow'], ['0.9', 'Normal'], ['1', 'Fast']]) + '<button class="btn small" type="button" data-act="test-voice">Test</button></div>') +
       '</div>';
-    h += '<h3 class="section-title">Sync & Backup</h3>' + syncAndBackupCardsHTML();
     var files = GT.packFiles(GT.learn), errs = GT.pack.loadErrors;
     h += '<h3 class="section-title">Data · ' + esc(langMeta().name) + '</h3><div class="box"><p class="note muted">' + plural(files.length - errs.length, 'data file') + ' loaded · ' + GT.items.length + ' words & chunks · ' + Object.keys(GT.grammar).length + ' grammar pages · ' + Object.keys(GT.roots).length + ' word families · ' + (GT.links ? GT.links.length : 0) + ' cross-language links · schema v' + d.version + '.</p>' +
       (GT.pack.missingOverlay && GT.pack.missingOverlay.length ? '<p class="note" style="color:var(--gold);margin-top:8px">Overlay ids not found: ' + GT.pack.missingOverlay.map(esc).join(', ') + '</p>' : '') +
@@ -1638,7 +1714,8 @@
         items.sort(function (a, b) { return itemLastActivity(b.id) - itemLastActivity(a.id); });
         if (!items.length) { GT.toast('Learn a few cards in this topic first.'); break; }
         var t = findTopic(tab, tid), o = practiceFromItems(items.slice(0, 12), tid);
-        if (tab === 'chunks' && t.scenario) { o.topic = t.name; o.scenario = t.scenario; }
+        var scenario = (tab === 'chunks' || tab === 'literature') && GT.lx(t, 'scenario');
+        if (scenario) { o.topic = t.name; o.scenario = scenario; }
         $('#practiceSlot').innerHTML = practicePanel(o, 'Practice ' + t.name);
         break;
       }
@@ -1893,6 +1970,9 @@
   document.addEventListener('focusin', function (e) {
     var wrap = e.target.closest && e.target.closest('.mtag-wrap');
     if (wrap) { wrap.classList.remove('dismissed'); positionTooltip(wrap); }
+  });
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.mtag-wrap.open').forEach(positionTooltip);
   });
   document.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -2251,7 +2331,7 @@
       (showExs.length ? '<div style="margin-top:22px">' + examplesHTML(showExs) + '</div>' : '') +
       (wn ? '<p class="note" style="margin-top:20px" lang="' + GT.lxLang(w, 'note') + '">' + esc(wn) + '</p>' : '') +
       linksBox(w) +
-      '<div class="actions" style="margin-top:28px">' + (inDeck ? '<span class="mono-muted">✓ In Review</span>' : '<button class="btn primary" data-act="root-add" data-root="' + esc(rootId) + '" data-id="' + esc(w.id) + '">+ Review</button>') +
+      '<div class="actions actions-pair" style="margin-top:28px">' + (inDeck ? '<span class="mono-muted">✓ In Review</span>' : '<button class="btn primary" data-act="root-add" data-root="' + esc(rootId) + '" data-id="' + esc(w.id) + '">+ Review</button>') +
       '<a class="btn" href="#/item/' + encodeURIComponent(w.id) + '">Open card</a></div></div>';
   }
 
@@ -2281,7 +2361,7 @@
     }
     if (pf.grammar) h += '<h3 class="section-title">Grammar</h3><div class="box"><div class="prose" lang="' + GT.lxLang(pf, 'grammar') + '">' + fbTag(GT.lxLang(pf, 'grammar')) + lxText(pf, 'grammar') + '</div></div>';
     var rootsWith = Object.keys(GT.roots).filter(function (rid) { return rootWords(rid).some(function (w) { return w.prefix === id; }); });
-    if (rootsWith.length) h += '<div class="actions">' + rootsWith.map(function (rid) { return '<a class="btn" href="#/roots/' + rid + '">' + esc(pf.label) + ' with ' + esc(rootName(GT.roots[rid])) + '</a>'; }).join('') + '</div>';
+    if (rootsWith.length) h += '<div class="actions actions-grid">' + rootsWith.map(function (rid) { return '<a class="btn" href="#/roots/' + rid + '">' + esc(pf.label) + ' with ' + esc(rootName(GT.roots[rid])) + '</a>'; }).join('') + '</div>';
     page(h, 'mid');
   }
 
@@ -2357,7 +2437,7 @@
     if (R.i >= R.queue.length) {
       ui.keyHandler = null;
       return page(crumbsHTML(crumbBase, 100) + '<header class="page-head"><h1>Drill done</h1><p class="lead">' + R.right + ' of ' + R.queue.length + ' correct.</p></header>' +
-        '<div class="actions"><button class="btn primary" data-act="rd-again">Again</button><a class="btn" href="#/roots' + (R.rootId ? '/' + R.rootId : '') + '">Back</a></div>', 'narrow');
+        '<div class="actions actions-pair"><button class="btn primary" data-act="rd-again">Again</button><a class="btn" href="#/roots' + (R.rootId ? '/' + R.rootId : '') + '">Back</a></div>', 'narrow');
     }
     var item = R.queue[R.i], w = item.w, r = GT.roots[w.rootId];
     var keyId = R.i + ':' + item.kind + ':' + w.id;
@@ -2427,7 +2507,7 @@
         h += '<div class="drill-answer"><div class="a" lang="' + GT.know + '">' + esc(item.pf.label) + ' → ' + esc(GT.gl(correctM)) + (GT.know === 'ru' && correctM.ruPrefix && correctM.ruPrefix !== '—' ? ' (' + esc(correctM.ruPrefix) + ')' : '') + '</div>' +
           '<div class="x" lang="' + GT.lxLang(item.pd, 'explain') + '">' + esc(lxText(item.pd, 'explain')) + '</div></div>';
         h += '<p class="ex-tr" lang="' + GT.glLang(ex2) + '" style="margin-top:16px">' + esc(trOf(ex2)) + '</p>';
-        h += '<div class="actions-row" style="margin-top:16px">' + whyBtn(w) + '<a class="btn small" href="#/roots/p-' + esc(w.prefix) + '">Open ' + esc(item.pf.label) + '</a></div>';
+        h += '<div class="actions-row actions-inline" style="margin-top:16px">' + whyBtn(w) + '<a class="btn small" href="#/roots/p-' + esc(w.prefix) + '">Open ' + esc(item.pf.label) + '</a></div>';
         h += '<div class="actionbar"><div class="actions">' + (S.hasAnyCard(w.id) ? '' : '<button class="btn" data-act="root-add" data-id="' + esc(w.id) + '">+ Review</button>') + '<button class="btn primary" data-act="rd-next">Next →</button></div><p class="kbd-hint">Enter · next</p></div>';
       }
     }
@@ -2484,7 +2564,8 @@
     if (!scope || scope === 'all') return all;
     if (scope === 'words') return all.filter(function (it) { return GT.inTab(it, 'words') && !(GT.PRO_SUBS || []).some(function (s) { return s.tab === 'words' && GT.inTopic(it, 'words', s.topic); }); });
     if (scope === 'professional') return all.filter(proScopeItem);
-    if (scope === 'expressions') return all.filter(function (it) { return GT.inTab(it, 'chunks') || GT.inTab(it, 'expressions'); });
+    if (scope === 'expressions') return all.filter(function (it) { return GT.inTab(it, 'chunks') || GT.inTab(it, 'expressions') || GT.inTab(it, 'literature'); });
+    if (scope === 'literature') return all.filter(function (it) { return GT.inTab(it, 'literature'); });
     if (scope === 'roots') return all.filter(function (it) { return !!it.rootId; });
     if (scope.indexOf('root:') === 0) {
       var rid = scope.slice(5);
@@ -2515,7 +2596,7 @@
       cardKey: GT.cardKey(it.id, kind === 'recognition' ? 'rec' : 'prod'),
       prompt: '', context: '', translation: '', base: '',
       answer: '', accepted: [], options: null,
-      explain: lxText(it, 'note') || lxText(it, 'meaningExplanation') || '',
+      explain: lxText(it, 'note') || lxText(it, 'meaningExplanation') || lxText(it.lit, 'breakdown') || '',
       ex: ex
     };
     if (kind === 'recognition') {
@@ -2692,7 +2773,7 @@
     var rootOpts = Object.keys(GT.roots).map(function (rid) {
       return '<option value="root:' + esc(rid) + '"' + (defScope === 'root:' + rid ? ' selected' : '') + '>Root · ' + esc(rootName(GT.roots[rid])) + ' (' + GT.roots[rid].ids.length + ')</option>';
     }).join('');
-    var topicOpts = ['words', 'it', 'chunks', 'expressions'].map(function (tb) {
+    var topicOpts = ['words', 'it', 'chunks', 'expressions', 'literature'].map(function (tb) {
       var list = GT.TOPICS[tb].filter(function (t) { return (GT.members[tb + '.' + t.id] || []).length; });
       if (!list.length) return '';
       var tdef = GT.TABS.find(function (x) { return x.id === tb; });
@@ -2716,7 +2797,8 @@
           '<option value="all"' + (defScope === 'all' ? ' selected' : '') + '>Whole catalogue</option>' +
           '<option value="words"' + (defScope === 'words' ? ' selected' : '') + '>Language · Words</option>' +
           '<option value="professional"' + (defScope === 'professional' ? ' selected' : '') + '>Professional (Work, IT, Security)</option>' +
-          '<option value="expressions"' + (defScope === 'expressions' ? ' selected' : '') + '>Expressions (Chunks, Idioms, Everyday)</option>' +
+          '<option value="expressions"' + (defScope === 'expressions' ? ' selected' : '') + '>Expressions · All sections</option>' +
+          '<option value="literature"' + (defScope === 'literature' ? ' selected' : '') + '>Literary Phrases · All themes</option>' +
           '<option value="roots"' + (defScope === 'roots' ? ' selected' : '') + '>Roots · All word families</option>' +
           '<optgroup label="Specific word family">' + rootOpts + '</optgroup>' + topicOpts +
         '</select></label>' +
@@ -2826,7 +2908,7 @@
         var it = q.entry;
         h += (it.type === 'word' ? wordTags(it) : '<div class="word-tags">' + meaningBadgeHTML(it) + '</div>');
         h += '<div class="hw-row"><p class="hw' + (it.type === 'chunk' ? ' chunk' : (hwSize(it.t) || ' long')) + '" lang="' + GT.learn + '">' + (it.type === 'chunk' ? rich(it.t) : esc(it.t)) + '</p>' + speakBtn(plainHead(it), true) + whyBtn(it) + '</div>';
-        h += '<p class="mean-en" lang="' + GT.glLang(it) + '">' + esc(meaningOf(it)) + '</p>';
+        h += litBylineHTML(it) + '<p class="mean-en" lang="' + GT.glLang(it) + '">' + esc(meaningOf(it)) + '</p>';
       } else {
         h += '<div class="drill-answer"><div class="a">' + esc(q.answer) + '</div></div>';
       }
@@ -2875,7 +2957,7 @@
     ui.keyHandler = null;
     var h = '<header class="page-head"><span class="eyebrow">Practice · Done</span><h1>Session complete</h1><p class="lead">' +
       S2.correct + ' of ' + S2.questions.length + ' correct · ' + plural(S2.graded, 'card') + ' scheduled into FSRS Review.</p></header>';
-    h += '<div class="actions-row"><button class="btn primary" type="button" data-act="st-again">New practice session</button><a class="btn" href="#/review">Review due</a><a class="btn ghost" href="#/stats">Stats</a></div>';
+    h += '<div class="actions-row actions-split"><button class="btn primary" type="button" data-act="st-again">New practice session</button><a class="btn" href="#/review">Review due</a><a class="btn ghost" href="#/stats">Stats</a></div>';
     var items = S2.seen.map(function (id) { return GT.byId[id]; }).filter(Boolean);
     if (items.length >= 3) h += practicePanel(practiceFromItems(items), 'Now use these in a real ' + langMeta().name + ' conversation.');
     page(h, 'mid');
@@ -2897,6 +2979,7 @@
   /** Old standalone-English URLs and shortcuts → unified routes. Returns a replacement hash or null. */
   function legacyRoute(p) {
     var t = p[0];
+    if (t === 'expressions' && p[1] === 'literature') return '#/literature';
     if (p[2] === 'item' && p[3]) return '#/item/' + encodeURIComponent(p[3]);
     if (t === 'professional' && p[1]) return '#/it/' + p.slice(1).map(encodeURIComponent).join('/');
     if (t === 'idioms') return '#/expressions/' + (p[1] ? 'idioms-' + p[1] : 'idioms') + (p[2] ? '/' + p[2] : '');
@@ -2936,7 +3019,7 @@
         else if (p[2] === 'learn') viewLearn('expressions', p[1]);
         else viewTopic('expressions', p[1]);
         break;
-      case 'words': case 'it': case 'chunks':
+      case 'words': case 'it': case 'chunks': case 'literature':
         if (!p[1]) viewLanding(p[0]);
         else if (p[2] === 'browse') viewBrowse(p[0], p[1]);
         else if (p[2] === 'learn') viewLearn(p[0], p[1]);
@@ -3089,8 +3172,8 @@
   function nearestValidHash() {
     var p = curPath(), t = p[0];
     if (t === 'item') return GT.byId[p[1]] ? null : '#/words';
-    if ((t === 'words' || t === 'it' || t === 'chunks' || t === 'expressions') && p[1]) {
-      if (t === 'chunks' && p[1] === 'all') return null;
+    if ((t === 'words' || t === 'it' || t === 'chunks' || t === 'expressions' || t === 'literature') && p[1]) {
+      if ((t === 'chunks' || t === 'literature') && p[1] === 'all') return null;
       return GT.topic(t, p[1]) ? null : '#/' + t;
     }
     if (t === 'grammar' && p[1]) return GT.topic('grammar', p[1]) ? null : '#/grammar';

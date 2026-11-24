@@ -26,7 +26,7 @@
     var r = P.roots[id];
     if (r) { r.label = TITLES[id][0]; r.sub = TITLES[id][1]; }
   });
-  ['езд', 'смотр', 'лож', 'говор', 'дел'].forEach(function (id) { if (P.config.ROOT_PLAN.indexOf(id) < 0 && P.roots[id]) P.config.ROOT_PLAN.push(id); });
+  ['езд', 'смотр', 'лож', 'говор', 'дел', 'прос', 'жив', 'би'].forEach(function (id) { if (P.config.ROOT_PLAN.indexOf(id) < 0 && P.roots[id]) P.config.ROOT_PLAN.push(id); });
 
   /* 2. aspect partners */
   P.items.forEach(function (w) {

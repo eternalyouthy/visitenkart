@@ -55,9 +55,10 @@
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
 body {
   margin: 0;
+  overflow-x: clip;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
@@ -231,7 +232,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; color: var(--ice); }
   text-align: left;
 }
 .btn:hover { border-color: var(--muted); }
-.btn svg { width: 16px; height: 16px; }
+.btn svg { width: 16px; height: 16px; flex: none; }
 .btn.primary { background: var(--ice); border-color: var(--ice); color: var(--ink); }
 .btn.primary:hover { background: color-mix(in srgb, var(--ice) 85%, white); }
 .btn.outline { border-color: var(--text); }
@@ -410,6 +411,35 @@ mark.hl { background: none; color: var(--ice); text-decoration: underline; text-
 .parts dt.suf { color: var(--die); }
 .parts dt.link { color: var(--dim); }
 .parts dd { margin: 0; color: var(--text); }
+.word-tile .tile-source, .row-src, .lit-byline {
+  margin: 6px 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.lit-byline { margin: 12px 0; }
+.lit-literal { margin: 14px 0 8px; color: var(--ice); }
+.lit-sub { margin: 0; }
+.lit-box { border-color: var(--line-ice); }
+.lit-src-author { margin: 0; color: var(--text); font-weight: 600; }
+.lit-src-work { margin: 4px 0 0; color: var(--text); }
+.lit-orig { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.lit-quote-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 12px;
+  background: var(--bg);
+  border-inline-start: 2px solid var(--line-ice);
+}
+.lit-quote { min-width: 0; margin: 0; color: var(--ice); line-height: 1.45; overflow-wrap: anywhere; }
+.lit-quote-row button { flex-shrink: 0; }
+.lit-parts { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 10px 14px; overflow-wrap: anywhere; }
+.lit-parts dt { color: var(--ice); }
+.lit-parts dd { padding-bottom: 6px; border-bottom: 1px solid var(--line-2); }
 .fam { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip { display: inline-block; border: 1px solid var(--line-2); padding: 7px 12px; font-size: 15.5px; line-height: 1.3; }
 .chip-speak { display: inline-flex; align-items: center; gap: 8px; padding: 4px 5px 4px 11px; }
@@ -675,10 +705,21 @@ input[type="number"] { width: 90px; }
   .bnav { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--muted); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; position: relative; }
   .bnav svg { width: 20px; height: 20px; }
   .bnav.active { color: var(--ice); }
-  .bnav .pip { position: absolute; top: 9px; left: calc(50% + 7px); min-width: 17px; height: 15px; padding: 0 4px; background: var(--ice); color: var(--ink); font-size: 9.5px; letter-spacing: 0; display: grid; place-items: center; }
   .toast { bottom: calc(var(--bottomnav-h) + 20px + var(--safe-b)); }
   .kbd-hint { display: none; }
   .tile h4 { font-size: 18px; }
+  .mtag-tip {
+    position: fixed; left: 12px; right: 12px; top: calc(var(--topbar-h) + 12px); bottom: auto;
+    width: auto; max-width: 380px; margin: 0 auto;
+    max-height: calc(100dvh - var(--topbar-h) - var(--bottomnav-h) - 24px - var(--safe-b));
+    overflow-y: auto;
+  }
+  .mtag-tip.below { top: calc(var(--topbar-h) + 12px); bottom: auto; }
+  .mtag-tip::after { display: none; }
+  .mtag-wrap:not(.open):hover .mtag-tip,
+  .mtag-wrap:not(.open):focus-within .mtag-tip {
+    opacity: 0; visibility: hidden; pointer-events: none;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -904,3 +945,163 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 .word-grid { margin-top: 18px; }
 .word-tile h4 { font-size: 19px; overflow-wrap: anywhere; }
 .word-tile.is-known h4, .word-tile.is-known p { color: var(--dim); }
+
+/* Structured "Feeling lucky" buttons (inline on desktop, 2-line split tiles on phones) */
+.btn-lucky { gap: 8px; }
+.btn-lucky .lucky-sep { color: var(--dim); }
+
+/* ---------- mobile buttons & action layouts ---------- */
+@media (max-width: 640px) {
+  .btn {
+    min-height: 46px;
+    padding: 10px 16px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    line-height: 1.35;
+    text-align: center;
+  }
+  .btn.big { min-height: 52px; }
+  .btn.small {
+    min-height: 38px;
+    padding: 7px 12px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  .side-practice .btn { text-align: left; }
+  .practice .btn,
+  .box > .btn { width: 100%; }
+
+  /* Typing input + Check button */
+  .typing { gap: 8px; }
+  .typing input { min-height: 46px; min-width: 0; font-size: 18px; padding: 8px 12px; }
+  .typing .btn { flex: none; padding: 10px 14px; }
+
+  /* Default action containers: clean full-width stack (no ragged edges) */
+  .actions,
+  .actions-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+  }
+  .actions { margin-top: 24px; }
+  .actions > .btn,
+  .actions-row > .btn { width: 100%; }
+
+  /* Preserve sticky Learn/Practice/Drill bottom bar as single-row equal-width */
+  .actionbar .actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-top: 0;
+  }
+  .actionbar .actions > .btn { width: auto; }
+
+  /* Compact inline utility row (e.g., WHY? + Open prefix) */
+  .actions-row.actions-inline {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  .actions-row.actions-inline > .btn { width: auto; }
+
+  /* 1 primary CTA full-width on top + 2 sibling buttons 50/50 below */
+  .actions-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .actions-split > :not(.btn),
+  .actions-split > .btn.primary,
+  .actions-split > .btn:only-child,
+  .actions-split > .btn.primary + .btn:last-child {
+    grid-column: 1 / -1;
+  }
+  .actions-split > .btn:not(.primary) {
+    padding: 10px 8px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Equal 2-column pairs (status/non-btn children span full width) */
+  .actions-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .actions-pair > :not(.btn),
+  .actions-pair > .btn:only-child,
+  .actions-pair > :not(.btn) + .btn:last-child {
+    grid-column: 1 / -1;
+  }
+  .actions-pair > .btn {
+    padding: 10px 8px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Multi-link grids (Prefix page root links) */
+  .actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .actions-grid > .btn:only-child { grid-column: 1 / -1; }
+  .actions-grid > .btn {
+    padding: 10px 8px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Topic page actions: 1 full-width, 2 side-by-side, or primary full-width + 2 side-by-side */
+  .topic-bar {
+    align-items: stretch;
+    gap: 10px;
+    margin: 4px 0 22px;
+  }
+  .topic-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+  }
+  .topic-actions > .btn {
+    width: 100%;
+    padding: 10px 8px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  .topic-actions > .btn:only-child,
+  .topic-actions > .btn.primary:first-child:nth-last-child(3) {
+    grid-column: 1 / -1;
+    padding: 10px 16px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+
+  /* Expressions "Glück! / Feeling lucky / Наудачу" 2-line split buttons */
+  .btn-lucky {
+    flex-direction: column;
+    gap: 4px;
+    min-height: 54px;
+    padding: 10px 8px;
+  }
+  .btn-lucky .lucky-sep { display: none; }
+  .btn-lucky .lucky-tag {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--ice);
+    line-height: 1.15;
+  }
+  .btn-lucky .lucky-lbl {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    line-height: 1.25;
+  }
+
+  /* Google Drive OAuth sync row in User */
+  .gd-row { flex-direction: column; }
+  .gd-row .gd-input { min-width: 0 !important; width: 100%; }
+  .gd-row .btn { width: 100%; }
+}
