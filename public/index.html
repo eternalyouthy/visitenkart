@@ -31,35 +31,17 @@
   /* ---- particle canvas ---- */
   #field{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100lvh;z-index:0;display:block}
 
-  /* ---- top bar (language) ---- */
-  .topbar{
-    position:fixed;top:0;left:0;right:0;z-index:6;
-    display:flex;justify-content:flex-end;align-items:center;
-    padding:22px clamp(20px,5vw,54px);
-    mix-blend-mode:difference;pointer-events:none;
-  }
-  .topbar > *{pointer-events:auto}
-  .lang{display:flex;gap:1px;font-size:12px;letter-spacing:.1em}
-  .lang button{
-    background:none;border:none;color:#fff;opacity:.4;cursor:pointer;
-    padding:4px 7px;font:inherit;letter-spacing:inherit;
-    transition:opacity .35s var(--ease);
-  }
-  .lang button:hover{opacity:.85}
-  .lang button[aria-pressed="true"]{opacity:1;text-decoration:underline;text-underline-offset:5px}
-
   /* ---- stage: split layout ---- */
   .stage{
     position:relative;z-index:1;
     min-height:100svh;
     overflow-x:clip;
     display:grid;
-    grid-template-columns:minmax(0,44fr) minmax(0,49fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
     align-content:center;align-items:center;
     gap:clamp(28px,5vw,80px);
-    padding-block:72px;
-    padding-inline:clamp(7rem,12vw,9.375rem) 20px;
-    max-width:82.5rem;margin:0 auto;
+    padding:72px clamp(22px,4vw,48px);
+    max-width:70rem;margin:0 auto;text-align:center;
   }
 
   /* ---- left / hero ---- */
@@ -80,11 +62,11 @@
   .left .loc{margin-top:12px;font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
 
   .featured{
-    max-width:30rem;margin-top:28px;padding-top:16px;
+    max-width:30rem;margin:28px auto 0;padding-top:16px;
     border-top:2px solid var(--line);
   }
   .featured-heading{
-    display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 9px;
+    display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:2px 9px;
   }
   .featured-label{font-size:.8125rem;color:var(--muted)}
   .featured-label span{margin-left:.3em}
@@ -94,15 +76,15 @@
     display:flex;align-items:center;justify-content:center;text-align:center;
     min-height:44px;margin-top:14px;padding:8px 18px;border-radius:6px;
     background:var(--fg);color:var(--bg);text-decoration:none;font-size:.875rem;font-weight:500;
-    transition:background .35s var(--ease);
+    transition:background .35s var(--ease),scale .22s var(--ease),translate .22s var(--ease);
   }
-  .featured-link:hover{background:#d6d6d6}
+  .featured-link:not(.featured-link-intro):hover{background:#d6d6d6}
   .featured-link:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
-  body.ready .featured-link-intro{
-    transform-origin:top left;
-    animation:featured-link-settle .8s 3.1s;
+  .featured-link-intro{
+    animation:featured-link-settle .8s;
   }
   @keyframes featured-link-settle{
+    0%,100%{transform-origin:top left}
     0%{transform:rotate(0);animation-timing-function:cubic-bezier(.5,0,.85,.55)}
     30%{transform:rotate(2.2deg);animation-timing-function:var(--ease)}
     66%{transform:rotate(-.5deg);animation-timing-function:ease-in-out}
@@ -111,8 +93,6 @@
 
   /* ---- right / panels ---- */
   .panel{
-    --index-width:1.25rem;
-    --index-gap:1rem;
     opacity:0;transform:translateX(-34px);
     transition:opacity .9s var(--ease),transform .9s var(--ease);
   }
@@ -120,9 +100,8 @@
 
   .panel-head{
     width:100%;background:none;border:none;color:#fff;font:inherit;
-    text-align:left;cursor:pointer;
-    display:grid;grid-template-columns:var(--index-width) minmax(0,1fr);
-    align-items:baseline;gap:var(--index-gap);
+    text-align:center;cursor:pointer;
+    display:flex;justify-content:center;align-items:baseline;gap:1rem;
     padding:22px 0;
   }
   .panel-head:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
@@ -139,14 +118,14 @@
   .panel-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
   .panel.open .panel-body{grid-template-rows:1fr}
   .panel-inner{overflow:hidden}
-  .panel-content{padding:2px 0 28px calc(var(--index-width) + var(--index-gap));max-width:40em}
+  .panel-content{padding:2px 0 28px;max-width:40em;margin-inline:auto}
   .panel-copy{color:#d0d0d0}
 
   /* projects inside panel */
   .proj{display:block;text-decoration:none;color:inherit;padding:16px 0;border-bottom:1px solid var(--line)}
   .proj:first-child{padding-top:0}
   .proj:last-child{border-bottom:none;padding-bottom:0}
-  .proj-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 12px}
+  .proj-top{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:2px 12px}
   .proj-name{font-size:1.05rem;color:#fff;font-weight:400;overflow-wrap:anywhere}
   .proj-meta{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
   .proj-desc{display:block;color:var(--muted);margin-top:6px;font-size:.94rem;text-wrap:pretty}
@@ -157,7 +136,7 @@
 
   /* contact inside panel */
   .links{display:flex;flex-direction:column;gap:16px}
-  .links a{color:var(--fg);text-decoration:none;font-size:1.02rem;position:relative;width:max-content;padding-bottom:3px}
+  .links a{color:var(--fg);text-decoration:none;font-size:1.02rem;position:relative;width:fit-content;margin-inline:auto;max-width:100%;overflow-wrap:anywhere;padding-bottom:3px}
   .links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:#fff;transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
   .links a:hover::after{transform:scaleX(1);transform-origin:left}
   .links .k{color:var(--muted);font-size:11px;letter-spacing:.2em;text-transform:uppercase;display:block;margin-bottom:5px}
@@ -165,17 +144,26 @@
   /* ---- email reveal (Turnstile-gated) ---- */
   .email-slot{display:flex;flex-direction:column}
   .reveal-btn{
-    display:inline-flex;align-items:center;gap:9px;width:max-content;
+    display:inline-flex;align-items:center;gap:9px;width:max-content;margin-inline:auto;
     background:none;border:1px solid var(--line);color:#cfcfcf;
     font:inherit;font-size:.9rem;font-weight:300;letter-spacing:.02em;
     padding:8px 16px;border-radius:999px;cursor:pointer;
     transition:border-color .4s var(--ease),color .4s var(--ease),transform .4s var(--ease),opacity .4s var(--ease);
   }
-  .reveal-btn:hover:not(:disabled){border-color:#fff;color:#fff;transform:translateY(-2px)}
+  .reveal-btn:hover:not(:disabled){border-color:#fff;color:#fff}
   .reveal-btn:disabled{opacity:.45;cursor:default}
   .reveal-btn .lock{width:12px;height:12px;flex:none;opacity:.7}
   .reveal-btn .arrow{display:inline-block;transition:transform .45s var(--ease)}
-  .reveal-btn:hover:not(:disabled) .arrow{transform:translateX(6px)}
+  @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+    .featured-link:not(.featured-link-intro):hover{translate:0 -2px;scale:1.015}
+    .p-label,.proj-name{transition:scale .22s var(--ease)}
+    .panel-head:hover .p-label,.proj:hover .proj-name{scale:1.025}
+    .reveal-btn:hover:not(:disabled){transform:translateY(-1px) scale(1.015)}
+    .reveal-btn:hover:not(:disabled) .arrow{transform:translateX(4px)}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .featured-link:not(.featured-link-intro):active{translate:0 0;scale:.99;transition-duration:.09s}
+  }
   .ts-box{margin-top:14px;min-height:0}
   .ts-box:empty{margin-top:0}
   .reveal-msg{margin-top:10px;font-size:.84rem;letter-spacing:.02em;color:var(--muted)}
@@ -183,9 +171,7 @@
 
   /* ---- responsive: stack the profile and details on narrow screens ---- */
   @media (max-width:860px){
-    /* let the language switch scroll away with the page instead of overlapping text */
-    .topbar{position:absolute}
-    .stage{grid-template-columns:minmax(0,1fr);align-content:start;gap:32px;padding:72px 22px 60px;max-width:40rem}
+    .stage{grid-template-columns:minmax(0,1fr);align-content:center;gap:32px;padding:48px 22px;max-width:40rem}
     .left{width:100%}
   }
   @media (prefers-reduced-motion:reduce){
@@ -198,18 +184,11 @@
 <body>
 <canvas id="field" aria-hidden="true"></canvas>
 
-<div class="topbar">
-  <div class="lang" role="group" aria-label="Language">
-    <button data-lang="en" aria-pressed="true">EN</button>
-    <button data-lang="de" aria-pressed="false">DE</button>
-  </div>
-</div>
-
 <main class="stage">
   <section class="left">
-    <h1 data-i="hero_name">Artem Bilyi</h1>
-    <p class="lede" data-i="hero_lede"></p>
-    <div class="loc" data-i="hero_loc">Saarland, Germany</div>
+    <h1>Artem Bilyi</h1>
+    <p class="lede">Aspiring security architect. Looking for a SOC analyst role.</p>
+    <div class="loc">Saarland, Germany</div>
     <section class="featured" id="featured-project" aria-labelledby="featured-title"></section>
   </section>
 
@@ -238,78 +217,39 @@ const ENTRA_PROJECT = {
 };
 
 /* ============================================================
-   CONTENT — English and German.
+   CONTENT
    ============================================================ */
 const DATA = {
-  en:{
-    hero_name:"Artem Bilyi",
-    hero_lede:"Aspiring security architect. Looking for a SOC analyst role.",
-    hero_loc:"Saarland, Germany",
-    featured:{
-      label:"Latest project",
-      description:"Learn languages by finding familiar patterns in words, roots and expressions.",
-      action:"Try it online"
-    },
-    now:{
-      title:"What I’m doing now",
-      text:"I’m learning languages, brushing up on cybersecurity fundamentals, and building new skills for my first role in the field. In my spare time, I sometimes use AI to build projects that interest me."
-    },
-    bg:{
-      title:"Education",
-      text:"Bachelor’s degree in cybersecurity."
-    },
-    proj:{
-      title:"Projects",
-      list:[
-        {...CCTV_PROJECT, d:"A governance architecture for privacy-preserving, federated AI-assisted CCTV searches across independent security zones."},
-        {...ENTRA_PROJECT,
-         d:"Automates the Joiner–Mover–Leaver identity lifecycle in Entra ID through direct Microsoft Graph API calls.",
-         status:{label:"On hold", reason:"Other commitments take priority right now."}}
-      ]
-    },
-    contact:{title:"Contact", email_label:"Email", reveal:"Reveal email", verifying:"Verifying…", error:"Verification failed — try again"}
+  featured:{
+    label:"Latest project",
+    description:"Learn languages by finding familiar patterns in words, roots and expressions.",
+    action:"Try it online"
   },
-
-  de:{
-    hero_name:"Artem Bilyi",
-    hero_lede:"Ich möchte IT-Sicherheitsarchitekt werden und suche eine Stelle als SOC-Analyst.",
-    hero_loc:"Saarland, Deutschland",
-    featured:{
-      label:"Neuestes Projekt",
-      description:"Lerne Sprachen, indem du vertraute Muster in Wörtern, Wortwurzeln und Ausdrücken erkennst.",
-      action:"Online ausprobieren"
-    },
-    now:{
-      title:"Was ich gerade mache",
-      text:"Ich lerne Sprachen, frische meine Grundlagen in der IT-Sicherheit auf und eigne mir neues Wissen für den Berufseinstieg an. In meiner Freizeit setze ich ab und zu eigene Projekte mit KI um."
-    },
-    bg:{
-      title:"Studium",
-      text:"Bachelorabschluss in Cybersicherheit."
-    },
-    proj:{
-      title:"Projekte",
-      list:[
-        {...CCTV_PROJECT, d:"Governance-Konzept für die datenschutzfreundliche, föderierte KI-Suche in Kameraaufnahmen aus unabhängigen Sicherheitszonen."},
-        {...ENTRA_PROJECT,
-         d:"Automatisiert den Joiner–Mover–Leaver-Lebenszyklus in Entra ID über direkte Aufrufe der Microsoft Graph API.",
-         status:{label:"Pausiert", reason:"Andere Verpflichtungen haben gerade Vorrang."}}
-      ]
-    },
-    contact:{title:"Kontakt", email_label:"E-Mail", reveal:"E-Mail anzeigen", verifying:"Wird geprüft…", error:"Prüfung fehlgeschlagen — erneut versuchen"}
-  }
+  now:{
+    title:"What I’m doing now",
+    text:"I’m learning languages, brushing up on cybersecurity fundamentals, and building new skills for my first role in the field. In my spare time, I sometimes use AI to build projects that interest me."
+  },
+  bg:{
+    title:"Education",
+    text:"Bachelor’s degree in cybersecurity."
+  },
+  proj:{
+    title:"Projects",
+    list:[
+      {...CCTV_PROJECT, d:"A governance architecture for privacy-preserving, federated AI-assisted CCTV searches across independent security zones."},
+      {...ENTRA_PROJECT,
+       d:"Automates the Joiner–Mover–Leaver identity lifecycle in Entra ID through direct Microsoft Graph API calls.",
+       status:{label:"On hold", reason:"Other commitments take priority right now."}}
+    ]
+  },
+  contact:{title:"Contact", email_label:"Email", reveal:"Reveal email", verifying:"Verifying…", error:"Verification failed — try again"}
 };
 
-/* ---------- email reveal state (persists across language switches) ---------- */
-let revealedEmail = null;   // once fetched, remember it so switching language re-shows it
-let tsWidgetId = null;      // Turnstile explicit-render widget id
 
 /* ---------- contact panel (email is NOT in this markup — it comes from the server) ---------- */
 function contactsHTML(d){
   const c = d.contact;
-  const emailBlock = revealedEmail
-    ? `<a href="mailto:${revealedEmail}">${revealedEmail}</a>`
-    : `<button type="button" class="reveal-btn" id="reveal-btn">
+  const emailBlock = `<button type="button" class="reveal-btn" id="reveal-btn">
          <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
            <rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
          </svg>
@@ -328,19 +268,16 @@ function contactsHTML(d){
   </div>`;
 }
 
-/* which panel is open (null = none). Persists across language switches. */
-let openIndex = null;
 
 /* ---------- build one panel ---------- */
 function panelHTML(idx, label, bodyHTML){
-  const on = idx===openIndex;
   return `
-  <div class="panel${on?" open":""}">
-    <button class="panel-head" type="button" aria-expanded="${on?"true":"false"}">
+  <div class="panel">
+    <button class="panel-head" type="button" aria-expanded="false">
       <span class="p-idx" aria-hidden="true">${String(idx).padStart(2,"0")}</span>
       <span class="p-label">${label}</span>
     </button>
-    <div class="panel-body"${on?"":" inert"}><div class="panel-inner"><div class="panel-content">${bodyHTML}</div></div></div>
+    <div class="panel-body" inert><div class="panel-inner"><div class="panel-content">${bodyHTML}</div></div></div>
   </div>`;
 }
 function projHTML(list){
@@ -353,14 +290,7 @@ function projHTML(list){
 }
 
 /* ---------- render ---------- */
-function render(lang){
-  const locale = Object.hasOwn(DATA, lang) ? lang : "en";
-  const d = DATA[locale];
-  document.documentElement.lang = locale;
-  document.querySelectorAll("[data-i]").forEach(el=>{
-    const k = el.getAttribute("data-i");
-    if(d[k]!==undefined) el.textContent = d[k];
-  });
+function render(d){
   const featured = d.featured;
   document.getElementById("featured-project").innerHTML = `
     <div class="featured-heading">
@@ -370,7 +300,7 @@ function render(lang){
     <p class="featured-desc">${featured.description}</p>
     <a class="featured-link" href="${LEARN_START}">${featured.action}</a>`;
   const projects = [
-    {n:LEARN_TITLE, m:"GitHub · Public", d:featured.description, u:"https://github.com/eternalyouthy/etrnl.recognize"},
+    {n:"recognize", m:"GitHub · Public", d:featured.description, u:"https://github.com/eternalyouthy/recognize"},
     ...d.proj.list
   ];
 
@@ -387,7 +317,7 @@ function render(lang){
 /* ---------- single-open accordion ---------- */
 function wirePanels(){
   const panels = [...document.querySelectorAll(".panel")];
-  panels.forEach((panel,i)=>{
+  panels.forEach(panel=>{
     const btn = panel.querySelector(".panel-head");
     btn.addEventListener("click",()=>{
       const isOpen = panel.classList.contains("open");
@@ -397,14 +327,13 @@ function wirePanels(){
         p.querySelector(".panel-head").setAttribute("aria-expanded", String(open));
         p.querySelector(".panel-body").inert = !open;
       });
-      openIndex = isOpen ? null : i+1;
     });
   });
 }
 
 /* ---------- email reveal (Turnstile-gated) ---------- */
 function wireEmail(d){
-  if(revealedEmail) return;                 // already shown as a mailto link
+  let tsWidgetId = null;
   const btn = document.getElementById("reveal-btn");
   if(!btn) return;
   const tsBox = document.getElementById("ts-box");
@@ -428,7 +357,6 @@ function wireEmail(d){
       });
       const data = await res.json().catch(()=>({}));
       if(res.ok && data.email){
-        revealedEmail = data.email;
         slot.innerHTML =
           `<span class="k">${c.email_label}</span>` +
           `<a href="mailto:${data.email}">${data.email}</a>`;
@@ -458,13 +386,6 @@ function wireEmail(d){
   });
 }
 
-/* ---------- language toggle ---------- */
-const btns = document.querySelectorAll(".lang button");
-btns.forEach(b=>b.addEventListener("click",()=>{
-  const lang = b.getAttribute("data-lang");
-  btns.forEach(x=>x.setAttribute("aria-pressed", x===b?"true":"false"));
-  render(lang);
-}));
 
 /* ---------- particle field ---------- */
 (function(){
@@ -586,9 +507,18 @@ btns.forEach(b=>b.addEventListener("click",()=>{
 })();
 
 /* ---------- init ---------- */
-render("en");
-document.querySelector(".featured-link").classList.add("featured-link-intro");
+render(DATA);
 requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add("ready")));
+setTimeout(()=>{
+  const link = document.querySelector(".featured-link");
+  if(window.matchMedia("(prefers-reduced-motion:reduce)").matches ||
+     link.matches(":hover, :active, :focus-visible") || link.getAnimations().length) return;
+
+  link.classList.add("featured-link-intro");
+  const animations = link.getAnimations();
+  Promise.allSettled(animations.map(animation=>animation.finished))
+    .then(()=>link.classList.remove("featured-link-intro"));
+}, 3100);
 </script>
 </body>
 </html>
