@@ -50,6 +50,59 @@ GT.registerGrammar({
     { id: 'g-pa-d5', kind: 'reorder', q: 'Составьте: «Сервер нужно перезапустить».', tokens: ['Der', 'Server', 'muss', 'neu', 'gestartet', 'werden.'], answer: 'Der Server muss neu gestartet werden.', explain: 'Модальный на втором месте, Partizip II + werden в конце.' },
     { id: 'g-pa-d6', kind: 'choice', q: 'Der Angriff wurde ___ ein Monitoring-Tool entdeckt.', options: ['von', 'durch', 'mit'], answer: 1, explain: 'Средство / инструмент → durch + Akk.' },
     { id: 'g-pa-d7', kind: 'choice', q: '«Здесь не курят.» → Hier ___ nicht geraucht.', options: ['wird', 'ist', 'raucht'], answer: 0, explain: 'Безличный пассив: Hier wird nicht geraucht.' },
-    { id: 'g-pa-d8', kind: 'gap', q: 'Man repariert die Heizung morgen. → Die Heizung ___ morgen ___.', answer: 'wird … repariert', explain: 'Актив с «man» → пассив с werden + Partizip II.' }
+    { id: 'g-pa-d8', kind: 'gap', q: 'Man repariert die Heizung morgen. → Die Heizung ___ morgen ___.', answer: 'wird … repariert', explain: 'Актив с «man» → пассив с werden + Partizip II.' },
+    {
+      id: 'g-pa-d9', kind: 'choice',
+      q: 'Die Brücke ___ 1990 gebaut.',
+      options: ['wurde', 'wird', 'hat'],
+      answer: 0,
+      explain: { ru: 'Событие в прошлом → пассив Präteritum: wurde gebaut.', en: 'A past event → passive Präteritum: wurde gebaut.' }
+    },
+    {
+      id: 'g-pa-d10', kind: 'gap',
+      q: 'In Deutschland ___ sehr viel Kaffee getrunken. (Präsens)',
+      answer: 'wird',
+      explain: { ru: 'Подлежащее Kaffee (ед. ч.) → wird + Partizip II.', en: 'Subject Kaffee (singular) → wird + Partizip II.' }
+    },
+    {
+      id: 'g-pa-d11', kind: 'choice',
+      q: 'Das Formular muss vollständig ___.',
+      options: ['ausgefüllt werden', 'ausfüllen werden', 'ausgefüllt worden'],
+      answer: 0,
+      explain: { ru: 'Модальный глагол + Partizip II + werden.', en: 'Modal + Partizip II + werden.' }
+    },
+    {
+      id: 'g-pa-d12', kind: 'choice',
+      q: 'Die Patientin wurde ___ einer jungen Ärztin untersucht.',
+      options: ['von', 'durch', 'mit'],
+      answer: 0,
+      explain: { ru: 'Действующее лицо → von + Dativ.', en: 'The person doing it → von + Dativ.' }
+    },
+    {
+      id: 'g-pa-d13', kind: 'gap',
+      q: 'Ihr Antrag ist schon bearbeitet ___. (Perfekt Passiv)',
+      answer: 'worden',
+      explain: { ru: 'Пассив Perfekt: ist + Partizip II + worden (не geworden).', en: 'Passive Perfekt: ist + Partizip II + worden (not geworden).' }
+    },
+    {
+      id: 'g-pa-d14', kind: 'choice',
+      q: 'Man hat den Dieb gestern gefasst. → ___',
+      options: ['Der Dieb ist gestern gefasst worden.', 'Der Dieb hat gestern gefasst worden.', 'Der Dieb ist gestern gefasst geworden.'],
+      answer: 0,
+      explain: { ru: 'Пассив Perfekt: ist … gefasst worden.', en: 'Passive Perfekt: ist … gefasst worden.' }
+    },
+    {
+      id: 'g-pa-d15', kind: 'gap',
+      q: 'Hier darf nicht geparkt ___.',
+      answer: 'werden',
+      explain: { ru: 'Модальный + Partizip II + werden: darf … geparkt werden.', en: 'Modal + Partizip II + werden: darf … geparkt werden.' }
+    },
+    {
+      id: 'g-pa-d16', kind: 'reorder',
+      q: { ru: 'Соберите фразу. «Квартиру ремонтируют на следующей неделе».', en: 'Build the sentence. “The flat is being renovated next week.”' },
+      tokens: ['Die Wohnung', 'wird', 'nächste Woche', 'renoviert.'],
+      answer: 'Die Wohnung wird nächste Woche renoviert.',
+      explain: { ru: 'wird на 2-м месте, Partizip II renoviert в конце.', en: 'wird in position 2, Partizip II renoviert at the end.' }
+    }
   ]
 });

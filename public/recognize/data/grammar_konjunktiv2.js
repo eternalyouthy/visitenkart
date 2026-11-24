@@ -50,6 +50,60 @@ GT.registerGrammar({
     { id: 'g-k2-d5', kind: 'reorder', q: 'Составьте: «Если бы у меня было время, я бы пришёл».', tokens: ['Wenn', 'ich', 'Zeit', 'hätte,', 'würde', 'ich', 'kommen.'], answer: 'Wenn ich Zeit hätte, würde ich kommen.', explain: 'Глагол в конце придаточного с wenn; главное предложение начинается с глагола.' },
     { id: 'g-k2-d6', kind: 'gap', q: 'Du ___ die Schwachstelle sofort melden. (sollen, совет)', answer: 'solltest', explain: 'Совет: du solltest …' },
     { id: 'g-k2-d7', kind: 'choice', q: 'В кафе: «___ einen Cappuccino, bitte.»', options: ['Ich will', 'Ich hätte gern', 'Ich habe'], answer: 1, explain: '«Ich hätte gern …» — вежливый стандарт для заказа.' },
-    { id: 'g-k2-d8', kind: 'gap', q: 'Es ___ schön, wenn du am Wochenende kommen könntest. (sein)', answer: 'wäre', explain: 'Желание / нереальность: es wäre schön, wenn …' }
+    { id: 'g-k2-d8', kind: 'gap', q: 'Es ___ schön, wenn du am Wochenende kommen könntest. (sein)', answer: 'wäre', explain: 'Желание / нереальность: es wäre schön, wenn …' },
+    {
+      id: 'g-k2-d9', kind: 'choice',
+      q: 'Wenn der Zug pünktlich ___, wären wir schon in Köln.',
+      options: ['wäre', 'war', 'ist'],
+      answer: 0,
+      explain: { ru: 'Нереальное условие: wäre (не war).', en: 'Unreal condition: wäre (not war).' }
+    },
+    {
+      id: 'g-k2-d10', kind: 'gap',
+      q: 'Ich ___ gern einen Termin beim Hausarzt. (haben)',
+      answer: 'hätte',
+      explain: { ru: 'Вежливая просьба: ich hätte gern …', en: 'Polite request: ich hätte gern …' }
+    },
+    {
+      id: 'g-k2-d11', kind: 'choice',
+      q: 'Ich ___ dir gern helfen, aber ich habe heute keine Zeit.',
+      options: ['würde', 'werde', 'wurde'],
+      answer: 0,
+      explain: { ru: 'Нереальное желание → würde + инфинитив.', en: 'Unreal wish → würde + infinitive.' }
+    },
+    {
+      id: 'g-k2-d12', kind: 'gap',
+      q: 'Wenn ich das gewusst ___, wäre ich früher gekommen. (haben)',
+      answer: 'hätte',
+      explain: { ru: 'Нереальное в прошлом: hätte + Partizip II.', en: 'Unreal past: hätte + Partizip II.' }
+    },
+    {
+      id: 'g-k2-d13', kind: 'choice',
+      q: 'Wenn ich du wäre, ___',
+      options: ['ich würde den Vertrag nicht unterschreiben.', 'würde ich den Vertrag nicht unterschreiben.', 'ich den Vertrag nicht unterschreiben würde.'],
+      answer: 1,
+      explain: { ru: 'После придаточного с wenn главное начинается с глагола: würde ich …', en: 'After a wenn-clause the main clause starts with the verb: würde ich …' }
+    },
+    {
+      id: 'g-k2-d14', kind: 'gap',
+      q: '___ du kurz Zeit? Ich brauche deine Hilfe. (haben, вежливо)',
+      hint: { ru: 'вежливая форма', en: 'polite form' },
+      answer: 'Hättest',
+      explain: { ru: 'Вежливый вопрос: Hättest du …?', en: 'Polite question: Hättest du …?' }
+    },
+    {
+      id: 'g-k2-d15', kind: 'choice',
+      q: 'Wenn ich mehr Zeit gehabt hätte, ___ ich dich besucht.',
+      options: ['hätte', 'würde', 'wäre'],
+      answer: 0,
+      explain: { ru: 'Нереальное в прошлом: hätte + besucht (besuchen — с haben).', en: 'Unreal past: hätte + besucht (besuchen takes haben).' }
+    },
+    {
+      id: 'g-k2-d16', kind: 'reorder',
+      q: { ru: 'Соберите фразу. «Было бы лучше, если бы мы выехали пораньше».', en: 'Build the sentence. “It would be better if we left earlier.”' },
+      tokens: ['Es', 'wäre', 'besser,', 'wenn', 'wir', 'früher', 'losfahren', 'würden.'],
+      answer: 'Es wäre besser, wenn wir früher losfahren würden.',
+      explain: { ru: 'Es wäre besser, wenn …; в придаточном würden в конце.', en: 'Es wäre besser, wenn …; würden goes last in the clause.' }
+    }
   ]
 });

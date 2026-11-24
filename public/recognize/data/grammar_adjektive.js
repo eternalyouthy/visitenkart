@@ -165,6 +165,59 @@ GT.registerGrammar({
       options: ['schön', 'schöne', 'schönes'],
       answer: 0,
       explain: { ru: 'После sein прилагательное без окончания.', en: 'After sein the adjective takes no ending.' }
+    },
+    {
+      id: 'g-adj-d9', kind: 'choice',
+      q: 'Wir suchen eine Wohnung mit ___ Balkon.',
+      options: ['großem', 'großen', 'großer'],
+      answer: 0,
+      explain: { ru: 'mit + Dativ, артикля нет → сильное окончание: großem (как dem).', en: 'mit + Dativ with no article → strong ending: großem (like dem).' }
+    },
+    {
+      id: 'g-adj-d10', kind: 'choice',
+      q: 'Bei dem ___ Wetter bleiben wir lieber zu Hause.',
+      options: ['schlechten', 'schlechte', 'schlechtem'],
+      answer: 0,
+      explain: { ru: 'После dem артикль уже показал падеж → -en.', en: 'After dem the article already shows the case → -en.' }
+    },
+    {
+      id: 'g-adj-d11', kind: 'gap',
+      q: 'Wo ist der Schlüssel des ___ Autos? (neu)',
+      answer: 'neuen',
+      explain: { ru: 'Genitiv после des → -en.', en: 'Genitiv after des → -en.' }
+    },
+    {
+      id: 'g-adj-d12', kind: 'choice',
+      q: 'Für den Termin beim Amt brauchen Sie einen ___ Pass.',
+      options: ['gültigen', 'gültiger', 'gültigem'],
+      answer: 0,
+      explain: { ru: 'einen (Akk м. р.) показал падеж → -en.', en: 'einen (masc. Akk) already shows the case → -en.' }
+    },
+    {
+      id: 'g-adj-d13', kind: 'gap',
+      q: 'Ich wünsche Ihnen ein ___ Wochenende! (schön)',
+      answer: 'schönes',
+      explain: { ru: 'ein + ср. р. Akk: у ein нет окончания → прилагательное берёт -es.', en: 'ein + neuter Akk: ein has no ending → the adjective takes -es.' }
+    },
+    {
+      id: 'g-adj-d14', kind: 'choice',
+      q: '___ Kundinnen und Kunden, ab Montag haben wir neue Öffnungszeiten.',
+      options: ['Liebe', 'Lieben', 'Lieber'],
+      answer: 0,
+      explain: { ru: 'Мн. ч. без артикля, Nominativ → -e: Liebe.', en: 'Plural with no article, Nominativ → -e: Liebe.' }
+    },
+    {
+      id: 'g-adj-d15', kind: 'gap',
+      q: 'Bei ___ Wetter fahre ich mit dem Rad zur Arbeit. (gut)',
+      answer: 'gutem',
+      explain: { ru: 'bei + Dativ без артикля → сильное -em: bei gutem Wetter.', en: 'bei + Dativ with no article → strong -em: bei gutem Wetter.' }
+    },
+    {
+      id: 'g-adj-d16', kind: 'reorder',
+      q: { ru: 'Соберите фразу. «Мы нашли маленькую квартиру с большим садом».', en: 'Build the sentence. “We found a small flat with a big garden.”' },
+      tokens: ['Wir', 'haben', 'eine kleine Wohnung', 'mit großem Garten', 'gefunden.'],
+      answer: 'Wir haben eine kleine Wohnung mit großem Garten gefunden.',
+      explain: { ru: 'eine kleine (Akk ж. р. → -e), mit großem (Dativ без артикля → -em).', en: 'eine kleine (fem. Akk → -e), mit großem (Dativ, no article → -em).' }
     }
   ]
 });

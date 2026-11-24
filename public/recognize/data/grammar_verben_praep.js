@@ -159,6 +159,68 @@ GT.registerGrammar({
       tokens: ['Worüber', 'habt', 'ihr', 'im Meeting', 'gesprochen?'],
       answer: 'Worüber habt ihr im Meeting gesprochen?',
       explain: { ru: 'sprechen über (о теме/предмете) → Worüber стоит на первом месте, затем глагол.', en: 'sprechen über (a topic) → Worüber comes first, followed by the verb.' }
+    },
+    {
+      id: 'g-vp-d9', kind: 'choice',
+      q: 'Ich habe mich beim Vermieter ___ die laute Musik beschwert.',
+      options: ['über', 'auf', 'an'],
+      answer: 0,
+      explain: { ru: 'sich beschweren über + Akk.', en: 'sich beschweren über + Akk.' }
+    },
+    {
+      id: 'g-vp-d10', kind: 'choice',
+      q: 'Wer kümmert sich ___ die Katze, wenn wir im Urlaub sind?',
+      options: ['um', 'für', 'über'],
+      answer: 0,
+      explain: { ru: 'sich kümmern um + Akk.', en: 'sich kümmern um + Akk.' }
+    },
+    {
+      id: 'g-vp-d11', kind: 'gap',
+      q: 'Ich bewerbe mich ___ eine Stelle als Krankenpfleger.',
+      hint: { ru: 'Предлог', en: 'Preposition' },
+      answer: 'um',
+      explain: { ru: 'sich bewerben um + Akk (на должность).', en: 'sich bewerben um + Akk (for a job).' }
+    },
+    {
+      id: 'g-vp-d12', kind: 'choice',
+      q: 'Vielen Dank! Ich bedanke mich ___ Ihre Hilfe.',
+      options: ['für', 'um', 'an'],
+      answer: 0,
+      explain: { ru: 'sich bedanken für + Akk.', en: 'sich bedanken für + Akk.' }
+    },
+    {
+      id: 'g-vp-d13', kind: 'choice',
+      q: '___ denkst du gerade? — An meine Oma.',
+      options: ['An wen', 'Woran', 'An wem'],
+      answer: 0,
+      explain: { ru: 'О человеке: предлог + wen (an + Akk). Woran — о вещах.', en: 'For a person: preposition + wen (an + Akk). Woran is for things.' }
+    },
+    {
+      id: 'g-vp-d14', kind: 'gap',
+      q: 'Die Heizung ist kaputt. Hast du dich schon ___ beschwert? (da- + über)',
+      answer: 'darüber',
+      explain: { ru: 'sich beschweren über + вещь → darüber (вставляется -r-).', en: 'sich beschweren über + a thing → darüber (with -r-).' }
+    },
+    {
+      id: 'g-vp-d15', kind: 'choice',
+      q: 'Ich träume schon lange ___ einem Haus am Meer.',
+      options: ['von', 'über', 'auf'],
+      answer: 0,
+      explain: { ru: 'träumen von + Dat.', en: 'träumen von + Dat.' }
+    },
+    {
+      id: 'g-vp-d16', kind: 'choice',
+      q: 'Ob wir grillen, hängt ___ Wetter ab.',
+      options: ['vom', 'am', 'mit dem'],
+      answer: 0,
+      explain: { ru: 'abhängen von + Dat; von + dem = vom.', en: 'abhängen von + Dat; von + dem = vom.' }
+    },
+    {
+      id: 'g-vp-d17', kind: 'reorder',
+      q: { ru: 'Соберите вопрос. «Чему ты радуешься больше всего?» (о будущем)', en: 'Build the question. “What are you looking forward to most?”' },
+      tokens: ['Worauf', 'freust', 'du', 'dich', 'am meisten?'],
+      answer: 'Worauf freust du dich am meisten?',
+      explain: { ru: 'sich freuen auf (будущее) → Worauf; dich сразу после подлежащего.', en: 'sich freuen auf (future) → Worauf; dich right after the subject.' }
     }
   ]
 });

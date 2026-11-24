@@ -174,6 +174,61 @@ GT.registerGrammar({
       tokens: ['Ich', 'habe', 'dem Kollegen', 'den Schlüssel', 'gegeben.'],
       answer: 'Ich habe dem Kollegen den Schlüssel gegeben.',
       explain: { ru: 'Кому? — dem Kollegen (Dativ), что? — den Schlüssel (Akkusativ). Обычный порядок: сначала Dativ, потом Akkusativ.', en: 'To whom? — dem Kollegen (Dativ); what? — den Schlüssel (Akkusativ). With two nouns, the Dativ usually comes first.' }
+    },
+    {
+      id: 'g-ka-d9', kind: 'choice',
+      q: 'Der Brief ist von ___ Vermieter.',
+      options: ['meinem', 'meinen', 'mein'],
+      answer: 0,
+      explain: { ru: 'von всегда с Dativ; der Vermieter → meinem.', en: 'von always takes the Dativ; der Vermieter → meinem.' }
+    },
+    {
+      id: 'g-ka-d10', kind: 'choice',
+      q: 'Wir gehen durch ___ Park zum Bahnhof.',
+      options: ['den', 'dem', 'der'],
+      answer: 0,
+      explain: { ru: 'durch всегда с Akkusativ; der Park → den.', en: 'durch always takes the Akkusativ; der Park → den.' }
+    },
+    {
+      id: 'g-ka-d11', kind: 'choice',
+      q: 'Die Apotheke ist direkt gegenüber ___ Bahnhof.',
+      options: ['dem', 'den', 'der'],
+      answer: 0,
+      explain: { ru: 'gegenüber + Dativ → dem Bahnhof.', en: 'gegenüber + Dativ → dem Bahnhof.' }
+    },
+    {
+      id: 'g-ka-d12', kind: 'gap',
+      q: 'Ich gratuliere ___ herzlich zum Geburtstag! (du)',
+      answer: 'dir',
+      explain: { ru: 'gratulieren + Dativ: dir (хотя по-русски «поздравляю тебя»).', en: 'gratulieren + Dativ: dir (English “congratulate you” uses a plain object).' }
+    },
+    {
+      id: 'g-ka-d13', kind: 'choice',
+      q: 'Frau Weber, ich rufe ___ morgen an.',
+      options: ['Sie', 'Ihnen', 'Ihr'],
+      answer: 0,
+      explain: { ru: 'anrufen + Akkusativ: Sie (хотя по-русски «позвоню вам»).', en: 'anrufen + Akkusativ: Sie.' }
+    },
+    {
+      id: 'g-ka-d14', kind: 'choice',
+      q: 'Während ___ Fahrt darf man nicht mit dem Fahrer sprechen.',
+      options: ['der', 'die', 'dem'],
+      answer: 0,
+      explain: { ru: 'während + Genitiv; die Fahrt → der Fahrt.', en: 'während + Genitiv; die Fahrt → der Fahrt.' }
+    },
+    {
+      id: 'g-ka-d15', kind: 'gap',
+      q: 'Stell die Milch bitte ___ Kühlschrank! (in + der Kühlschrank)',
+      hint: { ru: 'wohin → ?', en: 'wohin → ?' },
+      answer: 'in den',
+      explain: { ru: 'Куда? (wohin) → Akkusativ: in den. Слияния in + den нет.', en: 'Where to? (wohin) → Akkusativ: in den. There is no contraction for in + den.' }
+    },
+    {
+      id: 'g-ka-d16', kind: 'reorder',
+      q: { ru: 'Соберите фразу. «Я отдам его тебе завтра». (es = das Buch)', en: 'Build the sentence. “I’ll give it to you tomorrow.” (es = das Buch)' },
+      tokens: ['Ich', 'gebe', 'es', 'dir', 'morgen.'],
+      answer: 'Ich gebe es dir morgen.',
+      explain: { ru: 'Два местоимения: сначала Akkusativ (es), потом Dativ (dir).', en: 'Two pronouns: Akkusativ (es) first, then Dativ (dir).' }
     }
   ]
 });

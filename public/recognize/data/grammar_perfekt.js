@@ -146,6 +146,66 @@ GT.registerGrammar({
       tokens: ['Der Server', 'war', 'kurz offline,', 'aber', 'wir', 'haben', 'die Ursache', 'gefunden.'],
       answer: 'Der Server war kurz offline, aber wir haben die Ursache gefunden.',
       explain: { ru: 'War описывает состояние, haben … gefunden сообщает о событии. После aber первый блок нового главного предложения — wir.', en: 'War describes the state, and haben … gefunden reports the event. After aber, wir is the first constituent of the new main clause.' }
+    },
+    {
+      id: 'g-pf-d9', kind: 'choice',
+      q: 'Wir ___ letzte Woche nach Hamburg gefahren.',
+      options: ['sind', 'haben', 'werden'],
+      answer: 0,
+      explain: { ru: 'fahren — движение → sein: sind gefahren.', en: 'fahren is movement → sein: sind gefahren.' }
+    },
+    {
+      id: 'g-pf-d10', kind: 'gap',
+      q: 'Hast du die Miete schon ___? (überweisen)',
+      answer: 'überwiesen',
+      explain: { ru: 'überweisen — неотделяемая приставка über-, сильный глагол → überwiesen (без ge-).', en: 'überweisen has the inseparable prefix über- and is strong → überwiesen (no ge-).' }
+    },
+    {
+      id: 'g-pf-d11', kind: 'choice',
+      q: 'Der Kurs hat schon um neun Uhr ___.',
+      options: ['angefangen', 'angefängt', 'geanfangen'],
+      answer: 0,
+      explain: { ru: 'anfangen — сильный, отделяемый: an-ge-fangen.', en: 'anfangen is strong and separable: an-ge-fangen.' }
+    },
+    {
+      id: 'g-pf-d12', kind: 'gap',
+      q: 'Am Sonntag bin ich lange im Bett ___. (bleiben)',
+      answer: 'geblieben',
+      explain: { ru: 'bleiben — с sein, Partizip II geblieben.', en: 'bleiben takes sein; Partizip II geblieben.' }
+    },
+    {
+      id: 'g-pf-d13', kind: 'choice',
+      q: 'Wann ___ ihr heute aufgestanden?',
+      options: ['seid', 'habt', 'wart'],
+      answer: 0,
+      explain: { ru: 'aufstehen — изменение положения → sein: ihr seid.', en: 'aufstehen is a change of position → sein: ihr seid.' }
+    },
+    {
+      id: 'g-pf-d14', kind: 'gap',
+      q: 'Wir haben die Küche im März ___. (renovieren)',
+      answer: 'renoviert',
+      explain: { ru: 'Глаголы на -ieren без ge-: renoviert.', en: 'Verbs in -ieren have no ge-: renoviert.' }
+    },
+    {
+      id: 'g-pf-d15', kind: 'choice',
+      q: 'Gestern ___ ich leider nicht kommen, ich war krank.',
+      options: ['konnte', 'habe gekonnt', 'könnte'],
+      answer: 0,
+      explain: { ru: 'Модальные глаголы в прошедшем обычно в Präteritum: konnte.', en: 'Modal verbs in the past are usually Präteritum: konnte.' }
+    },
+    {
+      id: 'g-pf-d16', kind: 'choice',
+      q: 'Das Paket ist leider noch nicht ___.',
+      options: ['angekommen', 'angekommt', 'ankommen'],
+      answer: 0,
+      explain: { ru: 'ankommen — с sein, отделяемый, сильный: angekommen.', en: 'ankommen takes sein, is separable and strong: angekommen.' }
+    },
+    {
+      id: 'g-pf-d17', kind: 'reorder',
+      q: { ru: 'Соберите вопрос. «Куда вы ездили?» (ihr)', en: 'Build the question. “Where did you go?” (ihr)' },
+      tokens: ['Wohin', 'seid', 'ihr', 'gefahren?'],
+      answer: 'Wohin seid ihr gefahren?',
+      explain: { ru: 'W-слово, затем seid (движение → sein), Partizip II в конце.', en: 'Question word, then seid (movement → sein), Partizip II at the end.' }
     }
   ]
 });

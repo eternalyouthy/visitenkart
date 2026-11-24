@@ -130,6 +130,60 @@ GT.registerGrammar({
       tokens: ['Hier ist die Kollegin,', 'mit der', 'ich', 'gestern', 'gesprochen habe.'],
       answer: 'Hier ist die Kollegin, mit der ich gestern gesprochen habe.',
       explain: { ru: 'Предлог mit перед местоимением der (Dativ ж. р.), вспомогательный глагол habe — самый последний.', en: 'Preposition mit goes before der (Dativ fem.), and the conjugated verb habe goes last.' }
+    },
+    {
+      id: 'g-rel-d9', kind: 'choice',
+      q: 'Das ist der Arzt, ___ mir damals sehr geholfen hat.',
+      options: ['der', 'den', 'dem'],
+      answer: 0,
+      explain: { ru: 'В придаточном der Arzt — подлежащее → der (Nominativ).', en: 'In the clause der Arzt is the subject → der (Nominativ).' }
+    },
+    {
+      id: 'g-rel-d10', kind: 'choice',
+      q: 'Die Wohnung, ___ wir gestern besichtigt haben, ist leider zu teuer.',
+      options: ['die', 'der', 'das'],
+      answer: 0,
+      explain: { ru: 'die Wohnung — прямое дополнение (Akk ж. р.) → die.', en: 'die Wohnung is the direct object (fem. Akk) → die.' }
+    },
+    {
+      id: 'g-rel-d11', kind: 'choice',
+      q: 'Der Kollege, ___ ich mein Fahrrad geliehen habe, ist im Urlaub.',
+      options: ['dem', 'den', 'der'],
+      answer: 0,
+      explain: { ru: 'jemandem etwas leihen: кому? → Dativ м. р. → dem.', en: 'jemandem etwas leihen: to whom? → masc. Dativ → dem.' }
+    },
+    {
+      id: 'g-rel-d12', kind: 'gap',
+      q: 'Das ist die Stadt, in ___ ich geboren bin.',
+      answer: 'der',
+      explain: { ru: 'in + Dativ (где?), die Stadt → der.', en: 'in + Dativ (where?), die Stadt → der.' }
+    },
+    {
+      id: 'g-rel-d13', kind: 'choice',
+      q: 'Die Leute, ___ Wohnung über uns liegt, feiern jedes Wochenende.',
+      options: ['deren', 'dessen', 'die'],
+      answer: 0,
+      explain: { ru: 'Владельцы — die Leute (мн. ч.) → deren.', en: 'The owners are die Leute (plural) → deren.' }
+    },
+    {
+      id: 'g-rel-d14', kind: 'gap',
+      q: 'Wie heißt das Hotel, in ___ ihr letztes Jahr gewohnt habt?',
+      answer: 'dem',
+      explain: { ru: 'in + Dativ, das Hotel → dem.', en: 'in + Dativ, das Hotel → dem.' }
+    },
+    {
+      id: 'g-rel-d15', kind: 'choice',
+      q: 'Das sind die Nachbarn, ___ wir unseren Schlüssel gegeben haben.',
+      options: ['denen', 'den', 'die'],
+      answer: 0,
+      explain: { ru: 'Кому? → Dativ мн. ч. → denen (не den!).', en: 'To whom? → Dativ plural → denen (not den!).' }
+    },
+    {
+      id: 'g-rel-d16', kind: 'reorder',
+      q: { ru: 'Соберите фразу. «Я ищу работу, которая мне нравится».', en: 'Build the sentence. “I’m looking for a job that I enjoy.”' },
+      tokens: ['Ich', 'suche', 'einen Job,', 'der', 'mir', 'Spaß', 'macht.'],
+      answer: 'Ich suche einen Job, der mir Spaß macht.',
+      explain: { ru: 'der Job — подлежащее в придаточном → der; спрягаемый macht в конце.', en: 'der Job is the subject of the clause → der; macht goes last.' }
     }
   ]
 });

@@ -54,6 +54,59 @@ GT.registerGrammar({
     { id: 'g-ns-d5', kind: 'choice', q: 'Ich schreibe eine Anleitung, ___ die Kollegen sie nutzen können.', options: ['damit', 'um', 'weil'], answer: 0, explain: 'Другое подлежащее (die Kollegen) → damit.' },
     { id: 'g-ns-d6', kind: 'gap', q: 'Kannst du mir sagen, wann das Meeting ___? (anfangen)', answer: 'anfängt', explain: 'Косвенный вопрос: отделяемый глагол склеивается в конце.' },
     { id: 'g-ns-d7', kind: 'reorder', q: 'Составьте: «Хотя было поздно, мы продолжали работать».', tokens: ['Obwohl', 'es', 'spät', 'war,', 'haben', 'wir', 'weitergearbeitet.'], answer: 'Obwohl es spät war, haben wir weitergearbeitet.', explain: 'Придаточное первое → главное начинается с глагола (haben).' },
-    { id: 'g-ns-d8', kind: 'choice', q: 'Immer ___ ich Stress habe, schlafe ich schlecht.', options: ['als', 'wenn'], answer: 1, explain: 'Повторяющаяся ситуация → wenn.' }
+    { id: 'g-ns-d8', kind: 'choice', q: 'Immer ___ ich Stress habe, schlafe ich schlecht.', options: ['als', 'wenn'], answer: 1, explain: 'Повторяющаяся ситуация → wenn.' },
+    {
+      id: 'g-ns-d9', kind: 'choice',
+      q: 'Ich weiß nicht, ___ der Zug heute pünktlich ist.',
+      options: ['ob', 'wenn', 'als'],
+      answer: 0,
+      explain: { ru: '«ли» → ob.', en: '“whether / if” in an indirect question → ob.' }
+    },
+    {
+      id: 'g-ns-d10', kind: 'gap',
+      q: 'Ich bleibe heute zu Hause, weil mein Sohn krank ___. (sein)',
+      answer: 'ist',
+      explain: { ru: 'После weil спрягаемый глагол в конце: … krank ist.', en: 'After weil the conjugated verb goes last: … krank ist.' }
+    },
+    {
+      id: 'g-ns-d11', kind: 'choice',
+      q: 'Obwohl er ___, ist er zur Arbeit gegangen.',
+      options: ['krank war', 'war krank', 'krank ist gewesen'],
+      answer: 0,
+      explain: { ru: 'Глагол в конце придаточного: krank war.', en: 'Verb at the end of the clause: krank war.' }
+    },
+    {
+      id: 'g-ns-d12', kind: 'choice',
+      q: '___ wir letzten Sommer in Spanien waren, hat es jeden Tag geregnet.',
+      options: ['Als', 'Wenn', 'Ob'],
+      answer: 0,
+      explain: { ru: 'Один отрезок в прошлом (одна поездка) → als.', en: 'One period in the past (one trip) → als.' }
+    },
+    {
+      id: 'g-ns-d13', kind: 'reorder',
+      q: { ru: 'Соберите фразу. «Так как автобус не пришёл, я пошёл пешком».', en: 'Build the sentence. “Because the bus didn’t come, I walked.”' },
+      tokens: ['Weil', 'der Bus', 'nicht', 'kam,', 'bin', 'ich', 'zu Fuß', 'gegangen.'],
+      answer: 'Weil der Bus nicht kam, bin ich zu Fuß gegangen.',
+      explain: { ru: 'Придаточное первым → главное начинается с глагола (bin).', en: 'Subordinate clause first → the main clause starts with the verb (bin).' }
+    },
+    {
+      id: 'g-ns-d14', kind: 'gap',
+      q: 'Der Arzt sagt, dass ich mehr Wasser trinken ___. (sollen)',
+      answer: 'soll',
+      explain: { ru: 'Модальный глагол в придаточном — последним: trinken soll.', en: 'The modal goes last in the clause: trinken soll.' }
+    },
+    {
+      id: 'g-ns-d15', kind: 'choice',
+      q: 'Entschuldigung, wissen Sie, ___',
+      options: ['wo ist das Bürgeramt?', 'wo das Bürgeramt ist?', 'ist wo das Bürgeramt?'],
+      answer: 1,
+      explain: { ru: 'Косвенный вопрос: глагол в конце, без вопросительного порядка.', en: 'Indirect question: the verb goes last, no question word order.' }
+    },
+    {
+      id: 'g-ns-d16', kind: 'gap',
+      q: 'Ruf mich bitte an, wenn du am Bahnhof ___! (ankommen)',
+      answer: 'ankommst',
+      explain: { ru: 'В придаточном отделяемый глагол пишется слитно: ankommst.', en: 'In a subordinate clause the separable verb joins up: ankommst.' }
+    }
   ]
 });

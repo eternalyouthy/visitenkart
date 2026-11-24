@@ -122,6 +122,61 @@ GT.registerGrammar({
       options: ['wir verschieben den Termin.', 'wir den Termin verschieben.', 'verschieben wir den Termin.'],
       answer: 2,
       explain: { ru: 'Deshalb занимает первое место главного предложения. Сразу после него идёт verschieben.', en: 'Deshalb occupies first position in the main clause. Verschieben comes immediately after it.' }
+    },
+    {
+      id: 'g-ws-d9', kind: 'choice',
+      q: 'Am Samstag ___',
+      options: ['wir besuchen unsere Großeltern.', 'besuchen wir unsere Großeltern.', 'unsere Großeltern wir besuchen.'],
+      answer: 1,
+      explain: { ru: 'Am Samstag занимает 1-е место → глагол 2-м, подлежащее после него.', en: 'Am Samstag takes position 1 → verb second, subject after it.' }
+    },
+    {
+      id: 'g-ws-d10', kind: 'gap',
+      q: 'Der Zug fährt um 8:15 Uhr von Gleis 3 ___. (abfahren)',
+      answer: 'ab',
+      explain: { ru: 'abfahren отделяемый: fährt … ab, приставка в конце.', en: 'abfahren is separable: fährt … ab, prefix at the end.' }
+    },
+    {
+      id: 'g-ws-d11', kind: 'reorder',
+      q: { ru: 'Соберите вопрос. «Можешь забрать меня завтра с вокзала?»', en: 'Build the question. “Can you pick me up from the station tomorrow?”' },
+      tokens: ['Kannst', 'du', 'mich', 'morgen', 'vom Bahnhof', 'abholen?'],
+      answer: 'Kannst du mich morgen vom Bahnhof abholen?',
+      explain: { ru: 'Вопрос да/нет: модальный глагол первым, инфинитив abholen в конце.', en: 'Yes/no question: modal first, infinitive abholen at the end.' }
+    },
+    {
+      id: 'g-ws-d12', kind: 'choice',
+      q: { ru: 'Выберите правильное предложение.', en: 'Choose the correct sentence.' },
+      options: ['Ich habe gestern meine Mutter angerufen.', 'Ich habe meine Mutter angerufen gestern.', 'Gestern ich habe meine Mutter angerufen.'],
+      answer: 0,
+      explain: { ru: 'Рамка: habe на 2-м месте, angerufen в самом конце.', en: 'Sentence bracket: habe in position 2, angerufen at the very end.' }
+    },
+    {
+      id: 'g-ws-d13', kind: 'choice',
+      q: 'Ich wollte eigentlich kommen, aber ___',
+      options: ['ich hatte keine Zeit.', 'hatte ich keine Zeit.', 'ich keine Zeit hatte.'],
+      answer: 0,
+      explain: { ru: 'aber не занимает места: после него обычный порядок — подлежащее, глагол.', en: 'aber takes no position: normal order follows — subject, then verb.' }
+    },
+    {
+      id: 'g-ws-d14', kind: 'choice',
+      q: 'Ich bin total müde, trotzdem ___',
+      options: ['ich gehe zur Arbeit.', 'gehe ich zur Arbeit.', 'ich zur Arbeit gehe.'],
+      answer: 1,
+      explain: { ru: 'trotzdem — наречие, занимает 1-е место → глагол сразу после него.', en: 'trotzdem is an adverb in position 1 → the verb follows immediately.' }
+    },
+    {
+      id: 'g-ws-d15', kind: 'choice',
+      q: 'Ich nehme ein Taxi, denn ___',
+      options: ['der Bus kommt heute nicht.', 'kommt der Bus heute nicht.', 'der Bus heute nicht kommt.'],
+      answer: 0,
+      explain: { ru: 'denn, как aber и und, не меняет порядок слов.', en: 'denn, like aber and und, does not change the word order.' }
+    },
+    {
+      id: 'g-ws-d16', kind: 'reorder',
+      q: { ru: 'Соберите фразу. «Я думаю, что завтра нам придётся работать дольше».', en: 'Build the sentence. “I think we’ll have to work longer tomorrow.”' },
+      tokens: ['Ich glaube,', 'dass', 'wir', 'morgen', 'länger', 'arbeiten', 'müssen.'],
+      answer: 'Ich glaube, dass wir morgen länger arbeiten müssen.',
+      explain: { ru: 'dass-предложение: спрягаемый müssen в самом конце, перед ним инфинитив.', en: 'dass-clause: the conjugated müssen goes last, the infinitive before it.' }
     }
   ]
 });
