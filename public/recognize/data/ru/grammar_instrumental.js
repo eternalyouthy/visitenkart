@@ -59,7 +59,7 @@ GT.registerGrammar({
       explain: { en: "заниматься + instrumental.", de: "заниматься + Instrumental." }
     },
     {
-      id: 'ru-g-instrumental-6', kind: 'gap', q: "Я ид+у с ___.",
+      id: 'ru-g-instrumental-6', kind: 'gap', q: "Я ид+у в кин+о с ___. (друг)",
       answer: "др+угом",
       hint: { en: "Express company with с.", de: "Drücke die Begleitung mit с aus." },
       explain: { en: "с + instrumental for company.", de: "с + Instrumental für die Begleitung." }

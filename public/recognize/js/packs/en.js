@@ -236,7 +236,7 @@
       examples: g.example ? [{ t: g.example, ru: g.translation }] : [],
       drills: drills
     });
-    TOPICS.grammar.push({ id: id, name: g.label + ' · ' + g.level, group: 'Grammar topics' });
+    TOPICS.grammar.push({ id: id, name: g.label, level: g.level });
   });
 
   // Cross-disciplinary, domain & advanced (B2–C2) Professional topics
@@ -272,6 +272,7 @@
 
   GT.definePack('en', {
     baseKnown: 'ru',
+    grammarFold: { A1: 'B1', A2: 'B1' },
     TOPICS: TOPICS,
     ROOT_PLAN: ROOT_PLAN,
     PREFIX_PLAN: PREFIX_PLAN,
@@ -365,7 +366,7 @@
       chunks: 'Ready-made phrases for speaking and writing, organised by communicative function.',
       expressions: 'Idioms, American street slang, everyday conversational phrases, ready-made chunks and classic literary expressions for natural English.',
       literature: 'Lines from English-language literature with a short explanation of their meaning and examples.',
-      grammar: 'Essential B1–B2 grammar: a short explanation, an example, a recognition question and a typed production task per topic.',
+      grammar: 'English grammar by level — B1, B2 and C1: explanations, examples, pitfalls, and recognition and typed drills you can add to Review.',
       roots: 'Start with verbs + particles (take up, take off, take over): the core of everyday English. Then word-building families, prefixes, suffixes and classical Latin/Greek roots.'
     }
   });

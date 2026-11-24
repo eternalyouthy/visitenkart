@@ -164,6 +164,26 @@
     if (list) { var i = list.indexOf(it); if (i >= 0) list.splice(i, 1); }
   }
   /** Rebuild TOPICS.expressions, category memberships, the Expressions menu and chunk groups (after a pack loads). */
+  /**
+   * Grammar sidebar by CEFR level: every grammar topic gets group "<level> grammar" (B1 grammar, B2 grammar, C1 grammar …),
+   * in level order. The level comes from topic.level, the registered page's level, or a " · B2" suffix on the topic name
+   * (the suffix is then removed). config.grammarFold maps levels into a neighbour group (English/German: A2 → B1).
+   */
+  var LEVEL_ORDER = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+  GT.setupGrammarLevels = function (p) {
+    var T = p.config.TOPICS.grammar || [], fold = p.config.grammarFold || {};
+    T.forEach(function (t, i) {
+      var m = /\s·\s(A1|A2|B1|B2|C1|C2)\s*$/.exec(t.name || ''), page = p.grammar[t.id];
+      if (m) t.name = t.name.slice(0, m.index);
+      var lv = String(t.level || (page && page.level) || (m && m[1]) || 'B1').toUpperCase();
+      t.level = lv; t._i = i;
+      lv = fold[lv] || lv;
+      t.group = lv + ' grammar';
+      t._o = LEVEL_ORDER.indexOf(lv);
+    });
+    T.sort(function (a, b) { return (a._o - b._o) || (a._i - b._i); });
+    T.forEach(function (t) { delete t._i; delete t._o; });
+  };
   GT.setupExpressions = function (p) {
     var T = p.config.TOPICS;
     if (!T) return;

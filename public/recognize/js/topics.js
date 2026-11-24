@@ -254,7 +254,22 @@
       { id: 'adjektive', name: 'Adjective declension' },
       { id: 'kasus', name: 'Cases & prepositions' },
       { id: 'verben_praep', name: 'Verbs + prepositions, da-/wo-' },
-      { id: 'infinitiv', name: 'zu-infinitive, lassen, reflexive, n-declension, Futur I' }
+      { id: 'infinitiv', name: 'zu-infinitive, lassen, reflexive, n-declension, Futur I' },
+      { id: 'temporal', name: 'Time clauses & Plusquamperfekt' },
+      { id: 'komparation', name: 'Comparison: -er, am -sten, als / wie' },
+      { id: 'modalverben', name: 'Modal verbs' },
+      { id: 'konjunktiv1', name: 'Konjunktiv I & reported speech', level: 'B2' },
+      { id: 'passiversatz', name: 'Passive alternatives: sich lassen, -bar, sein + zu', level: 'B2' },
+      { id: 'konnektoren_b2', name: 'Connectors: indem, sodass, falls, ohne dass', level: 'B2' },
+      { id: 'vermutung', name: 'Assumptions: muss, dürfte, soll, will', level: 'B2' },
+      { id: 'nominalstil', name: 'Nominal style & noun–verb collocations', level: 'B2' },
+      { id: 'genitivpraep', name: 'Prepositions with the Genitiv', level: 'B2' },
+      { id: 'konj2_vergangenheit', name: 'Past Konjunktiv II: hätte … sollen', level: 'B2' },
+      { id: 'partizipattribut', name: 'Extended participle attributes', level: 'C1' },
+      { id: 'modalpartikeln', name: 'Modal particles: doch, ja, mal, halt', level: 'C1' },
+      { id: 'mittelfeld', name: 'Middle field order & position of nicht', level: 'C1' },
+      { id: 'konnektoren_c1', name: 'Connectors: zumal, wohingegen, geschweige denn', level: 'C1' },
+      { id: 'es_gebrauch', name: 'Uses of es', level: 'C1' }
     ]
   };
 
@@ -271,9 +286,10 @@
   });
   GT.TOPICS.it.forEach(function (t) { t.group = t.level === 'b2' ? 'B2 career themes' : 'Professional'; });
   GT.TOPICS.expressions.forEach(function (t) { t.group = 'Expressions'; });
-  GT.TOPICS.grammar.forEach(function (t) { t.group = 'B1 grammar'; });
+  // Grammar groups (B1 / B2 / C1 grammar) are set from each topic's level by GT.setupGrammarLevels.
 
   GT.definePack('de', {
+    grammarFold: { A1: 'B1', A2: 'B1' },
     features: { goetheB1: true, prefixDrill: true, ruLink: true, rootMapVerbs: true, stressPairs: true },
     PRO_GROUPS: [
       { key: 'for-everyone', title: 'For Everyone', badge: 'Start here', desc: 'Essential for every profession: office communication, meetings, clients, presentations, careers and modern work. Complete this track first, then pick your field below.' },
@@ -293,7 +309,7 @@
       chunks: 'Ready-made phrases (Redemittel) for speaking and writing. Use the filter to get phrases for a specific situation.',
       expressions: 'Idioms, Berlin street slang, everyday conversational phrases, ready-made Redemittel and classic literary expressions.',
       literature: 'Lines from German literature with a short explanation of their meaning and examples.',
-      grammar: 'A compact B1 reference: short explanations, tables, examples, pitfalls, and quick drills you can add to Review.',
+      grammar: 'B1, B2 and C1 grammar: short explanations, tables, examples, pitfalls, and quick drills you can add to Review.',
       roots: 'German word families, separable/inseparable prefixes, gender-determining suffixes, and classical Latin/Greek roots.'
     }
   });

@@ -159,9 +159,9 @@
     ]
   });
 
-  pack.config.TOPICS.grammar.push({ id: "vorvergangenheit", name: "Earlier past events · B2", group: "Grammar topics" });
+  pack.config.TOPICS.grammar.push({ id: "vorvergangenheit", name: "Earlier past events · B1", group: "Grammar topics" });
   GT.registerGrammar({
-    id: "vorvergangenheit", level: "B2", title: "Что произошло раньше · Plusquamperfekt",
+    id: "vorvergangenheit", level: "B1", title: "Что произошло раньше · Plusquamperfekt",
     summary: "Выстройте последовательность двух событий в прошлом.",
     explanation: "<p>Plusquamperfekt переносит точку отсчёта в прошлое. Из двух событий более раннее можно обозначить сочетанием <b>hatte/war + Partizip II</b>. Вспомогательный глагол тот же, что и в Perfekt.</p><p><em>Als wir ankamen, hatte der Film schon begonnen.</em> Сначала начался фильм, потом пришли мы. В придаточном вспомогательный глагол стоит после причастия.</p>",
     examples: [

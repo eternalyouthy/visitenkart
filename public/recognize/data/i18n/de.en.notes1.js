@@ -5,10 +5,10 @@
     'b1-everyday-obwohl': {
       note: 'Subordinating conjunction: the conjugated verb moves to the END (“…, obwohl alle Tests grün waren”). If the obwohl-clause comes first, the main clause starts with the verb: “Obwohl es regnet, gehe ich spazieren”. The meaning is the same as trotzdem, but the word order differs: “Es regnet. Trotzdem gehe ich spazieren”.',
       why: {
-        text: 'Composition: fusion of ob + wohl.\nOrigin: in Early New High German (16th–17th centuries), the conjunction ob could have the concessive meaning “even if”, reinforced by the particle wohl.\nTransparency: the meaning “although” cannot be deduced directly from the modern meanings of ob (“whether”) and wohl (“probably”).',
-        evidence: 'Records the fusion of concessive ob (“even if”) + intensifying wohl in the 16th–17th centuries; details of the early grammaticalisation are interpreted variously.'
+        text: 'Composition: fusion of ob + wohl.\nOrigin: in older German, ob meant “if” (like English if, which means both “if” and “whether”), and wohl meant “indeed, admittedly” (still today: “Er ist wohl reich, aber nicht glücklich” — “He is admittedly rich, but not happy”). The words stood apart: “ob er wohl reich ist…” ≈ “if he is indeed rich…”. From this came the concession “granted, and yet”, and in the 16th–17th centuries the pair fused into the conjunction “although”. Obgleich and obschon are built the same way.\nTransparency: the meaning “although” cannot be deduced directly from the modern meanings of ob (“whether”) and wohl (“probably”).',
+        evidence: 'Records the fusion of ob (“if”) + concessive wohl in the 16th–17th centuries; details of the early grammaticalisation are interpreted variously.'
       },
-      parts: ['archaic “even if”', 'intensifying particle (“indeed, well”)']
+      parts: ['“if” (old meaning; today “whether”)', '“admittedly, indeed” (concessive particle)']
     },
     'b1-everyday-trotzdem': {
       note: 'An adverb, not a conjunction: in first position it is immediately followed by the verb (“Trotzdem war ich pünktlich”), never “Trotzdem ich war …”. It can also stand inside the clause (“Wir machen es trotzdem”). Colloquially: “Trotzdem danke!” — thanks anyway.',

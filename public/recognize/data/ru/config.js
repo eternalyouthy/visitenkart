@@ -170,14 +170,29 @@
           scenario: { en: 'a conversation about turning points, endurance, memory and the price of choices. You are a close friend.', de: 'ein Gespräch über Wendepunkte, Erinnerung und den Preis von Entscheidungen. Du bist ein enger Freund.' } }
       ],
       grammar: [
-        { id: 'aspect', name: 'Verb aspect: imperfective vs perfective', group: 'Core grammar' },
-        { id: 'cases', name: 'Cases: prepositional & accusative after в / на', group: 'Core grammar' },
-        { id: 'motion', name: 'Verbs of motion: идти / ходить, ехать / ездить', group: 'Core grammar' },
-        { id: 'genitive', name: 'Genitive: absence, quantity and origin', group: 'Core grammar' },
-        { id: 'dative', name: 'Dative: recipients and experiencers', group: 'Core grammar' },
-        { id: 'instrumental', name: 'Instrumental: tools, company and roles', group: 'Core grammar' },
-        { id: 'adjectives', name: 'Adjective agreement and declension', group: 'Core grammar' },
-        { id: 'reflexive', name: 'Verbs in -ся / -сь', group: 'Core grammar' }
+        { id: 'conjugation', name: 'Present tense: the two conjugations', level: 'A2' },
+        { id: 'past', name: 'Past tense: -л, -ла, -ли', level: 'A2' },
+        { id: 'cases', name: 'Cases: prepositional & accusative after в / на', level: 'A2' },
+        { id: 'genitive', name: 'Genitive: absence, quantity and origin', level: 'A2' },
+        { id: 'aspect', name: 'Verb aspect: imperfective vs perfective', level: 'B1' },
+        { id: 'motion', name: 'Verbs of motion: идти / ходить, ехать / ездить', level: 'B1' },
+        { id: 'dative', name: 'Dative: recipients and experiencers', level: 'B1' },
+        { id: 'instrumental', name: 'Instrumental: tools, company and roles', level: 'B1' },
+        { id: 'adjectives', name: 'Adjective agreement and declension', level: 'B1' },
+        { id: 'reflexive', name: 'Verbs in -ся / -сь', level: 'B1' },
+        { id: 'imperative', name: 'Imperative and aspect', level: 'B1' },
+        { id: 'numerals', name: 'Numbers + nouns: 2 часа, 5 часов', level: 'B1' },
+        { id: 'kotoryj', name: 'Relative clauses with который', level: 'B1' },
+        { id: 'motion_prefixes', name: 'Prefixed verbs of motion: прийти, уйти…', level: 'B2' },
+        { id: 'participles', name: 'Participles: читающий, прочитанный', level: 'B2' },
+        { id: 'gerunds', name: 'Verbal adverbs: читая, прочитав', level: 'B2' },
+        { id: 'chtoby', name: 'чтобы: purpose and wishes', level: 'B2' },
+        { id: 'word_order', name: 'Word order: theme and rheme', level: 'C1' },
+        { id: 'aspect_infinitive', name: 'Aspect after нельзя, не надо, пора', level: 'C1' },
+        { id: 'government', name: 'Verb government: which case after which verb', level: 'C1' },
+        { id: 'numerals_case', name: 'Declining numerals: с пятью, около тысячи', level: 'C1' },
+        { id: 'impersonal', name: 'Impersonal sentences: мне не спится', level: 'C1' },
+        { id: 'passive_ru', name: 'The passive: -ся, short participles, “они”', level: 'C1' }
       ],
       roots: []
     },
@@ -259,7 +274,7 @@
       chunks: 'Ready-made phrases for speaking and writing, organised by communicative function.',
       expressions: 'Idioms, youth slang, short everyday phrases, chunks and classic literary lines for natural Russian.',
       literature: 'Lines from Russian literature with a short explanation of their meaning and examples.',
-      grammar: 'The core of Russian grammar for learners: aspect, cases after в / на, and verbs of motion — with tables, pitfalls and drills.',
+      grammar: 'Russian grammar by level — A2, B1, B2 and C1: conjugation, cases, aspect, motion verbs, participles and more, with tables, pitfalls and drills.',
       roots: 'Russian word families built from one root with prefixes (при-, вы-, пере- …), noun and adjective suffixes, and international classical elements.'
     }
   });

@@ -21,6 +21,7 @@
           GT._target = null;
           pack.loaded = true;
           if (GT.setupExpressions) { try { GT.setupExpressions(pack); } catch (e) { pack.loadErrors.push('expressions: ' + e.message); } }
+          if (GT.setupGrammarLevels) { try { GT.setupGrammarLevels(pack); } catch (e) { pack.loadErrors.push('grammar levels: ' + e.message); } }
           if (GT.validatePack) { try { GT.validatePack(pack); } catch (e) { pack.loadErrors.push('validate: ' + e.message); } }
           (pack.config.afterLoad || []).forEach(function (fn) {
             try { fn(pack); } catch (e) { pack.loadErrors.push('afterLoad: ' + e.message); }
