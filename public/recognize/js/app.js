@@ -655,21 +655,22 @@
         sideGroupsFor(wordGroups(), tab, cur, p);
       html += sidePractice();
     } else if (tab === 'grammar') {
+      /* Folding groups per level (B1 Grammar, B2 Grammar, …), like Words / Roots; the group you are in opens. */
       html += languageSideLinks(tab, p);
-      var group = null, n = 0;
-      GT.TOPICS[tab].filter(visibleTopic).forEach(function (t) {
-        if (t.group !== group) { group = t.group; n = 0; html += '<div class="side-label">' + esc(group.replace(' · Goethe list', ' topics')) + '</div>'; }
-        n++;
-        var due = dueKeys(tab + '.' + t.id, 'both').length, right, dim;
-        if (tab === 'grammar') {
-          dim = !GT.grammar[t.id];
-          right = due ? due + ' due' : '';
-        } else {
-          var items = itemsFor(tab, t.id), c = counts(items);
-          dim = !items.length;
-          right = items.length ? c.known + '/' + items.length : '';
-        }
-        html += sideLink('#/' + tab + '/' + t.id, pad2(n), t.name, right, { active: cur === t.id, dim: dim, due: tab === 'grammar' && !!due });
+      var gRows = [], gByName = {};
+      GT.TOPICS.grammar.filter(visibleTopic).forEach(function (t) {
+        var g = gByName[t.group];
+        if (!g) { g = gByName[t.group] = ['grammar-' + gRows.length, t.group, 0, false, '', 0]; gRows.push(g); }
+        var due = dueKeys('grammar.' + t.id, 'both').length;
+        g[5]++; g[2] += due; g[3] = g[3] || cur === t.id;
+        g[4] += sideLink('#/grammar/' + t.id, pad2(g[5]), t.name, due ? due + ' due' : '', { active: cur === t.id, dim: !GT.grammar[t.id], due: !!due });
+      });
+      var gHere = null;
+      gRows.forEach(function (g) { if (g[3]) gHere = g[0]; });
+      if (gHere !== ui.sideHere) { if (gHere) ui.sideOpen[gHere] = true; ui.sideHere = gHere; }
+      if (gRows.length) html += '<div class="side-label">Grammar</div>';
+      gRows.forEach(function (g, i) {
+        html += sideGroup(g[0], pad2(i + 1), g[1], g[2] ? g[2] + ' due' : String(g[5]), g[3], g[4], i === gRows.length - 1);
       });
       html += sidePractice();
     } else if (tab === 'roots') {
