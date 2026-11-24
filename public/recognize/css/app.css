@@ -883,6 +883,10 @@ a.chip:hover { border-color: var(--ice); }
 .blitz-card .hw { margin: 0; }
 .blitz-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .blitz-btns .btn { justify-content: center; min-height: 56px; }
+/* Practice results: centered header, buttons and box labels; rows keep their two sides. */
+.st-done > .page-head, .st-done > .box > .label { text-align: center; }
+.st-done > .page-head .lead { margin-left: auto; margin-right: auto; }
+.st-done > .actions-row { justify-content: center; }
 .st-pairs { border-top: 1px solid var(--line); }
 .st-pair { display: flex; justify-content: space-between; gap: 16px; padding: 10px 2px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
 .st-pair > span:first-child { font-family: var(--font-display); font-size: 17px; }
