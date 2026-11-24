@@ -331,17 +331,9 @@
     if (tab === 'user' || tab === 'review' || tab === 'stats') return 'user';
     return 'language';
   }
-  function isNavItemActive(item, tab, p) {
-    if (item.tab && item.topic) {
-      if (p[0] === 'item' && GT.byId[p[1]]) return GT.byId[p[1]].tab === item.tab && GT.byId[p[1]].topic === item.topic;
-      return tab === item.tab && p[1] === item.topic;
-    }
-    if (item.match) return item.match.indexOf(tab) >= 0 && !proSubFor(tab, p[1]);
-    return false;
-  }
-  /* Professional and Words share one classification in the sidebar and in the top menus:
+  /* Professional and Words share one classification in the sidebar (the top bar has no dropdowns):
    * Professional → Professional / B2 / B1 Workplace; Words → B1 topics / B2 themes / B2 everyday topics.
-   * Each list starts with "Show all"; groups fold open, the one you are in opens by itself. */
+   * Groups fold open, the one you are in opens by itself. */
   function proGroups() {
     var out = [], main = [], b2 = [];
     (GT.PRO_SUBS || []).forEach(function (s) {
@@ -367,38 +359,6 @@
     if (p[0] === 'item') { var it = GT.byId[p[1]]; return !!it && it.tab === s.tab && it.topic === s.topic; }
     return tab === s.tab && cur === s.topic;
   }
-  ui.menuOpen = ui.menuOpen || {};
-  $('#tabs').addEventListener('toggle', function (e) {
-    var d = e.target;
-    if (d && d.classList && d.classList.contains('tm-group')) ui.menuOpen[d.dataset.mgroup] = d.open;
-  }, true);
-  function menuLink(href, label, on, cls) {
-    return '<a class="tab-menu-item' + (cls || '') + (on ? ' active' : '') + '" href="' + href + '" role="menuitem">' + esc(label) + '</a>';
-  }
-  function groupedMenu(id, tab, p) {
-    var cur = p[0] === 'item' && GT.byId[p[1]] ? GT.byId[p[1]].topic : p[1];
-    var h = id === 'professional' ? menuLink('#/professional', 'Show all', tab === 'professional', ' tm-all')
-      : menuLink('#/words', 'All words', tab === 'words' && !p[1], ' tm-all');
-    (id === 'professional' ? proGroups() : wordGroups()).forEach(function (g) {
-      var here = false, inner = '';
-      g.subs.forEach(function (s) {
-        var on = isSubHere(s, tab, cur, p);
-        here = here || on;
-        inner += menuLink('#/' + s.tab + '/' + s.topic, s.name, on, ' tm-sub');
-      });
-      var open = ui.menuOpen[g.key] != null ? ui.menuOpen[g.key] : here;
-      h += '<details class="tm-group' + (here ? ' here' : '') + '" data-mgroup="' + esc(g.key) + '"' + (open ? ' open' : '') + '>' +
-        '<summary class="tm-group-head"><span>' + esc(g.title) + '</span><span class="ct">' + g.subs.length + '</span><span class="chev">' + icon('chev') + '</span></summary>' +
-        '<div class="tm-group-body">' + inner + '</div></details>';
-    });
-    if (id === 'language') {
-      h += '<div class="tm-sep"></div>' + menuLink('#/grammar', 'Grammar', tab === 'grammar') + menuLink('#/roots', 'Roots', tab === 'roots');
-    }
-    return h;
-  }
-  function closeNavMenus() {
-    document.querySelectorAll('.tab-drop.open').forEach(function (d) { d.classList.remove('open'); });
-  }
   function renderNav(active, p) {
     p = p || location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean).map(decodeURIComponent);
     var group = navGroupFor(active, p);
@@ -406,17 +366,9 @@
     if (active === 'user') userBtn.setAttribute('aria-current', 'page'); else userBtn.removeAttribute('aria-current');
     var brand = $('.brand');
     if (group === 'start') brand.setAttribute('aria-current', 'page'); else brand.removeAttribute('aria-current');
+    // Plain tabs only: sub-sections live in the left sidebar.
     $('#tabs').innerHTML = GT.NAV.map(function (g, i) {
-      var actCls = g.id === group ? ' active' : '';
-      if (g.items && g.items.length) {
-        var grouped = g.id === 'language' || g.id === 'professional';
-        return '<div class="tab-drop">' +
-          '<a class="tab' + actCls + '" href="' + g.href + '" data-nav-drop="' + g.id + '" aria-haspopup="true"><span class="num">' + pad2(i + 1) + '</span>' + esc(g.label) + '<span class="chev">' + icon('chev') + '</span></a>' +
-          '<div class="tab-menu' + (grouped ? ' grouped' : '') + '" role="menu">' + (grouped ? groupedMenu(g.id, active, p) : g.items.map(function (sub) {
-            return '<a class="tab-menu-item' + (isNavItemActive(sub, active, p) ? ' active' : '') + '" href="' + sub.href + '" role="menuitem">' + esc(sub.label) + '</a>';
-          }).join('')) + '</div></div>';
-      }
-      return '<a class="tab' + actCls + '" href="' + g.href + '"><span class="num">' + pad2(i + 1) + '</span>' + esc(g.label) + '</a>';
+      return '<a class="tab' + (g.id === group ? ' active' : '') + '" href="' + g.href + '"><span class="num">' + pad2(i + 1) + '</span>' + esc(g.label) + '</a>';
     }).join('');
     $('#bottomnav').innerHTML = GT.NAV.map(function (g) {
       return '<a class="bnav' + (g.id === group ? ' active' : '') + '" href="' + g.href + '">' + icon(g.icon) + '<span>' + esc(g.short) + '</span></a>';
@@ -543,6 +495,14 @@
     return h;
   }
 
+  /** Language section switch (the top bar has no dropdowns): Words · Grammar · Roots. */
+  function languageSideLinks(tab, p) {
+    var item = p[0] === 'item' && GT.byId[p[1]];
+    return '<div class="side-label">Language</div>' +
+      sideLink('#/words', '01', 'Words', '', { active: tab === 'words' && !p[1] && !item }) +
+      sideLink('#/grammar', '02', 'Grammar', '', { active: tab === 'grammar' && !p[1] }) +
+      sideLink('#/roots', '03', 'Roots', '', { active: tab === 'roots' && !p[1] });
+  }
   function renderSidebar(tab, p) {
     var html = '', cur = p[1];
     if (p[0] === 'item') { var it = GT.byId[p[1]]; cur = it ? it.topic : null; }
@@ -550,18 +510,18 @@
     var inExp = tab === 'expressions' || tab === 'chunks' || tab === 'literature';
     if (inPro) {
       html += '<div class="side-label">Professional</div>' +
-        sideLink('#/professional', '—', 'Show all', '', { active: tab === 'professional' }) +
+        sideLink('#/professional', '—', 'Key words for your profession', '', { active: tab === 'professional' }) +
         sideGroupsFor(proGroups(), tab, cur, p);
       html += sidePractice();
     } else if (inExp) {
       html += expressionsSidebar(tab, p, cur);
       html += sidePractice();
     } else if (tab === 'words') {
-      html += '<div class="side-label">Words</div>' +
-        sideLink('#/words', '—', 'All words', '', { active: !cur && p[0] !== 'item' }) +
+      html += languageSideLinks(tab, p) + '<div class="side-label">Word topics</div>' +
         sideGroupsFor(wordGroups(), tab, cur, p);
       html += sidePractice();
     } else if (tab === 'grammar') {
+      html += languageSideLinks(tab, p);
       var group = null, n = 0;
       GT.TOPICS[tab].filter(visibleTopic).forEach(function (t) {
         if (t.group !== group) { group = t.group; n = 0; html += '<div class="side-label">' + esc(group.replace(' · Goethe list', ' topics')) + '</div>'; }
@@ -579,7 +539,7 @@
       });
       html += sidePractice();
     } else if (tab === 'roots') {
-      html += rootsSidebar(p);
+      html += languageSideLinks(tab, p) + rootsSidebar(p);
     } else if (tab === 'user' || tab === 'review' || tab === 'stats') {
       var dir = S.settings.reviewDirection || 'both';
       var dueTotal = dueKeys('all', dir).length;
@@ -2134,18 +2094,6 @@
 
   document.addEventListener('click', function (e) {
     if (!e.target.closest('.mtag-wrap')) closeAllTooltips();
-    if (!e.target.closest('.tab-drop')) closeNavMenus();
-    var navDrop = e.target.closest('[data-nav-drop]');
-    if (navDrop && window.matchMedia && window.matchMedia('(hover: none)').matches) {
-      var dd = navDrop.closest('.tab-drop');
-      if (dd && !dd.classList.contains('open')) {
-        e.preventDefault();
-        closeNavMenus();
-        dd.classList.add('open');
-        return;
-      }
-    }
-    if (e.target.closest('.tab-menu-item')) closeNavMenus();
     var sp = e.target.closest('[data-speak]');
     if (sp) { e.preventDefault(); e.stopPropagation(); speak(sp.dataset.speak, sp, sp.dataset.speakLang); return; }
     var el = e.target.closest('[data-act]');
@@ -3831,7 +3779,6 @@
     opts = opts || {};
     if (!ready) return;
     if (!opts.keep) { closeSidebar(); closeSheet(); }
-    closeNavMenus();
     ui.keyHandler = null;
     var raw = location.hash.replace(/^#\/?/, '');
     var qIdx = raw.indexOf('?');

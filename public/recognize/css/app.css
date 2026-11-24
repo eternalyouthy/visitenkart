@@ -115,7 +115,6 @@ code { font-family: var(--font-mono); font-size: 0.9em; color: var(--ice); }
 .logo b { font-weight: 400; color: var(--ice); letter-spacing: 0.32em; }
 .logo-code { display: none; }
 .tabs { display: flex; justify-content: center; flex: 1; gap: 4px; }
-.tab-drop { position: relative; display: flex; align-items: stretch; }
 .tab {
   position: relative; display: flex; align-items: center; gap: 8px;
   padding: 0 16px; white-space: nowrap;
@@ -123,56 +122,10 @@ code { font-family: var(--font-mono); font-size: 0.9em; color: var(--ice); }
   color: var(--muted); transition: color 0.15s;
 }
 .tab .num { color: var(--dim); }
-.tab .chev { display: inline-grid; place-items: center; opacity: 0.65; transition: transform 0.15s; }
-.tab .chev svg { width: 13px; height: 13px; }
-.tab-drop:hover .tab .chev, .tab-drop.open .tab .chev { transform: rotate(180deg); opacity: 1; }
 .tab:hover { color: var(--text); }
 .tab.active { color: var(--ice); }
 .tab.active .num { color: var(--ice); }
 .tab.active::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px; background: var(--ice); }
-.tab-menu {
-  position: absolute; top: 100%; left: 0; min-width: 220px; z-index: 60;
-  background: var(--bg); border: 1px solid var(--line-2); border-top: 1px solid var(--line-ice);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
-  padding: 6px 0;
-  opacity: 0; visibility: hidden; pointer-events: none;
-  transform: translateY(-4px); transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
-}
-.tab-drop:hover .tab-menu,
-.tab-drop:focus-within .tab-menu,
-.tab-drop.open .tab-menu {
-  opacity: 1; visibility: visible; pointer-events: auto; transform: none;
-}
-.tab-menu-item {
-  display: block; padding: 10px 18px; white-space: nowrap;
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--muted); transition: background 0.12s, color 0.12s;
-}
-.tab-menu-item:hover { background: var(--navy); color: var(--text); }
-.tab-menu-item.active { color: var(--ice); background: color-mix(in srgb, var(--navy) 70%, transparent); }
-/* grouped menus (Language, Professional): "Show all", then folding groups, like the sidebar */
-.tab-menu.grouped { min-width: 290px; max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; }
-.tab-menu-item.tm-all { color: var(--text); }
-.tm-group { border-top: 1px solid var(--line); }
-.tm-group-head {
-  display: flex; align-items: center; gap: 10px; padding: 11px 18px; cursor: pointer; list-style: none; user-select: none;
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
-}
-.tm-group-head::-webkit-details-marker { display: none; }
-.tm-group-head > span:first-child { flex: 1; }
-.tm-group-head:hover { background: var(--navy); color: var(--text); }
-.tm-group-head .ct { color: var(--dim); letter-spacing: 0.05em; }
-.tm-group-head .chev { display: inline-grid; place-items: center; transition: transform 0.15s; }
-.tm-group-head .chev svg { width: 12px; height: 12px; }
-.tm-group[open] > .tm-group-head { color: var(--text); }
-.tm-group[open] > .tm-group-head .chev { transform: rotate(180deg); color: var(--ice); }
-.tm-group.here > .tm-group-head { color: var(--ice); }
-.tm-group-body { padding-bottom: 6px; }
-.tab-menu-item.tm-sub {
-  padding: 8px 18px 8px 34px; white-space: normal;
-  font-family: var(--font-body); font-size: 14px; letter-spacing: 0; text-transform: none;
-}
-.tm-sep { height: 1px; margin: 6px 0; background: var(--line-2); }
 .top-right { display: flex; align-items: center; gap: 8px; }
 .due-chip { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.2em; color: var(--muted); white-space: nowrap; }
 .due-chip b { font-weight: 500; min-width: 36px; padding: 3px 8px; text-align: center; background: var(--ice); color: var(--ink); letter-spacing: 0.05em; }
@@ -904,7 +857,7 @@ a.chip:hover { border-color: var(--ice); }
 .fortune[open] .fortune-ico { transform: rotate(-18deg) scale(1.1); }
 .fortune-body { padding: 4px 22px 20px; }
 .fortune-body .label { display: block; margin-bottom: 10px; color: var(--gold); }
-.fortune-body p { font-family: var(--font-display); font-size: 18px; line-height: 1.55; max-width: 640px; }
+.fortune-body p { font-family: var(--font-body); font-size: 15.5px; font-weight: 400; line-height: 1.6; color: var(--muted); max-width: none; }
 .fortune-body p + p { margin-top: 10px; }
 .st-task { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 15px; line-height: 1.5; color: var(--text); }
 .st-task-ico { flex: none; width: 20px; height: 20px; border: 1px solid var(--line-ice); color: var(--ice); font-family: var(--font-mono); font-size: 12px; display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
@@ -1271,7 +1224,7 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 .theme-off { display: block; margin-top: 2px; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
 /* shared: rounded corners follow --radius (0 in Orbit, so Orbit is unchanged) */
-.box, .btn, select, input[type="number"], .practice, .stat-row, .lang-pop, .tab-menu, .mtag-tip, .rate, .opt, .side-practice { border-radius: var(--radius); }
+.box, .btn, select, input[type="number"], .practice, .stat-row, .lang-pop, .mtag-tip, .rate, .opt, .side-practice { border-radius: var(--radius); }
 
 /* shared: themes with separate card tiles instead of one shared-border grid */
 :is([data-theme="holo"], [data-theme="autobahn"], [data-theme="nord"]) .grid { border: 0; gap: 12px; }
@@ -1328,7 +1281,7 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 [data-theme="holo"] .topbar { background: rgba(10, 8, 32, 0.55); }
 [data-theme="holo"] .sidebar { background: rgba(255, 255, 255, 0.03); }
 [data-theme="holo"] .box { background: var(--navy); border-color: var(--line); }
-[data-theme="holo"] :is(.tab-menu, .lang-pop) { background: var(--overlay); }
+[data-theme="holo"] :is(.lang-pop) { background: var(--overlay); }
 [data-theme="holo"] .sheet.sheet-wide { background: var(--overlay); }
 [data-theme="holo"] .tile:hover { background: var(--navy-2); }
 [data-theme="holo"] .btn.primary { background: linear-gradient(90deg, #9b8cff, #5ee0d6); border-color: transparent; color: var(--ink); }
