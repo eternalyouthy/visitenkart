@@ -342,6 +342,62 @@
     ], ['ПЕРЕдумать', 'UMdenken'], ['around = развернуться (мнением) в другую сторону.', 'around = (die Meinung) umdrehen.'], { tr: 'figurative' })
   ]);
 
+  extend('vf-set', [
+    pv("set aside", null, null, "B1", "откладывать для определённой цели", "für einen bestimmten Zweck zurücklegen", [
+      ex("We [[set aside]] a little money each month for repairs.", "Мы каждый месяц откладываем немного денег на ремонт.", "Wir legen jeden Monat etwas Geld für Reparaturen zurück.")
+    ], null, null, { tr: 'figurative' })
+  ]);
+
+  extend('vf-keep', [
+    pv("keep back", "back", null, "B1", "держаться на расстоянии", "Abstand halten", [
+      ex("Please [[keep back]] from the platform edge.", "Пожалуйста, отойдите от края платформы.", "Bitte halten Sie Abstand von der Bahnsteigkante.")
+    ], null, null, { tr: 'transparent' })
+  ]);
+
+  extend('vf-hold', [
+    pv("hold out", "out", null, "B1", "протягивать что-либо", "etwas hinhalten", [
+      ex("She [[held out]] her hand so I could see the ring.", "Она протянула руку, чтобы я мог рассмотреть кольцо.", "Sie hielt mir die Hand hin, damit ich den Ring sehen konnte.")
+    ], null, null, { tr: 'transparent' }),
+    pv("hold together", null, null, "B1", "скреплять, удерживать части вместе", "zusammenhalten", [
+      ex("These two screws [[hold]] the frame [[together]].", "Эти два винта скрепляют раму.", "Diese beiden Schrauben halten den Rahmen zusammen.")
+    ], null, null, { tr: 'transparent' })
+  ]);
+
+  extend('vf-call', [
+    pv("call up", "up", null, "B1", "вызывать на экран", "auf dem Bildschirm aufrufen", [
+      ex("Can you [[call up]] the timetable on your phone?", "Можешь открыть расписание на телефоне?", "Kannst du den Fahrplan auf deinem Handy aufrufen?")
+    ], null, null, { tr: 'figurative' }),
+    pv("call for", null, null, "B2", "требовать, делать необходимым", "erfordern", [
+      ex("A change this big [[calls for]] a new timetable.", "Такая серьёзная перемена требует нового расписания.", "Eine so große Änderung erfordert einen neuen Zeitplan.")
+    ], null, null, { tr: 'figurative' })
+  ]);
+
+  extend('vf-fall', [
+    pv("fall over", "over", null, "A2", "падать, опрокидываться", "umfallen", [
+      ex("The empty bin [[fell over]] in the wind.", "Пустой мусорный бак опрокинулся от ветра.", "Die leere Mülltonne fiel im Wind um.")
+    ], null, null, { tr: 'transparent' })
+  ]);
+
+  extend('vf-carry', [
+    pv("carry over", "over", null, "B2", "переносить остаток на следующий период", "auf den nächsten Zeitraum übertragen", [
+      ex("We can [[carry over]] five days of leave to next year.", "Мы можем перенести пять дней отпуска на следующий год.", "Wir können fünf Urlaubstage ins nächste Jahr übertragen.")
+    ], null, null, { tr: 'figurative' }),
+    pv("carry through", "through", null, "B2", "доводить задуманное до конца", "ein Vorhaben zu Ende führen", [
+      ex("She had a good plan and [[carried]] it [[through]].", "У неё был хороший план, и она довела его до конца.", "Sie hatte einen guten Plan und führte ihn zu Ende.")
+    ], null, null, { tr: 'figurative' }),
+    pv("carry around", "around", null, "A2", "носить с собой", "mit sich herumtragen", [
+      ex("I used to [[carry]] this notebook [[around]] everywhere.", "Раньше я повсюду носил с собой этот блокнот.", "Früher trug ich dieses Notizbuch überall mit mir herum.")
+    ], null, null, { tr: 'transparent' })
+  ]);
+
+  extend('vf-let', [
+    pv("let up", "up", null, "B2", "ослабевать, стихать", "nachlassen", [
+      ex("The rain finally [[let up]], so we walked home.", "Дождь наконец ослаб, и мы пошли домой пешком.", "Der Regen ließ endlich nach, also gingen wir zu Fuß nach Hause.")
+    ], null, null, { tr: 'figurative' }),
+    pv("let through", "through", null, "B1", "пропускать, давать пройти", "durchlassen", [
+      ex("The steward checked our tickets and [[let]] us [[through]].", "Контролёр проверил наши билеты и пропустил нас.", "Der Ordner prüfte unsere Karten und ließ uns durch.")
+    ], null, null, { tr: 'transparent' })
+  ]);
   /* ---------------- every particle page lists its verbs ---------------- */
   P.items.forEach(function (w) {
     if (!w.particle || !w.prefixDrill || !P.prefixes[w.prefix]) return;

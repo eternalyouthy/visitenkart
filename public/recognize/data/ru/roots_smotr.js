@@ -16,14 +16,14 @@ GT.registerRoot({
     { id: 'ru-r-smotr-prosmatrivat', core: true, pos: 'verb', aspect: 'impf', level: 'B1', prefix: 'про', t: 'просм+атривать',
       forms: { praes: 'просм+атриваю, просм+атриваешь', praet: 'просм+атривал', perf: 'pf. просмотр+еть (просмотр+ю, просм+отришь)' },
       en: 'to look through, to view; to overlook', de: 'durchsehen, ansehen; übersehen',
-      examples: [{ t: 'Я [[просмотр+ел]] вс+е п+исьма за н+очь.', en: 'I went through all the emails from overnight.', de: 'Ich habe alle Mails von der Nacht durchgesehen.' }],
+      examples: [{ t: 'Я [[просмотр+ел]] все п+исьма за ночь.', en: 'I went through all the emails from overnight.', de: 'Ich habe alle Mails von der Nacht durchgesehen.' }],
       prefixDrill: { ex: 0, meaning: 0, explain: { en: 'про- = through: from the first email to the last.', de: 'про- = durch: von der ersten bis zur letzten Mail.' } },
       transparency: 'transparent',
       note: { en: 'Two directions, like German übersehen: просмотреть письма — go through the emails; просмотреть ошибку — overlook a mistake.', de: 'Zwei Richtungen, wie übersehen: просмотреть письма — die Mails durchsehen; просмотреть ошибку — einen Fehler übersehen.' } },
     { id: 'ru-r-smotr-rassmatrivat', core: true, pos: 'verb', aspect: 'impf', level: 'B1', prefix: 'раз', t: 'рассм+атривать',
       forms: { praes: 'рассм+атриваю, рассм+атриваешь', praet: 'рассм+атривал', perf: 'pf. рассмотр+еть (рассмотр+ю, рассм+отришь)' },
       en: 'to examine, to consider (a request, an option)', de: 'betrachten, prüfen (Antrag, Möglichkeit)',
-      examples: [{ t: 'В+ашу з+аявку [[рассм+отрят]] в теч+ение нед+ели.', en: 'Your application will be considered within a week.', de: 'Ihr Antrag wird innerhalb einer Woche geprüft.' }],
+      examples: [{ t: 'В+ашу за+явку [[рассм+отрят]] в теч+ение нед+ели.', en: 'Your application will be considered within a week.', de: 'Ihr Antrag wird innerhalb einer Woche geprüft.' }],
       prefixDrill: { ex: 0, meaning: 1, explain: { en: 'рас- = thoroughly, in detail: the application is examined point by point.', de: 'рас- = gründlich, im Detail: der Antrag wird Punkt für Punkt geprüft.' } },
       transparency: 'transparent',
       note: { en: 'раз- becomes рас- before a voiceless consonant: рас-смотреть.', de: 'раз- wird vor stimmlosem Konsonanten zu рас-: рас-смотреть.' } },
@@ -58,6 +58,14 @@ GT.registerRoot({
       examples: [{ t: 'Раз в год н+ужно прох+одить медиц+инский [[осм+отр]].', en: 'You need a medical check-up once a year.', de: 'Einmal im Jahr muss man zur ärztlichen Untersuchung.' }] },
     { id: 'ru-r-smotr-peresmotr', pos: 'noun', gender: 'm', level: 'B2', t: 'пересм+отр',
       en: 'revision, review', de: 'die Überprüfung, die Revision',
-      examples: [{ t: 'Профсо+юз тр+ебует [[пересм+отра]] зарпл+ат.', en: 'The union is demanding a review of salaries.', de: 'Die Gewerkschaft fordert eine Überprüfung der Gehälter.' }] }
+      examples: [{ t: 'Профсо+юз тр+ебует [[пересм+отра]] зарпл+ат.', en: 'The union is demanding a review of salaries.', de: 'Die Gewerkschaft fordert eine Überprüfung der Gehälter.' }] },
+    { id: 'ru-r-smotr-dosmatrivat', t: "досм+атривать", pos: 'verb', level: 'B1', aspect: 'impf', prefix: "до", core: true,
+      forms: { praes: "досм+атриваю, досм+атриваешь", praet: "досм+атривал", perf: "pf. досмотр+еть" },
+      en: "to watch the rest of something", de: "etwas zu Ende ansehen",
+      examples: [{ t: "Мы [[досм+атривали]] фильм, когд+а пог+ас свет.", en: "We were watching the last part of the film when the lights went out.", de: "Wir sahen gerade den Rest des Films, als das Licht ausging." }] },
+    { id: 'ru-r-smotr-vysmatrivat', t: "высм+атривать", pos: 'verb', level: 'B2', aspect: 'impf', prefix: "вы", core: true,
+      forms: { praes: "высм+атриваю, высм+атриваешь", praet: "высм+атривал", perf: "pf. в+ысмотреть" },
+      en: "to look out for someone or something", de: "nach jemandem oder etwas Ausschau halten",
+      examples: [{ t: "На вокз+але я [[высм+атривал]] сестр+у в толп+е.", en: "At the station I was looking out for my sister in the crowd.", de: "Am Bahnhof hielt ich in der Menge nach meiner Schwester Ausschau." }] }
   ]
 });

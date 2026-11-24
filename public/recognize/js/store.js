@@ -22,6 +22,7 @@
     retention: 0.9,
     showMediumWhy: true,       // show WHY? notes with confidence 'medium'
     hideSidePractice: false,   // hide the "Practice now" box in the sidebar
+    hideBasics: false,         // hide elementary/obvious words in Words & Professional
     theme: 'orbit',            // see THEMES in app.js
     speechRate: 0.9,
     speechVoice: 'auto',       // German voice (legacy name); other languages: speechVoice_<lang>
@@ -63,14 +64,28 @@
 
   function isDrillKey(k) {
     var it = self.GT && GT.byId && GT.byId[k];
+    if (!it && self.GT && GT.packs) {
+      for (var l in GT.packs) {
+        if (GT.packs[l] && GT.packs[l].byId && GT.packs[l].byId[k]) { it = GT.packs[l].byId[k]; break; }
+      }
+    }
     if (it) return it.type === 'drill';
-    return /^(g-|grammar:|affix:|ru-g-|ru-sf-)/.test(k);
+    return /^(g-|de-g-|en-g-|grammar:|affix:|ru-g-|ru-sf-)/.test(k);
+  }
+
+  function safeKey(k) { return !!k && k !== '__proto__' && k !== 'constructor' && k !== 'prototype'; }
+  function safeMap(src) {
+    var out = {};
+    if (!src || typeof src !== 'object') return out;
+    Object.keys(src).forEach(function (k) { if (safeKey(k)) out[k] = src[k]; });
+    return out;
   }
 
   /** Migrate v1 cards (plain item id) -> v2 (<id>#rec + <id>#prod for known, <id>#prod for active). */
   function migrateCards(rawCards) {
     var out = {}, changed = false;
     Object.keys(rawCards || {}).forEach(function (k) {
+      if (!safeKey(k)) return;
       var c = rawCards[k];
       if (!c || typeof c !== 'object') return;
       if (/#(rec|prod)$/.test(k) || isDrillKey(k)) { out[k] = c; return; }
@@ -86,7 +101,7 @@
   function normalize(d, lang) {
     var f = fresh(lang);
     if (!d || typeof d !== 'object') return { data: f, migrated: false, settings: null };
-    var rawCards = d.cards && typeof d.cards === 'object' ? d.cards : {};
+    var rawCards = safeMap(d.cards && typeof d.cards === 'object' ? d.cards : {});
     var needsMig = (d.version || 1) < SCHEMA_VERSION || Object.keys(rawCards).some(function (k) {
       return !/#(rec|prod)$/.test(k) && !isDrillKey(k);
     });
@@ -99,10 +114,10 @@
         language: lang,
         created: d.created || f.created,
         cards: mig.cards,
-        later: d.later && typeof d.later === 'object' ? d.later : {},
-        deleted: d.deleted && typeof d.deleted === 'object' ? d.deleted : {},
+        later: safeMap(d.later),
+        deleted: safeMap(d.deleted),
         resetAt: Number(d.resetAt) || 0,
-        log: d.log && typeof d.log === 'object' ? d.log : {},
+        log: safeMap(d.log),
         lastPractice: d.lastPractice || null,
         lastExport: d.lastExport || null
       }
@@ -133,12 +148,46 @@
     if (!v || v.schemaVersion !== 1 || v.language !== 'en' || !v.cards) throw new Error('Not an English progress export.');
     var d = fresh('en'), now = Date.now();
     Object.keys(v.cards).forEach(function (k) {
+      if (!safeKey(k)) return;
       var nk = legacyEnKey(k), nc = nk && legacyEnCard(v.cards[k], now);
-      if (nk && nc) d.cards[nk] = nc;
+      if (nk && safeKey(nk) && nc) d.cards[nk] = nc;
     });
-    if (v.later && typeof v.later === 'object') Object.keys(v.later).forEach(function (id) { if (Number.isFinite(v.later[id])) d.later[id] = v.later[id]; });
+    if (v.later && typeof v.later === 'object') Object.keys(v.later).forEach(function (id) { if (safeKey(id) && Number.isFinite(v.later[id])) d.later[id] = v.later[id]; });
     d.importedFrom = LEGACY_EN_KEY;
     return d;
+  }
+
+  var SAFE_LANGS = { de: 1, en: 1, ru: 1 };
+  function sanitizeSettings(src, allowClientId) {
+    var out = {};
+    if (!src || typeof src !== 'object') return out;
+    if (src.newPerSession != null) {
+      var nps = Math.round(Number(src.newPerSession));
+      if (Number.isFinite(nps)) out.newPerSession = Math.max(1, Math.min(50, nps));
+    }
+    ['typing', 'showRu', 'showMediumWhy', 'hideSidePractice', 'hideBasics'].forEach(function (k) {
+      if (typeof src[k] === 'boolean') out[k] = src[k];
+    });
+    if (src.reviewModes === 'mix' || src.reviewModes === 'meaning' || src.reviewModes === 'cloze') out.reviewModes = src.reviewModes;
+    if (src.reviewDirection === 'both' || src.reviewDirection === 'rec' || src.reviewDirection === 'prod') out.reviewDirection = src.reviewDirection;
+    if (src.retention != null) {
+      var ret = Number(src.retention);
+      if (Number.isFinite(ret)) out.retention = Math.max(0.7, Math.min(0.99, ret));
+    }
+    if (typeof src.theme === 'string' && /^[a-z0-9_-]{1,32}$/i.test(src.theme)) out.theme = src.theme;
+    if (src.speechRate != null) {
+      var sr = Number(src.speechRate);
+      if (Number.isFinite(sr)) out.speechRate = Math.max(0.5, Math.min(2, sr));
+    }
+    if (typeof src.speechVoice === 'string' && src.speechVoice.length <= 200) out.speechVoice = src.speechVoice;
+    Object.keys(src).forEach(function (k) {
+      if (/^speechVoice_(de|en|ru)$/.test(k) && typeof src[k] === 'string' && src[k].length <= 200) out[k] = src[k];
+    });
+    if (SAFE_LANGS[src.knowLang]) out.knowLang = src.knowLang;
+    if (SAFE_LANGS[src.learnLang]) out.learnLang = src.learnLang;
+    if (out.knowLang && out.learnLang && out.knowLang === out.learnLang) { delete out.knowLang; delete out.learnLang; }
+    if (allowClientId && typeof src.gdriveClientId === 'string' && src.gdriveClientId.length <= 200) out.gdriveClientId = src.gdriveClientId;
+    return out;
   }
 
   var storageOk = true;
@@ -155,7 +204,7 @@
   var settings = (function () {
     var s = readJSON(SETTINGS_KEY) || {};
     var de = readJSON(KEYS.de);   // settings of the former German-only app sit underneath (first run, partial files)
-    return Object.assign({}, DEFAULT_SETTINGS, de && de.settings ? de.settings : {}, s);
+    return Object.assign({}, DEFAULT_SETTINGS, sanitizeSettings(de && de.settings, true), sanitizeSettings(s, true));
   })();
 
   var datas = {};      // lang -> progress data
@@ -212,11 +261,16 @@
     var resetAt = Math.max(a.resetAt || 0, b.resetAt || 0);
     var deleted = {};
     [a.deleted, b.deleted].forEach(function (src) {
-      Object.keys(src).forEach(function (k) { var t = Number(src[k]) || 0; if (t > resetAt && t > (deleted[k] || 0)) deleted[k] = t; });
+      Object.keys(src).forEach(function (k) {
+        if (!safeKey(k)) return;
+        var t = Number(src[k]) || 0;
+        if (t > resetAt && t > (deleted[k] || 0)) deleted[k] = t;
+      });
     });
     var cards = {};
-    Object.keys(a.cards).forEach(function (k) { cards[k] = Object.assign({}, a.cards[k]); });
+    Object.keys(a.cards).forEach(function (k) { if (safeKey(k)) cards[k] = Object.assign({}, a.cards[k]); });
     Object.keys(b.cards).forEach(function (k) {
+      if (!safeKey(k)) return;
       cards[k] = cards[k] ? mergeCard(cards[k], b.cards[k]) : Object.assign({}, b.cards[k]);
     });
     Object.keys(cards).forEach(function (k) {
@@ -225,15 +279,15 @@
       else delete deleted[k];
     });
     var later = {};
-    Object.keys(a.later).forEach(function (id) { later[id] = a.later[id]; });
-    Object.keys(b.later).forEach(function (id) { later[id] = Math.max(later[id] || 0, b.later[id] || 0); });
+    Object.keys(a.later).forEach(function (id) { if (safeKey(id)) later[id] = a.later[id]; });
+    Object.keys(b.later).forEach(function (id) { if (safeKey(id)) later[id] = Math.max(later[id] || 0, b.later[id] || 0); });
     Object.keys(later).forEach(function (id) { if (resetAt && later[id] < resetAt) delete later[id]; });
     Object.keys(cards).forEach(function (k) { delete later[baseId(k)]; });
     var resetDay = resetAt ? dayKey(resetAt) : '';
     var log = {};
     [a.log, b.log].forEach(function (src) {
       Object.keys(src).forEach(function (day) {
-        if (resetDay && day < resetDay) return;
+        if (!safeKey(day) || (resetDay && day < resetDay)) return;
         var prev = log[day] || { reviews: 0, learned: 0 }, cur = src[day] || {};
         log[day] = { reviews: Math.max(prev.reviews, cur.reviews || 0), learned: Math.max(prev.learned, cur.learned || 0) };
       });
@@ -423,7 +477,12 @@
       });
       if (newSettings && !opts.keepSettings) {
         var keepPair = { knowLang: settings.knowLang, learnLang: settings.learnLang };
-        Object.assign(settings, DEFAULT_SETTINGS, newSettings, newSettings.knowLang ? {} : keepPair);
+        var cleanS = sanitizeSettings(newSettings, false);
+        if (cleanS.knowLang && !cleanS.learnLang && cleanS.knowLang === keepPair.learnLang) delete cleanS.knowLang;
+        if (cleanS.learnLang && !cleanS.knowLang && cleanS.learnLang === keepPair.knowLang) delete cleanS.learnLang;
+        Object.assign(settings, DEFAULT_SETTINGS, cleanS, cleanS.knowLang ? {} : keepPair);
+        // A file with only one side of the pair can still collide with the default of the other side.
+        if (settings.knowLang === settings.learnLang) Object.assign(settings, keepPair);
       }
       suppressAutoSync = !!opts.fromSync;
       try { store.save(); } finally { suppressAutoSync = false; }

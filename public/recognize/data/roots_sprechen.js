@@ -230,6 +230,24 @@ GT.registerRoot({
       meaningExplanation: 'der Widerspruch — это «логическое противоречие» и важнейший юридический термин в Германии «официальное обжалование решения ведомства / страховки» (Widerspruch einlegen).',
       meaningExamples: [{ de: 'Widerspruch gegen einen Bescheid einlegen', ru: 'подать возражение/апелляцию на решение ведомства' }, { de: 'im Widerspruch zu etw. stehen', ru: 'противоречить чему-то' }],
       note: '«Widerspruch einlegen» — подать официальное возражение (например, в Krankenkasse, Finanzamt или Ausländerbehörde).'
+    },
+    {
+      id: "r-sprechen-vorsprechen", de: "vorsprechen", pos: 'verb', core: true,
+      prefix: "vor", sep: 'trennbar', forms: { praes: "spricht vor", praet: "sprach vor", perf: "hat vorgesprochen" },
+      ru: "проходить актёрское прослушивание", en: "to audition for a role",
+      examples: [{ de: "Am Freitag [[spricht]] sie für eine Rolle im Theater [[vor]].", ru: "В пятницу она проходит прослушивание на роль в театре.", en: "On Friday she's auditioning for a part in a play." }]
+    },
+    {
+      id: "r-sprechen-zusprechen", de: "zusprechen", pos: 'verb', core: false,
+      prefix: "zu", sep: 'trennbar', forms: { praes: "spricht zu", praet: "sprach zu", perf: "hat zugesprochen" },
+      ru: "присуждать кому-либо что-либо", en: "to award something to someone",
+      examples: [{ de: "Das Gericht [[sprach]] den Mietern eine Entschädigung [[zu]].", ru: "Суд присудил жильцам компенсацию.", en: "The court awarded the tenants compensation." }]
+    },
+    {
+      id: "r-sprechen-freisprechen", de: "freisprechen", pos: 'verb', core: false,
+      prefix: "frei", sep: 'trennbar', forms: { praes: "spricht frei", praet: "sprach frei", perf: "hat freigesprochen" },
+      ru: "оправдывать в суде", en: "to acquit",
+      examples: [{ de: "Das Gericht hat die Angeklagte [[freigesprochen]].", ru: "Суд оправдал обвиняемую.", en: "The court acquitted the defendant." }]
     }
   ]
 });

@@ -26,8 +26,9 @@
       id: 'language', label: 'Language', short: 'Lang', icon: 'book', href: '#/words',
       items: [
         { label: 'Words', href: '#/words', match: ['words'] },
-        { label: 'Grammar', href: '#/grammar', match: ['grammar'] },
-        { label: 'Roots', href: '#/roots', match: ['roots'] }
+        { label: 'Roots', href: '#/roots', match: ['roots'] },
+        { label: 'Grammar', href: '#/grammar', match: ['grammar'] }
+        // 4th item (Articles) comes from the shared "Which form?" engine: js/whichform.js + js/forms/de.js
       ]
     },
     {
@@ -59,17 +60,41 @@
   ];
 
   GT.PRO_SUBS = [
-    { id: 'workcomm', tab: 'it', topic: 'workcomm', name: 'Work & Office', desc: 'Meetings, emails, deadlines, coordination, tickets and office communication.' },
-    { id: 'dev', tab: 'it', topic: 'dev', name: 'IT & Development', desc: 'Code, releases, requirements, version control.' },
-    { id: 'infra', tab: 'it', topic: 'infra', name: 'Infrastructure', desc: 'Servers, networks, outages, cloud.' },
-    { id: 'security', tab: 'it', topic: 'security', name: 'Security', desc: 'Vulnerabilities, attacks, access, SOC, incidents.' },
-    { id: 'design', tab: 'it', topic: 'design', name: 'Design, UX & Visuals', desc: 'Graphic design, typography, layout, contrast, branding and mockups.' },
-    { id: 'ai_data', tab: 'it', topic: 'ai_data', name: 'AI, Data & Analytics', desc: 'Prompts, models, datasets, metrics, dashboards and automation.' },
-    { id: 'product', tab: 'it', topic: 'product', name: 'Product & Agile', desc: 'Roadmaps, backlogs, sprints, user stories, prototypes and launches.' },
-    { id: 'clients', tab: 'it', topic: 'clients', name: 'Clients & Freelance', desc: 'Briefs, quotes, invoices, scope, retainers and client talks.' },
-    { id: 'presentations', tab: 'it', topic: 'presentations', name: 'Presentations & Pitching', desc: 'Slide decks, structure, charts, transitions and handling Q&A.' },
-    { id: 'b2_beruf', tab: 'it', topic: 'b2_beruf', name: 'B2 Career Paths', desc: 'Career changes, further training, promotion, salary talks, self-employment.' },
-    { id: 'b2_arbeitswelt', tab: 'it', topic: 'b2_arbeitswelt', name: 'B2 World of Work', desc: 'Remote work, digitalisation, work-life balance, skills shortage.' }
+    // 01 · For Everyone
+    { id: 'workcomm', group: 'for-everyone', tab: 'it', topic: 'workcomm', name: 'Work & Office', desc: 'Meetings, emails, deadlines, coordination, tickets and office communication.' },
+    { id: 'clients', group: 'for-everyone', tab: 'it', topic: 'clients', name: 'Clients & Freelance', desc: 'Briefs, quotes, invoices, scope, retainers and client talks.' },
+    { id: 'presentations', group: 'for-everyone', tab: 'it', topic: 'presentations', name: 'Presentations & Pitching', desc: 'Slide decks, structure, charts, transitions and handling Q&A.' },
+    { id: 'b2_beruf', group: 'for-everyone', tab: 'it', topic: 'b2_beruf', name: 'B2 Career Paths', desc: 'Career changes, further training, promotion, salary talks, self-employment.' },
+    { id: 'b2_arbeitswelt', group: 'for-everyone', tab: 'it', topic: 'b2_arbeitswelt', name: 'B2 World of Work', desc: 'Remote work, digitalisation, work-life balance, skills shortage.' },
+    // 02 · IT Professions
+    { id: 'dev', group: 'it', tab: 'it', topic: 'dev', name: 'IT & Development', desc: 'Code, releases, requirements, version control.' },
+    { id: 'infra', group: 'it', tab: 'it', topic: 'infra', name: 'Infrastructure', desc: 'Servers, networks, outages, cloud.' },
+    { id: 'security', group: 'it', tab: 'it', topic: 'security', name: 'Security', desc: 'Vulnerabilities, attacks, access, SOC, incidents.' },
+    { id: 'design', group: 'it', tab: 'it', topic: 'design', name: 'Design, UX & Visuals', desc: 'Graphic design, typography, layout, contrast, branding and mockups.' },
+    { id: 'ai_data', group: 'it', tab: 'it', topic: 'ai_data', name: 'AI, Data & Analytics', desc: 'Prompts, models, datasets, metrics, dashboards and automation.' },
+    { id: 'product', group: 'it', tab: 'it', topic: 'product', name: 'Product & Agile', desc: 'Roadmaps, backlogs, sprints, user stories, prototypes and launches.' },
+    // 03 · Bureaucracy & Administration
+    { id: 'bureau_offices', group: 'bureaucracy', tab: 'it', topic: 'bureau_offices', name: 'Public Offices & Permits', desc: 'Authorities, permits, official decisions, appeals, jurisdiction and administrative procedures.' },
+    { id: 'bureau_tax', group: 'bureaucracy', tab: 'it', topic: 'bureau_tax', name: 'Taxes, Payroll & Social Security', desc: 'Tax assessments, withholding, deductions, social contributions, payroll and fiscal audits.' },
+    { id: 'bureau_docs', group: 'bureaucracy', tab: 'it', topic: 'bureau_docs', name: 'Official Correspondence & Records', desc: 'Formal letters, registered mail, power of attorney, notarisation, dunning and statutory retention.' },
+    // 04 · Legal & Law
+    { id: 'legal_contracts', group: 'legal', tab: 'it', topic: 'legal_contracts', name: 'Contracts & Civil Law', desc: 'Clauses, breach, liability, indemnification, force majeure, limitation periods and settlements.' },
+    { id: 'legal_ip', group: 'legal', tab: 'it', topic: 'legal_ip', name: 'Copyright & Intellectual Property', desc: 'Copyright, licensing, trademarks, patents, infringement, cease-and-desist letters and trade secrets.' },
+    { id: 'legal_criminal', group: 'legal', tab: 'it', topic: 'legal_criminal', name: 'Criminal Law & Courts', desc: 'Indictment, prosecution, defence, remand, fraud, verdicts, sentencing and appeals.' },
+    { id: 'legal_labour', group: 'legal', tab: 'it', topic: 'legal_labour', name: 'Employment & Labour Law', desc: 'Unfair dismissal, non-compete clauses, works councils, tribunals, severance and workplace rights.' },
+    { id: 'legal_corporate', group: 'legal', tab: 'it', topic: 'legal_corporate', name: 'Compliance, Privacy & Corporate', desc: 'GDPR/data protection, due diligence, anti-money laundering, whistleblowing, governance and insolvency.' },
+    // 05 · Service, Hospitality & Retail
+    { id: 'svc_hotel', group: 'service', tab: 'it', topic: 'svc_hotel', name: 'Hotels & Front Desk', desc: 'Reception, overbooking, upgrades, deposits, housekeeping, concierge and shift handovers.' },
+    { id: 'svc_gastro', group: 'service', tab: 'it', topic: 'svc_gastro', name: 'Gastronomy & Catering', desc: 'Allergens, food hygiene, dietary requests, kitchen brigade, service flow and billing.' },
+    { id: 'svc_retail', group: 'service', tab: 'it', topic: 'svc_retail', name: 'Retail, Sales & Customer Support', desc: 'Stocktake, warranty claims, goodwill gestures, de-escalation, SLA and cash reconciliation.' },
+    // 06 · Finance, HR & Marketing
+    { id: 'fin_accounting', group: 'business', tab: 'it', topic: 'fin_accounting', name: 'Accounting & Finance', desc: 'Balance sheets, receivables/payables, accruals, depreciation, liquidity, VAT and audit trails.' },
+    { id: 'fin_marketing', group: 'business', tab: 'it', topic: 'fin_marketing', name: 'Sales, Marketing & PR', desc: 'Lead generation, sales funnels, press releases, crisis PR, brand positioning and market share.' },
+    { id: 'fin_hr', group: 'business', tab: 'it', topic: 'fin_hr', name: 'HR & Recruiting', desc: 'Talent acquisition, screening, employer branding, succession planning, retention and appraisals.' },
+    // 07 · Healthcare, Logistics & Trades
+    { id: 'med_clinical', group: 'operations', tab: 'it', topic: 'med_clinical', name: 'Healthcare & Clinical Work', desc: 'Triage, patient history, ward rounds, discharge notes, informed consent, dosage and confidentiality.' },
+    { id: 'ops_logistics', group: 'operations', tab: 'it', topic: 'ops_logistics', name: 'Logistics & Supply Chain', desc: 'Freight, customs clearance, dispatch, order picking, cold chain, lead times and inventory.' },
+    { id: 'ops_trades', group: 'operations', tab: 'it', topic: 'ops_trades', name: 'Engineering, Construction & Trades', desc: 'Blueprints, commissioning, site safety, defect liability, tolerances, maintenance and retrofits.' }
   ];
 
   // scenario = what the AI should role-play in "Practice now" (Russian, goes into the prompt)
@@ -149,7 +174,41 @@
       { id: 'b2_beruf', level: 'b2', name: 'Career Paths (Berufswege)', desc: 'Career changes, further training, promotion, salary talks, self-employment.',
         scenario: 'карьерная консультация (Karriereberatung). Ты — коуч; я рассказываю о своём пути, о желании расти в кибербезопасности и о возможных переговорах о зарплате.' },
       { id: 'b2_arbeitswelt', level: 'b2', name: 'Changing World of Work', desc: 'Remote work, digitalisation, work-life balance, skills shortage.',
-        scenario: 'переговоры о гибридном графике команды. Ты — HR-менеджер. Я предлагаю правила присутствия и доступности после работы. Попроси меня взвесить интересы команды и бизнеса и предложить компромисс.' }
+        scenario: 'переговоры о гибридном графике команды. Ты — HR-менеджер. Я предлагаю правила присутствия и доступности после работы. Попроси меня взвесить интересы команды и бизнеса и предложить компромисс.' },
+      { id: 'bureau_offices', level: 'b2', name: 'Public Offices & Permits', desc: 'Authorities, permits, official decisions, appeals, jurisdiction and administrative procedures.',
+        scenario: 'приём в ведомстве (Amt / Behörde): обсуждаем официальное решение (Bescheid), исключение из правил и подачу возражения в срок. Ты — сотрудник ведомства.' },
+      { id: 'bureau_tax', level: 'b2', name: 'Taxes, Payroll & Social Security', desc: 'Tax assessments, withholding, deductions, social contributions, payroll and fiscal audits.',
+        scenario: 'разговор с налоговым консультантом о налоговом уведомлении, вычетах, расчёте зарплаты и налоговой проверке. Ты — налоговый консультант.' },
+      { id: 'bureau_docs', level: 'b2', name: 'Official Correspondence & Records', desc: 'Formal letters, registered mail, power of attorney, notarisation, dunning and statutory retention.',
+        scenario: 'подача нотариальной доверенности и ответ на официальное предупреждение об оплате с заказным письмом. Ты — делопроизводитель.' },
+      { id: 'legal_contracts', level: 'b2', name: 'Contracts & Civil Law', desc: 'Clauses, breach, liability, indemnification, force majeure, limitation periods and settlements.',
+        scenario: 'согласование коммерческого договора: обсуждаем ответственность, неустойку, гарантию, форс-мажор и досудебное урегулирование. Ты — юрист контрагента.' },
+      { id: 'legal_ip', level: 'b2', name: 'Copyright & Intellectual Property', desc: 'Copyright, licensing, trademarks, patents, infringement, cease-and-desist letters and trade secrets.',
+        scenario: 'ответ на претензию о нарушении авторских прав и лицензии на ПО/контент. Ты — юрист по интеллектуальной собственности.' },
+      { id: 'legal_criminal', level: 'b2', name: 'Criminal Law & Courts', desc: 'Indictment, prosecution, defence, remand, fraud, verdicts, sentencing and appeals.',
+        scenario: 'консультация с адвокатом по делу об экономическом правонарушении: обвинение, показания свидетелей, смягчающие обстоятельства и приговор. Ты — адвокат.' },
+      { id: 'legal_labour', level: 'b2', name: 'Employment & Labour Law', desc: 'Unfair dismissal, non-compete clauses, works councils, tribunals, severance and workplace rights.',
+        scenario: 'переговоры о соглашении сторон при увольнении, выходном пособии и пункте о неконкуренции. Ты — юрист по трудовому праву.' },
+      { id: 'legal_corporate', level: 'b2', name: 'Compliance, Privacy & Corporate', desc: 'GDPR/data protection, due diligence, anti-money laundering, whistleblowing, governance and insolvency.',
+        scenario: 'аудит комплаенса: защита персональных данных, конфликт интересов и проверка благонадёжности. Ты — комплаенс-офицер.' },
+      { id: 'svc_hotel', level: 'b2', name: 'Hotels & Front Desk', desc: 'Reception, overbooking, upgrades, deposits, housekeeping, concierge and shift handovers.',
+        scenario: 'ситуация овербукинга на ресепшене отеля: предлагаю гостю апгрейд или размещение в партнёрском отеле. Ты — недовольный гость.' },
+      { id: 'svc_gastro', level: 'b2', name: 'Gastronomy & Catering', desc: 'Allergens, food hygiene, dietary requests, kitchen brigade, service flow and billing.',
+        scenario: 'обслуживание гостя с тяжёлой аллергией и согласование банкета на кухне. Ты — гость или старший смены.' },
+      { id: 'svc_retail', level: 'b2', name: 'Retail, Sales & Customer Support', desc: 'Stocktake, warranty claims, goodwill gestures, de-escalation, SLA and cash reconciliation.',
+        scenario: 'деэскалация конфликта с покупателем по гарантии и оформление возврата или жеста доброй воли. Ты — недовольный клиент.' },
+      { id: 'fin_accounting', level: 'b2', name: 'Accounting & Finance', desc: 'Balance sheets, receivables/payables, accruals, depreciation, liquidity, VAT and audit trails.',
+        scenario: 'закрытие квартала с аудитором: обсуждаем баланс, дебиторскую задолженность, начисления и ликвидность. Ты — внешний аудитор.' },
+      { id: 'fin_marketing', level: 'b2', name: 'Sales, Marketing & PR', desc: 'Lead generation, sales funnels, press releases, crisis PR, brand positioning and market share.',
+        scenario: 'планирование антикризисного пресс-релиза, позиционирования бренда и воронки продаж. Ты — руководитель PR-отдела.' },
+      { id: 'fin_hr', level: 'b2', name: 'HR & Recruiting', desc: 'Talent acquisition, screening, employer branding, succession planning, retention and appraisals.',
+        scenario: 'обсуждение шорт-листа кандидатов, компенсационного пакета и итогов exit-интервью с нанимающим директором. Ты — директор.' },
+      { id: 'med_clinical', level: 'b2', name: 'Healthcare & Clinical Work', desc: 'Triage, patient history, ward rounds, discharge notes, informed consent, dosage and confidentiality.',
+        scenario: 'передача пациента на обходе и получение информированного согласия перед процедурой. Ты — старший врач.' },
+      { id: 'ops_logistics', level: 'b2', name: 'Logistics & Supply Chain', desc: 'Freight, customs clearance, dispatch, order picking, cold chain, lead times and inventory.',
+        scenario: 'разбор задержки партии с температурным режимом на таможне. Ты — таможенный брокер или экспедитор.' },
+      { id: 'ops_trades', level: 'b2', name: 'Engineering, Construction & Trades', desc: 'Blueprints, commissioning, site safety, defect liability, tolerances, maintenance and retrofits.',
+        scenario: 'приёмка объекта: проверка допусков по чертежам, устранение дефектов и ввод оборудования в эксплуатацию. Ты — инженер-приёмщик.' }
     ],
     expressions: [
       { id: 'idioms', name: 'Idioms', group: 'Expressions', desc: 'Common B1–B2 German idioms and figurative expressions with literal vs real meaning.',
@@ -216,12 +275,21 @@
 
   GT.definePack('de', {
     features: { goetheB1: true, prefixDrill: true, ruLink: true, rootMapVerbs: true, stressPairs: true },
-    proExtra: { label: 'B1 Workplace', tab: 'words', topic: 'work', name: 'Work & Career (B1)' },
+    PRO_GROUPS: [
+      { key: 'for-everyone', title: 'For Everyone', badge: 'Start here', desc: 'Essential for every profession: office communication, meetings, clients, presentations, careers and modern work. Complete this track first, then pick your field below.' },
+      { key: 'it', title: 'IT Professions', desc: 'Software engineering, cloud infrastructure, cybersecurity, UX design, AI/data and agile product work.' },
+      { key: 'bureaucracy', title: 'Bureaucracy & Administration', desc: 'Public offices, permits, taxes, payroll, social security, official notices and formal records (B2–C2).' },
+      { key: 'legal', title: 'Legal & Law', desc: 'Contracts, intellectual property, criminal law & courts, labour law and corporate compliance (B2–C2).' },
+      { key: 'service', title: 'Service, Hospitality & Retail', desc: 'Hotels & front desk, gastronomy & catering, retail sales and customer support (B2–C1).' },
+      { key: 'business', title: 'Finance, HR & Marketing', desc: 'Accounting & finance, sales, marketing & PR, recruiting and HR operations (B2–C2).' },
+      { key: 'operations', title: 'Healthcare, Logistics & Trades', desc: 'Clinical healthcare, logistics & supply chain, engineering, construction and technical trades (B2–C2).' }
+    ],
+    proExtra: { group: 'for-everyone', label: 'B1 Workplace', tab: 'words', topic: 'work', name: 'Work & Career (B1)', desc: 'Applications, contracts, colleagues and core B1 workplace vocabulary.' },
     nounHint: 'noun · with article',
     levelName: 'B1',
     intro: {
       words: 'B1 topics follow the official Goethe B1 Wortliste. B2 themes train discussion and argument; B2 everyday topics take the B1 life situations one step deeper. Work-related B2 themes are under Professional.',
-      it: 'Professional German for your job: Work & Office, IT & Development, Infrastructure, Security, and B2 career themes.',
+      it: 'Professional German (B1–C2) across 7 tracks: universal workplace basics first, followed by IT, bureaucracy, law, hospitality, finance, healthcare and trades.',
       chunks: 'Ready-made phrases (Redemittel) for speaking and writing. Use the filter to get phrases for a specific situation.',
       expressions: 'Idioms, Berlin street slang, everyday conversational phrases, ready-made Redemittel and classic literary expressions.',
       literature: 'Lines from German literature with a short explanation of their meaning and examples.',

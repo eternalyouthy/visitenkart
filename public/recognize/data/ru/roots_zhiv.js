@@ -52,6 +52,18 @@ GT.registerRoot({
       note: { en: 'Uncountable neuter noun; stress always on ё.', de: 'Unzählbares Neutrum; Betonung immer auf ё.' } },
     { id: 'ru-r-zhiv-zhitel', pos: 'noun', gender: 'm', level: 'B1', t: 'ж+итель',
       en: 'resident, inhabitant', de: 'der Einwohner, der Bewohner',
-      examples: [{ t: '[[Ж+ители]] д+ома собр+али п+одписи за рем+онт.', en: 'Residents of the building collected signatures for the repair.', de: 'Die Bewohner des Hauses sammelten Unterschriften für die Reparatur.' }] }
+      examples: [{ t: '[[Ж+ители]] д+ома собр+али п+одписи за рем+онт.', en: 'Residents of the building collected signatures for the repair.', de: 'Die Bewohner des Hauses sammelten Unterschriften für die Reparatur.' }] },
+    { id: 'ru-r-zhiv-uzhivatsya', t: "ужив+аться", pos: 'verb', level: 'B2', aspect: 'impf', prefix: "у", core: true,
+      forms: { praes: "ужив+аюсь, ужив+аешься", praet: "ужив+ался", perf: "pf. уж+иться" },
+      en: "to get along while living together", de: "gut miteinander auskommen",
+      examples: [{ t: "Мы хорош+о [[ужив+аемся]] в одн+ой кварт+ире.", en: "We get along well sharing a flat.", de: "Wir kommen in der gemeinsamen Wohnung gut miteinander aus." }] },
+    { id: 'ru-r-zhiv-prizhivatsya', t: "прижив+аться", pos: 'verb', level: 'B2', aspect: 'impf', prefix: "при", core: true,
+      forms: { praes: "прижив+аюсь, прижив+аешься", praet: "прижив+ался", perf: "pf. приж+иться" },
+      en: "to take root in a new place", de: "an einem neuen Ort anwachsen",
+      examples: [{ t: "На +этом балк+оне хорош+о [[прижив+аются]] тр+авы.", en: "Herbs take root well on this balcony.", de: "Auf diesem Balkon wachsen Kräuter gut an." }] },
+    { id: 'ru-r-zhiv-ozhivat', t: "ожив+ать", pos: 'verb', level: 'B2', aspect: 'impf', prefix: "о", core: true,
+      forms: { praes: "ожив+аю, ожив+аешь", praet: "ожив+ал", perf: "pf. ож+ить" },
+      en: "to come to life", de: "lebendig werden",
+      examples: [{ t: "Вечер+ами пл+ощадь [[ожив+ает]]: открыв+аются каф+е, игр+ает м+узыка.", en: "The square comes to life in the evenings as cafés open and music plays.", de: "Abends wird der Platz lebendig, wenn die Cafés öffnen und Musik spielt." }] }
   ]
 });

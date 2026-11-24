@@ -42,6 +42,8 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
+  function safeDecode(s) { try { return decodeURIComponent(s); } catch (e) { return String(s || ''); } }
+  function safeHref(u) { return typeof u === 'string' && /^https?:\/\//i.test(u.trim()) ? u.trim() : ''; }
   // [[target]] -> highlighted, [slot] -> slot pill
   function rich(s) {
     return esc(s).replace(/\[\[(.+?)\]\]/g, '<mark class="hl">$1</mark>').replace(/\[([^\[\]]+?)\]/g, '<span class="slot">$1</span>');
@@ -228,11 +230,38 @@
     return GT.inTab(it, 'chunks') && (func === 'all' || GT.inTopic(it, 'chunks', func)) &&
       (!ui.chunkTag || (it.topics || []).indexOf(ui.chunkTag) >= 0);
   }
-  function itemsFor(tab, topic) {
+  function isBasicItem(it) {
+    if (!it) return false;
+    if (it.basic) return true;
+    var lv = String(it.level || '').toUpperCase();
+    return lv === 'A1' || lv === 'A2';
+  }
+  function isBasicsTab(tab) { return tab === 'words' || tab === 'it'; }
+  function rawItemsFor(tab, topic) {
     if (tab === 'chunks') return GT.items.filter(function (it) { return chunkMatches(it, topic); });
     if (tab === 'literature' && topic === 'all') return GT.items.filter(function (it) { return GT.inTab(it, 'literature'); });
     if (tab === 'all') return GT.items.slice();
     return (GT.members[tab + '.' + topic] || []).slice();
+  }
+  function itemsFor(tab, topic) {
+    var list = rawItemsFor(tab, topic);
+    if (!S.settings.hideBasics) return list;
+    if (isBasicsTab(tab)) return list.filter(function (it) { return !isBasicItem(it); });
+    if (tab === 'all') return list.filter(function (it) { return !(isBasicItem(it) && (GT.inTab(it, 'words') || GT.inTab(it, 'it'))); });
+    return list;
+  }
+  function countBasicsIn(tab, items) {
+    if (isBasicsTab(tab)) return items.filter(isBasicItem).length;
+    if (tab === 'all') return items.filter(function (it) { return isBasicItem(it) && (GT.inTab(it, 'words') || GT.inTab(it, 'it')); }).length;
+    return 0;
+  }
+  function basicsToggleHTML(basicCount, extraStyle) {
+    if (!basicCount) return '';
+    var on = !!S.settings.hideBasics;
+    var countTxt = on ? basicCount + ' hidden' : String(basicCount);
+    return '<label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--muted);user-select:none;white-space:nowrap' + (extraStyle ? ';' + extraStyle : '') + '">' +
+      '<input type="checkbox" data-act="toggle-basics"' + (on ? ' checked' : '') + ' style="width:15px;height:15px;margin:0;accent-color:var(--ice);cursor:pointer">' +
+      '<span>Hide basics <span class="mono-muted">(' + countTxt + ')</span></span></label>';
   }
   function matchFilter(it, f) {
     if (!f || f === 'all') return true;
@@ -335,6 +364,25 @@
    * Professional → Professional / B2 / B1 Workplace; Words → B1 topics / B2 themes / B2 everyday topics.
    * Groups fold open, the one you are in opens by itself. */
   function proGroups() {
+    var defs = GT.cfg('PRO_GROUPS');
+    if (defs && defs.length) {
+      var byKey = {}, out = [];
+      defs.forEach(function (g) {
+        var entry = { key: g.key, title: g.title, desc: g.desc || '', badge: g.badge || '', subs: [] };
+        byKey[g.key] = entry;
+        out.push(entry);
+      });
+      (GT.PRO_SUBS || []).forEach(function (s) {
+        var target = byKey[s.group] || out[0];
+        if (target) target.subs.push(s);
+      });
+      var px = GT.cfg('proExtra');
+      if (px && GT.topic(px.tab, px.topic)) {
+        var pxGroup = byKey[px.group || 'for-everyone'] || out[0];
+        if (pxGroup) pxGroup.subs.push({ tab: px.tab, topic: px.topic, name: px.name, desc: px.desc || '' });
+      }
+      return out.filter(function (g) { return g.subs.length; });
+    }
     var out = [], main = [], b2 = [];
     (GT.PRO_SUBS || []).forEach(function (s) {
       var st = GT.topic(s.tab, s.topic);
@@ -359,20 +407,36 @@
     if (p[0] === 'item') { var it = GT.byId[p[1]]; return !!it && it.tab === s.tab && it.topic === s.topic; }
     return tab === s.tab && cur === s.topic;
   }
+  var PRO_DROP_LABELS = { 'for-everyone': 'For Everyone', it: 'IT', bureaucracy: 'Bureaucracy', legal: 'Legal' };
   function navItemsFor(g) {
     if (g.id === 'professional') {
-      return proGroups().map(function (gr) {
-        return { label: gr.title, href: '#/professional/' + gr.key, proGroup: gr.key };
+      var groups = proGroups();
+      var proItems = groups.slice(0, 4).map(function (gr) {
+        return { label: PRO_DROP_LABELS[gr.key] || gr.title, href: '#/professional/' + gr.key, proGroup: gr.key };
       });
+      if (groups.length > 4) {
+        proItems.push({
+          label: 'Other fields inside →',
+          href: '#/professional',
+          mini: true,
+          proMore: groups.slice(4).map(function (gr) { return gr.key; })
+        });
+      }
+      return proItems;
     }
-    return g.items || [];
+    var items = g.items || [];
+    // The pack's "Which form?" section (German Articles …) is added from the shared engine, so the three NAV copies stay as they are.
+    var wf = g.id === 'language' && wfDef();
+    if (wf && !items.some(function (x) { return x.href === '#/' + wf.route; })) items = items.concat([{ label: wf.label, href: '#/' + wf.route, match: [wf.route] }]);
+    return items;
   }
   function isNavItemActive(item, tab, p) {
     var cur = p[0] === 'item' && GT.byId[p[1]] ? GT.byId[p[1]].topic : p[1];
-    if (item.proGroup) {
-      if (tab === 'professional' && p[1] === item.proGroup) return true;
+    if (item.proGroup || item.proMore) {
+      var keys = item.proMore || [item.proGroup];
+      if (tab === 'professional' && keys.indexOf(p[1]) >= 0) return true;
       return proGroups().some(function (gr) {
-        return gr.key === item.proGroup && gr.subs.some(function (s) { return isSubHere(s, tab, cur, p); });
+        return keys.indexOf(gr.key) >= 0 && gr.subs.some(function (s) { return isSubHere(s, tab, cur, p); });
       });
     }
     if (item.tab && item.topic) {
@@ -399,25 +463,28 @@
     document.querySelectorAll('.tab-drop.open').forEach(function (d) { d.classList.remove('open'); });
   }
   function renderNav(active, p) {
-    p = p || location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean).map(decodeURIComponent);
+    p = p || location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean).map(safeDecode);
     var group = navGroupFor(active, p);
     userBtn.classList.toggle('active', group === 'user');
     if (active === 'user') userBtn.setAttribute('aria-current', 'page'); else userBtn.removeAttribute('aria-current');
     var brand = $('.brand');
     if (group === 'start') brand.setAttribute('aria-current', 'page'); else brand.removeAttribute('aria-current');
-    $('#tabs').innerHTML = GT.NAV.map(function (g, i) {
+    // User lives in the top-bar icon only; never draw it as a tab, whatever a pack config says.
+    var NAV = GT.NAV.filter(function (g) { return g.id !== 'user'; });
+    $('#tabs').innerHTML = NAV.map(function (g, i) {
       var actCls = g.id === group ? ' active' : '';
       var items = navItemsFor(g);
       if (items.length) {
         return '<div class="tab-drop">' +
           '<a class="tab' + actCls + '" href="' + g.href + '" data-nav-drop="' + g.id + '" aria-haspopup="true"><span class="num">' + pad2(i + 1) + '</span>' + esc(g.label) + '<span class="chev">' + icon('chev') + '</span></a>' +
           '<div class="tab-menu" role="menu">' + items.map(function (sub) {
-            return '<a class="tab-menu-item' + (isNavItemActive(sub, active, p) ? ' active' : '') + '" href="' + sub.href + '" role="menuitem">' + esc(sub.label) + '</a>';
+            var st = sub.mini ? ' style="border-top:1px solid var(--line-2);margin-top:4px;padding-top:9px;font-size:10.5px;letter-spacing:0.08em;text-transform:none;opacity:0.75"' : '';
+            return '<a class="tab-menu-item' + (isNavItemActive(sub, active, p) ? ' active' : '') + '" href="' + sub.href + '" role="menuitem"' + st + '>' + esc(sub.label) + '</a>';
           }).join('') + '</div></div>';
       }
       return '<a class="tab' + actCls + '" href="' + g.href + '"><span class="num">' + pad2(i + 1) + '</span>' + esc(g.label) + '</a>';
     }).join('');
-    $('#bottomnav').innerHTML = GT.NAV.map(function (g) {
+    $('#bottomnav').innerHTML = NAV.map(function (g) {
       return '<a class="bnav' + (g.id === group ? ' active' : '') + '" href="' + g.href + '">' + icon(g.icon) + '<span>' + esc(g.short) + '</span></a>';
     }).join('');
     renderBrand();
@@ -545,13 +612,14 @@
     return h;
   }
 
-  /** Language section switch: Words · Grammar · Roots. */
+  /** Language section switch: Words · Roots · Grammar · the pack's "Which form?" section (German: Articles). */
   function languageSideLinks(tab, p) {
-    var item = p[0] === 'item' && GT.byId[p[1]];
+    var item = p[0] === 'item' && GT.byId[p[1]], wf = wfDef();
     return '<div class="side-label">Language</div>' +
       sideLink('#/words', '01', 'Words', '', { active: tab === 'words' && !p[1] && !item }) +
-      sideLink('#/grammar', '02', 'Grammar', '', { active: tab === 'grammar' && !p[1] }) +
-      sideLink('#/roots', '03', 'Roots', '', { active: tab === 'roots' && !p[1] });
+      sideLink('#/roots', '02', 'Roots', '', { active: tab === 'roots' && !p[1] }) +
+      sideLink('#/grammar', '03', 'Grammar', '', { active: tab === 'grammar' && !p[1] }) +
+      (wf ? sideLink('#/' + wf.route, '04', wf.label, '', { active: tab === wf.route }) : '');
   }
   function renderSidebar(tab, p) {
     var html = '', cur = p[1];
@@ -560,7 +628,7 @@
     var inExp = tab === 'expressions' || tab === 'chunks' || tab === 'literature';
     if (inPro) {
       html += '<div class="side-label">Professional</div>' +
-        sideLink('#/professional', '—', 'Key words for your profession', '', { active: tab === 'professional' && !p[1] }) +
+        sideLink('#/professional', '—', 'All professions · Start here', '', { active: tab === 'professional' && !p[1] }) +
         sideGroupsFor(proGroups(), tab, cur, p);
       html += sidePractice();
     } else if (inExp) {
@@ -590,6 +658,19 @@
       html += sidePractice();
     } else if (tab === 'roots') {
       html += languageSideLinks(tab, p) + rootsSidebar(p);
+    } else if (tab === 'cases' && GT.whichForm) {
+      html += languageSideLinks(tab, p) + '<div class="side-label">Cases across languages</div>' +
+        GT.whichForm.casesSections().map(function (sc, i) {
+          return sideLink('#/cases?s=' + sc[0], pad2(i + 1), sc[1], '', {}).replace('<a ', '<a data-ag-jump="' + sc[0] + '" ');
+        }).join('');
+      html += sidePractice();
+    } else if (wfDef() && tab === wfDef().route) {
+      var wf = wfDef();
+      html += languageSideLinks(tab, p) + '<div class="side-label">' + esc(wf.label) + '</div>' +
+        (wf.sections || []).map(function (sc, i) {
+          return sideLink('#/' + wf.route + '?s=' + sc[0], pad2(i + 1), sc[1], '', {}).replace('<a ', '<a data-ag-jump="' + sc[0] + '" ');
+        }).join('');
+      html += sidePractice();
     } else if (tab === 'user' || tab === 'review' || tab === 'stats') {
       var dir = S.settings.reviewDirection || 'both';
       var dueTotal = dueKeys('all', dir).length;
@@ -632,9 +713,9 @@
     var nGr = Object.keys(GT.grammar || {}).length, nRoots = Object.keys(GT.roots || {}).length;
     return [
       { href: '#/words', name: 'Words', ct: nWords ? nWords + ' cards' : '', desc: 'Everyday vocabulary by topic, from core B1 lists to B2 discussion themes.' },
-      { href: '#/grammar', name: 'Grammar', ct: nGr ? nGr + ' lessons' : '', desc: 'Short lessons with tables, typical mistakes and drills you can send to Review.' },
       { href: '#/roots', name: 'Roots', ct: nRoots ? nRoots + ' families' : '', desc: 'Learn one root, prefix or suffix and recognise a whole family of words.' },
-      { href: '#/professional', name: 'Professional', ct: nPro ? nPro + ' cards' : '', desc: 'Language for work: office, IT, infrastructure, security and B2 career themes.' },
+      { href: '#/grammar', name: 'Grammar', ct: nGr ? nGr + ' lessons' : '', desc: 'Short lessons with tables, typical mistakes and drills you can send to Review.' },
+      { href: '#/professional', name: 'Professional', ct: nPro ? nPro + ' cards' : '', desc: 'Start with universal workplace skills, then specialise: IT, bureaucracy, law, hospitality, finance, healthcare and operations (up to C2).' },
       { href: '#/expressions', name: 'Expressions', ct: nExp ? nExp + ' phrases' : '', desc: 'Chunks, idioms, everyday phrases and classic literary lines with breakdowns.' },
       { href: '#/practice', name: 'Practice', ct: '', desc: 'Drills on recognition, recall and word building, plus a role-play prompt for an AI chat.' },
       { href: '#/review', name: 'Review', ct: due ? due + ' due' : '', due: !!due, desc: 'Spaced repetition: come back to the cards you added when they are due.' }
@@ -1013,7 +1094,10 @@
     var c = it.cefrInfo;
     return '<details class="box"><summary class="label">Level & sources</summary><div style="margin-top:12px">' +
       '<p class="note muted">' + esc(c.summary) + '</p>' +
-      (c.sources || []).map(function (src) { return '<p class="mono-muted" style="font-size:12px;margin-top:8px">' + (src.url ? '<a href="' + esc(src.url) + '" target="_blank" rel="noopener">' + esc(src.title || src.url) + '</a>' : esc(src.title)) + '</p>'; }).join('') +
+      (c.sources || []).map(function (src) {
+        var href = safeHref(src.url);
+        return '<p class="mono-muted" style="font-size:12px;margin-top:8px">' + (href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(src.title || href) + '</a>' : esc(src.title || src.url || '')) + '</p>';
+      }).join('') +
       '</div></details>';
   }
   function crumbsHTML(left, pct) {
@@ -1095,19 +1179,42 @@
     var groups = proGroups();
     var chosen = groupKey ? groups.find(function (g) { return g.key === groupKey; }) : null;
     var h = chosen
-      ? '<header class="page-head"><span class="eyebrow"><a href="#/professional">02 · Professional</a> · ' + esc(chosen.title) + '</span><h1>' + esc(chosen.title) + '</h1><p class="lead">' + intro('it') + '</p></header>' + reminders()
+      ? '<header class="page-head"><span class="eyebrow"><a href="#/professional">02 · Professional</a> · ' + esc(chosen.title) + '</span><h1>' + esc(chosen.title) + '</h1><p class="lead">' + esc(chosen.desc || '') + (chosen.desc ? '' : intro('it')) + '</p></header>' + reminders()
       : '<header class="page-head"><span class="eyebrow">02 · Professional</span><h1>Professional</h1><p class="lead">' + intro('it') + '</p></header>' + reminders();
+    if (!chosen && groups.length > 1) {
+      h += '<div class="box navy" style="margin-bottom:22px"><span class="label ice">Start here · Recommended path</span>' +
+        '<p class="note" style="margin-top:8px"><strong>Start with “01 · For Everyone” first.</strong> It covers the universal workplace vocabulary every job shares — emails, meetings, clients, presentations, careers and modern work — so the same essentials aren’t repeated across every profession. Once you have that core, jump into your field below (up to C1–C2).</p>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">' + groups.map(function (g, i) {
+          return '<a class="chip small" href="#/professional/' + esc(g.key) + '">' + pad2(i + 1) + ' · ' + esc(g.title) + '</a>';
+        }).join('') + '</div></div>';
+    } else if (chosen && chosen.key !== 'for-everyone' && groups.some(function (g) { return g.key === 'for-everyone'; })) {
+      h += '<div class="box" style="margin-bottom:20px;padding:12px 16px"><p class="note muted" style="margin:0">New to Professional? Start with <a href="#/professional/for-everyone"><strong>01 · For Everyone</strong></a> first — it covers meetings, emails, clients, presentations and careers needed in every field.</p></div>';
+    }
+    var pSeen = {}, pBasicN = 0;
     (chosen ? [chosen] : groups).forEach(function (g) {
-      if (!chosen) h += '<h3 class="section-title">' + esc(g.title) + '</h3>';
+      g.subs.forEach(function (s) {
+        rawItemsFor(s.tab, s.topic).forEach(function (it) {
+          if (!pSeen[it.id] && isBasicItem(it)) { pSeen[it.id] = 1; pBasicN++; }
+        });
+      });
+    });
+    if (pBasicN) h += '<div style="margin-bottom:18px">' + basicsToggleHTML(pBasicN) + '</div>';
+    (chosen ? [chosen] : groups).forEach(function (g) {
+      var gIdx = groups.indexOf(g);
+      if (!chosen) {
+        h += '<h3 class="section-title">' + pad2(gIdx + 1) + ' · ' + esc(g.title) + (g.badge ? ' <span class="tag" style="margin-left:8px;vertical-align:middle">' + esc(g.badge) + '</span>' : '') + '</h3>';
+        if (g.desc) h += '<p class="muted" style="margin:-8px 0 18px;font-size:14px;max-width:74ch">' + esc(g.desc) + '</p>';
+      }
       h += '<div class="grid">' + g.subs.map(function (s, i) {
-        var items = itemsFor(s.tab, s.topic), c = counts(items), pct = c.total ? Math.round(c.known / c.total * 100) : 0;
+        var rawN = rawItemsFor(s.tab, s.topic).length, items = itemsFor(s.tab, s.topic), c = counts(items), pct = c.total ? Math.round(c.known / c.total * 100) : 0;
         var tObj = GT.topic(s.tab, s.topic);
         var desc = s.desc || (tObj && tObj.desc) || '';
-        return '<a class="tile' + (c.total ? '' : ' empty') + '" href="#/' + s.tab + '/' + s.topic + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + (c.total ? c.known + '/' + c.total + (c.due ? ' · ' + c.due + ' due' : '') : 'soon') + '</span></div>' +
+        var badgeText = c.total ? c.known + '/' + c.total + (c.due ? ' · ' + c.due + ' due' : '') : (rawN ? 'hidden' : 'soon');
+        return '<a class="tile' + (rawN ? '' : ' empty') + '" href="#/' + s.tab + '/' + s.topic + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + badgeText + '</span></div>' +
           '<h4>' + esc(s.name) + '</h4><p>' + esc(desc) + '</p><div class="track"><i style="width:' + pct + '%"></i></div></a>';
       }).join('') + '</div>';
     });
-    h += '<div class="actions"><a class="btn primary" href="#/practice?scope=professional">Practice Professional →</a></div>';
+    h += '<div class="actions' + (chosen ? ' actions-split' : '') + '">' + (chosen ? '<a class="btn" href="#/professional">← All professions</a>' : '') + '<a class="btn primary" href="#/practice?scope=professional">Practice Professional →</a></div>';
     page(h);
   }
   function viewExpressionsLanding() {
@@ -1165,8 +1272,9 @@
     return '<div class="box" style="margin-bottom:32px"><div class="setting"><div><div class="lbl">Show phrases for</div><div class="help">Filters every chunk list and Learn session.</div></div><select data-act="chunktag" aria-label="Filter chunks by topic">' + opts + '</select></div></div>';
   }
   function tile(tab, t, n) {
-    var items = itemsFor(tab, t.id), c = counts(items), pct = c.total ? Math.round(c.known / c.total * 100) : 0;
-    return '<a class="tile' + (c.total ? '' : ' empty') + '" href="#/' + tab + '/' + t.id + '"><div class="tile-top"><span>' + pad2(n) + '</span><span class="ct">' + (c.total ? c.known + '/' + c.total + (c.due ? ' · ' + c.due + ' due' : '') : 'soon') + '</span></div>' +
+    var rawN = rawItemsFor(tab, t.id).length, items = itemsFor(tab, t.id), c = counts(items), pct = c.total ? Math.round(c.known / c.total * 100) : 0;
+    var badgeText = c.total ? c.known + '/' + c.total + (c.due ? ' · ' + c.due + ' due' : '') : (rawN ? 'hidden' : 'soon');
+    return '<a class="tile' + (rawN ? '' : ' empty') + '" href="#/' + tab + '/' + t.id + '"><div class="tile-top"><span>' + pad2(n) + '</span><span class="ct">' + badgeText + '</span></div>' +
       '<h4>' + esc(t.name) + '</h4>' + (t.desc ? '<p>' + esc(t.desc) + '</p>' : '') + '<div class="track"><i style="width:' + pct + '%"></i></div></a>';
   }
   function viewLanding(tab) {
@@ -1176,7 +1284,10 @@
     if (tab === 'literature') h += '<div class="actions actions-split"><a class="btn primary" href="#/practice?scope=literature">Practice Literary Phrases →</a>' +
       '<a class="btn" href="#/literature/all/browse">Browse all</a><button class="btn" type="button" data-act="lucky" data-v="literature">Random quote</button></div>';
     if (tab === 'chunks') h += tagFilter();
-    if (tab === 'words') h += '<div class="actions-row" style="margin-bottom:28px"><a class="btn" href="#/vocabulary">Search the whole catalogue (' + GT.items.length + ')</a></div>';
+    if (tab === 'words') {
+      var wBasicN = GT.items.filter(function (it) { return GT.inTab(it, 'words') && isBasicItem(it); }).length;
+      h += '<div class="actions-row" style="margin-bottom:28px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px"><a class="btn" href="#/vocabulary">Search the whole catalogue (' + itemsFor('all', 'all').length + ')</a>' + basicsToggleHTML(wBasicN) + '</div>';
+    }
     var group = null, n = 0, list = GT.TOPICS[tab].filter(visibleTopic);
     list.forEach(function (t, i) {
       if (t.group !== group) {
@@ -1201,6 +1312,10 @@
     var lvl = tab === 'words' ? (t.level === 'b2' ? 'B2' : (GT.cfg('levelName') || 'B1')) : tdef.label;
     var par = tab === 'expressions' && t.parent ? GT.topic('expressions', t.parent) : null;
     if (par) return '<a href="#/expressions">Expressions</a> · <a href="#/expressions/' + par.id + '">' + esc(par.name) + '</a> · ' + (extra ? '<a href="#/' + tab + '/' + t.id + '">' + esc(t.name) + '</a> · ' + extra : esc(t.name));
+    if (tab === 'it') {
+      var pg = proGroups().find(function (g) { return g.subs.some(function (s) { return s.tab === 'it' && s.topic === t.id; }); });
+      return '<a href="#/professional">Professional</a>' + (pg ? ' · <a href="#/professional/' + pg.key + '">' + esc(pg.title) + '</a>' : '') + ' · ' + (extra ? '<a href="#/it/' + t.id + '">' + esc(t.name) + '</a> · ' + extra : esc(t.name));
+    }
     return '<a href="#/' + tab + '">' + esc(lvl) + '</a> · ' + (extra ? '<a href="#/' + tab + '/' + t.id + '">' + esc(t.name) + '</a> · ' + extra : esc(t.name));
   }
 
@@ -1217,6 +1332,7 @@
   function viewTopic(tab, id) {
     var t = findTopic(tab, id);
     if (!t) return notFound();
+    var allItems = rawItemsFor(tab, id), basicN = countBasicsIn(tab, allItems);
     var items = itemsFor(tab, id), c = counts(items);
     var pct = c.total ? Math.round(c.known / c.total * 100) : 0;
     var h = crumbsHTML(topicCrumb(tab, t), c.total ? pct : null);
@@ -1224,7 +1340,11 @@
     if (tab === 'chunks') h += tagFilter();
     if (tab === 'expressions' && (t.section || t.parent)) h += expCatChips(t.section ? t.id : t.parent, id);
     if (!items.length) {
-      h += '<div class="empty-state"><h3>No entries yet</h3><p>' + (tab === 'chunks' && ui.chunkTag ? 'No phrases match this filter.' : 'This topic arrives in a later data batch. Drop the file into <code>data/</code> and list it in <code>data/manifest.js</code>.') + '</p></div>';
+      if (basicN > 0 && S.settings.hideBasics) {
+        h += '<div class="empty-state"><h3>All entries are hidden</h3><p>Every card in this topic is marked as basic.</p>' + basicsToggleHTML(basicN, 'margin-top:14px') + '</div>';
+      } else {
+        h += '<div class="empty-state"><h3>No entries yet</h3><p>' + (tab === 'chunks' && ui.chunkTag ? 'No phrases match this filter.' : 'This topic arrives in a later data batch. Drop the file into <code>data/</code> and list it in <code>data/manifest.js</code>.') + '</p></div>';
+      }
       return page(h, 'mid');
     }
     // Actions on top (left-aligned); the full word list below, so known words can simply be skimmed.
@@ -1232,20 +1352,27 @@
       (c.fresh ? '<a class="btn primary" href="#/' + tab + '/' + id + '/learn">Start in order →</a>' : '') +
       (c.due ? '<a class="btn" href="#/review/' + reviewFilterFor(tab, id) + '/go">Review ' + c.due + ' due</a>' : '') +
       '<button class="btn" data-act="practice-topic" data-tab="' + tab + '" data-id="' + id + '">Practice now</button></div>' +
-      '<p class="topic-stats mono-muted">' + c.fresh + ' new · ' + c.learning + ' learning · ' + c.known + ' known' + (c.due ? ' · ' + c.due + ' due' : '') + '</p></div>';
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;margin-top:4px">' +
+      '<p class="topic-stats mono-muted" style="margin:0">' + c.fresh + ' new · ' + c.learning + ' learning · ' + c.known + ' known' + (c.due ? ' · ' + c.due + ' due' : '') + '</p>' +
+      basicsToggleHTML(basicN) + '</div></div>';
     if (!c.fresh) h += notice('info', 'Everything in this topic is already in your deck.', 'subtle');
     h += '<div id="practiceSlot"></div>';
     h += searchBox() + tilesHTML(items);
     page(h, 'mid');
   }
   /* Topic page word list: same tile grid as the topic overview (number · state, headword, gloss, progress line). */
+  /** Long single words (German compounds) shrink to fit the tile instead of breaking mid-word; see .hw-fit in app.css. */
+  function fitAttr(it) {
+    var n = plain(it.t || '').split(/[\s\/–—-]+/).reduce(function (m, w) { return Math.max(m, w.length); }, 0);
+    return n >= 14 ? ' class="hw-fit" style="--n:' + n + '"' : '';
+  }
   function tilesHTML(items, gridId) {
     var W = { '': 0, learning: 35, review: 70, known: 100 };
     return '<div class="grid word-grid" id="' + (gridId || 'rows') + '">' + items.map(function (it, i) {
       var hay = norm([plain(it.t), meaningOf(it), it.plural, it.ru, it.en, it.de, litSearchTerms(it)].join(' '));
       var st = stateClass(it.id);
       return '<a class="tile word-tile' + (st === 'known' ? ' is-known' : '') + '" href="#/item/' + encodeURIComponent(it.id) + '" data-hay="' + esc(hay) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + (st || 'new') + '</span></div>' +
-        '<h4 lang="' + GT.learn + '">' + headword(it) + '</h4>' + litBylineHTML(it, 'tile-source') + '<p lang="' + GT.glLang(it) + '">' + esc(plain(meaningOf(it))) + '</p><div class="track"><i style="width:' + (W[st] || 0) + '%"></i></div></a>';
+        '<h4 lang="' + GT.learn + '"' + fitAttr(it) + '>' + headword(it) + '</h4>' + litBylineHTML(it, 'tile-source') + '<p lang="' + GT.glLang(it) + '">' + esc(plain(meaningOf(it))) + '</p><div class="track"><i style="width:' + (W[st] || 0) + '%"></i></div></a>';
     }).join('') + '</div>';
   }
   function searchBox() {
@@ -1262,12 +1389,14 @@
   function viewBrowse(tab, id) {
     var t = findTopic(tab, id);
     if (!t) return notFound();
+    var allItems = rawItemsFor(tab, id), basicN = countBasicsIn(tab, allItems);
     var items = itemsFor(tab, id);
     var h = crumbsHTML(topicCrumb(tab, t, 'Browse'));
     h += '<header class="page-head"><h1>' + esc(t.name) + '</h1></header>';
     if (tab === 'chunks') h += tagFilter();
+    if (basicN > 0) h += '<div style="margin-bottom:14px">' + basicsToggleHTML(basicN) + '</div>';
     h += searchBox() + rowsHTML(items);
-    if (!items.length) h += '<div class="empty-state"><p>No entries.</p></div>';
+    if (!items.length) h += '<div class="empty-state"><p>' + (basicN && S.settings.hideBasics ? 'All entries here are hidden by “Hide basics”.' : 'No entries.') + '</p></div>';
     page(h, 'mid');
   }
 
@@ -1280,8 +1409,22 @@
 
   function viewItem(id) {
     var it = GT.byId[id];
-    if (!it || it.type === 'drill') return notFound();
+    if (!it) {
+      // Back/Forward after an "In other languages" jump lands on another pack's card: switch to that pack.
+      var owner = packForItem(id);
+      if (owner && owner !== GT.learn) { setLanguages('learn', owner, location.hash); return; }
+      notFound(true);
+      // Not in any loaded pack or link: load the other packs quietly and switch if one of them has it.
+      var here = location.hash, others = (GT.LEARN_ORDER || ['de', 'en', 'ru']).filter(function (l) { return l !== GT.learn; });
+      Promise.all(others.map(function (l) { return GT.loadPack(l).catch(function () {}); })).then(function () {
+        var l = packForItem(id);
+        if (l && l !== GT.learn && location.hash === here) setLanguages('learn', l, here);
+      });
+      return;
+    }
+    if (it.type === 'drill') return notFound();
     var pair = S.cardsForItem(id), now = GT.now(), list = itemsFor(it.tab, it.topic), idx = list.indexOf(it);
+    if (idx < 0) { list = rawItemsFor(it.tab, it.topic); idx = list.indexOf(it); }
     var tc = counts(list), pct = tc.total ? Math.round(tc.known / tc.total * 100) : 0;
     var actions;
     if (!pair.rec && !pair.prod) {
@@ -1301,8 +1444,19 @@
     page(h);
   }
 
-  function notFound() {
-    page('<div class="empty-state"><h3>Not found</h3><p>This page doesn’t exist (anymore). <a class="link-btn" href="#/words">Go to Words</a></p></div>', 'mid');
+  /** Which learn-language pack owns this item id (loaded packs first, then cross-language links), or null. */
+  function packForItem(id) {
+    var order = GT.LEARN_ORDER || ['de', 'en', 'ru'];
+    for (var i = 0; i < order.length; i++) {
+      var l = order[i];
+      if (GT.packs[l] && GT.packs[l].byId && GT.packs[l].byId[id]) return l;
+    }
+    for (var j = 0; j < order.length; j++) if (GT.linksByKey && GT.linksByKey[order[j] + ':' + id]) return order[j];
+    return null;
+  }
+  function notFound(isItem) {
+    var hint = isItem ? '<p class="muted" style="margin-top:12px">This card may belong to another language. That happens when you follow “In other languages” links and then go back. Switch what you learn with the globe button at the top.</p>' : '';
+    page('<div class="empty-state"><h3>Not found</h3><p>This page doesn’t exist (anymore). <a class="link-btn" href="#/words">Go to Words</a></p>' + hint + '</div>', 'mid');
   }
 
   /* ---------------- learn session ---------------- */
@@ -1645,6 +1799,15 @@
     return (tb.caption ? '<h3 class="section-title">' + esc(lxText(tb, 'caption')) + '</h3>' : '') + '<div class="table-wrap"><table><thead><tr>' + (lxText(tb, 'head') || []).map(function (x) { return '<th>' + esc(x) + '</th>'; }).join('') + '</tr></thead><tbody>' +
       (lxText(tb, 'rows') || []).map(function (r) { return '<tr>' + r.map(function (c, i) { return '<td' + ((tb.deCols || []).indexOf(i) >= 0 ? ' class="de" lang="' + GT.learn + '"' : '') + '>' + rich(c) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
   }
+  /** The learned pack's "Which form?" definition (js/whichform.js), or null. */
+  function wfDef() { return GT.whichForm ? GT.whichForm.active() : null; }
+  function isWfRoute(t) { return !!GT.whichForm && GT.whichForm.routes().indexOf(t) >= 0; }
+  function viewWhichForm(route, sub, params) {
+    // A link to another language's section (#/articles while learning Russian) opens this language's own section.
+    var wf = wfDef();
+    if (wf && wf.route !== route) { location.replace('#/' + wf.route + (sub === 'play' ? '/play' : '')); return; }
+    GT.whichForm.render(route, sub, { page: page, esc: esc, crumbs: crumbsHTML, setKeys: function (fn) { ui.keyHandler = fn; } }, params);
+  }
   function viewGrammar(id) {
     var t = GT.topic('grammar', id);
     if (!t) return notFound();
@@ -1862,13 +2025,14 @@
       row('Production mode', 'How production cards are asked.', sel('reviewModes', [['mix', 'Mixed'], ['meaning', 'Meaning → ' + langMeta().name + ''], ['cloze', 'Cloze sentences']])) +
       row('Typing mode', 'Type your ' + langMeta().name + ' answer on production cards before revealing it.', sw('typing')) +
       row('WHY? with medium confidence', 'Also show etymology notes marked as less certain.', sw('showMediumWhy')) +
+      row('Hide basic words', 'Hide elementary and obvious words in Words and Professional topics.', sw('hideBasics')) +
       row('Target retention', 'Higher means more reviews but fewer forgotten cards.', sel('retention', [['0.85', '85%'], ['0.9', '90% (recommended)'], ['0.95', '95%']])) +
       '</div>';
     h += '<h3 class="section-title">Look & sound</h3><div class="box">' +
       row('Hide sidebar Practice box', 'Hide the "Practice now" card in the sidebar.', sw('hideSidePractice')) +
       row('' + langMeta().name + ' voice', '<span id="voiceInfo">' + (tts.ok ? 'Loading voices…' : 'Speech is not supported in this browser.') + '</span>',
-        tts.ok ? '<select id="voiceSelect" data-set="' + voiceKey() + '" style="max-width:240px"></select>' : '<span class="mono-muted">—</span>') +
-      row('Speech rate', 'Applied to all pronunciation buttons.', '<div style="display:flex;gap:8px;align-items:center">' + sel('speechRate', [['0.75', 'Slow'], ['0.9', 'Normal'], ['1', 'Fast']]) + '<button class="btn small" type="button" data-act="test-voice">Test</button></div>') +
+        tts.ok ? '<select id="voiceSelect" class="voice-select" data-set="' + voiceKey() + '"></select>' : '<span class="mono-muted">—</span>') +
+      row('Speech rate', 'Applied to all pronunciation buttons.', '<div class="setting-ctl">' + sel('speechRate', [['0.75', 'Slow'], ['0.9', 'Normal'], ['1', 'Fast']]) + '<button class="btn small" type="button" data-act="test-voice">Test</button></div>') +
       '</div>';
     var files = GT.packFiles(GT.learn), errs = GT.pack.loadErrors;
     h += '<h3 class="section-title">Data · ' + esc(langMeta().name) + '</h3><div class="box"><p class="note muted">' + plural(files.length - errs.length, 'data file') + ' loaded · ' + GT.items.length + ' words & chunks · ' + Object.keys(GT.grammar).length + ' grammar pages · ' + Object.keys(GT.roots).length + ' word families · ' + (GT.links ? GT.links.length : 0) + ' cross-language links · schema v' + d.version + '.</p>' +
@@ -1921,7 +2085,7 @@
       GT.toast(ok ? 'Prompt copied. Paste it into your AI chat.' : 'Copy failed. Open "Show prompt" and copy it manually.');
     });
   }
-  function refreshChrome(tab) { renderNav(tab); renderSidebar(tab, location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent)); }
+  function refreshChrome(tab) { renderNav(tab); renderSidebar(tab, curPath()); }
 
   function act(name, el) {
     el = el || { dataset: {} };
@@ -2095,7 +2259,7 @@
       case 'rd-opt': rootDrillAnswer(el.dataset.v); break;
       case 'rd-next': rd.i++; rd.answered = null; rd.given = null; drawRootDrill(); break;
       case 'rd-again': viewRootDrill(rd.rootId); break;
-      case 'reset-drills': ui.drillState = {}; viewGrammar(location.hash.split('/')[2]); break;
+      case 'reset-drills': ui.drillState = {}; viewGrammar(curPath()[1]); break;
       case 'd-opt': {
         var d = GT.byId[id], st = drillStateFor(el.dataset.ctx, id);
         st.chosen = Number(el.dataset.i); st.verdict = st.chosen === d.answer; st.revealed = true;
@@ -2206,10 +2370,11 @@
       S.setSetting(k, v);
       if (k === 'theme') { applyTheme(); refreshThemeRows(); }
       if (k === 'hideSidePractice') {
-        var curP = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
+        var curP = curPath();
         var curTab = curP[0] === 'item' && GT.byId[curP[1]] ? GT.byId[curP[1]].tab : (curP[0] || 'words');
         renderSidebar(curTab, curP);
       }
+      if (k === 'hideBasics') route({ keep: true });
       if (/^speechVoice/.test(k) || k === 'speechRate') {
         stopSpeak();
         if (/^speechVoice/.test(k)) pickVoice();
@@ -2218,6 +2383,9 @@
     } else if (el.dataset.act === 'chunktag') {
       ui.chunkTag = el.value;
       route();
+    } else if (el.dataset.act === 'toggle-basics') {
+      S.setSetting('hideBasics', !!el.checked);
+      route({ keep: true });
     } else if ((el.id === 'importFile' || el.id === 'importReplaceFile') && el.files && el.files[0]) {
       var replaceMode = el.id === 'importReplaceFile';
       var reader = new FileReader();
@@ -2246,8 +2414,23 @@
     var wrap = e.target.closest && e.target.closest('.mtag-wrap');
     if (wrap) { wrap.classList.remove('dismissed'); positionTooltip(wrap); }
   });
+  /* Root map: nodes sit on a circle by %, so long labels on narrow screens can poke past the frame — nudge them back in. */
+  function fitRootMaps() {
+    document.querySelectorAll('.rmap').forEach(function (m) {
+      var mr = m.getBoundingClientRect(), pad = 4;
+      m.querySelectorAll('.rnode').forEach(function (n) {
+        n.style.marginLeft = '';
+        var r = n.getBoundingClientRect(), shift = 0;
+        if (r.width > mr.width - 2 * pad) return;
+        if (r.left < mr.left + pad) shift = mr.left + pad - r.left;
+        else if (r.right > mr.right - pad) shift = mr.right - pad - r.right;
+        if (shift) n.style.marginLeft = Math.round(shift) + 'px';
+      });
+    });
+  }
   window.addEventListener('resize', function () {
     document.querySelectorAll('.mtag-wrap.open').forEach(positionTooltip);
+    fitRootMaps();
   });
   document.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -2823,13 +3006,13 @@
   var STUDIO_GROUPS = [
     { label: 'Classic', modes: ['mixed', 'cloze', 'translation', 'recognition', 'derivative'] },
     { label: 'Games', modes: ['builder', 'duel', 'family', 'match', 'odd', 'dictation', 'blitz', 'gender'] },
-    { label: 'Rules', modes: ['affix', 'grammar'] }
+    { label: 'Rules', modes: ['affix', 'grammar', 'articles'] }
   ];
   var STUDIO_MODES = {
     mixed: 'Mixed practice', cloze: 'Cloze in context', translation: 'Meaning → word', recognition: 'Meaning in context',
     derivative: 'Root base → derivative', builder: 'Sentence builder', duel: 'Family duel', family: 'Family builder · 90 s',
     match: 'Match pairs', odd: 'Odd one out', dictation: 'Dictation', blitz: 'Blitz · 60 s', gender: 'Gender of nouns',
-    affix: 'Prefixes & Suffixes', grammar: 'Grammar in context'
+    affix: 'Prefixes & Suffixes', grammar: 'Grammar in context', articles: 'Articles · Which form? ↗'
   };
   var STUDIO_CLASSIC = ['recognition', 'translation', 'derivative', 'cloze', 'dictation'];
   var LEVEL_BANDS = { all: null, a: ['A1', 'A2'], b1: ['B1'], b2: ['B2'], c: ['C1', 'C2'] };
@@ -2839,6 +3022,7 @@
     if (k === 'recognition') return 'Meaning in context (' + LS() + ' → ' + KS() + ')';
     if (k === 'translation') return 'Meaning → word (' + KS() + ' → ' + LS() + ')';
     if (k === 'gender' && GT.learn === 'de') return 'Article · der / die / das';
+    if (k === 'articles' && wfDef()) return wfDef().practice.label;
     return STUDIO_MODES[k] || k;
   }
   function studioModeAvailable(k) {
@@ -2846,6 +3030,7 @@
     if (k === 'dictation') return tts.ok;
     if (k === 'duel' || k === 'family' || k === 'odd' || k === 'derivative') return Object.keys(GT.roots).length > 0;
     if (k === 'grammar') return Object.keys(GT.grammar).length > 0;
+    if (k === 'articles') return !!wfDef();
     return true;
   }
   function SH(k, vars) { return GT.hint('studio.h.' + k, vars); }
@@ -2885,6 +3070,7 @@
     var band = LEVEL_BANDS[opts.level] || null;
     return studioScopeItems(opts.scope).filter(function (it) {
       if (!levelOk(it, band)) return false;
+      if (S.settings.hideBasics && opts.level !== 'a' && isBasicItem(it) && (GT.inTab(it, 'words') || GT.inTab(it, 'it'))) return false;
       if (opts.studied && !S.card(GT.cardKey(it.id, 'rec')) && !S.card(GT.cardKey(it.id, 'prod'))) return false;
       return true;
     });
@@ -3356,12 +3542,12 @@
   function syncStudioHelp() {
     var kindEl = $('#stKind'), helpEl = $('#stHelp');
     if (!kindEl) return;
-    var k = kindEl.value, noScope = k === 'affix' || k === 'grammar';
+    var k = kindEl.value, noScope = k === 'affix' || k === 'grammar' || k === 'articles';
     ['#stLevel', '#stSection', '#stTopic', '#stStudied'].forEach(function (s) { var el = $(s); if (el) el.disabled = noScope; });
     var lim = $('#stLimit');
     if (lim) lim.disabled = k === 'blitz';
     if (helpEl) {
-      helpEl.textContent = GT.hint('studio.' + k) || '';
+      helpEl.textContent = k === 'articles' ? (wfDef() ? wfDef().practice.help : '') : GT.hint('studio.' + k) || '';
       helpEl.lang = GT.know;
       if (k === 'dictation' && !tts.ok) helpEl.textContent += ' — No speech voice in this browser.';
     }
@@ -3417,6 +3603,7 @@
   }
   function startStudioFromForm(form) {
     var f = form.elements;
+    if (f.kind.value === 'articles') { location.hash = '#/' + (wfDef() ? wfDef().route : 'grammar') + '/play'; return; }
     var opts = {
       kind: f.kind.value,
       level: f.level.value,
@@ -3822,14 +4009,14 @@
 
   /* ---------------- router ---------------- */
   function parseQuery(qs) {
-    var out = {};
+    var out = Object.create(null);
     if (!qs) return out;
     qs.split('&').forEach(function (pair) {
       if (!pair) return;
       var i = pair.indexOf('=');
-      var k = decodeURIComponent(i >= 0 ? pair.slice(0, i) : pair);
-      var v = i >= 0 ? decodeURIComponent(pair.slice(i + 1)) : '';
-      out[k] = v;
+      var k = safeDecode(i >= 0 ? pair.slice(0, i) : pair);
+      var v = i >= 0 ? safeDecode(pair.slice(i + 1)) : '';
+      if (k) out[k] = v;
     });
     return out;
   }
@@ -3844,6 +4031,7 @@
     if (t === 'family' && p[1]) return '#/roots/' + encodeURIComponent(p[1]);
     if (t === 'prefixes' || t === 'suffixes' || t === 'classical') return '#/roots/' + t;
     if (t === 'progress') return '#/stats';
+    if (t === 'grammar' && p[1] === 'artikel') return '#/articles' + (p[2] === 'play' ? '/play' : '');
     // Work-related B2 themes moved from Words to Professional.
     if (t === 'words' && /^(b2_beruf|b2_arbeitswelt|career-paths|world-of-work|b2_work)$/.test(p[1] || '')) return '#/it/' + p.slice(1).map(encodeURIComponent).join('/');
     if (t === 'review' && /^words\.(b2_beruf|b2_arbeitswelt|career-paths|world-of-work|b2_work)$/.test(p[1] || '')) return '#/review/' + p[1].replace(/^words\./, 'it.');
@@ -3859,7 +4047,7 @@
     var qIdx = raw.indexOf('?');
     var pathStr = qIdx >= 0 ? raw.slice(0, qIdx) : raw;
     var params = qIdx >= 0 ? parseQuery(raw.slice(qIdx + 1)) : {};
-    var p = pathStr.split('/').filter(Boolean).map(decodeURIComponent);
+    var p = pathStr.split('/').filter(Boolean).map(safeDecode);
     if (!p.length) { location.replace('#/start'); return; }
     var legacy = legacyRoute(p);
     if (legacy) { location.replace(legacy); return; }
@@ -3877,7 +4065,13 @@
         else if (p[2] === 'learn') viewLearn('expressions', p[1]);
         else viewTopic('expressions', p[1]);
         break;
-      case 'words': case 'it': case 'chunks': case 'literature':
+      case 'it':
+        if (!p[1]) viewProfessionalLanding();
+        else if (p[2] === 'browse') viewBrowse('it', p[1]);
+        else if (p[2] === 'learn') viewLearn('it', p[1]);
+        else viewTopic('it', p[1]);
+        break;
+      case 'words': case 'chunks': case 'literature':
         if (!p[1]) viewLanding(p[0]);
         else if (p[2] === 'browse') viewBrowse(p[0], p[1]);
         else if (p[2] === 'learn') viewLearn(p[0], p[1]);
@@ -3904,11 +4098,38 @@
       case 'review': if (p[2] === 'go') viewReviewSession(p[1] || 'all'); else viewReviewLanding(p[1] || 'all'); break;
       case 'stats': viewStats(); break;
       case 'settings': viewSettings(); break;
-      default: location.replace('#/words'); return;
+      default:
+        if (p[0] === 'cases' && GT.whichForm) { GT.whichForm.renderCases({ page: page, esc: esc, crumbs: crumbsHTML, setKeys: function (fn) { ui.keyHandler = fn; } }, params); break; }
+        if (isWfRoute(p[0])) { viewWhichForm(p[0], p[1], params); break; }
+        location.replace('#/words'); return;
     }
+    fitRootMaps();
+    stampPair();
     if (!opts.keep) window.scrollTo(0, 0);
   }
-  window.addEventListener('hashchange', function () { route(); });
+  /* Each history entry remembers the language pair it was shown in, so Back/Forward
+     after an "In other languages" jump also switches the language back. */
+  function stampPair() {
+    try {
+      var st = history.state || {};
+      if (st.learn !== GT.learn || st.know !== GT.know) history.replaceState(Object.assign({}, st, { learn: GT.learn, know: GT.know }), '');
+    } catch (e) {}
+  }
+  window.addEventListener('hashchange', function () {
+    var st = history.state;
+    if (st && st.learn && GT.LANGS[st.learn] && GT.LANGS[st.know] && st.know !== st.learn &&
+        (st.learn !== GT.learn || st.know !== GT.know)) {
+      var knowChanged = st.know !== GT.know;
+      GT.know = st.know;
+      S.settings.knowLang = st.know;
+      S.settings.learnLang = st.learn;
+      S.saveSettings();
+      var done = st.learn !== GT.learn ? switchLearn(st.learn, location.hash) : Promise.resolve(knowChanged ? route() : null);
+      done.then(function () { GT.toast(GT.LANGS[GT.know].name + ' → ' + GT.LANGS[GT.learn].name); });
+      return;
+    }
+    route();
+  });
 
   /* ---------------- PWA (only when served over http/https) ---------------- */
   if (/^https?:$/.test(location.protocol)) {
@@ -3978,7 +4199,7 @@
     $('#langBtn').classList.remove('active');
     if (focusBtn) $('#langBtn').focus();
   }
-  function curPath() { return location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean).map(decodeURIComponent); }
+  function curPath() { return location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean).map(safeDecode); }
 
   /** Re-render the current screen in place (known-language change): keeps sessions, answers and scroll. */
   function redrawInPlace() {
@@ -4028,6 +4249,7 @@
   function nearestValidHash() {
     var p = curPath(), t = p[0];
     if (t === 'item') return GT.byId[p[1]] ? null : '#/words';
+    if (isWfRoute(t)) { var wf = wfDef(); return wf ? (wf.route === t ? null : '#/' + wf.route + (p[1] === 'play' ? '/play' : '')) : '#/grammar'; }
     if (t === 'professional' && p[1]) return proGroups().some(function (g) { return g.key === p[1]; }) ? null : '#/professional';
     if ((t === 'words' || t === 'it' || t === 'chunks' || t === 'expressions' || t === 'literature') && p[1]) {
       if ((t === 'chunks' || t === 'literature') && p[1] === 'all') return null;

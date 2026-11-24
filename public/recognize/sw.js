@@ -3,12 +3,12 @@
  * (fresh when online, cached copy when offline); cache-first for Google Fonts.
  * Bump VERSION when you want to force a clean cache. */
 var CACHE_PREFIX = 'etrnl-recognize-';
-var VERSION = CACHE_PREFIX + '89';
+var VERSION = CACHE_PREFIX + '121';
 importScripts('data/manifest.js');
 
 var SHELL = [
   './', 'css/app.css',
-  'js/core.js', 'js/i18n.js', 'js/topics.js', 'js/loader.js', 'js/validate.js', 'js/fsrs.js', 'js/store.js', 'js/app.js',
+  'js/core.js', 'js/i18n.js', 'js/topics.js', 'js/loader.js', 'js/validate.js', 'js/fsrs.js', 'js/store.js', 'js/whichform.js', 'js/forms/de.js', 'js/forms/en.js', 'js/forms/ru.js', 'js/app.js',
   'data/about.js', 'data/manifest.js', 'manifest.webmanifest',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'
 ];

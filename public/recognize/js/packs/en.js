@@ -44,6 +44,23 @@
     'it.clients': 'Briefs, quotes, invoices, scope, retainers and client talks.',
     'it.presentations': 'Slide decks, structure, charts, transitions and handling Q&A.',
     'it.business': 'Negotiation, clients, budgets and business correspondence (B2).',
+    'it.bureau_offices': 'Authorities, permits, official decisions, appeals, jurisdiction and administrative procedures.',
+    'it.bureau_tax': 'Tax assessments, withholding, deductions, social contributions, payroll and fiscal audits.',
+    'it.bureau_docs': 'Formal letters, registered mail, power of attorney, notarisation, dunning and statutory retention.',
+    'it.legal_contracts': 'Clauses, breach, liability, indemnification, force majeure, limitation periods and settlements.',
+    'it.legal_ip': 'Copyright, licensing, trademarks, patents, infringement, cease-and-desist letters and trade secrets.',
+    'it.legal_criminal': 'Indictment, prosecution, defence, remand, fraud, verdicts, sentencing and appeals.',
+    'it.legal_labour': 'Unfair dismissal, non-compete clauses, works councils, tribunals, severance and workplace rights.',
+    'it.legal_corporate': 'GDPR/data protection, due diligence, anti-money laundering, whistleblowing, governance and insolvency.',
+    'it.svc_hotel': 'Reception, overbooking, upgrades, deposits, housekeeping, concierge and shift handovers.',
+    'it.svc_gastro': 'Allergens, food hygiene, dietary requests, kitchen brigade, service flow and billing.',
+    'it.svc_retail': 'Stocktake, warranty claims, goodwill gestures, de-escalation, SLA and cash reconciliation.',
+    'it.fin_accounting': 'Balance sheets, receivables/payables, accruals, depreciation, liquidity, VAT and audit trails.',
+    'it.fin_marketing': 'Lead generation, sales funnels, press releases, crisis PR, brand positioning and market share.',
+    'it.fin_hr': 'Talent acquisition, screening, employer branding, succession planning, retention and appraisals.',
+    'it.med_clinical': 'Triage, patient history, ward rounds, discharge notes, informed consent, dosage and confidentiality.',
+    'it.ops_logistics': 'Freight, customs clearance, dispatch, order picking, cold chain, lead times and inventory.',
+    'it.ops_trades': 'Blueprints, commissioning, site safety, defect liability, tolerances, maintenance and retrofits.',
     'expressions.idioms': 'Common B1–B2 English idioms with literal vs real meaning.',
     'expressions.everyday': 'High-frequency conversational phrases for quick replies and arrangements.'
   };
@@ -212,24 +229,42 @@
       drills.push({ id: g.id + '~prod', kind: 'gap', q: g.production.question, answer: g.production.answer,
         accepted: (g.production.acceptedAnswers || []).concat(E.accepted ? E.accepted(g.production.answer) : []), explain: g.production.explain });
     }
+    var srcHref = g.source && /^https?:\/\//i.test(String(g.source).trim()) ? String(g.source).trim() : '';
     GT.registerGrammar({
       id: id, title: g.label, level: g.level, summary: sentenceOne(g.ru),
-      explanation: '<p>' + escHTML(g.ru) + '</p>' + (g.source ? '<p class="mono-muted" style="font-size:12px">Reference: <a href="' + escHTML(g.source) + '" target="_blank" rel="noopener">' + escHTML(g.source.replace(/^https:\/\//, '').split('/')[0]) + '</a></p>' : ''),
+      explanation: '<p>' + escHTML(g.ru) + '</p>' + (g.source ? '<p class="mono-muted" style="font-size:12px">Reference: ' + (srcHref ? '<a href="' + escHTML(srcHref) + '" target="_blank" rel="noopener noreferrer">' + escHTML(srcHref.replace(/^https?:\/\//i, '').split('/')[0]) + '</a>' : escHTML(g.source)) + '</p>' : ''),
       examples: g.example ? [{ t: g.example, ru: g.translation }] : [],
       drills: drills
     });
     TOPICS.grammar.push({ id: id, name: g.label + ' · ' + g.level, group: 'Grammar topics' });
   });
 
-  // New cross-disciplinary Professional topics (Design, AI/Data, Product/Agile, Clients, Presentations)
+  // Cross-disciplinary, domain & advanced (B2–C2) Professional topics
   [
     { id: 'design', name: 'Design, UX & Visuals', scenario: 'дизайн-ревью макета и фирменного стиля с заказчиком. Ты — заказчик, я объясняю выбор типографики, сетки, контраста и макета.' },
     { id: 'ai_data', name: 'AI, Data & Analytics', scenario: 'обсуждение внедрения ИИ-инструмента и аналитики данных. Ты — менеджер, спрашиваешь про промпты, точность модели, смещение данных и метрики.' },
     { id: 'product', name: 'Product & Agile', scenario: 'обсуждение дорожной карты продукта, MVP и ретроспективы спринта. Ты — продакт-менеджер.' },
     { id: 'clients', name: 'Clients & Freelance', scenario: 'переговоры с клиентом на фрилансе по брифу, смете, правкам и счёту. Ты — клиент.' },
-    { id: 'presentations', name: 'Presentations & Pitching', scenario: 'тренировка презентации проекта и секции вопросов и ответов (Q&A). Ты — аудитория.' }
+    { id: 'presentations', name: 'Presentations & Pitching', scenario: 'тренировка презентации проекта и секции вопросов и ответов (Q&A). Ты — аудитория.' },
+    { id: 'bureau_offices', level: 'b2', name: 'Public Offices & Permits', scenario: 'приём в ведомстве по поводу официального решения, исключения и подачи апелляции в срок. Ты — инспектор.' },
+    { id: 'bureau_tax', level: 'b2', name: 'Taxes, Payroll & Social Security', scenario: 'разбор налогового уведомления, вычетов и налоговой проверки с консультантом. Ты — налоговый консультант.' },
+    { id: 'bureau_docs', level: 'b2', name: 'Official Correspondence & Records', scenario: 'оформление доверенности, заказной корреспонденции и ответ на официальное напоминание об оплате. Ты — сотрудник канцелярии.' },
+    { id: 'legal_contracts', level: 'b2', name: 'Contracts & Civil Law', scenario: 'переговоры по коммерческому договору: нарушение условий, ответственность, гарантия и форс-мажор. Ты — юрист второй стороны.' },
+    { id: 'legal_ip', level: 'b2', name: 'Copyright & Intellectual Property', scenario: 'разбор претензии о нарушении авторских прав, лицензий и товарного знака. Ты — юрист по IP.' },
+    { id: 'legal_criminal', level: 'b2', name: 'Criminal Law & Courts', scenario: 'консультация с адвокатом по обвинительному акту, показаниям свидетелей и смягчающим обстоятельствам. Ты — адвокат.' },
+    { id: 'legal_labour', level: 'b2', name: 'Employment & Labour Law', scenario: 'обсуждение незаконного увольнения, соглашения о расторжении и запрета на конкуренцию. Ты — юрист по трудовому праву.' },
+    { id: 'legal_corporate', level: 'b2', name: 'Compliance, Privacy & Corporate', scenario: 'аудит комплаенса: защита данных, конфликт интересов, противодействие отмыванию средств и управление рисками. Ты — аудитор.' },
+    { id: 'svc_hotel', level: 'b2', name: 'Hotels & Front Desk', scenario: 'решение ситуации овербукинга на стойке регистрации отеля и согласование апгрейда. Ты — гость отеля.' },
+    { id: 'svc_gastro', level: 'b2', name: 'Gastronomy & Catering', scenario: 'обсуждение пищевых аллергенов, гигиены и координации зала с кухней в час пик. Ты — гость с аллергией.' },
+    { id: 'svc_retail', level: 'b2', name: 'Retail, Sales & Customer Support', scenario: 'деэскалация претензии клиента по гарантии и согласование компенсации. Ты — недовольный покупатель.' },
+    { id: 'fin_accounting', level: 'b2', name: 'Accounting & Finance', scenario: 'закрытие финансового квартала с аудитором: баланс, дебиторская задолженность и ликвидность. Ты — аудитор.' },
+    { id: 'fin_marketing', level: 'b2', name: 'Sales, Marketing & PR', scenario: 'подготовка антикризисного пресс-релиза, позиционирования бренда и воронки лидов. Ты — директор по PR.' },
+    { id: 'fin_hr', level: 'b2', name: 'HR & Recruiting', scenario: 'обсуждение шорт-листа кандидатов, компенсационного пакета и причин текучести кадров. Ты — нанимающий руководитель.' },
+    { id: 'med_clinical', level: 'b2', name: 'Healthcare & Clinical Work', scenario: 'передача пациента на обходе и получение информированного согласия. Ты — старший врач.' },
+    { id: 'ops_logistics', level: 'b2', name: 'Logistics & Supply Chain', scenario: 'разбор задержки рефрижераторного груза на таможенном оформлении. Ты — таможенный брокер.' },
+    { id: 'ops_trades', level: 'b2', name: 'Engineering, Construction & Trades', scenario: 'техническая приёмка объекта: чертежи, допуски, гарантия на дефекты и ввод в эксплуатацию. Ты — главный инженер.' }
   ].forEach(function (t) {
-    TOPICS.it.push({ id: t.id, name: t.name, desc: DESC['it.' + t.id], scenario: t.scenario, group: 'Professional', level: 'b1' });
+    TOPICS.it.push({ id: t.id, name: t.name, desc: DESC['it.' + t.id], scenario: t.scenario, group: 'Professional', level: t.level || 'b1' });
   });
 
   // Keep the moved B2 career themes after the core Professional topics (stable sort).
@@ -252,7 +287,7 @@
     },
     NAV: [
       { id: 'language', label: 'Language', short: 'Lang', icon: 'book', href: '#/words',
-        items: [{ label: 'Words', href: '#/words', match: ['words'] }, { label: 'Grammar', href: '#/grammar', match: ['grammar'] }, { label: 'Roots', href: '#/roots', match: ['roots'] }] },
+        items: [{ label: 'Words', href: '#/words', match: ['words'] }, { label: 'Roots', href: '#/roots', match: ['roots'] }, { label: 'Grammar', href: '#/grammar', match: ['grammar'] }] },
       { id: 'professional', label: 'Professional', short: 'Pro', icon: 'shield', href: '#/professional',
         items: [
           { label: 'Work & Office', href: '#/it/work', tab: 'it', topic: 'work' },
@@ -275,31 +310,58 @@
           { label: 'Everyday Phrases', href: '#/expressions/everyday', tab: 'expressions', topic: 'everyday' },
           { label: 'Literary Phrases', href: '#/literature', match: ['literature'] }
         ] },
-      { id: 'practice', label: 'Practice', short: 'Practice', icon: 'spark', href: '#/practice' },
-      { id: 'user', label: 'User', short: 'User', icon: 'user', href: '#/user',
-        items: [
-          { label: 'Sync & Backup', href: '#/user', match: ['user'] },
-          { label: 'Review', href: '#/review', match: ['review'] },
-          { label: 'Stats', href: '#/stats', match: ['stats'] }
-        ] }
+      { id: 'practice', label: 'Practice', short: 'Practice', icon: 'spark', href: '#/practice' }
+    ],
+    PRO_GROUPS: [
+      { key: 'for-everyone', title: 'For Everyone', badge: 'Start here', desc: 'Essential for every profession: office communication, meetings, clients, presentations, careers and modern work. Complete this track first, then pick your field below.' },
+      { key: 'it', title: 'IT Professions', desc: 'Software engineering, cloud infrastructure, cybersecurity, UX design, AI/data and agile product work.' },
+      { key: 'bureaucracy', title: 'Bureaucracy & Administration', desc: 'Public offices, permits, taxes, payroll, social security, official notices and formal records (B2–C2).' },
+      { key: 'legal', title: 'Legal & Law', desc: 'Contracts, intellectual property, criminal law & courts, labour law and corporate compliance (B2–C2).' },
+      { key: 'service', title: 'Service, Hospitality & Retail', desc: 'Hotels & front desk, gastronomy & catering, retail sales and customer support (B2–C1).' },
+      { key: 'business', title: 'Finance, HR & Marketing', desc: 'Accounting & finance, sales, marketing & PR, recruiting and HR operations (B2–C2).' },
+      { key: 'operations', title: 'Healthcare, Logistics & Trades', desc: 'Clinical healthcare, logistics & supply chain, engineering, construction and technical trades (B2–C2).' }
     ],
     PRO_SUBS: [
-      { id: 'work', tab: 'it', topic: 'work', name: 'Work & Office', desc: DESC['it.work'] },
-      { id: 'dev', tab: 'it', topic: 'dev', name: 'IT & Development', desc: DESC['it.dev'] },
-      { id: 'infra', tab: 'it', topic: 'infra', name: 'Infrastructure', desc: DESC['it.infra'] },
-      { id: 'security', tab: 'it', topic: 'security', name: 'Security', desc: DESC['it.security'] },
-      { id: 'design', tab: 'it', topic: 'design', name: 'Design, UX & Visuals', desc: DESC['it.design'] },
-      { id: 'ai_data', tab: 'it', topic: 'ai_data', name: 'AI, Data & Analytics', desc: DESC['it.ai_data'] },
-      { id: 'product', tab: 'it', topic: 'product', name: 'Product & Agile', desc: DESC['it.product'] },
-      { id: 'clients', tab: 'it', topic: 'clients', name: 'Clients & Freelance', desc: DESC['it.clients'] },
-      { id: 'presentations', tab: 'it', topic: 'presentations', name: 'Presentations & Pitching', desc: DESC['it.presentations'] },
-      { id: 'business', tab: 'it', topic: 'business', name: 'B2 Business English', desc: DESC['it.business'] },
-      { id: 'career-paths', tab: 'it', topic: 'career-paths', name: 'B2 Career Paths', desc: DESC['it.career-paths'] },
-      { id: 'world-of-work', tab: 'it', topic: 'world-of-work', name: 'B2 World of Work', desc: DESC['it.world-of-work'] }
+      // 01 · For Everyone
+      { id: 'work', group: 'for-everyone', tab: 'it', topic: 'work', name: 'Work & Office', desc: DESC['it.work'] },
+      { id: 'clients', group: 'for-everyone', tab: 'it', topic: 'clients', name: 'Clients & Freelance', desc: DESC['it.clients'] },
+      { id: 'presentations', group: 'for-everyone', tab: 'it', topic: 'presentations', name: 'Presentations & Pitching', desc: DESC['it.presentations'] },
+      { id: 'business', group: 'for-everyone', tab: 'it', topic: 'business', name: 'B2 Business English', desc: DESC['it.business'] },
+      { id: 'career-paths', group: 'for-everyone', tab: 'it', topic: 'career-paths', name: 'B2 Career Paths', desc: DESC['it.career-paths'] },
+      { id: 'world-of-work', group: 'for-everyone', tab: 'it', topic: 'world-of-work', name: 'B2 World of Work', desc: DESC['it.world-of-work'] },
+      // 02 · IT Professions
+      { id: 'dev', group: 'it', tab: 'it', topic: 'dev', name: 'IT & Development', desc: DESC['it.dev'] },
+      { id: 'infra', group: 'it', tab: 'it', topic: 'infra', name: 'Infrastructure', desc: DESC['it.infra'] },
+      { id: 'security', group: 'it', tab: 'it', topic: 'security', name: 'Security', desc: DESC['it.security'] },
+      { id: 'design', group: 'it', tab: 'it', topic: 'design', name: 'Design, UX & Visuals', desc: DESC['it.design'] },
+      { id: 'ai_data', group: 'it', tab: 'it', topic: 'ai_data', name: 'AI, Data & Analytics', desc: DESC['it.ai_data'] },
+      { id: 'product', group: 'it', tab: 'it', topic: 'product', name: 'Product & Agile', desc: DESC['it.product'] },
+      // 03 · Bureaucracy & Administration
+      { id: 'bureau_offices', group: 'bureaucracy', tab: 'it', topic: 'bureau_offices', name: 'Public Offices & Permits', desc: DESC['it.bureau_offices'] },
+      { id: 'bureau_tax', group: 'bureaucracy', tab: 'it', topic: 'bureau_tax', name: 'Taxes, Payroll & Social Security', desc: DESC['it.bureau_tax'] },
+      { id: 'bureau_docs', group: 'bureaucracy', tab: 'it', topic: 'bureau_docs', name: 'Official Correspondence & Records', desc: DESC['it.bureau_docs'] },
+      // 04 · Legal & Law
+      { id: 'legal_contracts', group: 'legal', tab: 'it', topic: 'legal_contracts', name: 'Contracts & Civil Law', desc: DESC['it.legal_contracts'] },
+      { id: 'legal_ip', group: 'legal', tab: 'it', topic: 'legal_ip', name: 'Copyright & Intellectual Property', desc: DESC['it.legal_ip'] },
+      { id: 'legal_criminal', group: 'legal', tab: 'it', topic: 'legal_criminal', name: 'Criminal Law & Courts', desc: DESC['it.legal_criminal'] },
+      { id: 'legal_labour', group: 'legal', tab: 'it', topic: 'legal_labour', name: 'Employment & Labour Law', desc: DESC['it.legal_labour'] },
+      { id: 'legal_corporate', group: 'legal', tab: 'it', topic: 'legal_corporate', name: 'Compliance, Privacy & Corporate', desc: DESC['it.legal_corporate'] },
+      // 05 · Service, Hospitality & Retail
+      { id: 'svc_hotel', group: 'service', tab: 'it', topic: 'svc_hotel', name: 'Hotels & Front Desk', desc: DESC['it.svc_hotel'] },
+      { id: 'svc_gastro', group: 'service', tab: 'it', topic: 'svc_gastro', name: 'Gastronomy & Catering', desc: DESC['it.svc_gastro'] },
+      { id: 'svc_retail', group: 'service', tab: 'it', topic: 'svc_retail', name: 'Retail, Sales & Customer Support', desc: DESC['it.svc_retail'] },
+      // 06 · Finance, HR & Marketing
+      { id: 'fin_accounting', group: 'business', tab: 'it', topic: 'fin_accounting', name: 'Accounting & Finance', desc: DESC['it.fin_accounting'] },
+      { id: 'fin_marketing', group: 'business', tab: 'it', topic: 'fin_marketing', name: 'Sales, Marketing & PR', desc: DESC['it.fin_marketing'] },
+      { id: 'fin_hr', group: 'business', tab: 'it', topic: 'fin_hr', name: 'HR & Recruiting', desc: DESC['it.fin_hr'] },
+      // 07 · Healthcare, Logistics & Trades
+      { id: 'med_clinical', group: 'operations', tab: 'it', topic: 'med_clinical', name: 'Healthcare & Clinical Work', desc: DESC['it.med_clinical'] },
+      { id: 'ops_logistics', group: 'operations', tab: 'it', topic: 'ops_logistics', name: 'Logistics & Supply Chain', desc: DESC['it.ops_logistics'] },
+      { id: 'ops_trades', group: 'operations', tab: 'it', topic: 'ops_trades', name: 'Engineering, Construction & Trades', desc: DESC['it.ops_trades'] }
     ],
     intro: {
       words: 'A2–B2 English for everyday life and B2 discussion topics. Levels shown are dictionary CEFR labels where verified, otherwise study targets.',
-      it: 'Professional English for your job: Work & Office, IT & Development, Infrastructure, Security, B2 Business English and B2 career themes.',
+      it: 'Professional English (B1–C2) across 7 tracks: universal workplace basics first, followed by IT, bureaucracy, law, hospitality, finance, healthcare and trades.',
       chunks: 'Ready-made phrases for speaking and writing, organised by communicative function.',
       expressions: 'Idioms, American street slang, everyday conversational phrases, ready-made chunks and classic literary expressions for natural English.',
       literature: 'Lines from English-language literature with a short explanation of their meaning and examples.',

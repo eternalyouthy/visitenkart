@@ -253,6 +253,24 @@ GT.registerRoot({
       morph: 'Arbeit-geb-er',
       parts: [['Arbeit-', 'die Arbeit — работа'], ['geb', 'основа geben — давать'], ['-er', 'тот, кто делает']],
       note: 'Пара: «der Arbeitgeber» (работодатель — кто даёт работу) и «der Arbeitnehmer» (работник — кто берёт работу). Очень прозрачная пара!'
+    },
+    {
+      id: "r-geben-zurueckgeben", de: "zurückgeben", pos: 'verb', core: true,
+      prefix: "zurück", sep: 'trennbar', forms: { praes: "gibt zurück", praet: "gab zurück", perf: "hat zurückgegeben" },
+      ru: "возвращать взятую вещь", en: "to give something back",
+      examples: [{ de: "Wann musst du das Buch [[zurückgeben]]?", ru: "Когда тебе нужно вернуть книгу?", en: "When do you have to return the book?" }]
+    },
+    {
+      id: "r-geben-durchgeben", de: "durchgeben", pos: 'verb', core: false,
+      prefix: "durch", sep: 'trennbar', forms: { praes: "gibt durch", praet: "gab durch", perf: "hat durchgegeben" },
+      ru: "передавать сведения по телефону или по связи", en: "to pass on information by phone or radio",
+      examples: [{ de: "Können Sie mir die Auftragsnummer am Telefon [[durchgeben]]?", ru: "Можете продиктовать мне номер заказа по телефону?", en: "Could you give me the order number over the phone?" }]
+    },
+    {
+      id: "r-geben-hergeben", de: "hergeben", pos: 'verb', core: false,
+      prefix: "her", sep: 'trennbar', forms: { praes: "gibt her", praet: "gab her", perf: "hat hergegeben" },
+      ru: "отдавать, расставаться с вещью", en: "to part with something",
+      examples: [{ de: "Diese Gitarre würde ich nie [[hergeben]].", ru: "Я бы ни за что не расстался с этой гитарой.", en: "I'd never part with this guitar." }]
     }
   ],
   pairs: []

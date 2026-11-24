@@ -194,6 +194,24 @@ GT.registerRoot({
       de: 'Beschreibung', ru: 'описание', en: 'description',
       examples: [{ de: 'In der [[Beschreibung]] des Tickets fehlen die Logs.', ru: 'В описании тикета не хватает логов.', en: 'The logs are missing from the ticket description.' }],
       morph: 'Be-schreib-ung'
+    },
+    {
+      id: "r-schreiben-mitschreiben", de: "mitschreiben", pos: 'verb', core: true,
+      prefix: "mit", sep: 'trennbar', forms: { praes: "schreibt mit", praet: "schrieb mit", perf: "hat mitgeschrieben" },
+      ru: "записывать по ходу разговора или занятия", en: "to take notes as someone speaks",
+      examples: [{ de: "Im Kurs [[schreibe]] ich nur die wichtigsten Beispiele [[mit]].", ru: "На занятии я записываю только самые важные примеры.", en: "In class I only take notes on the most important examples." }]
+    },
+    {
+      id: "r-schreiben-weiterschreiben", de: "weiterschreiben", pos: 'verb', core: false,
+      prefix: "weiter", sep: 'trennbar', forms: { praes: "schreibt weiter", praet: "schrieb weiter", perf: "hat weitergeschrieben" },
+      ru: "продолжать писать", en: "to carry on writing",
+      examples: [{ de: "Nach der Pause [[schreibt]] Lea an ihrem Bericht [[weiter]].", ru: "После перерыва Леа продолжает писать отчёт.", en: "After the break Lea carries on writing her report." }]
+    },
+    {
+      id: "r-schreiben-zurueckschreiben", de: "zurückschreiben", pos: 'verb', core: false,
+      prefix: "zurück", sep: 'trennbar', forms: { praes: "schreibt zurück", praet: "schrieb zurück", perf: "hat zurückgeschrieben" },
+      ru: "писать в ответ", en: "to write back",
+      examples: [{ de: "Danke für deine Nachricht! Ich [[schreibe]] dir morgen [[zurück]].", ru: "Спасибо за сообщение! Отвечу тебе завтра.", en: "Thanks for your message! I'll write back tomorrow." }]
     }
   ],
   pairs: [

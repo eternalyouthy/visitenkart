@@ -51,6 +51,9 @@ self.GT_DATA_FILES = [
   'it_pro_more.js',
   'it_pro_more_2.js',
   'it_topics_new.js',
+  'it_pro_more_3.js',
+  'pro_bureau_legal.js',
+  'pro_service_ops.js',
   // Expressions (Chunks, Idioms, Everyday Phrases)
   'chunks_sample.js',
   'chunks_more.js',
@@ -100,7 +103,11 @@ self.GT_DATA_FILES = [
   'grammar_relativsaetze.js',
   'grammar_konnektoren.js',
   'grammar_infinitiv.js',
+  'grammar_artikel.js',
+  'grammar_practice.js',
+  'i18n/de.en.grammar_practice.js',
   // Late topic memberships (must stay last)
+  'basics.js',
   'memberships.js'
 ];
 
@@ -141,9 +148,12 @@ self.GT_PACKS = {
       'data/en/verbs_families.js',
       'data/en/verbs_families_2.js',
       'data/en/words_more.js', 'data/en/words_more_2.js', 'data/en/words_more_3.js',
-      'data/en/it_more.js', 'data/en/it_more_2.js', 'data/en/it_topics_new.js',
+      'data/en/it_more.js', 'data/en/it_more_2.js', 'data/en/it_topics_new.js', 'data/en/it_more_3.js', 'data/en/pro_bureau_legal.js', 'data/en/pro_service_ops.js', 'data/en/basics.js',
       'data/en/expressions_more.js', 'data/en/expressions_more_2.js', 'data/en/expressions_more_3.js',
-      'data/en/literature.js', 'data/en/slang.js', 'data/en/expressions_cats.js'
+      'data/en/literature.js', 'data/en/slang.js', 'data/en/expressions_cats.js',
+      'data/en/grammar_articles.js',
+      'data/en/grammar_practice.js',
+      'data/i18n/en.de.grammar_practice.js'
     ]
   },
   // Russian: written natively for the shared engine (target `t`, glosses en/de, explanations { en, de }).
@@ -163,6 +173,8 @@ self.GT_PACKS = {
       'pro_more.js',
       'pro_more_2.js',
       'pro_topics_new.js',
+      'pro_more_3.js',
+      'basics.js',
       'expressions.js',
       'expressions_more.js',
       'expressions_more_2.js',
@@ -196,7 +208,10 @@ self.GT_PACKS = {
       'grammar_dative.js',
       'grammar_instrumental.js',
       'grammar_adjectives.js',
-      'grammar_reflexive.js'
+      'grammar_reflexive.js',
+      'grammar_endings.js',
+      'grammar_practice.js',
+      '../i18n/ru.de.grammar_practice.js'
     ]
   }
 };
@@ -204,5 +219,6 @@ self.GT_PACKS = {
 // Always-loaded cross-language sense links (small; carry display text so other packs stay lazy).
 self.GT_LINK_FILES = [
   'data/links/cross.js',
-  'data/links/families.js'
+  'data/links/families.js',
+  'data/links/forms_cross.js'
 ];
