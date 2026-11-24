@@ -22,13 +22,29 @@
     retention: 0.9,
     showMediumWhy: true,       // show WHY? notes with confidence 'medium'
     hideSidePractice: false,   // hide the "Practice now" box in the sidebar
-    theme: 'dark',
+    theme: 'orbit',            // see THEMES in app.js
     speechRate: 0.9,
     speechVoice: 'auto',       // German voice (legacy name); other languages: speechVoice_<lang>
     knowLang: 'ru',            // "I know"
     learnLang: 'de'            // "I learn"
   };
   function keyFor(lang) { return KEYS[lang] || ('etrnl.progress.' + lang + '.v1'); }
+
+  /* ---- unified clock ----
+   * Every sync-relevant timestamp is UTC epoch ms (timezone-independent). Device clocks can still drift,
+   * so after each Google Drive write we measure the offset to Google's server clock (file modifiedTime)
+   * and GT.now() = Date.now() + offset. All devices then stamp reviews/deletions on the same timeline. */
+  var CLOCK_KEY = 'etrnl.clock.v1';
+  var clockOffset = 0;
+  try { clockOffset = Number(JSON.parse(localStorage.getItem(CLOCK_KEY) || '{}').offset) || 0; } catch (e) {}
+  if (Math.abs(clockOffset) > 7 * DAY) clockOffset = 0;
+  function now() { return Date.now() + clockOffset; }
+  GT.now = now;
+  function setClockOffset(off) {
+    if (!Number.isFinite(off) || Math.abs(off) > 7 * DAY) return;
+    clockOffset = Math.abs(off) < 1500 ? 0 : Math.round(off);   // ignore network jitter
+    try { localStorage.setItem(CLOCK_KEY, JSON.stringify({ offset: clockOffset, at: Date.now() })); } catch (e) {}
+  }
 
   function fresh(lang) {
     return {
@@ -37,6 +53,8 @@
       created: Date.now(),
       cards: {},          // <id>#rec / <id>#prod (or <id> for drills) -> FSRS card
       later: {},          // item id -> timestamp ("Later" in learn sessions)
+      deleted: {},        // card key -> timestamp of removal (tombstone, so other devices don't resurrect it)
+      resetAt: 0,         // timestamp of the last "reset progress" (older cards from other devices are dropped)
       log: {},            // 'YYYY-MM-DD' -> { reviews, learned }
       lastPractice: null,
       lastExport: null
@@ -82,6 +100,8 @@
         created: d.created || f.created,
         cards: mig.cards,
         later: d.later && typeof d.later === 'object' ? d.later : {},
+        deleted: d.deleted && typeof d.deleted === 'object' ? d.deleted : {},
+        resetAt: Number(d.resetAt) || 0,
         log: d.log && typeof d.log === 'object' ? d.log : {},
         lastPractice: d.lastPractice || null,
         lastExport: d.lastExport || null
@@ -164,65 +184,90 @@
   function baseId(key) { return String(key || '').replace(/#(rec|prod)$/, ''); }
   function D() { return loadLang(active); }
 
-  /* ---- non-destructive merge across devices ----
-   * Rules (handoff_3.md §2):
-   *  - Per card: "known" is never lost; otherwise the fresher card (last, then reps, then due) wins; earliest added kept.
-   *  - later: union (max timestamp), minus any item that already has a card in cards.
+  /* ---- merge across devices (last-writer-wins on the unified clock) ----
+   *  - Per card: the card touched most recently (max of last / known / added) wins. A tie prefers Known,
+   *    then more reps. Earliest `added` is kept.
+   *  - deleted (tombstones): a card is dropped when its removal is newer than its last change.
+   *  - resetAt: cards / later / log older than the latest reset are dropped.
+   *  - later: union (max timestamp), minus any item that already has a card.
    *  - log: per-day max of reviews and learned (idempotent across repeated syncs). */
+  function cardTs(c) { return Math.max(Number(c && c.last) || 0, Number(c && c.known) || 0, Number(c && c.added) || 0); }
   function mergeCard(a, b) {
     if (!a || typeof a !== 'object') return Object.assign({}, b);
     if (!b || typeof b !== 'object') return Object.assign({}, a);
     var added = Math.min(a.added || Infinity, b.added || Infinity);
-    var hasAdded = Number.isFinite(added);
-    if (a.state === 'known' || b.state === 'known') {
-      var kTs = Math.max(a.known || 0, b.known || 0, a.last || 0, b.last || 0, hasAdded ? added : 0) || Date.now();
-      return { state: 'known', known: kTs, last: kTs, added: hasAdded ? added : kTs };
-    }
-    var ta = a.last || a.known || a.added || 0;
-    var tb = b.last || b.known || b.added || 0;
-    var win;
-    if (tb !== ta) win = tb > ta ? b : a;
+    var ta = cardTs(a), tb = cardTs(b), win;
+    if (ta !== tb) win = tb > ta ? b : a;
+    else if ((a.state === 'known') !== (b.state === 'known')) win = b.state === 'known' ? b : a;
     else if ((b.reps || 0) !== (a.reps || 0)) win = (b.reps || 0) > (a.reps || 0) ? b : a;
     else win = (b.due || 0) >= (a.due || 0) ? b : a;
     var out = Object.assign({}, win);
-    if (hasAdded) out.added = added;
+    if (Number.isFinite(added)) out.added = added;
     return out;
   }
 
   function mergeLangData(localD, incD, lang) {
     var a = normalize(localD, lang).data;
     var b = normalize(incD, lang).data;
+    var resetAt = Math.max(a.resetAt || 0, b.resetAt || 0);
+    var deleted = {};
+    [a.deleted, b.deleted].forEach(function (src) {
+      Object.keys(src).forEach(function (k) { var t = Number(src[k]) || 0; if (t > resetAt && t > (deleted[k] || 0)) deleted[k] = t; });
+    });
     var cards = {};
     Object.keys(a.cards).forEach(function (k) { cards[k] = Object.assign({}, a.cards[k]); });
     Object.keys(b.cards).forEach(function (k) {
       cards[k] = cards[k] ? mergeCard(cards[k], b.cards[k]) : Object.assign({}, b.cards[k]);
     });
+    Object.keys(cards).forEach(function (k) {
+      var t = cardTs(cards[k]);
+      if ((resetAt && t < resetAt) || (deleted[k] && t <= deleted[k])) delete cards[k];
+      else delete deleted[k];
+    });
     var later = {};
     Object.keys(a.later).forEach(function (id) { later[id] = a.later[id]; });
     Object.keys(b.later).forEach(function (id) { later[id] = Math.max(later[id] || 0, b.later[id] || 0); });
+    Object.keys(later).forEach(function (id) { if (resetAt && later[id] < resetAt) delete later[id]; });
     Object.keys(cards).forEach(function (k) { delete later[baseId(k)]; });
+    var resetDay = resetAt ? dayKey(resetAt) : '';
     var log = {};
-    Object.keys(a.log).forEach(function (day) {
-      log[day] = { reviews: (a.log[day] && a.log[day].reviews) || 0, learned: (a.log[day] && a.log[day].learned) || 0 };
+    [a.log, b.log].forEach(function (src) {
+      Object.keys(src).forEach(function (day) {
+        if (resetDay && day < resetDay) return;
+        var prev = log[day] || { reviews: 0, learned: 0 }, cur = src[day] || {};
+        log[day] = { reviews: Math.max(prev.reviews, cur.reviews || 0), learned: Math.max(prev.learned, cur.learned || 0) };
+      });
     });
-    Object.keys(b.log).forEach(function (day) {
-      var prev = log[day] || { reviews: 0, learned: 0 };
-      var cur = b.log[day] || {};
-      log[day] = {
-        reviews: Math.max(prev.reviews, cur.reviews || 0),
-        learned: Math.max(prev.learned, cur.learned || 0)
-      };
-    });
+    var lp = Math.max(a.lastPractice || 0, b.lastPractice || 0);
     return {
       version: SCHEMA_VERSION,
       language: lang,
       created: Math.min(a.created || Date.now(), b.created || Date.now()),
       cards: cards,
       later: later,
+      deleted: deleted,
+      resetAt: resetAt,
       log: log,
-      lastPractice: Math.max(a.lastPractice || 0, b.lastPractice || 0) || null,
+      lastPractice: lp && lp >= resetAt ? lp : null,
       lastExport: Math.max(a.lastExport || 0, b.lastExport || 0) || null
     };
+  }
+
+  /** Order-independent fingerprint of progress: tells whether the local merge has anything the remote file lacks. */
+  function stableStr(v) {
+    if (v === null || typeof v !== 'object') return JSON.stringify(v === undefined ? null : v);
+    if (Array.isArray(v)) return '[' + v.map(stableStr).join(',') + ']';
+    return '{' + Object.keys(v).sort().filter(function (k) { return v[k] !== undefined; }).map(function (k) { return JSON.stringify(k) + ':' + stableStr(v[k]); }).join(',') + '}';
+  }
+  function progressPrint(progress) {
+    var out = {};
+    Object.keys(progress || {}).sort().forEach(function (lang) {
+      var d = normalize(progress[lang], lang).data;
+      if (!Object.keys(d.cards).length && !Object.keys(d.later).length && !Object.keys(d.log).length &&
+          !Object.keys(d.deleted).length && !d.resetAt) return;
+      out[lang] = { cards: d.cards, later: d.later, deleted: d.deleted, resetAt: d.resetAt, log: d.log };
+    });
+    return stableStr(out);
   }
 
   function parseImportText(text) {
@@ -289,6 +334,7 @@
     setCard: function (key, card) {
       var d = D();
       d.cards[key] = card;
+      delete d.deleted[key];
       delete d.later[baseId(key)];
       store.save();
     },
@@ -309,13 +355,21 @@
       delete d.later[id];
       store.save();
     },
-    removeCard: function (key) { delete D().cards[key]; store.save(); },
-    removeItem: function (id) {
-      var c = D().cards;
-      delete c[id]; delete c[id + '#rec']; delete c[id + '#prod'];
+    removeCard: function (key) {
+      var d = D();
+      if (d.cards[key]) d.deleted[key] = Math.max(now(), cardTs(d.cards[key]) + 1);
+      delete d.cards[key];
       store.save();
     },
-    markLater: function (id) { D().later[id] = Date.now(); store.save(); },
+    removeItem: function (id) {
+      var d = D(), t = now();
+      [id, id + '#rec', id + '#prod'].forEach(function (k) {
+        if (d.cards[k]) d.deleted[k] = Math.max(t, cardTs(d.cards[k]) + 1);
+        delete d.cards[k];
+      });
+      store.save();
+    },
+    markLater: function (id) { D().later[id] = now(); store.save(); },
     setSetting: function (k, v) { settings[k] = v; store.save(); },
     dayKey: dayKey,
     logActivity: function (kind, n) {
@@ -324,14 +378,15 @@
       e[kind] = (e[kind] || 0) + (n || 1);
       store.save();
     },
-    markPracticed: function () { D().lastPractice = Date.now(); store.save(); },
+    markPracticed: function () { D().lastPractice = now(); store.save(); },
 
     buildPayload: function (markExport) {
       var now = Date.now(), progress = {};
       Object.keys(Object.assign({}, KEYS, datas)).forEach(function (lang) {
         var d = loadLang(lang);
         if (markExport && lang === active) d.lastExport = now;
-        if (Object.keys(d.cards).length || Object.keys(d.later).length || Object.keys(d.log).length || lang === active) {
+        if (Object.keys(d.cards).length || Object.keys(d.later).length || Object.keys(d.log).length ||
+            Object.keys(d.deleted || {}).length || d.resetAt || lang === active) {
           progress[lang] = d;
         }
       });
@@ -378,7 +433,8 @@
     mergeCard: mergeCard,
     mergeLangData: mergeLangData,
     /** Reset progress of the ACTIVE language only. */
-    reset: function () { datas[active] = fresh(active); store.save(); }
+    reset: function () { var f = fresh(active); f.resetAt = now(); datas[active] = f; store.save(); },
+    progressPrint: progressPrint
   };
 
   /* ---- Sync folder / file via File System Access API (OneDrive / Google Drive Desktop / local folder) ----
@@ -584,17 +640,46 @@
     }
   };
 
-  /* ---- Google Drive appDataFolder sync via Google Identity Services (OAuth in browser) ----
-   * Token is kept strictly in memory (never in URL, localStorage, or logs).
-   * Works on http://localhost and HTTPS static hosts (e.g. Netlify). */
-  var GD_SCOPE = 'https://www.googleapis.com/auth/drive.appdata';
+  /* ---- Google Drive appDataFolder sync via Google Identity Services (OAuth in the browser, no backend) ----
+   * Storage is the user's own Google Drive (hidden appDataFolder, file etrnl-progress.json). Nothing else is stored anywhere.
+   * - Connect = 2 clicks: "Connect Google Drive" → pick the Google account / Allow.
+   * - Afterwards it syncs by itself: ~2 s after every change, when the tab becomes visible, and every 2 min while open.
+   * - Browser-only OAuth gives 1-hour tokens and no refresh token, so a new tab (or after 1 h) re-authorises silently
+   *   on the first tap anywhere (Google's popup opens and closes on its own).
+   * - Merge is last-writer-wins per card on the unified clock (GT.now), with tombstones for removals and resets,
+   *   so an older state on another device can never overwrite a newer review.
+   * The access token lives only in memory (never in URL, localStorage or logs). */
+
+  // App owner: paste the OAuth "Web application" Client ID here once (it is public, not a secret).
+  // Then nobody has to enter anything: users only click Connect. Leave empty to enter it in the User tab instead.
+  var GD_CLIENT_ID = '';
+
+  var GD_DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.appdata';
+  var GD_SCOPE = GD_DRIVE_SCOPE + ' email';
   var GD_FILE = 'etrnl-progress.json';
-  var gdToken = null, gdTokenExp = 0, gdFileId = null, gsiLoadPromise = null;
+  var GD_META_KEY = 'etrnl.gdrive.v1';
+  var GD_API = 'https://www.googleapis.com/drive/v3/files';
+  var GD_UPLOAD = 'https://www.googleapis.com/upload/drive/v3/files';
+  var GD_POLL_MS = 120000;
+
+  var gdToken = null, gdTokenExp = 0, gsiLoadPromise = null, gdClient = null, gdClientCid = '', gdPending = null;
+  var gdAutoTimer = null, gdPollTimer = null, gdAgain = false, gdTapArmed = false, gdEditSeq = 0, gdInitDone = false;
+  var gdMeta = readJSON(GD_META_KEY) || {};   // { enabled, email, fileId, remoteModified, lastSync, dirty }
+  function saveGdMeta() { writeJSON(GD_META_KEY, gdMeta); }
+  function gdClientId() { return String(GD_CLIENT_ID || settings.gdriveClientId || '').trim(); }
+  function gdTokenValid() { return !!gdToken && Date.now() < gdTokenExp - 60000; }
+
   var gdState = {
     isHttp: typeof location !== 'undefined' && /^https?:$/.test(location.protocol),
-    connected: false,
+    builtInClientId: !!GD_CLIENT_ID,
+    get hasClientId() { return !!gdClientId(); },
+    get enabled() { return !!gdMeta.enabled; },
+    get connected() { return !!gdMeta.enabled && gdTokenValid(); },
+    get email() { return gdMeta.email || ''; },
+    get lastSync() { return gdMeta.lastSync || null; },
+    get pending() { return !!gdMeta.dirty; },
+    needsTap: false,
     busy: false,
-    lastSync: null,
     error: null
   };
 
@@ -608,38 +693,54 @@
       s.src = 'https://accounts.google.com/gsi/client';
       s.async = true;
       s.onload = function () { resolve(); };
-      s.onerror = function () { gsiLoadPromise = null; reject(new Error('Could not load Google Identity Services script.')); };
+      s.onerror = function () { gsiLoadPromise = null; reject(new Error('Could not reach Google (offline?).')); };
       document.head.appendChild(s);
     });
     return gsiLoadPromise;
   }
 
-  function ensureGdToken(interactive) {
-    if (gdToken && Date.now() < gdTokenExp - 30000) return Promise.resolve(gdToken);
-    if (!gdState.isHttp) return Promise.reject(new Error('Google OAuth requires http://localhost or an https:// domain (not file://).'));
-    var cid = String(settings.gdriveClientId || '').trim();
-    if (!cid) return Promise.reject(new Error('Enter your Google OAuth Client ID first.'));
-    if (!interactive) return Promise.reject(new Error('Google Drive session expired — click Sync with Google Drive.'));
+  /** Opens Google's token popup. Must start from a user gesture (click / tap), otherwise the browser blocks it. */
+  function requestToken() {
+    if (!gdState.isHttp) return Promise.reject(new Error('Google sign-in needs the hosted app (https://…) or http://localhost, not file://.'));
+    var cid = gdClientId();
+    if (!cid) return Promise.reject(new Error('Google OAuth Client ID is missing (see Setup below).'));
     return loadGSI().then(function () {
       return new Promise(function (resolve, reject) {
-        var client = window.google.accounts.oauth2.initTokenClient({
-          client_id: cid,
-          scope: GD_SCOPE,
-          callback: function (resp) {
-            if (!resp || resp.error || !resp.access_token) {
-              reject(new Error((resp && (resp.error_description || resp.error)) || 'Google sign-in was cancelled.'));
-              return;
+        var oauth2 = window.google.accounts.oauth2;
+        if (!gdClient || gdClientCid !== cid) {
+          gdClientCid = cid;
+          gdClient = oauth2.initTokenClient({
+            client_id: cid,
+            scope: GD_SCOPE,
+            include_granted_scopes: true,
+            callback: function (resp) {
+              var p = gdPending; gdPending = null;
+              if (!p) return;
+              if (!resp || resp.error || !resp.access_token) {
+                return p.reject(new Error((resp && (resp.error_description || resp.error)) || 'Google sign-in was cancelled.'));
+              }
+              if (oauth2.hasGrantedAllScopes && !oauth2.hasGrantedAllScopes(resp, GD_DRIVE_SCOPE)) {
+                return p.reject(new Error('Please tick “See, create and delete its own configuration data in your Google Drive”.'));
+              }
+              gdToken = resp.access_token;
+              gdTokenExp = Date.now() + (Number(resp.expires_in) || 3599) * 1000;
+              p.resolve(gdToken);
+            },
+            error_callback: function (err) {
+              var p = gdPending; gdPending = null;
+              if (!p) return;
+              var t = err && err.type;
+              p.reject(new Error(t === 'popup_closed' ? 'Google sign-in was closed.' :
+                t === 'popup_failed_to_open' ? 'The browser blocked Google’s popup. Tap again or allow popups for this site.' :
+                (err && err.message) || 'Google sign-in failed.'));
             }
-            gdToken = resp.access_token;
-            gdTokenExp = Date.now() + (Number(resp.expires_in) || 3500) * 1000;
-            gdState.connected = true;
-            resolve(gdToken);
-          },
-          error_callback: function (err) {
-            reject(new Error((err && err.message) || 'Google OAuth popup failed.'));
-          }
-        });
-        client.requestAccessToken({ prompt: '' });
+          });
+        }
+        if (gdPending) gdPending.reject(new Error('superseded'));
+        gdPending = { resolve: resolve, reject: reject };
+        var o = { prompt: '' };
+        if (gdMeta.email) o.login_hint = gdMeta.email;
+        gdClient.requestAccessToken(o);
       });
     });
   }
@@ -647,93 +748,207 @@
   function gdFetch(url, opts) {
     opts = opts || {};
     opts.headers = Object.assign({ Authorization: 'Bearer ' + gdToken }, opts.headers || {});
-    return fetch(url, opts).then(function (res) {
-      if (res.status === 401) { gdToken = null; gdTokenExp = 0; gdState.connected = false; }
-      if (!res.ok) throw new Error('Google Drive API error (' + res.status + ').');
+    return fetch(url, opts).catch(function () {
+      throw new Error('Offline — will sync when the connection is back.');
+    }).then(function (res) {
+      if (res.status === 401) { gdToken = null; gdTokenExp = 0; throw new Error('Google session expired — tap anywhere to resume.'); }
+      if (!res.ok) throw new Error('Google Drive error (' + res.status + ').');
       return res;
     });
   }
 
+  function gdFetchEmail() {
+    if (gdMeta.email) return Promise.resolve();
+    return gdFetch('https://www.googleapis.com/oauth2/v3/userinfo').then(function (r) { return r.json(); }).then(function (u) {
+      if (u && u.email) { gdMeta.email = u.email; saveGdMeta(); }
+    }).catch(function () {});
+  }
+
+  function localPrint() { return progressPrint(store.buildPayload(false).progress); }
+
+  function uploadPayload(fileId) {
+    var jsonStr = JSON.stringify(store.buildPayload(false));
+    var t0 = Date.now(), req;
+    if (fileId) {
+      req = gdFetch(GD_UPLOAD + '/' + encodeURIComponent(fileId) + '?uploadType=media&fields=id,modifiedTime', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+        body: jsonStr
+      });
+    } else {
+      var boundary = 'etrnl_gd_' + Date.now();
+      var meta = JSON.stringify({ name: GD_FILE, parents: ['appDataFolder'] });
+      req = gdFetch(GD_UPLOAD + '?uploadType=multipart&fields=id,modifiedTime', {
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/related; boundary=' + boundary },
+        body: '--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + meta +
+          '\r\n--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + jsonStr +
+          '\r\n--' + boundary + '--'
+      });
+    }
+    return req.then(function (r) { return r.json(); }).then(function (f) {
+      // Google's modifiedTime is the server clock at write time → offset of this device's clock.
+      var server = Date.parse(f && f.modifiedTime);
+      if (Number.isFinite(server)) setClockOffset(server - (t0 + Date.now()) / 2);
+      return f;
+    });
+  }
+
+  /** One sync round: pull (only if the Drive file changed) → merge → push (only if Drive lacks something). */
   function gdSyncNow(opts) {
     opts = opts || {};
-    if (gdState.busy) return Promise.resolve(null);
+    if (gdState.busy) { gdAgain = true; return Promise.resolve(null); }
+    if (!gdTokenValid()) {
+      if (!opts.interactive) { armTapResume(); return Promise.resolve(null); }
+    }
     gdState.busy = true;
     gdState.error = null;
     notifySync(false);
-    var summary = '';
-    return ensureGdToken(!opts.silent).then(function () {
+    var seq = gdEditSeq, dataChanged = false, summary = '';
+    var tokenStep = gdTokenValid() ? Promise.resolve() : requestToken();
+    return tokenStep.then(function () {
+      gdState.needsTap = false;
+      if (!gdMeta.enabled) { gdMeta.enabled = true; gdMeta.dirty = true; saveGdMeta(); }
+      return gdFetchEmail();
+    }).then(function () {
       var q = encodeURIComponent("name='" + GD_FILE + "' and trashed=false");
-      return gdFetch('https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&pageSize=1&fields=files(id,name,modifiedTime)&q=' + q);
-    }).then(function (res) {
-      return res.json();
-    }).then(function (list) {
-      var f = list && list.files && list.files[0];
-      gdFileId = f ? f.id : null;
-      if (!gdFileId) return '';
-      return gdFetch('https://www.googleapis.com/drive/v3/files/' + encodeURIComponent(gdFileId) + '?alt=media').then(function (r) { return r.text(); });
-    }).then(function (remoteText) {
-      var trimmed = String(remoteText || '').trim();
-      if (trimmed) {
-        summary = store.importJSON(trimmed, { replace: false, keepSettings: true, fromSync: true });
-      }
-      var payload = store.buildPayload(true);
-      var jsonStr = JSON.stringify(payload, null, 1);
-      suppressAutoSync = true;
-      try { store.save(); } finally { suppressAutoSync = false; }
-      if (gdFileId) {
-        return gdFetch('https://www.googleapis.com/upload/drive/v3/files/' + encodeURIComponent(gdFileId) + '?uploadType=media', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-          body: jsonStr
+      return gdFetch(GD_API + '?spaces=appDataFolder&pageSize=10&orderBy=modifiedTime%20desc&fields=files(id,modifiedTime)&q=' + q);
+    }).then(function (r) { return r.json(); }).then(function (list) {
+      var files = (list && list.files) || [];
+      var main = files[0] || null;
+      var extras = files.slice(1);   // two devices created the file at the same moment: merge all, keep one
+      var remoteChanged = !!main && (main.id !== gdMeta.fileId || main.modifiedTime !== gdMeta.remoteModified || extras.length > 0);
+      var before = localPrint(), remotePrint = null;
+      var pull = Promise.resolve();
+      if (remoteChanged) {
+        files.forEach(function (f) {
+          pull = pull.then(function () {
+            return gdFetch(GD_API + '/' + encodeURIComponent(f.id) + '?alt=media').then(function (r) { return r.text(); }).then(function (text) {
+              var trimmed = String(text || '').trim();
+              if (!trimmed) return;
+              var parsed = null;
+              try { parsed = JSON.parse(trimmed); } catch (e) { return; }   // corrupt file → overwritten below
+              if (f === main && parsed && parsed.app === 'etrnl' && parsed.progress) remotePrint = progressPrint(parsed.progress);
+              store.importJSON(trimmed, { replace: false, keepSettings: true, fromSync: true });
+            });
+          });
         });
       }
-      var boundary = 'etrnl_gd_' + Date.now();
-      var meta = JSON.stringify({ name: GD_FILE, parents: ['appDataFolder'] });
-      var body = '--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + meta +
-        '\r\n--' + boundary + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + jsonStr +
-        '\r\n--' + boundary + '--';
-      return gdFetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', {
-        method: 'POST',
-        headers: { 'Content-Type': 'multipart/related; boundary=' + boundary },
-        body: body
-      }).then(function (r) { return r.json(); }).then(function (created) {
-        if (created && created.id) gdFileId = created.id;
+      return pull.then(function () {
+        var after = localPrint();
+        dataChanged = after !== before;
+        var mustPush = !main || extras.length > 0 ||
+          (remoteChanged ? after !== remotePrint : (!!gdMeta.dirty || gdEditSeq !== seq));
+        var step = mustPush ? uploadPayload(main && main.id).then(function (f) {
+          gdMeta.fileId = (f && f.id) || (main && main.id) || gdMeta.fileId;
+          gdMeta.remoteModified = (f && f.modifiedTime) || null;
+          summary = 'saved to Drive';
+        }) : Promise.resolve().then(function () {
+          gdMeta.fileId = main.id;
+          gdMeta.remoteModified = main.modifiedTime;
+          summary = dataChanged ? 'updated from Drive' : 'up to date';
+        });
+        return step.then(function () {
+          var del = Promise.resolve();
+          extras.forEach(function (f) {
+            del = del.then(function () { return gdFetch(GD_API + '/' + encodeURIComponent(f.id), { method: 'DELETE' }).catch(function () {}); });
+          });
+          return del;
+        });
       });
     }).then(function () {
-      if (!summary) {
-        var p = store.buildPayload(false).progress;
-        summary = Object.keys(p).map(function (l) { return Object.keys(p[l].cards).length + ' ' + l.toUpperCase() + ' cards'; }).join(' · ') + ' synced';
-      }
+      if (gdEditSeq === seq) gdMeta.dirty = false;
+      gdMeta.lastSync = Date.now();
+      saveGdMeta();
       gdState.busy = false;
-      gdState.connected = true;
-      gdState.lastSync = Date.now();
       gdState.error = null;
-      notifySync(true);
+      startPoll();
+      notifySync(dataChanged);
+      if (gdAgain || gdEditSeq !== seq) { gdAgain = false; scheduleGdSoon(800); }
       return summary;
     }).catch(function (err) {
       gdState.busy = false;
-      gdState.error = err && err.message ? err.message : String(err);
+      gdAgain = false;
+      var msg = err && err.message ? err.message : String(err);
+      if (msg !== 'superseded') gdState.error = msg;
+      if (!gdTokenValid() && gdMeta.enabled) armTapResume();
       notifySync(false);
-      if (!opts.silent) throw err;
+      if (opts.interactive) throw err;
       return null;
     });
   }
 
-  scheduleGdAutoSync = function () {
-    if (!gdToken || Date.now() >= gdTokenExp - 30000) return;
+  function scheduleGdSoon(ms) {
     clearTimeout(gdAutoTimer);
-    gdAutoTimer = setTimeout(function () { gdSyncNow({ silent: true }); }, 1500);
+    gdAutoTimer = setTimeout(function () { gdSyncNow({}); }, ms);
+  }
+  function startPoll() {
+    clearInterval(gdPollTimer);
+    gdPollTimer = setInterval(function () {
+      if (gdMeta.enabled && gdTokenValid() && document.visibilityState === 'visible') gdSyncNow({});
+    }, GD_POLL_MS);
+  }
+
+  /** New tab or expired token: the first tap anywhere silently re-authorises (popups need a user gesture). */
+  function onFirstTap(e) {
+    var t = e && e.target;
+    if (t && t.closest && t.closest('[data-act^="gdrive-"]')) return;   // the Drive buttons handle it themselves
+    disarmTap();
+    if (!gdMeta.enabled || gdTokenValid()) return;
+    gdSyncNow({ interactive: true }).catch(function () {});
+  }
+  function armTapResume() {
+    if (!gdMeta.enabled || !gdState.isHttp || !gdClientId() || typeof document === 'undefined') return;
+    if (!gdState.needsTap) { gdState.needsTap = true; notifySync(false); }
+    if (gdTapArmed) return;
+    gdTapArmed = true;
+    loadGSI().catch(function () {});
+    document.addEventListener('pointerdown', onFirstTap, true);
+    document.addEventListener('keydown', onFirstTap, true);
+  }
+  function disarmTap() {
+    gdTapArmed = false;
+    document.removeEventListener('pointerdown', onFirstTap, true);
+    document.removeEventListener('keydown', onFirstTap, true);
+  }
+
+  scheduleGdAutoSync = function () {
+    if (!gdMeta.enabled) return;
+    gdEditSeq++;
+    if (!gdMeta.dirty) { gdMeta.dirty = true; saveGdMeta(); }
+    if (gdTokenValid()) scheduleGdSoon(2000);
+    else armTapResume();
   };
 
   store.gdrive = {
     get state() { return gdState; },
-    syncNow: function (opts) { return gdSyncNow(opts); },
+    /** Click 1 of 2: opens Google's popup (click 2 = choose account / Allow), then syncs. */
+    connect: function () { disarmTap(); return gdSyncNow({ interactive: true }); },
+    syncNow: function () { disarmTap(); return gdSyncNow({ interactive: true }); },
+    init: function () {
+      if (!gdMeta.enabled || !gdState.isHttp || !gdClientId()) return;
+      if (!gdTokenValid()) armTapResume();
+      if (gdInitDone) return;
+      gdInitDone = true;
+      document.addEventListener('visibilitychange', function () {
+        if (!gdMeta.enabled) return;
+        if (document.visibilityState === 'visible') {
+          if (gdTokenValid()) gdSyncNow({}); else armTapResume();
+        } else if (gdMeta.dirty && gdTokenValid()) {
+          gdSyncNow({});   // best effort: push before the tab is backgrounded / closed
+        }
+      });
+    },
     disconnect: function () {
       clearTimeout(gdAutoTimer);
+      clearInterval(gdPollTimer);
+      disarmTap();
       var tok = gdToken;
-      gdToken = null; gdTokenExp = 0; gdFileId = null;
-      gdState.connected = false; gdState.busy = false; gdState.error = null;
-      if (tok && typeof window !== 'undefined' && window.google && window.google.accounts && window.google.accounts.oauth2) {
+      gdToken = null; gdTokenExp = 0;
+      gdMeta = {};
+      saveGdMeta();
+      gdState.busy = false; gdState.error = null; gdState.needsTap = false;
+      if (tok && window.google && window.google.accounts && window.google.accounts.oauth2) {
         try { window.google.accounts.oauth2.revoke(tok, function () {}); } catch (e) {}
       }
       notifySync(false);
@@ -743,7 +958,8 @@
   if (typeof document !== 'undefined' && syncSupported) {
     document.addEventListener('visibilitychange', function () {
       if (document.visibilityState === 'visible' && syncHandle && syncState.permission === 'granted') {
-        scheduleAutoSync();
+        clearTimeout(autoSyncTimer);
+        autoSyncTimer = setTimeout(function () { syncNow({ silent: true }); }, 1000);
       }
     });
   }

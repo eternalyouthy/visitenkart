@@ -44,6 +44,9 @@
         formal: 'Формально: вежливая форма, учреждения, письма, незнакомые люди.',
         neutral: 'Нейтрально: подходит почти везде — на работе и в быту.',
         informal: 'Неформально: с друзьями и близкими коллегами.',
+        slang: 'Сленг: улица, друзья, соцсети. Не для работы и официальных ситуаций.',
+        vulgar: 'Грубо / мат: только среди своих, и то не со всеми.',
+        vulgarWarn: 'Это мат или очень грубое слово. Знать полезно, чтобы понимать улицу, рэп и фильмы. Но скажешь не тому человеку и не в том месте — могут и лицо подровнять. С незнакомыми, на работе и при старших — никогда.',
         literary: 'Книжно-выразительно: родом из классики, но понятно носителям в живой речи, эссе и разговоре — главное, без пафоса.',
         ironic: 'Иронично: литературная формула с тонкой усмешкой — уместна в умном разговоре, статье или дружеском споре.',
         elevated: 'Возвышенно-образно: сильная литературная метафора для точных описаний, писем и глубоких разговоров.'
@@ -83,6 +86,9 @@
         formal: 'Formal: polite address, offices, letters, people you don’t know.',
         neutral: 'Neutral: fits almost everywhere — at work and in everyday life.',
         informal: 'Informal: with friends and close colleagues.',
+        slang: 'Slang: the street, friends, social media. Not for work or formal situations.',
+        vulgar: 'Vulgar / swearing: only among close friends, and not with all of them.',
+        vulgarWarn: 'This is a swear word or very rude slang. Worth knowing so you understand the street, rap and films. Say it to the wrong person in the wrong place and you might get your face rearranged. Never with strangers, at work or around older people.',
         literary: 'Literary & expressive: born in classic literature, still understood by native speakers in essays and conversation — best used lightly, without melodrama.',
         ironic: 'Ironic: a literary turn of phrase with dry wit — natural in sharp conversation, essays or friendly debate.',
         elevated: 'Elevated & vivid: a strong literary image suited to precise descriptions, letters and thoughtful conversation.'
@@ -122,6 +128,9 @@
         formal: 'Formell: höfliche Anrede, Behörden, Briefe, fremde Menschen.',
         neutral: 'Neutral: passt fast überall — bei der Arbeit und im Alltag.',
         informal: 'Informell: mit Freunden und vertrauten Kollegen.',
+        slang: 'Slang: Straße, Freunde, Social Media. Nicht für die Arbeit oder formelle Situationen.',
+        vulgar: 'Vulgär / Schimpfwort: nur unter engen Freunden, und auch da nicht mit allen.',
+        vulgarWarn: 'Das ist ein Schimpfwort oder sehr derber Slang. Gut zu kennen, um Straße, Rap und Filme zu verstehen. Sagst du es zur falschen Person am falschen Ort, kann es was auf die Fresse geben. Nie bei Fremden, auf der Arbeit oder bei Älteren.',
         literary: 'Literarisch-ausdrucksstark: stammt aus der Klassik, ist Muttersprachlern aber heute noch vertraut — am besten ohne Pathos verwendet.',
         ironic: 'Ironisch: eine literarische Wendung mit trockenem Witz — passt in kluge Gespräche, Essays oder Debatten.',
         elevated: 'Gehoben & bildhaft: eine prägnante literarische Metapher für genaue Beschreibungen, Briefe und tiefere Gespräche.'

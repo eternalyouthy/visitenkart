@@ -114,6 +114,113 @@
     });
   };
 
+  /* ---------- Expressions: sections (Idioms, Slang, Everyday Phrases) with categories ----------
+   * Same structure in every pack. A section is a topic of tab `expressions` (e.g. `idioms`); its categories are
+   * topics too (`idioms-people`, parent: 'idioms'). Category membership comes from GT.classifyExpressions (a map
+   * per pack) or from items registered with a category as their topic. Every category member is also a member
+   * of its section, so "All idioms" = the section topic. Names are interface text (English). */
+  GT.EXP_SECTIONS = [
+    { id: 'idioms', name: 'Idioms', desc: 'Figurative expressions with literal vs real meaning.', cats: [
+      { id: 'idioms-people', name: 'People & Feelings', desc: 'Relationships, getting along, moods, nerves and happiness.' },
+      { id: 'idioms-talk', name: 'Talking & Understanding', desc: 'Speaking plainly, gossip, jokes, getting it — or not getting it at all.' },
+      { id: 'idioms-work', name: 'Work & Effort', desc: 'Being busy, getting started, putting things off and working smart.' },
+      { id: 'idioms-situations', name: 'Problems & Luck', desc: 'Trouble, hidden problems, good luck and staying afloat.' },
+      { id: 'idioms-decisions', name: 'Decisions & Risk', desc: 'Risky bets, hard choices, staying calm and keeping perspective.' }
+    ] },
+    { id: 'slang', name: 'Slang', desc: 'Street and youth slang: what people actually say among friends.', cats: [
+      { id: 'slang-crew', name: 'Greetings & Crew', desc: 'How friends address and greet each other on the street.' },
+      { id: 'slang-react', name: 'Reactions & Hype', desc: 'Wow, cool, cringe, no way: reacting like a local.' },
+      { id: 'slang-people', name: 'People & Attitude', desc: 'Labels for people, respect, showing off and drama.' },
+      { id: 'slang-life', name: 'Money, Chilling & Street', desc: 'Cash, food, hanging out, partying and getting out of trouble.' },
+      { id: 'slang-rude', name: 'Swearing & Insults (18+)', desc: 'Swear words and fighting words. Know them so you understand them; say them and you may get hit.' }
+    ] },
+    { id: 'everyday', name: 'Everyday Phrases', desc: 'Short high-frequency replies for everyday conversation.', cats: [
+      { id: 'everyday-respond', name: 'Reacting & Replying', desc: 'Really? I see. Exactly. No idea. Quick reactions in conversation.' },
+      { id: 'everyday-opinion', name: 'Agreeing & Doubting', desc: 'It depends, why not, no way, it’s a matter of taste.' },
+      { id: 'everyday-arrange', name: 'Plans & Arrangements', desc: 'We’ll see, sounds good, let me know, I’ll be right back.' },
+      { id: 'everyday-comfort', name: 'Reassuring & Comforting', desc: 'Never mind, don’t worry, we’ll manage, no offence.' },
+      { id: 'everyday-social', name: 'Wishes & Politeness', desc: 'Thanks, you’re welcome, sorry, good luck, get well soon.' }
+    ] }
+  ];
+  /* Chunk functions grouped for the sidebar (ids with - or _). */
+  GT.CHUNK_GROUPS = [
+    { name: 'Discussion', ids: ['opinion', 'agree', 'clarify'] },
+    { name: 'Problems & Services', ids: ['complain', 'problem', 'appointments'] },
+    { name: 'Calls, Emails & Small Talk', ids: ['phone', 'email', 'smalltalk'] },
+    { name: 'IT & Work', ids: ['it_standup', 'it_bug', 'it_help', 'it_meeting'] }
+  ];
+  /** GT.classifyExpressions({ 'idioms-people': [ids], ... }, { slang: { desc, scenario } }) — per pack. */
+  GT.classifyExpressions = function (map, topics) {
+    var p = target();
+    p.expCats = p.expCats || {};
+    Object.keys(map || {}).forEach(function (k) { p.expCats[k] = (p.expCats[k] || []).concat(map[k]); });
+    p.expTopics = p.expTopics || {};
+    Object.keys(topics || {}).forEach(function (k) { p.expTopics[k] = topics[k]; });
+  };
+  function dropMember(p, it, key) {
+    if (!it.memberOf || !it.memberOf[key]) return;
+    delete it.memberOf[key];
+    var list = p.members[key];
+    if (list) { var i = list.indexOf(it); if (i >= 0) list.splice(i, 1); }
+  }
+  /** Rebuild TOPICS.expressions, category memberships, the Expressions menu and chunk groups (after a pack loads). */
+  GT.setupExpressions = function (p) {
+    var T = p.config.TOPICS;
+    if (!T) return;
+    var old = {}, parentOf = {}, list = [], extra = p.expTopics || {};
+    (T.expressions || []).forEach(function (t) { old[t.id] = t; });
+    GT.EXP_SECTIONS.forEach(function (sec) {
+      var o = old[sec.id] || {}, x = extra[sec.id] || {};
+      var u = Object.assign({}, o, x, { id: sec.id, name: sec.name, group: sec.name, hidden: false, section: true,
+        cats: sec.cats.map(function (c) { return c.id; }) });
+      u.desc = x.desc || o.desc || sec.desc;
+      list.push(u);
+      sec.cats.forEach(function (c) {
+        parentOf[c.id] = sec.id;
+        var oc = old[c.id] || {};
+        list.push(Object.assign({}, oc, extra[c.id] || {}, { id: c.id, name: c.name, desc: c.desc, parent: sec.id, group: sec.name, hidden: false,
+          scenario: (extra[c.id] && extra[c.id].scenario) || oc.scenario || u.scenario }));
+      });
+    });
+    var map = p.expCats || {}, seen = {};
+    Object.keys(map).forEach(function (cat) {
+      if (!parentOf[cat]) { p.loadErrors.push('expressions: unknown category ' + cat); return; }
+      map[cat].forEach(function (id) {
+        var it = p.byId[id];
+        if (!it) { p.loadErrors.push('expressions: unknown id ' + id + ' in ' + cat); return; }
+        if (seen[id]) return;
+        seen[id] = true;
+        Object.keys(it.memberOf || {}).forEach(function (k) { if (parentOf[k.slice(12)] && k.indexOf('expressions.') === 0) dropMember(p, it, k); });
+      });
+    });
+    var placed = {};
+    Object.keys(map).forEach(function (cat) {
+      if (!parentOf[cat]) return;
+      map[cat].forEach(function (id) {
+        var it = p.byId[id];
+        if (!it) return;
+        addMember(p, it, 'expressions', cat);
+        if (it.tab === 'expressions' && !placed[id]) { it.topic = cat; placed[id] = true; }   // breadcrumbs show the category
+      });
+    });
+    p.items.forEach(function (it) {
+      Object.keys(it.memberOf || {}).forEach(function (k) {
+        if (k.indexOf('expressions.') === 0 && parentOf[k.slice(12)]) addMember(p, it, 'expressions', parentOf[k.slice(12)]);
+      });
+    });
+    T.expressions = list;
+    // Menu: Idioms · Slang · Everyday Phrases · Chunks · Literary Phrases
+    (p.config.NAV || []).forEach(function (g) {
+      if (g.id !== 'expressions') return;
+      g.items = GT.EXP_SECTIONS.map(function (sec) { return { label: sec.name, href: '#/expressions/' + sec.id, tab: 'expressions', topic: sec.id }; })
+        .concat([{ label: 'Chunks', href: '#/chunks', match: ['chunks'] }, { label: 'Literary Phrases', href: '#/literature', match: ['literature'] }]);
+    });
+    (T.chunks || []).forEach(function (t) {
+      var k = t.id.replace(/-/g, '_');
+      GT.CHUNK_GROUPS.forEach(function (g) { if (g.ids.indexOf(k) >= 0) t.group = g.name; });
+    });
+  };
+
   /**
    * GT.registerRoot({ id, verb, ru, label?, words: [ word entries ], pairs: [...] })
    * Each word gets tab 'roots' (unless it already belongs to a topic) and rootId = root id.

@@ -196,7 +196,7 @@
       words: 'A2–B2 Russian for everyday life, work and discussion. Stress is marked with an accent (говори́ть); you never need to type it.',
       it: 'Professional Russian for IT work: office communication, development, infrastructure and security.',
       chunks: 'Ready-made phrases for speaking and writing, organised by communicative function.',
-      expressions: 'Idioms, short everyday phrases and classic literary lines for natural Russian.',
+      expressions: 'Idioms, youth slang, short everyday phrases, chunks and classic literary lines for natural Russian.',
       literature: 'Lines from Russian literature with a short explanation of their meaning and examples.',
       grammar: 'The core of Russian grammar for learners: aspect, cases after в / на, and verbs of motion — with tables, pitfalls and drills.',
       roots: 'Russian word families built from one root with prefixes (при-, вы-, пере- …), noun and adjective suffixes, and international classical elements.'

@@ -61,6 +61,8 @@ self.GT_DATA_FILES = [
   'expressions_more.js',
   'expressions_more_2.js',
   'expressions_more_3.js',
+  'expressions_slang.js',
+  'expressions_cats.js',
   'literature.js',
   // Roots, prefixes, suffixes & classical roots
   'roots_bauen.js',
@@ -141,7 +143,7 @@ self.GT_PACKS = {
       'data/en/words_more.js', 'data/en/words_more_2.js', 'data/en/words_more_3.js',
       'data/en/it_more.js', 'data/en/it_more_2.js', 'data/en/it_topics_new.js',
       'data/en/expressions_more.js', 'data/en/expressions_more_2.js', 'data/en/expressions_more_3.js',
-      'data/en/literature.js'
+      'data/en/literature.js', 'data/en/slang.js', 'data/en/expressions_cats.js'
     ]
   },
   // Russian: written natively for the shared engine (target `t`, glosses en/de, explanations { en, de }).
@@ -165,6 +167,8 @@ self.GT_PACKS = {
       'expressions_more.js',
       'expressions_more_2.js',
       'expressions_more_3.js',
+      'slang.js',
+      'expressions_cats.js',
       'literature.js',
       'roots_hod.js',
       'roots_pis.js',

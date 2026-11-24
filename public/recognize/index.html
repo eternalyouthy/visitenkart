@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="orbit">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -16,14 +16,17 @@
 <!-- Fonts: loaded online, cached by the service worker when hosted. Offline on file:// falls back to system fonts. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@600&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700&family=Inter+Tight:wght@800&family=Manrope:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="css/app.css">
 <script>
   // Apply saved theme before first paint (avoids a flash of the wrong theme).
   try {
-    var t = localStorage.getItem('gt.theme');
-    if (t === 'system') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    if (t) document.documentElement.setAttribute('data-theme', t);
+    var t = localStorage.getItem('gt.theme'), ok = /^(orbit|holo|nord|autobahn|swiss|light)$/;
+    if (t === 'system') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'orbit';
+    if (!ok.test(t)) t = 'orbit';   // nothing saved (or legacy 'dark') -> Orbit
+    document.documentElement.setAttribute('data-theme', t);
+    var bars = { orbit: '#04060a', holo: '#07061a', nord: '#1b2029', autobahn: '#1b4f9c', swiss: '#ffffff', light: '#f4f6fa' };
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', bars[t]);
   } catch (e) {}
 </script>
 </head>

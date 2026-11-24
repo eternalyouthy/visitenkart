@@ -169,13 +169,56 @@
   }
 
   /* ---------------- theme ---------------- */
+  // Two groups (dark / light); exactly one theme is active. Orbit (dark) is the default.
+  var THEMES = [
+    { id: 'orbit', name: 'Orbit (dark)', mode: 'dark', dot: '#8ccbff', bar: '#04060a' },
+    { id: 'holo', name: 'Holo Glass (dark)', mode: 'dark', dot: '#a99bff', bar: '#07061a' },
+    { id: 'nord', name: 'Nordlicht (dark)', mode: 'dark', dot: '#7fe0c3', bar: '#1b2029' },
+    { id: 'autobahn', name: 'Autobahn (light)', mode: 'light', dot: '#1b4f9c', bar: '#1b4f9c' },
+    { id: 'swiss', name: 'Swiss (light)', mode: 'light', dot: '#e3170a', bar: '#ffffff' },
+    { id: 'light', name: 'Orbit (light)', mode: 'light', dot: '#1f5fe0', bar: '#f4f6fa' }
+  ];
   var mql = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
+  function themeOf(id) {
+    if (id === 'system') id = mql && mql.matches ? 'light' : 'orbit';   // legacy values
+    for (var i = 0; i < THEMES.length; i++) if (THEMES[i].id === id) return THEMES[i];
+    return THEMES[0];   // 'dark', unknown or empty -> Orbit
+  }
   function applyTheme() {
-    var t = S.settings.theme;
-    if (t === 'system') t = mql && mql.matches ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', t);
+    var t = themeOf(S.settings.theme);
+    if (S.settings.theme !== t.id) { S.settings.theme = t.id; S.saveSettings(); }   // migrate legacy 'dark' / 'system'
+    var root = document.documentElement;
+    if (root.getAttribute('data-theme') !== t.id) {
+      // Switch instantly: no half-faded colors from per-element transitions.
+      root.classList.add('theme-switching');
+      root.setAttribute('data-theme', t.id);
+      void root.offsetWidth;
+      setTimeout(function () { root.classList.remove('theme-switching'); }, 50);
+    }
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', t === 'light' ? '#f4f6fa' : '#04060a');
+    if (meta) meta.setAttribute('content', t.bar);
+  }
+  function themeRowsHTML() {
+    var cur = themeOf(S.settings.theme);
+    function group(mode, title) {
+      var on = cur.mode === mode, other = mode === 'dark' ? 'light' : 'dark';
+      var opts = (on ? '' : '<option value="" selected disabled>— off —</option>') +
+        THEMES.filter(function (t) { return t.mode === mode; }).map(function (t) {
+          return '<option value="' + t.id + '"' + (on && t.id === cur.id ? ' selected' : '') + '>' + esc(t.name) + '</option>';
+        }).join('');
+      return '<div class="setting"><div><div class="lbl">' + title + '</div>' +
+        (on ? '<div class="help">Active: ' + esc(cur.name) + '</div>' : '<span class="theme-off">Now active: ' + other + ' theme</span>') + '</div>' +
+        '<div class="theme-pick' + (on ? '' : ' off') + '"><i class="theme-dot" style="background:' + cur.dot + '" aria-hidden="true"></i>' +
+        '<select data-set="theme" aria-label="' + title + '">' + opts + '</select></div></div>';
+    }
+    return group('dark', 'Dark themes') + group('light', 'Light themes');
+  }
+  function refreshThemeRows() {
+    var box = document.getElementById('themeBox');
+    if (!box) return;
+    box.innerHTML = themeRowsHTML();
+    var sel = box.querySelector('.theme-pick:not(.off) select');
+    if (sel) sel.focus();
   }
   if (mql && mql.addEventListener) mql.addEventListener('change', applyTheme);
 
@@ -300,7 +343,7 @@
     document.querySelectorAll('.tab-drop.open').forEach(function (d) { d.classList.remove('open'); });
   }
   function renderNav(active, p) {
-    p = p || curPath();
+    p = p || location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean).map(decodeURIComponent);
     var group = navGroupFor(active, p);
     userBtn.classList.toggle('active', group === 'user');
     if (active === 'user') userBtn.setAttribute('aria-current', 'page'); else userBtn.removeAttribute('aria-current');
@@ -357,6 +400,73 @@
       (right !== '' && right != null ? '<span class="ct' + (opts.due ? ' due' : '') + '">' + right + '</span>' : '') + '</a>';
   }
 
+  /* Expressions sidebar: one collapsible group per section (Idioms, Slang, Everyday Phrases, Chunks, Literary
+   * Phrases). Each group starts with "All …", then its categories. The group you are in opens by itself;
+   * groups you open or close by hand stay that way until the page reloads. */
+  ui.sideOpen = ui.sideOpen || {};
+  sideEl.addEventListener('toggle', function (e) {
+    var d = e.target;
+    if (d && d.classList && d.classList.contains('side-group')) ui.sideOpen[d.dataset.group] = d.open;
+  }, true);
+  function sideGroup(key, n, title, right, here, inner, last) {
+    var open = ui.sideOpen[key] != null ? ui.sideOpen[key] : here;
+    return '<details class="side-group' + (here ? ' here' : '') + (last ? ' last' : '') + '" data-group="' + key + '"' + (open ? ' open' : '') + '>' +
+      '<summary class="side-group-head"><span class="n">' + n + '</span><span class="nm">' + esc(title) + '</span>' +
+      (right ? '<span class="ct">' + right + '</span>' : '') + '<span class="chev">' + icon('chev') + '</span></summary>' +
+      '<div class="side-group-body">' + inner + '</div></details>';
+  }
+  function ctOf(items) { var c = counts(items); return items.length ? c.known + '/' + items.length : ''; }
+  function expressionsSidebar(tab, p, cur) {
+    var h = '<div class="side-label">Expressions</div>', n = 0, groups = [];
+    var onItem = p[0] === 'item';
+    var curT = tab === 'expressions' ? GT.topic('expressions', cur) : null;
+    (GT.EXP_SECTIONS || []).forEach(function (sec) {
+      if (!GT.topic('expressions', sec.id)) return;
+      var all = itemsFor('expressions', sec.id);
+      var here = !!curT && (curT.id === sec.id || curT.parent === sec.id);
+      var inner = sideLink('#/expressions/' + sec.id, '—', 'All ' + (sec.id === 'slang' ? 'slang' : sec.name.toLowerCase()), ctOf(all), { active: here && !onItem && cur === sec.id });
+      var cats = GT.TOPICS.expressions.filter(function (t) { return t.parent === sec.id; });
+      cats.forEach(function (t, i) {
+        var items = itemsFor('expressions', t.id);
+        inner += sideLink('#/expressions/' + t.id, pad2(i + 1), t.name, ctOf(items), { active: cur === t.id && tab === 'expressions', dim: !items.length });
+      });
+      groups.push([sec.id, sec.name, ctOf(all), here, inner]);
+    });
+    // Chunks: All chunks, then functions grouped (Discussion, Problems & Services, …)
+    if ((GT.TOPICS.chunks || []).length) {
+      var chAll = itemsFor('chunks', 'all'), chInner = sideLink('#/chunks/all', '—', 'All chunks', ctOf(chAll), { active: tab === 'chunks' && cur === 'all' });
+      var names = (GT.CHUNK_GROUPS || []).map(function (g) { return g.name; });
+      GT.TOPICS.chunks.forEach(function (t) { if (names.indexOf(t.group) < 0) names.push(t.group); });
+      names.forEach(function (g) {
+        var ts = GT.TOPICS.chunks.filter(function (t) { return t.group === g && visibleTopic(t); });
+        if (!ts.length) return;
+        chInner += '<div class="side-sublabel">' + esc(g) + '</div>';
+        ts.forEach(function (t, i) {
+          var items = itemsFor('chunks', t.id);
+          chInner += sideLink('#/chunks/' + t.id, pad2(i + 1), t.name, ctOf(items), { active: tab === 'chunks' && cur === t.id, dim: !items.length });
+        });
+      });
+      groups.push(['chunks', 'Chunks', ctOf(chAll), tab === 'chunks', chInner]);
+    }
+    var litTopics = (GT.TOPICS.literature || []).filter(visibleTopic);
+    if (litTopics.length) {
+      var litAll = itemsFor('literature', 'all'), litInner = sideLink('#/literature/all', '—', 'All literary phrases', ctOf(litAll), { active: tab === 'literature' && cur === 'all' });
+      litTopics.forEach(function (t, i) {
+        var items = itemsFor('literature', t.id);
+        litInner += sideLink('#/literature/' + t.id, pad2(i + 1), t.name, ctOf(items), { active: tab === 'literature' && cur === t.id, dim: !items.length });
+      });
+      groups.push(['literature', 'Literary Phrases', ctOf(litAll), tab === 'literature', litInner]);
+    }
+    // Entering a group (from another one) opens it, even if it was closed by hand earlier.
+    var hereKey = null;
+    groups.forEach(function (g) { if (g[3]) hereKey = g[0]; });
+    if (hereKey !== ui.sideHere) { if (hereKey) ui.sideOpen[hereKey] = true; ui.sideHere = hereKey; }
+    groups.forEach(function (g, i) {
+      h += sideGroup(g[0], pad2(++n), g[1], g[2], g[3], g[4], i === groups.length - 1);
+    });
+    return h;
+  }
+
   function renderSidebar(tab, p) {
     var html = '', cur = p[1];
     if (p[0] === 'item') { var it = GT.byId[p[1]]; cur = it ? it.topic : null; }
@@ -380,28 +490,7 @@
       }
       html += sidePractice();
     } else if (inExp) {
-      html += '<div class="side-label">Expressions</div>';
-      GT.TOPICS.expressions.filter(visibleTopic).forEach(function (t, i) {
-        var items = itemsFor('expressions', t.id), c = counts(items);
-        html += sideLink('#/expressions/' + t.id, pad2(i + 1), t.name, items.length ? c.known + '/' + items.length : '', { active: tab === 'expressions' && cur === t.id, dim: !items.length });
-      });
-      var litTopics = (GT.TOPICS.literature || []).filter(visibleTopic);
-      if (litTopics.length) {
-        html += '<div class="side-label">Literary Phrases</div>' +
-          sideLink('#/literature/all', '—', 'All literary', itemsFor('literature', 'all').length, { active: tab === 'literature' && cur === 'all' });
-        litTopics.forEach(function (t, i) {
-          var items = itemsFor('literature', t.id), c = counts(items);
-          html += sideLink('#/literature/' + t.id, pad2(i + 1), t.name, items.length ? c.known + '/' + items.length : '', { active: tab === 'literature' && cur === t.id, dim: !items.length });
-        });
-      }
-      html += '<div class="side-label">Chunks</div>' + sideLink('#/chunks/all', '—', 'All chunks', itemsFor('chunks', 'all').length, { active: tab === 'chunks' && cur === 'all' });
-      var groupE = null, nE = 0;
-      GT.TOPICS.chunks.forEach(function (t) {
-        if (t.group !== groupE) { groupE = t.group; nE = 0; html += '<div class="side-label">' + esc(groupE) + '</div>'; }
-        nE++;
-        var items = itemsFor('chunks', t.id), c = counts(items);
-        html += sideLink('#/chunks/' + t.id, pad2(nE), t.name, items.length ? c.known + '/' + items.length : '', { active: tab === 'chunks' && cur === t.id, dim: !items.length });
-      });
+      html += expressionsSidebar(tab, p, cur);
       html += sidePractice();
     } else if (tab === 'words' || tab === 'grammar') {
       var group = null, n = 0;
@@ -502,9 +591,7 @@
       '<h1 class="about-title">' + esc(about.title) + '</h1><div class="about-body" id="bysBody">' + about.body + '</div>' +
       '<div class="bys-controls" lang="en"><button class="bys-btn bys-toggle" type="button" data-act="bys-toggle" aria-controls="bysBody" aria-expanded="' + expanded + '">' +
       (expanded ? 'Show Less ↑' : 'Read More ↓') + '</button></div></article>';
-    var authorHref = location.protocol === 'file:' ? '../index.html' : '../';
-    var author = '<footer class="start-author"><a class="btn ghost" href="' + authorHref + '">About the author <span aria-hidden="true">→</span></a></footer>';
-    page('<div class="start-grid">' + panel + article + '</div>' + author, 'start');
+    page('<div class="start-grid">' + panel + article + '</div>', 'start');
     if (restoreFocus) $('.about-languages [aria-current="page"]', mainEl).focus({ preventScroll: true });
   }
 
@@ -521,10 +608,6 @@
         out += notice('chat', (d.lastPractice ? 'It’s been <b>' + days + ' days</b> since you last practised speaking.' : 'You haven’t practised speaking with your words yet.') +
           ' Open a topic and use <b>Practice now</b> to get a ready-made role-play prompt for your AI chat.');
       }
-    }
-    if (n >= 20 && (!d.lastExport || Date.now() - d.lastExport > 14 * DAY)) {
-      out += notice('download', 'Your progress is stored only in this browser. <button class="link-btn" data-act="export">Export a backup</button>' +
-        (d.lastExport ? ' (last one: ' + fmtDate(d.lastExport) + ').' : '.'), 'subtle');
     }
     if (!S.storageOk()) out += notice('info', 'This browser is blocking local storage, so progress can’t be saved. Try another browser or host the app.', 'subtle');
     return out;
@@ -872,7 +955,7 @@
     var main = '', side = '';
     if (it.type === 'chunk') {
       var fn = GT.topic(it.tab, it.topic), lit = it.lit;
-      main += '<div class="word-tags"><span class="tag outline">' + esc(it.register || 'neutral') + '</span><span class="mono-muted upper">' + esc(fn ? fn.name : it.topic) + '</span>' +
+      main += '<div class="word-tags"><span class="tag outline' + (it.register === 'vulgar' ? ' warn' : '') + '">' + esc(it.register || 'neutral') + '</span><span class="mono-muted upper">' + esc(fn ? fn.name : it.topic) + '</span>' +
         (lit && it.level ? '<span class="tag dim">' + esc(it.level) + '</span>' : '') + meaningBadgeHTML(it) + '</div>';
       main += '<div class="hw-row"><h1 class="hw chunk" lang="' + GT.learn + '">' + rich(it.t) + '</h1>' + speakBtn(it.t, true) + whyBtn(it) + '</div>';
       main += lit ? litBylineHTML(it) + literatureExplanation(it) : meanings(it);
@@ -884,8 +967,12 @@
         }).join('') + '</ul>';
       }
       if (it.note) main += '<hr class="rule"><span class="label">Note</span><p class="note" style="margin-top:14px" lang="' + GT.lxLang(it, 'note') + '">' + esc(lxText(it, 'note')) + fbTag(GT.lxLang(it, 'note')) + '</p>';
+      // Slang: history and where people say it.
+      if (it.origin) main += '<hr class="rule"><span class="label">Origin</span><p class="note" style="margin-top:14px" lang="' + GT.lxLang(it, 'origin') + '">' + esc(lxText(it, 'origin')) + '</p>';
+      if (it.where) main += '<hr class="rule"><span class="label">Where you hear it</span><p class="note" style="margin-top:14px" lang="' + GT.lxLang(it, 'where') + '">' + esc(lxText(it, 'where')) + '</p>';
       if (lit) side += literatureSide(it);
       else {
+        if (it.register === 'vulgar') side += '<div class="box box-warn"><span class="label">Careful</span><p class="note">' + esc(GT.hint('register.vulgarWarn')) + '</p></div>';
         side += '<div class="box"><span class="label">Register</span><p class="note muted">' + esc(GT.hint('register.' + (it.register || 'neutral')) || GT.hint('register.neutral')) + '</p></div>';
         var tags = (it.topics || []).map(function (id) { var t = GT.anyTopic(id); return t ? t.topic.name : null; }).filter(Boolean);
         side += linksBox(it) + levelBox(it);
@@ -918,8 +1005,8 @@
   }
   function viewExpressionsLanding() {
     var h = '<header class="page-head"><span class="eyebrow">03 · Expressions</span><h1>Expressions</h1><p class="lead">' + intro('expressions') + '</p></header>' + reminders();
-    var expTopics = GT.TOPICS.expressions.filter(visibleTopic);
-    h += '<h3 class="section-title">Idioms & Everyday Phrases</h3><div class="grid">' +
+    var expTopics = GT.TOPICS.expressions.filter(function (t) { return t.section && visibleTopic(t); });
+    h += '<h3 class="section-title">Sections</h3><div class="grid">' +
       expTopics.map(function (t, i) { return tile('expressions', t, i + 1); }).join('') +
       expressionSectionTile('chunks', 'Chunks', expTopics.length + 1) +
       expressionSectionTile('literature', 'Literary Phrases', expTopics.length + 2) + '</div>';
@@ -1001,9 +1088,21 @@
   function topicCrumb(tab, t, extra) {
     var tdef = GT.TABS.find(function (x) { return x.id === tab; }) || { label: 'Catalogue' };
     var lvl = tab === 'words' ? (t.level === 'b2' ? 'B2' : (GT.cfg('levelName') || 'B1')) : tdef.label;
+    var par = tab === 'expressions' && t.parent ? GT.topic('expressions', t.parent) : null;
+    if (par) return '<a href="#/expressions">Expressions</a> · <a href="#/expressions/' + par.id + '">' + esc(par.name) + '</a> · ' + (extra ? '<a href="#/' + tab + '/' + t.id + '">' + esc(t.name) + '</a> · ' + extra : esc(t.name));
     return '<a href="#/' + tab + '">' + esc(lvl) + '</a> · ' + (extra ? '<a href="#/' + tab + '/' + t.id + '">' + esc(t.name) + '</a> · ' + extra : esc(t.name));
   }
 
+  /* Category chips under an Idioms / Slang / Everyday Phrases heading: All + each category. */
+  function expCatChips(secId, cur) {
+    var sec = GT.topic('expressions', secId);
+    if (!sec) return '';
+    var list = [sec].concat(GT.TOPICS.expressions.filter(function (t) { return t.parent === secId; }));
+    return '<div class="cat-chips">' + list.map(function (t) {
+      var n = itemsFor('expressions', t.id).length;
+      return '<a class="chip small' + (t.id === cur ? ' on' : '') + '" href="#/expressions/' + t.id + '">' + esc(t.id === secId ? 'All' : t.name) + ' <span class="mono">' + n + '</span></a>';
+    }).join('') + '</div>';
+  }
   function viewTopic(tab, id) {
     var t = findTopic(tab, id);
     if (!t) return notFound();
@@ -1012,6 +1111,7 @@
     var h = crumbsHTML(topicCrumb(tab, t), c.total ? pct : null);
     h += '<header class="page-head"><h1>' + esc(t.name) + '</h1>' + (t.desc ? '<p class="lead">' + esc(t.desc) + '</p>' : '') + '</header>';
     if (tab === 'chunks') h += tagFilter();
+    if (tab === 'expressions' && (t.section || t.parent)) h += expCatChips(t.section ? t.id : t.parent, id);
     if (!items.length) {
       h += '<div class="empty-state"><h3>No entries yet</h3><p>' + (tab === 'chunks' && ui.chunkTag ? 'No phrases match this filter.' : 'This topic arrives in a later data batch. Drop the file into <code>data/</code> and list it in <code>data/manifest.js</code>.') + '</p></div>';
       return page(h, 'mid');
@@ -1070,7 +1170,7 @@
   function viewItem(id) {
     var it = GT.byId[id];
     if (!it || it.type === 'drill') return notFound();
-    var pair = S.cardsForItem(id), now = Date.now(), list = itemsFor(it.tab, it.topic), idx = list.indexOf(it);
+    var pair = S.cardsForItem(id), now = GT.now(), list = itemsFor(it.tab, it.topic), idx = list.indexOf(it);
     var tc = counts(list), pct = tc.total ? Math.round(tc.known / tc.total * 100) : 0;
     var actions;
     if (!pair.rec && !pair.prod) {
@@ -1343,7 +1443,7 @@
     drawReview();
   }
   function rate(g) {
-    var R = rev, q = R.queue[R.i], now = Date.now();
+    var R = rev, q = R.queue[R.i], now = GT.now();
     var prev = S.card(q.key);
     var nc = F.rate(prev, g, now, S.settings.retention);
     nc.added = prev && prev.added;
@@ -1516,22 +1616,49 @@
   }
 
   /* ---------------- USER tab (#/user: Sync & Backup first, then Review & Stats) + settings ---------------- */
+  function agoText(ts) {
+    var m = Math.round((Date.now() - ts) / 60000);
+    if (m < 1) return 'just now';
+    if (m < 60) return m + ' min ago';
+    if (m < 24 * 60) return Math.round(m / 60) + ' h ago';
+    return fmtDateTime(ts);
+  }
   function gdriveBoxHTML() {
-    var gd = S.gdrive ? S.gdrive.state : { isHttp: false, connected: false };
-    var cid = S.settings.gdriveClientId || '';
-    var badge = gd.connected ? '<span class="tag outline">Connected</span>' : '<span class="tag dim">OAuth · appDataFolder</span>';
-    return '<div class="box-head" style="margin-bottom:10px"><span class="label ice" style="margin:0">Google Drive (Cloud OAuth)</span>' + badge + '</div>' +
-      '<p class="note muted">Syncs <code>etrnl-progress.json</code> into your private Google Drive <code>appDataFolder</code> across desktop and mobile (requires HTTPS or <code>http://localhost</code>).</p>' +
-      '<div class="gd-row" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">' +
-        '<input type="text" class="gd-input" data-set="gdriveClientId" value="' + esc(cid) + '" placeholder="Google OAuth Client ID (…apps.googleusercontent.com)" spellcheck="false" autocomplete="off" style="flex:1;min-width:240px;min-height:44px;padding:8px 12px;border:1px solid var(--line-2);background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:12.5px">' +
-        '<button class="btn primary small" type="button" data-act="gdrive-sync"' + (!gd.isHttp || gd.busy ? ' disabled' : '') + '>' + icon('repeat') + (gd.busy ? 'Syncing…' : 'Sync with Google Drive') + '</button>' +
-        (gd.connected ? '<button class="btn ghost small" type="button" data-act="gdrive-disconnect">Disconnect</button>' : '') +
-      '</div>' +
-      (gd.lastSync ? '<p class="mono-muted" style="font-size:12px;margin-top:8px">Last synced with Google Drive: ' + fmtDateTime(gd.lastSync) + '</p>' : '') +
-      (!gd.isHttp ? '<p class="note" style="color:var(--gold);margin-top:8px">Google OAuth does not work on <code>file://</code>. Open the hosted site or use a local HTTP server.</p>' : '') +
-      (gd.error ? '<p class="note" style="color:var(--gold);margin-top:8px">' + esc(gd.error) + '</p>' : '') +
-      '<details style="margin-top:12px"><summary class="mono-muted" style="font-size:12px;cursor:pointer">How to get a Google OAuth Client ID (once)</summary>' +
-      '<p class="note muted" style="font-size:13.5px;margin-top:8px">1. Open Google Cloud Console → enable <b>Google Drive API</b>.<br>2. In <b>OAuth consent screen</b> add scope <code>.../auth/drive.appdata</code> and your Google email as test user.<br>3. In <b>Credentials → Create Credentials → OAuth client ID (Web application)</b> add this site’s origin (for example, <code>https://example.com</code>) to <b>Authorized JavaScript origins</b>, then paste the Client ID above.</p></details>';
+    var gd = S.gdrive ? S.gdrive.state : { isHttp: false };
+    var head = function (badge) {
+      return '<div class="box-head" style="margin-bottom:10px"><span class="label ice" style="margin:0">Google Drive sync</span>' + badge + '</div>';
+    };
+    var err = gd.error ? '<p class="note gd-err">' + esc(gd.error) + '</p>' : '';
+    var setup = gd.builtInClientId ? '' :
+      '<details class="gd-setup"' + (gd.hasClientId ? '' : ' open') + '><summary class="mono-muted">Setup · Google Client ID (once, by the app owner)</summary>' +
+        '<p class="note muted">1. <a href="https://console.cloud.google.com/apis/library/drive.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a> → enable <b>Google Drive API</b>.<br>' +
+        '2. <b>OAuth consent screen</b> → External → add your Gmail as test user (or Publish the app).<br>' +
+        '3. <b>Credentials → OAuth client ID → Web application</b> → Authorized JavaScript origins: <code>' + esc(location.origin) + '</code> (plus <code>http://localhost:8765</code> for local use).<br>' +
+        '4. Paste the Client ID below — or put it into <code>GD_CLIENT_ID</code> in <code>js/store.js</code> so every device only needs “Connect”.</p>' +
+        '<input type="text" class="gd-input" data-set="gdriveClientId" value="' + esc(S.settings.gdriveClientId || '') + '" placeholder="…apps.googleusercontent.com" spellcheck="false" autocomplete="off">' +
+      '</details>';
+
+    if (!gd.isHttp) {
+      return head('<span class="tag dim">Unavailable here</span>') +
+        '<p class="note muted">Google sign-in does not work when the app is opened as a file (<code>file://</code>). Open the hosted version (Netlify) or <code>http://localhost:8765</code>.</p>';
+    }
+    if (!gd.enabled) {
+      return head('<span class="tag dim">Off</span>') +
+        '<p class="note muted">Keeps progress identical on all your devices. Stored only in a hidden app folder of <b>your</b> Google Drive — no server, no database. Newer reviews always win, by a shared clock.</p>' +
+        '<div class="actions-row"><button class="btn primary" type="button" data-act="gdrive-connect"' + (gd.busy ? ' disabled' : '') + '>' +
+          icon('repeat') + (gd.busy ? 'Connecting…' : 'Connect Google Drive') + '</button></div>' + err + setup;
+    }
+    var badge, line;
+    if (gd.busy) { badge = '<span class="tag outline">Syncing…</span>'; line = 'Syncing with Google Drive…'; }
+    else if (gd.needsTap) { badge = '<span class="tag gold">Paused</span>'; line = 'Resumes on your first tap anywhere (Google needs one click per session).'; }
+    else { badge = '<span class="tag outline">Auto-sync on</span>'; line = gd.pending ? 'Changes waiting to upload…' : 'Everything saved. Syncs automatically after each change and when you return to the app.'; }
+    return head(badge) +
+      '<p class="note muted">' + (gd.email ? 'Account <b>' + esc(gd.email) + '</b>. ' : '') + esc(line) + '</p>' +
+      (gd.lastSync ? '<p class="mono-muted gd-when">Last sync: ' + esc(agoText(gd.lastSync)) + '</p>' : '') + err +
+      '<div class="actions-row actions-split">' +
+        '<button class="btn primary small" type="button" data-act="gdrive-sync"' + (gd.busy ? ' disabled' : '') + '>' + icon('repeat') + (gd.needsTap ? 'Resume' : 'Sync now') + '</button>' +
+        '<button class="btn ghost small" type="button" data-act="gdrive-disconnect">Disconnect</button>' +
+      '</div>';
   }
   function syncBoxHTML() {
     var st = S.sync ? S.sync.state : { supported: false };
@@ -1566,7 +1693,12 @@
       '<label class="btn">' + icon('upload') + 'Import & merge<input type="file" id="importFile" accept=".json,application/json" hidden></label>' +
       '<label class="btn ghost small">' + icon('upload') + 'Replace from file<input type="file" id="importReplaceFile" accept=".json,application/json" hidden></label></div>' +
       '</div>' +
-      '<div class="box" id="gdriveBox">' + gdriveBoxHTML() + '</div>' +
+      // Hidden until the owner sets a Google Client ID (GD_CLIENT_ID in store.js), so visitors never see setup steps.
+      (S.gdrive && (S.gdrive.state.hasClientId || S.gdrive.state.enabled) ? '<div class="box" id="gdriveBox">' + gdriveBoxHTML() + '</div>' :
+        '<div class="box"><div class="box-head" style="margin-bottom:10px"><span class="label" style="margin:0">Cloud sync</span><span class="tag dim">Not available</span></div>' +
+        '<p class="note muted">There is no cloud sync: this site has no server or database and never collects your data. ' +
+        'All your progress is stored only in this browser on this device. Clearing site data or browser cache deletes it. ' +
+        'To keep a backup or move progress to another device, use <b>Export progress</b> and <b>Import & merge</b> above.</p></div>') +
       '<div class="box" id="syncBox">' + syncBoxHTML() + '</div>';
   }
   function refreshSyncBox() {
@@ -1612,10 +1744,7 @@
     }
     function sw(key) { return '<label class="switch"><input type="checkbox" data-set="' + key + '"' + (s[key] ? ' checked' : '') + '><span></span></label>'; }
     function row(label, help, control) { return '<div class="setting"><div><div class="lbl">' + label + '</div>' + (help ? '<div class="help">' + help + '</div>' : '') + '</div>' + control + '</div>'; }
-    var h = '<h3 class="section-title" style="margin-top:0">Languages</h3><div class="box">' +
-      row('I know', 'Language of meanings, translations and explanations.', langSelect('know')) +
-      row('I learn', 'Language you are studying. Progress is kept separately per language.', langSelect('learn')) +
-      '</div>';
+    var h = '<h3 class="section-title" style="margin-top:0">Theme</h3><div class="box" id="themeBox">' + themeRowsHTML() + '</div>';
     h += '<h3 class="section-title">Learning</h3><div class="box">' +
       row('New cards per session', 'How many cards "Learn new" shows.', '<input type="number" min="1" max="50" data-set="newPerSession" value="' + s.newPerSession + '">') +
       row('Review direction', 'Review recognition (' + LS() + ' → ' + KS() + '), production (' + KS() + ' → ' + LS() + '), or both.', sel('reviewDirection', [['both', 'Both'], ['rec', 'Recognition only'], ['prod', 'Production only']])) +
@@ -1625,7 +1754,6 @@
       row('Target retention', 'Higher means more reviews but fewer forgotten cards.', sel('retention', [['0.85', '85%'], ['0.9', '90% (recommended)'], ['0.95', '95%']])) +
       '</div>';
     h += '<h3 class="section-title">Look & sound</h3><div class="box">' +
-      row('Theme', 'The design is made for dark.', sel('theme', [['dark', 'Dark'], ['light', 'Light'], ['system', 'System']])) +
       row('Hide sidebar Practice box', 'Hide the "Practice now" card in the sidebar.', sw('hideSidePractice')) +
       row('' + langMeta().name + ' voice', '<span id="voiceInfo">' + (tts.ok ? 'Loading voices…' : 'Speech is not supported in this browser.') + '</span>',
         tts.ok ? '<select id="voiceSelect" data-set="' + voiceKey() + '" style="max-width:240px"></select>' : '<span class="mono-muted">—</span>') +
@@ -1682,11 +1810,11 @@
       GT.toast(ok ? 'Prompt copied. Paste it into your AI chat.' : 'Copy failed. Open "Show prompt" and copy it manually.');
     });
   }
-  function refreshChrome(tab) { var p = curPath(); renderNav(tab, p); renderSidebar(tab, p); }
+  function refreshChrome(tab) { renderNav(tab); renderSidebar(tab, location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent)); }
 
   function act(name, el) {
     el = el || { dataset: {} };
-    var now = Date.now(), id = el.dataset.id;
+    var now = GT.now(), id = el.dataset.id;
     switch (name) {
       case 'l-later': learn.later.push(learn.queue[learn.i]); S.markLater(learn.queue[learn.i]); learn.i++; drawLearn(); break;
       case 'l-know':
@@ -1769,21 +1897,24 @@
       case 'sync-disconnect':
         S.sync.disconnect().then(function () { GT.toast('Sync file disconnected'); });
         break;
+      case 'gdrive-connect':
       case 'gdrive-sync': {
         var cidInp = document.querySelector('[data-set="gdriveClientId"]');
-        if (cidInp && cidInp.value.trim() !== (S.settings.gdriveClientId || '')) {
-          S.setSetting('gdriveClientId', cidInp.value.trim());
-        }
-        S.gdrive.syncNow({ silent: false }).then(function (msg) {
-          if (msg) GT.toast('Google Drive · ' + msg);
+        if (cidInp && cidInp.value.trim() !== (S.settings.gdriveClientId || '')) S.setSetting('gdriveClientId', cidInp.value.trim());
+        var first = name === 'gdrive-connect';
+        (first ? S.gdrive.connect() : S.gdrive.syncNow()).then(function (msg) {
+          if (first) { S.gdrive.init(); GT.toast('Google Drive connected · auto-sync on'); }
+          else if (msg) GT.toast('Google Drive · ' + msg);
         }).catch(function (err) {
-          GT.toast(err && err.message ? err.message : 'Google Drive sync failed');
+          if (err && err.message !== 'superseded') GT.toast(err.message || 'Google Drive sync failed');
         });
         break;
       }
       case 'gdrive-disconnect':
-        S.gdrive.disconnect();
-        GT.toast('Google Drive disconnected');
+        if (confirm('Disconnect Google Drive on this device? Your progress stays here and in Drive.')) {
+          S.gdrive.disconnect();
+          GT.toast('Google Drive disconnected');
+        }
         break;
       case 'reset-all':
         if (confirm('Reset ALL ' + langMeta().name + ' progress? Other languages are kept. This cannot be undone. Export first if unsure.') && confirm('Really delete all ' + langMeta().name + ' progress?')) { S.reset(); applyTheme(); route(); GT.toast('Progress reset'); }
@@ -1935,7 +2066,7 @@
       if (k === 'newPerSession') { v = Math.max(1, Math.min(50, Math.round(Number(v) || 10))); el.value = v; }
       if (k === 'retention' || k === 'speechRate') v = Number(v);
       S.setSetting(k, v);
-      if (k === 'theme') applyTheme();
+      if (k === 'theme') { applyTheme(); refreshThemeRows(); }
       if (k === 'hideSidePractice') {
         var curP = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
         var curTab = curP[0] === 'item' && GT.byId[curP[1]] ? GT.byId[curP[1]].tab : (curP[0] || 'words');
@@ -2858,7 +2989,7 @@
   function studioRate(g) {
     var S2 = studio;
     if (!S2 || !S2.checked) return;
-    var q = S2.questions[S2.i], now = Date.now();
+    var q = S2.questions[S2.i], now = GT.now();
     if (q.cardKey) {
       var prev = S.card(q.cardKey);
       var nc = F.rate(prev, g, now, S.settings.retention);
@@ -3008,7 +3139,8 @@
     var qIdx = raw.indexOf('?');
     var pathStr = qIdx >= 0 ? raw.slice(0, qIdx) : raw;
     var params = qIdx >= 0 ? parseQuery(raw.slice(qIdx + 1)) : {};
-    var p = curPath(pathStr);
+    var p = pathStr.split('/').filter(Boolean).map(decodeURIComponent);
+    if (!p.length) { location.replace('#/start'); return; }
     var legacy = legacyRoute(p);
     if (legacy) { location.replace(legacy); return; }
     var tab = p[0];
@@ -3063,7 +3195,7 @@
     var link = document.createElement('link');
     link.rel = 'manifest'; link.href = 'manifest.webmanifest';
     document.head.appendChild(link);
-    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js', { scope: './' }).catch(function () {});
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
     if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function () {});
   }
 
@@ -3126,11 +3258,7 @@
     $('#langBtn').classList.remove('active');
     if (focusBtn) $('#langBtn').focus();
   }
-  function curPath(pathStr) {
-    if (pathStr === undefined) pathStr = location.hash.replace(/^#\/?/, '').split('?')[0];
-    var path = pathStr.split('/').filter(Boolean).map(decodeURIComponent);
-    return path.length ? path : ['start'];
-  }
+  function curPath() { return location.hash.replace(/^#\/?/, '').split('?')[0].split('/').filter(Boolean).map(decodeURIComponent); }
 
   /** Re-render the current screen in place (known-language change): keeps sessions, answers and scroll. */
   function redrawInPlace() {
@@ -3325,6 +3453,7 @@
       ready = true;
       route();
       if (S.sync && S.sync.init) S.sync.init();
+      if (S.gdrive && S.gdrive.init) S.gdrive.init();
     });
   })();
 })();
