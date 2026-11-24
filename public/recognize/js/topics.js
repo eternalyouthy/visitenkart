@@ -20,7 +20,7 @@
     { id: 'literature', label: 'Literary Phrases', short: 'Literature', icon: 'book' }
   ];
 
-  /* Main navigation: plain top tabs (no dropdowns; `items` are not shown in the top bar, sub-sections live in the sidebar). */
+  /* Main navigation: top tabs with hover/focus dropdowns (`items` for Language & Expressions; Professional uses proGroups()). */
   GT.NAV = [
     {
       id: 'language', label: 'Language', short: 'Lang', icon: 'book', href: '#/words',
