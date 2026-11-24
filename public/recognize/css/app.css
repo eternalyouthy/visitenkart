@@ -150,6 +150,29 @@ code { font-family: var(--font-mono); font-size: 0.9em; color: var(--ice); }
 }
 .tab-menu-item:hover { background: var(--navy); color: var(--text); }
 .tab-menu-item.active { color: var(--ice); background: color-mix(in srgb, var(--navy) 70%, transparent); }
+/* grouped menus (Language, Professional): "Show all", then folding groups, like the sidebar */
+.tab-menu.grouped { min-width: 290px; max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; }
+.tab-menu-item.tm-all { color: var(--text); }
+.tm-group { border-top: 1px solid var(--line); }
+.tm-group-head {
+  display: flex; align-items: center; gap: 10px; padding: 11px 18px; cursor: pointer; list-style: none; user-select: none;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+}
+.tm-group-head::-webkit-details-marker { display: none; }
+.tm-group-head > span:first-child { flex: 1; }
+.tm-group-head:hover { background: var(--navy); color: var(--text); }
+.tm-group-head .ct { color: var(--dim); letter-spacing: 0.05em; }
+.tm-group-head .chev { display: inline-grid; place-items: center; transition: transform 0.15s; }
+.tm-group-head .chev svg { width: 12px; height: 12px; }
+.tm-group[open] > .tm-group-head { color: var(--text); }
+.tm-group[open] > .tm-group-head .chev { transform: rotate(180deg); color: var(--ice); }
+.tm-group.here > .tm-group-head { color: var(--ice); }
+.tm-group-body { padding-bottom: 6px; }
+.tab-menu-item.tm-sub {
+  padding: 8px 18px 8px 34px; white-space: normal;
+  font-family: var(--font-body); font-size: 14px; letter-spacing: 0; text-transform: none;
+}
+.tm-sep { height: 1px; margin: 6px 0; background: var(--line-2); }
 .top-right { display: flex; align-items: center; gap: 8px; }
 .due-chip { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.2em; color: var(--muted); white-space: nowrap; }
 .due-chip b { font-weight: 500; min-width: 36px; padding: 3px 8px; text-align: center; background: var(--ice); color: var(--ink); letter-spacing: 0.05em; }
@@ -581,7 +604,7 @@ details.full summary { cursor: pointer; }
 .about-article :is(h1, h2) { text-wrap: balance; }
 .about-article :is(p, li, blockquote) { text-wrap: pretty; }
 .about-article h2 { margin: 36px 0 12px; font: 600 24px/1.3 var(--font-display); }
-.about-article .about-title { margin-top: 0; font-size: clamp(24px, 4vw, 32px); }
+.about-article .about-title { margin-top: 0; font-size: clamp(24px, 4vw, 32px); text-wrap: pretty; }
 .about-article blockquote { margin: 14px 0; padding-inline-start: 16px; border-inline-start: 2px solid var(--line-ice); }
 .about-article a { text-decoration: underline; text-underline-offset: 0.16em; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--line-2); margin: 8px 0; }
@@ -808,10 +831,12 @@ input[type="number"] { width: 90px; }
 .bys-labels .bys-label.active { color: var(--ice); }
 .bys-head .about-languages { margin-top: 10px; }
 .bys-sticker {
-  position: absolute; right: 10px; top: 28px; z-index: 1; display: none;
+  /* anchored to the end of the language buttons, rotating around its left edge,
+     so it sits in the same spot whatever the text length (RU / EN / DE) */
+  position: absolute; left: calc(min(100%, 480px) + 44px); top: 24px; z-index: 1; display: none;
   padding: 9px 16px; border: 2px solid #ff3b3b; border-radius: 6px; background: #e0201e; color: #fff;
   font: 800 15px/1.1 var(--font-body); letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
-  transform: rotate(15deg); transform-origin: center;
+  transform: rotate(15deg); transform-origin: left center;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(255, 255, 255, 0.25);
   pointer-events: none; user-select: none;
 }

@@ -14,8 +14,7 @@
 <script>
   /* English now lives in the unified ETRNL site (one app for German, English and Russian).
    * This page switches "I learn" to English and forwards there, keeping the old route (#/...).
-   * Old English progress (etrnl.english.progress.v1) is imported automatically the first time English opens.
-   * The previous standalone English app is still available as english/standalone.html. */
+   * Old English progress (etrnl.english.progress.v1) is imported automatically the first time English opens. */
   (function () {
     try {
       var key = 'etrnl.settings.v1', s = JSON.parse(localStorage.getItem(key) || '{}') || {};

@@ -339,6 +339,63 @@
     if (item.match) return item.match.indexOf(tab) >= 0 && !proSubFor(tab, p[1]);
     return false;
   }
+  /* Professional and Words share one classification in the sidebar and in the top menus:
+   * Professional → Professional / B2 / B1 Workplace; Words → B1 topics / B2 themes / B2 everyday topics.
+   * Each list starts with "Show all"; groups fold open, the one you are in opens by itself. */
+  function proGroups() {
+    var out = [], main = [], b2 = [];
+    (GT.PRO_SUBS || []).forEach(function (s) {
+      var st = GT.topic(s.tab, s.topic);
+      (st && st.level === 'b2' ? b2 : main).push(s);
+    });
+    if (main.length) out.push({ key: 'pro-main', title: 'Professional', subs: main });
+    if (b2.length) out.push({ key: 'pro-b2', title: 'B2', subs: b2 });
+    var px = GT.cfg('proExtra');
+    if (px && GT.topic(px.tab, px.topic)) out.push({ key: 'pro-b1', title: px.label, subs: [{ tab: px.tab, topic: px.topic, name: px.name }] });
+    return out;
+  }
+  function wordGroups() {
+    var out = [], byName = {};
+    (GT.TOPICS.words || []).filter(visibleTopic).forEach(function (t) {
+      var name = String(t.group || 'Topics').replace(' · Goethe list', ' topics');
+      if (!byName[name]) { byName[name] = { key: 'w-' + name, title: name, subs: [] }; out.push(byName[name]); }
+      byName[name].subs.push({ tab: 'words', topic: t.id, name: t.name });
+    });
+    return out;
+  }
+  function isSubHere(s, tab, cur, p) {
+    if (p[0] === 'item') { var it = GT.byId[p[1]]; return !!it && it.tab === s.tab && it.topic === s.topic; }
+    return tab === s.tab && cur === s.topic;
+  }
+  ui.menuOpen = ui.menuOpen || {};
+  $('#tabs').addEventListener('toggle', function (e) {
+    var d = e.target;
+    if (d && d.classList && d.classList.contains('tm-group')) ui.menuOpen[d.dataset.mgroup] = d.open;
+  }, true);
+  function menuLink(href, label, on, cls) {
+    return '<a class="tab-menu-item' + (cls || '') + (on ? ' active' : '') + '" href="' + href + '" role="menuitem">' + esc(label) + '</a>';
+  }
+  function groupedMenu(id, tab, p) {
+    var cur = p[0] === 'item' && GT.byId[p[1]] ? GT.byId[p[1]].topic : p[1];
+    var h = id === 'professional' ? menuLink('#/professional', 'Show all', tab === 'professional', ' tm-all')
+      : menuLink('#/words', 'All words', tab === 'words' && !p[1], ' tm-all');
+    (id === 'professional' ? proGroups() : wordGroups()).forEach(function (g) {
+      var here = false, inner = '';
+      g.subs.forEach(function (s) {
+        var on = isSubHere(s, tab, cur, p);
+        here = here || on;
+        inner += menuLink('#/' + s.tab + '/' + s.topic, s.name, on, ' tm-sub');
+      });
+      var open = ui.menuOpen[g.key] != null ? ui.menuOpen[g.key] : here;
+      h += '<details class="tm-group' + (here ? ' here' : '') + '" data-mgroup="' + esc(g.key) + '"' + (open ? ' open' : '') + '>' +
+        '<summary class="tm-group-head"><span>' + esc(g.title) + '</span><span class="ct">' + g.subs.length + '</span><span class="chev">' + icon('chev') + '</span></summary>' +
+        '<div class="tm-group-body">' + inner + '</div></details>';
+    });
+    if (id === 'language') {
+      h += '<div class="tm-sep"></div>' + menuLink('#/grammar', 'Grammar', tab === 'grammar') + menuLink('#/roots', 'Roots', tab === 'roots');
+    }
+    return h;
+  }
   function closeNavMenus() {
     document.querySelectorAll('.tab-drop.open').forEach(function (d) { d.classList.remove('open'); });
   }
@@ -352,11 +409,12 @@
     $('#tabs').innerHTML = GT.NAV.map(function (g, i) {
       var actCls = g.id === group ? ' active' : '';
       if (g.items && g.items.length) {
+        var grouped = g.id === 'language' || g.id === 'professional';
         return '<div class="tab-drop">' +
           '<a class="tab' + actCls + '" href="' + g.href + '" data-nav-drop="' + g.id + '" aria-haspopup="true"><span class="num">' + pad2(i + 1) + '</span>' + esc(g.label) + '<span class="chev">' + icon('chev') + '</span></a>' +
-          '<div class="tab-menu" role="menu">' + g.items.map(function (sub) {
+          '<div class="tab-menu' + (grouped ? ' grouped' : '') + '" role="menu">' + (grouped ? groupedMenu(g.id, active, p) : g.items.map(function (sub) {
             return '<a class="tab-menu-item' + (isNavItemActive(sub, active, p) ? ' active' : '') + '" href="' + sub.href + '" role="menuitem">' + esc(sub.label) + '</a>';
-          }).join('') + '</div></div>';
+          }).join('')) + '</div></div>';
       }
       return '<a class="tab' + actCls + '" href="' + g.href + '"><span class="num">' + pad2(i + 1) + '</span>' + esc(g.label) + '</a>';
     }).join('');
@@ -416,6 +474,24 @@
       '<div class="side-group-body">' + inner + '</div></details>';
   }
   function ctOf(items) { var c = counts(items); return items.length ? c.known + '/' + items.length : ''; }
+  /** Folding sidebar groups for Professional / Words, built from proGroups() / wordGroups(). */
+  function sideGroupsFor(groups, tab, cur, p) {
+    var rows = groups.map(function (g) {
+      var all = [], here = false, inner = '';
+      g.subs.forEach(function (s, i) {
+        var items = itemsFor(s.tab, s.topic), on = isSubHere(s, tab, cur, p);
+        all = all.concat(items);
+        here = here || on;
+        inner += sideLink('#/' + s.tab + '/' + s.topic, pad2(i + 1), s.name, ctOf(items), { active: on, dim: !items.length });
+      });
+      return [g.key, g.title, ctOf(all), here, inner];
+    });
+    var hereKey = null, h = '';
+    rows.forEach(function (g) { if (g[3]) hereKey = g[0]; });
+    if (hereKey !== ui.sideHere) { if (hereKey) ui.sideOpen[hereKey] = true; ui.sideHere = hereKey; }
+    rows.forEach(function (g, i) { h += sideGroup(g[0], pad2(i + 1), g[1], g[2], g[3], g[4], i === rows.length - 1); });
+    return h;
+  }
   function expressionsSidebar(tab, p, cur) {
     var h = '<div class="side-label">Expressions</div>', n = 0, groups = [];
     var onItem = p[0] === 'item';
@@ -473,26 +549,19 @@
     var inPro = tab === 'professional' || tab === 'it' || (tab === 'words' && proSubFor('words', cur));
     var inExp = tab === 'expressions' || tab === 'chunks' || tab === 'literature';
     if (inPro) {
-      html += '<div class="side-label">Professional</div>';
-      var b2Label = false;
-      GT.PRO_SUBS.forEach(function (s, i) {
-        var st = GT.topic(s.tab, s.topic);
-        if (st && st.level === 'b2' && !b2Label) { b2Label = true; html += '<div class="side-label">B2</div>'; }
-        var items = itemsFor(s.tab, s.topic), c = counts(items);
-        var actSub = (tab === s.tab && cur === s.topic) || (p[0] === 'item' && GT.byId[p[1]] && GT.byId[p[1]].tab === s.tab && GT.byId[p[1]].topic === s.topic);
-        html += sideLink('#/' + s.tab + '/' + s.topic, pad2(i + 1), s.name, items.length ? c.known + '/' + items.length : '', { active: actSub, dim: !items.length });
-      });
-      var px = GT.cfg('proExtra');
-      if (px) {
-        var workItems = itemsFor(px.tab, px.topic), wc = counts(workItems);
-        if (workItems.length) html += '<div class="side-label">' + esc(px.label) + '</div>' +
-          sideLink('#/' + px.tab + '/' + px.topic, '—', px.name, wc.known + '/' + workItems.length, { active: tab === px.tab && cur === px.topic });
-      }
+      html += '<div class="side-label">Professional</div>' +
+        sideLink('#/professional', '—', 'Show all', '', { active: tab === 'professional' }) +
+        sideGroupsFor(proGroups(), tab, cur, p);
       html += sidePractice();
     } else if (inExp) {
       html += expressionsSidebar(tab, p, cur);
       html += sidePractice();
-    } else if (tab === 'words' || tab === 'grammar') {
+    } else if (tab === 'words') {
+      html += '<div class="side-label">Words</div>' +
+        sideLink('#/words', '—', 'All words', '', { active: !cur && p[0] !== 'item' }) +
+        sideGroupsFor(wordGroups(), tab, cur, p);
+      html += sidePractice();
+    } else if (tab === 'grammar') {
       var group = null, n = 0;
       GT.TOPICS[tab].filter(visibleTopic).forEach(function (t) {
         if (t.group !== group) { group = t.group; n = 0; html += '<div class="side-label">' + esc(group.replace(' · Goethe list', ' topics')) + '</div>'; }
