@@ -17,6 +17,7 @@ self.GT_DATA_FILES = [
   'words_b1_community.js',
   'words_b1_more.js',
   'words_b1_more_2.js',
+  'words_b1_more_3.js',
   // Words: B2 themes
   'words_b2_beruf.js',
   'words_b2_beruf_2.js',
@@ -38,6 +39,7 @@ self.GT_DATA_FILES = [
   'words_b2_more.js',
   'words_b2_everyday_2.js',
   'words_b2_more_2.js',
+  'words_b2_more_3.js',
   // Professional / IT & Security
   'it_security.js',
   'it_security_2.js',
@@ -172,7 +174,7 @@ self.GT_PACKS = {
       'data/en/verbs_particles.js',
       'data/en/verbs_families.js',
       'data/en/verbs_families_2.js',
-      'data/en/words_more.js', 'data/en/words_more_2.js', 'data/en/words_more_3.js',
+      'data/en/words_more.js', 'data/en/words_more_2.js', 'data/en/words_more_3.js', 'data/en/words_more_4.js',
       'data/en/it_more.js', 'data/en/it_more_2.js', 'data/en/it_topics_new.js', 'data/en/it_more_3.js', 'data/en/pro_bureau_legal.js', 'data/en/pro_service_ops.js', 'data/en/basics.js',
       'data/en/expressions_more.js', 'data/en/expressions_more_2.js', 'data/en/expressions_more_3.js',
       'data/en/literature.js', 'data/en/slang.js', 'data/en/expressions_cats.js',
@@ -201,6 +203,7 @@ self.GT_PACKS = {
       'words_b2_everyday.js',
       'words_more_2.js',
       'words_more_3.js',
+      'words_more_4.js',
       'pro.js',
       'pro_more.js',
       'pro_more_2.js',

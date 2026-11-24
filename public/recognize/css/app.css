@@ -1635,3 +1635,88 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
   .ag-actions .btn.primary { grid-column: 1 / -1; }
   .ag-table th, .ag-table td { padding: 9px 8px; }
 }
+
+/* ---------- Roots map: legibility (all themes, stronger on light ones) ---------- */
+.rnode .rn-gl, .rnode .rn-pair, .rnode.center .rn-ru { color: color-mix(in srgb, var(--text) 74%, var(--bg)); }
+.rnode .rn-gl, .rnode:not(.center) .rn-pair { font-size: 12.5px; }
+@media (max-width: 860px) { .rnode .rn-gl, .rnode:not(.center) .rn-pair { font-size: 11.5px; } }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rmap { background: var(--navy); border-color: color-mix(in srgb, var(--text) 18%, var(--bg)); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rmap-lines line { stroke: color-mix(in srgb, var(--text) 30%, var(--bg)); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rmap-lines line.figurative { stroke: color-mix(in srgb, var(--ice) 60%, var(--bg)); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rnode {
+  background: #ffffff; border-color: color-mix(in srgb, var(--text) 32%, #ffffff);
+  box-shadow: 0 1px 2px rgba(10, 20, 40, 0.08), 0 4px 14px rgba(10, 20, 40, 0.06);
+}
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rnode .rn-de { font-weight: 600; }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rnode .pfx { font-weight: 700; }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) :is(.rnode .rn-gl, .rnode .rn-pair, .rnode.center .rn-ru) { color: color-mix(in srgb, var(--text) 82%, #ffffff); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rnode:hover { border-color: var(--ice); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rnode.center { border-width: 2px; border-color: var(--ice); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rnode.active { background: var(--ice-soft); background-color: color-mix(in srgb, var(--ice) 10%, #ffffff); border-color: var(--ice); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rnode.figurative { border-color: color-mix(in srgb, var(--ice) 60%, #ffffff); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .rnode:is(.lost, .opaque) { color: color-mix(in srgb, var(--text) 70%, #ffffff); }
+
+/* ---------- Mobile: crumbs stack (eyebrow on its own line, progress bar below, full width) ---------- */
+@media (max-width: 640px) {
+  .crumbs { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 20px; }
+  .crumbs .eyebrow { font-size: 11px; letter-spacing: 0.12em; line-height: 1.6; }
+  .crumb-progress { gap: 12px; font-size: 11.5px; }
+  .crumb-progress .track { flex: 1; width: auto; }
+}
+
+/* ---------- Mobile audit fixes ---------- */
+@media (max-width: 640px) {
+  /* Segmented tabs (e.g. Review: Both / Recognition / Production): full-width rows, no dangling empty cell */
+  .seg-tabs:not(.about-languages) { display: flex; width: 100%; border-width: 1px 0 0 1px; }
+  .seg-tabs:not(.about-languages) > .seg-tab {
+    flex: 1 1 auto; display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 6px 10px; font-size: 11px; letter-spacing: 0.1em;
+    border-right: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2);
+  }
+  .ag-modes .seg-tabs { width: auto; }
+  /* Card heads (label + tag) wrap instead of squeezing both into narrow columns */
+  .box-head { flex-wrap: wrap; row-gap: 8px; }
+  .box-head > .tag, .box-head > .mono-muted { white-space: nowrap; }
+  .box-head > .mono-muted { font-size: 11.5px !important; letter-spacing: 0.1em; }
+  /* Settings with a dropdown: label on top, full-width control below (no truncated "Holo Glass (da…") */
+  .setting:has(> select), .setting:has(> .theme-pick) { flex-direction: column; align-items: stretch; gap: 12px; }
+  .setting > select { width: 100%; }
+  .theme-pick { flex: 1 1 auto; }
+  /* Prefix / family example links: one per row, even widths */
+  .pmeanings .fam { flex-direction: column; align-items: stretch; gap: 8px; }
+  .pmeanings .fam > .chip-speak { display: flex; justify-content: space-between; }
+}
+
+/* ---------- Roots map: dark themes tuned toward Holo's legibility (each in its own palette) ---------- */
+:is([data-theme="orbit"], [data-theme="nord"]) .rmap { background: color-mix(in srgb, var(--navy) 35%, var(--bg)); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rmap-lines line { stroke: color-mix(in srgb, var(--text) 26%, var(--bg)); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rmap-lines line.figurative { stroke: color-mix(in srgb, var(--ice) 55%, var(--bg)); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode {
+  background: var(--navy); border-color: color-mix(in srgb, var(--text) 22%, var(--navy));
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode .rn-de { font-weight: 600; color: #ffffff; }
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode .pfx { font-weight: 700; color: var(--ice); }
+:is([data-theme="orbit"], [data-theme="nord"]) :is(.rnode .rn-gl, .rnode .rn-pair, .rnode.center .rn-ru) { color: color-mix(in srgb, var(--text) 86%, var(--navy)); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode:hover { border-color: var(--ice); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode.center { border-width: 2px; border-color: var(--ice); background: var(--navy-2); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode.active { background: color-mix(in srgb, var(--ice) 7%, var(--navy)); border-color: var(--ice); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode.center, :is([data-theme="orbit"], [data-theme="nord"]) .rnode.center.active { background: color-mix(in srgb, var(--ice) 5%, color-mix(in srgb, var(--navy) 70%, var(--bg))); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode.figurative { border-color: color-mix(in srgb, var(--ice) 55%, var(--navy)); }
+:is([data-theme="orbit"], [data-theme="nord"]) .rnode:is(.lost, .opaque) { color: color-mix(in srgb, var(--text) 78%, var(--navy)); }
+[data-theme="nord"] .rnode { border-radius: 8px; }
+/* Small mono labels (eyebrows, crumbs) were the dimmest text in Orbit dark */
+[data-theme="orbit"] { --dim: #7f8a9c; }
+
+/* ---------- Roots map: long glosses wrap instead of widening nodes into their neighbours ---------- */
+.rnode.center { max-width: min(46%, 340px); white-space: normal; }
+.rnode.center .rn-de { white-space: nowrap; }
+.rnode.center .rn-ru, .rnode.center .rn-pair { line-height: 1.3; text-wrap: balance; }
+.rnode:not(.center) { max-width: 34%; white-space: normal; text-align: center; }
+.rnode:not(.center) .rn-de { white-space: nowrap; }
+.rnode .rn-gl { white-space: normal; line-height: 1.25; text-wrap: balance; }
+@media (max-width: 860px) {
+  .rnode.center { max-width: 42%; }
+  .rnode:not(.center) { max-width: 36%; }
+}
+[data-theme="holo"] .rnode.active { background: color-mix(in srgb, var(--ice) 8%, var(--bg)); }

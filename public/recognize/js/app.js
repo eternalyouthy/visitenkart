@@ -2457,14 +2457,25 @@
   /* Root map: nodes sit on a circle by %, so long labels on narrow screens can poke past the frame — nudge them back in. */
   function fitRootMaps() {
     document.querySelectorAll('.rmap').forEach(function (m) {
-      var mr = m.getBoundingClientRect(), pad = 4;
+      var mr = m.getBoundingClientRect(), pad = 6;
+      var c = m.querySelector('.rnode.center'), cr = c && c.getBoundingClientRect(), gap = 6;
       m.querySelectorAll('.rnode').forEach(function (n) {
-        n.style.marginLeft = '';
+        n.style.marginLeft = ''; n.style.marginTop = '';
         var r = n.getBoundingClientRect(), shift = 0;
         if (r.width > mr.width - 2 * pad) return;
         if (r.left < mr.left + pad) shift = mr.left + pad - r.left;
         else if (r.right > mr.right - pad) shift = mr.right - pad - r.right;
         if (shift) n.style.marginLeft = Math.round(shift) + 'px';
+        // Long glosses make the centre node tall/wide: push a neighbour that touches it outward
+        // (sideways if it still fits inside the map, otherwise up/down).
+        if (!cr || n === c) return;
+        var L = r.left + shift, R = r.right + shift;
+        if (R <= cr.left - gap || L >= cr.right + gap || r.bottom <= cr.top - gap || r.top >= cr.bottom + gap) return;
+        var right = (L + R) / 2 >= (cr.left + cr.right) / 2, below = (r.top + r.bottom) / 2 >= (cr.top + cr.bottom) / 2;
+        var dx = right ? cr.right + gap - L : cr.left - gap - R, dy = below ? cr.bottom + gap - r.top : cr.top - gap - r.bottom;
+        var fitsX = L + dx >= mr.left + pad && R + dx <= mr.right - pad, fitsY = r.top + dy >= mr.top + pad && r.bottom + dy <= mr.bottom - pad;
+        if (fitsX && (!fitsY || Math.abs(dx) <= Math.abs(dy))) n.style.marginLeft = Math.round(shift + dx) + 'px';
+        else if (fitsY) n.style.marginTop = Math.round(dy) + 'px';
       });
     });
   }
@@ -2472,6 +2483,11 @@
     document.querySelectorAll('.mtag-wrap.open').forEach(positionTooltip);
     fitRootMaps();
   });
+  // Web fonts (and theme switches, which change the font) widen nodes after the first fit: re-fit then.
+  if (document.fonts) {
+    if (document.fonts.ready) document.fonts.ready.then(fitRootMaps);
+    if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fitRootMaps);
+  }
   document.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === 'Escape' && document.querySelector('.mtag-wrap.open, .mtag-wrap:focus-within')) {
