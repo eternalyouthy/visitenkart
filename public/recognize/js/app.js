@@ -3332,11 +3332,10 @@
             }).join('') + '</optgroup>';
           }).join('') +
         '</select></label>' +
-        '<label class="st-check"><input type="checkbox" id="stStudied" name="studied"' + (params.studied ? ' checked' : '') + '> <span>Only words I’ve already studied</span></label>' +
       '</div>' +
       '<p class="note muted" style="margin-top:14px">Words without a level tag (roots, chunks, idioms) are included at every level.</p>' +
       '<p class="note muted" id="stHelp" lang="' + GT.know + '" style="margin-top:10px"></p>' +
-      '<div class="actions" style="margin-top:24px"><button class="btn primary" type="submit">Start →</button></div>' +
+      '<div class="actions" style="margin-top:24px;justify-content:center"><button class="btn primary" type="submit">Start →</button></div>' +
       '</form><div id="studioMsg"></div>';
     page(h, 'mid');
     syncStudioHelp();
@@ -3355,7 +3354,7 @@
       var msg = $('#studioMsg');
       if (msg) msg.innerHTML = '<div class="empty-state"><h3>No matching questions</h3><p>' +
         (opts.kind === 'dictation' && !tts.ok ? 'This browser has no speech voice, so Dictation can’t play.' :
-          'Nothing in this selection fits the game. Try All levels, a broader section, turn off “Only words I’ve already studied”, or pick another game (word-family games need Roots).') + '</p></div>';
+          'Nothing in this selection fits the game. Try All levels, a broader section, or pick another game (word-family games need Roots).') + '</p></div>';
       return;
     }
     ui.lastStudioParams = { kind: opts.kind, level: opts.level, scope: opts.scope, studied: opts.studied };
