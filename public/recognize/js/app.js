@@ -845,18 +845,26 @@
   }
 
   function literatureSide(it) {
-    var src = litMeta(it), lit = it.lit;
+    var src = litMeta(it);
     var original = src.workOrig && src.workOrig !== src.work ? '<p class="lit-orig" lang="' + GT.learn + '">' + esc(src.workOrig) + '</p>' : '';
-    var quote = '<div class="lit-quote-row"><blockquote class="lit-quote" lang="' + GT.learn + '">' + rich(lit.quote) + '</blockquote>' + speakBtn(lit.quote, 'sm') + '</div>';
-    var parts = (it.parts || []).map(function (part) {
-      return '<dt lang="' + GT.learn + '">' + esc(part[0]) + '</dt><dd lang="' + GT.know + '">' + esc(glossText(part[1])) + '</dd>';
-    }).join('');
     return '<div class="box navy lit-box"><span class="label">Source</span><p class="lit-src-author" lang="' + GT.know + '">' + esc(src.author) + '</p>' +
-      '<p class="lit-src-work" lang="' + GT.know + '">' + esc(src.work) + ' · ' + esc(src.year) + '</p>' + original + quote +
-      '<p class="note" lang="' + GT.know + '">' + esc(lxText(lit, 'context')) + '</p></div>' +
-      (parts ? '<div class="box"><span class="label">Key words &amp; grammar</span><dl class="parts lit-parts">' + parts + '</dl></div>' : '') +
-      '<div class="box"><span class="label">Tone &amp; usage</span><p class="note muted" lang="' + GT.know + '">' +
-      esc(lxText(lit, 'tone') || GT.hint('register.' + (it.register || 'neutral'))) + '</p></div>' + linksBox(it);
+      '<p class="lit-src-work" lang="' + GT.know + '">' + esc(src.work) + ' · ' + esc(src.year) + '</p>' + original + '</div>' + linksBox(it);
+  }
+
+  function literatureExplanation(it) {
+    var lit = it.lit;
+    var parts = (it.parts || []).map(function (part) {
+      return '<dt lang="' + GT.learn + '">' + rich(part[0]) + '</dt><dd lang="' + GT.know + '">' + esc(glossText(part[1])) + '</dd>';
+    }).join('');
+    var literal = lxText(lit, 'literal');
+    return '<section class="lit-explanation"><h2 class="label">What it means</h2>' + meanings(it) +
+      '<p class="note" lang="' + GT.lxLang(lit, 'context') + '">' + esc(lxText(lit, 'context')) + '</p></section>' +
+      '<details class="lit-details"><summary>Why?</summary><div class="lit-details-body">' +
+      '<h3 class="label">Wording</h3>' +
+      (literal && literal !== trOf(it) ? '<p class="lit-literal" lang="' + GT.lxLang(lit, 'literal') + '">' + esc(literal) + '</p>' : '') +
+      '<p class="note" lang="' + GT.lxLang(lit, 'breakdown') + '">' + esc(lxText(lit, 'breakdown')) + '</p>' +
+      (parts ? '<dl class="parts lit-parts">' + parts + '</dl>' : '') +
+      '<h3 class="label">Tone &amp; usage</h3><p class="note" lang="' + GT.lxLang(lit, 'tone') + '">' + esc(lxText(lit, 'tone')) + '</p></div></details>';
   }
 
   /** Full word/chunk view. actions = HTML placed under the note */
@@ -867,10 +875,8 @@
       main += '<div class="word-tags"><span class="tag outline">' + esc(it.register || 'neutral') + '</span><span class="mono-muted upper">' + esc(fn ? fn.name : it.topic) + '</span>' +
         (lit && it.level ? '<span class="tag dim">' + esc(it.level) + '</span>' : '') + meaningBadgeHTML(it) + '</div>';
       main += '<div class="hw-row"><h1 class="hw chunk" lang="' + GT.learn + '">' + rich(it.t) + '</h1>' + speakBtn(it.t, true) + whyBtn(it) + '</div>';
-      main += litBylineHTML(it) + meanings(it);
-      if (lit) main += '<hr class="rule"><span class="label">Breakdown</span><p class="lit-literal" lang="' + GT.know + '">' + esc(lxText(lit, 'literal')) + '</p>' +
-        '<p class="note lit-sub" lang="' + GT.know + '">' + esc(lxText(lit, 'breakdown')) + '</p>';
-      if (it.examples && it.examples.length) main += '<hr class="rule"><span class="label">' + (lit ? 'In use today' : 'Examples') + '</span><div style="margin-top:18px">' + examplesHTML(it.examples) + '</div>';
+      main += lit ? litBylineHTML(it) + literatureExplanation(it) : meanings(it);
+      if (it.examples && it.examples.length) main += '<hr class="rule"><span class="label">Examples</span><div style="margin-top:18px">' + examplesHTML(it.examples) + '</div>';
       if (it.variations && it.variations.length) {
         main += '<hr class="rule"><span class="label">Variations</span><ul class="examples" style="margin-top:18px">' + it.variations.map(function (v) {
           var vt = typeof v === 'string' ? v : v.t, vtr = typeof v === 'string' ? '' : trOf(v);

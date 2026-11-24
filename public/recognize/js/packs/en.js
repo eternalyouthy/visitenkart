@@ -302,7 +302,7 @@
       it: 'Professional English for your job: Work & Office, IT & Development, Infrastructure, Security, B2 Business English and B2 career themes.',
       chunks: 'Ready-made phrases for speaking and writing, organised by communicative function.',
       expressions: 'Idioms, everyday conversational phrases, ready-made chunks and classic literary expressions for natural English.',
-      literature: 'Memorable, unusual turns of phrase from classic English literature that modern native speakers still recognise — with author, book and breakdown.',
+      literature: 'Lines from English-language literature with a short explanation of their meaning and examples.',
       grammar: 'Essential B1–B2 grammar: a short explanation, an example, a recognition question and a typed production task per topic.',
       roots: 'Start with verbs + particles (take up, take off, take over): the core of everyday English. Then word-building families, prefixes, suffixes and classical Latin/Greek roots.'
     }

@@ -197,7 +197,7 @@
       it: 'Professional Russian for IT work: office communication, development, infrastructure and security.',
       chunks: 'Ready-made phrases for speaking and writing, organised by communicative function.',
       expressions: 'Idioms, short everyday phrases and classic literary lines for natural Russian.',
-      literature: 'Memorable, unusual lines from classic Russian literature that every native speaker recognises — with author, book and breakdown.',
+      literature: 'Lines from Russian literature with a short explanation of their meaning and examples.',
       grammar: 'The core of Russian grammar for learners: aspect, cases after в / на, and verbs of motion — with tables, pitfalls and drills.',
       roots: 'Russian word families built from one root with prefixes (при-, вы-, пере- …), noun and adjective suffixes, and international classical elements.'
     }

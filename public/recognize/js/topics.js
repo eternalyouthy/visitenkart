@@ -224,7 +224,7 @@
       it: 'Professional German for your job: Work & Office, IT & Development, Infrastructure, Security, and B2 career themes.',
       chunks: 'Ready-made phrases (Redemittel) for speaking and writing. Use the filter to get phrases for a specific situation.',
       expressions: 'Idioms, everyday conversational phrases, ready-made Redemittel and classic literary expressions.',
-      literature: 'Memorable, unusual turns of phrase from classic German literature that modern native speakers still recognise — with author, book and breakdown.',
+      literature: 'Lines from German literature with a short explanation of their meaning and examples.',
       grammar: 'A compact B1 reference: short explanations, tables, examples, pitfalls, and quick drills you can add to Review.',
       roots: 'German word families, separable/inseparable prefixes, gender-determining suffixes, and classical Latin/Greek roots.'
     }
