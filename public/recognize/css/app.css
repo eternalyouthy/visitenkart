@@ -891,6 +891,57 @@ a.chip:hover { border-color: var(--ice); }
 .rate[disabled] { opacity: 0.32; pointer-events: none; }
 @media (max-width: 640px) { .studio-grid { grid-template-columns: 1fr; } }
 
+/* ---------- Practice studio: setup, hints, games ---------- */
+.st-field select:disabled { opacity: 0.45; }
+.st-check { display: flex; align-items: center; gap: 10px; align-self: end; min-height: 44px; cursor: pointer; font-size: 15px; color: var(--muted); }
+.st-check input { width: 18px; height: 18px; accent-color: var(--ice); }
+.st-check:has(input:disabled) { opacity: 0.45; }
+.fortune { margin-bottom: 28px; border: 1px dashed color-mix(in srgb, var(--gold) 55%, transparent); }
+.fortune > summary { list-style: none; display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.fortune > summary::-webkit-details-marker { display: none; }
+.fortune > summary:hover, .fortune > summary:focus-visible { background: color-mix(in srgb, var(--gold) 8%, transparent); }
+.fortune-ico { font-size: 22px; line-height: 1; letter-spacing: 0; display: inline-block; transition: transform 0.25s; }
+.fortune[open] .fortune-ico { transform: rotate(-18deg) scale(1.1); }
+.fortune-body { padding: 4px 22px 20px; }
+.fortune-body .label { display: block; margin-bottom: 10px; color: var(--gold); }
+.fortune-body p { font-family: var(--font-display); font-size: 18px; line-height: 1.55; max-width: 640px; }
+.fortune-body p + p { margin-top: 10px; }
+.st-task { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 15px; line-height: 1.5; color: var(--text); }
+.st-task-ico { flex: none; width: 20px; height: 20px; border: 1px solid var(--line-ice); color: var(--ice); font-family: var(--font-mono); font-size: 12px; display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+.st-hints { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.st-hint { display: flex; gap: 12px; align-items: baseline; padding: 8px 12px; border-left: 2px solid var(--ice); background: var(--ice-soft); }
+.st-hint .label { flex: none; margin: 0; }
+.st-hint-t { font-family: var(--font-display); font-size: 17px; white-space: pre-wrap; }
+.st-listen { display: flex; align-items: center; gap: 14px; }
+.st-clock { color: var(--ice); font-weight: 600; }
+.st-clock.low { color: var(--bad); }
+.st-score { margin-top: 14px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--muted); }
+.st-score b { font-size: 20px; color: var(--text); }
+.st-flash.ok { color: var(--ok); } .st-flash.bad { color: var(--bad); }
+.fam-found { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.verdict.almost { color: var(--gold); border-color: color-mix(in srgb, var(--gold) 50%, transparent); }
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+.match-col { display: flex; flex-direction: column; gap: 10px; }
+.opt.match-item { width: 100%; text-align: left; font-size: 16px; padding: 10px 14px; }
+.opt.match-item.sel { border-color: var(--ice); background: var(--ice-soft); }
+.opt.match-item.wrong { border-color: var(--bad); color: var(--bad); }
+.opt.match-item.done { border-color: color-mix(in srgb, var(--ok) 45%, transparent); color: var(--ok); opacity: 0.55; cursor: default; }
+.blitz-card { margin-top: 18px; padding: 24px; border: 1px solid var(--line-2); text-align: center; }
+.blitz-card .hw { margin: 0; }
+.blitz-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.blitz-btns .btn { justify-content: center; min-height: 56px; }
+.st-pairs { border-top: 1px solid var(--line); }
+.st-pair { display: flex; justify-content: space-between; gap: 16px; padding: 10px 2px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+.st-pair > span:first-child { font-family: var(--font-display); font-size: 17px; }
+.st-pair > span:last-child { text-align: right; }
+.st-pair.got > span:first-child { color: var(--ok); }
+@media (max-width: 640px) {
+  .match-grid { gap: 8px; }
+  .opt.match-item { font-size: 14.5px; padding: 8px 10px; }
+  .st-pair { flex-direction: column; gap: 2px; }
+  .st-pair > span:last-child { text-align: left; }
+}
+
 /* ---------- WHY? button + sheet ---------- */
 .why-btn {
   flex: none; height: 40px; padding: 0 12px; background: transparent; border: 1px solid var(--line-ice); color: var(--ice);

@@ -2095,10 +2095,35 @@
       }
       case 'st-choice': studioAnswer(el.dataset.v); break;
       case 'st-reveal': studioAnswer(null); break;
-      case 'st-rate': studioRate(Number(el.dataset.g)); break;
-      case 'st-next': if (studio) { studio.i++; studio.checked = false; studio.isCorrect = false; studio.input = ''; drawPractice(); window.scrollTo(0, 0); } break;
-      case 'st-end': if (studio) { studio.i = studio.questions.length; drawPractice(); } break;
+      case 'st-hint': studioHint(); break;
+      case 'st-next': studioNext(); break;
+      case 'st-end': {
+        if (!studio) break;
+        var eq = studio.questions[studio.i];
+        if (eq && !studio.checked && eq.kind === 'blitz') blitzFinish();          // count the round played so far
+        else if (eq && !studio.checked && eq.kind === 'family') familyFinish();
+        stopStudioTimer();
+        studio.i = studio.questions.length;
+        drawPractice();
+        break;
+      }
       case 'st-again': studio = null; viewPractice(ui.lastStudioParams || {}); break;
+      case 'st-build': case 'st-unbuild': {
+        var bq = studio && studio.questions[studio.i], bi = Number(el.dataset.i);
+        if (!bq || studio.checked || bq.kind !== 'builder') break;
+        if (name === 'st-build') { if (bq.built.indexOf(bi) < 0) bq.built.push(bi); } else bq.built = bq.built.filter(function (x) { return x !== bi; });
+        drawPractice();
+        break;
+      }
+      case 'st-bcheck': builderCheck(); break;
+      case 'st-match': matchPick(el.dataset.side, Number(el.dataset.i)); break;
+      case 'st-fam-done': familyFinish(); break;
+      case 'st-blitz': blitzAnswer(el.dataset.v === '1'); break;
+      case 'st-say-slow': {
+        var dq = studio && studio.questions[studio.i];
+        if (dq && dq.say) { var rate0 = S.settings.speechRate; S.settings.speechRate = 0.6; speak(dq.say); S.settings.speechRate = rate0; }
+        break;
+      }
       case 'open-link':
         if (el.dataset.lang && el.dataset.id) {
           setLanguages('learn', el.dataset.lang, '#/item/' + encodeURIComponent(el.dataset.id));
@@ -2131,6 +2156,7 @@
   document.addEventListener('submit', function (e) {
     if (e.target.dataset.act === 'studio-start') { e.preventDefault(); startStudioFromForm(e.target); return; }
     if (e.target.dataset.act === 'st-type') { e.preventDefault(); studioAnswer(($('#stInput') || {}).value || ''); return; }
+    if (e.target.dataset.act === 'st-fam') { e.preventDefault(); familyGuess(($('#stInput') || {}).value || ''); return; }
     if (e.target.dataset.act === 'rd-type') { e.preventDefault(); rootDrillAnswer(($('#rdInput') || {}).value || ''); return; }
     if (e.target.dataset.act !== 'type-check') return;
     e.preventDefault();
@@ -2149,6 +2175,7 @@
   document.addEventListener('change', function (e) {
     var el = e.target;
     if (el.id === 'stKind') { syncStudioHelp(); return; }
+    if (el.id === 'stSection') { syncStudioTopics(); return; }
     if (el.dataset.set) {
       var k = el.dataset.set, v = el.type === 'checkbox' ? el.checked : el.value;
       if (k === 'newPerSession') { v = Math.max(1, Math.min(50, Math.round(Number(v) || 10))); el.value = v; }
@@ -2764,22 +2791,44 @@
     drawRootDrill();
   }
 
-  /* ---------------- PRACTICE / LEARNING STUDIO (ported from English ETRNL) ---------------- */
-  var studio = null;
+  /* ---------------- PRACTICE / LEARNING STUDIO ----------------
+   * A sandbox. Nothing is saved and nothing touches FSRS Review. Setup: level → words → game.
+   * Wrong answers come back once at the end of the same session (kept in memory only).
+   * Typed answers: umlauts may be written ae/oe/ue/ss, ё = е, stress marks are ignored, one typo (two in long
+   * words) counts as "almost". Every typed task says what is expected; the Hint button opens further hints. */
+  var studio = null, stTimer = null;
+  var STUDIO_GROUPS = [
+    { label: 'Classic', modes: ['mixed', 'cloze', 'translation', 'recognition', 'derivative'] },
+    { label: 'Games', modes: ['builder', 'duel', 'family', 'match', 'odd', 'dictation', 'blitz', 'gender'] },
+    { label: 'Rules', modes: ['affix', 'grammar'] }
+  ];
   var STUDIO_MODES = {
-    mixed: 'Mixed practice',
-    recognition: 'Meaning in context',
-    translation: 'Meaning → word',
-    derivative: 'Root base → derivative',
-    cloze: 'Cloze in context',
-    affix: 'Prefixes & Suffixes',
-    grammar: 'Grammar in context'
+    mixed: 'Mixed practice', cloze: 'Cloze in context', translation: 'Meaning → word', recognition: 'Meaning in context',
+    derivative: 'Root base → derivative', builder: 'Sentence builder', duel: 'Family duel', family: 'Family builder · 90 s',
+    match: 'Match pairs', odd: 'Odd one out', dictation: 'Dictation', blitz: 'Blitz · 60 s', gender: 'Gender of nouns',
+    affix: 'Prefixes & Suffixes', grammar: 'Grammar in context'
   };
+  var STUDIO_CLASSIC = ['recognition', 'translation', 'derivative', 'cloze', 'dictation'];
+  var LEVEL_BANDS = { all: null, a: ['A1', 'A2'], b1: ['B1'], b2: ['B2'], c: ['C1', 'C2'] };
+  var LEVEL_NAMES = { all: 'All levels', a: 'A1–A2', b1: 'B1', b2: 'B2', c: 'C1–C2' };
+  var RU_GENDER = { m: 'masculine', f: 'feminine', n: 'neuter' };
   function studioModeName(k) {
     if (k === 'recognition') return 'Meaning in context (' + LS() + ' → ' + KS() + ')';
-    if (k === 'translation') return GT.LANGS[GT.know].name + ' → ' + langMeta().name;
+    if (k === 'translation') return 'Meaning → word (' + KS() + ' → ' + LS() + ')';
+    if (k === 'gender' && GT.learn === 'de') return 'Article · der / die / das';
     return STUDIO_MODES[k] || k;
   }
+  function studioModeAvailable(k) {
+    if (k === 'gender') return GT.items.some(function (it) { return it.article || it.gender; });
+    if (k === 'dictation') return tts.ok;
+    if (k === 'duel' || k === 'family' || k === 'odd' || k === 'derivative') return Object.keys(GT.roots).length > 0;
+    if (k === 'grammar') return Object.keys(GT.grammar).length > 0;
+    return true;
+  }
+  function SH(k, vars) { return GT.hint('studio.h.' + k, vars); }
+  function stopStudioTimer() { if (stTimer) { clearInterval(stTimer); stTimer = null; } }
+
+  /* ---- what to train: scope + level ---- */
   function proScopeItem(it) {
     return GT.inTab(it, 'it') || (GT.PRO_SUBS || []).some(function (s) { return GT.inTopic(it, s.tab, s.topic); }) ||
       (GT.cfg('proExtra') && GT.inTopic(it, GT.cfg('proExtra').tab, GT.cfg('proExtra').topic));
@@ -2802,6 +2851,120 @@
     }
     return all;
   }
+  function levelOf(it) {
+    var l = it.level;
+    if (!l) { var t = GT.topic(it.tab, it.topic); l = t && t.level; }
+    return l ? String(l).toUpperCase() : '';
+  }
+  /** Items without a level tag (roots, chunks …) pass every level filter. */
+  function levelOk(it, band) { if (!band) return true; var l = levelOf(it); return !l || band.indexOf(l) >= 0; }
+  function studioItems(opts) {
+    var band = LEVEL_BANDS[opts.level] || null;
+    return studioScopeItems(opts.scope).filter(function (it) {
+      if (!levelOk(it, band)) return false;
+      if (opts.studied && !S.card(GT.cardKey(it.id, 'rec')) && !S.card(GT.cardKey(it.id, 'prod'))) return false;
+      return true;
+    });
+  }
+
+  /* ---- answer checking ---- */
+  function fold(s) { return norm(s).replace(/\+/g, '').replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss'); }
+  function editDist(a, b) {
+    if (Math.abs(a.length - b.length) > 2) return 9;
+    var prev = [], cur, i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur = [i];
+      for (j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  var DE_ART = /^(der|die|das|den|dem|des)\s+/;
+  /** -> 'ok' | 'almost' (typo) | 'article' (right noun, wrong article) | 'bad' */
+  function checkTyped(input, accepted, it) {
+    var fi = fold(input);
+    if (!fi) return 'bad';
+    var acc = accepted.filter(Boolean);
+    if (acc.some(function (a) { return fold(a) === fi; })) return 'ok';
+    if (it && it.article && GT.learn === 'de') {
+      var m = DE_ART.exec(fi);
+      if (m && acc.some(function (a) { return fold(a).replace(DE_ART, '') === fi.slice(m[0].length); })) return 'article';
+    }
+    for (var k = 0; k < acc.length; k++) {
+      var fa = fold(acc[k]), tol = fa.length >= 9 ? 2 : fa.length >= 4 ? 1 : 0;
+      if (tol && editDist(fi, fa) <= tol) return 'almost';
+    }
+    return 'bad';
+  }
+
+  /* ---- hints ---- */
+  function baseFormOf(it) {
+    if (!it) return '';
+    if (it.type === 'chunk') return plain(it.t);
+    return String(it.t).replace(/^sich\s+/, '');
+  }
+  function posKey(it) { var p = it && it.pos; return p === 'adjective' ? 'adj' : p; }
+  /** The always-visible line that says what the task expects. */
+  function taskHint(q) {
+    var it = q.entry;
+    if (q.kind === 'cloze' || q.kind === 'dictation') {
+      var pre = q.kind === 'dictation' ? SH('dictation') + ' ' : '';
+      if (q.parts > 1) return pre + SH(it && it.type !== 'chunk' ? 'split' : 'multi');
+      if (it && it.type === 'chunk') return pre + SH('chunkForm');
+      if (it && fold(q.answer) === fold(baseFormOf(it))) return pre + SH('asIs');
+      var p = posKey(it);
+      return pre + SH(p === 'verb' ? 'verb' : p === 'noun' ? 'noun' : p === 'adj' ? 'adj' : 'form');
+    }
+    if (q.kind === 'translation') {
+      if (it.type === 'chunk') return SH('phrase');
+      if (it.article && GT.learn === 'de') return SH('withArticle');
+      if (posKey(it) === 'verb') return SH('infinitive');
+      return SH('dictForm');
+    }
+    if (q.kind === 'derivative') return SH('derive');
+    if (q.kind === 'recognition') return GT.hint('pickMeaning');
+    return q.task || '';
+  }
+  function letterCount(s) { return plain(s).replace(/́/g, '').replace(/[\s'’-]/g, '').length; }
+  function maskAnswer(ans, show) {
+    return plain(ans).replace(/́/g, '').trim().split(/\s+/).map(function (w) {
+      return w.split('').map(function (c, i) { return i < show || /['’-]/.test(c) ? c : '_'; }).join(' ');
+    }).join('   ') + '   (' + letterCount(ans) + ')';
+  }
+  /** Further hints, opened one by one with the Hint button. */
+  function hintSteps(q) {
+    var it = q.entry, out = [];
+    function add(label, text) { if (text) out.push({ label: label, text: text }); }
+    if (q.kind === 'cloze' || q.kind === 'dictation') {
+      if (q.kind === 'dictation') add(SH('lTranslation'), q.translation);
+      if (it) add(SH('lMeaning'), meaningOf(it));
+      if (it && fold(plainHead(it)) !== fold(q.answer)) add(SH('lDict'), plainHead(it));
+      add(SH('lStart'), maskAnswer(q.answer, 1));
+      add(SH('lStart'), maskAnswer(q.answer, 3));
+    } else if (q.kind === 'translation') {
+      var r = rootOf(it);
+      if (r) add(SH('lFamily'), rootName(r) + ' — ' + GT.gl(r));
+      if (q.ex && q.ex.t.indexOf('[[') >= 0) add(SH('lExample'), plain(q.ex.t.replace(/\[\[(.+?)\]\]/g, '____')));
+      add(SH('lStart'), maskAnswer(q.answer, 1));
+      add(SH('lStart'), maskAnswer(q.answer, 3));
+    } else if (q.kind === 'derivative') {
+      add(SH('lStart'), maskAnswer(q.answer, 1));
+      add(SH('lStart'), maskAnswer(q.answer, 3));
+    } else if (q.kind === 'grammar' && !q.options) {
+      add(SH('lStart'), maskAnswer(q.answer, 1));
+    } else if (q.kind === 'builder') {
+      add(SH('lFirst'), q.answerTokens[0]);
+      if (q.answerTokens.length > 4) add(SH('lFirst'), q.answerTokens.slice(0, 3).join(' '));
+    }
+    return out;
+  }
+
+  /* ---- question builders ---- */
+  function clozeExOf(it) {
+    var exs = (it.examples || []).filter(function (e) { return e.t && e.t.indexOf('[[') >= 0; });
+    return exs.length ? exs[Math.floor(Math.random() * exs.length)] : null;
+  }
   /** Base word for a "root base → derivative" question, or null. */
   function derivBaseOf(it) {
     if (it.derivFrom && GT.byId[it.derivFrom]) { var b = GT.byId[it.derivFrom]; return { t: b.t, gloss: meaningOf(b) }; }
@@ -2811,14 +2974,12 @@
     return null;
   }
   function makeStudioEntryQuestion(it, kind) {
-    var exs = it.examples || [];
-    var clozeEx = exs.filter(function (e) { return e.t && e.t.indexOf('[[') >= 0; });
-    var ex = (clozeEx.length ? clozeEx[Math.floor(Math.random() * clozeEx.length)] : exs[0]) || null;
-    var surface = ex ? clozeAnswers(ex.t).join(' ') : '';
+    var clozeEx = clozeExOf(it);
+    var ex = clozeEx || (it.examples || [])[0] || null;
+    var parts = clozeEx ? clozeAnswers(clozeEx.t) : [];
+    var surface = parts.join(' ');
     var q = {
-      id: it.id, entry: it, kind: kind,
-      direction: kind === 'recognition' ? 'rec' : 'prod',
-      cardKey: GT.cardKey(it.id, kind === 'recognition' ? 'rec' : 'prod'),
+      id: it.id, entry: it, kind: kind, hints: 0, parts: parts.length,
       prompt: '', context: '', translation: '', base: '',
       answer: '', accepted: [], options: null,
       explain: lxText(it, 'note') || lxText(it, 'meaningExplanation') || lxText(it.lit, 'breakdown') || '',
@@ -2827,14 +2988,7 @@
     if (kind === 'recognition') {
       q.prompt = ex ? ex.t : plainHead(it);
       q.answer = (ex && ex.sense) ? lxText(ex, 'sense') : meaningOf(it);
-      var sameType = GT.items.filter(function (w) { return w.id !== it.id && w.type === it.type && (!it.pos || w.pos === it.pos) && meaningOf(w) !== q.answer; });
-      if (sameType.length < 3) sameType = GT.items.filter(function (w) { return w.id !== it.id && meaningOf(w) !== q.answer; });
-      var dist = [];
-      shuffle(sameType).forEach(function (w) {
-        var m = meaningOf(w);
-        if (m && m !== q.answer && dist.indexOf(m) < 0 && dist.length < 3) dist.push(m);
-      });
-      q.options = shuffle([q.answer].concat(dist));
+      q.options = shuffle([q.answer].concat(meaningDistractors(it, q.answer, 3)));
     } else if (kind === 'derivative') {
       var db = derivBaseOf(it);
       q.base = db ? String(db.t).toUpperCase() + ' — ' + db.gloss : (it.root || '').toUpperCase();
@@ -2845,14 +2999,18 @@
       q.accepted = [it.t, plainHead(it)];
       if (surface) q.accepted.push(surface);
       if (/^sich /.test(it.t)) q.accepted.push(it.t.slice(5));
-    } else if (kind === 'cloze' && ex && surface) {
-      q.prompt = GT.hint('restoreWord');
-      q.context = ex.t.replace(/\[\[(.+?)\]\]/g, '________');
-      q.translation = trOf(ex);
+    } else if ((kind === 'cloze' || kind === 'dictation') && clozeEx && surface) {
+      q.ex = clozeEx;
+      q.prompt = kind === 'cloze' ? GT.hint('restoreWord') : '';
+      q.context = clozeEx.t.replace(/\[\[(.+?)\]\]/g, '________');
+      q.translation = trOf(clozeEx);
+      q.say = plain(clozeEx.t);
       q.answer = surface;
       q.accepted = [surface, it.t, plainHead(it)];
+      if (parts.length > 1) q.accepted.push(parts.join(''), parts.slice().reverse().join(''));
     } else {
       q.kind = 'translation';
+      q.parts = 1;
       q.prompt = (ex && ex.sense) ? lxText(ex, 'sense') : meaningOf(it);
       q.context = it.type === 'chunk' ? (it.register || 'neutral') + ' · phrase' : (it.pos === 'noun' ? GT.cfg('nounHint', 'noun') : (it.pos || ''));
       q.answer = plainHead(it);
@@ -2862,15 +3020,136 @@
     }
     return q;
   }
+  /** Close meanings first: same root, then same topic, then same type/part of speech. */
+  function meaningDistractors(it, answer, n) {
+    var seen = [answer], out = [];
+    function take(list) {
+      shuffle(list).forEach(function (w) {
+        if (out.length >= n || !w || w.id === it.id) return;
+        var m = meaningOf(w);
+        if (m && seen.indexOf(m) < 0) { seen.push(m); out.push(m); }
+      });
+    }
+    if (it.rootId) take(rootWords(it.rootId).filter(function (w) { return w && posKey(w) === posKey(it); }));
+    if (out.length < n) take((GT.members[it.tab + '.' + it.topic] || []).filter(function (w) { return w.type === it.type; }));
+    if (out.length < n) take(GT.items.filter(function (w) { return w.type === it.type && (!it.pos || posKey(w) === posKey(it)); }));
+    if (out.length < n) take(GT.items);
+    return out;
+  }
+  function tokenize(s) { return plain(s).replace(/\s+/g, ' ').trim().split(' '); }
+  function shuffledOrder(n) {
+    var idx = [], i, o;
+    for (i = 0; i < n; i++) idx.push(i);
+    for (i = 0; i < 6; i++) { o = shuffle(idx); if (o.join() !== idx.join()) return o; }
+    return idx.slice().reverse();
+  }
+  function makeBuilderQuestion(it, ex) {
+    var toks = tokenize(ex.t);
+    if (toks.length < 4 || toks.length > 12) return null;
+    return { id: 'b:' + it.id, entry: it, kind: 'builder', hints: 0, task: SH('builder'), tokens: toks, answerTokens: toks, order: shuffledOrder(toks.length), built: [], answer: toks.join(' '), translation: trOf(ex), ex: ex };
+  }
+  function makeDuelQuestion(it) {
+    if (!it.rootId || it.type === 'chunk') return null;
+    var ex = clozeExOf(it);
+    if (!ex) return null;
+    var head = baseFormOf(it), used = [fold(head)];
+    var sib = shuffle(rootWords(it.rootId).filter(function (w) { return w && w.id !== it.id && w.type !== 'chunk'; }));
+    var same = sib.filter(function (w) { return posKey(w) === posKey(it); });
+    var pick = [];
+    (same.length >= 2 ? same : sib).forEach(function (w) {
+      if (pick.length < 3 && used.indexOf(fold(baseFormOf(w))) < 0) { used.push(fold(baseFormOf(w))); pick.push(w); }
+    });
+    if (pick.length < 2) return null;
+    var all = pick.concat([it]);
+    return {
+      id: 'd:' + it.id, entry: it, kind: 'duel', hints: 0, task: SH('duel'),
+      context: ex.t.replace(/\[\[(.+?)\]\]/g, '________'), translation: trOf(ex), ex: ex,
+      answer: head, options: shuffle(all.map(baseFormOf)), optLang: GT.learn,
+      explainList: all.map(function (w) { return [baseFormOf(w), meaningOf(w)]; })
+    };
+  }
+  function makeGenderQuestion(it) {
+    if (it.type !== 'word') return null;
+    if (GT.learn === 'de' && /^(der|die|das)$/.test(it.article || '')) {
+      if (it.plural && fold(it.plural) === fold(it.article + ' ' + it.t)) return null;   // plural-only (die Eltern)
+      return { id: 'g:' + it.id, entry: it, kind: 'gender', hints: 0, task: SH('genderDe'), word: it.t, answer: it.article, options: ['der', 'die', 'das'], fixedOpts: true, optLang: GT.learn };
+    }
+    if (RU_GENDER[it.gender]) {
+      return { id: 'g:' + it.id, entry: it, kind: 'gender', hints: 0, task: SH('gender'), word: it.t, answer: RU_GENDER[it.gender], options: ['masculine', 'feminine', 'neuter'], fixedOpts: true, optLang: 'en' };
+    }
+    return null;
+  }
+  function makeOddQuestion(pool, usedRoots) {
+    var words = function (rid) { return rootWords(rid).filter(function (w) { return w && w.type !== 'chunk'; }); };
+    var rids = shuffle(Object.keys(pool.reduce(function (m, it) { if (it.rootId && GT.roots[it.rootId]) m[it.rootId] = 1; return m; }, {})));
+    var fresh = rids.filter(function (r) { return usedRoots.indexOf(r) < 0; });
+    var rA = (fresh.length ? fresh : rids).find(function (r) { return words(r).length >= 3; });
+    if (rA) {
+      var three = [], seen = [];
+      shuffle(words(rA)).forEach(function (w) { var f = fold(baseFormOf(w)); if (three.length < 3 && seen.indexOf(f) < 0) { seen.push(f); three.push(w); } });
+      var others = shuffle(Object.keys(GT.roots).filter(function (r) { return r !== rA; })).reduce(function (a, r) { return a.concat(words(r)); }, []);
+      var pf = three.map(function (w) { return w.prefix; }).filter(Boolean);
+      var odd = others.find(function (w) { return w.prefix && pf.indexOf(w.prefix) >= 0 && seen.indexOf(fold(baseFormOf(w))) < 0; }) ||
+        others.find(function (w) { return seen.indexOf(fold(baseFormOf(w))) < 0; });
+      if (three.length === 3 && odd) {
+        usedRoots.push(rA);
+        var rB = GT.roots[odd.rootId];
+        return {
+          id: 'o:' + rA + ':' + odd.id, entry: null, kind: 'odd', hints: 0, task: SH('oddRoot'),
+          answer: baseFormOf(odd), options: shuffle(three.concat([odd]).map(baseFormOf)), optLang: GT.learn,
+          explain: three.map(baseFormOf).join(', ') + ' → ' + rootName(GT.roots[rA]) + ' (' + GT.gl(GT.roots[rA]) + ').  ' + baseFormOf(odd) + ' → ' + rootName(rB) + ' (' + GT.gl(rB) + ').',
+          seenIds: three.concat([odd]).map(function (w) { return w.id; })
+        };
+      }
+    }
+    // no word families in this selection: odd one out by topic
+    var byTopic = {};
+    pool.forEach(function (it) { if (it.type === 'word') (byTopic[it.tab + '.' + it.topic] = byTopic[it.tab + '.' + it.topic] || []).push(it); });
+    var keys = shuffle(Object.keys(byTopic).filter(function (k) { return byTopic[k].length >= 3 && usedRoots.indexOf(k) < 0; }));
+    if (!keys.length) return null;
+    var tk = keys[0], tp = tk.split('.'), trio = shuffle(byTopic[tk]).slice(0, 3);
+    var outsider = shuffle(GT.items.filter(function (w) { return w.type === 'word' && w.tab === tp[0] && w.topic !== tp[1] && trio.every(function (x) { return posKey(x) === posKey(w) || !x.pos; }); }))[0] ||
+      shuffle(GT.items.filter(function (w) { return w.type === 'word' && w.topic !== tp[1]; }))[0];
+    if (!outsider) return null;
+    usedRoots.push(tk);
+    var tA = GT.topic(tp[0], tp[1]), tB = GT.topic(outsider.tab, outsider.topic);
+    return {
+      id: 'o:' + tk + ':' + outsider.id, entry: null, kind: 'odd', hints: 0, task: SH('oddTopic'),
+      answer: baseFormOf(outsider), options: shuffle(trio.concat([outsider]).map(baseFormOf)), optLang: GT.learn,
+      explain: trio.map(baseFormOf).join(', ') + ' → ' + (tA ? tA.name : tk) + '.  ' + baseFormOf(outsider) + ' → ' + (tB ? tB.name : outsider.topic) + '.',
+      seenIds: trio.concat([outsider]).map(function (w) { return w.id; })
+    };
+  }
+  function makeMatchQuestion(items) {
+    var pairs = items.map(function (it) { return { id: it.id, l: plainHead(it), r: meaningOf(it) }; });
+    var idx = pairs.map(function (_, i) { return i; });
+    return { id: 'm:' + items[0].id, entry: null, kind: 'match', hints: 0, task: SH('match'), pairs: pairs, left: shuffle(idx), right: shuffle(idx), done: [], sel: null, wrong: null, errors: 0, seenIds: items.map(function (it) { return it.id; }) };
+  }
+  function makeFamilyQuestion(rid) {
+    var r = GT.roots[rid], base = r.t || r.verb || '', seen = [fold(base)], words = [];
+    rootWords(rid).forEach(function (w) {
+      if (!w || w.type === 'chunk') return;
+      var f = fold(baseFormOf(w));
+      if (seen.indexOf(f) < 0) { seen.push(f); words.push(w); }
+    });
+    if (words.length < 4) return null;
+    return { id: 'f:' + rid, entry: null, kind: 'family', hints: 0, task: SH('family'), rid: rid, base: base, gloss: GT.gl(r), words: words, found: [], misses: [], secs: 90 };
+  }
+  function makeBlitzQuestion(items) {
+    var cards = shuffle(items).slice(0, 80).map(function (it) {
+      var truth = Math.random() < 0.5, shown = meaningOf(it);
+      if (!truth) { var d = meaningDistractors(it, shown, 1)[0]; if (d) shown = d; else truth = true; }
+      return { id: it.id, word: plainHead(it), shown: shown, real: meaningOf(it), truth: truth };
+    });
+    return { id: 'blitz', entry: null, kind: 'blitz', hints: 0, task: SH('blitz'), cards: cards, k: 0, right: 0, wrongs: [], secs: 60, seenIds: [] };
+  }
   function buildAffixQuestions() {
     var out = [];
-    // Affix exercises (suffixes, and prefixes that carry a reference exercise)
     function fromAffix(a, kind, href) {
       if (!a || !a.exercise) return;
       var ex = a.exercise, opts = lxText(ex, 'options') || [];
-      var drill = a.drillId && GT.byId[a.drillId];
       out.push({
-        id: kind + ':' + a.id, entry: null, kind: 'affix', direction: 'rec', cardKey: drill ? drill.id : null,
+        id: kind + ':' + a.id, entry: null, kind: 'affix', hints: 0,
         badge: (kind === 'sf' ? 'Suffix · ' : 'Prefix · ') + a.label,
         prompt: lxText(ex, 'question'),
         answer: lxText(ex, 'answer'),
@@ -2881,10 +3160,9 @@
     }
     GT.suffixOrder.forEach(function (sid) { fromAffix(GT.suffixes[sid], 'sf', '#/roots/s-' + sid); });
     Object.keys(GT.prefixes).forEach(function (pid) { fromAffix(GT.prefixes[pid], 'pfx', '#/roots/p-' + pid); });
-    // Prefix meaning-in-context questions from roots
     Object.keys(GT.roots).forEach(function (rid) {
       rootWords(rid).forEach(function (w) {
-        if (!w.prefixDrill || !GT.prefixes[w.prefix] || w.rootId !== rid) return;
+        if (!w || !w.prefixDrill || !GT.prefixes[w.prefix] || w.rootId !== rid) return;
         var pf = GT.prefixes[w.prefix];
         var list = Array.isArray(w.prefixDrill) ? w.prefixDrill : [w.prefixDrill];
         list.forEach(function (pd) {
@@ -2892,7 +3170,7 @@
           if (!ex || !cm) return;
           var dist = shuffle(pf.meanings.filter(function (_, idx) { return idx !== pd.meaning; })).slice(0, 3).map(function (m) { return GT.gl(m); });
           out.push({
-            id: 'pf:' + w.id + ':' + pd.ex, entry: w, kind: 'affix', direction: 'rec', cardKey: null,
+            id: 'pf:' + w.id + ':' + pd.ex, entry: w, kind: 'affix', hints: 0,
             badge: 'Prefix · ' + pf.label + ' in ' + w.t,
             prompt: GT.hint('prefixQ', { P: pf.label }),
             contextDe: ex.t, translation: trOf(ex),
@@ -2909,187 +3187,401 @@
   function buildGrammarQuestions() {
     var out = [];
     Object.keys(GT.grammar).forEach(function (gid) {
-      var pg = GT.grammar[gid];
+      var pg = GT.grammar[gid], badge = 'Grammar · ' + lxText(pg, 'title'), link = '#/grammar/' + gid, linkLabel = 'Open ' + lxText(pg, 'title');
       (pg.drills || []).forEach(function (d) {
         if (d.kind === 'choice') {
           var dOpts = drillOptions(d);
           out.push({
-            id: d.id, entry: d, kind: 'grammar', direction: 'rec', cardKey: d.id,
-            badge: 'Grammar · ' + lxText(pg, 'title'),
+            id: d.id, entry: d, kind: 'grammar', hints: 0, badge: badge,
             prompt: String(lxText(d, 'q')).replace(/___/g, '________'),
-            answer: dOpts[d.answer],
-            options: dOpts.slice(),
-            explain: lxText(d, 'explain') || '',
-            linkHref: '#/grammar/' + gid, linkLabel: 'Open ' + lxText(pg, 'title')
+            answer: dOpts[d.answer], options: dOpts.slice(), optLang: GT.learn,
+            explain: lxText(d, 'explain') || '', linkHref: link, linkLabel: linkLabel
           });
         } else if (d.kind === 'gap') {
           out.push({
-            id: d.id, entry: d, kind: 'grammar', direction: 'prod', cardKey: d.id,
-            badge: 'Grammar · ' + lxText(pg, 'title'),
-            prompt: d.hint ? lxText(d, 'hint') : GT.hint('fillGrammar'),
+            id: d.id, entry: d, kind: 'grammar', hints: 0, badge: badge,
+            task: d.hint ? lxText(d, 'hint') : GT.hint('fillGrammar'),
             context: String(lxText(d, 'q')).replace(/___/g, '________'),
-            answer: d.answer,
-            accepted: [d.answer].concat(d.accepted || []),
-            options: null,
-            explain: lxText(d, 'explain') || '',
-            linkHref: '#/grammar/' + gid, linkLabel: 'Open ' + lxText(pg, 'title')
+            answer: d.answer, accepted: [d.answer].concat(d.accepted || []), options: null,
+            explain: lxText(d, 'explain') || '', linkHref: link, linkLabel: linkLabel
+          });
+        } else if (d.kind === 'reorder' && d.tokens && d.tokens.length > 1) {
+          out.push({
+            id: d.id, entry: d, kind: 'builder', hints: 0, badge: badge, task: SH('builder'),
+            tokens: d.tokens.slice(), answerTokens: tokenize(d.answer), order: shuffledOrder(d.tokens.length), built: [],
+            answer: d.answer, translation: d.q ? lxText(d, 'q') : '',
+            explain: lxText(d, 'explain') || '', linkHref: link, linkLabel: linkLabel
           });
         }
       });
     });
     return out;
   }
+  function studioLimit(opts) { return Math.max(4, Math.min(25, Number(opts.limit) || 12)); }
   function buildStudioPool(opts) {
-    var kind = opts.kind || 'mixed';
-    var dir = opts.direction || 'both';
-    var limit = Math.max(4, Math.min(25, Number(opts.limit) || 12));
-    var pool = [];
-    if (kind === 'affix') {
-      pool = buildAffixQuestions();
-    } else if (kind === 'grammar') {
-      pool = buildGrammarQuestions().filter(function (q) { return dir === 'both' || q.direction === dir; });
-    } else {
-      var items = shuffle(studioScopeItems(opts.scope));
-      items.forEach(function (it) {
-        var canDer = !!derivBaseOf(it);
-        var hasCloze = (it.examples || []).some(function (e) { return e.t && e.t.indexOf('[[') >= 0; });
-        var types;
-        if (kind === 'mixed') {
-          var prodChoices = [];
-          if (hasCloze) prodChoices.push('cloze');
-          if (canDer) prodChoices.push('derivative');
-          prodChoices.push('translation');
-          types = [];
-          if (dir === 'both' || dir === 'rec') types.push('recognition');
-          if (dir === 'both' || dir === 'prod') types.push(prodChoices[Math.floor(Math.random() * prodChoices.length)]);
-        } else {
-          if (kind === 'derivative' && !canDer) return;
-          if (kind === 'cloze' && !hasCloze) return;
-          types = [kind];
-        }
-        types.forEach(function (tp) {
-          var q = makeStudioEntryQuestion(it, tp);
-          if (dir === 'both' || q.direction === dir) pool.push(q);
+    var kind = opts.kind || 'mixed', limit = studioLimit(opts), out = [];
+    if (kind === 'affix') return shuffle(buildAffixQuestions()).slice(0, limit);
+    if (kind === 'grammar') return shuffle(buildGrammarQuestions()).slice(0, limit);
+    var items = shuffle(studioItems(opts));
+    function fill(make) { items.forEach(function (it) { if (out.length < limit) { var q = make(it); if (q) out.push(q); } }); return out; }
+    switch (kind) {
+      case 'builder':
+        return fill(function (it) {
+          var exs = (it.examples || []).filter(function (e) { return e.t && trOf(e); });
+          return exs.length ? makeBuilderQuestion(it, exs[Math.floor(Math.random() * exs.length)]) : null;
         });
-      });
+      case 'duel': return fill(makeDuelQuestion);
+      case 'gender': return fill(makeGenderQuestion);
+      case 'dictation':
+        if (!tts.ok) return [];
+        return fill(function (it) { return clozeExOf(it) ? makeStudioEntryQuestion(it, 'dictation') : null; });
+      case 'odd': {
+        var used = [];
+        for (var a = 0; a < limit * 3 && out.length < limit; a++) { var oq = makeOddQuestion(items, used); if (oq) out.push(oq); else break; }
+        return out;
+      }
+      case 'match': {
+        var rounds = Math.max(2, Math.round(limit / 5)), group = [], means = [];
+        items.forEach(function (it) {
+          if (out.length >= rounds) return;
+          var m = meaningOf(it);
+          if (!m || means.indexOf(m) >= 0) return;
+          means.push(m); group.push(it);
+          if (group.length === 5) { out.push(makeMatchQuestion(group)); group = []; }
+        });
+        if (!out.length && group.length >= 3) out.push(makeMatchQuestion(group));
+        return out;
+      }
+      case 'family': {
+        var rids = shuffle(Object.keys(items.reduce(function (m, it) { if (it.rootId && GT.roots[it.rootId]) m[it.rootId] = 1; return m; }, {})));
+        var n = limit >= 20 ? 3 : limit >= 12 ? 2 : 1;
+        rids.forEach(function (rid) { if (out.length < n) { var fq = makeFamilyQuestion(rid); if (fq) out.push(fq); } });
+        return out;
+      }
+      case 'blitz': return items.length >= 8 ? [makeBlitzQuestion(items)] : [];
     }
-    return shuffle(pool).slice(0, limit);
+    items.forEach(function (it) {
+      if (out.length >= limit) return;
+      var canDer = !!derivBaseOf(it), hasCloze = !!clozeExOf(it), tp = kind;
+      if (kind === 'mixed') {
+        var choices = ['recognition', 'translation'];
+        if (hasCloze) choices.push('cloze', 'cloze');
+        if (canDer) choices.push('derivative');
+        tp = choices[Math.floor(Math.random() * choices.length)];
+      } else {
+        if (kind === 'derivative' && !canDer) return;
+        if (kind === 'cloze' && !hasCloze) return;
+      }
+      out.push(makeStudioEntryQuestion(it, tp));
+    });
+    return out;
+  }
+
+  /* ---- setup screen ---- */
+  var STUDIO_SECTIONS = [['all', 'Whole catalogue'], ['words', 'Words'], ['professional', 'Professional'], ['expressions', 'Expressions'], ['literature', 'Literary phrases'], ['roots', 'Roots · word families']];
+  function studioTopicOptions(section) {
+    if (section === 'roots') return Object.keys(GT.roots).map(function (rid) { return ['root:' + rid, rootName(GT.roots[rid]) + ' (' + GT.roots[rid].ids.length + ')']; });
+    var out = [], seen = {};
+    function addTopic(tb, t) {
+      var v = 'topic:' + tb + '.' + t.id;
+      if (seen[v] || t.hidden || !(GT.members[tb + '.' + t.id] || []).length) return;
+      seen[v] = 1;
+      out.push([v, t.name]);
+    }
+    if (section === 'words') GT.TOPICS.words.forEach(function (t) { if (!(GT.PRO_SUBS || []).some(function (s) { return s.tab === 'words' && s.topic === t.id; })) addTopic('words', t); });
+    if (section === 'professional') {
+      GT.TOPICS.it.forEach(function (t) { addTopic('it', t); });
+      (GT.PRO_SUBS || []).forEach(function (s) { var t = GT.topic(s.tab, s.topic); if (t) addTopic(s.tab, t); });
+    }
+    if (section === 'expressions') {
+      GT.TOPICS.expressions.forEach(function (t) { if (!t.parent) addTopic('expressions', t); });
+      GT.TOPICS.chunks.forEach(function (t) { addTopic('chunks', t); });
+    }
+    if (section === 'literature') GT.TOPICS.literature.forEach(function (t) { addTopic('literature', t); });
+    return out;
+  }
+  function topicSelectHTML(section, cur) {
+    var list = studioTopicOptions(section);
+    return '<option value="">' + (section === 'all' ? '—' : section === 'roots' ? 'All word families' : 'All topics') + '</option>' +
+      list.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (cur === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('');
+  }
+  function sectionOfScope(scope) {
+    if (!scope || scope === 'all') return 'all';
+    if (scope.indexOf('root:') === 0) return 'roots';
+    if (scope.indexOf('topic:') === 0) {
+      var tp = scope.slice(6).split('.');
+      if (tp[0] === 'it' || (GT.PRO_SUBS || []).some(function (s) { return s.tab === tp[0] && s.topic === tp[1]; })) return 'professional';
+      if (tp[0] === 'chunks' || tp[0] === 'expressions') return 'expressions';
+      return tp[0] === 'literature' ? 'literature' : 'words';
+    }
+    return STUDIO_SECTIONS.some(function (s) { return s[0] === scope; }) ? scope : 'all';
+  }
+  function levelCounts() {
+    var c = {};
+    GT.items.forEach(function (it) {
+      var l = levelOf(it);
+      Object.keys(LEVEL_BANDS).forEach(function (b) { if (LEVEL_BANDS[b] && LEVEL_BANDS[b].indexOf(l) >= 0) c[b] = (c[b] || 0) + 1; });
+    });
+    return c;
+  }
+  /** Honest note, folded like a fortune cookie. Text follows the "I know" language. */
+  function truthHTML(open) {
+    var paras = String(GT.hint('studio.truth') || '').split('\n\n');
+    return '<details class="fortune"' + (open ? ' open' : '') + '><summary><span class="fortune-ico" aria-hidden="true">🥠</span><span class="fortune-sum">Crack open the truth</span></summary>' +
+      '<div class="fortune-body" lang="' + GT.know + '"><span class="label ice">Your fortune</span>' + paras.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div></details>';
   }
   function syncStudioHelp() {
-    var kindEl = $('#stKind'), dirEl = $('#stDir'), scopeEl = $('#stScope'), helpEl = $('#stHelp');
+    var kindEl = $('#stKind'), helpEl = $('#stHelp');
     if (!kindEl) return;
-    var k = kindEl.value;
-    if (dirEl) {
-      if (k === 'recognition' || k === 'affix') { dirEl.value = 'rec'; dirEl.disabled = true; }
-      else if (k === 'translation' || k === 'derivative' || k === 'cloze') { dirEl.value = 'prod'; dirEl.disabled = true; }
-      else { dirEl.disabled = false; }
+    var k = kindEl.value, noScope = k === 'affix' || k === 'grammar';
+    ['#stLevel', '#stSection', '#stTopic', '#stStudied'].forEach(function (s) { var el = $(s); if (el) el.disabled = noScope; });
+    var lim = $('#stLimit');
+    if (lim) lim.disabled = k === 'blitz';
+    if (helpEl) {
+      helpEl.textContent = GT.hint('studio.' + k) || '';
+      helpEl.lang = GT.know;
+      if (k === 'dictation' && !tts.ok) helpEl.textContent += ' — No speech voice in this browser.';
     }
-    if (scopeEl) scopeEl.disabled = (k === 'affix' || k === 'grammar');
-    if (helpEl) { helpEl.textContent = GT.hint('studio.' + k) || ''; helpEl.lang = GT.know; }
+  }
+  function syncStudioTopics() {
+    var sec = $('#stSection'), top = $('#stTopic');
+    if (!sec || !top) return;
+    top.innerHTML = topicSelectHTML(sec.value, '');
+    top.disabled = sec.value === 'all';
   }
   function viewPractice(params) {
     params = params || {};
+    stopStudioTimer();
     ui.lastStudioParams = params;
     studio = null;
     var defKind = params.kind && STUDIO_MODES[params.kind] ? params.kind : 'mixed';
     var defScope = params.scope || (params.root ? 'root:' + params.root : 'all');
-    var dueAll = dueKeys('all', 'both').length;
-    var recSt = dirStats('rec'), prodSt = dirStats('prod');
-    var rootOpts = Object.keys(GT.roots).map(function (rid) {
-      return '<option value="root:' + esc(rid) + '"' + (defScope === 'root:' + rid ? ' selected' : '') + '>Root · ' + esc(rootName(GT.roots[rid])) + ' (' + GT.roots[rid].ids.length + ')</option>';
-    }).join('');
-    var topicOpts = ['words', 'it', 'chunks', 'expressions', 'literature'].map(function (tb) {
-      var list = GT.TOPICS[tb].filter(function (t) { return (GT.members[tb + '.' + t.id] || []).length; });
-      if (!list.length) return '';
-      var tdef = GT.TABS.find(function (x) { return x.id === tb; });
-      return '<optgroup label="' + esc(tdef ? tdef.label : tb) + ' topics">' + list.map(function (t) {
-        var v = 'topic:' + tb + '.' + t.id;
-        return '<option value="' + esc(v) + '"' + (defScope === v ? ' selected' : '') + '>' + esc(t.name) + '</option>';
-      }).join('') + '</optgroup>';
-    }).join('');
-    var h = '<header class="page-head"><span class="eyebrow">04 · Learning Studio · ' + esc(langMeta().name) + '</span><h1>Practice</h1><p class="lead">Active recall across words, word families, prefixes/suffixes, grammar and expressions. Check your answer first, then optionally schedule it directly into FSRS-5 Review.</p></header>';
-    h += '<div class="stat-row"><div class="stat accent"><b>' + dueAll + '</b><span>due in review</span></div><div class="stat"><b>' + GT.items.length + '</b><span>words & phrases</span></div><div class="stat"><b>' + recSt.known + '</b><span>rec known</span></div><div class="stat"><b>' + prodSt.known + '</b><span>prod known</span></div></div>';
+    var defSection = sectionOfScope(defScope), defTopic = defScope !== defSection ? defScope : '';
+    var defLevel = LEVEL_BANDS.hasOwnProperty(params.level) ? params.level : 'all';
+    var lc = levelCounts();
+    var h = '<header class="page-head"><span class="eyebrow">04 · Learning Studio · ' + esc(langMeta().name) + '</span><h1>Practice</h1>' +
+      '<p class="lead">Short games with words, word families, grammar and expressions. A sandbox: nothing is saved here and nothing changes your Review schedule.</p></header>';
+    h += truthHTML(false);
     h += '<form class="box" data-act="studio-start">' +
       '<span class="label ice">Session settings</span>' +
       '<div class="studio-grid">' +
-        '<label class="st-field"><span class="label">Exercise type</span><select id="stKind" name="kind">' +
-          Object.keys(STUDIO_MODES).map(function (k) { return '<option value="' + k + '"' + (defKind === k ? ' selected' : '') + '>' + esc(studioModeName(k)) + '</option>'; }).join('') +
-        '</select></label>' +
-        '<label class="st-field"><span class="label">Direction</span><select id="stDir" name="direction">' +
-          '<option value="both">Both directions</option><option value="rec">Recognition (' + LS() + ' → ' + KS() + ')</option><option value="prod">Production (' + KS() + ' → ' + LS() + ')</option>' +
-        '</select></label>' +
-        '<label class="st-field"><span class="label">Scope</span><select id="stScope" name="scope">' +
-          '<option value="all"' + (defScope === 'all' ? ' selected' : '') + '>Whole catalogue</option>' +
-          '<option value="words"' + (defScope === 'words' ? ' selected' : '') + '>Language · Words</option>' +
-          '<option value="professional"' + (defScope === 'professional' ? ' selected' : '') + '>Professional (Work, IT, Security)</option>' +
-          '<option value="expressions"' + (defScope === 'expressions' ? ' selected' : '') + '>Expressions · All sections</option>' +
-          '<option value="literature"' + (defScope === 'literature' ? ' selected' : '') + '>Literary Phrases · All themes</option>' +
-          '<option value="roots"' + (defScope === 'roots' ? ' selected' : '') + '>Roots · All word families</option>' +
-          '<optgroup label="Specific word family">' + rootOpts + '</optgroup>' + topicOpts +
+        '<label class="st-field"><span class="label">1 · Level</span><select id="stLevel" name="level">' +
+          Object.keys(LEVEL_BANDS).filter(function (b) { return b === 'all' || lc[b]; }).map(function (b) {
+            return '<option value="' + b + '"' + (defLevel === b ? ' selected' : '') + '>' + esc(LEVEL_NAMES[b]) + (b === 'all' ? '' : ' (' + lc[b] + ')') + '</option>';
+          }).join('') +
         '</select></label>' +
         '<label class="st-field"><span class="label">Questions</span><select id="stLimit" name="limit">' +
           '<option value="8">8 questions</option><option value="12" selected>12 questions</option><option value="20">20 questions</option>' +
         '</select></label>' +
+        '<label class="st-field"><span class="label">2 · Words from</span><select id="stSection" name="section">' +
+          STUDIO_SECTIONS.map(function (s) { return '<option value="' + s[0] + '"' + (defSection === s[0] ? ' selected' : '') + '>' + esc(s[1]) + '</option>'; }).join('') +
+        '</select></label>' +
+        '<label class="st-field"><span class="label">Topic</span><select id="stTopic" name="topic"' + (defSection === 'all' ? ' disabled' : '') + '>' + topicSelectHTML(defSection, defTopic) + '</select></label>' +
+        '<label class="st-field"><span class="label">3 · What to train</span><select id="stKind" name="kind">' +
+          STUDIO_GROUPS.map(function (g) {
+            return '<optgroup label="' + esc(g.label) + '">' + g.modes.filter(studioModeAvailable).map(function (k) {
+              return '<option value="' + k + '"' + (defKind === k ? ' selected' : '') + '>' + esc(studioModeName(k)) + '</option>';
+            }).join('') + '</optgroup>';
+          }).join('') +
+        '</select></label>' +
+        '<label class="st-check"><input type="checkbox" id="stStudied" name="studied"' + (params.studied ? ' checked' : '') + '> <span>Only words I’ve already studied</span></label>' +
       '</div>' +
-      '<p class="note muted" id="stHelp" lang="' + GT.know + '" style="margin-top:18px"></p>' +
-      '<div class="actions" style="margin-top:24px"><button class="btn primary" type="submit">Start practice →</button><a class="btn" href="#/review">Go to due Review (' + dueAll + ')</a></div>' +
+      '<p class="note muted" style="margin-top:14px">Words without a level tag (roots, chunks, idioms) are included at every level.</p>' +
+      '<p class="note muted" id="stHelp" lang="' + GT.know + '" style="margin-top:10px"></p>' +
+      '<div class="actions" style="margin-top:24px"><button class="btn primary" type="submit">Start →</button></div>' +
       '</form><div id="studioMsg"></div>';
     page(h, 'mid');
     syncStudioHelp();
   }
   function startStudioFromForm(form) {
+    var f = form.elements;
     var opts = {
-      kind: form.elements.kind.value,
-      direction: form.elements.direction.value,
-      scope: form.elements.scope.value,
-      limit: form.elements.limit.value
+      kind: f.kind.value,
+      level: f.level.value,
+      scope: (f.topic && !f.topic.disabled && f.topic.value) || f.section.value,
+      limit: f.limit.value,
+      studied: !!(f.studied && f.studied.checked)
     };
     var qs = buildStudioPool(opts);
     if (!qs.length) {
       var msg = $('#studioMsg');
-      if (msg) msg.innerHTML = '<div class="empty-state"><h3>No matching questions</h3><p>Try a broader scope or switch to Mixed practice (e.g. Derivative mode uses Roots word families).</p></div>';
+      if (msg) msg.innerHTML = '<div class="empty-state"><h3>No matching questions</h3><p>' +
+        (opts.kind === 'dictation' && !tts.ok ? 'This browser has no speech voice, so Dictation can’t play.' :
+          'Nothing in this selection fits the game. Try All levels, a broader section, turn off “Only words I’ve already studied”, or pick another game (word-family games need Roots).') + '</p></div>';
       return;
     }
-    studio = { opts: opts, questions: qs, i: 0, correct: 0, graded: 0, checked: false, isCorrect: false, input: '', seen: [] };
+    ui.lastStudioParams = { kind: opts.kind, level: opts.level, scope: opts.scope, studied: opts.studied };
+    studio = { opts: opts, questions: qs, total: qs.length, i: 0, correct: 0, checked: false, isCorrect: false, verdict: null, input: '', seen: [] };
     drawPractice();
     window.scrollTo(0, 0);
+  }
+
+  /* ---- answering ---- */
+  function noteSeen(q) {
+    var ids = q.seenIds || (q.entry && q.entry.type !== 'drill' ? [q.entry.id] : []);
+    ids.forEach(function (id) { if (studio.seen.indexOf(id) < 0) studio.seen.push(id); });
+  }
+  function retryCopy(q) {
+    if (q.retry || q.kind === 'match' || q.kind === 'family' || q.kind === 'blitz') return null;
+    var c;
+    if (q.entry && q.entry.type !== 'drill' && STUDIO_CLASSIC.indexOf(q.kind) >= 0) c = makeStudioEntryQuestion(q.entry, q.kind);
+    else {
+      c = Object.assign({}, q);
+      if (c.options && !c.fixedOpts) c.options = shuffle(c.options);
+      if (c.kind === 'builder') { c.order = shuffledOrder(c.tokens.length); c.built = []; }
+    }
+    c.retry = true; c.hints = 0; c.result = null; c.yours = '';
+    return c;
+  }
+  function settleQuestion(q) {
+    var S2 = studio;
+    S2.checked = true;
+    q.result = S2.verdict;
+    q.yours = S2.input;
+    if (S2.isCorrect) S2.correct++;
+    else { var c = retryCopy(q); if (c) S2.questions.push(c); }
+    noteSeen(q);
+    stopStudioTimer();
+    drawPractice();
   }
   function studioAnswer(val) {
     var S2 = studio;
     if (!S2 || S2.checked) return;
-    var q = S2.questions[S2.i];
-    if (val === null) {
-      S2.input = '';
-      S2.isCorrect = false;
-    } else {
-      S2.input = String(val || '').trim();
-      if (q.options) {
-        S2.isCorrect = norm(S2.input) === norm(q.answer);
-      } else {
-        S2.isCorrect = (q.accepted && q.accepted.length ? q.accepted : [q.answer]).some(function (a) { return norm(a) === norm(S2.input); });
-      }
+    var q = S2.questions[S2.i], v;
+    if (val === null) v = 'revealed';
+    else if (q.options) v = norm(val) === norm(q.answer) ? 'ok' : 'bad';
+    else v = checkTyped(val, q.accepted && q.accepted.length ? q.accepted : [q.answer], q.entry && q.entry.type !== 'drill' ? q.entry : null);
+    S2.input = val == null ? '' : String(val).trim();
+    S2.verdict = v;
+    S2.isCorrect = v === 'ok' || v === 'almost';
+    settleQuestion(q);
+  }
+  function builderCheck() {
+    var S2 = studio, q = S2 && S2.questions[S2.i];
+    if (!q || S2.checked || q.kind !== 'builder') return;
+    var got = q.built.map(function (k) { return q.tokens[k]; }).join(' ');
+    S2.input = got;
+    S2.verdict = fold(got) === fold(q.answer) ? 'ok' : 'bad';
+    S2.isCorrect = S2.verdict === 'ok';
+    settleQuestion(q);
+  }
+  function matchPick(side, i) {
+    var S2 = studio, q = S2 && S2.questions[S2.i];
+    if (!q || S2.checked || q.kind !== 'match' || q.done.indexOf(i) >= 0) return;
+    q.wrong = null;
+    if (!q.sel || q.sel.side === side) { q.sel = { side: side, i: i }; drawPractice(); return; }
+    var l = side === 'l' ? i : q.sel.i, r = side === 'r' ? i : q.sel.i;
+    if (l === r) q.done.push(l);
+    else { q.errors++; q.wrong = { l: l, r: r }; }
+    q.sel = null;
+    if (q.done.length === q.pairs.length) {
+      S2.verdict = q.errors ? 'bad' : 'ok';
+      S2.isCorrect = !q.errors;
+      S2.input = q.errors ? plural(q.errors, 'wrong pair') : '';
+      settleQuestion(q);
+      return;
     }
-    S2.checked = true;
-    if (S2.isCorrect) S2.correct++;
-    if (q.entry && q.entry.type !== 'drill' && S2.seen.indexOf(q.entry.id) < 0) S2.seen.push(q.entry.id);
     drawPractice();
   }
-  function studioRate(g) {
-    var S2 = studio;
-    if (!S2 || !S2.checked) return;
-    var q = S2.questions[S2.i], now = GT.now();
-    if (q.cardKey) {
-      var prev = S.card(q.cardKey);
-      var nc = F.rate(prev, g, now, S.settings.retention);
-      nc.added = (prev && prev.added) || now;
-      S.setCard(q.cardKey, nc);
-      S.logActivity('reviews');
-      S2.graded++;
-      renderNav('practice');
-    }
-    S2.i++; S2.checked = false; S2.isCorrect = false; S2.input = '';
+  function familyGuess(val) {
+    var S2 = studio, q = S2 && S2.questions[S2.i];
+    if (!q || S2.checked || q.kind !== 'family') return;
+    var f = fold(val);
+    if (!f) return;
+    var hit = q.words.find(function (w) { return [baseFormOf(w), plainHead(w), w.t].some(function (x) { return fold(x) === f; }); });
+    if (hit && q.found.indexOf(hit.id) < 0) { q.found.push(hit.id); q.flash = '✓ ' + baseFormOf(hit); }
+    else if (hit) q.flash = '· ' + baseFormOf(hit) + ' — already found';
+    else if (fold(q.base) === f) q.flash = '· That is the base word itself';
+    else { q.misses.push(String(val).trim()); q.flash = '✗ ' + String(val).trim(); }
+    if (q.found.length === q.words.length) { familyFinish(); return; }
+    drawPractice();
+  }
+  function familyFinish() {
+    var S2 = studio, q = S2 && S2.questions[S2.i];
+    if (!q || S2.checked || q.kind !== 'family') return;
+    S2.isCorrect = q.found.length >= Math.min(3, q.words.length);
+    S2.verdict = S2.isCorrect ? 'ok' : 'bad';
+    S2.input = q.found.length + ' / ' + q.words.length;
+    q.seenIds = q.words.map(function (w) { return w.id; });
+    settleQuestion(q);
+  }
+  function blitzAnswer(saysTrue) {
+    var S2 = studio, q = S2 && S2.questions[S2.i];
+    if (!q || S2.checked || q.kind !== 'blitz') return;
+    var c = q.cards[q.k];
+    if (!c) return blitzFinish();
+    if (q.seenIds.indexOf(c.id) < 0) q.seenIds.push(c.id);
+    if (saysTrue === c.truth) { q.right++; q.flash = 'ok'; } else { q.wrongs.push(c); q.flash = 'bad'; }
+    q.k++;
+    if (q.k >= q.cards.length) return blitzFinish();
+    drawPractice();
+  }
+  function blitzFinish() {
+    var S2 = studio, q = S2 && S2.questions[S2.i];
+    if (!q || S2.checked || q.kind !== 'blitz') return;
+    S2.isCorrect = q.right >= 8 && q.wrongs.length <= Math.max(2, Math.round(q.right / 5));
+    S2.verdict = S2.isCorrect ? 'ok' : 'bad';
+    S2.input = q.right + ' right · ' + q.wrongs.length + ' wrong';
+    settleQuestion(q);
+  }
+  GT.studioState = function () { return studio; };   // for QA / console
+  function studioHint() {
+    var S2 = studio, q = S2 && S2.questions[S2.i];
+    if (!q || S2.checked) return;
+    if (q.hints < hintSteps(q).length) q.hints++;
+    drawPractice();
+  }
+  function studioNext() {
+    if (!studio) return;
+    studio.i++; studio.checked = false; studio.isCorrect = false; studio.verdict = null; studio.input = '';
     drawPractice();
     window.scrollTo(0, 0);
+  }
+  function studioTick() {
+    var S2 = studio, q = S2 && S2.questions[S2.i];
+    if (!q || S2.checked || !q.endsAt || curPath()[0] !== 'practice') { stopStudioTimer(); return; }
+    var left = Math.max(0, Math.ceil((q.endsAt - Date.now()) / 1000));
+    var el = $('#stClock');
+    if (el) { el.textContent = left + ' s'; el.classList.toggle('low', left <= 10); }
+    if (left <= 0) { stopStudioTimer(); if (q.kind === 'family') familyFinish(); else blitzFinish(); }
+  }
+
+  /* ---- drawing ---- */
+  function hintsHTML(q) {
+    var steps = hintSteps(q), h = '';
+    var task = taskHint(q);
+    if (task) h += '<p class="st-task" lang="' + GT.know + '"><span class="st-task-ico" aria-hidden="true">?</span>' + esc(task) + '</p>';
+    if (q.hints) {
+      h += '<div class="st-hints">' + steps.slice(0, q.hints).map(function (s) {
+        return '<div class="st-hint"><span class="label">' + esc(s.label) + '</span><span class="st-hint-t">' + esc(s.text) + '</span></div>';
+      }).join('') + '</div>';
+    }
+    return h;
+  }
+  function hintBtnHTML(q) {
+    var n = hintSteps(q).length - (q.hints || 0);
+    return n > 0 ? '<button class="btn ghost small" type="button" data-act="st-hint">Hint · ' + n + ' left</button>' : '';
+  }
+  function entryCardHTML(it) {
+    var h = (it.type === 'word' ? wordTags(it) : '<div class="word-tags">' + meaningBadgeHTML(it) + '</div>');
+    h += '<div class="hw-row"><p class="hw' + (it.type === 'chunk' ? ' chunk' : (hwSize(it.t) || ' long')) + '" lang="' + GT.learn + '">' + (it.type === 'chunk' ? rich(it.t) : esc(it.t)) + '</p>' + speakBtn(plainHead(it), true) + whyBtn(it) + '</div>';
+    return h + litBylineHTML(it) + '<p class="mean-en" lang="' + GT.glLang(it) + '">' + esc(meaningOf(it)) + '</p>';
+  }
+  function exampleHTML(ex) {
+    return '<div class="ex" style="margin-top:18px"><div class="grow">' + (ex.sense ? '<span class="ex-sense" lang="' + GT.know + '">' + esc(lxText(ex, 'sense')) + '</span>' : '') +
+      '<p class="ex-de" lang="' + GT.learn + '">' + rich(ex.t) + '</p><p class="ex-tr" lang="' + GT.glLang(ex) + '">' + esc(trOf(ex)) + '</p></div>' + speakBtn(ex.t) + '</div>';
+  }
+  function verdictHTML(S2, q) {
+    var v = S2.verdict, txt;
+    if (v === 'ok') txt = '✓ Correct';
+    else if (v === 'almost') txt = '≈ Almost — mind the spelling. Your answer: <span class="yours">' + esc(S2.input) + '</span>';
+    else if (v === 'article') txt = '✗ Right word, wrong article — it’s <span class="yours">' + esc(q.entry.article) + '</span>';
+    else if (v === 'revealed') txt = 'Answer revealed';
+    else txt = S2.input ? '✗ Your answer: <span class="yours">' + esc(S2.input) + '</span>' : '✗ Not quite';
+    if (q.kind === 'match' || q.kind === 'family' || q.kind === 'blitz') txt = (S2.isCorrect ? '✓ ' : '· ') + esc(S2.input || 'Done');
+    var cls = v === 'ok' || (S2.isCorrect && (q.kind === 'family' || q.kind === 'blitz')) ? 'ok' : v === 'almost' ? 'almost' : 'bad';
+    var used = q.hints ? ' <span class="mono-muted">· ' + plural(q.hints, 'hint') + '</span>' : '';
+    return '<div class="verdict ' + cls + '">' + txt + used + (q.retry ? ' <span class="mono-muted">· second try</span>' : '') + '</div>';
   }
   function drawPractice() {
     var S2 = studio;
@@ -3097,92 +3589,210 @@
     if (S2.i >= S2.questions.length) return drawPracticeDone();
     var q = S2.questions[S2.i];
     var pct = Math.round(S2.i / S2.questions.length * 100);
-    var dirTag = q.direction === 'rec' ? 'Recognition · ' + LS() + ' → ' + KS() + '' : 'Production · ' + KS() + ' → ' + LS() + '';
+    var timed = q.kind === 'family' || q.kind === 'blitz';
+    if (timed && !S2.checked && !q.endsAt) q.endsAt = Date.now() + q.secs * 1000;
     var h = '<div class="review-col"><div class="sess-top"><span class="label ice">Practice · ' + esc(studioModeName(q.kind)) + '</span>' +
-      '<span class="mono-muted">' + pad2(S2.i + 1) + ' / ' + pad2(S2.questions.length) + ' · <button class="link-btn" type="button" data-act="st-end" style="font-family:inherit;letter-spacing:inherit">End</button></span></div>' +
+      '<span class="mono-muted">' + (timed && !S2.checked ? '<b class="st-clock" id="stClock">' + Math.max(0, Math.ceil((q.endsAt - Date.now()) / 1000)) + ' s</b> · ' : '') +
+      pad2(S2.i + 1) + ' / ' + pad2(S2.questions.length) + ' · <button class="link-btn" type="button" data-act="st-end" style="font-family:inherit;letter-spacing:inherit">End</button></span></div>' +
       '<div class="sess-line"><i style="width:' + pct + '%"></i></div>';
-
-    h += '<div class="recall"><div class="word-tags" style="margin-bottom:14px"><span class="tag outline">' + esc(dirTag) + '</span>' + (q.badge ? '<span class="tag dim">' + esc(q.badge) + '</span>' : '') + '</div>';
-    if (q.base) h += '<span class="label ice" style="display:block;margin-bottom:8px">Base · ' + esc(q.base) + '</span>';
-    if (q.kind === 'recognition') {
-      h += '<div class="ex"><div class="grow"><p class="prompt-de" lang="' + GT.learn + '">' + rich(q.prompt) + '</p></div>' + speakBtn(q.prompt) + '</div>';
-      h += '<p class="hint" lang="' + GT.know + '" style="margin-top:12px">' + esc(GT.hint('pickMeaning')) + '</p>';
-    } else if (q.contextDe) {
-      h += '<div class="ex"><div class="grow"><p class="prompt-de" lang="' + GT.learn + '">' + rich(q.contextDe) + '</p></div>' + speakBtn(q.contextDe) + '</div>';
-      h += '<p class="hint" lang="' + GT.know + '" style="margin-top:12px">' + esc(q.prompt) + '</p>';
-    } else {
-      h += '<p class="mean-en" lang="' + GT.know + '">' + esc(q.prompt) + '</p>';
-      if (q.context) h += '<p class="prompt-de" lang="' + GT.learn + '" style="margin-top:14px">' + esc(q.context).replace(/________/g, '<span class="blank">____</span>') + '</p>';
-      if (q.translation) h += '<p class="ex-tr" lang="' + GT.know + '" style="margin-top:8px">' + esc(q.translation) + '</p>';
-    }
+    var tags = (q.badge ? '<span class="tag dim">' + esc(q.badge) + '</span>' : '') + (q.retry ? '<span class="tag outline">Second try</span>' : '');
+    h += '<div class="recall">' + (tags ? '<div class="word-tags" style="margin-bottom:14px">' + tags + '</div>' : '');
+    h += questionBodyHTML(S2, q);
     h += '</div>';
-
-    if (!S2.checked) {
-      if (q.options) {
-        h += '<div class="options">' + q.options.map(function (o, idx) {
-          return '<button class="opt wide" type="button" data-act="st-choice" data-v="' + esc(o) + '" lang="' + (q.kind === 'grammar' ? GT.learn : GT.know) + '"><span class="mono-muted" style="margin-right:10px">' + (idx + 1) + '</span>' + esc(o) + '</button>';
-        }).join('') + '</div><p class="kbd-hint">Keys 1–4 to choose</p>';
-      } else {
-        h += '<form class="typing" data-act="st-type" autocomplete="off"><input id="stInput" lang="' + GT.learn + '" placeholder="Type the ' + langMeta().name + ' answer…" autocapitalize="off" spellcheck="false" required><button class="btn primary" type="submit">Check</button></form>' +
-          '<div class="actions-row"><button class="btn ghost small" type="button" data-act="st-reveal">Show answer</button></div>';
-      }
-    } else {
-      h += '<div class="verdict ' + (S2.isCorrect ? 'ok' : 'bad') + '">' +
-        (S2.isCorrect ? '✓ Correct' : (S2.input ? '✗ Your answer: <span class="yours">' + esc(S2.input) + '</span>' : 'Answer revealed')) + '</div>';
-      if (q.entry && q.entry.type !== 'drill') {
-        var it = q.entry;
-        h += (it.type === 'word' ? wordTags(it) : '<div class="word-tags">' + meaningBadgeHTML(it) + '</div>');
-        h += '<div class="hw-row"><p class="hw' + (it.type === 'chunk' ? ' chunk' : (hwSize(it.t) || ' long')) + '" lang="' + GT.learn + '">' + (it.type === 'chunk' ? rich(it.t) : esc(it.t)) + '</p>' + speakBtn(plainHead(it), true) + whyBtn(it) + '</div>';
-        h += litBylineHTML(it) + '<p class="mean-en" lang="' + GT.glLang(it) + '">' + esc(meaningOf(it)) + '</p>';
-      } else {
-        h += '<div class="drill-answer"><div class="a">' + esc(q.answer) + '</div></div>';
-      }
-      if (q.explain) h += '<p class="note muted" lang="' + GT.know + '" style="margin-top:14px">' + esc(q.explain) + '</p>';
-      if (q.ex) {
-        h += '<div class="ex" style="margin-top:18px"><div class="grow">' + (q.ex.sense ? '<span class="ex-sense" lang="' + GT.know + '">' + esc(lxText(q.ex, 'sense')) + '</span>' : '') +
-          '<p class="ex-de" lang="' + GT.learn + '">' + rich(q.ex.t) + '</p><p class="ex-tr" lang="' + GT.glLang(q.ex) + '">' + esc(trOf(q.ex)) + '</p></div>' + speakBtn(q.ex.t) + '</div>';
-      } else if (q.translation) {
-        h += '<p class="ex-tr" lang="' + GT.know + '" style="margin-top:12px">' + esc(q.translation) + '</p>';
-      }
-      if (q.linkHref) h += '<div class="actions-row" style="margin-top:14px"><a class="btn small" href="' + esc(q.linkHref) + '">' + esc(q.linkLabel || 'Open reference') + '</a></div>';
-
-      if (q.cardKey) {
-        var pv = F.preview(S.card(q.cardKey), Date.now(), S.settings.retention);
-        var sug = S2.isCorrect ? 3 : 1;
-        var names = { 1: 'Again', 2: 'Hard', 3: 'Good', 4: 'Easy' }, cls = { 1: 'again', 2: 'hard', 3: 'good', 4: 'easy' };
-        h += '<div class="actionbar"><span class="label" style="display:block;margin-bottom:10px">Schedule into FSRS Review</span>' +
-          '<div class="rate-grid' + (sug !== 3 ? ' has-suggest' : '') + '">' + [1, 2, 3, 4].map(function (g) {
-            var dis = !S2.isCorrect && g >= 3 ? ' disabled' : '';
-            return '<button class="rate ' + cls[g] + (sug === g && g !== 3 ? ' suggest' : '') + '" type="button" data-act="st-rate" data-g="' + g + '"' + dis + '>' + names[g] + '<small>' + pv[g].label + '</small></button>';
-          }).join('') + '</div>' +
-          '<div class="actions-row" style="margin-top:12px"><button class="btn ghost small" type="button" data-act="st-next">Skip rating · Next →</button></div>' +
-          '<p class="kbd-hint">1–4 schedule · Enter next</p></div>';
-      } else {
-        h += '<div class="actionbar"><div class="actions"><button class="btn primary" type="button" data-act="st-next">Next →</button></div><p class="kbd-hint">Enter · next</p></div>';
-      }
-    }
+    h += S2.checked ? afterHTML(S2, q) : inputHTML(S2, q);
     h += '</div>';
     page(h);
+    stopStudioTimer();
+    if (timed && !S2.checked) stTimer = setInterval(studioTick, 250);
     var inp = $('#stInput');
-    if (inp && window.matchMedia('(min-width: 861px)').matches) inp.focus();
+    if (inp && (q.kind === 'family' || window.matchMedia('(min-width: 861px)').matches)) inp.focus();
+    if (q.kind === 'dictation' && !S2.checked && !q.played) { q.played = true; speak(q.say); }
     ui.keyHandler = function (e) {
-      if (!studio.checked && q.options && /^[1-4]$/.test(e.key) && q.options[Number(e.key) - 1] != null) {
-        studioAnswer(q.options[Number(e.key) - 1]);
-      } else if (studio.checked) {
-        if (e.key === 'Enter') { e.preventDefault(); act('st-next'); }
-        else if (q.cardKey && /^[1-4]$/.test(e.key)) {
-          var g = Number(e.key);
-          if (studio.isCorrect || g <= 2) studioRate(g);
-        }
+      var st = studio, cq = st && st.questions[st.i];
+      if (!cq) return;
+      if (st.checked) { if (e.key === 'Enter') { e.preventDefault(); studioNext(); } return; }
+      if (cq.kind === 'blitz') {
+        if (e.key === 'ArrowLeft' || e.key === '1') { e.preventDefault(); blitzAnswer(false); }
+        else if (e.key === 'ArrowRight' || e.key === '2') { e.preventDefault(); blitzAnswer(true); }
+        return;
       }
+      if (cq.options && /^[1-9]$/.test(e.key) && cq.options[Number(e.key) - 1] != null) studioAnswer(cq.options[Number(e.key) - 1]);
     };
+  }
+  function questionBodyHTML(S2, q) {
+    var h = '';
+    switch (q.kind) {
+      case 'recognition':
+        h += '<div class="ex"><div class="grow"><p class="prompt-de" lang="' + GT.learn + '">' + rich(q.prompt) + '</p></div>' + speakBtn(q.prompt) + '</div>';
+        return h + hintsHTML(q);
+      case 'dictation':
+        h += '<div class="st-listen"><button class="speak lg" type="button" data-speak="' + esc(q.say) + '" aria-label="Play again" title="Play again">' + icon('volume') + '</button>' +
+          '<button class="btn ghost small" type="button" data-act="st-say-slow">Slower</button></div>';
+        h += '<p class="prompt-de" lang="' + GT.learn + '" style="margin-top:14px">' + esc(q.context).replace(/________/g, '<span class="blank">____</span>') + '</p>';
+        return h + hintsHTML(q);
+      case 'builder':
+        if (q.translation) h += '<p class="mean-en" lang="' + (q.entry && q.entry.type === 'drill' ? GT.lxLang(q.entry, 'q') : GT.know) + '">' + esc(q.translation) + '</p>';
+        h += hintsHTML(q);
+        h += '<div class="built">' + q.built.map(function (k) {
+          return '<button class="opt token" type="button" data-act="st-unbuild" data-i="' + k + '"' + (S2.checked ? ' disabled' : '') + ' lang="' + GT.learn + '">' + esc(q.tokens[k]) + '</button>';
+        }).join('') + '</div>';
+        if (!S2.checked) {
+          h += '<div class="options">' + q.order.filter(function (k) { return q.built.indexOf(k) < 0; }).map(function (k) {
+            return '<button class="opt token" type="button" data-act="st-build" data-i="' + k + '" lang="' + GT.learn + '">' + esc(q.tokens[k]) + '</button>';
+          }).join('') + '</div>';
+        }
+        return h;
+      case 'duel':
+        h += '<p class="prompt-de" lang="' + GT.learn + '">' + esc(q.context).replace(/________/g, '<span class="blank">____</span>') + '</p>';
+        if (q.translation) h += '<p class="ex-tr" lang="' + GT.know + '" style="margin-top:8px">' + esc(q.translation) + '</p>';
+        return h + hintsHTML(q);
+      case 'gender':
+        h += '<div class="hw-row"><p class="hw' + (hwSize(q.word) || '') + '" lang="' + GT.learn + '">' + esc(q.word) + '</p>' + speakBtn(q.word, true) + '</div>';
+        h += '<p class="mean-en" lang="' + GT.glLang(q.entry) + '">' + esc(meaningOf(q.entry)) + '</p>';
+        return h + hintsHTML(q);
+      case 'odd':
+        return hintsHTML(q);
+      case 'match':
+        h += hintsHTML(q);
+        h += '<div class="match-grid"><div class="match-col">' + q.left.map(function (i) {
+          var cls = q.done.indexOf(i) >= 0 ? ' done' : q.sel && q.sel.side === 'l' && q.sel.i === i ? ' sel' : q.wrong && q.wrong.l === i ? ' wrong' : '';
+          return '<button class="opt match-item' + cls + '" type="button" data-act="st-match" data-side="l" data-i="' + i + '"' + (cls === ' done' ? ' disabled' : '') + ' lang="' + GT.learn + '">' + esc(q.pairs[i].l) + '</button>';
+        }).join('') + '</div><div class="match-col">' + q.right.map(function (i) {
+          var cls = q.done.indexOf(i) >= 0 ? ' done' : q.sel && q.sel.side === 'r' && q.sel.i === i ? ' sel' : q.wrong && q.wrong.r === i ? ' wrong' : '';
+          return '<button class="opt match-item' + cls + '" type="button" data-act="st-match" data-side="r" data-i="' + i + '"' + (cls === ' done' ? ' disabled' : '') + ' lang="' + GT.know + '">' + esc(q.pairs[i].r) + '</button>';
+        }).join('') + '</div></div>';
+        if (q.errors) h += '<p class="kbd-hint">' + plural(q.errors, 'wrong pair') + '</p>';
+        return h;
+      case 'family':
+        h += '<span class="label ice" style="display:block;margin-bottom:8px">Word family</span>';
+        h += '<div class="hw-row"><p class="hw" lang="' + GT.learn + '">' + esc(String(q.base).toUpperCase()) + '</p>' + speakBtn(q.base, true) + '</div>';
+        h += '<p class="mean-en" lang="' + GT.know + '">' + esc(q.gloss) + '</p>';
+        h += hintsHTML(q);
+        if (!S2.checked) {
+          h += '<p class="st-score"><b>' + q.found.length + '</b> / ' + q.words.length + ' found' + (q.flash ? ' <span class="mono-muted">' + esc(q.flash) + '</span>' : '') + '</p>';
+          h += '<div class="fam-found">' + q.found.map(function (id) { return '<span class="chip" lang="' + GT.learn + '">' + esc(baseFormOf(GT.byId[id])) + '</span>'; }).join('') + '</div>';
+        }
+        return h;
+      case 'blitz': {
+        var c = q.cards[q.k];
+        if (S2.checked || !c) return h + hintsHTML(q);
+        h += '<p class="st-score"><b>' + q.right + '</b> right · ' + q.wrongs.length + ' wrong' + (q.flash ? ' <span class="st-flash ' + q.flash + '">' + (q.flash === 'ok' ? '✓' : '✗') + '</span>' : '') + '</p>';
+        h += '<div class="blitz-card"><p class="hw' + (hwSize(c.word) || '') + '" lang="' + GT.learn + '">' + esc(c.word) + '</p><p class="mean-en" lang="' + GT.know + '">= ' + esc(c.shown) + '</p></div>';
+        return h + hintsHTML(q);
+      }
+      case 'affix':
+      case 'grammar':
+        if (q.contextDe) {
+          h += '<div class="ex"><div class="grow"><p class="prompt-de" lang="' + GT.learn + '">' + rich(q.contextDe) + '</p></div>' + speakBtn(q.contextDe) + '</div>';
+          h += '<p class="hint" lang="' + GT.know + '" style="margin-top:12px">' + esc(q.prompt) + '</p>';
+        } else if (q.prompt) {
+          h += '<p class="' + (q.kind === 'grammar' ? 'prompt-de' : 'mean-en') + '" lang="' + (q.kind === 'grammar' ? GT.learn : GT.know) + '">' + esc(q.prompt).replace(/________/g, '<span class="blank">____</span>') + '</p>';
+        }
+        if (q.context) h += '<p class="prompt-de" lang="' + GT.learn + '" style="margin-top:14px">' + esc(q.context).replace(/________/g, '<span class="blank">____</span>') + '</p>';
+        return h + hintsHTML(q);
+    }
+    // translation, cloze, derivative
+    if (q.base) h += '<span class="label ice" style="display:block;margin-bottom:8px">Base · ' + esc(q.base) + '</span>';
+    if (q.prompt) h += '<p class="mean-en" lang="' + GT.know + '">' + esc(q.prompt) + '</p>';
+    if (q.context) h += '<p class="prompt-de" lang="' + GT.learn + '" style="margin-top:14px">' + esc(q.context).replace(/________/g, '<span class="blank">____</span>') + '</p>';
+    if (q.translation) h += '<p class="ex-tr" lang="' + GT.know + '" style="margin-top:8px">' + esc(q.translation) + '</p>';
+    return h + hintsHTML(q);
+  }
+  function inputHTML(S2, q) {
+    var h = '';
+    if (q.kind === 'match') return '';
+    if (q.kind === 'builder') {
+      var full = q.built.length === q.tokens.length;
+      return '<div class="actions-row"><button class="btn primary" type="button" data-act="st-bcheck"' + (full ? '' : ' disabled') + '>Check</button>' +
+        hintBtnHTML(q) + '<button class="btn ghost small" type="button" data-act="st-reveal">Show answer</button></div>';
+    }
+    if (q.kind === 'family') {
+      return '<form class="typing" data-act="st-fam" autocomplete="off"><input id="stInput" lang="' + GT.learn + '" placeholder="Type a word of this family…" autocapitalize="off" spellcheck="false"><button class="btn primary" type="submit">Add</button></form>' +
+        '<div class="actions-row"><button class="btn ghost small" type="button" data-act="st-fam-done">I’m done</button></div>';
+    }
+    if (q.kind === 'blitz') {
+      return '<div class="blitz-btns"><button class="btn" type="button" data-act="st-blitz" data-v="0">✗ Wrong</button><button class="btn primary" type="button" data-act="st-blitz" data-v="1">✓ Right</button></div>' +
+        '<p class="kbd-hint">← wrong · → right</p>';
+    }
+    if (q.options) {
+      var lang = q.optLang || (q.kind === 'grammar' ? GT.learn : GT.know);
+      h += '<div class="options">' + q.options.map(function (o, idx) {
+        return '<button class="opt wide" type="button" data-act="st-choice" data-v="' + esc(o) + '" lang="' + lang + '"><span class="mono-muted" style="margin-right:10px">' + (idx + 1) + '</span>' + esc(o) + '</button>';
+      }).join('') + '</div><p class="kbd-hint">Keys 1–' + Math.min(9, q.options.length) + ' to choose</p>';
+      return h;
+    }
+    return '<form class="typing" data-act="st-type" autocomplete="off"><input id="stInput" lang="' + GT.learn + '" placeholder="Type the ' + langMeta().name + ' answer…" autocapitalize="off" spellcheck="false" required><button class="btn primary" type="submit">Check</button></form>' +
+      '<div class="actions-row">' + hintBtnHTML(q) + '<button class="btn ghost small" type="button" data-act="st-reveal">Show answer</button></div>';
+  }
+  function afterHTML(S2, q) {
+    var h = verdictHTML(S2, q);
+    if (q.kind === 'builder') {
+      h += '<div class="ex"><div class="grow"><p class="ex-de" lang="' + GT.learn + '">' + esc(q.answer) + '</p>' + (q.translation ? '<p class="ex-tr" lang="' + GT.know + '">' + esc(q.translation) + '</p>' : '') + '</div>' + speakBtn(q.answer) + '</div>';
+      if (S2.verdict === 'bad') h += '<p class="note muted" lang="' + GT.know + '" style="margin-top:10px">' + esc(SH('builderAlt')) + '</p>';
+    } else if (q.kind === 'match') {
+      h += '<div class="st-pairs">' + q.pairs.map(function (p) { return '<div class="st-pair"><span lang="' + GT.learn + '">' + esc(p.l) + '</span><span class="muted" lang="' + GT.know + '">' + esc(p.r) + '</span></div>'; }).join('') + '</div>';
+    } else if (q.kind === 'family') {
+      h += '<p class="note muted">' + esc(String(q.base).toUpperCase()) + ' — ' + esc(q.gloss) + '</p>';
+      h += '<div class="st-pairs">' + q.words.map(function (w) {
+        var got = q.found.indexOf(w.id) >= 0;
+        return '<div class="st-pair' + (got ? ' got' : '') + '"><span lang="' + GT.learn + '">' + (got ? '✓ ' : '') + esc(plainHead(w)) + '</span><span class="muted" lang="' + GT.glLang(w) + '">' + esc(meaningOf(w)) + '</span></div>';
+      }).join('') + '</div>';
+      if (q.misses.length) h += '<p class="note muted" style="margin-top:10px">Not in this family here: ' + esc(q.misses.join(', ')) + '</p>';
+    } else if (q.kind === 'blitz') {
+      if (q.wrongs.length) {
+        h += '<span class="label" style="display:block;margin:6px 0 10px">Mistakes</span><div class="st-pairs">' + q.wrongs.map(function (c) {
+          return '<div class="st-pair"><span lang="' + GT.learn + '">' + esc(c.word) + '</span><span class="muted" lang="' + GT.know + '">' + esc(c.real) + (c.truth ? '' : ' <s>' + esc(c.shown) + '</s>') + '</span></div>';
+        }).join('') + '</div>';
+      }
+    } else if (q.kind === 'odd') {
+      h += '<div class="drill-answer"><div class="a" lang="' + GT.learn + '">' + esc(q.answer) + '</div></div>';
+      h += '<p class="note muted" lang="' + GT.know + '" style="margin-top:14px">' + esc(q.explain) + '</p>';
+    } else if (q.entry && q.entry.type !== 'drill') {
+      h += entryCardHTML(q.entry);
+      if (q.kind === 'gender' && q.entry.plural) h += '<p class="note muted" lang="' + GT.learn + '" style="margin-top:8px">Plural: ' + esc(q.entry.plural) + '</p>';
+      if (q.kind === 'duel') {
+        h += '<div class="st-pairs" style="margin-top:16px">' + q.explainList.map(function (p) {
+          return '<div class="st-pair' + (p[0] === q.answer ? ' got' : '') + '"><span lang="' + GT.learn + '">' + esc(p[0]) + '</span><span class="muted" lang="' + GT.know + '">' + esc(p[1]) + '</span></div>';
+        }).join('') + '</div>';
+      }
+      if (q.explain && q.kind !== 'gender') h += '<p class="note muted" lang="' + GT.know + '" style="margin-top:14px">' + esc(q.explain) + '</p>';
+      if (q.ex) h += exampleHTML(q.ex);
+    } else {
+      h += '<div class="drill-answer"><div class="a" lang="' + GT.learn + '">' + esc(q.answer) + '</div></div>';
+      if (q.explain) h += '<p class="note muted" lang="' + GT.know + '" style="margin-top:14px">' + esc(q.explain) + '</p>';
+      if (q.translation) h += '<p class="ex-tr" lang="' + GT.know + '" style="margin-top:12px">' + esc(q.translation) + '</p>';
+    }
+    if (q.linkHref) h += '<div class="actions-row" style="margin-top:14px"><a class="btn small" href="' + esc(q.linkHref) + '">' + esc(q.linkLabel || 'Open reference') + '</a></div>';
+    var more = !S2.isCorrect && !q.retry && ['match', 'family', 'blitz'].indexOf(q.kind) < 0 ?'<p class="kbd-hint" style="margin-top:0;margin-bottom:10px">This one comes back at the end of the session.</p>' : '';
+    h += '<div class="actionbar">' + more + '<div class="actions"><button class="btn primary" type="button" data-act="st-next">Next →</button></div><p class="kbd-hint">Enter · next</p></div>';
+    return h;
+  }
+  function mistakeLine(q) {
+    var ask = q.kind === 'gender' || q.kind === 'match' || q.kind === 'family' || q.kind === 'blitz' ? (q.word || '') :
+      q.entry && q.entry.type !== 'drill' ? meaningOf(q.entry) : (q.prompt || q.context || q.translation || '');
+    return '<div class="st-pair"><span lang="' + GT.learn + '">' + esc(plain(q.answer || '')) + '</span><span class="muted">' + esc(plain(ask)) + (q.yours ? ' · yours: <s>' + esc(q.yours) + '</s>' : '') + '</span></div>';
   }
   function drawPracticeDone() {
     var S2 = studio;
+    stopStudioTimer();
     ui.keyHandler = null;
-    var h = '<header class="page-head"><span class="eyebrow">Practice · Done</span><h1>Session complete</h1><p class="lead">' +
-      S2.correct + ' of ' + S2.questions.length + ' correct · ' + plural(S2.graded, 'card') + ' scheduled into FSRS Review.</p></header>';
-    h += '<div class="actions-row actions-split"><button class="btn primary" type="button" data-act="st-again">New practice session</button><a class="btn" href="#/review">Review due</a><a class="btn ghost" href="#/stats">Stats</a></div>';
+    var firsts = S2.questions.filter(function (q) { return !q.retry && q.result; });
+    var okFirst = firsts.filter(function (q) { return q.result === 'ok' || q.result === 'almost'; }).length;
+    var retries = S2.questions.filter(function (q) { return q.retry && q.result; });
+    var fixed = retries.filter(function (q) { return q.result === 'ok' || q.result === 'almost'; }).length;
+    var lead = firsts.length ? okFirst + ' of ' + firsts.length + ' right on the first try' + (retries.length ? ' · ' + fixed + ' of ' + retries.length + ' fixed on the second try' : '') + '.' : 'Session ended.';
+    var h = '<header class="page-head"><span class="eyebrow">Practice · Done</span><h1>Session complete</h1><p class="lead">' + esc(lead) + '</p></header>';
+    h += '<div class="actions-row actions-split"><button class="btn primary" type="button" data-act="st-again">New session</button><a class="btn" href="#/review">Review due</a></div>';
+    var summaries = S2.questions.filter(function (q) { return q.result && (q.kind === 'family' || q.kind === 'blitz' || q.kind === 'match'); });
+    if (summaries.length) {
+      h += '<div class="box" style="margin-top:28px"><span class="label ice">Rounds</span><div class="st-pairs" style="margin-top:12px">' + summaries.map(function (q) {
+        var name = q.kind === 'family' ? String(q.base).toUpperCase() : studioModeName(q.kind);
+        return '<div class="st-pair"><span>' + esc(name) + '</span><span class="muted">' + esc(q.yours || (q.result === 'ok' ? 'no mistakes' : '')) + '</span></div>';
+      }).join('') + '</div></div>';
+    }
+    var wrong = firsts.filter(function (q) { return !(q.result === 'ok' || q.result === 'almost') && q.kind !== 'family' && q.kind !== 'blitz' && q.kind !== 'match'; });
+    if (wrong.length) h += '<div class="box" style="margin-top:28px"><span class="label ice">Worth another look</span><div class="st-pairs" style="margin-top:12px">' + wrong.map(mistakeLine).join('') + '</div></div>';
+    h += '<div style="margin-top:28px">' + truthHTML(true) + '</div>';
     var items = S2.seen.map(function (id) { return GT.byId[id]; }).filter(Boolean);
     if (items.length >= 3) h += practicePanel(practiceFromItems(items), 'Now use these in a real ' + langMeta().name + ' conversation.');
     page(h, 'mid');
@@ -3364,8 +3974,10 @@
       renderNav('review', p); renderSidebar('review', p); drawReview();
     } else if (p[0] === 'practice' && studio) {
       studio.questions = studio.questions.map(function (q, i) {
-        if ((i === studio.i && studio.checked) || i < studio.i || !q.entry || q.entry.type === 'drill' || q.kind === 'affix' || q.kind === 'grammar') return q;
-        return makeStudioEntryQuestion(q.entry, q.kind);
+        if ((i === studio.i && studio.checked) || i < studio.i || !q.entry || q.entry.type === 'drill' || STUDIO_CLASSIC.indexOf(q.kind) < 0) return q;
+        var nq = makeStudioEntryQuestion(q.entry, q.kind);
+        nq.retry = q.retry; nq.hints = q.hints; nq.played = q.played;
+        return nq;
       });
       renderNav('practice', p); drawPractice();
     } else if (p[0] === 'roots' && p[1] === 'drill' && rd) {
