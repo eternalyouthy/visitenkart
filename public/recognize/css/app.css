@@ -1764,7 +1764,7 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 [data-theme="nord"] .rmap-lines line { stroke: #4a5568; }
 
 /* Eyebrows / labels wrap between whole parts (see segmentLabels in app.js) */
-.eb-seg { display: inline-block; max-width: 100%; }
+.eb-seg { display: inline-block; max-width: 100%; text-indent: 0; }
 @media (max-width: 640px) {
   .eyebrow { letter-spacing: 0.12em; line-height: 1.7; }
   .page-head .eyebrow { font-size: 11px; }
@@ -1778,3 +1778,9 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
   [data-theme="holo"] .rnode .rn-gl, [data-theme="holo"] .rnode:not(.center) .rn-pair { margin-top: 4px; }
   [data-theme="holo"] .rnode.center { padding: 12px 15px; }
 }
+/* Phones: page eyebrows are blocks so fitEyebrows() can measure their lines */
+@media (max-width: 640px) {
+  .crumbs .eyebrow, .page-head .eyebrow { display: block; line-height: 1.6; }
+}
+/* Eyebrow that wraps to two lines: block, so fitEyebrows can hang the second line under the last part of the first */
+.eyebrow.eb-2l { display: block; text-align: left; }

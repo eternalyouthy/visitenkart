@@ -1852,7 +1852,8 @@
     var t = GT.topic('grammar', id);
     if (!t) return notFound();
     var pg = GT.grammar[id];
-    var h = crumbsHTML('<a href="#/grammar">Grammar</a> · ' + esc(t.name));
+    // Crumb shows the short lesson name (before ":"); the full title is the heading right below.
+    var h = crumbsHTML('<a href="#/grammar">Grammar</a> · ' + esc(String(t.name).split(':')[0].trim()));
     h += '<header class="page-head"><h1>' + esc(pg ? lxText(pg, 'title') : t.name) + '</h1>' + (pg && pg.summary ? '<p class="lead">' + esc(lxText(pg, 'summary')) + '</p>' : '') + '</header>';
     if (!pg) return page(h + '<div class="empty-state"><h3>Coming soon</h3><p>This grammar page arrives in a later batch.</p></div>', 'mid');
     var exLang = GT.lxLang(pg, 'explanation');
@@ -2550,14 +2551,52 @@
       });
     });
   }
+  /* Page eyebrows (the "PROFESSIONAL · GROUP · TOPIC" trail above a title) take at most two lines:
+     if they wrap to more, letter-spacing and then font size step down until they fit. */
+  function fitEyebrows() {
+    document.querySelectorAll('.crumbs .eyebrow, .page-head .eyebrow').forEach(function (el) {
+      el.style.letterSpacing = ''; el.style.fontSize = ''; el.style.paddingLeft = ''; el.style.textIndent = '';
+      el.classList.remove('eb-2l');
+      if (!el.offsetWidth) return;
+      function lines() {
+        var lh = parseFloat(getComputedStyle(el).lineHeight) || 18;
+        return Math.round(el.getBoundingClientRect().height / lh);
+      }
+      var steps = [[null, '0.08em'], [null, '0.04em'], ['10.5px', '0.04em'], ['10px', '0.02em'], ['9.5px', '0']];
+      for (var i = 0; i < steps.length && lines() > 2; i++) {
+        if (steps[i][0]) el.style.fontSize = steps[i][0];
+        el.style.letterSpacing = steps[i][1];
+      }
+      // Two lines: indent the second line so it starts right under the last part of the first line
+      // (hanging indent: padding-left + negative text-indent). Falls back to a smaller indent, or none, if it would not fit.
+      el.style.paddingLeft = ''; el.style.textIndent = '';
+      if (lines() !== 2) return;
+      el.classList.add('eb-2l');
+      var segs = Array.prototype.slice.call(el.querySelectorAll('.eb-seg'));
+      if (segs.length < 2) return;
+      var elLeft = el.getBoundingClientRect().left, top0 = segs[0].getBoundingClientRect().top;
+      var firstLine = segs.filter(function (sp) { return Math.abs(sp.getBoundingClientRect().top - top0) < 3; });
+      var offsets = firstLine.slice(1).reverse().map(function (sp) { return Math.round(sp.getBoundingClientRect().left - elLeft); });
+      for (var k = 0; k < offsets.length; k++) {
+        if (offsets[k] <= 0) continue;
+        el.style.paddingLeft = offsets[k] + 'px'; el.style.textIndent = -offsets[k] + 'px';
+        var lh = parseFloat(getComputedStyle(el).lineHeight) || 18;
+        var whole = segs.every(function (sp) { return sp.getBoundingClientRect().height < lh * 1.5; });
+        if (lines() === 2 && whole) return;
+      }
+      el.style.paddingLeft = ''; el.style.textIndent = '';
+    });
+  }
   if (window.MutationObserver) {
     var segQueued = false;
     new MutationObserver(function () {
       if (segQueued) return;
       segQueued = true;
-      requestAnimationFrame(function () { segQueued = false; segmentLabels(document.body); });
+      requestAnimationFrame(function () { segQueued = false; segmentLabels(document.body); fitEyebrows(); });
     }).observe(document.body, { childList: true, subtree: true });
   }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitEyebrows);
+  window.addEventListener('resize', fitEyebrows);
   window.addEventListener('resize', function () {
     document.querySelectorAll('.mtag-wrap.open').forEach(positionTooltip);
     fitRootMaps();
@@ -4252,6 +4291,7 @@
     }
     fitRootMaps();
     stampPair();
+    segmentLabels(mainEl); fitEyebrows();
     if (!opts.keep) window.scrollTo(0, 0);
   }
   /* Each history entry remembers the language pair it was shown in, so Back/Forward
