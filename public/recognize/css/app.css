@@ -1787,9 +1787,8 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 @media (max-width: 640px) {
   .crumbs .eyebrow, .page-head .eyebrow { display: block; line-height: 1.6; }
 }
-/* Eyebrow that wraps to two lines: block; line 2 is right-aligned under the rule (eb-r), or centred when it is wide (eb-c) */
+/* Eyebrow that wraps to two lines: block; line 2 is centred (eb-c) with a rule as wide as its text above it */
 .eyebrow.eb-2l { display: block; text-align: left; }
-.eyebrow.eb-2l.eb-r { text-align-last: right; }
 .eyebrow.eb-2l.eb-c { text-align-last: center; }
 /* Two-line eyebrow: no "·" at the end of line 1; a thin rule under the last part of line 1 separates the lines */
 .eb-seg.eb-joint { position: relative; }
