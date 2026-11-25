@@ -2545,7 +2545,12 @@
         var sp = document.createElement('span');
         sp.className = 'eb-seg';
         s.forEach(function (x) { sp.appendChild(x); });
-        if (i < segs.length - 1) sp.appendChild(document.createTextNode(' ·'));
+        if (i < segs.length - 1) {
+          var dot = document.createElement('span');
+          dot.className = 'eb-dot';
+          dot.textContent = ' ·';
+          sp.appendChild(dot);
+        }
         el.appendChild(sp);
         if (i < segs.length - 1) el.appendChild(document.createTextNode(' '));
       });
@@ -2557,6 +2562,7 @@
     document.querySelectorAll('.crumbs .eyebrow, .page-head .eyebrow').forEach(function (el) {
       el.style.letterSpacing = ''; el.style.fontSize = ''; el.style.paddingLeft = ''; el.style.textIndent = '';
       el.classList.remove('eb-2l');
+      el.querySelectorAll('.eb-joint').forEach(function (sp) { sp.classList.remove('eb-joint'); });
       if (!el.offsetWidth) return;
       function lines() {
         var lh = parseFloat(getComputedStyle(el).lineHeight) || 18;
@@ -2574,17 +2580,26 @@
       el.classList.add('eb-2l');
       var segs = Array.prototype.slice.call(el.querySelectorAll('.eb-seg'));
       if (segs.length < 2) return;
-      var elLeft = el.getBoundingClientRect().left, top0 = segs[0].getBoundingClientRect().top;
-      var firstLine = segs.filter(function (sp) { return Math.abs(sp.getBoundingClientRect().top - top0) < 3; });
-      var offsets = firstLine.slice(1).reverse().map(function (sp) { return Math.round(sp.getBoundingClientRect().left - elLeft); });
+      function firstLineSegs() {
+        var top0 = segs[0].getBoundingClientRect().top;
+        return segs.filter(function (sp) { return Math.abs(sp.getBoundingClientRect().top - top0) < 3; });
+      }
+      // The last part on line 1 loses its trailing "·" and gets a thin rule under it instead (CSS .eb-joint).
+      function markJoint() {
+        var fl = firstLineSegs(), last = fl[fl.length - 1];
+        if (last && fl.length < segs.length) last.classList.add('eb-joint');
+      }
+      var elLeft = el.getBoundingClientRect().left;
+      var offsets = firstLineSegs().slice(1).reverse().map(function (sp) { return Math.round(sp.getBoundingClientRect().left - elLeft); });
       for (var k = 0; k < offsets.length; k++) {
         if (offsets[k] <= 0) continue;
         el.style.paddingLeft = offsets[k] + 'px'; el.style.textIndent = -offsets[k] + 'px';
         var lh = parseFloat(getComputedStyle(el).lineHeight) || 18;
         var whole = segs.every(function (sp) { return sp.getBoundingClientRect().height < lh * 1.5; });
-        if (lines() === 2 && whole) return;
+        if (lines() === 2 && whole) { markJoint(); return; }
       }
       el.style.paddingLeft = ''; el.style.textIndent = '';
+      markJoint();
     });
   }
   if (window.MutationObserver) {
@@ -4335,7 +4350,7 @@
     var L = langMeta();
     $('.logo-lang').textContent = L.brand;
     $('.logo-code').textContent = L.short;
-    document.title = 'ETRNL / ' + L.brand;
+    document.title = 'RECGZ / ' + L.brand;
     var pair = $('#langPair');
     if (pair) pair.textContent = KS() + ' → ' + LS();
   }

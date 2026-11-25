@@ -1517,16 +1517,17 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   color-scheme: light;
 }
+[data-theme="swiss"] { --swiss-wall: #c4c4c4; }
 [data-theme="swiss"] .constellation { display: none; }
 [data-theme="swiss"] :is(h1, h2, h4, .sheet-title) { font-weight: 800; letter-spacing: -0.03em; }
 [data-theme="swiss"] .page-head h1 {
   font-size: clamp(44px, 8vw, 96px); letter-spacing: -0.045em; line-height: 1.0;
   overflow-wrap: break-word; hyphens: auto;
 }
-[data-theme="swiss"] .grid { border: 0; column-gap: 28px; }
-[data-theme="swiss"] .tile { border: 0; border-bottom: 1px solid var(--text); padding-left: 0; padding-right: 0; background: none; transition: border-color 0.15s; }
-[data-theme="swiss"] .tile:hover { background: none; border-bottom-color: var(--ice); }
-[data-theme="swiss"] .tile { position: relative; }
+/* Swiss tiles: Orbit-style grid where neighbours share one 1px wall (grid draws top/left, each tile right/bottom) */
+[data-theme="swiss"] .grid { border-top: 1px solid var(--swiss-wall); border-left: 1px solid var(--swiss-wall); gap: 0; }
+[data-theme="swiss"] .tile { position: relative; border-right: 1px solid var(--swiss-wall); border-bottom: 1px solid var(--swiss-wall); background: #ffffff; transition: background 0.15s; }
+[data-theme="swiss"] .tile:hover { background: var(--navy); }
 [data-theme="swiss"] .tile .track { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; margin: 0; background: transparent; }
 [data-theme="swiss"] .tile h4 { transition: color 0.15s; }
 [data-theme="swiss"] .tile:hover h4 { color: var(--ice); }
@@ -1784,3 +1785,13 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 }
 /* Eyebrow that wraps to two lines: block, so fitEyebrows can hang the second line under the last part of the first */
 .eyebrow.eb-2l { display: block; text-align: left; }
+/* Two-line eyebrow: no "·" at the end of line 1; a thin rule under the last part of line 1 separates the lines */
+.eb-seg.eb-joint { position: relative; }
+.eb-seg.eb-joint > .eb-dot { display: none; }
+.eb-seg.eb-joint::after {
+  content: ""; position: absolute; left: 0; right: 0.2em; bottom: 0; height: 1px;
+  background: currentColor; opacity: 0.4; pointer-events: none;
+}
+/* Brand mark (eye): never shrinks in a tight header; thicker line at small sizes (18px on phones) */
+.brand svg { flex: none; }
+@media (max-width: 860px) { .brand .brand-mark { stroke-width: 1.8; } }
