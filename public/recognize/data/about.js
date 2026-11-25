@@ -137,13 +137,13 @@ GT.START_NOTES = {
         { h: 'Новый контент', p: 'Добавили много нового контента.' },
         { h: 'Исправления', p: 'Пофиксили много багов.' }
       ] },
-      { date: '24.11.2026 · вечер', items: [
+      { date: '24.11.2026', items: [
         { h: 'Новый режим: артикли', p: 'В Language появился раздел с артиклями и интерактивной игрой для всех языков. Артикль не угадывается в отрыве от контекста: он выбирается прямо внутри предложения.' },
         { h: 'Обновления разделов', p: 'Пополнились почти все разделы. Больше всего изменился Professional: его переделали, и профессий стало намного больше.' },
         { h: 'Навигация на телефоне', p: 'Вкладки внизу теперь называются Grund и Job, а в Grund появились кнопки разделов: Words, Roots, Grammar и артикли.' },
         { h: 'Исправления', p: 'Крупное исправление багов, особенно на телефоне и в темах оформления.' }
       ] },
-      { date: '24.11.2026 · ночь', items: [
+      { date: '24.11.2026', items: [
         { h: 'Сленг', p: 'По 40 карточек уличного сленга на каждый язык: три примера, происхождение слова и отдельная категория мата (18+).' },
         { h: 'Литература', p: 'В Expressions появились фразы из классики с разбором.' },
         { h: 'Темы', p: 'Четыре новые темы: Holo Glass, Nordlicht, Autobahn и Swiss.' },
@@ -168,13 +168,13 @@ GT.START_NOTES = {
         { h: 'New content', p: 'Lots of new content added.' },
         { h: 'Fixes', p: 'Lots of bugs fixed.' }
       ] },
-      { date: '24 Nov 2026 · evening', items: [
+      { date: '24 Nov 2026', items: [
         { h: 'New mode: articles', p: 'Language now has an articles section with an interactive game for every language. You don’t guess the article out of context: you pick it inside a real sentence.' },
         { h: 'Section updates', p: 'Almost every section got new content. Professional changed the most: it has been reworked and now covers many more professions.' },
         { h: 'Phone navigation', p: 'The bottom tabs are now called Grund and Job, and Grund has section buttons: Words, Roots, Grammar and articles.' },
         { h: 'Fixes', p: 'A big round of bug fixes, especially on phones and in the themes.' }
       ] },
-      { date: '24 Nov 2026 · night', items: [
+      { date: '24 Nov 2026', items: [
         { h: 'Slang', p: '40 street-slang cards per language, with three examples, word origins and a separate swearing category (18+).' },
         { h: 'Literature', p: 'Expressions now includes lines from the classics, with breakdowns.' },
         { h: 'Themes', p: 'Four new themes: Holo Glass, Nordlicht, Autobahn and Swiss.' },
@@ -199,13 +199,13 @@ GT.START_NOTES = {
         { h: 'Neue Inhalte', p: 'Viele neue Inhalte hinzugefügt.' },
         { h: 'Fehlerbehebungen', p: 'Viele Fehler behoben.' }
       ] },
-      { date: '24.11.2026 · abends', items: [
+      { date: '24.11.2026', items: [
         { h: 'Neuer Modus: Artikel', p: 'Unter Language gibt es jetzt einen Bereich zu Artikeln mit einem interaktiven Spiel für alle Sprachen. Der Artikel wird nicht ohne Kontext geraten, sondern direkt im Satz gewählt.' },
         { h: 'Neues in den Bereichen', p: 'Fast alle Bereiche wurden erweitert. Am meisten hat sich Professional verändert: Der Bereich wurde neu aufgebaut und umfasst jetzt viel mehr Berufe.' },
         { h: 'Navigation auf dem Handy', p: 'Die Tabs unten heißen jetzt Grund und Job, und in Grund gibt es Buttons für die Bereiche: Words, Roots, Grammar und Artikel.' },
         { h: 'Fehlerbehebungen', p: 'Viele Fehler wurden behoben, vor allem auf dem Handy und in den Designs.' }
       ] },
-      { date: '24.11.2026 · nachts', items: [
+      { date: '24.11.2026', items: [
         { h: 'Slang', p: 'Je 40 Karten Straßenslang pro Sprache, mit drei Beispielen, Wortherkunft und einer eigenen Kategorie für Schimpfwörter (18+).' },
         { h: 'Literatur', p: 'Unter Expressions gibt es jetzt Zeilen aus der Klassik mit Erklärungen.' },
         { h: 'Designs', p: 'Vier neue Designs: Holo Glass, Nordlicht, Autobahn und Swiss.' },
