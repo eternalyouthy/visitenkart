@@ -291,9 +291,11 @@ body.side-collapsed .side-toggle svg { transform: scaleX(-1); }
 .btn[disabled] { opacity: 0.4; pointer-events: none; }
 .link-btn { background: none; border: 0; padding: 0; color: var(--ice); cursor: pointer; font: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
-/* Prev / Next on a word card: two equal halves under the deck buttons */
-.item-pager { flex-basis: 100%; width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
-.item-pager .btn { text-align: center; justify-content: center; }
+/* Word card buttons: deck buttons and Prev / Next share one 2-column grid, so all four are the same size */
+.item-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.item-actions > :not(.btn), .item-actions > .btn:only-child { grid-column: 1 / -1; }
+.item-actions > .btn, .item-pager .btn { width: 100%; text-align: center; justify-content: center; }
+.item-pager { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
 .actions-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
 
 /* ---------- boxes, grids ---------- */
@@ -1253,7 +1255,8 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
   .actions-pair > :not(.btn) + .btn:last-child {
     grid-column: 1 / -1;
   }
-  .actions-pair > .btn {
+  .actions-pair > .btn,
+  .item-pager .btn {
     padding: 10px 8px;
     font-size: 11px;
     letter-spacing: 0.08em;

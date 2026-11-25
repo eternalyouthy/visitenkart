@@ -1497,11 +1497,11 @@
     var tc = counts(list), pct = tc.total ? Math.round(tc.known / tc.total * 100) : 0;
     var actions;
     if (!pair.rec && !pair.prod) {
-      actions = '<div class="actions actions-pair"><button class="btn primary" data-act="item-know" data-id="' + esc(id) + '">Know it</button><button class="btn outline" data-act="item-learn" data-id="' + esc(id) + '">Learn it</button></div>';
+      actions = '<div class="actions actions-pair item-actions"><button class="btn primary" data-act="item-know" data-id="' + esc(id) + '">Know it</button><button class="btn outline" data-act="item-learn" data-id="' + esc(id) + '">Learn it</button></div>';
     } else if (pair.rec && pair.prod && pair.rec.state === 'known' && pair.prod.state === 'known') {
-      actions = '<div class="actions actions-pair"><p class="mono-muted" style="width:100%">Marked as known (recognition + production) · ' + fmtDate(pair.prod.known || pair.prod.last || now) + ' · not in reviews</p><button class="btn" data-act="item-learn" data-id="' + esc(id) + '">Add to reviews</button><button class="btn ghost" data-act="item-reset" data-id="' + esc(id) + '">Remove from deck</button></div>';
+      actions = '<div class="actions actions-pair item-actions"><p class="mono-muted" style="width:100%">Marked as known (recognition + production) · ' + fmtDate(pair.prod.known || pair.prod.last || now) + ' · not in reviews</p><button class="btn" data-act="item-learn" data-id="' + esc(id) + '">Add to reviews</button><button class="btn ghost" data-act="item-reset" data-id="' + esc(id) + '">Remove from deck</button></div>';
     } else {
-      actions = '<div class="actions actions-pair"><div class="dir-status">' +
+      actions = '<div class="actions actions-pair item-actions"><div class="dir-status">' +
         '<div class="dir-row"><div><span class="label">Recognition · ' + LS() + ' → ' + KS() + '</span><p class="mono-muted">' + esc(cardStatusText(pair.rec, now)) + '</p></div>' +
         (!pair.rec ? '<button class="btn small" data-act="item-add-dir" data-id="' + esc(id) + '" data-dir="rec">+ Add</button>' : '') + '</div>' +
         '<div class="dir-row"><div><span class="label">Production · ' + KS() + ' → ' + LS() + '</span><p class="mono-muted">' + esc(cardStatusText(pair.prod, now)) + '</p></div>' +
