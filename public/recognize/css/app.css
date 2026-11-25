@@ -1789,15 +1789,15 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 .eb-seg.eb-joint { position: relative; }
 .eb-seg.eb-joint > .eb-dot { display: none; }
 .eb-seg.eb-joint::after {
-  content: ""; position: absolute; left: 0; right: 0.2em; bottom: 0; height: 1px;
-  background: currentColor; opacity: 0.4; pointer-events: none;
+  content: ""; position: absolute; left: 0; width: var(--eb-rule-w, calc(100% - 0.2em)); bottom: 0; height: 1px;
+  background: currentColor; opacity: 0.22; pointer-events: none;
 }
 /* Brand mark (eye): never shrinks in a tight header; thicker line at small sizes (18px on phones) */
 .brand svg { flex: none; }
 @media (max-width: 860px) { .brand .brand-mark { stroke-width: 1.8; } }
 /* Brand mark: a soft glow in its own colour (subtle; weaker on light themes) */
-.brand svg { filter: drop-shadow(0 0 3px color-mix(in srgb, currentColor 55%, transparent)); }
-:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .brand svg { filter: drop-shadow(0 0 2px color-mix(in srgb, currentColor 35%, transparent)); }
+.brand svg { filter: drop-shadow(0 0 8px color-mix(in srgb, currentColor 34%, transparent)); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .brand svg { filter: drop-shadow(0 0 7px color-mix(in srgb, currentColor 22%, transparent)); }
 /* Orbit dark roots map: darker nodes so the words, not the boxes, draw the eye.
    Centre a touch lighter than the others; the selected word only slightly lighter. */
 [data-theme="orbit"] .rmap { background: #04080f; }
@@ -1805,3 +1805,5 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 [data-theme="orbit"] .rnode.center, [data-theme="orbit"] .rnode.center.active { background: #0a1322; border-color: var(--ice); }
 [data-theme="orbit"] .rnode.active:not(.center) { background: #0b1527; border-color: color-mix(in srgb, var(--ice) 70%, #070d18); }
 [data-theme="orbit"] .rnode:hover { border-color: color-mix(in srgb, var(--ice) 60%, #070d18); }
+/* Brand mark sits on the capitals' optical centre (flex centring left it ~1px low) */
+.brand svg { transform: translateY(-1px); }

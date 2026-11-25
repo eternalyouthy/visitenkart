@@ -2589,7 +2589,7 @@
     document.querySelectorAll('.crumbs .eyebrow, .page-head .eyebrow').forEach(function (el) {
       el.style.letterSpacing = ''; el.style.fontSize = ''; el.style.paddingLeft = ''; el.style.textIndent = '';
       el.classList.remove('eb-2l');
-      el.querySelectorAll('.eb-joint').forEach(function (sp) { sp.classList.remove('eb-joint'); });
+      el.querySelectorAll('.eb-joint').forEach(function (sp) { sp.classList.remove('eb-joint'); sp.style.removeProperty('--eb-rule-w'); });
       if (!el.offsetWidth) return;
       function lines() {
         var lh = parseFloat(getComputedStyle(el).lineHeight) || 18;
@@ -2612,9 +2612,15 @@
         return segs.filter(function (sp) { return Math.abs(sp.getBoundingClientRect().top - top0) < 3; });
       }
       // The last part on line 1 loses its trailing "·" and gets a thin rule under it instead (CSS .eb-joint).
+      // The rule runs to the end of whichever is longer: that part or line 2.
       function markJoint() {
         var fl = firstLineSegs(), last = fl[fl.length - 1];
-        if (last && fl.length < segs.length) last.classList.add('eb-joint');
+        if (!last || fl.length >= segs.length) return;
+        last.classList.add('eb-joint');
+        var lr = last.getBoundingClientRect(), right = lr.right;
+        segs.forEach(function (sp) { if (fl.indexOf(sp) < 0) right = Math.max(right, sp.getBoundingClientRect().right); });
+        var trail = parseFloat(getComputedStyle(el).letterSpacing) || 0;   // letter-spacing after the last letter
+        last.style.setProperty('--eb-rule-w', Math.max(0, Math.round(right - lr.left - trail)) + 'px');
       }
       var elLeft = el.getBoundingClientRect().left;
       var offsets = firstLineSegs().slice(1).reverse().map(function (sp) { return Math.round(sp.getBoundingClientRect().left - elLeft); });
