@@ -2613,14 +2613,18 @@
       }
       // The last part on line 1 loses its trailing "·" and gets a thin rule under it instead (CSS .eb-joint).
       // The rule runs to the end of whichever is longer: that part or line 2.
+      // The "·" is only made invisible (it keeps its width), so line 2 cannot jump back up onto line 1.
       function markJoint() {
         var fl = firstLineSegs(), last = fl[fl.length - 1];
-        if (!last || fl.length >= segs.length) return;
+        if (!last || fl.length >= segs.length || lines() !== 2) return;
         last.classList.add('eb-joint');
-        var lr = last.getBoundingClientRect(), right = lr.right;
-        segs.forEach(function (sp) { if (fl.indexOf(sp) < 0) right = Math.max(right, sp.getBoundingClientRect().right); });
         var trail = parseFloat(getComputedStyle(el).letterSpacing) || 0;   // letter-spacing after the last letter
-        last.style.setProperty('--eb-rule-w', Math.max(0, Math.round(right - lr.left - trail)) + 'px');
+        function textEnd(sp) { var d = sp.querySelector('.eb-dot'); return (d ? d.getBoundingClientRect().left : sp.getBoundingClientRect().right) - trail; }
+        var left = last.getBoundingClientRect().left, right = textEnd(last);
+        segs.forEach(function (sp) { if (fl.indexOf(sp) < 0) right = Math.max(right, textEnd(sp)); });
+        last.style.setProperty('--eb-rule-w', Math.max(0, Math.round(right - left)) + 'px');
+        // Safety net: a divider only ever sits between two lines.
+        if (lines() !== 2) { last.classList.remove('eb-joint'); last.style.removeProperty('--eb-rule-w'); }
       }
       var elLeft = el.getBoundingClientRect().left;
       var offsets = firstLineSegs().slice(1).reverse().map(function (sp) { return Math.round(sp.getBoundingClientRect().left - elLeft); });
@@ -2644,6 +2648,15 @@
     }).observe(document.body, { childList: true, subtree: true });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitEyebrows);
+  if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fitEyebrows);
+  // The content column can change width without a window resize (sidebar collapse): re-fit then too.
+  if (window.ResizeObserver) {
+    var mainW = 0;
+    new ResizeObserver(function (entries) {
+      var w = Math.round(entries[0].contentRect.width);
+      if (w !== mainW) { mainW = w; fitEyebrows(); }   // runs after layout, so measuring here is safe
+    }).observe(mainEl);
+  }
   window.addEventListener('resize', fitEyebrows);
   window.addEventListener('resize', function () {
     document.querySelectorAll('.mtag-wrap.open').forEach(positionTooltip);

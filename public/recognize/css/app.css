@@ -1787,7 +1787,7 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 .eyebrow.eb-2l { display: block; text-align: left; }
 /* Two-line eyebrow: no "·" at the end of line 1; a thin rule under the last part of line 1 separates the lines */
 .eb-seg.eb-joint { position: relative; }
-.eb-seg.eb-joint > .eb-dot { display: none; }
+.eb-seg.eb-joint > .eb-dot { visibility: hidden; }
 .eb-seg.eb-joint::after {
   content: ""; position: absolute; left: 0; width: var(--eb-rule-w, calc(100% - 0.2em)); bottom: 0; height: 1px;
   background: currentColor; opacity: 0.22; pointer-events: none;
