@@ -1323,6 +1323,28 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 
 }
 
+/* Copy/paste progress, including long keys on narrow phones. */
+.progress-key { min-width: 0; overflow-wrap: anywhere; scroll-margin-top: calc(var(--topbar-h) + 16px); }
+.progress-key .box-head { flex-wrap: wrap; }
+.progress-key-field { margin-top: 20px; min-width: 0; }
+.progress-key-field[hidden] { display: none; }
+.progress-key-field label { display: block; margin-bottom: 8px; font-size: 14px; }
+.progress-key textarea {
+  display: block; box-sizing: border-box; width: 100%; min-width: 0; max-width: 100%;
+  padding: 12px; border: 1px solid var(--line-2); border-radius: var(--radius);
+  background: var(--bg); color: var(--text); font-family: var(--font-mono);
+  font-size: 16px; line-height: 1.5; resize: vertical; overflow-wrap: anywhere; word-break: break-all;
+}
+.progress-key textarea:focus { outline: 2px solid var(--ice); outline-offset: 2px; }
+.progress-key .actions-row { align-items: center; }
+.progress-key-actions .progress-key-reset { margin-left: auto; }
+.progress-key-status:not(:empty) { margin-top: 16px; }
+.progress-key-error { color: var(--gold); }
+.progress-key-help { margin-top: 20px; font-size: 14px; line-height: 1.65; }
+.progress-key-help summary { cursor: pointer; color: var(--ice); }
+.progress-key-help ol { padding-left: 22px; margin-top: 12px; }
+.progress-key-help li + li, .progress-key-help p { margin-top: 10px; }
+
 /* Google Drive sync box in User */
 .gd-err { color: var(--gold); margin-top: 8px; }
 .gd-when { font-size: 12px; margin-top: 6px; }

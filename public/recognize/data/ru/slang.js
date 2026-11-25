@@ -126,6 +126,13 @@
       ['Literally «блин» is a pancake. When the context isn’t about food, it is the clean, non-mat version of «пиздец» / «блядь»: same feeling as “damn!”, “shit!”, “fuck!”, but fine with parents, at work and on TV.', 'Wörtlich ist «блин» ein Pfannkuchen. Wenn es nicht ums Essen geht, ist es die saubere, nicht-vulgäre Version von «пиздец» / «блядь»: dasselbe Gefühl wie „Scheiße!“, „Mist!“, „verdammt!“, aber okay vor Eltern, bei der Arbeit und im Fernsehen.'],
       ['A polite stand-in for the mat word «блядь»: same first sounds, harmless meaning.', 'Ein höflicher Ersatz für das Mat-Wort «блядь»: gleicher Anfang, harmlose Bedeutung.'],
       ['Everywhere, all ages.', 'Überall, alle Altersgruppen.']),
+    S('popugai', 'slang-react', 'Я теб+е чё, попуг+ай?', 'Do I look like a parrot? (I’m not saying it again)', 'Bin ich ein Papagei? (ich wiederhole mich nicht)', [
+      ['— Повтори! — [[Я тебе чё, попугай]]?', '“Say it again!” — “Do I look like a parrot?”', '„Sag’s nochmal!“ — „Bin ich ein Papagei?“'],
+      ['[[Я тебе чё, попугай]], сто раз объяснять?', 'Am I a parrot, explaining it a hundred times?', 'Bin ich ein Papagei, dass ich’s hundertmal erkläre?'],
+      ['Слушай с первого раза, [[я тебе не попугай]].', 'Listen the first time, I’m not a parrot.', 'Hör beim ersten Mal zu, ich bin kein Papagei.']],
+      ['A snappy refusal to repeat yourself: “you should have listened”. Rude-ish, but not mat. Same model: «Я тебе чё, нанялся?» (am I your servant?).', 'Patzige Weigerung, sich zu wiederholen: „hättest du zugehört“. Etwas frech, aber kein Mat. Gleiches Muster: «Я тебе чё, нанялся?» (bin ich dein Diener?).'],
+      ['Parrots repeat words; «попугайничать» = to parrot, copy someone. «Чё» is colloquial «что».', 'Papageien wiederholen Wörter; «попугайничать» = nachplappern. «Чё» ist umgangssprachlich für «что».'],
+      ['Parents to kids, friends, arguments.', 'Eltern zu Kindern, Freunde, Streit.']),
     // ---- People & Attitude ----
     S('krash', 'slang-people', 'краш', 'crush (person you like)', 'Schwarm, Crush', [
       ['Он мой [[краш]] с первого курса.', 'He’s been my crush since first year.', 'Er ist mein Schwarm seit dem ersten Semester.'],
@@ -309,11 +316,39 @@
       ['Friends, drivers, gamers. To a stranger it is an insult.', 'Freunde, Autofahrer, Gamer. Zu Fremden eine Beleidigung.'], V),
     S('ebunyavyi', 'slang-rude', 'ебун+явый', 'nutty, cuckoo (jokey “fucking nuts”)', 'plemplem, durchgeknallt (scherzhaft)', [
       ['Мой кот [[ебунявый]]: в три ночи носится по квартире.', 'My cat is cuckoo: races round the flat at 3 a.m.', 'Mein Kater ist plemplem: rast um drei Uhr nachts durch die Wohnung.'],
-      ['Ну ты [[ебунявый]], конечно!', 'Man, you’re a proper nutter!', 'Du bist ja echt durchgeknallt!'],
+      ['Ну ты [[ебунявый]] даун, завали ебало.', 'You’re a total nutjob retard, shut your fucking trap.', 'Du bist ein durchgeknallter Spast, halt die Fresse.'],
       ['Вот [[ебунявка]], опять ключи в холодильник положила!', 'What a nutcase, put the keys in the fridge again!', 'So eine Bekloppte, hat schon wieder die Schlüssel in den Kühlschrank gelegt!']],
       ['Same meaning as «ебанутый», but mangled on purpose, so it sounds funny and almost affectionate (like «слюнявый», «дырявый»). Noun: «ебунявка» (a nutcase, about anyone). For pets, friends, your own wild ideas.', 'Bedeutet dasselbe wie «ебанутый», aber absichtlich verdreht, darum lustig und fast liebevoll (wie «слюнявый», «дырявый»). Nomen: «ебунявка» (Bekloppte(r), für alle). Für Haustiere, Freunde, eigene verrückte Ideen.'],
       ['Playful distortion of «ебанутый» with the suffix «-явый». Friend-group and internet wordplay; not in dictionaries.', 'Spielerische Verdrehung von «ебанутый» mit dem Suffix «-явый». Wortspiel unter Freunden und im Netz; in keinem Wörterbuch.'],
       ['Only with close friends, in a joking tone.', 'Nur unter engen Freunden, im Scherz.'], V),
+    S('daun', 'slang-rude', 'д+аун', 'retard, moron (offensive)', 'Spast, Mongo (beleidigend)', [
+      ['Ты чё, [[даун]]? Я же сказал налево!', 'Are you a retard? I said left!', 'Bist du ein Spast? Ich hab doch links gesagt!'],
+      ['Опять какой-то [[даун]] слил нам катку.', 'Some moron threw our match again.', 'Schon wieder hat irgendein Mongo uns die Runde versaut.'],
+      ['Не будь [[дауном]], проверь ещё раз.', 'Don’t be a moron, check again.', 'Sei kein Depp, check’s nochmal.']],
+      ['Calls someone stupid. Not mat, but cruel: it mocks people with Down syndrome, so many find it worse than mat. Milder: «тупой», «дурак».', 'Nennt jemanden dumm. Kein Mat, aber grausam: verspottet Menschen mit Down-Syndrom, darum für viele schlimmer als Mat. Milder: «тупой», «дурак».'],
+      ['From «синдром Дауна» (Down syndrome), named after the doctor John Langdon Down. Same path as German «Mongo».', 'Von «синдром Дауна» (Down-Syndrom), nach dem Arzt John Langdon Down. Derselbe Weg wie deutsch „Mongo“.'],
+      ['Schoolkids, gamers, online comments. Avoid around adults you don’t know.', 'Schüler, Gamer, Online-Kommentare. Bei fremden Erwachsenen vermeiden.'], V),
+    S('zavali-ebalo', 'slang-rude', 'Зав+али еб+ало!', 'Shut your fucking mouth!, Shut your trap!', 'Halt die Fresse!, Halt’s Maul!', [
+      ['[[Завали ебало]], я разговариваю!', 'Shut your fucking mouth, I’m talking!', 'Halt die Fresse, ich rede gerade!'],
+      ['[[Закрой ебло]] и слушай.', 'Shut your fucking face and listen.', 'Halt die Fresse und hör zu.'],
+      ['[[Завали хлебало]], не позорься.', 'Shut your trap, don’t embarrass yourself.', 'Halt’s Maul, blamier dich nicht.']],
+      ['A rough order to shut up. «Ебало» is mat for the face or mouth («дать в ебало» = punch in the face). Same thing: «закрой ебло» («ебло» is the short form of «ебало»). Softer: «завали хлебало», «заткнись»; polite: «помолчи».', 'Grober Befehl, still zu sein. «Ебало» ist Mat für Gesicht oder Mund («дать в ебало» = in die Fresse hauen). Dasselbe: «закрой ебло» («ебло» ist die Kurzform von «ебало»). Weicher: «завали хлебало», «заткнись»; höflich: «помолчи».'],
+      ['«Завалить» = to block, fill up (like a road with rubble). «Ебало» comes from the mat root «еб-» + «-ало», as in «хлебало» (from «хлебать», to slurp).', '«Завалить» = zuschütten, versperren (wie eine Straße mit Geröll). «Ебало» = Mat-Wurzel «еб-» + «-ало», wie «хлебало» (von «хлебать», schlürfen).'],
+      ['Arguments, street, gaming voice chat. Said to a stranger it starts a fight.', 'Streit, Straße, Gaming-Voicechat. Zu Fremden gesagt — Prügelei garantiert.'], V),
+    S('eblishche', 'slang-rude', 'ебл+ище', 'ugly fat mug, big ugly face', 'hässliche Fresse, Visage', [
+      ['Ну и [[еблище]] у него на паспорте!', 'What an ugly mug he has in his passport photo!', 'Was für eine Visage er auf dem Passfoto hat!'],
+      ['Убери своё [[еблище]] из кадра.', 'Get your ugly mug out of the shot.', 'Nimm deine Fresse aus dem Bild.'],
+      ['За лето такое [[еблище]] наел.', 'Grew a right fat face over the summer.', 'Hat sich über den Sommer eine richtig fette Fresse angefressen.']],
+      ['A big, ugly or smug face. Stronger than «ебло» / «ебало» because of «-ище». Among friends also a joke about your own bad photo.', 'Ein großes, hässliches oder selbstgefälliges Gesicht. Stärker als «ебло» / «ебало» wegen «-ище». Unter Freunden auch als Witz über das eigene schlechte Foto.'],
+      ['«Ебло» (short for «ебало») + the size suffix «-ище», as in «домище» (huge house), «ручища» (huge hand).', '«Ебло» (Kurzform von «ебало») + das Vergrößerungssuffix «-ище», wie in «домище» (Riesenhaus), «ручища» (Riesenhand).'],
+      ['Friends, photo comments, street.', 'Freunde, Fotokommentare, Straße.'], V),
+    S('pizda', 'slang-rude', 'пизд+а', 'cunt (vagina); stupid girl; we’re fucked', 'Fotze (Vagina); dumme Tussi; wir sind am Arsch', [
+      ['Всё, нам [[пизда]]: завтра экзамен, а я ничего не учил.', 'That’s it, we’re fucked: exam tomorrow and I haven’t studied.', 'Das war’s, wir sind am Arsch: morgen Prüfung, und ich hab nichts gelernt.'],
+      ['Эта [[пизда]] опять всё перепутала.', 'That stupid bitch mixed everything up again.', 'Die dumme Kuh hat schon wieder alles verwechselt.'],
+      ['На заборе кто-то нарисовал [[пизду]].', 'Someone drew a pussy on the fence.', 'Jemand hat eine Muschi an den Zaun gemalt.']],
+      ['Three uses: 1) disappointment, trouble: «(нам) пизда» = we’re screwed, it’s over (same as «пиздец»); 2) a very rude word for a woman, usually “stupid girl”; 3) literally, the vagina. Polite: «капец», «хана»; «дура».', 'Drei Gebrauchsweisen: 1) Enttäuschung, Ärger: «(нам) пизда» = wir sind erledigt (wie «пиздец»); 2) sehr grobes Wort für eine Frau, meist „dumme Tussi“; 3) wörtlich die Vagina. Höflich: «капец», «хана»; «дура».'],
+      ['One of the four core mat roots («хуй», «пизда», «ебать», «блядь»). It gives «пиздец», «пиздеть», «пиздота», «пиздобол» and hundreds more. Old Indo-European word, related to Lithuanian «pyzda».', 'Eine der vier Kernwurzeln des Mat («хуй», «пизда», «ебать», «блядь»). Daraus «пиздец», «пиздеть», «пиздота», «пиздобол» und Hunderte mehr. Altes indoeuropäisches Wort, verwandt mit litauisch «pyzda».'],
+      ['Very strong mat. Sense 1 among friends; senses 2 and 3 are deeply offensive.', 'Sehr starker Mat. Bedeutung 1 unter Freunden; 2 und 3 sind zutiefst beleidigend.'], V),
     S('pes', 'slang-rude', 'Пёс ёбаный!', 'You fucking dog!, Son of a bitch!', 'Du verdammter Hund!, Mistkerl!', [
       ['[[Пёс ёбаный]], ты мне телефон разбил!', 'You fucking dog, you broke my phone!', 'Du verdammter Hund, du hast mein Handy kaputt gemacht!'],
       ['Этот [[пёс ёбаный]] опять меня подставил.', 'That son of a bitch set me up again.', 'Dieser Mistkerl hat mich schon wieder reingeritten.'],

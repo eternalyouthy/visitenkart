@@ -125,12 +125,23 @@ GT.START_NOTES = {
   ru: {
     goodTitle: 'Полезно знать',
     good: [
-      { h: 'Темы оформления', p: 'В настройках (иконка с ползунками справа вверху) можно сменить тему. Их шесть, тёмные и светлые, выбирай под настроение.' },
+      { h: 'Прогресс между устройствами', p: 'Рядом с настройками есть иконка профиля: в Sync & Backup прогресс легко перенести на другое устройство одним ключом. Прогресс суммируется, так что переносить его постоянно не нужно. Прошёл новые темы на телефоне, закинул ключ на ПК, и они добавятся к старому прогрессу. И наоборот.' },
       { h: 'Где хранятся твои данные', p: 'Никаких данных о тебе не собирается. Сервера с базой данных нет, потому что, честно говоря, мне было лень. Весь прогресс хранится в кэше браузера на этом устройстве. Если очистишь данные сайта, прогресс пропадёт.' },
+      { h: 'Темы оформления', p: 'В настройках (иконка с ползунками справа вверху) можно сменить тему. Их шесть, тёмные и светлые, выбирай под настроение.' },
       { h: 'Почему интерфейс полностью не на русском', p: 'Сайт переведён на русский не полностью, и это осознанно. Объяснения и переводы идут на русском, а кнопки и меню остаются на английском. Чтобы пользоваться сайтом, хватит английского на уровне A1. Мне кажется, что полностью русский интерфейс выглядел бы менее эстетично.' }
     ],
     newsTitle: 'Последние обновления',
     news: [
+      { date: '25.11.2026', items: [
+        { h: 'Новое имя: RECGZ', p: 'У сайта новое название и логотип-глаз. Иконка вкладки теперь меняет цвет вместе с темой оформления.' },
+        { h: 'Ключ прогресса', p: 'В Sync & Backup можно сгенерировать ключ и перенести прогресс по всем языкам на другое устройство, без аккаунтов и серверов. Прогресс суммируется: новое с телефона добавляется к старому на ПК и наоборот. Кнопка Reset all сбрасывает прогресс по всем языкам, но только на этом устройстве.' },
+        { h: 'Грамматика по уровням', p: 'Грамматика во всех языках разбита на B1, B2 и C1 (в русском от A2). Добавились новые уроки, а в ключевых немецких уроках стало по 16–17 упражнений.' },
+        { h: 'Больше слов', p: 'Во всех языках добавлено много слов B1 и B2, а карточки связаны между языками.' },
+        { h: 'Карточки и навигация', p: 'В карточках слов появились кнопки Prev / Next (и стрелки ← → на клавиатуре). Боковое меню можно свернуть, а Words, Roots и Grammar разбиты на раскрывающиеся группы.' },
+        { h: 'Карта корней', p: 'Карта корней читается во всех темах, подписи больше не наезжают друг на друга, на телефоне тоже.' },
+        { h: 'Сленг', p: 'Русский сленг пополнился: ещё около 30 карточек мата, тюремного жаргона и интернет-оскорблений (18+).' },
+        { h: 'Телефон и планшет', p: 'Большая проверка на телефонах и планшетах: текст не вылезает за края, iOS не зумит поля ввода, учтены вырезы экрана.' }
+      ] },
       { date: '24.11.2026 · вечер', items: [
         { h: 'Новый режим: артикли', p: 'В Language появился раздел с артиклями и интерактивной игрой для всех языков. Артикль не угадывается в отрыве от контекста: он выбирается прямо внутри предложения.' },
         { h: 'Обновления разделов', p: 'Пополнились почти все разделы. Больше всего изменился Professional: его переделали, и профессий стало намного больше.' },
@@ -151,11 +162,21 @@ GT.START_NOTES = {
   en: {
     goodTitle: 'Good to know',
     good: [
-      { h: 'Themes', p: 'Open the settings (the sliders icon, top right) to switch the theme. There are six of them, dark and light. Pick whatever suits your mood.' },
-      { h: 'Where your data lives', p: 'Nothing about you is collected. There is no server with a database because, honestly, I couldn’t be bothered. All your progress is stored in this browser’s cache on this device. Clear the site data and your progress is gone.' }
+      { h: 'Progress across devices', p: 'Next to the settings there is a profile icon: in Sync & Backup you can move your progress to another device with a single key. Progress adds up, so you don’t have to keep moving it. Learn new topics on your phone, drop the key on your PC, and they join your existing progress there. And the other way round.' },
+      { h: 'Where your data lives', p: 'Nothing about you is collected. There is no server with a database because, honestly, I couldn’t be bothered. All your progress is stored in this browser’s cache on this device. Clear the site data and your progress is gone.' },
+      { h: 'Themes', p: 'Open the settings (the sliders icon, top right) to switch the theme. There are six of them, dark and light. Pick whatever suits your mood.' }
     ],
     newsTitle: 'Latest updates',
     news: [
+      { date: '25 Nov 2026', items: [
+        { h: 'New name: RECGZ', p: 'The site has a new name and an eye logo. The browser tab icon now changes colour with the theme.' },
+        { h: 'Progress key', p: 'In Sync & Backup you can generate a key and move your progress for all languages to another device, with no accounts and no server. Progress adds up: what you learn on your phone joins your PC progress, and the other way round. Reset all clears progress in every language, on this device only.' },
+        { h: 'Grammar by level', p: 'Grammar in every language is now split into B1, B2 and C1 (Russian starts at A2). There are new lessons, and the key German lessons now have 16–17 drills each.' },
+        { h: 'More words', p: 'Lots of new B1 and B2 words in every language, with cards linked across languages.' },
+        { h: 'Cards and navigation', p: 'Word cards have Prev / Next buttons (and the ← → keys). The sidebar can be collapsed, and Words, Roots and Grammar fold into groups.' },
+        { h: 'Roots map', p: 'The roots map is readable in every theme, and labels no longer overlap, on phones too.' },
+        { h: 'Phone and tablet', p: 'A big pass over phones and tablets: text fits on screen, iOS no longer zooms into input fields, and notches are respected.' }
+      ] },
       { date: '24 Nov 2026 · evening', items: [
         { h: 'New mode: articles', p: 'Language now has an articles section with an interactive game for every language. You don’t guess the article out of context: you pick it inside a real sentence.' },
         { h: 'Section updates', p: 'Almost every section got new content. Professional changed the most: it has been reworked and now covers many more professions.' },
@@ -176,11 +197,21 @@ GT.START_NOTES = {
   de: {
     goodTitle: 'Gut zu wissen',
     good: [
-      { h: 'Designs', p: 'In den Einstellungen (Regler-Symbol oben rechts) können Sie das Design wechseln. Es gibt sechs, dunkle und helle, ganz nach Laune.' },
-      { h: 'Wo Ihre Daten liegen', p: 'Es werden keine Daten über Sie gesammelt. Es gibt keinen Server mit Datenbank, ehrlich gesagt war ich zu faul dafür. Ihr gesamter Fortschritt liegt im Browser-Cache auf diesem Gerät. Wenn Sie die Website-Daten löschen, ist der Fortschritt weg.' }
+      { h: 'Fortschritt zwischen Geräten', p: 'Neben den Einstellungen gibt es ein Profil-Symbol: Unter Sync & Backup lässt sich der Fortschritt mit einem einzigen Schlüssel auf ein anderes Gerät bringen. Der Fortschritt summiert sich, Sie müssen ihn also nicht ständig übertragen. Neue Themen auf dem Handy lernen, den Schlüssel auf dem PC einfügen, und sie kommen zum bisherigen Fortschritt dazu. Und umgekehrt.' },
+      { h: 'Wo Ihre Daten liegen', p: 'Es werden keine Daten über Sie gesammelt. Es gibt keinen Server mit Datenbank, ehrlich gesagt war ich zu faul dafür. Ihr gesamter Fortschritt liegt im Browser-Cache auf diesem Gerät. Wenn Sie die Website-Daten löschen, ist der Fortschritt weg.' },
+      { h: 'Designs', p: 'In den Einstellungen (Regler-Symbol oben rechts) können Sie das Design wechseln. Es gibt sechs, dunkle und helle, ganz nach Laune.' }
     ],
     newsTitle: 'Letzte Updates',
     news: [
+      { date: '25.11.2026', items: [
+        { h: 'Neuer Name: RECGZ', p: 'Die Seite hat einen neuen Namen und ein Augen-Logo. Das Tab-Symbol wechselt jetzt die Farbe mit dem Design.' },
+        { h: 'Fortschrittsschlüssel', p: 'Unter Sync & Backup können Sie einen Schlüssel erzeugen und den Fortschritt aller Sprachen auf ein anderes Gerät bringen, ohne Konto und ohne Server. Der Fortschritt summiert sich: Was Sie auf dem Handy lernen, kommt zum Fortschritt auf dem PC dazu und umgekehrt. Reset all löscht den Fortschritt aller Sprachen, aber nur auf diesem Gerät.' },
+        { h: 'Grammatik nach Niveau', p: 'Die Grammatik ist in allen Sprachen in B1, B2 und C1 aufgeteilt (Russisch ab A2). Es gibt neue Lektionen, und die wichtigsten deutschen Lektionen haben jetzt je 16–17 Übungen.' },
+        { h: 'Mehr Wörter', p: 'Viele neue B1- und B2-Wörter in allen Sprachen, mit Verknüpfungen zwischen den Sprachen.' },
+        { h: 'Karten und Navigation', p: 'Wortkarten haben jetzt Prev / Next (und die Tasten ← →). Die Seitenleiste lässt sich einklappen, und Words, Roots und Grammar sind in aufklappbare Gruppen gegliedert.' },
+        { h: 'Wurzelkarte', p: 'Die Wurzelkarte ist in allen Designs gut lesbar, und die Beschriftungen überlappen nicht mehr, auch auf dem Handy.' },
+        { h: 'Handy und Tablet', p: 'Große Überarbeitung für Handy und Tablet: Text passt auf den Bildschirm, iOS zoomt nicht mehr in Eingabefelder, Notches werden berücksichtigt.' }
+      ] },
       { date: '24.11.2026 · abends', items: [
         { h: 'Neuer Modus: Artikel', p: 'Unter Language gibt es jetzt einen Bereich zu Artikeln mit einem interaktiven Spiel für alle Sprachen. Der Artikel wird nicht ohne Kontext geraten, sondern direkt im Satz gewählt.' },
         { h: 'Neues in den Bereichen', p: 'Fast alle Bereiche wurden erweitert. Am meisten hat sich Professional verändert: Der Bereich wurde neu aufgebaut und umfasst jetzt viel mehr Berufe.' },

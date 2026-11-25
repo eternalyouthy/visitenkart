@@ -55,7 +55,7 @@
       cards: {},          // <id>#rec / <id>#prod (or <id> for drills) -> FSRS card
       later: {},          // item id -> timestamp ("Later" in learn sessions)
       deleted: {},        // card key -> timestamp of removal (tombstone, so other devices don't resurrect it)
-      resetAt: 0,         // timestamp of the last "reset progress" (older cards from other devices are dropped)
+      resetAt: 0,         // legacy reset timestamp from file/sync imports; local resets do not create one
       log: {},            // 'YYYY-MM-DD' -> { reviews, learned }
       lastPractice: null,
       lastExport: null
@@ -81,6 +81,21 @@
     return out;
   }
 
+  var PROGRESS_FIELDS = ['version', 'language', 'created', 'cards', 'later', 'deleted', 'resetAt', 'log', 'lastPractice', 'lastExport', 'settings'];
+  function extraFields(src, fields) {
+    var out = {};
+    Object.keys(src || {}).forEach(function (k) { if (safeKey(k) && fields.indexOf(k) < 0) out[k] = src[k]; });
+    return out;
+  }
+  // Preserve future metadata through older clients, with deterministic conflict resolution.
+  function mergeExtras(a, b, fields) {
+    var out = extraFields(a, fields), inc = extraFields(b, fields);
+    Object.keys(inc).forEach(function (k) {
+      if (!Object.prototype.hasOwnProperty.call(out, k) || stableStr(inc[k]) > stableStr(out[k])) out[k] = inc[k];
+    });
+    return out;
+  }
+
   /** Migrate v1 cards (plain item id) -> v2 (<id>#rec + <id>#prod for known, <id>#prod for active). */
   function migrateCards(rawCards) {
     var out = {}, changed = false;
@@ -102,14 +117,13 @@
     var f = fresh(lang);
     if (!d || typeof d !== 'object') return { data: f, migrated: false, settings: null };
     var rawCards = safeMap(d.cards && typeof d.cards === 'object' ? d.cards : {});
-    var needsMig = (d.version || 1) < SCHEMA_VERSION || Object.keys(rawCards).some(function (k) {
-      return !/#(rec|prod)$/.test(k) && !isDrillKey(k);
-    });
+    // Modern ids are opaque. An unknown drill from a newer catalogue must not be renamed.
+    var needsMig = (d.version || 1) < SCHEMA_VERSION;
     var mig = needsMig ? migrateCards(rawCards) : { cards: rawCards, changed: false };
     return {
       migrated: (d.version || 1) < SCHEMA_VERSION || mig.changed,
       settings: d.settings && typeof d.settings === 'object' ? d.settings : null,
-      data: {
+      data: Object.assign(extraFields(d, PROGRESS_FIELDS), {
         version: SCHEMA_VERSION,
         language: lang,
         created: d.created || f.created,
@@ -120,7 +134,7 @@
         log: safeMap(d.log),
         lastPractice: d.lastPractice || null,
         lastExport: d.lastExport || null
-      }
+      })
     };
   }
 
@@ -249,9 +263,14 @@
     if (ta !== tb) win = tb > ta ? b : a;
     else if ((a.state === 'known') !== (b.state === 'known')) win = b.state === 'known' ? b : a;
     else if ((b.reps || 0) !== (a.reps || 0)) win = (b.reps || 0) > (a.reps || 0) ? b : a;
-    else win = (b.due || 0) >= (a.due || 0) ? b : a;
+    else if ((a.due || 0) !== (b.due || 0)) win = (b.due || 0) > (a.due || 0) ? b : a;
+    // Full ties must not depend on import direction. Ignore added here: it is merged separately.
+    else win = stableStr(Object.assign({}, b, { added: 0 })) > stableStr(Object.assign({}, a, { added: 0 })) ? b : a;
     var out = Object.assign({}, win);
     if (Number.isFinite(added)) out.added = added;
+    // A new card can have only `added`. Keeping the earliest added must not move
+    // its last change backwards, or a second import could choose a different winner.
+    if (cardTs(out) < Math.max(ta, tb)) out.last = Math.max(ta, tb);
     return out;
   }
 
@@ -259,7 +278,7 @@
     var a = normalize(localD, lang).data;
     var b = normalize(incD, lang).data;
     var resetAt = Math.max(a.resetAt || 0, b.resetAt || 0);
-    var deleted = {};
+    var deleted = Object.create(null);
     [a.deleted, b.deleted].forEach(function (src) {
       Object.keys(src).forEach(function (k) {
         if (!safeKey(k)) return;
@@ -267,7 +286,7 @@
         if (t > resetAt && t > (deleted[k] || 0)) deleted[k] = t;
       });
     });
-    var cards = {};
+    var cards = Object.create(null);
     Object.keys(a.cards).forEach(function (k) { if (safeKey(k)) cards[k] = Object.assign({}, a.cards[k]); });
     Object.keys(b.cards).forEach(function (k) {
       if (!safeKey(k)) return;
@@ -278,22 +297,32 @@
       if ((resetAt && t < resetAt) || (deleted[k] && t <= deleted[k])) delete cards[k];
       else delete deleted[k];
     });
-    var later = {};
+    var later = Object.create(null);
     Object.keys(a.later).forEach(function (id) { if (safeKey(id)) later[id] = a.later[id]; });
     Object.keys(b.later).forEach(function (id) { if (safeKey(id)) later[id] = Math.max(later[id] || 0, b.later[id] || 0); });
     Object.keys(later).forEach(function (id) { if (resetAt && later[id] < resetAt) delete later[id]; });
+    // A removed card also supersedes an older Later marker from an offline device.
+    // A new Later choice made after that removal is still valid.
+    Object.keys(deleted).forEach(function (k) {
+      var id = baseId(k);
+      if (later[id] && later[id] <= deleted[k]) delete later[id];
+    });
     Object.keys(cards).forEach(function (k) { delete later[baseId(k)]; });
-    var resetDay = resetAt ? dayKey(resetAt) : '';
-    var log = {};
+    // Merge cutoffs must be identical on devices in different time zones.
+    var resetDate = resetAt ? new Date(resetAt) : null;
+    var resetDay = resetDate ? resetDate.getUTCFullYear() + '-' + String(resetDate.getUTCMonth() + 1).padStart(2, '0') + '-' + String(resetDate.getUTCDate()).padStart(2, '0') : '';
+    var log = Object.create(null);
     [a.log, b.log].forEach(function (src) {
       Object.keys(src).forEach(function (day) {
         if (!safeKey(day) || (resetDay && day < resetDay)) return;
         var prev = log[day] || { reviews: 0, learned: 0 }, cur = src[day] || {};
-        log[day] = { reviews: Math.max(prev.reviews, cur.reviews || 0), learned: Math.max(prev.learned, cur.learned || 0) };
+        log[day] = Object.assign(mergeExtras(prev, cur, ['reviews', 'learned']), {
+          reviews: Math.max(prev.reviews, cur.reviews || 0), learned: Math.max(prev.learned, cur.learned || 0)
+        });
       });
     });
     var lp = Math.max(a.lastPractice || 0, b.lastPractice || 0);
-    return {
+    return Object.assign(mergeExtras(a, b, PROGRESS_FIELDS), {
       version: SCHEMA_VERSION,
       language: lang,
       created: Math.min(a.created || Date.now(), b.created || Date.now()),
@@ -304,7 +333,7 @@
       log: log,
       lastPractice: lp && lp >= resetAt ? lp : null,
       lastExport: Math.max(a.lastExport || 0, b.lastExport || 0) || null
-    };
+    });
   }
 
   /** Order-independent fingerprint of progress: tells whether the local merge has anything the remote file lacks. */
@@ -459,6 +488,64 @@
       setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
     },
 
+    buildKeyProgress: function () {
+      var progress = {};
+      Object.keys(Object.assign({}, KEYS, datas)).sort().forEach(function (lang) {
+        // Progress keys do not carry a local reset (including markers left by older app versions).
+        var d = Object.assign({}, loadLang(lang), { resetAt: 0 });
+        // Keep deletions and future metadata, even without cards. A reset alone is not progress.
+        if (Object.keys(d.cards).length || Object.keys(d.later).length || Object.keys(d.log).length ||
+            Object.keys(d.deleted).length || d.lastPractice || d.lastExport ||
+            Object.keys(extraFields(d, PROGRESS_FIELDS)).length) progress[lang] = d;
+      });
+      return progress;
+    },
+    generateProgressKey: function () { return GT.progressKey.encodeAll(store.buildKeyProgress()); },
+    addProgressKey: async function (text) {
+      // Decode and validate the whole key before reading/merging/writing any progress.
+      var decoded = await GT.progressKey.decode(text), incoming = {};
+      if (decoded.language) incoming[decoded.language] = decoded;   // permanent V1 support
+      else incoming = decoded.progress;
+      var langs = Object.keys(incoming).sort(), merged = {}, added = 0, updated = 0;
+      langs.forEach(function (lang) {
+        var before = loadLang(lang);
+        // Reuse the file merge while ignoring reset barriers on BOTH sides: an old key
+        // can restore a locally reset device, and a legacy reset-bearing key cannot clear another one.
+        var next = mergeLangData(Object.assign({}, before, { resetAt: 0 }),
+          Object.assign({}, incoming[lang], { resetAt: 0 }), lang);
+        merged[lang] = next;
+        Object.keys(next.cards).forEach(function (k) {
+          if (!Object.prototype.hasOwnProperty.call(before.cards, k)) added++;
+          else if (stableStr(before.cards[k]) !== stableStr(next.cards[k])) updated++;
+        });
+        // Explicit per-card removals also count as updates in the summary.
+        Object.keys(before.cards).forEach(function (k) { if (!Object.prototype.hasOwnProperty.call(next.cards, k)) updated++; });
+      });
+      // localStorage has no transaction across keys: restore earlier writes if a later one fails.
+      var saved = [], rollbackFailed = false;
+      try {
+        langs.forEach(function (lang) {
+          var key = keyFor(lang), raw = localStorage.getItem(key);
+          var out = lang === 'de' ? Object.assign({}, merged[lang], { settings: settings }) : merged[lang];
+          if (!writeJSON(key, out)) throw new Error('Storage unavailable');
+          saved.push({ key: key, raw: raw });
+        });
+      } catch (e) {
+        storageOk = false;
+        saved.reverse().forEach(function (entry) {
+          try {
+            if (entry.raw === null) localStorage.removeItem(entry.key);
+            else localStorage.setItem(entry.key, entry.raw);
+          } catch (err) { rollbackFailed = true; }
+        });
+        throw new Error('Could not save progress. Storage is blocked or full.' +
+          (rollbackFailed ? ' Some languages may have been saved. Try again or export your progress.' : ''));
+      }
+      langs.forEach(function (lang) { datas[lang] = merged[lang]; });
+      if (langs.length) scheduleAutoSync();
+      return { languages: langs, added: added, updated: updated };
+    },
+
     /**
      * Imports a JSON export string. By default (`!opts.replace`), MERGES incoming cards, later and log
      * with local progress so no cards or Known markers are lost. Pass `{ replace: true }` to overwrite.
@@ -491,8 +578,30 @@
     },
     mergeCard: mergeCard,
     mergeLangData: mergeLangData,
-    /** Reset progress of the ACTIVE language only. */
-    reset: function () { var f = fresh(active); f.resetAt = now(); datas[active] = f; store.save(); },
+    /** Reset the ACTIVE language on this device only. Saved progress keys can restore it. */
+    reset: function () { datas[active] = fresh(active); store.save(); },
+    /** Reset EVERY language on this device only (settings, theme and clock stay). Saved progress keys can restore it. */
+    resetAll: function () {
+      var langs = Object.keys(Object.assign({}, KEYS, datas)).sort(), next = {}, saved = [];
+      langs.forEach(function (lang) { next[lang] = fresh(lang); });
+      try {
+        langs.forEach(function (lang) {
+          var key = keyFor(lang), raw = localStorage.getItem(key);
+          var out = lang === 'de' ? Object.assign({}, next[lang], { settings: settings }) : next[lang];
+          if (!writeJSON(key, out)) throw new Error('Storage unavailable');
+          saved.push({ key: key, raw: raw });
+        });
+      } catch (e) {
+        storageOk = false;
+        saved.reverse().forEach(function (entry) {
+          try { if (entry.raw === null) localStorage.removeItem(entry.key); else localStorage.setItem(entry.key, entry.raw); } catch (err) {}
+        });
+        throw new Error('Could not reset progress. Storage is blocked or full.');
+      }
+      langs.forEach(function (lang) { datas[lang] = next[lang]; });
+      scheduleAutoSync();
+      return langs;
+    },
     progressPrint: progressPrint
   };
 

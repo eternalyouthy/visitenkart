@@ -2038,9 +2038,70 @@
         '<button class="btn ghost small" type="button" data-act="sync-disconnect">Disconnect</button>' +
       '</div>';
   }
+  var progressKeyUI = null;
+  function keyUI() {
+    var k = progressKeyUI || (progressKeyUI = { key: '', input: '', adding: false, busy: false, message: '', error: false, instructions: false });
+    // Learning, reset and file sync can all change progress while this panel is closed.
+    if (k.key && k.snapshot !== JSON.stringify(S.buildKeyProgress())) {
+      k.key = ''; k.error = false; k.message = 'Progress changed. Generate a fresh key.';
+    }
+    return k;
+  }
+  function progressKeyHTML() {
+    var k = keyUI();
+    return '<div class="box-head"><span class="label ice">Progress key</span><span class="tag outline">All languages</span></div>' +
+      '<p class="note muted">Progress adds up across devices. Learn new topics on your phone, then add its key on your PC to combine them with your existing progress. You can do the same from PC to phone. One key carries all your languages.</p>' +
+      '<div class="actions-row progress-key-actions"><button class="btn primary" type="button" data-act="key-generate"' + (k.busy ? ' disabled' : '') + '>Generate key</button>' +
+      '<button class="btn" type="button" data-act="key-open" aria-expanded="' + k.adding + '" aria-controls="progressKeyAdd">Add progress</button>' +
+      '<button class="btn danger progress-key-reset" type="button" data-act="reset-all" aria-label="Reset progress in all languages"' + (k.busy ? ' disabled' : '') + '>Reset all</button></div>' +
+      '<p class="note muted" style="margin-top:12px"><b>Reset all</b> clears progress in every language on this device only. Save a key first to restore it later. The reset is not sent in progress keys.</p>' +
+      (k.key ? '<div class="progress-key-field"><label for="progressKeyOutput">Your progress key</label>' +
+        '<textarea id="progressKeyOutput" rows="4" readonly spellcheck="false" aria-describedby="progressKeyLength">' + esc(k.key) + '</textarea>' +
+        '<div class="actions-row"><button class="btn small" type="button" data-act="key-copy">' + icon('copy') + 'Copy</button>' +
+        '<span class="note muted" id="progressKeyLength">' + k.key.length.toLocaleString('en-US') + ' characters</span></div></div>' : '') +
+      '<div class="progress-key-field" id="progressKeyAdd"' + (k.adding ? '' : ' hidden') + '><label for="progressKeyInput">Paste a progress key</label>' +
+        '<textarea id="progressKeyInput" rows="4" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="RECGZ2-all-…">' + esc(k.input) + '</textarea>' +
+        '<p class="note muted">Each language merges with its own progress. Older single-language keys also work.</p>' +
+        '<div class="actions-row"><button class="btn primary" type="button" data-act="key-add"' + (k.busy ? ' disabled' : '') + '>Add</button></div></div>' +
+      '<p class="note progress-key-status' + (k.error ? ' progress-key-error' : '') + '" role="status" aria-live="polite">' + esc(k.busy ? 'Working…' : k.message) + '</p>' +
+      '<details class="progress-key-help"' + (k.instructions ? ' open' : '') + '><summary>How to swap progress keys</summary><ol>' +
+        '<li><b>Keys add up.</b> Progress from your phone is added to your PC\'s progress, and vice versa. Practise on both, swap keys both ways, and combine what you\'ve learned.</li>' +
+        '<li>Press <b>Generate key</b> and copy it.</li>' +
+        '<li>Send it to yourself in any messenger you have on both devices — Saved Messages, a chat with yourself, notes.</li>' +
+        '<li>On the other device press <b>Add progress</b> and paste. If the messenger split the key into several messages, paste all parts in order.</li></ol>' +
+        '<p class="note muted">Yes, the key is long. That\'s the price of no accounts, no email and no server — your progress never leaves your hands. (Also, the author is lazy.)</p>' +
+        '</details>';
+  }
+  function refreshProgressKey() {
+    var box = $('#progressKeyBox');
+    if (box) box.innerHTML = progressKeyHTML();
+  }
+  function runProgressKey(adding) {
+    var k = keyUI();
+    if (k.busy) return;
+    if (adding) k.input = $('#progressKeyInput').value;
+    else k.snapshot = JSON.stringify(S.buildKeyProgress());
+    k.busy = true; k.error = false; k.message = '';
+    refreshProgressKey();
+    (adding ? S.addProgressKey(k.input) : S.generateProgressKey()).then(function (result) {
+      if (adding) {
+        k.message = '+' + result.added + ' cards added, ' + result.updated + ' updated (' + (result.languages.length ? result.languages.join(', ').toUpperCase() : 'all languages') + ')';
+        // The old generated snapshot no longer represents this device's merged progress.
+        k.key = '';
+      } else { k.key = result; k.message = 'Key ready. Copy it to your other device.'; }
+    }).catch(function (err) {
+      k.error = true; k.message = err.message || 'Could not process this key.';
+    }).then(function () {
+      k.busy = false;
+      if (progressKeyUI !== k) return;
+      if (adding && !k.error && curPath()[0] === 'user') route({ keep: true });
+      else refreshProgressKey();
+    });
+  }
   function syncAndBackupCardsHTML() {
     var d = S.data;
-    return '<div class="box">' +
+    return '<div class="box progress-key" id="progressKeyBox">' + progressKeyHTML() + '</div>' +
+      '<div class="box">' +
       '<div class="box-head" style="margin-bottom:10px"><span class="label ice" style="margin:0">Import & Export</span><span class="mono-muted" style="font-size:12px">All languages · non-destructive merge</span></div>' +
       '<p class="note muted">Export saves every language in one JSON file. <b>Import & merge</b> combines cards by latest review without losing Known items.' + (d.lastExport ? ' Last export: ' + fmtDate(d.lastExport) + '.' : '') + '</p>' +
       '<div class="actions-row"><button class="btn primary" type="button" data-act="export">' + icon('download') + 'Export progress</button>' +
@@ -2099,6 +2160,9 @@
     function sw(key, lbl) { return '<label class="switch"><input type="checkbox" data-set="' + key + '" aria-label="' + esc(lbl || key) + '"' + (s[key] ? ' checked' : '') + '><span></span></label>'; }
     function row(label, help, control) { return '<div class="setting"><div><div class="lbl">' + label + '</div>' + (help ? '<div class="help">' + help + '</div>' : '') + '</div>' + control + '</div>'; }
     var h = '<h3 class="section-title" style="margin-top:0">Theme</h3><div class="box" id="themeBox">' + themeRowsHTML() + '</div>';
+    h += '<h3 class="section-title">Progress</h3><div class="box">' +
+      row('Share progress between devices', 'No accounts and no database: one key moves your progress for all languages, and progress from both devices adds up.',
+        '<button class="btn small" type="button" data-act="goto-progress" style="white-space:nowrap;flex-shrink:0">Go →</button>') + '</div>';
     h += '<h3 class="section-title">Learning</h3><div class="box">' +
       row('New cards per session', 'How many cards "Learn new" shows.', '<input type="number" min="1" max="50" data-set="newPerSession" aria-label="New cards per session" value="' + s.newPerSession + '">') +
       row('Review direction', 'Review recognition (' + LS() + ' → ' + KS() + '), production (' + KS() + ' → ' + LS() + '), or both.', sel('reviewDirection', [['both', 'Both'], ['rec', 'Recognition only'], ['prod', 'Production only']], 'Review direction')) +
@@ -2121,7 +2185,7 @@
       (errs.length ? '<p class="note" style="color:var(--bad);margin-top:8px">Missing files: ' + errs.map(esc).join(', ') + '</p>' : '') +
       (GT.duplicates.length ? '<p class="note" style="color:var(--gold);margin-top:8px">Duplicate ids skipped: ' + GT.duplicates.map(esc).join(', ') + '</p>' : '') +
       '<p class="note muted" style="margin-top:8px">To add a batch: copy the file into the pack folder and list it in <code>data/manifest.js</code>.</p></div>';
-    h += '<h3 class="section-title">Danger zone</h3><div class="box"><button class="btn danger" data-act="reset-all">Reset ' + esc(langMeta().name) + ' progress</button></div>';
+    h += '<h3 class="section-title">Danger zone</h3><div class="box"><button class="btn danger" data-act="reset-all">Reset all progress</button><p class="note muted" style="margin-top:10px">Clears every language on this device. Settings and theme stay.</p></div>';
     return h;
   }
   function openSettings() {
@@ -2235,6 +2299,23 @@
         break;
       }
       case 'export': S.exportJSON(); refreshSyncBox(); GT.toast('Progress exported'); break;
+      case 'key-generate': runProgressKey(false); break;
+      case 'key-open': {
+        var k = keyUI(); k.adding = !k.adding; refreshProgressKey();
+        if (k.adding) $('#progressKeyInput').focus();
+        break;
+      }
+      case 'key-add': runProgressKey(true); break;
+      case 'key-copy': {
+        if (!keyUI().key) { refreshProgressKey(); GT.toast('Progress changed. Generate a fresh key.'); break; }
+        var output = $('#progressKeyOutput');
+        if (!output) break;
+        copyText(output.value).then(function (ok) {
+          if (!ok && output.isConnected) { output.focus(); output.select(); output.setSelectionRange(0, output.value.length); }
+          GT.toast(ok ? 'Progress key copied.' : 'Key selected. Use Copy or Ctrl/Cmd+C.');
+        });
+        break;
+      }
       case 'sync-open':
         S.sync.pickExisting().then(function (msg) { if (msg) GT.toast('Synced · ' + msg); }).catch(function (err) {
           if (err && err.name !== 'AbortError') GT.toast(err.message || 'Sync failed');
@@ -2273,7 +2354,10 @@
         }
         break;
       case 'reset-all':
-        if (confirm('Reset ALL ' + langMeta().name + ' progress? Other languages are kept. This cannot be undone. Export first if unsure.') && confirm('Really delete all ' + langMeta().name + ' progress?')) { S.reset(); applyTheme(); route(); GT.toast('Progress reset'); }
+        if (confirm('Reset progress in ALL languages on this device? Settings and theme are kept. You can restore your progress with a key saved before resetting. This reset is not sent to other devices.')) {
+          try { S.resetAll(); } catch (e) { GT.toast(e.message); break; }
+          progressKeyUI = null; if (sheetEl.classList.contains('open')) closeSheet(); applyTheme(); route(); GT.toast('All progress reset');
+        }
         break;
       case 'test-voice': speak(langMeta().testPhrase, el); break;
       case 'add-drills': {
@@ -2290,6 +2374,12 @@
         else openSettings();
         break;
       case 'sheet-close': closeSheet(); break;
+      case 'goto-progress': {
+        closeSheet();
+        var toKeyBox = function () { var kb = document.getElementById('progressKeyBox'); if (kb) kb.scrollIntoView({ block: 'start', behavior: 'smooth' }); };
+        if (location.hash === '#/user') toKeyBox(); else { location.hash = '#/user'; setTimeout(toKeyBox, 150); }
+        break;
+      }
       case 'lang-close': closeLangPop(true); break;
       case 'lucky': {
         var pool = expressionPool(el.dataset.v);
@@ -2436,10 +2526,14 @@
     drawReview();
   });
   document.addEventListener('input', function (e) {
+    if (e.target.id === 'progressKeyInput') { keyUI().input = e.target.value; return; }
     if (e.target.dataset.act !== 'search') return;
     var qv = norm(e.target.value);
     document.querySelectorAll('#rows [data-hay]').forEach(function (r) { r.style.display = !qv || r.dataset.hay.indexOf(qv) >= 0 ? '' : 'none'; });
   });
+  document.addEventListener('toggle', function (e) {
+    if (e.target.classList && e.target.classList.contains('progress-key-help') && e.target.isConnected) keyUI().instructions = e.target.open;
+  }, true);
   document.addEventListener('change', function (e) {
     var el = e.target;
     if (el.id === 'stKind') { syncStudioHelp(); return; }
