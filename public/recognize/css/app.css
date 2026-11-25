@@ -1720,3 +1720,61 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
   .rnode:not(.center) { max-width: 36%; }
 }
 [data-theme="holo"] .rnode.active { background: color-mix(in srgb, var(--ice) 8%, var(--bg)); }
+
+/* ======================================================================
+   Roots map v2: Holo-sized text in every theme, frame grows with content
+   (JS layoutRootMap pushes nodes apart and sets the frame height).
+   ====================================================================== */
+.rnode:not(.center), .rnode.center { max-width: none; }
+.rnode { font-size: 20px; padding: 8px 14px; }
+.rnode .rn-gl, .rnode:not(.center) .rn-pair { font-size: 14px; margin-top: 3px; max-width: 12em; margin-left: auto; margin-right: auto; }
+.rnode.center { padding: 14px 24px; }
+.rnode.center .rn-de { font-size: 34px; }
+.rnode.center .rn-ru, .rnode.center .rn-pair { font-size: 15px; max-width: 16em; margin-left: auto; margin-right: auto; }
+/* Holo is the reference look: its wide display face already reads big at 17px */
+[data-theme="holo"] .rnode { font-size: 17px; padding: 7px 12px; }
+[data-theme="holo"] .rnode .rn-gl, [data-theme="holo"] .rnode:not(.center) .rn-pair { font-size: 13px; }
+[data-theme="holo"] .rnode.center .rn-de { font-size: 32px; }
+/* Autobahn's condensed face needs more size for the same visual weight */
+[data-theme="autobahn"] .rnode { font-size: 23px; }
+[data-theme="autobahn"] .rnode .rn-gl, [data-theme="autobahn"] .rnode:not(.center) .rn-pair { font-size: 15px; }
+[data-theme="autobahn"] .rnode.center .rn-de { font-size: 38px; }
+[data-theme="autobahn"] .rnode.center .rn-ru { font-size: 16px; }
+@media (max-width: 860px) {
+  .rmap { height: 420px; }
+  .rnode { font-size: 16px; padding: 6px 9px; }
+  .rnode .rn-gl, .rnode:not(.center) .rn-pair { font-size: 13px; max-width: 10.5em; }
+  .rnode.center { padding: 10px 14px; }
+  .rnode.center .rn-de { font-size: 25px; }
+  .rnode.center .rn-ru, .rnode.center .rn-pair { font-size: 13.5px; max-width: 12em; }
+  [data-theme="holo"] .rnode { font-size: 14.5px; padding: 6px 9px; }
+  [data-theme="holo"] .rnode .rn-gl, [data-theme="holo"] .rnode:not(.center) .rn-pair { font-size: 12.5px; }
+  [data-theme="holo"] .rnode.center .rn-de { font-size: 23px; }
+  [data-theme="autobahn"] .rnode { font-size: 19px; }
+  [data-theme="autobahn"] .rnode .rn-gl, [data-theme="autobahn"] .rnode:not(.center) .rn-pair { font-size: 14px; }
+  [data-theme="autobahn"] .rnode.center .rn-de { font-size: 28px; }
+  [data-theme="autobahn"] .rnode.center .rn-ru { font-size: 14.5px; }
+}
+/* Nordlicht: darker nodes on a darker map for more contrast against the light text */
+[data-theme="nord"] .rmap { background: #161a21; border-color: #2c3442; }
+[data-theme="nord"] .rnode { background: #0f1217; border-color: #3a4556; }
+[data-theme="nord"] .rnode.center, [data-theme="nord"] .rnode.center.active { background: #0c1a17; }
+[data-theme="nord"] .rnode.active { background: #102420; }
+[data-theme="nord"] :is(.rnode .rn-gl, .rnode .rn-pair, .rnode.center .rn-ru) { color: #d3dae5; }
+[data-theme="nord"] .rmap-lines line { stroke: #4a5568; }
+
+/* Eyebrows / labels wrap between whole parts (see segmentLabels in app.js) */
+.eb-seg { display: inline-block; max-width: 100%; }
+@media (max-width: 640px) {
+  .eyebrow { letter-spacing: 0.12em; line-height: 1.7; }
+  .page-head .eyebrow { font-size: 11px; }
+}
+/* Holo: taller node frames (more air above/below) to match the other themes */
+[data-theme="holo"] .rnode { padding: 11px 14px; }
+[data-theme="holo"] .rnode .rn-gl, [data-theme="holo"] .rnode:not(.center) .rn-pair { margin-top: 5px; }
+[data-theme="holo"] .rnode.center { padding: 18px 26px; }
+@media (max-width: 860px) {
+  [data-theme="holo"] .rnode { padding: 8px 10px; }
+  [data-theme="holo"] .rnode .rn-gl, [data-theme="holo"] .rnode:not(.center) .rn-pair { margin-top: 4px; }
+  [data-theme="holo"] .rnode.center { padding: 12px 15px; }
+}

@@ -2279,7 +2279,7 @@
         break;
       }
       case 'root-select': ui.rootSel[el.dataset.root] = id; drawRootDetail(el.dataset.root); break;
-      case 'root-toggle-all': ui.rootAll[id] = !ui.rootAll[id]; viewRoot(id); break;
+      case 'root-toggle-all': ui.rootAll[id] = !ui.rootAll[id]; viewRoot(id); fitRootMaps(); break;
       case 'root-add': {
         S.addItemToReview(id, now);
         S.logActivity('learned');
@@ -2454,30 +2454,109 @@
     var wrap = e.target.closest && e.target.closest('.mtag-wrap');
     if (wrap) { wrap.classList.remove('dismissed'); positionTooltip(wrap); }
   });
-  /* Root map: nodes sit on a circle by %, so long labels on narrow screens can poke past the frame — nudge them back in. */
-  function fitRootMaps() {
-    document.querySelectorAll('.rmap').forEach(function (m) {
-      var mr = m.getBoundingClientRect(), pad = 6;
-      var c = m.querySelector('.rnode.center'), cr = c && c.getBoundingClientRect(), gap = 6;
-      m.querySelectorAll('.rnode').forEach(function (n) {
-        n.style.marginLeft = ''; n.style.marginTop = '';
-        var r = n.getBoundingClientRect(), shift = 0;
-        if (r.width > mr.width - 2 * pad) return;
-        if (r.left < mr.left + pad) shift = mr.left + pad - r.left;
-        else if (r.right > mr.right - pad) shift = mr.right - pad - r.right;
-        if (shift) n.style.marginLeft = Math.round(shift) + 'px';
-        // Long glosses make the centre node tall/wide: push a neighbour that touches it outward
-        // (sideways if it still fits inside the map, otherwise up/down).
-        if (!cr || n === c) return;
-        var L = r.left + shift, R = r.right + shift;
-        if (R <= cr.left - gap || L >= cr.right + gap || r.bottom <= cr.top - gap || r.top >= cr.bottom + gap) return;
-        var right = (L + R) / 2 >= (cr.left + cr.right) / 2, below = (r.top + r.bottom) / 2 >= (cr.top + cr.bottom) / 2;
-        var dx = right ? cr.right + gap - L : cr.left - gap - R, dy = below ? cr.bottom + gap - r.top : cr.top - gap - r.bottom;
-        var fitsX = L + dx >= mr.left + pad && R + dx <= mr.right - pad, fitsY = r.top + dy >= mr.top + pad && r.bottom + dy <= mr.bottom - pad;
-        if (fitsX && (!fitsY || Math.abs(dx) <= Math.abs(dy))) n.style.marginLeft = Math.round(shift + dx) + 'px';
-        else if (fitsY) n.style.marginTop = Math.round(dy) + 'px';
+  /* Root map layout. Nodes start on a circle (their original % position is kept in data-px/py), then:
+     1. each node is clamped inside the frame horizontally;
+     2. overlapping nodes are pushed apart (the centre never moves), mostly up/down, sideways when there is room;
+     3. the frame grows taller when the nodes need more height (big text, long glosses, phones);
+     4. the connector lines are redrawn to the final node centres. */
+  function layoutRootMap(m) {
+    var nodes = Array.prototype.slice.call(m.querySelectorAll('.rnode'));
+    if (!nodes.length || !m.offsetWidth) return;
+    m.style.height = '';
+    var W = m.clientWidth, H0 = m.clientHeight, pad = 8, gap = 8;
+    var boxes = nodes.map(function (n) {
+      if (!n.dataset.px) { n.dataset.px = parseFloat(n.style.left) || 50; n.dataset.py = parseFloat(n.style.top) || 50; }
+      n.style.left = n.dataset.px + '%'; n.style.top = n.dataset.py + '%'; n.style.marginLeft = ''; n.style.marginTop = '';
+      return { n: n, c: n.classList.contains('center'), x: n.dataset.px / 100 * W, y: n.dataset.py / 100 * H0, w: n.offsetWidth, h: n.offsetHeight };
+    });
+    function clampX(b) { var lo = pad + b.w / 2, hi = W - pad - b.w / 2; b.x = lo > hi ? W / 2 : Math.min(hi, Math.max(lo, b.x)); }
+    boxes.forEach(clampX);
+    var centre = boxes.filter(function (b) { return b.c; })[0];
+    for (var it = 0; it < 120; it++) {
+      var moved = false;
+      for (var i = 0; i < boxes.length; i++) for (var j = i + 1; j < boxes.length; j++) {
+        var a = boxes[i], b = boxes[j];
+        var ox = (a.w + b.w) / 2 + gap - Math.abs(a.x - b.x), oy = (a.h + b.h) / 2 + gap - Math.abs(a.y - b.y);
+        if (ox <= 0.5 || oy <= 0.5) continue;
+        moved = true;
+        var wa = a.c ? 0 : b.c ? 1 : 0.5, wb = 1 - wa;
+        // Direction: away from each other; ties are broken by which side of the centre a node sits on.
+        var ref = centre ? centre.y : H0 / 2;
+        var sy = a.y < b.y ? -1 : a.y > b.y ? 1 : (b.y >= ref ? -1 : 1);
+        var aBefore = a.x, bBefore = b.x;
+        if (oy > ox * 1.6) {
+          var sx = a.x <= b.x ? -1 : 1;
+          a.x += sx * ox * wa; b.x -= sx * ox * wb; clampX(a); clampX(b);
+          if (Math.abs(a.x - aBefore) + Math.abs(b.x - bBefore) >= ox - 0.5) continue;
+          a.x = aBefore; b.x = bBefore;   // no room sideways: fall back to vertical
+        }
+        a.y += sy * oy * wa; b.y -= sy * oy * wb;
+      }
+      if (!moved) break;
+    }
+    var top = Infinity, bot = -Infinity;
+    boxes.forEach(function (b) { top = Math.min(top, b.y - b.h / 2); bot = Math.max(bot, b.y + b.h / 2); });
+    var shift = top < pad ? pad - top : 0, H = Math.max(H0, bot + shift + pad);
+    if (H > H0 + 0.5) m.style.height = Math.ceil(H) + 'px';
+    boxes.forEach(function (b) {
+      b.y += shift;
+      b.n.style.left = (b.x / W * 100).toFixed(3) + '%';
+      b.n.style.top = (b.y / H * 100).toFixed(3) + '%';
+    });
+    var others = boxes.filter(function (b) { return !b.c; });
+    if (centre) m.querySelectorAll('.rmap-lines line').forEach(function (l, k) {
+      var o = others[k]; if (!o) return;
+      l.setAttribute('x1', (centre.x / W * 100).toFixed(3)); l.setAttribute('y1', (centre.y / H * 100).toFixed(3));
+      l.setAttribute('x2', (o.x / W * 100).toFixed(3)); l.setAttribute('y2', (o.y / H * 100).toFixed(3));
+    });
+  }
+  function fitRootMaps() { document.querySelectorAll('.rmap').forEach(layoutRootMap); }
+
+  /* Eyebrows / labels like "PROFESSIONAL · BUREAUCRACY & ADMINISTRATION · PUBLIC OFFICES": when they do not fit,
+     they wrap between whole parts (the "·" stays at the end of the line), never inside a part. */
+  function segmentLabels(root) {
+    (root || document).querySelectorAll('.eyebrow:not([data-seg]), .label:not([data-seg]), .section-title:not([data-seg]), .mono-muted:not([data-seg])').forEach(function (el) {
+      el.setAttribute('data-seg', '');
+      if (el.textContent.indexOf('·') < 0) return;
+      var segs = [[]];
+      Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+        if (n.nodeType !== 3) { segs[segs.length - 1].push(n); return; }
+        n.textContent.split(/\s*·\s*/).forEach(function (p, i) {
+          if (i > 0) segs.push([]);
+          if (p) segs[segs.length - 1].push(document.createTextNode(p));
+        });
+      });
+      segs = segs.filter(function (s) { return s.length; });
+      // A bare number ("01", "05") never sits alone on a line: glue it to the next part.
+      for (var g = 0; g < segs.length - 1; g++) {
+        var s0 = segs[g];
+        if (s0.length === 1 && s0[0].nodeType === 3 && /^\s*\d{1,3}\s*$/.test(s0[0].textContent)) {
+          s0[0].textContent = s0[0].textContent.trim() + ' · ';
+          segs[g + 1] = s0.concat(segs[g + 1]); segs.splice(g, 1); g--;
+        }
+      }
+      if (segs.length < 2) {
+        if (segs.length === 1) { el.textContent = ''; segs[0].forEach(function (x) { el.appendChild(x); }); }
+        return;
+      }
+      el.textContent = '';
+      segs.forEach(function (s, i) {
+        var sp = document.createElement('span');
+        sp.className = 'eb-seg';
+        s.forEach(function (x) { sp.appendChild(x); });
+        if (i < segs.length - 1) sp.appendChild(document.createTextNode(' ·'));
+        el.appendChild(sp);
+        if (i < segs.length - 1) el.appendChild(document.createTextNode(' '));
       });
     });
+  }
+  if (window.MutationObserver) {
+    var segQueued = false;
+    new MutationObserver(function () {
+      if (segQueued) return;
+      segQueued = true;
+      requestAnimationFrame(function () { segQueued = false; segmentLabels(document.body); });
+    }).observe(document.body, { childList: true, subtree: true });
   }
   window.addEventListener('resize', function () {
     document.querySelectorAll('.mtag-wrap.open').forEach(positionTooltip);
