@@ -1795,3 +1795,6 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 /* Brand mark (eye): never shrinks in a tight header; thicker line at small sizes (18px on phones) */
 .brand svg { flex: none; }
 @media (max-width: 860px) { .brand .brand-mark { stroke-width: 1.8; } }
+/* Brand mark: a soft glow in its own colour (subtle; weaker on light themes) */
+.brand svg { filter: drop-shadow(0 0 3px color-mix(in srgb, currentColor 55%, transparent)); }
+:is([data-theme="light"], [data-theme="autobahn"], [data-theme="swiss"]) .brand svg { filter: drop-shadow(0 0 2px color-mix(in srgb, currentColor 35%, transparent)); }

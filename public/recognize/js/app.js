@@ -199,6 +199,33 @@
     }
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', t.bar);
+    themeFavicon(t);
+  }
+  /* Tab icon in the active theme's colours: plate = the theme's top bar, eye = the header logo colour.
+     The SVG icon is swapped directly; the PNG fallback is redrawn from it on a canvas.
+     (The installed home-screen icon comes from the manifest and stays Orbit.) */
+  function themeFavicon(t) {
+    try {
+      var mark = document.querySelector('.brand svg');
+      var ink = mark ? getComputedStyle(mark).color : '#8ccbff';
+      var eye = 'M1 12C4.5 8 8 6.5 12 6.5s7.5 1.5 11 5.5c-3.5 4-7 5.5-11 5.5S4.5 16 1 12Z';
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="' + t.bar + '"/>' +
+        '<g transform="translate(8 8) scale(2)" fill="none" stroke="' + ink + '" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+        '<defs><clipPath id="c"><path d="' + eye + '"/></clipPath></defs><path d="' + eye + '"/>' +
+        '<circle cx="17" cy="12" r="2.8" fill="' + ink + '" stroke="none" clip-path="url(#c)"/></g></svg>';
+      var url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      var svgLink = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+      if (svgLink) svgLink.href = url;
+      var pngLink = document.querySelector('link[rel="icon"][type="image/png"]');
+      if (!pngLink) return;
+      var img = new Image();
+      img.onload = function () {
+        var c = document.createElement('canvas'); c.width = c.height = 64;
+        c.getContext('2d').drawImage(img, 0, 0, 64, 64);
+        try { pngLink.href = c.toDataURL('image/png'); } catch (e) {}
+      };
+      img.src = url;
+    } catch (e) {}
   }
   function themeRowsHTML() {
     var cur = themeOf(S.settings.theme);
