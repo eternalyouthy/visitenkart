@@ -196,6 +196,8 @@
       root.setAttribute('data-theme', t.id);
       void root.offsetWidth;
       setTimeout(function () { root.classList.remove('theme-switching'); }, 50);
+      // each theme has its own fonts: re-fit labels and one-line texts for the new metrics
+      requestAnimationFrame(function () { fitEyebrows(); });
     }
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', t.bar);
@@ -2638,7 +2640,77 @@
       el.style.paddingLeft = ''; el.style.textIndent = '';
       markJoint();
     });
+    fitOneLine();
   }
+  /* Short texts (titles, tile headings, buttons, answer options, tabs, labels) that wrap only because a
+     little is missing: when the last word drops to a second line but the whole text needs at most ~30%
+     more room, the font steps down just enough to keep it on one line. Really long texts still wrap.
+     Big headwords (.hw) also shrink so their longest word is never broken mid-word ("Sprechstu|nde").
+     Reads and writes are batched (one layout per phase), so it stays cheap on long lists. */
+  var FIT_SEL = '.page-head h1, .about-title, .tile h4, .tile-source, .btn, .opt, .seg-tab, .lang-subnav-item, .section-title, .box-head .label, ' +
+    '.start-link .nm, .pro-jump-item .name, .side-link .nm, .side-group-head .nm, .rate, .sheet-title, .mean-en, .pair-de, .drill .hint';
+  function fitOneLine(root) {
+    var scope = root || document;
+    var hws = Array.prototype.slice.call(scope.querySelectorAll('.hw'));
+    var els = Array.prototype.slice.call(scope.querySelectorAll(FIT_SEL)).filter(function (el) { return !el.closest('.rnode, .eyebrow, .crumbs'); });
+    var all = els.concat(hws);
+    // 1. reset earlier fits
+    all.forEach(function (el) { if (el.hasAttribute('data-fit')) { el.style.fontSize = ''; el.removeAttribute('data-fit'); } });
+    // 2. read: lines, room, font size
+    var info = [];
+    all.forEach(function (el) {
+      if (!el.offsetWidth || !el.firstChild) return;
+      var cs = getComputedStyle(el);
+      var fs = parseFloat(cs.fontSize), lh = parseFloat(cs.lineHeight) || fs * 1.25;
+      var room = el.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
+      var h = el.clientHeight - (parseFloat(cs.paddingTop) || 0) - (parseFloat(cs.paddingBottom) || 0);
+      var lines = Math.round(h / lh);
+      var hw = el.classList.contains('hw');
+      if (room > 0 && (lines === 2 || (hw && lines >= 2))) info.push({ el: el, fs: fs, room: room, hw: hw, ws: el.style.whiteSpace });
+    });
+    if (!info.length) return;
+    // 3. measure the one-line width (and, for headwords, the longest single word)
+    info.forEach(function (o) { o.el.style.whiteSpace = 'nowrap'; });
+    info.forEach(function (o) {
+      var r = document.createRange(); r.selectNodeContents(o.el);
+      o.w = r.getBoundingClientRect().width;
+      if (o.hw) {
+        // widest single word, measured on the text nodes themselves
+        o.word = 0;
+        var tw = document.createTreeWalker(o.el, NodeFilter.SHOW_TEXT), n;
+        while ((n = tw.nextNode())) {
+          var re = /\S+/g, m;
+          while ((m = re.exec(n.nodeValue))) {
+            var wr = document.createRange(); wr.setStart(n, m.index); wr.setEnd(n, m.index + m[0].length);
+            o.word = Math.max(o.word, wr.getBoundingClientRect().width);
+          }
+        }
+      }
+    });
+    // 4. write the fitted sizes
+    var groups = [];
+    info.forEach(function (o) {
+      o.el.style.whiteSpace = o.ws;
+      var minFs = Math.max(o.fs * 0.74, Math.min(o.fs, 10));
+      var want = 0;
+      if (o.w > o.room && o.w <= o.room * 1.32) want = o.fs * (o.room / o.w) * 0.97;        // one line (small margin for rounding)
+      else if (o.hw && o.word > o.room) want = Math.max(o.fs * (o.room / o.word) * 0.97, 20); // whole longest word
+      if (want && want < o.fs) {
+        if (!o.hw && want < minFs) return;
+        o.el.style.fontSize = want.toFixed(2) + 'px'; o.el.setAttribute('data-fit', '');
+        if (o.el.matches(FIT_GROUP)) groups.push({ el: o.el, size: want, ratio: want / o.fs });
+      }
+    });
+    // 5. answer options, tabs and button rows stay one size: siblings take the smallest fitted size
+    groups.forEach(function (g) {
+      Array.prototype.forEach.call(g.el.parentElement.children, function (sib) {
+        if (sib === g.el || !sib.matches(FIT_GROUP)) return;
+        var cur = parseFloat(sib.style.fontSize) || parseFloat(getComputedStyle(sib).fontSize);
+        if (g.size < cur) { sib.style.fontSize = g.size.toFixed(2) + 'px'; sib.setAttribute('data-fit', ''); }
+      });
+    });
+  }
+  var FIT_GROUP = '.opt, .seg-tab, .rate, .lang-subnav-item, .btn';
   if (window.MutationObserver) {
     var segQueued = false;
     new MutationObserver(function () {

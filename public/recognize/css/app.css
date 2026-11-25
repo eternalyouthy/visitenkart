@@ -1807,3 +1807,67 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 [data-theme="orbit"] .rnode:hover { border-color: color-mix(in srgb, var(--ice) 60%, #070d18); }
 /* Brand mark sits on the capitals' optical centre (flex centring left it ~1px low) */
 .brand svg { transform: translateY(-1px); }
+
+/* ======================================================================
+   Phone & tablet audit (2026-11-25)
+   ====================================================================== */
+/* iPhone / iPad home-screen app (black-translucent status bar, viewport-fit=cover):
+   keep the top bar below the status bar / Dynamic Island and content clear of the notch in landscape.
+   In a normal browser tab every inset is 0, so nothing changes there. */
+:root { --safe-t: env(safe-area-inset-top, 0px); --safe-l: env(safe-area-inset-left, 0px); --safe-r: env(safe-area-inset-right, 0px); }
+.topbar { height: calc(var(--topbar-h) + var(--safe-t)); padding-top: var(--safe-t); }
+.sidebar { top: calc(var(--topbar-h) + var(--safe-t)); height: calc(100vh - var(--topbar-h) - var(--safe-t)); }
+.side-toggle { top: calc(var(--topbar-h) + var(--safe-t) + 4px); }
+@media (max-width: 860px) {
+  .topbar { padding-left: max(4px, var(--safe-l)); padding-right: max(8px, var(--safe-r)); }
+  .main { padding-left: max(16px, var(--safe-l)); padding-right: max(16px, var(--safe-r)); }
+  .bottomnav { padding-left: var(--safe-l); padding-right: var(--safe-r); }
+  .sidebar, .sidebar.hidden, body.side-collapsed .sidebar { top: 0; height: 100%; padding-left: var(--safe-l); padding-bottom: calc(32px + var(--safe-b)); }
+  .lang-pop { top: calc(var(--topbar-h) + var(--safe-t) + 4px); right: max(12px, var(--safe-r)); }
+  .mtag-tip, .mtag-tip.below { top: calc(var(--topbar-h) + var(--safe-t) + 12px); }
+  .actionbar { margin-left: calc(-1 * max(16px, var(--safe-l))); margin-right: calc(-1 * max(16px, var(--safe-r))); padding-left: max(16px, var(--safe-l)); padding-right: max(16px, var(--safe-r)); }
+  /* Bottom sheet: the visible height (Safari's toolbars excluded), not the large viewport */
+  .sheet { max-height: 80vh; max-height: 80dvh; padding-left: max(28px, var(--safe-l)); padding-right: max(28px, var(--safe-r)); }
+}
+/* Scrolling inside a sheet, the menu drawer or a popup no longer drags the page behind it (iOS scroll chaining) */
+.sheet, .sidebar, .lang-pop, .mtag-tip { overscroll-behavior: contain; }
+
+/* iOS Safari zooms the whole page when a field under 16px gets focus (and stays zoomed).
+   Touch screens get 16px fields; desktop keeps the 13px mono look. */
+@media (hover: none) and (pointer: coarse) {
+  select, input[type="number"], input[type="text"], input[type="search"], input:not([type]), textarea { font-size: 16px; }
+  select { letter-spacing: 0; }
+}
+
+/* User page head "All languages · non-destructive merge": wraps between its parts instead of running off a 320px screen */
+@media (max-width: 640px) {
+  .box-head > .mono-muted { white-space: normal; }
+}
+
+/* Holo Glass: iOS ignores background-attachment: fixed and stretches the glow over the whole page height.
+   A fixed layer behind the app keeps the glow pinned to the screen on every device. */
+[data-theme="holo"] body { background: var(--bg); }
+[data-theme="holo"] body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 85% 10%, rgba(126, 87, 255, 0.35), transparent 70%),
+    radial-gradient(50% 45% at 10% 90%, rgba(0, 214, 201, 0.25), transparent 70%),
+    radial-gradient(40% 40% at 60% 60%, rgba(255, 92, 170, 0.16), transparent 70%);
+}
+
+/* Tablets in portrait (641–860 px: phone layout on a big screen): headwords at tablet size, not phone size */
+@media (min-width: 641px) and (max-width: 860px) {
+  .hw { font-size: 64px; }
+  .hw.long { font-size: 50px; }
+  .hw.xlong { font-size: 36px; }
+  .hw.chunk { font-size: 34px; }
+}
+/* Small tablets in landscape / large tablets in portrait (861–1100 px): a narrower sidebar leaves the page room */
+@media (min-width: 861px) and (max-width: 1100px) {
+  :root { --sidebar-w: 264px; }
+  .main { padding: 36px 28px 96px; }
+}
+/* Touch screens have no hover: arrows that slide on hover must not stay shifted after a tap */
+@media (hover: none) {
+  .start-link:hover .go, .pro-jump-item:hover .arr { transform: none; }
+}
