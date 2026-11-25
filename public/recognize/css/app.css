@@ -750,7 +750,8 @@ input[type="number"] { width: 90px; }
   .pro-jump { grid-template-columns: 1fr; }
   .menu-btn, .mobile-only { display: inline-grid; }
   .menu-btn { align-self: center; }
-  .menu-btn.hidden { visibility: hidden; }
+  .menu-btn.hidden { display: none; }
+  .menu-btn.hidden + .brand-group { padding-left: 10px; }
   .brand-group { flex: 1; }
   .brand { font-size: 13px; letter-spacing: 0.28em; }
   .brand svg { width: 18px; height: 18px; }
