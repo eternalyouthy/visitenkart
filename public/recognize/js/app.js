@@ -762,24 +762,8 @@
     }).join('') + '</nav>';
   }
 
-  /* Start page (logo): "Before You Start" article on the left, language pair + where-to-go panel on the right.
+  /* Start page (logo): "Before You Start" article on the left, language pair + notes/updates panel on the right.
    * On phones the panel comes first (it is what you need when you tap the logo), the article follows. */
-  function startSections() {
-    var due = dueKeys('all', 'both').length;
-    var nWords = GT.items.filter(function (it) { return GT.inTab(it, 'words'); }).length;
-    var nPro = GT.items.filter(function (it) { return GT.inTab(it, 'it'); }).length;
-    var nExp = GT.items.filter(function (it) { return GT.inTab(it, 'expressions') || GT.inTab(it, 'chunks') || GT.inTab(it, 'literature'); }).length;
-    var nGr = Object.keys(GT.grammar || {}).length, nRoots = Object.keys(GT.roots || {}).length;
-    return [
-      { href: '#/words', name: 'Words', ct: nWords ? nWords + ' cards' : '', desc: 'Everyday vocabulary by topic, from core B1 lists to B2 discussion themes.' },
-      { href: '#/roots', name: 'Roots', ct: nRoots ? nRoots + ' families' : '', desc: 'Learn one root, prefix or suffix and recognise a whole family of words.' },
-      { href: '#/grammar', name: 'Grammar', ct: nGr ? nGr + ' lessons' : '', desc: 'Short lessons with tables, typical mistakes and drills you can send to Review.' },
-      { href: '#/professional', name: 'Professional', ct: nPro ? nPro + ' cards' : '', desc: 'Start with universal workplace skills, then specialise: IT, bureaucracy, law, hospitality, finance, healthcare and operations (up to C2).' },
-      { href: '#/expressions', name: 'Expressions', ct: nExp ? nExp + ' phrases' : '', desc: 'Chunks, idioms, everyday phrases and classic literary lines with breakdowns.' },
-      { href: '#/practice', name: 'Practice', ct: '', desc: 'Drills on recognition, recall and word building, plus a role-play prompt for an AI chat.' },
-      { href: '#/review', name: 'Review', ct: due ? due + ' due' : '', due: !!due, desc: 'Spaced repetition: come back to the cards you added when they are due.' }
-    ];
-  }
   function startNotes(lang) {
     var n = (GT.START_NOTES || {})[lang];
     if (!n) return '';
@@ -799,6 +783,11 @@
       }).join('') + '</div>';
     return box(n.goodTitle, n.good) + news;
   }
+  /* Author links: under the article on desktop, after Latest updates on phones (CSS shows one copy). */
+  function authorLinks(cls) {
+    return '<div class="bys-author ' + cls + '" lang="en"><a class="btn" href="https://etrnl.world/" target="_blank" rel="noopener">About the author ↗</a>' +
+      '<a class="btn" href="https://github.com/eternalyouthy/etrnl.recognize" target="_blank" rel="noopener">Project on GitHub ↗</a></div>';
+  }
   function viewStart(requested) {
     var languages = GT.KNOW_ORDER.filter(function (lang) { return GT.ABOUT[lang]; });
     var lang = languages.indexOf(requested) >= 0 ? requested : GT.know;
@@ -816,12 +805,7 @@
       '<span class="start-arrow" aria-hidden="true">→</span>' +
       '<label class="lang-field"><span class="label">I learn</span>' + langSelect('learn') + '</label></div>' +
       '<p class="start-hint">Meanings and explanations follow <b>I know</b>. You can change this any time with the globe button.</p></div>' +
-      startNotes(lang) +
-      '<div class="start-box"><span class="label ice">Where to go</span><ul class="start-list">' + startSections().map(function (s) {
-        return '<li><a class="start-link" href="' + s.href + '"><span class="start-link-top"><span class="nm">' + esc(s.name) + '</span>' +
-          (s.ct ? '<span class="ct' + (s.due ? ' due' : '') + '">' + esc(s.ct) + '</span>' : '') + '<span class="go" aria-hidden="true">→</span></span>' +
-          '<span class="desc">' + esc(s.desc) + '</span></a></li>';
-      }).join('') + '</ul></div></aside>';
+      startNotes(lang) + authorLinks('start-author') + '</aside>';
     /* Phones: the article sits above the panel, collapsed to its first paragraph (Read More / Show Less),
      * Desktop ignores all of this via CSS. */
     var expanded = !!ui.bysExpanded;
@@ -837,8 +821,7 @@
       '<h1 class="about-title">' + esc(about.title) + '</h1><div class="about-body" id="bysBody">' + about.body + '</div>' +
       '<div class="bys-controls" lang="en"><button class="bys-btn bys-toggle" type="button" data-act="bys-toggle" aria-controls="bysBody" aria-expanded="' + expanded + '">' +
       (expanded ? 'Show Less ↑' : 'Read More ↓') + '</button></div>' +
-      '<div class="bys-author" lang="en"><a class="btn" href="https://etrnl.world/" target="_blank" rel="noopener">About the author ↗</a>' +
-      '<a class="btn" href="https://github.com/eternalyouthy/etrnl.recognize" target="_blank" rel="noopener">Project on GitHub ↗</a></div></article>';
+      authorLinks('article-author') + '</article>';
     page('<div class="start-grid">' + panel + article + '</div>', 'start');
     if (restoreFocus) $('.about-languages [aria-current="page"]', mainEl).focus({ preventScroll: true });
   }
