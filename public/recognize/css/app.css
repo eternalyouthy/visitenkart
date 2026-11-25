@@ -1787,13 +1787,15 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 @media (max-width: 640px) {
   .crumbs .eyebrow, .page-head .eyebrow { display: block; line-height: 1.6; }
 }
-/* Eyebrow that wraps to two lines: block, so fitEyebrows can hang the second line under the last part of the first */
+/* Eyebrow that wraps to two lines: block; line 2 is right-aligned under the rule (eb-r), or centred when it is wide (eb-c) */
 .eyebrow.eb-2l { display: block; text-align: left; }
+.eyebrow.eb-2l.eb-r { text-align-last: right; }
+.eyebrow.eb-2l.eb-c { text-align-last: center; }
 /* Two-line eyebrow: no "·" at the end of line 1; a thin rule under the last part of line 1 separates the lines */
 .eb-seg.eb-joint { position: relative; }
 .eb-seg.eb-joint > .eb-dot { visibility: hidden; }
 .eb-seg.eb-joint::after {
-  content: ""; position: absolute; left: 0; width: var(--eb-rule-w, calc(100% - 0.2em)); bottom: 0; height: 1px;
+  content: ""; position: absolute; left: var(--eb-rule-l, 0); width: var(--eb-rule-w, calc(100% - 0.2em)); bottom: 0; height: 1px;
   background: currentColor; opacity: 0.22; pointer-events: none;
 }
 /* Brand mark (eye): never shrinks in a tight header; thicker line at small sizes (18px on phones) */

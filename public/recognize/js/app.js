@@ -2595,8 +2595,8 @@
   function fitEyebrows() {
     document.querySelectorAll('.crumbs .eyebrow, .page-head .eyebrow').forEach(function (el) {
       el.style.letterSpacing = ''; el.style.fontSize = ''; el.style.paddingLeft = ''; el.style.textIndent = '';
-      el.classList.remove('eb-2l');
-      el.querySelectorAll('.eb-joint').forEach(function (sp) { sp.classList.remove('eb-joint'); sp.style.removeProperty('--eb-rule-w'); });
+      el.classList.remove('eb-2l', 'eb-r', 'eb-c');
+      el.querySelectorAll('.eb-joint').forEach(function (sp) { sp.classList.remove('eb-joint'); sp.style.removeProperty('--eb-rule-w'); sp.style.removeProperty('--eb-rule-l'); });
       if (!el.offsetWidth) return;
       function lines() {
         var lh = parseFloat(getComputedStyle(el).lineHeight) || 18;
@@ -2607,43 +2607,40 @@
         if (steps[i][0]) el.style.fontSize = steps[i][0];
         el.style.letterSpacing = steps[i][1];
       }
-      // Two lines: indent the second line so it starts right under the last part of the first line
-      // (hanging indent: padding-left + negative text-indent). Falls back to a smaller indent, or none, if it would not fit.
+      // Two lines: line 1 stays as it is; the last part of line 1 loses its trailing "·" and gets a thin rule
+      // under it that runs to the right edge, and line 2 is right-aligned so it ends where the rule ends.
+      // If line 2 is so wide that, right-aligned, it would reach under an earlier part of line 1, it is centred
+      // instead and the rule spans the whole width. The "·" is only made invisible (it keeps its width), so
+      // line 2 cannot jump back up onto line 1; alignment never changes where the lines break.
       el.style.paddingLeft = ''; el.style.textIndent = '';
       if (lines() !== 2) return;
       el.classList.add('eb-2l');
       var segs = Array.prototype.slice.call(el.querySelectorAll('.eb-seg'));
       if (segs.length < 2) return;
-      function firstLineSegs() {
-        var top0 = segs[0].getBoundingClientRect().top;
-        return segs.filter(function (sp) { return Math.abs(sp.getBoundingClientRect().top - top0) < 3; });
+      var top0 = segs[0].getBoundingClientRect().top;
+      var fl = segs.filter(function (sp) { return Math.abs(sp.getBoundingClientRect().top - top0) < 3; });
+      var l2 = segs.filter(function (sp) { return fl.indexOf(sp) < 0; });
+      var last = fl[fl.length - 1];
+      if (!last || !l2.length) return;
+      last.classList.add('eb-joint');
+      el.classList.add('eb-r');
+      var trail = parseFloat(getComputedStyle(el).letterSpacing) || 0;   // letter-spacing after the last letter
+      var lastLeft = last.getBoundingClientRect().left;
+      var l2Left = Math.min.apply(null, l2.map(function (sp) { return sp.getBoundingClientRect().left; }));
+      var ruleLeft = lastLeft;
+      if (l2Left < lastLeft - 1) {
+        el.classList.remove('eb-r'); el.classList.add('eb-c');
+        ruleLeft = segs[0].getBoundingClientRect().left;
       }
-      // The last part on line 1 loses its trailing "·" and gets a thin rule under it instead (CSS .eb-joint).
-      // The rule runs to the end of whichever is longer: that part or line 2.
-      // The "·" is only made invisible (it keeps its width), so line 2 cannot jump back up onto line 1.
-      function markJoint() {
-        var fl = firstLineSegs(), last = fl[fl.length - 1];
-        if (!last || fl.length >= segs.length || lines() !== 2) return;
-        last.classList.add('eb-joint');
-        var trail = parseFloat(getComputedStyle(el).letterSpacing) || 0;   // letter-spacing after the last letter
-        function textEnd(sp) { var d = sp.querySelector('.eb-dot'); return (d ? d.getBoundingClientRect().left : sp.getBoundingClientRect().right) - trail; }
-        var left = last.getBoundingClientRect().left, right = textEnd(last);
-        segs.forEach(function (sp) { if (fl.indexOf(sp) < 0) right = Math.max(right, textEnd(sp)); });
-        last.style.setProperty('--eb-rule-w', Math.max(0, Math.round(right - left)) + 'px');
-        // Safety net: a divider only ever sits between two lines.
-        if (lines() !== 2) { last.classList.remove('eb-joint'); last.style.removeProperty('--eb-rule-w'); }
+      var cs = getComputedStyle(el);
+      var right = el.getBoundingClientRect().right - (parseFloat(cs.paddingRight) || 0) - (parseFloat(cs.borderRightWidth) || 0) - trail;
+      last.style.setProperty('--eb-rule-l', Math.round(ruleLeft - lastLeft) + 'px');
+      last.style.setProperty('--eb-rule-w', Math.max(0, Math.round(right - ruleLeft)) + 'px');
+      // Safety net: a divider only ever sits between two lines.
+      if (lines() !== 2) {
+        el.classList.remove('eb-r', 'eb-c'); last.classList.remove('eb-joint');
+        last.style.removeProperty('--eb-rule-w'); last.style.removeProperty('--eb-rule-l');
       }
-      var elLeft = el.getBoundingClientRect().left;
-      var offsets = firstLineSegs().slice(1).reverse().map(function (sp) { return Math.round(sp.getBoundingClientRect().left - elLeft); });
-      for (var k = 0; k < offsets.length; k++) {
-        if (offsets[k] <= 0) continue;
-        el.style.paddingLeft = offsets[k] + 'px'; el.style.textIndent = -offsets[k] + 'px';
-        var lh = parseFloat(getComputedStyle(el).lineHeight) || 18;
-        var whole = segs.every(function (sp) { return sp.getBoundingClientRect().height < lh * 1.5; });
-        if (lines() === 2 && whole) { markJoint(); return; }
-      }
-      el.style.paddingLeft = ''; el.style.textIndent = '';
-      markJoint();
     });
     fitOneLine();
   }
