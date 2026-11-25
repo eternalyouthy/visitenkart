@@ -1328,6 +1328,25 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 
 /* Copy/paste progress, including long keys on narrow phones. */
 .progress-key { min-width: 0; overflow-wrap: anywhere; scroll-margin-top: calc(var(--topbar-h) + 16px); }
+
+/* One rainbow "snake" lap around a box we just jumped to (Settings → Go). */
+@property --ring-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.anchor-ring { position: relative; }
+.anchor-ring::after {
+  content: ''; position: absolute; inset: -2px; padding: 3px; pointer-events: none;
+  background: conic-gradient(from var(--ring-a), transparent 0 55%, #ff5f6d 65%, #ffc371 73%, #7cf29c 81%, #5ad1ff 89%, #a78bfa 96%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  filter: drop-shadow(0 0 8px rgba(124, 200, 255, 0.8));
+  animation: anchor-ring 1.6s cubic-bezier(0.45, 0, 0.25, 1) forwards;
+}
+@keyframes anchor-ring {
+  0% { --ring-a: 0deg; opacity: 0; }
+  12% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { --ring-a: 360deg; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .anchor-ring::after { animation: none; display: none; } }
 .progress-key .box-head { flex-wrap: wrap; }
 .progress-key-field { margin-top: 20px; min-width: 0; }
 .progress-key-field[hidden] { display: none; }
