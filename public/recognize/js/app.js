@@ -1508,9 +1508,19 @@
         (!pair.prod ? '<button class="btn small" data-act="item-add-dir" data-id="' + esc(id) + '" data-dir="prod">+ Add</button>' : '') + '</div>' +
         '</div><button class="btn" data-act="item-know" data-id="' + esc(id) + '">Mark known</button><button class="btn ghost" data-act="item-reset" data-id="' + esc(id) + '">Remove from deck</button></div>';
     }
+    // Prev / Next through the same topic list the counter shows, so the next card is one tap away.
+    var prev = idx > 0 ? list[idx - 1] : null, next = idx >= 0 && idx < list.length - 1 ? list[idx + 1] : null;
+    var href = function (x) { return '#/item/' + encodeURIComponent(x.id); };
+    if (prev || next) actions += '<nav class="item-pager" aria-label="Cards in this topic">' +
+      (prev ? '<a class="btn ghost" href="' + href(prev) + '" rel="prev">← Prev</a>' : '<span></span>') +
+      (next ? '<a class="btn outline" href="' + href(next) + '" rel="next">Next →</a>' : '<span></span>') + '</nav>';
     var h = crumbsHTML(itemCrumb(it, (idx + 1) + ' / ' + list.length), pct);
     h += renderItem(it, actions);
     page(h);
+    ui.keyHandler = function (e) {
+      var to = e.key === 'ArrowRight' ? next : e.key === 'ArrowLeft' ? prev : null;
+      if (to) { e.preventDefault(); location.hash = href(to); }
+    };
   }
 
   /** Which learn-language pack owns this item id (loaded packs first, then cross-language links), or null. */
