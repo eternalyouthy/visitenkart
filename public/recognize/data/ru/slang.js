@@ -119,7 +119,13 @@
       ['Noun «рофл», verb «рофлить», adj. «рофляный».', 'Nomen «рофл», Verb «рофлить», Adj. «рофляный».'],
       ['English “ROFL” (rolling on the floor laughing), borrowed by Russian streamers and gamers in the 2010s.', 'Englisch „ROFL“ (rolling on the floor laughing), von russischen Streamern und Gamern der 2010er übernommen.'],
       ['Teens, Twitch, chats.', 'Teenager, Twitch, Chats.']),
-
+    S('blin', 'slang-react', 'Блин!', 'Damn!, Shit! (literally “pancake”)', 'Mist!, Scheiße! (wörtlich „Pfannkuchen“)', [
+      ['[[Блин]], я ключи забыл!', 'Damn, I forgot my keys!', 'Mist, ich hab die Schlüssel vergessen!'],
+      ['Ну [[блин]], опять дождь.', 'Oh shit, rain again.', 'Mann, schon wieder Regen.'],
+      ['На Масленицу пекут [[блины]].', 'At Maslenitsa people bake pancakes. (literal)', 'Zur Masleniza backt man Pfannkuchen. (wörtlich)']],
+      ['Literally «блин» is a pancake. When the context isn’t about food, it is the clean, non-mat version of «пиздец» / «блядь»: same feeling as “damn!”, “shit!”, “fuck!”, but fine with parents, at work and on TV.', 'Wörtlich ist «блин» ein Pfannkuchen. Wenn es nicht ums Essen geht, ist es die saubere, nicht-vulgäre Version von «пиздец» / «блядь»: dasselbe Gefühl wie „Scheiße!“, „Mist!“, „verdammt!“, aber okay vor Eltern, bei der Arbeit und im Fernsehen.'],
+      ['A polite stand-in for the mat word «блядь»: same first sounds, harmless meaning.', 'Ein höflicher Ersatz für das Mat-Wort «блядь»: gleicher Anfang, harmlose Bedeutung.'],
+      ['Everywhere, all ages.', 'Überall, alle Altersgruppen.']),
     // ---- People & Attitude ----
     S('krash', 'slang-people', 'краш', 'crush (person you like)', 'Schwarm, Crush', [
       ['Он мой [[краш]] с первого курса.', 'He’s been my crush since first year.', 'Er ist mein Schwarm seit dem ersten Semester.'],
@@ -237,13 +243,6 @@
       ['Everywhere.', 'Überall.']),
 
     // ---- Swearing & Insults (18+) — Russian mat ----
-    S('blin', 'slang-rude', 'Блин!', 'Damn!, Darn! (mild)', 'Mist!, Verdammt! (mild)', [
-      ['[[Блин]], я ключи забыл!', 'Damn, I forgot my keys!', 'Mist, ich hab die Schlüssel vergessen!'],
-      ['Ну [[блин]], опять дождь.', 'Oh darn, rain again.', 'Mann, schon wieder Regen.'],
-      ['Да [[блин]], отстань!', 'Ugh, leave me alone!', 'Mensch, lass mich in Ruhe!']],
-      ['Not mat, a soft euphemism; fine even with parents. It literally means “pancake”.', 'Kein Mat, sondern weicher Ersatz; auch vor Eltern okay. Wörtlich „Pfannkuchen“.'],
-      ['A polite replacement for the mat word «блядь» — same first sounds, harmless meaning.', 'Ein höflicher Ersatz für das Mat-Wort «блядь» — gleicher Anfang, harmlose Bedeutung.'],
-      ['Everywhere, all ages.', 'Überall, alle Altersgruppen.']),
     S('pizdets', 'slang-rude', 'Пизд+ец!', 'Fucked up!, Total disaster!', 'Scheiße!, Totale Katastrophe!', [
       ['Машина сломалась. [[Пиздец]]!', 'The car broke down. Fuck!', 'Das Auto ist kaputt. Scheiße!'],
       ['Там полный [[пиздец]].', 'It’s a complete shitshow there.', 'Da ist das totale Chaos.'],
