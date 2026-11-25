@@ -197,9 +197,19 @@
       list.push(u);
       sec.cats.forEach(function (c) {
         parentOf[c.id] = sec.id;
-        var oc = old[c.id] || {};
-        list.push(Object.assign({}, oc, extra[c.id] || {}, { id: c.id, name: c.name, desc: c.desc, parent: sec.id, group: sec.name, hidden: false,
-          scenario: (extra[c.id] && extra[c.id].scenario) || oc.scenario || u.scenario }));
+        var oc = old[c.id] || {}, xc = extra[c.id] || {};
+        var catObj = Object.assign({}, oc, xc, { id: c.id, name: c.name, desc: c.desc, parent: sec.id, group: sec.name, hidden: false,
+          scenario: xc.scenario || oc.scenario || u.scenario });
+        if (!xc.scenario && u.i18n) {
+          var mergedI18n = {};
+          Object.keys(u.i18n).forEach(function (l) {
+            mergedI18n[l] = Object.assign({}, u.i18n[l], oc.i18n && oc.i18n[l], xc.i18n && xc.i18n[l]);
+          });
+          if (oc.i18n) Object.keys(oc.i18n).forEach(function (l) { if (!mergedI18n[l]) mergedI18n[l] = Object.assign({}, oc.i18n[l], xc.i18n && xc.i18n[l]); });
+          if (xc.i18n) Object.keys(xc.i18n).forEach(function (l) { if (!mergedI18n[l]) mergedI18n[l] = Object.assign({}, xc.i18n[l]); });
+          catObj.i18n = mergedI18n;
+        }
+        list.push(catObj);
       });
     });
     var map = p.expCats || {}, seen = {};

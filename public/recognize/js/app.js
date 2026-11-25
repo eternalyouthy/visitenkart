@@ -288,7 +288,7 @@
     if (!basicCount) return '';
     var on = !!S.settings.hideBasics;
     var countTxt = on ? basicCount + ' hidden' : String(basicCount);
-    return '<label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--muted);user-select:none;white-space:nowrap' + (extraStyle ? ';' + extraStyle : '') + '">' +
+    return '<label class="basics-toggle" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--muted);user-select:none;white-space:nowrap' + (extraStyle ? ';' + extraStyle : '') + '">' +
       '<input type="checkbox" data-act="toggle-basics"' + (on ? ' checked' : '') + ' style="width:15px;height:15px;margin:0;accent-color:var(--ice);cursor:pointer">' +
       '<span>Hide basics <span class="mono-muted">(' + countTxt + ')</span></span></label>';
   }
@@ -1110,7 +1110,7 @@
     var segs, dl = '';
     if (it.parts && it.parts.length) {
       segs = it.parts.map(function (x) { return '<span class="seg ' + segClass(x[0]) + '">' + esc(x[0].replace(/^-|-$/g, '')) + '</span>'; }).join('');
-      if (it.parts.some(function (x) { return glossText(x[1]); })) dl = '<dl class="parts">' + it.parts.map(function (x) { return '<dt class="' + segClass(x[0]) + '">' + esc(x[0]) + '</dt><dd>' + esc(glossText(x[1])) + '</dd>'; }).join('') + '</dl>';
+      if (it.parts.some(function (x) { return glossText(x[1]); })) dl = '<dl class="parts">' + it.parts.map(function (x) { return '<dt class="' + segClass(x[0]) + '">' + esc(x[0]) + '</dt><dd lang="' + GT.know + '">' + esc(glossText(x[1])) + '</dd>'; }).join('') + '</dl>';
     } else if (it.morph && it.morph.indexOf('-') >= 0) {
       segs = it.morph.split('-').map(function (x) { return '<span class="seg root">' + esc(x) + '</span>'; }).join('');
     } else return '';
@@ -1125,7 +1125,7 @@
   function ruLinkBox(it) {
     if (GT.know !== 'ru') return '';
     if (it.ru_link && it.ru_link.text) {
-      return '<div class="box navy rulink"><div class="box-head"><span class="label">RU link</span><span class="tag ' + (it.ru_link.type === 'false_friend' ? 'gold' : 'outline') + '">' + (RU_LABEL[it.ru_link.type] || esc(it.ru_link.type)) + '</span></div><p>' + esc(it.ru_link.text) + '</p></div>';
+      return '<div class="box navy rulink"><div class="box-head"><span class="label">RU link</span><span class="tag ' + (it.ru_link.type === 'false_friend' ? 'gold' : 'outline') + '">' + (RU_LABEL[it.ru_link.type] || esc(it.ru_link.type)) + '</span></div><p lang="ru">' + esc(it.ru_link.text) + '</p></div>';
     }
     if (!GT.feature('ruLink')) return '';
     return '<div class="box dashed rulink empty"><span class="label">RU link</span><p>No well-established connection. Left empty on purpose.</p></div>';
@@ -1223,8 +1223,8 @@
       if (it.where) main += '<hr class="rule"><span class="label">Where you hear it</span><p class="note" style="margin-top:14px" lang="' + GT.lxLang(it, 'where') + '">' + esc(lxText(it, 'where')) + '</p>';
       if (lit) side += literatureSide(it);
       else {
-        if (it.register === 'vulgar') side += '<div class="box box-warn"><span class="label">Careful</span><p class="note">' + esc(GT.hint('register.vulgarWarn')) + '</p></div>';
-        side += '<div class="box"><span class="label">Register</span><p class="note muted">' + esc(GT.hint('register.' + (it.register || 'neutral')) || GT.hint('register.neutral')) + '</p></div>';
+        if (it.register === 'vulgar') side += '<div class="box box-warn"><span class="label">Careful</span><p class="note" lang="' + GT.know + '">' + esc(GT.hint('register.vulgarWarn')) + '</p></div>';
+        side += '<div class="box"><span class="label">Register</span><p class="note muted" lang="' + GT.know + '">' + esc(GT.hint('register.' + (it.register || 'neutral')) || GT.hint('register.neutral')) + '</p></div>';
         var tags = (it.topics || []).map(function (id) { var t = GT.anyTopic(id); return t ? t.topic.name : null; }).filter(Boolean);
         side += linksBox(it) + levelBox(it);
         if (tags.length) side += '<div class="box"><span class="label">Useful for</span><div class="fam">' + tags.map(function (t) { return '<span class="chip small">' + esc(t) + '</span>'; }).join('') + '</div></div>';
@@ -1233,7 +1233,7 @@
       main += wordTags(it);
       main += '<div class="hw-row"><h1 class="hw' + hwSize(it.t) + '" lang="' + GT.learn + '">' + esc(it.t) + '</h1>' + speakBtn(plainHead(it), true) + whyBtn(it) + '</div>';
       main += meanings(it) + parallelLine(it);
-      if (it.usage && it.usage.says) main += '<div class="usage"><span class="tag ' + esc(it.usage.says) + '">' + (USAGE_LABEL[it.usage.says] || esc(it.usage.says)) + '</span><p>' + esc(lxText(it.usage, 'note')) + '</p></div>';
+      if (it.usage && it.usage.says) main += '<div class="usage"><span class="tag ' + esc(it.usage.says) + '">' + (USAGE_LABEL[it.usage.says] || esc(it.usage.says)) + '</span><p lang="' + GT.lxLang(it.usage, 'note') + '">' + esc(lxText(it.usage, 'note')) + '</p></div>';
       if (it.examples && it.examples.length) main += '<hr class="rule"><span class="label">Examples</span><div style="margin-top:18px">' + examplesHTML(it.examples) + '</div>';
       if (it.note) main += '<hr class="rule"><span class="label">Note</span><p class="note" style="margin-top:14px" lang="' + GT.lxLang(it, 'note') + '">' + esc(lxText(it, 'note')) + fbTag(GT.lxLang(it, 'note')) + '</p>';
       side += structureBox(it) + familyBox(it) + ruLinkBox(it) + linksBox(it) + levelBox(it);
@@ -1623,7 +1623,7 @@
     var h = '<header class="page-head"><span class="eyebrow">05 · User · ' + esc(filterLabel(filter)) + '</span><h1>Review</h1><p class="lead">Active recall with FSRS-5. Recognition (' + LS() + ' → ' + KS() + ') and Production (' + KS() + ' / cloze → ' + LS() + ') are tracked separately.</p></header>' + reminders();
     h += '<div class="seg-tabs" role="tablist" aria-label="Review direction">' +
       [['both', 'Both (' + nBoth + ')'], ['rec', 'Recognition (' + nRec + ')'], ['prod', 'Production (' + nProd + ')']].map(function (o) {
-        return '<button class="seg-tab' + (dir === o[0] ? ' active' : '') + '" type="button" data-act="rev-dir" data-v="' + o[0] + '" data-filter="' + esc(filter) + '">' + o[1] + '</button>';
+        return '<button class="seg-tab' + (dir === o[0] ? ' active' : '') + '" type="button" role="tab" aria-selected="' + (dir === o[0]) + '" data-act="rev-dir" data-v="' + o[0] + '" data-filter="' + esc(filter) + '">' + o[1] + '</button>';
       }).join('') + '</div>';
     h += '<div class="box" style="padding:40px 32px"><span class="label">Due today · ' + ({ both: 'Recognition + Production', rec: 'Recognition (' + LS() + ' → ' + KS() + ')', prod: 'Production (' + KS() + ' → ' + LS() + ')' }[dir]) + '</span>' +
       '<p style="font-family:var(--font-display);font-size:88px;line-height:1;margin:14px 0 6px;color:var(--ice)">' + keys.length + '</p>';
@@ -1638,7 +1638,7 @@
     }
     h += '</div>';
     var s = S.settings;
-    h += '<p class="mono-muted" style="margin-top:18px">Production mode: ' + ({ mix: 'meaning + cloze', meaning: 'meaning → German', cloze: 'cloze only' }[s.reviewModes]) + ' · Typing: ' + (s.typing ? 'on' : 'off') + ' · <button class="link-btn" type="button" data-act="open-settings">Change</button></p>';
+    h += '<p class="mono-muted" style="margin-top:18px">Production mode: ' + ({ mix: 'meaning + cloze', meaning: 'meaning → ' + langMeta().name, cloze: 'cloze only' }[s.reviewModes]) + ' · Typing: ' + (s.typing ? 'on' : 'off') + ' · <button class="link-btn" type="button" data-act="open-settings">Change</button></p>';
     page(h, 'narrow');
   }
   function viewReviewSession(filter) {
@@ -1816,7 +1816,7 @@
     var a = ' data-id="' + esc(d.id) + '" data-ctx="' + ctx + '"';
     var h = (ctx === 'page' ? '<div class="drill" data-drill="' + esc(d.id) + '">' : '<div>') + '<p class="drill-kind">' + kind + '</p>';
     if (d.kind !== 'reorder') h += (d.hint ? '<p class="hint" lang="' + GT.lxLang(d, 'hint') + '">' + esc(lxText(d, 'hint')) + '</p>' : '') + '<p class="drill-q" lang="' + GT.learn + '">' + drillQ(d) + '</p>';
-    else if (d.q) h += '<p class="drill-q">' + esc(lxText(d, 'q')) + '</p>';
+    else if (d.q) h += '<p class="drill-q" lang="' + GT.lxLang(d, 'q') + '">' + esc(lxText(d, 'q')) + '</p>';
     if (d.kind === 'choice') {
       var opts = drillOptions(d), optLang = GT.lxLang(d, 'options') === GT.know && d.i18n && d.i18n[GT.know] && d.i18n[GT.know].options ? GT.know : GT.learn;
       h += '<div class="options">' + opts.map(function (o, i) {
@@ -1883,7 +1883,7 @@
     var pg = GT.grammar[id];
     // Crumb shows the short lesson name (before ":"); the full title is the heading right below.
     var h = crumbsHTML('<a href="#/grammar">Grammar</a> · ' + esc(String(t.name).split(':')[0].trim()));
-    h += '<header class="page-head"><h1>' + esc(pg ? lxText(pg, 'title') : t.name) + '</h1>' + (pg && pg.summary ? '<p class="lead">' + esc(lxText(pg, 'summary')) + '</p>' : '') + '</header>';
+    h += '<header class="page-head"><h1>' + esc(pg ? lxText(pg, 'title') : t.name) + '</h1>' + (pg && pg.summary ? '<p class="lead" lang="' + GT.lxLang(pg, 'summary') + '">' + esc(lxText(pg, 'summary')) + '</p>' : '') + '</header>';
     if (!pg) return page(h + '<div class="empty-state"><h3>Coming soon</h3><p>This grammar page arrives in a later batch.</p></div>', 'mid');
     var exLang = GT.lxLang(pg, 'explanation');
     h += (exLang !== GT.know ? '<p class="mono-muted" style="margin-bottom:12px">' + fbTag(exLang) + ' ' + esc(GT.hint('missing')) + '</p>' : '') + '<div class="prose" lang="' + exLang + '">' + lxText(pg, 'explanation') + '</div>';
@@ -1891,7 +1891,7 @@
     if (pg.examples && pg.examples.length) h += '<h3 class="section-title">Examples</h3>' + examplesHTML(pg.examples);
     if (pg.pitfalls && pg.pitfalls.length) {
       h += '<h3 class="section-title">' + (GT.know === 'ru' ? 'Pitfalls for Russian speakers' : 'Pitfalls') + '</h3><ul class="pitfalls">' + pg.pitfalls.map(function (p) {
-        return '<li class="pitfall"><h5>' + esc(lxText(p, 'title')) + '</h5><p>' + lxText(p, 'html') + '</p></li>';
+        return '<li class="pitfall"><h5 lang="' + GT.lxLang(p, 'title') + '">' + esc(lxText(p, 'title')) + '</h5><p lang="' + GT.lxLang(p, 'html') + '">' + lxText(p, 'html') + '</p></li>';
       }).join('') + '</ul>';
     }
     var notIn = pg.drills.filter(function (d) { return !S.card(d.id); }).length;
@@ -2083,26 +2083,26 @@
 
   function settingsBodyHTML() {
     var s = S.settings, d = S.data;
-    function sel(key, opts) {
-      return '<select data-set="' + key + '">' + opts.map(function (o) { return '<option value="' + o[0] + '"' + (String(s[key]) === String(o[0]) ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>';
+    function sel(key, opts, lbl) {
+      return '<select data-set="' + key + '" aria-label="' + esc(lbl || key) + '">' + opts.map(function (o) { return '<option value="' + o[0] + '"' + (String(s[key]) === String(o[0]) ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>';
     }
-    function sw(key) { return '<label class="switch"><input type="checkbox" data-set="' + key + '"' + (s[key] ? ' checked' : '') + '><span></span></label>'; }
+    function sw(key, lbl) { return '<label class="switch"><input type="checkbox" data-set="' + key + '" aria-label="' + esc(lbl || key) + '"' + (s[key] ? ' checked' : '') + '><span></span></label>'; }
     function row(label, help, control) { return '<div class="setting"><div><div class="lbl">' + label + '</div>' + (help ? '<div class="help">' + help + '</div>' : '') + '</div>' + control + '</div>'; }
     var h = '<h3 class="section-title" style="margin-top:0">Theme</h3><div class="box" id="themeBox">' + themeRowsHTML() + '</div>';
     h += '<h3 class="section-title">Learning</h3><div class="box">' +
-      row('New cards per session', 'How many cards "Learn new" shows.', '<input type="number" min="1" max="50" data-set="newPerSession" value="' + s.newPerSession + '">') +
-      row('Review direction', 'Review recognition (' + LS() + ' → ' + KS() + '), production (' + KS() + ' → ' + LS() + '), or both.', sel('reviewDirection', [['both', 'Both'], ['rec', 'Recognition only'], ['prod', 'Production only']])) +
-      row('Production mode', 'How production cards are asked.', sel('reviewModes', [['mix', 'Mixed'], ['meaning', 'Meaning → ' + langMeta().name + ''], ['cloze', 'Cloze sentences']])) +
-      row('Typing mode', 'Type your ' + langMeta().name + ' answer on production cards before revealing it.', sw('typing')) +
-      row('WHY? with medium confidence', 'Also show etymology notes marked as less certain.', sw('showMediumWhy')) +
-      row('Hide basic words', 'Hide elementary and obvious words in Words and Professional topics.', sw('hideBasics')) +
-      row('Target retention', 'Higher means more reviews but fewer forgotten cards.', sel('retention', [['0.85', '85%'], ['0.9', '90% (recommended)'], ['0.95', '95%']])) +
+      row('New cards per session', 'How many cards "Learn new" shows.', '<input type="number" min="1" max="50" data-set="newPerSession" aria-label="New cards per session" value="' + s.newPerSession + '">') +
+      row('Review direction', 'Review recognition (' + LS() + ' → ' + KS() + '), production (' + KS() + ' → ' + LS() + '), or both.', sel('reviewDirection', [['both', 'Both'], ['rec', 'Recognition only'], ['prod', 'Production only']], 'Review direction')) +
+      row('Production mode', 'How production cards are asked.', sel('reviewModes', [['mix', 'Mixed'], ['meaning', 'Meaning → ' + langMeta().name + ''], ['cloze', 'Cloze sentences']], 'Production mode')) +
+      row('Typing mode', 'Type your ' + langMeta().name + ' answer on production cards before revealing it.', sw('typing', 'Typing mode')) +
+      row('WHY? with medium confidence', 'Also show etymology notes marked as less certain.', sw('showMediumWhy', 'WHY? with medium confidence')) +
+      row('Hide basic words', 'Hide elementary and obvious words in Words and Professional topics.', sw('hideBasics', 'Hide basic words')) +
+      row('Target retention', 'Higher means more reviews but fewer forgotten cards.', sel('retention', [['0.85', '85%'], ['0.9', '90% (recommended)'], ['0.95', '95%']], 'Target retention')) +
       '</div>';
     h += '<h3 class="section-title">Look & sound</h3><div class="box">' +
-      row('Hide sidebar Practice box', 'Hide the "Practice now" card in the sidebar.', sw('hideSidePractice')) +
+      row('Hide sidebar Practice box', 'Hide the "Practice now" card in the sidebar.', sw('hideSidePractice', 'Hide sidebar Practice box')) +
       row('' + langMeta().name + ' voice', '<span id="voiceInfo">' + (tts.ok ? 'Loading voices…' : 'Speech is not supported in this browser.') + '</span>',
-        tts.ok ? '<select id="voiceSelect" class="voice-select" data-set="' + voiceKey() + '"></select>' : '<span class="mono-muted">—</span>') +
-      row('Speech rate', 'Applied to all pronunciation buttons.', '<div class="setting-ctl">' + sel('speechRate', [['0.75', 'Slow'], ['0.9', 'Normal'], ['1', 'Fast']]) + '<button class="btn small" type="button" data-act="test-voice">Test</button></div>') +
+        tts.ok ? '<select id="voiceSelect" class="voice-select" data-set="' + voiceKey() + '" aria-label="' + esc(langMeta().name) + ' voice"></select>' : '<span class="mono-muted">—</span>') +
+      row('Speech rate', 'Applied to all pronunciation buttons.', '<div class="setting-ctl">' + sel('speechRate', [['0.75', 'Slow'], ['0.9', 'Normal'], ['1', 'Fast']], 'Speech rate') + '<button class="btn small" type="button" data-act="test-voice">Test</button></div>') +
       '</div>';
     var files = GT.packFiles(GT.learn), errs = GT.pack.loadErrors;
     h += '<h3 class="section-title">Data · ' + esc(langMeta().name) + '</h3><div class="box"><p class="note muted">' + plural(files.length - errs.length, 'data file') + ' loaded · ' + GT.items.length + ' words & chunks · ' + Object.keys(GT.grammar).length + ' grammar pages · ' + Object.keys(GT.roots).length + ' word families · ' + (GT.links ? GT.links.length : 0) + ' cross-language links · schema v' + d.version + '.</p>' +
@@ -2115,6 +2115,7 @@
     return h;
   }
   function openSettings() {
+    if (!sheetEl.classList.contains('open')) sheetOpener = document.activeElement;
     sheetEl.classList.add('sheet-wide');
     sheetEl.dataset.mode = 'settings';
     sheetEl.setAttribute('aria-label', 'Settings');
@@ -2463,9 +2464,13 @@
         if (replaceMode && !confirm('Replace your current progress with this file? Existing cards not in the file will be removed.')) return;
         try {
           var msg = S.importJSON(reader.result, { replace: replaceMode });
+          // The file may carry another language pair: follow it like a switch in the language picker.
+          var impKnow = S.settings.knowLang, impLearn = S.settings.learnLang;
+          if (!GT.LANGS[impLearn]) impLearn = GT.learn;
+          if (GT.LANGS[impKnow] && impKnow !== impLearn) GT.know = impKnow;
           applyTheme();
-          route();
-          GT.toast(msg);
+          (impLearn !== GT.learn ? switchLearn(impLearn) : Promise.resolve(route()))
+            .then(function () { GT.toast(msg); });
         } catch (err) { alert('Import failed: ' + err.message); }
       };
       reader.readAsText(el.files[0]);
@@ -2748,6 +2753,7 @@
       return;
     }
     if (sheetEl.classList.contains('open')) { if (e.key === 'Escape') closeSheet(); return; }
+    if (e.key === 'Escape' && document.querySelector('.tab-drop.open')) { closeNavMenus(); return; }
     if (e.key === 'Escape' && sideEl.classList.contains('open')) { closeSidebar(); return; }
     if (ui.keyHandler && !(e.target && /INPUT|TEXTAREA|SELECT|BUTTON/.test(e.target.tagName) && e.key !== 'Escape')) ui.keyHandler(e);
   });
@@ -2763,16 +2769,22 @@
   document.body.appendChild(sheetScrim);
   document.body.appendChild(sheetEl);
   sheetScrim.addEventListener('click', closeSheet);
+  var sheetOpener = null;
   function closeSheet() {
     var wasSettings = sheetEl.dataset.mode === 'settings';
+    var hadFocus = sheetEl.contains(document.activeElement);
     if (wasSettings) stopSpeak();
-    if (sheetEl.contains(document.activeElement)) document.activeElement.blur();
+    if (hadFocus) document.activeElement.blur();
     sheetEl.classList.remove('open', 'sheet-wide');
     sheetEl.dataset.mode = '';
     sheetScrim.classList.remove('open');
     if (wasSettings && location.hash.replace(/^#\/?/, '').split('/')[0] !== 'settings') {
       $('#settingsBtn').classList.remove('active');
     }
+    if (hadFocus && sheetOpener && sheetOpener.isConnected && typeof sheetOpener.focus === 'function') {
+      sheetOpener.focus();
+    }
+    sheetOpener = null;
   }
 
   /** The WHY? note to show, or null. Only confidence 'high' unless the setting allows 'medium'. */
@@ -2802,6 +2814,7 @@
     } else {
       srcHtml = '<p class="mono-muted" style="margin-top:18px">Confidence: ' + esc(w.confidence || 'high') + '</p>';
     }
+    if (!sheetEl.classList.contains('open')) sheetOpener = document.activeElement;
     sheetEl.classList.remove('sheet-wide');
     sheetEl.dataset.mode = 'why';
     var whyHead = { ru: 'Почему так', en: 'Why it is so', de: 'Warum ist das so' }[GT.know] || 'Why?';
@@ -2900,15 +2913,15 @@
   function rootsSubTabs(active) {
     var loadedRoots = Object.keys(GT.roots).length;
     var loadedPfx = Object.keys(GT.prefixes).length;
-    return '<div class="seg-tabs" role="tablist" aria-label="Roots sections">' +
+    return '<nav class="seg-tabs" aria-label="Roots sections">' +
       [
         ['families', 'Word Families (' + loadedRoots + ')', '#/roots'],
         ['prefixes', GT.cfg('prefixTab', 'Prefixes') + ' (' + loadedPfx + ')', '#/roots/prefixes'],
         ['suffixes', 'Suffixes (' + GT.suffixOrder.length + ')', '#/roots/suffixes'],
         ['classical', 'Classical Roots (' + GT.classicalOrder.length + ')', '#/roots/classical']
       ].map(function (o) {
-        return '<a class="seg-tab' + (active === o[0] ? ' active' : '') + '" href="' + o[2] + '">' + esc(o[1]) + '</a>';
-      }).join('') + '</div>';
+        return '<a class="seg-tab' + (active === o[0] ? ' active' : '') + '" href="' + o[2] + '"' + (active === o[0] ? ' aria-current="page"' : '') + '>' + esc(o[1]) + '</a>';
+      }).join('') + '</nav>';
   }
   function affixTagText(a) {
     if (a.sep) return a.sep;
@@ -2965,7 +2978,7 @@
     var gTag = gen === 'die' ? '<span class="tag die">die</span>' : gen === 'das' ? '<span class="tag das">das</span>' : gen === 'der' ? '<span class="tag der">der</span>' : gen && gen !== '—' ? '<span class="tag outline">' + esc(gen) + '</span>' : '';
     var h = crumbsHTML('<a href="#/roots">Roots</a> · <a href="' + backHref + '">' + esc(backLabel) + '</a> · ' + esc(a.label));
     h += '<div class="word-tags">' + gTag + (a.sep ? '<span class="tag outline">' + esc(a.sep) + '</span>' : '') + '<span class="tag dim">' + esc(kindLabel) + '</span>' + (a.posChange ? '<span class="mono-muted" lang="' + GT.lxLang(a, 'posChange') + '">' + esc(lxText(a, 'posChange')) + '</span>' : '') + '</div>' +
-      '<div class="hw-row"><h1 class="hw">' + esc(a.label) + '</h1></div><p class="mean-en" lang="' + GT.glLang(a) + '">' + esc(GT.gl(a)) + fbTag(GT.glLang(a)) + '</p>';
+      '<div class="hw-row"><h1 class="hw" lang="' + GT.learn + '">' + esc(a.label) + '</h1></div><p class="mean-en" lang="' + GT.glLang(a) + '">' + esc(GT.gl(a)) + fbTag(GT.glLang(a)) + '</p>';
     if (a.examples && a.examples.length) h += '<h3 class="section-title">Examples</h3><div class="box"><div class="fam">' + a.examples.map(exChip).join('') + '</div></div>';
     var fields = [['Pattern', 'pattern'], ['Spelling & sound changes', 'spelling'], ['Exceptions', 'exceptions'], ['Limitations', 'limitations'], ['Productivity', 'productivity']];
     var rows = fields.filter(function (f) { return a[f[1]]; });
@@ -2985,7 +2998,7 @@
     if (!cl) return notFound();
     var h = crumbsHTML('<a href="#/roots">Roots</a> · <a href="#/roots/classical">Classical Roots</a> · ' + esc(cl.label));
     h += '<div class="word-tags"><span class="tag outline">' + esc(cl.origin) + '</span><span class="tag dim">historical element</span></div>' +
-      '<div class="hw-row"><h1 class="hw">' + esc(cl.label) + '</h1></div><p class="mean-en" lang="' + GT.glLang(cl) + '">' + esc(GT.gl(cl)) + '</p>';
+      '<div class="hw-row"><h1 class="hw" lang="' + GT.learn + '">' + esc(cl.label) + '</h1></div><p class="mean-en" lang="' + GT.glLang(cl) + '">' + esc(GT.gl(cl)) + '</p>';
     if (cl.examples && cl.examples.length) h += '<h3 class="section-title">Examples</h3><div class="box"><div class="fam">' + cl.examples.map(exChip).join('') + '</div></div>';
     h += '<h3 class="section-title">Historical evidence & limitations</h3><div class="box">' +
       '<div class="ref-field"><span class="label">Historical evidence</span><p class="note" lang="' + GT.lxLang(cl, 'history') + '">' + esc(lxText(cl, 'history')) + '</p></div>' +
@@ -2999,7 +3012,7 @@
   function PW() { return GT.cfg('prefixWord', 'Prefix'); }
   /** Short translation under a map node: the first sense of the gloss in the known language ("to come, to arrive (on foot)" → "to come"). */
   function nodeGloss(w) {
-    var g = String(GT.gl(w) || '').split(/[;,(]/)[0].trim();
+    var g = String(GT.gl(w) || '').replace(/^(?:\([^)]*\)\s*)+/, '').split(/[;,(]/)[0].trim();
     return g ? '<span class="rn-gl" lang="' + GT.glLang(w) + '">' + esc(g) + '</span>' : '';
   }
   function pfLabel(id) { var pf = GT.prefixes[id]; return pf ? pf.label : id + '-'; }
@@ -3125,7 +3138,7 @@
     }
     if (!pf.meanings) return viewAffixReference(pf, 'prefix', '#/roots/prefixes', 'Prefixes');
     var h = crumb + '<div class="word-tags">' + (pf.sep ? '<span class="tag outline">' + esc(pf.sep) + '</span>' : '') + (pf.stress ? '<span class="mono-muted" lang="' + GT.lxLang(pf, 'stress') + '">' + esc(lxText(pf, 'stress')) + '</span>' : '') + '</div>' +
-      '<div class="hw-row"><h1 class="hw">' + esc(pf.label) + '</h1></div><p class="mean-en" lang="' + GT.glLang(pf) + '">' + esc(GT.gl(pf)) + fbTag(GT.glLang(pf)) + '</p>';
+      '<div class="hw-row"><h1 class="hw" lang="' + GT.learn + '">' + esc(pf.label) + '</h1></div><p class="mean-en" lang="' + GT.glLang(pf) + '">' + esc(GT.gl(pf)) + fbTag(GT.glLang(pf)) + '</p>';
     h += '<h3 class="section-title">Meanings</h3><div class="pmeanings">' + pf.meanings.map(function (m, i) {
       var parPfx = GT.know === 'ru' ? m.ruPrefix : GT.know === 'de' ? m.dePrefix : '', showRuPfx = !!parPfx;
       return '<div class="box"><div class="box-head"><span class="label">' + pad2(i + 1) + '</span>' + (showRuPfx ? '<span class="tag outline" lang="' + GT.know + '">' + esc(parPfx) + '</span>' : '') + '</div>' +
@@ -3200,7 +3213,7 @@
   function modeTabsHTML(mode) {
     return '<div class="seg-tabs" role="tablist" aria-label="Drill direction">' +
       [['mix', 'Mixed'], ['ru2pfx', KS() + ' → ' + PW()], ['sent2mean', 'Sentence → ' + PW() + ' meaning'], ['cloze', 'Gap → ' + clozeVerbWord()]].map(function (o) {
-        return '<button class="seg-tab' + (mode === o[0] ? ' active' : '') + '" type="button" data-act="rd-mode" data-v="' + o[0] + '">' + o[1] + '</button>';
+        return '<button class="seg-tab' + (mode === o[0] ? ' active' : '') + '" type="button" role="tab" aria-selected="' + (mode === o[0]) + '" data-act="rd-mode" data-v="' + o[0] + '">' + o[1] + '</button>';
       }).join('') + '</div>';
   }
   function drawRootDrill() {
@@ -3548,13 +3561,13 @@
     return q;
   }
   /** Close meanings first: same root, then same topic, then same type/part of speech. */
-  function meaningDistractors(it, answer, n) {
+  function meaningDistractorItems(it, answer, n) {
     var seen = [answer], out = [];
     function take(list) {
       shuffle(list).forEach(function (w) {
         if (out.length >= n || !w || w.id === it.id) return;
         var m = meaningOf(w);
-        if (m && seen.indexOf(m) < 0) { seen.push(m); out.push(m); }
+        if (m && seen.indexOf(m) < 0) { seen.push(m); out.push(w); }
       });
     }
     if (it.rootId) take(rootWords(it.rootId).filter(function (w) { return w && posKey(w) === posKey(it); }));
@@ -3562,6 +3575,9 @@
     if (out.length < n) take(GT.items.filter(function (w) { return w.type === it.type && (!it.pos || posKey(w) === posKey(it)); }));
     if (out.length < n) take(GT.items);
     return out;
+  }
+  function meaningDistractors(it, answer, n) {
+    return meaningDistractorItems(it, answer, n).map(meaningOf);
   }
   function tokenize(s) { return plain(s).replace(/\s+/g, ' ').trim().split(' '); }
   function shuffledOrder(n) {
@@ -3592,6 +3608,7 @@
       id: 'd:' + it.id, entry: it, kind: 'duel', hints: 0, task: SH('duel'),
       context: ex.t.replace(/\[\[(.+?)\]\]/g, '________'), translation: trOf(ex), ex: ex,
       answer: head, options: shuffle(all.map(baseFormOf)), optLang: GT.learn,
+      allIds: all.map(function (w) { return w.id; }),
       explainList: all.map(function (w) { return [baseFormOf(w), meaningOf(w)]; })
     };
   }
@@ -3624,6 +3641,7 @@
         return {
           id: 'o:' + rA + ':' + odd.id, entry: null, kind: 'odd', hints: 0, task: SH('oddRoot'),
           answer: baseFormOf(odd), options: shuffle(three.concat([odd]).map(baseFormOf)), optLang: GT.learn,
+          oddMeta: { kind: 'root', rA: rA, rB: odd.rootId, trioIds: three.map(function (w) { return w.id; }), oddId: odd.id },
           explain: three.map(baseFormOf).join(', ') + ' → ' + rootName(GT.roots[rA]) + ' (' + GT.gl(GT.roots[rA]) + ').  ' + baseFormOf(odd) + ' → ' + rootName(rB) + ' (' + GT.gl(rB) + ').',
           seenIds: three.concat([odd]).map(function (w) { return w.id; })
         };
@@ -3643,6 +3661,7 @@
     return {
       id: 'o:' + tk + ':' + outsider.id, entry: null, kind: 'odd', hints: 0, task: SH('oddTopic'),
       answer: baseFormOf(outsider), options: shuffle(trio.concat([outsider]).map(baseFormOf)), optLang: GT.learn,
+      oddMeta: { kind: 'topic', tk: tk, tA: tA ? tA.name : tk, tB: tB ? tB.name : outsider.topic, trioIds: trio.map(function (w) { return w.id; }), oddId: outsider.id },
       explain: trio.map(baseFormOf).join(', ') + ' → ' + (tA ? tA.name : tk) + '.  ' + baseFormOf(outsider) + ' → ' + (tB ? tB.name : outsider.topic) + '.',
       seenIds: trio.concat([outsider]).map(function (w) { return w.id; })
     };
@@ -3664,9 +3683,13 @@
   }
   function makeBlitzQuestion(items) {
     var cards = shuffle(items).slice(0, 80).map(function (it) {
-      var truth = Math.random() < 0.5, shown = meaningOf(it);
-      if (!truth) { var d = meaningDistractors(it, shown, 1)[0]; if (d) shown = d; else truth = true; }
-      return { id: it.id, word: plainHead(it), shown: shown, real: meaningOf(it), truth: truth };
+      var truth = Math.random() < 0.5, shown = meaningOf(it), distId = null;
+      if (!truth) {
+        var dItem = meaningDistractorItems(it, shown, 1)[0];
+        if (dItem) { distId = dItem.id; shown = meaningOf(dItem); }
+        else truth = true;
+      }
+      return { id: it.id, word: plainHead(it), shown: shown, real: meaningOf(it), truth: truth, distId: distId };
     });
     return { id: 'blitz', entry: null, kind: 'blitz', hints: 0, task: SH('blitz'), cards: cards, k: 0, right: 0, wrongs: [], secs: 60, seenIds: [] };
   }
@@ -3677,6 +3700,7 @@
       var ex = a.exercise, opts = lxText(ex, 'options') || [];
       out.push({
         id: kind + ':' + a.id, entry: null, kind: 'affix', hints: 0,
+        affixRef: { kind: kind, id: a.id },
         badge: (kind === 'sf' ? 'Suffix · ' : 'Prefix · ') + a.label,
         prompt: lxText(ex, 'question'),
         answer: lxText(ex, 'answer'),
@@ -3698,6 +3722,7 @@
           var dist = shuffle(pf.meanings.filter(function (_, idx) { return idx !== pd.meaning; })).slice(0, 3).map(function (m) { return GT.gl(m); });
           out.push({
             id: 'pf:' + w.id + ':' + pd.ex, entry: w, kind: 'affix', hints: 0,
+            affixRef: { kind: 'pf', wid: w.id, pdEx: pd.ex, pdMeaning: pd.meaning },
             badge: 'Prefix · ' + pf.label + ' in ' + w.t,
             prompt: GT.hint('prefixQ', { P: pf.label }),
             contextDe: ex.t, translation: trOf(ex),
@@ -4436,6 +4461,7 @@
     } catch (e) {}
   }
   window.addEventListener('hashchange', function () {
+    if (autoRedirect && location.hash !== autoRedirect.toHash) autoRedirect = null;
     var st = history.state;
     if (st && st.learn && GT.LANGS[st.learn] && GT.LANGS[st.know] && st.know !== st.learn &&
         (st.learn !== GT.learn || st.know !== GT.know)) {
@@ -4463,6 +4489,120 @@
   /* ================= LANGUAGES: "I know" / "I learn" ================= */
   var ready = false;
   var sessions = {};   // learned language -> { hash, learn, rev, studio, rd, params }
+  var autoRedirect = null;   // tracks redirect when switching I learn away from a pack-unique route
+
+  function relocalizeStudioQuestion(q, isChecked) {
+    if (!q) return q;
+    if (q.entry && q.entry.type !== 'drill' && STUDIO_CLASSIC.indexOf(q.kind) >= 0) {
+      if (isChecked) return q;
+      var nq = makeStudioEntryQuestion(q.entry, q.kind);
+      nq.retry = q.retry; nq.hints = q.hints; nq.played = q.played;
+      return nq;
+    }
+    switch (q.kind) {
+      case 'builder':
+        q.task = SH('builder');
+        if (q.entry && q.entry.type === 'drill') {
+          var bpg = GT.grammar[q.entry.topic];
+          if (bpg) { q.badge = 'Grammar · ' + lxText(bpg, 'title'); q.linkLabel = 'Open ' + lxText(bpg, 'title'); }
+          q.translation = q.entry.q ? lxText(q.entry, 'q') : '';
+          q.explain = lxText(q.entry, 'explain') || '';
+        } else if (q.ex) {
+          q.translation = trOf(q.ex);
+        }
+        break;
+      case 'duel':
+        q.task = SH('duel');
+        if (q.ex) q.translation = trOf(q.ex);
+        if (q.allIds) q.explainList = q.allIds.map(function (id) { var w = GT.byId[id]; return w ? [baseFormOf(w), meaningOf(w)] : null; }).filter(Boolean);
+        break;
+      case 'gender':
+        q.task = SH(GT.learn === 'de' ? 'genderDe' : 'gender');
+        break;
+      case 'odd':
+        if (q.oddMeta) {
+          var om = q.oddMeta;
+          q.task = SH(om.kind === 'root' ? 'oddRoot' : 'oddTopic');
+          var trioW = om.trioIds.map(function (id) { return GT.byId[id]; }).filter(Boolean);
+          var oddW = GT.byId[om.oddId];
+          if (om.kind === 'root' && GT.roots[om.rA] && GT.roots[om.rB] && oddW) {
+            q.explain = trioW.map(baseFormOf).join(', ') + ' → ' + rootName(GT.roots[om.rA]) + ' (' + GT.gl(GT.roots[om.rA]) + ').  ' + baseFormOf(oddW) + ' → ' + rootName(GT.roots[om.rB]) + ' (' + GT.gl(GT.roots[om.rB]) + ').';
+          } else if (om.kind === 'topic' && oddW) {
+            q.explain = trioW.map(baseFormOf).join(', ') + ' → ' + om.tA + '.  ' + baseFormOf(oddW) + ' → ' + om.tB + '.';
+          }
+        }
+        break;
+      case 'match':
+        q.task = SH('match');
+        (q.pairs || []).forEach(function (p) { var it = GT.byId[p.id]; if (it) p.r = meaningOf(it); });
+        break;
+      case 'family':
+        q.task = SH('family');
+        if (q.rid && GT.roots[q.rid]) q.gloss = GT.gl(GT.roots[q.rid]);
+        break;
+      case 'blitz':
+        q.task = SH('blitz');
+        (q.cards || []).forEach(function (c) {
+          var it = GT.byId[c.id];
+          if (!it) return;
+          c.real = meaningOf(it);
+          if (c.truth) c.shown = c.real;
+          else if (c.distId && GT.byId[c.distId]) c.shown = meaningOf(GT.byId[c.distId]);
+        });
+        break;
+      case 'affix':
+        if (q.affixRef) {
+          var ref = q.affixRef;
+          if (ref.kind === 'pf') {
+            var w = GT.byId[ref.wid], pf = w && GT.prefixes[w.prefix];
+            var pdList = w && w.prefixDrill ? (Array.isArray(w.prefixDrill) ? w.prefixDrill : [w.prefixDrill]) : [];
+            var pd = pdList.filter(function (x) { return x.ex === ref.pdEx && x.meaning === ref.pdMeaning; })[0];
+            var aex = w && w.examples && w.examples[ref.pdEx], cm = pf && pf.meanings && pf.meanings[ref.pdMeaning];
+            if (w && pf && pd && aex && cm) {
+              q.prompt = GT.hint('prefixQ', { P: pf.label });
+              q.translation = trOf(aex);
+              q.explain = lxText(pd, 'explain');
+              if (!isChecked) {
+                var dist = shuffle(pf.meanings.filter(function (_, idx) { return idx !== ref.pdMeaning; })).slice(0, 3).map(function (m) { return GT.gl(m); });
+                q.answer = GT.gl(cm);
+                q.options = shuffle([q.answer].concat(dist));
+              }
+            }
+          } else {
+            var af = ref.kind === 'sf' ? GT.suffixes[ref.id] : GT.prefixes[ref.id];
+            if (af && af.exercise) {
+              var ax = af.exercise;
+              q.explain = lxText(ax, 'explain');
+              if (!isChecked) {
+                q.prompt = lxText(ax, 'question');
+                q.answer = lxText(ax, 'answer');
+                q.options = shuffle(lxText(ax, 'options') || []);
+              }
+            }
+          }
+        }
+        break;
+      case 'grammar':
+        if (q.entry) {
+          var gd = q.entry, pg = GT.grammar[gd.topic];
+          if (pg) { q.badge = 'Grammar · ' + lxText(pg, 'title'); q.linkLabel = 'Open ' + lxText(pg, 'title'); }
+          q.explain = lxText(gd, 'explain') || '';
+          if (!isChecked) {
+            if (gd.kind === 'choice') {
+              var dOpts = drillOptions(gd);
+              q.prompt = String(lxText(gd, 'q')).replace(/___/g, '________');
+              q.answer = dOpts[gd.answer];
+              q.options = dOpts.slice();
+            } else if (gd.kind === 'gap') {
+              q.task = gd.hint ? lxText(gd, 'hint') : GT.hint('fillGrammar');
+              q.context = String(lxText(gd, 'q')).replace(/___/g, '________');
+            }
+          }
+        }
+        break;
+    }
+    return q;
+  }
 
   function renderBrand() {
     var L = langMeta();
@@ -4537,10 +4677,8 @@
       renderNav('review', p); renderSidebar('review', p); drawReview();
     } else if (p[0] === 'practice' && studio) {
       studio.questions = studio.questions.map(function (q, i) {
-        if ((i === studio.i && studio.checked) || i < studio.i || !q.entry || q.entry.type === 'drill' || STUDIO_CLASSIC.indexOf(q.kind) < 0) return q;
-        var nq = makeStudioEntryQuestion(q.entry, q.kind);
-        nq.retry = q.retry; nq.hints = q.hints; nq.played = q.played;
-        return nq;
+        if (i < studio.i) return q;
+        return relocalizeStudioQuestion(q, i === studio.i && studio.checked);
       });
       renderNav('practice', p); drawPractice();
     } else if (p[0] === 'roots' && p[1] === 'drill' && rd) {
@@ -4593,7 +4731,12 @@
       if (targetHash && location.hash !== targetHash) { location.hash = targetHash; route(); }
       return Promise.resolve();
     }
-    sessions[prev] = { hash: location.hash, learn: learn, rev: rev, studio: studio, rd: rd, params: ui.lastStudioParams };
+    if (studio && !studio.checked && studio.questions[studio.i] && studio.questions[studio.i].endsAt) {
+      studio.questions[studio.i]._remMs = Math.max(1000, studio.questions[studio.i].endsAt - Date.now());
+      delete studio.questions[studio.i].endsAt;
+    }
+    stopStudioTimer();
+    sessions[prev] = { hash: location.hash, know: GT.know, learn: learn, rev: rev, studio: studio, rd: rd, params: ui.lastStudioParams };
     var loading = $('#langLoading');
     if (loading) loading.hidden = false;
     document.body.classList.add('pack-loading');
@@ -4603,20 +4746,43 @@
       activatePack(lang);
       learn = null; rev = null; studio = null; rd = null;
       if (targetHash) {
+        autoRedirect = null;
         if (location.hash !== targetHash) location.hash = targetHash;
         route();
         return;
       }
       var saved = sessions[lang];
+      var canRestoreRedirect = saved && autoRedirect && autoRedirect.fromLang === lang && autoRedirect.toLang === prev && location.hash === autoRedirect.toHash;
+      if (canRestoreRedirect) {
+        autoRedirect = null;
+        try { history.replaceState(history.state, '', saved.hash); } catch (e) {}
+      }
       var fix = nearestValidHash();
-      if (fix) { location.replace(fix); return; }   // hashchange re-routes
+      if (fix) {
+        var prevSess = sessions[prev];
+        if (prevSess && (prevSess.learn || prevSess.rev || prevSess.studio || prevSess.rd)) {
+          autoRedirect = { fromLang: prev, toLang: lang, toHash: fix };
+        } else {
+          autoRedirect = null;
+        }
+        location.replace(fix);
+        return;   // hashchange re-routes
+      }
+      if (!canRestoreRedirect) autoRedirect = null;
       var p = curPath();
       if (saved && saved.hash === location.hash) {
         // same screen as when we left this language: resume its session
         learn = saved.learn; rev = saved.rev; studio = saved.studio; rd = saved.rd; ui.lastStudioParams = saved.params;
         if (p[2] === 'learn' && learn && learn.i < learn.queue.length) { renderNav(p[0], p); renderSidebar(p[0], p); drawLearn(); return; }
         if (p[0] === 'review' && p[2] === 'go' && rev) { renderNav('review', p); renderSidebar('review', p); drawReview(); return; }
-        if (p[0] === 'practice' && studio) { renderNav('practice', p); renderSidebar('practice', p); drawPractice(); return; }
+        if (p[0] === 'practice' && studio) {
+          if (saved.know !== GT.know) studio.questions = studio.questions.map(function (q, i) {
+            return i >= studio.i ? relocalizeStudioQuestion(q, i === studio.i && studio.checked) : q;
+          });
+          var curQ = studio.questions[studio.i];
+          if (curQ && curQ._remMs) { curQ.endsAt = Date.now() + curQ._remMs; delete curQ._remMs; }
+          renderNav('practice', p); renderSidebar('practice', p); drawPractice(); return;
+        }
         if (p[0] === 'roots' && p[1] === 'drill' && rd) { renderNav('roots', p); renderSidebar('roots', p); drawRootDrill(); return; }
       }
       var settingsOpen = sheetEl.classList.contains('open') && sheetEl.dataset.mode === 'settings';

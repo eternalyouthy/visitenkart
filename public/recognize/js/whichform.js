@@ -75,7 +75,7 @@
   function contrastHTML(s) {
     var n = noteFor(GT.learn, s);
     if (!n) return '';
-    return '<div class="ag-contrast' + (n.trap ? ' trap' : '') + '"><p class="ag-contrast-head">' + (n.trap ? '⚠ ' : '') + VS[GT.know] + '</p><p>' + n.text + '</p></div>';
+    return '<div class="ag-contrast' + (n.trap ? ' trap' : '') + '" lang="' + GT.know + '"><p class="ag-contrast-head">' + (n.trap ? '⚠ ' : '') + VS[GT.know] + '</p><p>' + n.text + '</p></div>';
   }
 
   /* ---------------- game ---------------- */
@@ -103,7 +103,7 @@
 
   function gameHTML(d, G, api) {
     var esc = api.esc, lang = GT.learn, m = modeOf(d, G.mode), gm = d.games[m.game];
-    function tab(mo) { return '<button class="seg-tab' + (G.mode === mo.id ? ' active' : '') + '" type="button" data-ag="mode" data-v="' + esc(mo.id) + '">' + esc(mo.label) + '</button>'; }
+    function tab(mo) { return '<button class="seg-tab' + (G.mode === mo.id ? ' active' : '') + '" type="button" role="tab" aria-selected="' + (G.mode === mo.id) + '" data-ag="mode" data-v="' + esc(mo.id) + '">' + esc(mo.label) + '</button>'; }
     var modes = modesOf(d), main = modes.filter(function (x) { return !x.solo; });
     var patterns = modes.find(function (x) { return x.solo && !comparisonMode(x); });
     var patternButton = patterns ? '<button type="button" class="seg-tab ag-patterns' + (m.id === patterns.id ? ' active' : '') +
@@ -118,7 +118,7 @@
     h += '<div class="drill ag-card"><div class="ag-top"><p class="drill-kind">' + esc(gm.kind(s)) + '</p><p class="drill-kind ag-score">✓ ' + G.ok + ' · ✗ ' + G.bad + (total ? ' · streak ' + G.streak : '') + '</p></div>';
     var blank = G.revealed ? '<mark class="hl">' + esc(show(ans)) + '</mark>' : '<span class="blank">____</span>';
     h += '<p class="drill-q ag-q-text' + (gm.qClass ? ' ' + gm.qClass : '') + '" lang="' + lang + '">' + gm.question(s, { revealed: G.revealed, hint: G.hint, ans: ans, esc: esc, blank: blank }) + '</p>';
-    if (G.hint && !G.revealed) h += '<p class="ag-hint">Hint: ' + gm.hint(s, G.hint, esc) + '</p>';
+    if (G.hint && !G.revealed) h += '<p class="ag-hint" lang="' + GT.know + '">Hint: ' + gm.hint(s, G.hint, esc) + '</p>';
     h += '<div class="options">' + opts.map(function (o, i) {
       var cls = gm.optClass ? ' ' + gm.optClass(o) : '';
       if (G.revealed) { if (o === ans) cls += ' ok'; else if (o === G.chosen) cls += ' bad'; }
@@ -126,7 +126,7 @@
     }).join('') + '</div>';
     if (G.revealed) {
       var verdict = G.chosen === ans ? '✓ Correct' : G.chosen ? '✗ Not quite' : 'Answer';
-      h += '<div class="drill-answer"><div class="a">' + verdict + ' — <span lang="' + lang + '">' + (gm.verdict ? gm.verdict(s, ans, esc) : esc(show(ans))) + '</span></div><div class="x">' + gm.explain(s, G.chosen) + contrastHTML(s) + '</div></div>';
+      h += '<div class="drill-answer"><div class="a">' + verdict + ' — <span lang="' + lang + '">' + (gm.verdict ? gm.verdict(s, ans, esc) : esc(show(ans))) + '</span></div><div class="x" lang="' + GT.know + '">' + gm.explain(s, G.chosen) + contrastHTML(s) + '</div></div>';
     }
     h += '</div><div class="actions-row ag-actions">';
     var hl = gm.hintLabels || ['Hint', 'More hint'];

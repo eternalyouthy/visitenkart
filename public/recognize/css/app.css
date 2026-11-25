@@ -669,7 +669,8 @@ input[type="number"] { width: 90px; }
 .topic-stat { padding: 14px 0; border-bottom: 1px solid var(--line); }
 .topic-stat:first-child { padding-top: 0; }
 .topic-stat:last-child { border-bottom: 0; padding-bottom: 0; }
-.topic-stat .line { display: flex; justify-content: space-between; gap: 12px; font-size: 15.5px; }
+.topic-stat .line { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; font-size: 15.5px; }
+.topic-stat .line > span:first-child { min-width: 0; overflow-wrap: break-word; }
 .topic-stat .line .mono { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
 .topic-stat .track { height: 2px; background: var(--line-2); margin-top: 10px; position: relative; }
 .topic-stat .track i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ice); }
@@ -1345,7 +1346,9 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 .theme-off { display: block; margin-top: 2px; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
 /* shared: rounded corners follow --radius (0 in Orbit, so Orbit is unchanged) */
-.box, .btn, select, input[type="number"], .practice, .stat-row, .lang-pop, .tab-menu, .mtag-tip, .rate, .opt, .side-practice { border-radius: var(--radius); }
+.box, .btn, select, input[type="number"], .practice, .stat-row, .lang-pop, .tab-menu, .mtag-tip, .rate, .opt, .side-practice,
+.fortune, .drill, .drill-answer, .notice, .search, .typing input, .built, .blitz-card, .dir-row, .rec-card, .verdict, .usage, .table-wrap, .pitfall, .start-box, .rmap { border-radius: var(--radius); }
+.rnode, .speak, .why-btn, .chip, .gd-input, .seg-tabs, .xlink-item { border-radius: calc(var(--radius) * 0.5); }
 
 /* shared: themes with separate card tiles instead of one shared-border grid */
 :is([data-theme="holo"], [data-theme="autobahn"], [data-theme="nord"]) .grid { border: 0; gap: 12px; }
@@ -1496,15 +1499,15 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
   --navy: #f4f4f4;
   --navy-2: #ececec;
   --overlay: #ffffff;
-  --signal: #e3170a;
-  --ice: #e3170a;
-  --ice-soft: rgba(227, 23, 10, 0.07);
+  --signal: #cf1206;
+  --ice: #cf1206;
+  --ice-soft: rgba(207, 18, 6, 0.07);
   --text: #0a0a0a;
   --muted: #6b6b6b;
   --dim: #707070;
   --line: #e3e3e3;
   --line-2: #e3e3e3;
-  --line-ice: rgba(227, 23, 10, 0.45);
+  --line-ice: rgba(207, 18, 6, 0.45);
   --der: #1d4ed8;
   --die: #c8150a;
   --das: #5c5c5c;
@@ -1837,6 +1840,16 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 @media (hover: none) and (pointer: coarse) {
   select, input[type="number"], input[type="text"], input[type="search"], input:not([type]), textarea { font-size: 16px; }
   select { letter-spacing: 0; }
+  .btn.small { min-height: 40px; }
+  .speak.sm { width: 40px; height: 40px; }
+  .speak.xs { width: 34px; height: 34px; }
+  .chip.rchip, .chip.chip-speak, .xlink-item { min-height: 40px; }
+  .mtag { position: relative; }
+  .mtag::after { content: ""; position: absolute; inset: -8px -4px; }
+  .side-practice-close, .mtag-close, .lang-pop-head .icon-btn { width: 40px; height: 40px; }
+  .switch::before { content: ""; position: absolute; inset: -7px -4px; }
+  .basics-toggle { min-height: 40px; }
+  .basics-toggle input { width: 18px !important; height: 18px !important; }
 }
 
 /* User page head "All languages · non-destructive merge": wraps between its parts instead of running off a 320px screen */
