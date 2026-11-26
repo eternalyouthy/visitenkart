@@ -159,3 +159,238 @@
       [ex('[[Bevor wir entscheiden, sollten wir]] die DSGVO-Vorgaben [[berücksichtigen]].', 'Прежде чем решать, нам нужно учесть требования GDPR.', 'Before we decide, we should take GDPR requirements into account.')], null, null, 'c1')
   ] });
 })();
+
+/* TELC B2 source expansion 2026-11-26 — data only.
+ * Source: Einfach besser! 500, B2, English word list; original examples.
+ * Permanent IDs; existing cards reused by lemma, part of speech and sense. */
+GT.register({
+  "tab": "chunks",
+  "topic": "appointments",
+  "items": [
+    {
+      "id": "telc26-ch-rechtzeitig-bescheid",
+      "t": "Bitte geben Sie uns rechtzeitig Bescheid.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 10,
+          "headword": "rechtzeitig Bescheid geben",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "Please let us know in good time.",
+      "ru": "Пожалуйста, сообщите нам заранее.",
+      "examples": [
+        {
+          "t": "Falls Sie den Termin nicht wahrnehmen können, [[geben Sie uns bitte rechtzeitig Bescheid]].",
+          "en": "If you cannot attend the appointment, please let us know in good time.",
+          "ru": "Если вы не сможете прийти на встречу, пожалуйста, сообщите нам заранее.",
+          "de": "Falls Sie den Termin nicht wahrnehmen können, [[geben Sie uns bitte rechtzeitig Bescheid]]."
+        }
+      ],
+      "de": "Bitte geben Sie uns rechtzeitig Bescheid."
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "email",
+  "items": [
+    {
+      "id": "telc26-ch-rechnung-begleichen",
+      "t": "Ich werde die Rechnung bis [Datum] begleichen.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 27,
+          "headword": "eine Rechnung begleichen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "I will settle the invoice by [date].",
+      "ru": "Я оплачу счёт до [дата].",
+      "examples": [
+        {
+          "t": "[[Ich werde die Rechnung bis]] Freitag [[begleichen]].",
+          "en": "I will settle the invoice by Friday.",
+          "ru": "Я оплачу счёт до пятницы.",
+          "de": "[[Ich werde die Rechnung bis]] Freitag [[begleichen]]."
+        }
+      ],
+      "de": "Ich werde die Rechnung bis [Datum] begleichen."
+    },
+    {
+      "id": "telc26-ch-schriftform",
+      "t": "[X] bedarf der Schriftform.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 35,
+          "headword": "etwas bedarf der Schriftform",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "[X] must be in writing.",
+      "ru": "Для [X] требуется письменная форма.",
+      "examples": [
+        {
+          "t": "Laut Entwurf [[bedarf]] eine Änderung der Vereinbarung [[der Schriftform]].",
+          "en": "According to the draft, an amendment must be in writing.",
+          "ru": "Согласно проекту, для изменения соглашения требуется письменная форма.",
+          "de": "Laut Entwurf [[bedarf]] eine Änderung der Vereinbarung [[der Schriftform]]."
+        }
+      ],
+      "de": "[X] bedarf der Schriftform.",
+      "note": {
+        "en": "Formal German: bedürfen takes the genitive, der Schriftform. The example reports a clause in a draft document; it does not establish a legal rule.",
+        "ru": "Формальная конструкция bedürfen + Genitiv: der Schriftform. Пример передаёт условие из проекта документа, а не универсальное юридическое правило."
+      }
+    },
+    {
+      "id": "telc26-ch-ab-werk",
+      "t": "ab Werk",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 25,
+          "headword": "ab Werk",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "ex works",
+      "ru": "с завода",
+      "examples": [
+        {
+          "t": "Das Angebot gilt [[ab Werk]] des Lieferanten.",
+          "en": "The quote is ex works at the supplier’s premises.",
+          "ru": "В предложении указана отгрузка с завода поставщика.",
+          "de": "Das Angebot gilt [[ab Werk]] des Lieferanten."
+        }
+      ],
+      "de": "ab Werk",
+      "note": {
+        "en": "A commercial delivery expression used in quotations. The actual allocation of costs and duties belongs in the agreed terms.",
+        "ru": "Коммерческая формулировка для предложения об отгрузке с предприятия поставщика. Точное распределение расходов и обязанностей определяется конкретными условиями."
+      }
+    },
+    {
+      "id": "telc26-ch-nachfrage",
+      "t": "Auf Nachfrage senden wir Ihnen [X].",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 12,
+          "headword": "auf Nachfrage",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "On request, we can send you [X].",
+      "ru": "По запросу мы можем направить вам [X].",
+      "examples": [
+        {
+          "t": "[[Auf Nachfrage senden wir Ihnen]] das vollständige Datenblatt.",
+          "en": "On request, we can send you the complete datasheet.",
+          "ru": "По запросу мы можем направить вам полное техническое описание.",
+          "de": "[[Auf Nachfrage senden wir Ihnen]] das vollständige Datenblatt."
+        }
+      ],
+      "de": "Auf Nachfrage senden wir Ihnen [X]."
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "it_meeting",
+  "items": [
+    {
+      "id": "telc26-ch-gegenvorschlag",
+      "t": "Ich möchte einen Gegenvorschlag machen.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 21,
+          "headword": "einen Gegenvorschlag machen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "I’d like to make a counterproposal.",
+      "ru": "Я хотел(а) бы предложить встречный вариант.",
+      "examples": [
+        {
+          "t": "[[Ich möchte einen Gegenvorschlag machen]]: Wir testen zuerst eine kleinere Lösung.",
+          "en": "I’d like to make a counterproposal: let’s test a smaller solution first.",
+          "ru": "Я хотел бы предложить встречный вариант: сначала проверим более простое решение.",
+          "de": "[[Ich möchte einen Gegenvorschlag machen]]: Wir testen zuerst eine kleinere Lösung."
+        }
+      ],
+      "de": "Ich möchte einen Gegenvorschlag machen."
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "complain",
+  "items": [
+    {
+      "id": "telc26-ch-verstaendnis",
+      "t": "Wir bitten um Ihr Verständnis.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 29,
+          "headword": "um Verständnis bitten",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "We ask for your understanding.",
+      "ru": "Просим отнестись с пониманием.",
+      "examples": [
+        {
+          "t": "Die Lieferung verzögert sich um einen Tag. [[Wir bitten um Ihr Verständnis]].",
+          "en": "The delivery is delayed by one day. We ask for your understanding.",
+          "ru": "Доставка задерживается на один день. Просим отнестись с пониманием.",
+          "de": "Die Lieferung verzögert sich um einen Tag. [[Wir bitten um Ihr Verständnis]]."
+        }
+      ],
+      "de": "Wir bitten um Ihr Verständnis."
+    }
+  ]
+});

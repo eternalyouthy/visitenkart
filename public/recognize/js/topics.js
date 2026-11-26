@@ -300,7 +300,7 @@
 
   GT.definePack('de', {
     grammarFold: { A1: 'B1', A2: 'B1' },
-    features: { goetheB1: true, prefixDrill: true, ruLink: true, rootMapVerbs: true, stressPairs: true },
+    features: { goetheB1: true, prefixDrill: true, rootRoulette: true, ruLink: true, rootMapVerbs: true, stressPairs: true },
     PRO_GROUPS: [
       { key: 'for-everyone', title: 'For Everyone', badge: 'Start here', desc: 'Essential for every profession: office communication, meetings, clients, presentations, careers and modern work. Complete this track first, then pick your field below.' },
       { key: 'it', title: 'IT Professions', desc: 'Software engineering, cloud infrastructure, cybersecurity, UX design, AI/data and agile product work.' },

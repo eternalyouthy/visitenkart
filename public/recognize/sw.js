@@ -3,12 +3,12 @@
  * (fresh when online, cached copy when offline); cache-first for Google Fonts.
  * Bump VERSION when you want to force a clean cache. */
 var CACHE_PREFIX = 'etrnl-recognize-';
-var VERSION = CACHE_PREFIX + '164';
+var VERSION = CACHE_PREFIX + '168';
 importScripts('data/manifest.js');
 
 var SHELL = [
   './', 'css/app.css',
-  'js/core.js', 'js/i18n.js', 'js/topics.js', 'js/loader.js', 'js/validate.js', 'js/fsrs.js', 'js/store.js', 'js/whichform.js', 'js/forms/de.js', 'js/forms/en.js', 'js/forms/ru.js', 'js/app.js',
+  'js/core.js', 'js/i18n.js', 'js/topics.js', 'js/loader.js', 'js/validate.js', 'js/fsrs.js', 'js/store.js', 'js/whichform.js', 'js/roulette.js', 'js/forms/de.js', 'js/forms/en.js', 'js/forms/ru.js', 'js/app.js',
   'js/progress-key.js', 'data/about.js', 'data/manifest.js', 'manifest.webmanifest',
   'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png'
 ];
@@ -51,12 +51,14 @@ self.addEventListener('fetch', function (e) {
   // App files: network first (so updates show up immediately), cache as offline fallback.
   // cache: 'no-cache' revalidates with the server, so a new deploy is never hidden by the HTTP cache.
   e.respondWith(fetch(req, { cache: 'no-cache' }).then(function (res) {
-    if (res && res.ok) { var copy = res.clone(); caches.open(VERSION).then(function (c) { c.put(req, copy); }); }
+    if (res && res.status === 200) { var copy = res.clone(); caches.open(VERSION).then(function (c) { c.put(req, copy); }).catch(function () {}); }
     return res;
   }).catch(function () {
     return caches.open(VERSION).then(function (cache) {
       return cache.match(req, { ignoreSearch: true }).then(function (hit) {
-        return hit || (req.mode === 'navigate' ? cache.match('./') : undefined);
+        if (hit) return hit;
+        // cache.match() is a promise (always truthy): resolve it before falling back to a network error.
+        return (req.mode === 'navigate' ? cache.match('./') : Promise.resolve(null)).then(function (r) { return r || Response.error(); });
       });
     });
   }));

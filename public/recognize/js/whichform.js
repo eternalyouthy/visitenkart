@@ -57,6 +57,11 @@
     return '<h3 class="section-title"' + (safeId ? ' id="ag-' + safeId + '"' : '') + '>' + t + '</h3>';
   }
 
+  function escHTML(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
   function stressMarks(s) { return String(s).replace(/\+([аеиоуыэюяАЕИОУЫЭЮЯ])/g, '$1́'); }
 
   /* ---------------- cross-language notes ---------------- */
@@ -75,7 +80,7 @@
   function contrastHTML(s) {
     var n = noteFor(GT.learn, s);
     if (!n) return '';
-    return '<div class="ag-contrast' + (n.trap ? ' trap' : '') + '" lang="' + GT.know + '"><p class="ag-contrast-head">' + (n.trap ? '⚠ ' : '') + VS[GT.know] + '</p><p>' + n.text + '</p></div>';
+    return '<div class="ag-contrast' + (n.trap ? ' trap' : '') + '" lang="' + GT.know + '"><p class="ag-contrast-head">' + (n.trap ? '⚠ ' : '') + VS[GT.know] + '</p><p>' + escHTML(n.text) + '</p></div>';
   }
 
   /* ---------------- game ---------------- */
@@ -181,7 +186,7 @@
       case 'mode': {
         var nextMode = modeOf(d, el.dataset.v);
         if (G.mode !== nextMode.id) { G.mode = nextMode.id; G.cur = -1; G.recent = []; }
-        if (location.hash.indexOf('?mode=') >= 0) history.replaceState(history.state, '', '#/' + d.route + '/play');
+        if (location.hash.indexOf('?mode=') >= 0) { try { history.replaceState(history.state, '', '#/' + d.route + '/play'); } catch (err) {} }
         nextTask(d, G);
         break;
       }

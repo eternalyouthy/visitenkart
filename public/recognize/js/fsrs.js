@@ -33,19 +33,24 @@
   /** Compute the next card for one grade (no interval ordering fix-up). */
   function step(card, g, now, retention) {
     var c = Object.assign({ reps: 0, lapses: 0 }, card || {});
-    var isNew = !card || !c.state || c.state === 'new' || c.s == null;
+    c.reps = Number.isFinite(Number(c.reps)) && Number(c.reps) >= 0 ? Math.floor(Number(c.reps)) : 0;
+    c.lapses = Number.isFinite(Number(c.lapses)) && Number(c.lapses) >= 0 ? Math.floor(Number(c.lapses)) : 0;
+    var isNew = !card || !c.state || c.state === 'new' || c.state === 'known' || !(typeof c.s === 'number' && Number.isFinite(c.s) && c.s > 0);
+    delete c.known;
     var ivl = 0; // days; 0 = minutes-level step
     if (isNew) {
       c.s = initS(g); c.d = initD(g);
       if (g === 4) { c.state = 'review'; ivl = days(intervalDays(c.s, retention)); }
       else { c.state = 'learning'; c.due = now + (g === 1 ? 1 : g === 2 ? 5 : 10) * MIN; }
     } else {
-      var elapsed = Math.max(0, (now - (c.last || now)) / DAY);
+      var lastTs = typeof c.last === 'number' && Number.isFinite(c.last) ? c.last : now;
+      var elapsed = Math.max(0, (now - lastTs) / DAY);
       var r = retrievability(elapsed, c.s);
       var sameDay = elapsed < 0.5;
-      c.d = nextD(c.d, g);
+      c.d = nextD(typeof c.d === 'number' && Number.isFinite(c.d) ? clampD(c.d) : initD(3), g);
       if (c.state === 'learning' || c.state === 'relearning') {
         c.s = sameDay ? shortTermS(c.s, g) : (g === 1 ? forgetS(c.d, c.s, r) : recallS(c.d, c.s, r, g));
+        if (!(Number.isFinite(c.s) && c.s > 0)) c.s = 0.1;
         if (g === 1) { c.due = now + 5 * MIN; }
         else if (g === 2) { c.due = now + 10 * MIN; }
         else { c.state = 'review'; ivl = days(intervalDays(c.s, retention)); }
@@ -53,10 +58,12 @@
         if (g === 1) {
           c.lapses += 1;
           c.s = sameDay ? shortTermS(c.s, g) : forgetS(c.d, c.s, r);
+          if (!(Number.isFinite(c.s) && c.s > 0)) c.s = 0.1;
           c.state = 'relearning';
           c.due = now + 10 * MIN;
         } else {
           c.s = sameDay ? shortTermS(c.s, g) : recallS(c.d, c.s, r, g);
+          if (!(Number.isFinite(c.s) && c.s > 0)) c.s = 0.1;
           ivl = days(intervalDays(c.s, retention));
         }
       }
@@ -68,7 +75,7 @@
 
   /** Results for all four grades, with intervals kept in order Hard <= Good < Easy. */
   function preview(card, now, retention) {
-    retention = retention || 0.9;
+    retention = typeof retention === 'number' && Number.isFinite(retention) ? Math.max(0.7, Math.min(0.99, retention)) : 0.9;
     var res = {};
     for (var g = 1; g <= 4; g++) res[g] = step(card, g, now, retention);
     var h = res[2], gd = res[3], e = res[4];

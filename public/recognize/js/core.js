@@ -29,8 +29,8 @@
   function blankPack(lang) {
     return {
       lang: lang, loaded: false, loading: null,
-      items: [], byId: {}, grammar: {}, roots: {}, prefixes: {}, suffixes: {}, classical: {},
-      suffixOrder: [], classicalOrder: [], duplicates: [], loadErrors: [], members: {},
+      items: [], byId: Object.create(null), grammar: Object.create(null), roots: Object.create(null), prefixes: Object.create(null), suffixes: Object.create(null), classical: Object.create(null),
+      suffixOrder: [], classicalOrder: [], duplicates: [], loadErrors: [], members: Object.create(null),
       config: { TOPICS: {}, NAV: [], PRO_SUBS: [], ROOT_PLAN: [], PREFIX_PLAN: [], baseKnown: 'ru', features: {}, intro: {} }
     };
   }
@@ -80,8 +80,8 @@
 
   function addMember(p, it, tab, topic) {
     var key = tab + '.' + topic;
-    it.memberOf = it.memberOf || {};
-    it.tabs = it.tabs || {};
+    it.memberOf = it.memberOf || Object.create(null);
+    it.tabs = it.tabs || Object.create(null);
     if (it.memberOf[key]) return;
     it.memberOf[key] = true;
     it.tabs[tab] = true;
@@ -307,8 +307,8 @@
       d.topic = d.topic || page.id;
       if (p.byId[d.id]) { p.duplicates.push(d.id); return; }
       p.byId[d.id] = d;
-      d.memberOf = {}; d.memberOf[d.tab + '.' + d.topic] = true;
-      d.tabs = {}; d.tabs[d.tab] = true;
+      d.memberOf = Object.create(null); d.memberOf[d.tab + '.' + d.topic] = true;
+      d.tabs = Object.create(null); d.tabs[d.tab] = true;
     });
   };
   /** Stand-alone reviewable drill (e.g. an affix exercise that has its own schedule). */
@@ -317,8 +317,8 @@
     d.type = 'drill'; d.tab = tab; d.topic = topic;
     if (p.byId[d.id]) { p.duplicates.push(d.id); return; }
     p.byId[d.id] = d;
-    d.memberOf = {}; d.memberOf[tab + '.' + topic] = true;
-    d.tabs = {}; d.tabs[tab] = true;
+    d.memberOf = Object.create(null); d.memberOf[tab + '.' + topic] = true;
+    d.tabs = Object.create(null); d.tabs[tab] = true;
   };
 
   /**
@@ -382,7 +382,7 @@
     return typeof s === 'string' && s.indexOf('+') >= 0 ? s.replace(RU_STRESS_RE, '$1\u0301') : String(s || '');
   }
   GT.links = [];
-  GT.linksByKey = {};
+  GT.linksByKey = Object.create(null);
   /**
    * GT.link([{ de: ['it-sec-schwachstelle', 'die Schwachstelle'], en: ['en:vulnerability:n:main', 'vulnerability'], ru: ['ru-pro-uyazvimost', 'уязв+имость'], note? }, ...])
    * Value per language may be [id, displayText] or a bare id string.

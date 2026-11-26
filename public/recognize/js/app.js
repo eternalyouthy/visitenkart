@@ -550,7 +550,7 @@
     if (items.length) {
       text = plural(items.length, 'new card') + ' today. Use them in a real conversation before they fade.';
     } else if (Object.keys(d.cards).length) {
-      var days = Math.floor((Date.now() - (d.lastPractice || d.created)) / DAY);
+      var days = Math.floor((GT.now() - (d.lastPractice || d.created)) / DAY);
       text = days >= 2 ? 'No speaking practice for ' + days + ' days. Learn a few cards, then copy a role-play prompt.' : 'Learn a few new cards today, then copy a role-play prompt for your AI chat.';
     } else {
       text = 'Learn your first cards, then copy a role-play prompt for your AI chat.';
@@ -834,7 +834,7 @@
     var d = S.data, n = Object.keys(d.cards).length, out = '';
     if (n) {
       var since = d.lastPractice || d.created;
-      var days = Math.floor((Date.now() - since) / DAY);
+      var days = Math.floor((GT.now() - since) / DAY);
       if (days >= 2) {
         out += notice('chat', (d.lastPractice ? 'It’s been <b>' + days + ' days</b> since you last practised speaking.' : 'You haven’t practised speaking with your words yet.') +
           ' Open a topic and use <b>Practice now</b> to get a ready-made role-play prompt for your AI chat.');
@@ -903,15 +903,17 @@
   var USAGE_LABEL = { english: 'English word', german: 'German word', both: 'Both' };
   var RU_LABEL = { loan_in_russian: 'Loan in Russian', internationalism: 'Internationalism', shared_ancient_root: 'Shared root', false_friend: 'False friend' };
   function transparencyOf(it) { return it.transparency || (it.lost ? 'opaque' : ''); }
+  var tipSeq = 0;
   function tooltipBadgeHTML(opts) {
+    var uid = opts.tid + '-' + (++tipSeq);
     var exHtml = opts.examples && opts.examples.length ? '<ul class="mtag-ex">' + opts.examples.map(function (ex) {
       return '<li><em lang="' + GT.learn + '">' + esc(ex.t) + '</em> — <span lang="' + GT.know + '">' + esc(ex.tr || trOf(ex)) + '</span></li>';
     }).join('') + '</ul>' : '';
     return '<span class="mtag-wrap">' +
-      '<button class="tag mtag ' + opts.cls + '" type="button" data-act="mtag-toggle" aria-expanded="false" aria-describedby="' + esc(opts.tid) + '" lang="' + GT.know + '">' +
+      '<button class="tag mtag ' + opts.cls + '" type="button" data-act="mtag-toggle" aria-expanded="false" aria-describedby="' + esc(uid) + '" lang="' + GT.know + '">' +
         esc(opts.label) + '<span class="mtag-q" aria-hidden="true">?</span>' +
       '</button>' +
-      '<span class="mtag-tip" id="' + esc(opts.tid) + '" role="tooltip" lang="' + GT.know + '">' +
+      '<span class="mtag-tip" id="' + esc(uid) + '" role="tooltip" lang="' + GT.know + '">' +
         '<span class="mtag-tip-head"><strong>' + esc(opts.heading) + '</strong>' +
         '<button class="mtag-close" type="button" data-act="mtag-close" aria-label="Close">' + icon('x') + '</button></span>' +
         '<span class="mtag-tip-def">' + esc(opts.summary) + '</span>' +
@@ -1540,6 +1542,7 @@
     var L = learn;
     if (L.i >= L.queue.length) return drawLearnDone();
     var it = GT.byId[L.queue[L.i]];
+    if (!it) { L.i++; return drawLearn(); }
     var pct = Math.round(L.i / L.queue.length * 100);
     var h = crumbsHTML(topicCrumb(L.tab, L.topic, 'Learn · ' + (L.i + 1) + ' / ' + L.queue.length), pct);
     var actions = '<div class="actionbar"><div class="actions"><button class="btn primary" data-act="l-know">Know it</button><button class="btn outline" data-act="l-learn">Learn it</button><button class="btn ghost" data-act="l-later">Later</button></div>' +
@@ -1624,10 +1627,11 @@
     if (keys.length) h += '<a class="btn primary big" style="margin-top:24px" href="#/review/' + encodeURIComponent(filter) + '/go">Start review →</a>';
     else {
       var next = Object.keys(S.data.cards).filter(function (k) {
-        return matchesDir(GT.parseCardKey(k).dir, dir);
+        var parsed = GT.parseCardKey(k), it = GT.byId[parsed.id];
+        return !!it && matchesDir(parsed.dir, dir) && matchFilter(it, filter);
       }).map(function (k) { return S.data.cards[k]; }).filter(function (c) { return c.state !== 'known' && c.due; })
         .reduce(function (m, c) { return Math.min(m, c.due); }, Infinity);
-      h += '<p class="note muted" style="margin-top:12px">' + (next < Infinity ? 'Nothing due in this filter. Next card ' + (next - Date.now() < DAY ? 'later today' : 'on ' + fmtDate(next)) + '.' : 'No cards in this filter yet. Learn some new words first.') + '</p>';
+      h += '<p class="note muted" style="margin-top:12px">' + (next < Infinity ? 'Nothing due in this filter. Next card ' + (next <= endOfToday() ? 'later today' : 'on ' + fmtDate(next)) + '.' : 'No cards in this filter yet. Learn some new words first.') + '</p>';
     }
     h += '</div>';
     var s = S.settings;
@@ -1732,6 +1736,7 @@
     var R = rev;
     if (R.i >= R.queue.length) return drawReviewDone();
     var q = R.queue[R.i], it = GT.byId[q.id];
+    if (!it) { R.i++; return drawReview(); }
     var dirLabel = q.mode === 'drill' ? 'Review · Drill' : q.dir === 'rec' ? 'Review · Recognition' : 'Review · Production';
     var h = '<div class="review-col"><div class="sess-top"><span class="label ice">' + dirLabel + '</span><span class="mono-muted">' + pad2(R.i + 1) + ' / ' + pad2(R.queue.length) + ' · <button class="link-btn" data-act="r-end" style="font-family:inherit;letter-spacing:inherit">End</button></span></div>' +
       '<div class="sess-line"><i style="width:' + Math.round(R.i / R.queue.length * 100) + '%"></i></div>';
@@ -1743,7 +1748,7 @@
       h += '<div class="actionbar"><button class="btn primary big" data-act="reveal">Show answer</button><p class="kbd-hint">Space to show · then 1–4 to rate</p></div>';
     } else {
       h += answerHTML(it, q);
-      var pv = F.preview(S.card(q.key), Date.now(), S.settings.retention);
+      var pv = F.preview(S.card(q.key), GT.now(), S.settings.retention);
       var sug = R.verdict === true ? 3 : R.verdict === false ? 1 : 0;
       var names = { 1: 'Again', 2: 'Hard', 3: 'Good', 4: 'Easy' }, cls = { 1: 'again', 2: 'hard', 3: 'good', 4: 'easy' };
       h += '<div class="actionbar"><div class="rate-grid' + (sug && sug !== 3 ? ' has-suggest' : '') + '">' + [1, 2, 3, 4].map(function (g) {
@@ -1773,7 +1778,7 @@
     var R = rev, q = R.queue[R.i], now = GT.now();
     var prev = S.card(q.key);
     var nc = F.rate(prev, g, now, S.settings.retention);
-    nc.added = prev && prev.added;
+    nc.added = (prev && prev.added) || now;
     S.setCard(q.key, nc);
     S.logActivity('reviews');
     R.counts[g]++; R.done++;
@@ -2062,7 +2067,7 @@
   function runProgressKey(adding) {
     var k = keyUI();
     if (k.busy) return;
-    if (adding) k.input = $('#progressKeyInput').value;
+    if (adding) { var inp = $('#progressKeyInput'); if (inp) k.input = inp.value; }
     else k.snapshot = JSON.stringify(S.buildKeyProgress());
     k.busy = true; k.error = false; k.message = '';
     refreshProgressKey();
@@ -2162,7 +2167,7 @@
       row('Speech rate', 'Applied to all pronunciation buttons.', '<div class="setting-ctl">' + sel('speechRate', [['0.75', 'Slow'], ['0.9', 'Normal'], ['1', 'Fast']], 'Speech rate') + '<button class="btn small" type="button" data-act="test-voice">Test</button></div>') +
       '</div>';
     var files = GT.packFiles(GT.learn), errs = GT.pack.loadErrors;
-    h += '<h3 class="section-title">Data · ' + esc(langMeta().name) + '</h3><div class="box"><p class="note muted">' + plural(files.length - errs.length, 'data file') + ' loaded · ' + GT.items.length + ' words & chunks · ' + Object.keys(GT.grammar).length + ' grammar pages · ' + Object.keys(GT.roots).length + ' word families · ' + (GT.links ? GT.links.length : 0) + ' cross-language links · schema v' + d.version + '.</p>' +
+    h += '<h3 class="section-title">Data · ' + esc(langMeta().name) + '</h3><div class="box"><p class="note muted">' + plural(Math.max(0, files.length - errs.length), 'data file') + ' loaded · ' + GT.items.length + ' words & chunks · ' + Object.keys(GT.grammar).length + ' grammar pages · ' + Object.keys(GT.roots).length + ' word families · ' + (GT.links ? GT.links.length : 0) + ' cross-language links · schema v' + d.version + '.</p>' +
       (GT.pack.missingOverlay && GT.pack.missingOverlay.length ? '<p class="note" style="color:var(--gold);margin-top:8px">Overlay ids not found: ' + GT.pack.missingOverlay.map(esc).join(', ') + '</p>' : '') +
       ((GT.pack.validation || []).length ? '<details style="margin-top:8px"><summary class="note" style="color:var(--gold)">' + plural(GT.pack.validation.length, 'data warning') + '</summary><p class="mono-muted" style="font-size:11.5px;margin-top:8px">' + GT.pack.validation.slice(0, 60).map(esc).join('<br>') + '</p></details>' : '<p class="note muted" style="margin-top:8px">Validation: 0 data warnings.</p>') +
       (errs.length ? '<p class="note" style="color:var(--bad);margin-top:8px">Missing files: ' + errs.map(esc).join(', ') + '</p>' : '') +
@@ -2195,7 +2200,7 @@
 
   /* ---------------- actions ---------------- */
   function copyText(t) {
-    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t).then(function () { return true; }, fallback);
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function' && window.isSecureContext) return navigator.clipboard.writeText(t).then(function () { return true; }, fallback);
     return Promise.resolve(fallback());
     function fallback() {
       var ta = document.createElement('textarea');
@@ -2219,33 +2224,35 @@
     el = el || { dataset: {} };
     var now = GT.now(), id = el.dataset.id;
     switch (name) {
-      case 'l-later': learn.later.push(learn.queue[learn.i]); S.markLater(learn.queue[learn.i]); learn.i++; drawLearn(); break;
+      case 'l-later': if (!learn || learn.i >= learn.queue.length) break; learn.later.push(learn.queue[learn.i]); S.markLater(learn.queue[learn.i]); learn.i++; drawLearn(); break;
       case 'l-know':
+        if (!learn || learn.i >= learn.queue.length) break;
         learn.known.push(learn.queue[learn.i]);
         S.setItemKnown(learn.queue[learn.i], now);
         S.logActivity('learned');
         learn.i++; refreshChrome(learn.tab); drawLearn();
         break;
       case 'l-learn':
+        if (!learn || learn.i >= learn.queue.length) break;
         learn.learned.push(learn.queue[learn.i]);
         S.addItemToReview(learn.queue[learn.i], now);
         S.logActivity('learned');
         learn.i++; refreshChrome(learn.tab); drawLearn();
         break;
-      case 'learn-more': viewLearn(learn.tab, learn.id); break;
-      case 'item-know': S.setItemKnown(id, now); S.logActivity('learned'); refreshChrome(GT.byId[id].tab); viewItem(id); break;
-      case 'item-learn': S.addItemToReview(id, now); S.logActivity('learned'); refreshChrome(GT.byId[id].tab); viewItem(id); GT.toast('Added to reviews (recognition + production)'); break;
-      case 'item-add-dir': S.addItemToReview(id, now, [el.dataset.dir]); refreshChrome(GT.byId[id].tab); viewItem(id); GT.toast('Card added'); break;
-      case 'item-reset': if (confirm('Remove this item from your deck? Its review history is lost.')) { S.removeItem(id); refreshChrome(GT.byId[id].tab); viewItem(id); } break;
+      case 'learn-more': if (learn) viewLearn(learn.tab, learn.id); break;
+      case 'item-know': if (!id || !GT.byId[id]) break; S.setItemKnown(id, now); S.logActivity('learned'); refreshChrome(GT.byId[id].tab); viewItem(id); break;
+      case 'item-learn': if (!id || !GT.byId[id]) break; S.addItemToReview(id, now); S.logActivity('learned'); refreshChrome(GT.byId[id].tab); viewItem(id); GT.toast('Added to reviews (recognition + production)'); break;
+      case 'item-add-dir': if (!id || !GT.byId[id] || (el.dataset.dir !== 'rec' && el.dataset.dir !== 'prod')) break; S.addItemToReview(id, now, [el.dataset.dir]); refreshChrome(GT.byId[id].tab); viewItem(id); GT.toast('Card added'); break;
+      case 'item-reset': if (id && GT.byId[id] && confirm('Remove this item from your deck? Its review history is lost.')) { S.removeItem(id); refreshChrome(GT.byId[id].tab); viewItem(id); } break;
       case 'rev-dir':
         S.setSetting('reviewDirection', el.dataset.v);
         renderSidebar('review', ['review', el.dataset.filter || 'all']);
         viewReviewLanding(el.dataset.filter || 'all');
         break;
       case 'show-ru': el.outerHTML = '<p class="mean-ru" lang="' + GT.know + '">' + esc(el.dataset.ru) + '</p>'; break;
-      case 'reveal': reveal(); break;
-      case 'rate': rate(Number(el.dataset.g)); break;
-      case 'r-end': rev.queue = rev.queue.slice(0, rev.i); drawReviewDone(); break;
+      case 'reveal': if (rev && rev.i < rev.queue.length) reveal(); break;
+      case 'rate': if (rev && rev.i < rev.queue.length) rate(Number(el.dataset.g)); break;
+      case 'r-end': if (!rev) break; rev.queue = rev.queue.slice(0, rev.i); drawReviewDone(); break;
       case 'practice-topic': {
         var tab = el.dataset.tab, tid = el.dataset.id, items = itemsFor(tab, tid).filter(function (it) { return S.hasAnyCard(it.id); });
         items.sort(function (a, b) { return itemLastActivity(b.id) - itemLastActivity(a.id); });
@@ -2281,7 +2288,7 @@
         copyPrompt(buildPrompt(practiceFromItems(today)));
         break;
       }
-      case 'export': S.exportJSON(); refreshSyncBox(); GT.toast('Progress exported'); break;
+      case 'export': S.exportJSON(); refreshSyncBox(); refreshProgressKey(); GT.toast('Progress exported'); break;
       case 'key-generate': runProgressKey(false); break;
       case 'key-open': {
         var k = keyUI(); k.adding = !k.adding; refreshProgressKey();
@@ -2339,12 +2346,15 @@
       case 'reset-all':
         if (confirm('Reset progress in ALL languages on this device? Settings and theme are kept. You can restore your progress with a key saved before resetting. This reset is not sent to other devices.')) {
           try { S.resetAll(); } catch (e) { GT.toast(e.message); break; }
+          learn = null; rev = null; rd = null; sessions = {};
           progressKeyUI = null; if (sheetEl.classList.contains('open')) closeSheet(); applyTheme(); route(); GT.toast('All progress reset');
         }
         break;
       case 'test-voice': speak(langMeta().testPhrase, el); break;
       case 'add-drills': {
-        var pg = GT.grammar[id], n = 0;
+        var pg = id && GT.grammar[id];
+        if (!pg) break;
+        var n = 0;
         pg.drills.forEach(function (d) { if (!S.card(d.id)) { var c3 = F.newCard(now); c3.added = now; S.setCard(d.id, c3); n++; } });
         GT.toast(plural(n, 'drill') + ' added to Review');
         refreshChrome('grammar'); viewGrammar(id);
@@ -2396,6 +2406,7 @@
       case 'root-select': ui.rootSel[el.dataset.root] = id; drawRootDetail(el.dataset.root); break;
       case 'root-toggle-all': ui.rootAll[id] = !ui.rootAll[id]; viewRoot(id); fitRootMaps(); break;
       case 'root-add': {
+        if (!id || !GT.byId[id]) break;
         S.addItemToReview(id, now);
         S.logActivity('learned');
         refreshChrome('roots'); GT.toast('Added to Review (rec + prod)');
@@ -2404,6 +2415,7 @@
         break;
       }
       case 'root-add-all': {
+        if (!id || !GT.roots[id]) break;
         var nAdd = 0;
         GT.roots[id].ids.forEach(function (wid) { if (!S.hasAnyCard(wid)) { S.addItemToReview(wid, now); nAdd++; } });
         if (nAdd) S.logActivity('learned', nAdd);
@@ -2411,9 +2423,9 @@
         break;
       }
       case 'rd-mode': ui.rootDrillMode = el.dataset.v; viewRootDrill(rd ? rd.rootId : ''); break;
-      case 'rd-opt': rootDrillAnswer(el.dataset.v); break;
-      case 'rd-next': rd.i++; rd.answered = null; rd.given = null; drawRootDrill(); break;
-      case 'rd-again': viewRootDrill(rd.rootId); break;
+      case 'rd-opt': if (rd && rd.i < rd.queue.length) rootDrillAnswer(el.dataset.v); break;
+      case 'rd-next': if (!rd || rd.i >= rd.queue.length) break; rd.i++; rd.answered = null; rd.given = null; drawRootDrill(); break;
+      case 'rd-again': if (rd) viewRootDrill(rd.rootId); break;
       case 'reset-drills': ui.drillState = {}; viewGrammar(curPath()[1]); break;
       case 'd-opt': {
         var d = GT.byId[id], st = drillStateFor(el.dataset.ctx, id);
@@ -2463,7 +2475,11 @@
       case 'st-blitz': blitzAnswer(el.dataset.v === '1'); break;
       case 'st-say-slow': {
         var dq = studio && studio.questions[studio.i];
-        if (dq && dq.say) { var rate0 = S.settings.speechRate; S.settings.speechRate = 0.6; speak(dq.say); S.settings.speechRate = rate0; }
+        if (dq && dq.say) {
+          var rate0 = S.settings.speechRate;
+          S.settings.speechRate = 0.6;
+          try { speak(dq.say); } finally { S.settings.speechRate = rate0; }
+        }
         break;
       }
       case 'open-link':
@@ -2552,6 +2568,7 @@
         if (replaceMode && !confirm('Replace your current progress with this file? Existing cards not in the file will be removed.')) return;
         try {
           var msg = S.importJSON(reader.result, { replace: replaceMode });
+          if (replaceMode) { learn = null; rev = null; rd = null; sessions = {}; }
           // The file may carry another language pair: follow it like a switch in the language picker.
           var impKnow = S.settings.knowLang, impLearn = S.settings.learnLang;
           if (!GT.LANGS[impLearn]) impLearn = GT.learn;
@@ -2926,7 +2943,7 @@
         var r = GT.roots[id], c = r ? counts(rootWords(id)) : null;
         if (r) all = all.concat(rootWords(id));
         here = here || cur === id;
-        inner += sideLink('#/roots/' + id, pad2(i + 1), r ? rootName(r) : id.toUpperCase(), r ? c.known + '/' + c.total : '', { active: cur === id, dim: !r });
+        inner += sideLink('#/roots/' + encodeURIComponent(id), pad2(i + 1), r ? rootName(r) : id.toUpperCase(), r ? c.known + '/' + c.total : '', { active: cur === id, dim: !r });
       });
       groups.push(['roots-f' + gi, g.name, ctOf(all), here, inner]);
     });
@@ -2963,6 +2980,7 @@
     if (groups.length) h += '<div class="side-label">Roots</div>';
     groups.forEach(function (g, i) { h += sideGroup(g[0], pad2(i + 1), g[1], g[2], g[3], g[4], i === groups.length - 1); });
     h += '<div class="side-label">Trainer</div>' +
+      (GT.feature('rootRoulette') ? sideLink('#/roots/roulette', null, 'Root roulette', '', { active: cur === 'roulette' }) : '') +
       (GT.feature('prefixDrill') ? sideLink('#/roots/drill', null, PW() + ' drill', '', { active: cur === 'drill' }) : '') +
       sideLink('#/practice?scope=roots', null, 'Practice Studio →', '', {});
     return h + sidePractice();
@@ -3008,6 +3026,7 @@
   function viewRootsLanding(section) {
     section = section || 'families';
     var h = '<header class="page-head"><span class="eyebrow">Language · Roots</span><h1>Roots & Word Formation</h1><p class="lead">' + intro('roots') + '</p></header>';
+    if (GT.feature('rootRoulette')) h += '<div class="roots-play-row"><a class="btn small" href="#/roots/roulette">Play Root roulette →</a></div>';
     h += rootsSubTabs(section);
     if (section === 'families') {
       var groupIntro = GT.cfg('rootGroupIntro') || {};
@@ -3015,9 +3034,9 @@
         var gIntro = groupIntro[g.name] ? GT.gl(groupIntro[g.name]) : '';
         h += '<h3 class="section-title"' + (gi ? '' : ' style="margin-top:0"') + '>' + esc(g.name) + '</h3>' + (gIntro ? '<p class="note muted" style="margin:-6px 0 18px">' + esc(gIntro) + '</p>' : '') + '<div class="grid">' + g.ids.map(function (id, i) {
           var r = GT.roots[id];
-          if (!r) return '<a class="tile empty" href="#/roots/' + id + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">soon</span></div><h4>' + esc(id.toUpperCase()) + '</h4></a>';
+          if (!r) return '<a class="tile empty" href="#/roots/' + encodeURIComponent(id) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">soon</span></div><h4>' + esc(id.toUpperCase()) + '</h4></a>';
           var c = counts(rootWords(id)), sub = r.sub ? '<span class="mono-muted"> · ' + esc(r.sub) + '</span>' : '';
-          return '<a class="tile" href="#/roots/' + id + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + c.known + '/' + c.total + '</span></div><h4>' + esc(rootName(r)) + '</h4><p lang="' + GT.glLang(r) + '">' + esc(GT.gl(r)) + sub + '</p><div class="track"><i style="width:' + (c.total ? c.known / c.total * 100 : 0) + '%"></i></div></a>';
+          return '<a class="tile" href="#/roots/' + encodeURIComponent(id) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + c.known + '/' + c.total + '</span></div><h4>' + esc(rootName(r)) + '</h4><p lang="' + GT.glLang(r) + '">' + esc(GT.gl(r)) + sub + '</p><div class="track"><i style="width:' + (c.total ? c.known / c.total * 100 : 0) + '%"></i></div></a>';
         }).join('') + '</div>';
       });
       h += '<div class="actions">' + (GT.feature('prefixDrill') ? '<a class="btn primary" href="#/roots/drill">' + PW() + ' drill →</a>' : '') + '<a class="btn' + (GT.feature('prefixDrill') ? '' : ' primary') + '" href="#/practice?scope=roots">Practice in Studio →</a></div>';
@@ -3121,6 +3140,7 @@
       return notFound();
     }
     var words = rootWords(id), base = words.filter(function (w) { return w.base; })[0] || words[0];
+    if (!base) return notFound();
     // German maps derived verbs (prefix + verb); other packs map every derived member of the family.
     var verbsOnly = r.mapVerbs != null ? r.mapVerbs : GT.feature('rootMapVerbs');
     var derived = uniqueByHead(words.filter(function (w) { return !w.base; }), base.t);
@@ -3227,7 +3247,7 @@
     }
     if (pf.grammar) h += '<h3 class="section-title">Grammar</h3><div class="box"><div class="prose" lang="' + GT.lxLang(pf, 'grammar') + '">' + fbTag(GT.lxLang(pf, 'grammar')) + lxText(pf, 'grammar') + '</div></div>';
     var rootsWith = Object.keys(GT.roots).filter(function (rid) { return rootWords(rid).some(function (w) { return w.prefix === id; }); });
-    if (rootsWith.length) h += '<div class="actions actions-grid">' + rootsWith.map(function (rid) { return '<a class="btn" href="#/roots/' + rid + '">' + esc(pf.label) + ' with ' + esc(rootName(GT.roots[rid])) + '</a>'; }).join('') + '</div>';
+    if (rootsWith.length) h += '<div class="actions actions-grid">' + rootsWith.map(function (rid) { return '<a class="btn" href="#/roots/' + encodeURIComponent(rid) + '">' + esc(pf.label) + ' with ' + esc(rootName(GT.roots[rid])) + '</a>'; }).join('') + '</div>';
     page(h, 'mid');
   }
 
@@ -3262,6 +3282,7 @@
     return pool;
   }
   function viewRootDrill(rootId) {
+    rootId = rootId && GT.roots[rootId] ? rootId : '';
     var mode = ui.rootDrillMode || 'mix';
     var pool = buildRootDrillPool(rootId, mode);
     rd = { rootId: rootId, mode: mode, queue: shuffle(pool).slice(0, 12), i: 0, right: 0, answered: null, given: null, opts: null };
@@ -3270,7 +3291,7 @@
   function drillPattern(w) {
     if (w.drill && w.drill.t) return w.drill.t;
     if (w.particle) {
-      var pl = String(pfLabel(w.prefix)).replace(/^…\s*/, '');
+      var pl = String(pfLabel(w.prefix)).replace(/^…\s*/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       return w.t.replace(new RegExp('(^|\\s)' + pl + '(?=\\s|$)', 'i'), '$1___');
     }
     var d = w.t.replace(/^sich /, '');
@@ -3303,7 +3324,7 @@
     if (R.i >= R.queue.length) {
       ui.keyHandler = null;
       return page(crumbsHTML(crumbBase, 100) + '<header class="page-head"><h1>Drill done</h1><p class="lead">' + R.right + ' of ' + R.queue.length + ' correct.</p></header>' +
-        '<div class="actions actions-pair"><button class="btn primary" data-act="rd-again">Again</button><a class="btn" href="#/roots' + (R.rootId ? '/' + R.rootId : '') + '">Back</a></div>', 'narrow');
+        '<div class="actions actions-pair"><button class="btn primary" data-act="rd-again">Again</button><a class="btn" href="#/roots' + (R.rootId ? '/' + encodeURIComponent(R.rootId) : '') + '">Back</a></div>', 'narrow');
     }
     var item = R.queue[R.i], w = item.w, r = GT.roots[w.rootId];
     var keyId = R.i + ':' + item.kind + ':' + w.id;
@@ -3800,8 +3821,8 @@
           out.push({
             id: 'pf:' + w.id + ':' + pd.ex, entry: w, kind: 'affix', hints: 0,
             affixRef: { kind: 'pf', wid: w.id, pdEx: pd.ex, pdMeaning: pd.meaning },
-            badge: 'Prefix · ' + pf.label + ' in ' + w.t,
-            prompt: GT.hint('prefixQ', { P: pf.label }),
+            badge: (pf.kind === 'particle' ? 'Particle · ' : 'Prefix · ') + pf.label + ' in ' + w.t,
+            prompt: GT.hint(pf.kind === 'particle' ? 'particleQ' : 'prefixQ', { P: pf.label }),
             contextDe: ex.t, translation: trOf(ex),
             answer: GT.gl(cm),
             options: shuffle([GT.gl(cm)].concat(dist)),
@@ -3963,7 +3984,10 @@
     var kindEl = $('#stKind'), helpEl = $('#stHelp');
     if (!kindEl) return;
     var k = kindEl.value, noScope = k === 'affix' || k === 'grammar' || k === 'articles';
-    ['#stLevel', '#stSection', '#stTopic', '#stStudied'].forEach(function (s) { var el = $(s); if (el) el.disabled = noScope; });
+    ['#stLevel', '#stSection', '#stTopic', '#stStudied'].forEach(function (s) {
+      var el = $(s);
+      if (el) el.disabled = noScope || (s === '#stTopic' && $('#stSection') && $('#stSection').value === 'all');
+    });
     var lim = $('#stLimit');
     if (lim) lim.disabled = k === 'blitz';
     if (helpEl) {
@@ -3983,10 +4007,10 @@
     stopStudioTimer();
     ui.lastStudioParams = params;
     studio = null;
-    var defKind = params.kind && STUDIO_MODES[params.kind] ? params.kind : 'mixed';
+    var defKind = params.kind && Object.prototype.hasOwnProperty.call(STUDIO_MODES, params.kind) ? params.kind : 'mixed';
     var defScope = params.scope || (params.root ? 'root:' + params.root : 'all');
     var defSection = sectionOfScope(defScope), defTopic = defScope !== defSection ? defScope : '';
-    var defLevel = LEVEL_BANDS.hasOwnProperty(params.level) ? params.level : 'all';
+    var defLevel = Object.prototype.hasOwnProperty.call(LEVEL_BANDS, params.level) ? params.level : 'all';
     var lc = levelCounts();
     var h = '<header class="page-head"><span class="eyebrow">04 · Learning Studio · ' + esc(langMeta().name) + '</span><h1>Practice</h1>' +
       '<p class="lead">Short games with words, word families, grammar and expressions. A sandbox: nothing is saved here and nothing changes your Review schedule.</p></header>';
@@ -4018,6 +4042,40 @@
       '<p class="note muted" id="stHelp" lang="' + GT.know + '" style="margin-top:10px"></p>' +
       '<div class="actions" style="margin-top:24px;justify-content:center"><button class="btn primary" type="submit">Start →</button></div>' +
       '</form><div id="studioMsg"></div>';
+    var wf = wfDef(), games = [];
+    if (GT.feature('rootRoulette')) {
+      games.push({
+        href: '#/roots/roulette',
+        tag: 'Roots',
+        title: 'Root roulette',
+        desc: 'Spin a ' + PW().toLowerCase() + ' onto a root — guess the meaning or build the word.'
+      });
+    }
+    if (GT.feature('prefixDrill')) {
+      games.push({
+        href: '#/roots/drill',
+        tag: 'Roots',
+        title: PW() + ' drill',
+        desc: 'Pick the right ' + PW().toLowerCase() + ' or explain its meaning in a real sentence.'
+      });
+    }
+    if (wf) {
+      var wfLead = String((wf.game && wf.game.lead && wf.game.lead()) || '').replace(/<[^>]+>/g, '').trim();
+      var wfDesc = (wfLead.match(/^.+?[.!?](?=\s|$)/) || [wfLead])[0];
+      games.push({
+        href: '#/' + wf.route + '/play',
+        tag: wf.label,
+        title: wf.label + ' · ' + (wf.game && wf.game.title ? wf.game.title : 'Game'),
+        desc: wfDesc,
+        lang: GT.know
+      });
+    }
+    if (games.length) {
+      h += '<h3 class="section-title">Games</h3><div class="grid">' + games.map(function (g, i) {
+        return '<a class="tile" href="' + g.href + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + esc(g.tag) + '</span></div>' +
+          '<h4>' + esc(g.title) + '</h4><p' + (g.lang ? ' lang="' + esc(g.lang) + '"' : '') + '>' + esc(g.desc) + '</p></a>';
+      }).join('') + '</div>';
+    }
     page(h, 'mid');
     syncStudioHelp();
   }
@@ -4446,8 +4504,8 @@
     if (t === 'expressions' && p[1] === 'literature') return '#/literature';
     if (p[2] === 'item' && p[3]) return '#/item/' + encodeURIComponent(p[3]);
     if (t === 'professional' && p[1] && !proGroups().some(function (g) { return g.key === p[1]; })) return '#/it/' + p.slice(1).map(encodeURIComponent).join('/');
-    if (t === 'idioms') return '#/expressions/' + (p[1] ? 'idioms-' + p[1] : 'idioms') + (p[2] ? '/' + p[2] : '');
-    if (t === 'everyday-phrases') return '#/expressions/' + (p[1] ? 'everyday-' + p[1] : 'everyday') + (p[2] ? '/' + p[2] : '');
+    if (t === 'idioms') return '#/expressions/' + (p[1] ? 'idioms-' + encodeURIComponent(p[1]) : 'idioms') + (p[2] ? '/' + encodeURIComponent(p[2]) : '');
+    if (t === 'everyday-phrases') return '#/expressions/' + (p[1] ? 'everyday-' + encodeURIComponent(p[1]) : 'everyday') + (p[2] ? '/' + encodeURIComponent(p[2]) : '');
     if (t === 'family' && p[1]) return '#/roots/' + encodeURIComponent(p[1]);
     if (t === 'prefixes' || t === 'suffixes' || t === 'classical') return '#/roots/' + t;
     if (t === 'progress') return '#/stats';
@@ -4505,6 +4563,10 @@
         else if (p[1] === 'prefixes') viewRootsLanding('prefixes');
         else if (p[1] === 'suffixes') viewRootsLanding('suffixes');
         else if (p[1] === 'classical') viewRootsLanding('classical');
+        else if (p[1] === 'roulette') {
+          if (!GT.feature('rootRoulette') || !GT.roulette) { location.replace('#/roots'); return; }
+          GT.roulette.render({ page: page, esc: esc, crumbs: crumbsHTML, setKeys: function (fn) { ui.keyHandler = fn; } });
+        }
         else if (p[1] === 'drill') viewRootDrill(p[2] || '');
         else if (p[1].indexOf('p-') === 0 && (GT.prefixes[p[1].slice(2)] || GT.PREFIX_PLAN.indexOf(p[1].slice(2)) >= 0)) viewPrefix(p[1].slice(2));
         else if (p[1].indexOf('s-') === 0 && GT.suffixes[p[1].slice(2)]) viewSuffix(p[1].slice(2));
@@ -4660,7 +4722,7 @@
             var pd = pdList.filter(function (x) { return x.ex === ref.pdEx && x.meaning === ref.pdMeaning; })[0];
             var aex = w && w.examples && w.examples[ref.pdEx], cm = pf && pf.meanings && pf.meanings[ref.pdMeaning];
             if (w && pf && pd && aex && cm) {
-              q.prompt = GT.hint('prefixQ', { P: pf.label });
+              q.prompt = GT.hint(pf.kind === 'particle' ? 'particleQ' : 'prefixQ', { P: pf.label });
               q.translation = trOf(aex);
               q.explain = lxText(pd, 'explain');
               if (!isChecked) {
@@ -4815,7 +4877,7 @@
       return GT.topic(t, p[1]) ? null : '#/' + t;
     }
     if (t === 'grammar' && p[1]) return GT.topic('grammar', p[1]) ? null : '#/grammar';
-    if (t === 'roots' && p[1] && ['prefixes', 'suffixes', 'classical', 'drill'].indexOf(p[1]) < 0) {
+    if (t === 'roots' && p[1] && ['prefixes', 'suffixes', 'classical', 'drill', 'roulette'].indexOf(p[1]) < 0) {
       var id = p[1];
       if (/^p-/.test(id)) return GT.prefixes[id.slice(2)] ? null : '#/roots/prefixes';
       if (/^s-/.test(id)) return GT.suffixes[id.slice(2)] ? null : '#/roots/suffixes';
@@ -4823,6 +4885,7 @@
       return GT.roots[id] || GT.ROOT_PLAN.indexOf(id) >= 0 ? null : '#/roots';
     }
     if (t === 'roots' && p[1] === 'drill' && !GT.feature('prefixDrill')) return '#/roots';
+    if (t === 'roots' && p[1] === 'roulette' && !GT.feature('rootRoulette')) return '#/roots';
     if (t === 'practice' && /scope=root(:|%3A)/.test(location.hash)) return '#/practice';
     return null;
   }
@@ -4900,7 +4963,7 @@
     GT.know = know;
     // Start page: a ?lang= article override would pin the old language; drop it so the article follows "I know".
     if (knowChanged && !targetHash && curPath()[0] === 'start' && location.hash.indexOf('?') >= 0) {
-      history.replaceState(null, '', location.pathname + location.search + '#/start');
+      try { history.replaceState(null, '', location.pathname + location.search + '#/start'); } catch (e) {}
     }
     S.settings.knowLang = know;
     S.settings.learnLang = learnL;

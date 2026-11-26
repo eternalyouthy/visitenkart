@@ -73,12 +73,43 @@
     return /^(g-|de-g-|en-g-|grammar:|affix:|ru-g-|ru-sf-)/.test(k);
   }
 
+  function isPlainObj(v) { return !!v && typeof v === 'object' && !Array.isArray(v); }
   function safeKey(k) { return !!k && k !== '__proto__' && k !== 'constructor' && k !== 'prototype'; }
-  function safeMap(src) {
+  function cleanObj(src) {
     var out = {};
-    if (!src || typeof src !== 'object') return out;
+    if (!isPlainObj(src)) return out;
     Object.keys(src).forEach(function (k) { if (safeKey(k)) out[k] = src[k]; });
     return out;
+  }
+  function safeMap(src) { return cleanObj(src); }
+  function safeCardMap(src) {
+    var out = {};
+    if (!isPlainObj(src)) return out;
+    Object.keys(src).forEach(function (k) { if (safeKey(k) && isPlainObj(src[k])) out[k] = cleanObj(src[k]); });
+    return out;
+  }
+  function safeTimeMap(src) {
+    var out = {};
+    if (!isPlainObj(src)) return out;
+    Object.keys(src).forEach(function (k) { if (safeKey(k) && typeof src[k] === 'number' && Number.isFinite(src[k]) && src[k] >= 0) out[k] = src[k]; });
+    return out;
+  }
+  function safeLogMap(src) {
+    var out = {};
+    if (!isPlainObj(src)) return out;
+    Object.keys(src).forEach(function (k) { if (safeKey(k) && isPlainObj(src[k])) out[k] = cleanObj(src[k]); });
+    return out;
+  }
+  function safeTs(v, fallback) { return Number.isSafeInteger(v) && v >= 0 ? v : fallback; }
+  function knownLangs() {
+    var set = Object.assign({}, KEYS, datas);
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var m = /^etrnl\.progress\.([a-z]{2})\.v1$/.exec(localStorage.key(i) || '');
+        if (m) set[m[1]] = 1;
+      }
+    } catch (e) {}
+    return Object.keys(set).sort();
   }
 
   var PROGRESS_FIELDS = ['version', 'language', 'created', 'cards', 'later', 'deleted', 'resetAt', 'log', 'lastPractice', 'lastExport', 'settings'];
@@ -115,25 +146,25 @@
 
   function normalize(d, lang) {
     var f = fresh(lang);
-    if (!d || typeof d !== 'object') return { data: f, migrated: false, settings: null };
-    var rawCards = safeMap(d.cards && typeof d.cards === 'object' ? d.cards : {});
+    if (!isPlainObj(d)) return { data: f, migrated: false, settings: null };
+    var rawCards = safeCardMap(d.cards);
     // Modern ids are opaque. An unknown drill from a newer catalogue must not be renamed.
     var needsMig = (d.version || 1) < SCHEMA_VERSION;
     var mig = needsMig ? migrateCards(rawCards) : { cards: rawCards, changed: false };
     return {
       migrated: (d.version || 1) < SCHEMA_VERSION || mig.changed,
-      settings: d.settings && typeof d.settings === 'object' ? d.settings : null,
+      settings: isPlainObj(d.settings) ? d.settings : null,
       data: Object.assign(extraFields(d, PROGRESS_FIELDS), {
         version: SCHEMA_VERSION,
         language: lang,
-        created: d.created || f.created,
+        created: Number.isSafeInteger(d.created) && d.created > 0 ? d.created : f.created,
         cards: mig.cards,
-        later: safeMap(d.later),
-        deleted: safeMap(d.deleted),
-        resetAt: Number(d.resetAt) || 0,
-        log: safeMap(d.log),
-        lastPractice: d.lastPractice || null,
-        lastExport: d.lastExport || null
+        later: safeTimeMap(d.later),
+        deleted: safeTimeMap(d.deleted),
+        resetAt: safeTs(d.resetAt, 0),
+        log: safeLogMap(d.log),
+        lastPractice: safeTs(d.lastPractice, null),
+        lastExport: safeTs(d.lastExport, null)
       })
     };
   }
@@ -206,11 +237,15 @@
 
   var storageOk = true;
   function readJSON(key) {
-    try { var raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : null; }
+    var raw;
+    try { raw = localStorage.getItem(key); }
     catch (e) { storageOk = false; return null; }
+    if (!raw) return null;
+    try { return JSON.parse(raw); }
+    catch (e) { return null; }
   }
   function writeJSON(key, v) {
-    try { localStorage.setItem(key, JSON.stringify(v)); return true; }
+    try { localStorage.setItem(key, JSON.stringify(v)); storageOk = true; return true; }
     catch (e) { storageOk = false; return false; }
   }
 
@@ -256,17 +291,18 @@
    *  - log: per-day max of reviews and learned (idempotent across repeated syncs). */
   function cardTs(c) { return Math.max(Number(c && c.last) || 0, Number(c && c.known) || 0, Number(c && c.added) || 0); }
   function mergeCard(a, b) {
-    if (!a || typeof a !== 'object') return Object.assign({}, b);
-    if (!b || typeof b !== 'object') return Object.assign({}, a);
-    var added = Math.min(a.added || Infinity, b.added || Infinity);
-    var ta = cardTs(a), tb = cardTs(b), win;
-    if (ta !== tb) win = tb > ta ? b : a;
-    else if ((a.state === 'known') !== (b.state === 'known')) win = b.state === 'known' ? b : a;
-    else if ((b.reps || 0) !== (a.reps || 0)) win = (b.reps || 0) > (a.reps || 0) ? b : a;
-    else if ((a.due || 0) !== (b.due || 0)) win = (b.due || 0) > (a.due || 0) ? b : a;
+    if (!isPlainObj(a)) return cleanObj(b);
+    if (!isPlainObj(b)) return cleanObj(a);
+    var ca = cleanObj(a), cb = cleanObj(b);
+    var added = Math.min(ca.added || Infinity, cb.added || Infinity);
+    var ta = cardTs(ca), tb = cardTs(cb), win;
+    if (ta !== tb) win = tb > ta ? cb : ca;
+    else if ((ca.state === 'known') !== (cb.state === 'known')) win = cb.state === 'known' ? cb : ca;
+    else if ((cb.reps || 0) !== (ca.reps || 0)) win = (cb.reps || 0) > (ca.reps || 0) ? cb : ca;
+    else if ((ca.due || 0) !== (cb.due || 0)) win = (cb.due || 0) > (ca.due || 0) ? cb : ca;
     // Full ties must not depend on import direction. Ignore added here: it is merged separately.
-    else win = stableStr(Object.assign({}, b, { added: 0 })) > stableStr(Object.assign({}, a, { added: 0 })) ? b : a;
-    var out = Object.assign({}, win);
+    else win = stableStr(Object.assign({}, cb, { added: 0 })) > stableStr(Object.assign({}, ca, { added: 0 })) ? cb : ca;
+    var out = cleanObj(win);
     if (Number.isFinite(added)) out.added = added;
     // A new card can have only `added`. Keeping the earliest added must not move
     // its last change backwards, or a second import could choose a different winner.
@@ -287,10 +323,10 @@
       });
     });
     var cards = Object.create(null);
-    Object.keys(a.cards).forEach(function (k) { if (safeKey(k)) cards[k] = Object.assign({}, a.cards[k]); });
+    Object.keys(a.cards).forEach(function (k) { if (safeKey(k)) cards[k] = cleanObj(a.cards[k]); });
     Object.keys(b.cards).forEach(function (k) {
       if (!safeKey(k)) return;
-      cards[k] = cards[k] ? mergeCard(cards[k], b.cards[k]) : Object.assign({}, b.cards[k]);
+      cards[k] = cards[k] ? mergeCard(cards[k], b.cards[k]) : cleanObj(b.cards[k]);
     });
     Object.keys(cards).forEach(function (k) {
       var t = cardTs(cards[k]);
@@ -298,8 +334,12 @@
       else delete deleted[k];
     });
     var later = Object.create(null);
-    Object.keys(a.later).forEach(function (id) { if (safeKey(id)) later[id] = a.later[id]; });
-    Object.keys(b.later).forEach(function (id) { if (safeKey(id)) later[id] = Math.max(later[id] || 0, b.later[id] || 0); });
+    Object.keys(a.later).forEach(function (id) {
+      if (safeKey(id) && typeof a.later[id] === 'number' && Number.isFinite(a.later[id]) && a.later[id] >= 0) later[id] = a.later[id];
+    });
+    Object.keys(b.later).forEach(function (id) {
+      if (safeKey(id) && typeof b.later[id] === 'number' && Number.isFinite(b.later[id]) && b.later[id] >= 0) later[id] = Math.max(later[id] || 0, b.later[id]);
+    });
     Object.keys(later).forEach(function (id) { if (resetAt && later[id] < resetAt) delete later[id]; });
     // A removed card also supersedes an older Later marker from an offline device.
     // A new Later choice made after that removal is still valid.
@@ -315,9 +355,11 @@
     [a.log, b.log].forEach(function (src) {
       Object.keys(src).forEach(function (day) {
         if (!safeKey(day) || (resetDay && day < resetDay)) return;
-        var prev = log[day] || { reviews: 0, learned: 0 }, cur = src[day] || {};
+        var prev = log[day] || { reviews: 0, learned: 0 }, cur = isPlainObj(src[day]) ? src[day] : {};
+        var revN = Number(cur.reviews), lrnN = Number(cur.learned);
         log[day] = Object.assign(mergeExtras(prev, cur, ['reviews', 'learned']), {
-          reviews: Math.max(prev.reviews, cur.reviews || 0), learned: Math.max(prev.learned, cur.learned || 0)
+          reviews: Math.max(prev.reviews, Number.isFinite(revN) && revN >= 0 ? revN : 0),
+          learned: Math.max(prev.learned, Number.isFinite(lrnN) && lrnN >= 0 ? lrnN : 0)
         });
       });
     });
@@ -356,19 +398,19 @@
   function parseImportText(text) {
     if (typeof text !== 'string' || text.length > 20000000) throw new Error('File is too large.');
     var parsed = JSON.parse(text), next = {}, newSettings = null;
-    if (parsed && parsed.app === 'etrnl' && parsed.progress && typeof parsed.progress === 'object') {
+    if (isPlainObj(parsed) && parsed.app === 'etrnl' && isPlainObj(parsed.progress)) {
       Object.keys(parsed.progress).forEach(function (lang) {
         if (!/^[a-z]{2}$/.test(lang)) throw new Error('Unknown language in file: ' + lang);
         var p = parsed.progress[lang];
-        if (!p || typeof p !== 'object' || !p.cards || typeof p.cards !== 'object') throw new Error('Invalid progress for ' + lang + '.');
+        if (!isPlainObj(p) || !isPlainObj(p.cards)) throw new Error('Invalid progress for ' + lang + '.');
         next[lang] = normalize(p, lang).data;
       });
-      if (parsed.settings && typeof parsed.settings === 'object') newSettings = parsed.settings;
-    } else if (parsed && parsed.schemaVersion === 1 && parsed.language === 'en') {
+      if (isPlainObj(parsed.settings)) newSettings = parsed.settings;
+    } else if (isPlainObj(parsed) && parsed.schemaVersion === 1 && parsed.language === 'en') {
       next.en = convertLegacyEnglish(parsed);
     } else {
-      var p2 = parsed && parsed.progress ? parsed.progress : parsed;
-      if (!p2 || typeof p2 !== 'object' || !p2.cards || typeof p2.cards !== 'object') {
+      var p2 = isPlainObj(parsed) && parsed.progress ? parsed.progress : parsed;
+      if (!isPlainObj(p2) || !isPlainObj(p2.cards)) {
         throw new Error('This file does not look like an ETRNL progress export.');
       }
       var res = normalize(p2, 'de');   // old ETRNL / DEUTSCH export
@@ -421,19 +463,26 @@
       delete d.later[baseId(key)];
       store.save();
     },
-    setItemKnown: function (id, now) {
-      var d = D(), c = { state: 'known', known: now, last: now, added: now };
-      d.cards[id + '#rec'] = Object.assign({}, c);
-      d.cards[id + '#prod'] = Object.assign({}, c);
+    setItemKnown: function (id, ts) {
+      var d = D();
+      ['rec', 'prod'].forEach(function (dir) {
+        var k = id + '#' + dir;
+        var t = Math.max(ts, d.deleted[k] ? (Number(d.deleted[k]) || 0) + 1 : 0);
+        d.cards[k] = { state: 'known', known: t, last: t, added: t };
+        delete d.deleted[k];
+      });
       delete d.later[id];
       store.save();
     },
-    addItemToReview: function (id, now, dirs) {
+    addItemToReview: function (id, ts, dirs) {
       var d = D();
       (dirs || ['rec', 'prod']).forEach(function (dir) {
-        var nc = GT.fsrs.newCard(now);
-        nc.added = now;
-        d.cards[id + '#' + dir] = nc;
+        var k = id + '#' + dir;
+        var t = Math.max(ts, d.deleted[k] ? (Number(d.deleted[k]) || 0) + 1 : 0);
+        var nc = GT.fsrs.newCard(t);
+        nc.added = t;
+        d.cards[k] = nc;
+        delete d.deleted[k];
       });
       delete d.later[id];
       store.save();
@@ -452,7 +501,14 @@
       });
       store.save();
     },
-    markLater: function (id) { D().later[id] = now(); store.save(); },
+    markLater: function (id) {
+      var d = D(), t = now();
+      [id, id + '#rec', id + '#prod'].forEach(function (k) {
+        if (d.deleted[k]) t = Math.max(t, (Number(d.deleted[k]) || 0) + 1);
+      });
+      d.later[id] = t;
+      store.save();
+    },
     setSetting: function (k, v) { settings[k] = v; store.save(); },
     dayKey: dayKey,
     logActivity: function (kind, n) {
@@ -465,7 +521,7 @@
 
     buildPayload: function (markExport) {
       var now = Date.now(), progress = {};
-      Object.keys(Object.assign({}, KEYS, datas)).forEach(function (lang) {
+      knownLangs().forEach(function (lang) {
         var d = loadLang(lang);
         if (markExport && lang === active) d.lastExport = now;
         if (Object.keys(d.cards).length || Object.keys(d.later).length || Object.keys(d.log).length ||
@@ -490,7 +546,7 @@
 
     buildKeyProgress: function () {
       var progress = {};
-      Object.keys(Object.assign({}, KEYS, datas)).sort().forEach(function (lang) {
+      knownLangs().forEach(function (lang) {
         // Progress keys do not carry a local reset (including markers left by older app versions).
         var d = Object.assign({}, loadLang(lang), { resetAt: 0 });
         // Keep deletions and future metadata, even without cards. A reset alone is not progress.
@@ -556,12 +612,29 @@
       var parsed = parseImportText(text), next = parsed.next, newSettings = parsed.settings;
       var langs = Object.keys(next);
       if (!langs.length) throw new Error('The file contains no progress.');
-      var replace = !!opts.replace;
+      var replace = !!opts.replace, mergedByLang = {}, saved = [], rollbackFailed = false;
       langs.forEach(function (lang) {
-        var merged = replace ? next[lang] : mergeLangData(loadLang(lang), next[lang], lang);
-        datas[lang] = merged;
-        writeJSON(keyFor(lang), lang === 'de' ? Object.assign({}, merged, { settings: settings }) : merged);
+        mergedByLang[lang] = replace ? next[lang] : mergeLangData(loadLang(lang), next[lang], lang);
       });
+      try {
+        langs.forEach(function (lang) {
+          var key = keyFor(lang), raw = localStorage.getItem(key);
+          var out = lang === 'de' ? Object.assign({}, mergedByLang[lang], { settings: settings }) : mergedByLang[lang];
+          if (!writeJSON(key, out)) throw new Error('Storage unavailable');
+          saved.push({ key: key, raw: raw });
+        });
+      } catch (e) {
+        storageOk = false;
+        saved.reverse().forEach(function (entry) {
+          try {
+            if (entry.raw === null) localStorage.removeItem(entry.key);
+            else localStorage.setItem(entry.key, entry.raw);
+          } catch (err) { rollbackFailed = true; }
+        });
+        throw new Error('Could not save progress. Storage is blocked or full.' +
+          (rollbackFailed ? ' Some languages may have been saved. Try again or export your progress.' : ''));
+      }
+      langs.forEach(function (lang) { datas[lang] = mergedByLang[lang]; });
       if (newSettings && !opts.keepSettings) {
         var keepPair = { knowLang: settings.knowLang, learnLang: settings.learnLang };
         var cleanS = sanitizeSettings(newSettings, false);
@@ -582,7 +655,7 @@
     reset: function () { datas[active] = fresh(active); store.save(); },
     /** Reset EVERY language on this device only (settings, theme and clock stay). Saved progress keys can restore it. */
     resetAll: function () {
-      var langs = Object.keys(Object.assign({}, KEYS, datas)).sort(), next = {}, saved = [];
+      var langs = knownLangs(), next = {}, saved = [];
       langs.forEach(function (lang) { next[lang] = fresh(lang); });
       try {
         langs.forEach(function (lang) {
@@ -709,6 +782,8 @@
       return syncHandle.createWritable().then(function (writable) {
         return writable.write(JSON.stringify(payload, null, 1)).then(function () {
           return writable.close();
+        }, function (err) {
+          return (writable.abort ? writable.abort().catch(function () {}) : Promise.resolve()).then(function () { throw err; });
         });
       }).then(function () {
         if (!summary) {
@@ -944,7 +1019,7 @@
         body: jsonStr
       });
     } else {
-      var boundary = 'etrnl_gd_' + Date.now();
+      var boundary = 'etrnl_gd_' + Date.now() + '_' + Math.random().toString(36).slice(2);
       var meta = JSON.stringify({ name: GD_FILE, parents: ['appDataFolder'] });
       req = gdFetch(GD_UPLOAD + '?uploadType=multipart&fields=id,modifiedTime', {
         method: 'POST',
@@ -997,6 +1072,11 @@
               var parsed = null;
               try { parsed = JSON.parse(trimmed); } catch (e) { return; }   // corrupt file → overwritten below
               if (f === main && parsed && parsed.app === 'etrnl' && parsed.progress) remotePrint = progressPrint(parsed.progress);
+              // Only a corrupt/foreign file may be skipped (and overwritten below). A storage failure must
+              // abort the sync: swallowing it would upload local-only progress over the Drive copy.
+              var usable = false;
+              try { usable = Object.keys(parseImportText(trimmed).next).length > 0; } catch (e) {}
+              if (!usable) return;
               store.importJSON(trimmed, { replace: false, keepSettings: true, fromSync: true });
             });
           });

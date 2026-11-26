@@ -29,7 +29,7 @@
     baseKnown: 'en',
     levelName: 'A2–B2',
     nounHint: 'noun · note the gender',
-    features: { rootMapVerbs: true, prefixDrill: true, goetheB1: false, ruLink: false },
+    features: { rootMapVerbs: true, prefixDrill: true, rootRoulette: true, goetheB1: false, ruLink: false },
     prefixMatchTitle: 'Compare',
     afterLoad: [function (pack) {
       var seen = [];

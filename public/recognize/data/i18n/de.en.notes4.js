@@ -1670,3 +1670,26 @@
     ]
   });
 })();
+
+/* TELC B2 source expansion 2026-11-26 — data only.
+ * Source: Einfach besser! 500, B2, English word list; original examples.
+ * Permanent IDs; existing cards reused by lemma, part of speech and sense. */
+GT.packs.de.byId["b2-m3-gehoerschutz"].note = {
+  "en": "Normally singular in this sense.",
+  "ru": "В данном значении обычно употребляется в единственном числе."
+};
+
+GT.packs.de.byId["it-sec-richtlinie"].note = {
+  "en": "“Eine Richtlinie gilt / tritt in Kraft” — a policy applies / enters into force. “Gegen die Richtlinie verstoßen” — to violate the policy. Also an EU directive: “die NIS-2-Richtlinie”.\n\nSingular die Richtlinie, plural die Richtlinien. A work guideline, rule or directive, rather than a single drawn line.",
+  "ru": "«Eine Richtlinie gilt / tritt in Kraft» — правило действует / вступает в силу. «Gegen die Richtlinie verstoßen» — нарушить политику. Также директива ЕС: «die NIS-2-Richtlinie».\n\nЕдинственное число — die Richtlinie, множественное — die Richtlinien. В рабочем контексте: принцип, правило или директива."
+};
+
+GT.packs.de.byId["pro-b6-mahnung"].note = {
+  "en": "A polite first notice is often titled Zahlungserinnerung; formal follow-ups are numbered Mahnungen.\n\nHere Mahnung concerns an overdue invoice. Do not learn the PDF’s broad “written warning” as a disciplinary warning; that context normally uses Abmahnung.",
+  "ru": "Дружелюбное первое письмо часто называют Zahlungserinnerung, а строгие последующие — 1./2. Mahnung.\n\nВ разделе оплаты Mahnung означает требование или напоминание о просроченной оплате. Не путайте с Abmahnung — предупреждением в трудовом или ином правовом контексте."
+};
+
+GT.packs.de.byId["r-sprechen-widersprechen"].note = {
+  "en": "Inseparable (spelled wider-, NOT wieder-!): “er widerspricht”, “hat widersprochen”. Always with the dative! Noun: “der Widerspruch” (objection, formal appeal against an authority’s decision!).\n\nHere the figures contradict a report. Widersprechen can also mean disagree with a person; the German complement is dative.",
+  "ru": "Неотделяемый (пишется wider-, НЕ wieder-!): «er widerspricht», «hat widersprochen». Всегда с Dativ! Существительное: «der Widerspruch» (возражение, обжалование решения ведомства!).\n\nВ этом примере факты противоречат отчёту. У widersprechen также есть значение «возражать человеку»; дополнение в немецком стоит в Dativ."
+};

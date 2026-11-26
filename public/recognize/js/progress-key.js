@@ -29,6 +29,13 @@
   function own(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
   function put(o, k, v) { Object.defineProperty(o, k, { value: v, enumerable: true, writable: true, configurable: true }); }
   function object(v) { return v && typeof v === 'object' && !Array.isArray(v); }
+  function safeKey(k) { return !!k && k !== '__proto__' && k !== 'constructor' && k !== 'prototype'; }
+  function hasUnsafeKeys(v, depth) {
+    if (!v || typeof v !== 'object') return false;
+    if (depth > 32) return true;
+    if (Array.isArray(v)) return v.some(function (x) { return hasUnsafeKeys(x, depth + 1); });
+    return Object.keys(v).some(function (k) { return !safeKey(k) || hasUnsafeKeys(v[k], depth + 1); });
+  }
   function uint(v) { return Number.isSafeInteger(v) && v >= 0; }
   function canonical(v) {
     if (v === null || typeof v !== 'object') return JSON.stringify(v);
@@ -143,7 +150,7 @@
     if (n) {
       var extra = r.json(n); if (!object(extra)) throw damaged();
       Object.keys(extra).forEach(function (k) {
-        if (own(out, k) || (excluded && excluded.indexOf(k) >= 0)) throw damaged();
+        if (!safeKey(k) || own(out, k) || (excluded && excluded.indexOf(k) >= 0) || hasUnsafeKeys(extra[k], 0)) throw damaged();
         put(out, k, extra[k]);
       });
     }
@@ -163,18 +170,22 @@
     });
   }
   function readMap(r, fields, base) {
-    var out = {}, prev = new Uint8Array(0), previousId = null, count = r.uint();
+    var out = {}, prev = new Uint8Array(0), previousId = null, count = r.uint(), totalIdBytes = 0;
     if (count > r.bytes.length - r.pos) throw damaged();
     for (var i = 0; i < count; i++) {
       var shared = r.uint(), length = r.uint();
-      if (shared > prev.length || shared + length > LIMIT) throw damaged();
+      if (shared > prev.length || shared + length > LIMIT || (totalIdBytes += shared + length) > LIMIT) throw damaged();
       var suffix = r.raw(length), bytes = new Uint8Array(shared + length);
       bytes.set(prev.subarray(0, shared)); bytes.set(suffix, shared); prev = bytes;
       var id = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
-      if (!id || id === '__proto__' || id === 'constructor' || id === 'prototype' || (previousId !== null && id <= previousId)) throw damaged();
+      if (!safeKey(id) || (previousId !== null && id <= previousId)) throw damaged();
       previousId = id;
       if (fields) put(out, id, readRecord(r, fields, base));
-      else { var tag = r.byte(); if (tag > 1) throw damaged(); put(out, id, tag ? r.json(r.uint()) : readValue(r, 'time', base)); }
+      else {
+        var tag = r.byte(); if (tag > 1) throw damaged();
+        if (tag) { var val = r.json(r.uint()); if (hasUnsafeKeys(val, 0)) throw damaged(); put(out, id, val); }
+        else put(out, id, readValue(r, 'time', base));
+      }
     }
     return out;
   }
@@ -256,7 +267,7 @@
   }
   async function encode(data, lang) {
     support();
-    if (!/^[a-z]{2}$/.test(lang) || data.language !== lang) throw new Error('Unknown progress language.');
+    if (!object(data) || !/^[a-z]{2}$/.test(lang) || data.language !== lang) throw new Error('Unknown progress language.');
     // Snapshot before the first await: reviews made while compressing belong to the next key.
     return envelope(encodeV1(JSON.parse(JSON.stringify(data))), 1, lang);
   }
@@ -282,6 +293,7 @@
     // Never repurpose a version. Old decoders remain here forever.
     var decoder;
     switch (bytes[0]) {
+      case 0: throw damaged();
       case 1:
         if (String.fromCharCode(bytes[1], bytes[2]) !== match[2]) throw damaged();
         decoder = decodeV1; break;

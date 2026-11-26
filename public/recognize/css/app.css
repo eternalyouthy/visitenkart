@@ -1013,11 +1013,11 @@ a.chip:hover { border-color: var(--ice); }
 .sheet-scrim { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, 0.55); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
 .sheet-scrim.open { opacity: 1; pointer-events: auto; }
 .sheet {
-  position: fixed; z-index: 90; top: 0; right: 0; bottom: 0; width: min(440px, 100vw);
+  position: fixed; z-index: 90; top: 0; right: 0; bottom: 0; width: min(440px, 100%);
   background: var(--overlay); border-left: 1px solid var(--line-2); padding: 24px 28px 40px; overflow-y: auto;
   transform: translateX(102%); transition: transform 0.25s ease;
 }
-.sheet.sheet-wide { width: min(560px, 100vw); background: var(--bg); }
+.sheet.sheet-wide { width: min(560px, 100%); background: var(--bg); }
 .sheet.open { transform: none; }
 .sheet-body { margin-top: 22px; }
 .sheet-body .box { padding: 20px; }
@@ -1040,6 +1040,7 @@ a.chip:hover { border-color: var(--ice); }
   .rec-split { grid-template-columns: 1fr; }
   .rmap-bar { flex-wrap: wrap; }
   .sheet { top: auto; left: 0; right: 0; width: 100%; max-height: 80vh; border-left: 0; border-top: 1px solid var(--line-2); padding-bottom: calc(32px + var(--safe-b)); transform: translateY(102%); }
+  .sheet.sheet-wide { width: 100%; }
   .sheet.open { transform: none; }
 }
 
@@ -1687,9 +1688,71 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
   .ag-actions .btn { width: 100%; }
   .ag-actions [data-ag="forms"],
   .ag-actions [data-ag="show"]:first-child,
+  .ag-actions [data-rr="newroot"],
+  .ag-actions [data-rr="show"]:first-child,
   .ag-actions .btn.primary { grid-column: 1 / -1; }
   .ag-table th, .ag-table td { padding: 9px 8px; }
 }
+@media (max-width: 640px) {
+  .rr-modes .seg-tabs { flex-wrap: wrap; width: 100%; }
+}
+
+/* ---------- Root roulette ---------- */
+.roots-play-row { display: flex; flex-wrap: wrap; gap: 10px; margin: -12px 0 18px; }
+.rr-slot {
+  display: inline-block; padding: 1px 10px;
+  border: 1px solid var(--line-ice); background: var(--ice-soft); color: var(--ice);
+  border-radius: calc(var(--radius) * 0.5);
+}
+@keyframes rrSpin {
+  0% { transform: translateY(-10px); opacity: 0.15; }
+  55% { transform: translateY(2px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.rr-slot.rr-spin { animation: rrSpin 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .rr-slot.rr-spin { animation: none; }
+}
+.rr-op { color: var(--dim); font-weight: 400; }
+.rr-base-gl { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+.rr-prompt-mean { margin: 0 0 10px; font-size: 18px; color: var(--text); line-height: 1.45; }
+.rr-opts { display: grid; gap: 10px; }
+.rr-opts .opt {
+  position: relative;
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 34px;
+  line-height: 1.35;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.rr-opts .opt .ag-key {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.rr-opts-pfx { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.rr-opts-mean { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rr-opts-mean.rr-grid-1 { grid-template-columns: 1fr; }
+.rr-opts-mean.rr-compact .opt { font-size: 14.5px; padding: 9px 28px; line-height: 1.3; }
+@media (max-width: 760px) {
+  .rr-opts .opt { padding: 10px 14px; }
+  .rr-opts-mean.rr-compact .opt { font-size: 14px; padding: 9px 12px; line-height: 1.3; }
+}
+@media (max-width: 560px) {
+  .rr-opts-pfx { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.rr-ans-tr { margin: 4px 0 0; color: var(--text); }
+.rr-ans-pfx { margin: 8px 0 0; font-size: 14.5px; color: var(--muted); }
+.rr-ans-pfx b { color: var(--text); }
+.rr-ans-ex { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-2); }
+.rr-ex-t { margin: 0; font-size: 15.5px; color: var(--text); }
+.rr-ex-tr { margin: 3px 0 0; font-size: 14px; color: var(--muted); }
 
 /* ---------- Roots map: legibility (all themes, stronger on light ones) ---------- */
 .rnode .rn-gl, .rnode .rn-pair, .rnode.center .rn-ru { color: color-mix(in srgb, var(--text) 74%, var(--bg)); }

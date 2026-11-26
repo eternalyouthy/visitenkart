@@ -410,3 +410,191 @@
       examples: [ex('Die ungewöhnliche Verbindung von Tanz und Zeichensprache macht diese Aufführung [[einzigartig]].', 'Необычное сочетание танца и жестового языка делает этот спектакль уникальным.', 'The unusual combination of dance and sign language makes this performance unique.')] })
   ]);
 })();
+
+/* TELC B2 source expansion 2026-11-26 — data only.
+ * Source: Einfach besser! 500, B2, English word list; original examples.
+ * Permanent IDs; existing cards reused by lemma, part of speech and sense. */
+GT.register({
+  "tab": "words",
+  "topic": "b2_bildung",
+  "items": [
+    {
+      "id": "telc26-zulassung",
+      "t": "Zulassung",
+      "pos": "noun",
+      "article": "die",
+      "plural": "die Zulassungen",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 5,
+          "headword": "Zulassung",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Zulassung",
+      "ru": "допуск к обучению",
+      "en": "admission",
+      "examples": [
+        {
+          "t": "Die [[Zulassung]] zum Lehrgang wurde schriftlich bestätigt.",
+          "en": "Admission to the training course was confirmed in writing.",
+          "ru": "Допуск к обучению на курсе подтвердили письменно.",
+          "de": "Die [[Zulassung]] zum Lehrgang wurde schriftlich bestätigt.",
+          "sense": {
+            "ru": "допуск к обучению",
+            "en": "admission"
+          }
+        }
+      ]
+    },
+    {
+      "id": "telc26-lernbereit",
+      "t": "lernbereit",
+      "pos": "adj",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 4,
+          "headword": "lernbereit",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "lernbereit",
+      "ru": "готовый учиться",
+      "en": "willing to learn",
+      "examples": [
+        {
+          "t": "Wir suchen Menschen, die neugierig und [[lernbereit]] sind.",
+          "en": "We are looking for people who are curious and willing to learn.",
+          "ru": "Мы ищем людей, которые любознательны и готовы учиться.",
+          "de": "Wir suchen Menschen, die neugierig und [[lernbereit]] sind.",
+          "sense": {
+            "ru": "готовый учиться",
+            "en": "willing to learn"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_psyche",
+  "items": [
+    {
+      "id": "telc26-belastbar",
+      "t": "belastbar",
+      "pos": "adj",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 4,
+          "headword": "belastbar",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "belastbar",
+      "ru": "стрессоустойчивый",
+      "en": "resilient",
+      "examples": [
+        {
+          "t": "Auch in hektischen Phasen bleibt sie [[belastbar]].",
+          "en": "She remains resilient even during hectic periods.",
+          "ru": "Даже в напряжённые периоды она остаётся стрессоустойчивой.",
+          "de": "Auch in hektischen Phasen bleibt sie [[belastbar]].",
+          "sense": {
+            "ru": "стрессоустойчивый",
+            "en": "resilient"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_beziehungen",
+  "items": [
+    {
+      "id": "telc26-angemessen",
+      "t": "angemessen",
+      "pos": "adj",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 15,
+          "headword": "angemessen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "angemessen",
+      "ru": "уместный",
+      "en": "appropriate",
+      "examples": [
+        {
+          "t": "In dieser Situation ist eine ruhige Antwort [[angemessen]].",
+          "en": "In this situation, a calm reply is appropriate.",
+          "ru": "В этой ситуации спокойный ответ уместен.",
+          "de": "In dieser Situation ist eine ruhige Antwort [[angemessen]].",
+          "sense": {
+            "ru": "уместный",
+            "en": "appropriate"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_wissenschaft",
+  "items": [
+    {
+      "id": "telc26-verallgemeinern",
+      "t": "verallgemeinern",
+      "pos": "verb",
+      "forms": {
+        "praes": "verallgemeinert",
+        "praet": "verallgemeinerte",
+        "perf": "hat verallgemeinert"
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 28,
+          "headword": "verallgemeinern",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "verallgemeinern",
+      "ru": "обобщать",
+      "en": "generalise",
+      "examples": [
+        {
+          "t": "Wir sollten einzelne Erfahrungen nicht sofort [[verallgemeinern]].",
+          "en": "We should not immediately generalise from individual experiences.",
+          "ru": "Не стоит сразу обобщать отдельные случаи.",
+          "de": "Wir sollten einzelne Erfahrungen nicht sofort [[verallgemeinern]].",
+          "sense": {
+            "ru": "обобщать",
+            "en": "generalise"
+          }
+        }
+      ]
+    }
+  ]
+});

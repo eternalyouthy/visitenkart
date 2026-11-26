@@ -233,3 +233,998 @@
       ex('[[Before we decide, we should factor in]] the ongoing maintenance cost.', 'Прежде чем решать, нужно заложить в расчёт стоимость дальнейшей поддержки.', 'Bevor wir entscheiden, sollten wir die laufenden Wartungskosten einkalkulieren.'))
   ]);
 })();
+
+/* RECGZ content expansion 2026-11-26 — content only.
+ * Editorial learning targets; original examples; permanent IDs. */
+GT.register({
+  "tab": "chunks",
+  "topic": "opinion",
+  "items": [
+    {
+      "id": "en:content26:ch-judge",
+      "t": "As far as I can judge, [X].",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "Насколько я могу судить, [X].",
+      "de": "Soweit ich das beurteilen kann, [X].",
+      "examples": [
+        {
+          "t": "[[As far as I can judge]], the plan is realistic.",
+          "ru": "Насколько я могу судить, план реалистичен.",
+          "de": "Soweit ich das beurteilen kann, ist der Plan realistisch."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-rule-out",
+      "t": "I wouldn’t rule out [X].",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "C1",
+      "register": "neutral",
+      "ru": "Я бы не стал(а) исключать [X].",
+      "de": "Ich würde [X] nicht ausschließen.",
+      "examples": [
+        {
+          "t": "[[I wouldn’t rule out]] a delay.",
+          "ru": "Я бы не стал исключать задержку.",
+          "de": "Ich würde eine Verzögerung nicht ausschließen."
+        }
+      ],
+      "note": {
+        "ru": "Осторожное допущение возможности, а не прогноз.",
+        "de": "Eine vorsichtig formulierte Möglichkeit, keine Vorhersage."
+      }
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "agree",
+  "items": [
+    {
+      "id": "en:content26:ch-hard-to-argue",
+      "t": "It’s hard to argue with that.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "С этим трудно поспорить.",
+      "de": "Dagegen lässt sich schwer etwas einwenden.",
+      "examples": [
+        {
+          "t": "[[It’s hard to argue with that]], but costs matter too.",
+          "ru": "С этим трудно поспорить, но расходы тоже важны.",
+          "de": "Dagegen lässt sich schwer etwas einwenden, aber die Kosten sind auch wichtig."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-aim-method",
+      "t": "I agree with the aim, but not the method.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "C1",
+      "register": "neutral",
+      "ru": "Я согласен (согласна) с целью, но не с методом.",
+      "de": "Ich stimme dem Ziel zu, aber nicht der Methode.",
+      "examples": [
+        {
+          "t": "[[I agree with the aim, but not the method]]. Let’s consider another approach.",
+          "ru": "Я согласен с целью, но не с методом. Давайте рассмотрим другой подход.",
+          "de": "Ich stimme dem Ziel zu, aber nicht der Methode. Betrachten wir einen anderen Ansatz."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "clarify",
+  "items": [
+    {
+      "id": "en:content26:ch-talking-about",
+      "t": "Are we talking about [X] or [Y]?",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B1",
+      "register": "neutral",
+      "ru": "Речь идёт о [X] или о [Y]?",
+      "de": "Geht es um [X] oder um [Y]?",
+      "examples": [
+        {
+          "t": "[[Are we talking about]] the price [[or]] the deadlines?",
+          "ru": "Речь идёт о цене или о сроках?",
+          "de": "Geht es um den Preis oder um die Termine?"
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-include",
+      "t": "What exactly do you include in [X]?",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "Что именно вы относите к [X]?",
+      "de": "Was genau zählen Sie zu [X]?",
+      "examples": [
+        {
+          "t": "[[What exactly do you include in]] additional costs?",
+          "ru": "Что именно вы относите к дополнительным расходам?",
+          "de": "Was genau zählen Sie zu den zusätzlichen Kosten?"
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "complain",
+  "items": [
+    {
+      "id": "en:content26:ch-resolution",
+      "t": "Please explain how you intend to resolve this.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "ru": "Прошу сообщить, как вы планируете решить эту проблему.",
+      "de": "Bitte erläutern Sie, wie Sie dieses Problem lösen wollen.",
+      "examples": [
+        {
+          "t": "[[Please explain how you intend to resolve this]]. The heating has been off for three days.",
+          "ru": "Прошу сообщить, как вы планируете решить эту проблему. Отопления нет уже третий день.",
+          "de": "Bitte erläutern Sie, wie Sie dieses Problem lösen wollen. Die Heizung ist seit drei Tagen ausgefallen."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-deadline-passed",
+      "t": "Unfortunately, the agreed deadline has passed.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "ru": "К сожалению, согласованный срок уже истёк.",
+      "de": "Leider ist die vereinbarte Frist bereits abgelaufen.",
+      "examples": [
+        {
+          "t": "[[Unfortunately, the agreed deadline has passed]], and I have not received a reply.",
+          "ru": "К сожалению, согласованный срок уже истёк, а ответа я не получил.",
+          "de": "Leider ist die vereinbarte Frist bereits abgelaufen, und ich habe keine Antwort erhalten."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "problem",
+  "items": [
+    {
+      "id": "en:content26:ch-even-though",
+      "t": "I can’t [X], even though [Y].",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B1",
+      "register": "neutral",
+      "ru": "Не получается [X], хотя [Y].",
+      "de": "Ich kann [X] nicht, obwohl [Y].",
+      "examples": [
+        {
+          "t": "[[I can’t]] log in, [[even though]] the password is correct.",
+          "ru": "Не получается войти, хотя пароль верный.",
+          "de": "Ich kann mich nicht anmelden, obwohl das Passwort richtig ist."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-only-affects",
+      "t": "The issue only affects [X].",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "Проблема затрагивает только [X].",
+      "de": "Das Problem betrifft nur [X].",
+      "examples": [
+        {
+          "t": "[[The issue only affects]] the mobile version.",
+          "ru": "Проблема затрагивает только мобильную версию.",
+          "de": "Das Problem betrifft nur die mobile Version."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "appointments",
+  "items": [
+    {
+      "id": "en:content26:ch-earlier",
+      "t": "Could we bring the meeting forward by an hour?",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "Можно ли сдвинуть встречу на час раньше?",
+      "de": "Könnten wir das Treffen um eine Stunde vorverlegen?",
+      "examples": [
+        {
+          "t": "[[Could we bring the meeting forward by an hour]]? I need to catch a train.",
+          "ru": "Можно ли сдвинуть встречу на час раньше? Мне нужно успеть на поезд.",
+          "de": "Könnten wir das Treffen um eine Stunde vorverlegen? Ich muss einen Zug erreichen."
+        }
+      ],
+      "note": {
+        "ru": "Bring forward здесь означает перенести раньше: с 15:00 на 14:00. Лучше сразу назвать новое время.",
+        "de": "Bring forward bedeutet hier vorverlegen: aus 15 Uhr wird 14 Uhr. Die neue Uhrzeit ausdrücklich nennen."
+      }
+    },
+    {
+      "id": "en:content26:ch-local-time",
+      "t": "Please confirm the local time of the meeting.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "Подтвердите, пожалуйста, местное время встречи.",
+      "de": "Bitte bestätigen Sie die Ortszeit des Treffens.",
+      "examples": [
+        {
+          "t": "[[Please confirm the local time of the meeting]]: we are in different time zones.",
+          "ru": "Подтвердите, пожалуйста, местное время встречи: у нас разные часовые пояса.",
+          "de": "Bitte bestätigen Sie die Ortszeit des Treffens: Wir sind in verschiedenen Zeitzonen."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "phone",
+  "items": [
+    {
+      "id": "en:content26:ch-prefer-email",
+      "t": "I’d prefer it if you emailed me.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "Мне удобнее, если вы напишете по электронной почте.",
+      "de": "Mir wäre es lieber, wenn Sie mir eine E-Mail schreiben würden.",
+      "examples": [
+        {
+          "t": "[[I’d prefer it if you emailed me]]. I can then attach the documents.",
+          "ru": "Мне удобнее, если вы напишете по электронной почте. Я смогу приложить документы.",
+          "de": "Mir wäre es lieber, wenn Sie mir eine E-Mail schreiben würden. Dann kann ich die Dokumente anhängen."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-stay-line",
+      "t": "Please stay on the line.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B1",
+      "register": "neutral",
+      "ru": "Оставайтесь, пожалуйста, на линии.",
+      "de": "Bitte bleiben Sie in der Leitung.",
+      "examples": [
+        {
+          "t": "[[Please stay on the line]] while I check the information.",
+          "ru": "Оставайтесь, пожалуйста, на линии, я уточню информацию.",
+          "de": "Bitte bleiben Sie in der Leitung, während ich die Information prüfe."
+        }
+      ],
+      "note": {
+        "ru": "Вежливая служебная фраза: собеседника просят не класть трубку.",
+        "de": "Höfliche Serviceformel: Der Anrufer soll nicht auflegen."
+      }
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "email",
+  "items": [
+    {
+      "id": "en:content26:ch-following",
+      "t": "Following our conversation, I’m sending [X].",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "ru": "В продолжение нашего разговора направляю [X].",
+      "de": "Im Anschluss an unser Gespräch sende ich Ihnen [X].",
+      "examples": [
+        {
+          "t": "[[Following our conversation, I’m sending]] the updated estimate.",
+          "ru": "В продолжение нашего разговора направляю обновлённую смету.",
+          "de": "Im Anschluss an unser Gespräch sende ich Ihnen den aktualisierten Kostenvoranschlag."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-please-note",
+      "t": "Please note that [X].",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "ru": "Прошу принять к сведению, что [X].",
+      "de": "Bitte beachten Sie, dass [X].",
+      "examples": [
+        {
+          "t": "[[Please note that]] the submission deadline has been extended.",
+          "ru": "Прошу принять к сведению, что срок подачи продлён.",
+          "de": "Bitte beachten Sie, dass die Einreichungsfrist verlängert wurde."
+        }
+      ],
+      "note": {
+        "ru": "Формальное уведомление, а не просьба записывать.",
+        "de": "Formeller Hinweis, keine Aufforderung zum Mitschreiben."
+      }
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "smalltalk",
+  "items": [
+    {
+      "id": "en:content26:ch-settling-in",
+      "t": "How are you settling in?",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B1",
+      "register": "informal",
+      "ru": "Как ты здесь осваиваешься?",
+      "de": "Wie lebst du dich hier ein?",
+      "examples": [
+        {
+          "t": "[[How are you settling in]]? Have you met the neighbours yet?",
+          "ru": "Как ты здесь осваиваешься? Уже познакомился с соседями?",
+          "de": "Wie lebst du dich hier ein? Hast du die Nachbarn schon kennengelernt?"
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-lined-up",
+      "t": "Got anything interesting lined up?",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "informal",
+      "ru": "Есть что-нибудь интересное на примете?",
+      "de": "Hast du etwas Interessantes vor?",
+      "examples": [
+        {
+          "t": "[[Got anything interesting lined up]] for the weekend?",
+          "ru": "На выходные есть что-нибудь интересное на примете?",
+          "de": "Hast du am Wochenende etwas Interessantes vor?"
+        }
+      ],
+      "note": {
+        "ru": "Разговорное сокращение Have you got …? Речь о планах, а не об очереди.",
+        "de": "Informelle Kurzform von Have you got …? Gemeint sind Pläne, keine Warteschlange."
+      }
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "it-standup",
+  "items": [
+    {
+      "id": "en:content26:ch-waiting-confirmation",
+      "t": "I’m waiting for confirmation from [X] before I can continue.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "Жду подтверждения от [X], чтобы продолжить.",
+      "de": "Ich warte auf die Bestätigung von [X], bevor ich weitermachen kann.",
+      "examples": [
+        {
+          "t": "[[I’m waiting for confirmation from]] the client [[before I can continue]].",
+          "ru": "Жду подтверждения от заказчика, чтобы продолжить.",
+          "de": "Ich warte auf die Bestätigung des Kunden, bevor ich weitermachen kann."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-end-day",
+      "t": "I expect to finish [X] by the end of the day.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "К концу дня рассчитываю завершить [X].",
+      "de": "Ich rechne damit, [X] bis Tagesende abzuschließen.",
+      "examples": [
+        {
+          "t": "[[I expect to finish]] the review [[by the end of the day]].",
+          "ru": "К концу дня рассчитываю завершить проверку.",
+          "de": "Ich rechne damit, die Prüfung bis Tagesende abzuschließen."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "it-bug",
+  "items": [
+    {
+      "id": "en:content26:ch-no-repro",
+      "t": "I can’t reproduce the issue with this data.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "С этими данными ошибка не воспроизводится.",
+      "de": "Mit diesen Daten kann ich den Fehler nicht reproduzieren.",
+      "examples": [
+        {
+          "t": "[[I can’t reproduce the issue with this data]]. I need another example.",
+          "ru": "С этими данными ошибка не воспроизводится. Нужен другой пример.",
+          "de": "Mit diesen Daten kann ich den Fehler nicht reproduzieren. Ich brauche ein anderes Beispiel."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-previous-version",
+      "t": "This didn’t happen in the previous version.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B1",
+      "register": "neutral",
+      "ru": "На предыдущей версии этого не было.",
+      "de": "In der vorherigen Version ist das nicht passiert.",
+      "examples": [
+        {
+          "t": "[[This didn’t happen in the previous version]]: the search was fast.",
+          "ru": "На предыдущей версии этого не было: поиск работал быстро.",
+          "de": "In der vorherigen Version ist das nicht passiert: Die Suche war schnell."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "it-help",
+  "items": [
+    {
+      "id": "en:content26:ch-check-assumption",
+      "t": "Could you check my assumption?",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "informal",
+      "ru": "Можешь проверить моё предположение?",
+      "de": "Könntest du meine Annahme überprüfen?",
+      "examples": [
+        {
+          "t": "[[Could you check my assumption]]? I think the cache is the problem.",
+          "ru": "Можешь проверить моё предположение? Кажется, проблема в кэше.",
+          "de": "Könntest du meine Annahme überprüfen? Ich glaube, das Problem liegt im Cache."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-where-start",
+      "t": "Could you show me where to start?",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B1",
+      "register": "informal",
+      "ru": "Покажи, пожалуйста, с чего начать.",
+      "de": "Könntest du mir zeigen, wo ich anfangen soll?",
+      "examples": [
+        {
+          "t": "[[Could you show me where to start]]? I haven’t worked with this system before.",
+          "ru": "Покажи, пожалуйста, с чего начать: я ещё не работал с этой системой.",
+          "de": "Könntest du mir zeigen, wo ich anfangen soll? Ich habe noch nicht mit diesem System gearbeitet."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "it-meeting",
+  "items": [
+    {
+      "id": "en:content26:ch-criteria",
+      "t": "I suggest we agree on the criteria first.",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "C1",
+      "register": "neutral",
+      "ru": "Предлагаю сначала согласовать критерии.",
+      "de": "Ich schlage vor, dass wir zuerst die Kriterien abstimmen.",
+      "examples": [
+        {
+          "t": "[[I suggest we agree on the criteria first]] and then compare the options.",
+          "ru": "Предлагаю сначала согласовать критерии, а потом сравнивать варианты.",
+          "de": "Ich schlage vor, dass wir zuerst die Kriterien abstimmen und dann die Optionen vergleichen."
+        }
+      ]
+    },
+    {
+      "id": "en:content26:ch-responsibility",
+      "t": "Who will take responsibility for [X]?",
+      "pos": "chunk",
+      "type": "chunk",
+      "level": "B2",
+      "register": "neutral",
+      "ru": "Кто возьмёт на себя ответственность за [X]?",
+      "de": "Wer übernimmt die Verantwortung für [X]?",
+      "examples": [
+        {
+          "t": "[[Who will take responsibility for]] checking the result?",
+          "ru": "Кто возьмёт на себя ответственность за проверку результата?",
+          "de": "Wer übernimmt die Verantwortung für die Überprüfung des Ergebnisses?"
+        }
+      ]
+    }
+  ]
+});
+
+/* TELC B2 source expansion 2026-11-26 — data only.
+ * Source: Einfach besser! 500, B2, English word list; original examples.
+ * Permanent IDs; existing cards reused by lemma, part of speech and sense. */
+GT.register({
+  "tab": "chunks",
+  "topic": "appointments",
+  "items": [
+    {
+      "id": "en:telc26:ch-rechtzeitig-bescheid",
+      "t": "Please let us know in good time.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 10,
+          "headword": "rechtzeitig Bescheid geben",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Bitte geben Sie uns rechtzeitig Bescheid.",
+      "ru": "Пожалуйста, сообщите нам заранее.",
+      "examples": [
+        {
+          "t": "If you cannot attend the appointment, [[please let us know in good time]].",
+          "de": "Falls Sie den Termin nicht wahrnehmen können, geben Sie uns bitte rechtzeitig Bescheid.",
+          "ru": "Если вы не сможете прийти на встречу, пожалуйста, сообщите нам заранее."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "email",
+  "items": [
+    {
+      "id": "en:telc26:ch-rechnung-begleichen",
+      "t": "I will settle the invoice by [date].",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 27,
+          "headword": "eine Rechnung begleichen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Ich werde die Rechnung bis [Datum] begleichen.",
+      "ru": "Я оплачу счёт до [дата].",
+      "examples": [
+        {
+          "t": "[[I will settle the invoice by]] Friday.",
+          "de": "Ich werde die Rechnung bis Freitag begleichen.",
+          "ru": "Я оплачу счёт до пятницы."
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:ch-schriftform",
+      "t": "[X] must be in writing.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 35,
+          "headword": "etwas bedarf der Schriftform",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "[X] bedarf der Schriftform.",
+      "ru": "Для [X] требуется письменная форма.",
+      "examples": [
+        {
+          "t": "According to the draft, an amendment [[must be in writing]].",
+          "de": "Laut Entwurf bedarf eine Änderung der Vereinbarung der Schriftform.",
+          "ru": "Согласно проекту, для изменения соглашения требуется письменная форма."
+        }
+      ],
+      "note": {
+        "de": "Formelle Konstruktion: bedürfen + Genitiv. Im Beispiel wird eine Vorgabe aus einem Vertragsentwurf wiedergegeben.",
+        "ru": "Формальная конструкция bedürfen + Genitiv: der Schriftform. Пример передаёт условие из проекта документа, а не универсальное юридическое правило."
+      }
+    },
+    {
+      "id": "en:telc26:ch-ab-werk",
+      "t": "ex works",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 25,
+          "headword": "ab Werk",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "ab Werk",
+      "ru": "с завода",
+      "examples": [
+        {
+          "t": "The quote is [[ex works]] at the supplier’s premises.",
+          "de": "Das Angebot gilt ab Werk des Lieferanten.",
+          "ru": "В предложении указана отгрузка с завода поставщика."
+        }
+      ],
+      "note": {
+        "de": "Kaufmännische Lieferangabe. Die konkreten Kosten und Pflichten ergeben sich aus den vereinbarten Bedingungen.",
+        "ru": "Коммерческая формулировка для предложения об отгрузке с предприятия поставщика. Точное распределение расходов и обязанностей определяется конкретными условиями."
+      }
+    },
+    {
+      "id": "en:telc26:ch-nachfrage",
+      "t": "On request, we can send you [X].",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 12,
+          "headword": "auf Nachfrage",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Auf Nachfrage senden wir Ihnen [X].",
+      "ru": "По запросу мы можем направить вам [X].",
+      "examples": [
+        {
+          "t": "[[On request, we can send you]] the complete datasheet.",
+          "de": "Auf Nachfrage senden wir Ihnen das vollständige Datenblatt.",
+          "ru": "По запросу мы можем направить вам полное техническое описание."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "it-meeting",
+  "items": [
+    {
+      "id": "en:telc26:ch-gegenvorschlag",
+      "t": "I’d like to make a counterproposal.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 21,
+          "headword": "einen Gegenvorschlag machen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Ich möchte einen Gegenvorschlag machen.",
+      "ru": "Я хотел(а) бы предложить встречный вариант.",
+      "examples": [
+        {
+          "t": "[[I’d like to make a counterproposal]]: let’s test a smaller solution first.",
+          "de": "Ich möchte einen Gegenvorschlag machen: Wir testen zuerst eine kleinere Lösung.",
+          "ru": "Я хотел бы предложить встречный вариант: сначала проверим более простое решение."
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "chunks",
+  "topic": "complain",
+  "items": [
+    {
+      "id": "en:telc26:ch-verstaendnis",
+      "t": "We ask for your understanding.",
+      "type": "chunk",
+      "pos": "chunk",
+      "level": "B2",
+      "register": "formal",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 29,
+          "headword": "um Verständnis bitten",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Wir bitten um Ihr Verständnis.",
+      "ru": "Просим отнестись с пониманием.",
+      "examples": [
+        {
+          "t": "The delivery is delayed by one day. [[We ask for your understanding]].",
+          "de": "Die Lieferung verzögert sich um einen Tag. Wir bitten um Ihr Verständnis.",
+          "ru": "Доставка задерживается на один день. Просим отнестись с пониманием."
+        }
+      ]
+    }
+  ]
+});
+
+GT.packs.en.byId["en:care:n:main"].examples.push({
+  "t": "The patients’ [[care]] is well organised.",
+  "de": "Die Betreuung der Patienten ist gut organisiert.",
+  "ru": "Уход за пациентами хорошо организован.",
+  "sense": {
+    "ru": "уход",
+    "de": "die Betreuung"
+  }
+});
+
+(GT.packs.en.byId["en:care:n:main"].sourceRefs || (GT.packs.en.byId["en:care:n:main"].sourceRefs = [])).push({
+  "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+  "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+  "page": 1,
+  "headword": "Betreuung",
+  "selection": "telc-b2-2026-11-26"
+});
+
+GT.packs.en.byId["en:it4:salary-expectation"].examples.push({
+  "t": "During the interview, she explained her [[salary expectation]].",
+  "de": "Im Gespräch erklärte sie ihre Gehaltsvorstellung.",
+  "ru": "На собеседовании она объяснила свои зарплатные ожидания.",
+  "sense": {
+    "ru": "зарплатные ожидания",
+    "de": "die Gehaltsvorstellung"
+  }
+});
+
+(GT.packs.en.byId["en:it4:salary-expectation"].sourceRefs || (GT.packs.en.byId["en:it4:salary-expectation"].sourceRefs = [])).push({
+  "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+  "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+  "page": 8,
+  "headword": "Gehaltsvorstellung",
+  "selection": "telc-b2-2026-11-26"
+});
+
+GT.packs.en.byId["en:it4:salary-expectation"].plural = "salary expectations";
+
+GT.packs.en.byId["en:maintenance:n:main"].examples.push({
+  "t": "The machine is unavailable during [[maintenance]].",
+  "de": "Die Maschine ist während der Wartung nicht verfügbar.",
+  "ru": "Во время технического обслуживания станок недоступен.",
+  "sense": {
+    "ru": "техническое обслуживание",
+    "de": "die Wartung"
+  }
+});
+
+(GT.packs.en.byId["en:maintenance:n:main"].sourceRefs || (GT.packs.en.byId["en:maintenance:n:main"].sourceRefs = [])).push({
+  "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+  "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+  "page": 23,
+  "headword": "Wartung",
+  "selection": "telc-b2-2026-11-26"
+});
+
+GT.packs.en.byId["en:it2:core-hours"].examples.push({
+  "t": "The [[core hours]] are shown in the team calendar.",
+  "de": "Die Kernzeit wird im Teamkalender angezeigt.",
+  "ru": "Обязательные часы присутствия указаны в календаре команды.",
+  "sense": {
+    "ru": "обязательные часы присутствия",
+    "de": "die Kernzeit"
+  }
+});
+
+(GT.packs.en.byId["en:it2:core-hours"].sourceRefs || (GT.packs.en.byId["en:it2:core-hours"].sourceRefs = [])).push({
+  "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+  "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+  "page": 19,
+  "headword": "Kernzeit",
+  "selection": "telc-b2-2026-11-26"
+});
+
+GT.packs.en.byId["en:request:n:main"].examples.push({
+  "t": "He politely explained his [[request]] on the phone.",
+  "de": "Er schilderte sein Anliegen höflich am Telefon.",
+  "ru": "Он вежливо изложил свою просьбу по телефону.",
+  "sense": {
+    "ru": "просьба",
+    "de": "das Anliegen"
+  }
+});
+
+(GT.packs.en.byId["en:request:n:main"].sourceRefs || (GT.packs.en.byId["en:request:n:main"].sourceRefs = [])).push({
+  "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+  "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+  "page": 16,
+  "headword": "Anliegen",
+  "selection": "telc-b2-2026-11-26"
+});
+
+GT.packs.en.byId["en:request:n:main"].plural = "requests";
+
+GT.packs.en.byId["en:it2:agenda-item"].examples.push({
+  "t": "The delivery problems are the first [[agenda item]].",
+  "de": "Die Lieferprobleme sind der erste Tagesordnungspunkt.",
+  "ru": "Проблемы с доставкой — первый пункт повестки дня.",
+  "sense": {
+    "ru": "пункт повестки дня",
+    "de": "der Tagesordnungspunkt"
+  }
+});
+
+(GT.packs.en.byId["en:it2:agenda-item"].sourceRefs || (GT.packs.en.byId["en:it2:agenda-item"].sourceRefs = [])).push({
+  "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+  "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+  "page": 30,
+  "headword": "Tagesordnungspunkt",
+  "selection": "telc-b2-2026-11-26"
+});
+
+GT.packs.en.byId["en:it2:agenda-item"].plural = "agenda items";
+
+GT.packs.en.byId["en:agree:v:main"].examples.push({
+  "t": "She [[agrees]] to the proposed schedule.",
+  "de": "Sie stimmt dem vorgeschlagenen Zeitplan zu.",
+  "ru": "Она соглашается с предложенным графиком.",
+  "sense": {
+    "ru": "соглашаться",
+    "de": "zustimmen"
+  }
+});
+
+(GT.packs.en.byId["en:agree:v:main"].sourceRefs || (GT.packs.en.byId["en:agree:v:main"].sourceRefs = [])).push({
+  "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+  "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+  "page": 31,
+  "headword": "zustimmen",
+  "selection": "telc-b2-2026-11-26"
+});
+
+GT.addMember("en:care:n:main", "it", "med_clinical");
+
+GT.addMember("en:telc26:lehrgang", "it", "career-paths");
+
+GT.addMember("en:telc26:vorkenntnisse", "it", "career-paths");
+
+GT.addMember("en:telc26:zulassung", "it", "career-paths");
+
+GT.addMember("en:telc26:fachwortschatz", "it", "career-paths");
+
+GT.addMember("en:it4:salary-expectation", "it", "fin_hr");
+
+GT.addMember("en:telc26:arbeitsablauf", "it", "ops_trades");
+
+GT.addMember("en:telc26:qualitaetssicherung", "it", "dev");
+
+GT.addMember("en:telc26:richtlinie", "it", "security");
+
+GT.addMember("en:telc26:datenblatt", "it", "ops_trades");
+
+GT.addMember("en:maintenance:n:main", "it", "ops_trades");
+
+GT.addMember("en:telc26:eilzuschlag", "it", "clients");
+
+GT.addMember("en:telc26:nettopreis", "it", "clients");
+
+GT.addMember("en:telc26:bruttopreis", "it", "clients");
+
+GT.addMember("en:telc26:skonto", "it", "clients");
+
+GT.addMember("en:telc26:vorauszahlung", "it", "clients");
+
+GT.addMember("en:it2:core-hours", "it", "legal_labour");
+
+GT.addMember("en:telc26:nebentaetigkeit", "it", "career-paths");
+
+GT.addMember("en:telc26:buchungsbestaetigung", "it", "svc_hotel");
+
+GT.addMember("en:telc26:fahrgemeinschaft", "it", "svc_hotel");
+
+GT.addMember("en:telc26:handwerklich", "it", "career-paths");
+
+GT.addMember("en:telc26:belastbar", "it", "career-paths");
+
+GT.addMember("en:telc26:lernbereit", "it", "career-paths");
+
+GT.addMember("en:telc26:fehlerhaft", "words", "digital-life");
+
+GT.addMember("en:telc26:angemessen", "it", "work");
+
+GT.addMember("en:telc26:absolvieren", "it", "career-paths");
+
+GT.addMember("en:agree:v:main", "it", "work");
+
+GT.addMember("en:telc26:verallgemeinern", "it", "presentations");
+
+GT.addMember("en:telc26:bedingungen", "it", "clients");
+
+GT.addMember("en:telc26:ch-rechtzeitig-bescheid", "it", "work");
+
+GT.addMember("en:telc26:ch-rechnung-begleichen", "it", "fin_accounting");
+
+GT.addMember("en:telc26:ch-schriftform", "it", "legal_contracts");
+
+GT.addMember("en:telc26:ch-ab-werk", "it", "ops_logistics");
+
+GT.addMember("en:telc26:ch-nachfrage", "it", "clients");
+
+GT.addMember("en:telc26:ch-gegenvorschlag", "it", "work");
+
+GT.addMember("en:telc26:ch-verstaendnis", "it", "clients");
+
+GT.packs.en.byId["en:care:n:main"].note = {
+  "de": "Unzählbar; take care of — sich kümmern um.\n\nIn dieser Bedeutung meist unzählbar.",
+  "ru": "Неисчисляемое; take care of — заботиться.\n\nВ этом значении обычно неисчисляемое."
+};
+
+GT.packs.en.byId["en:maintenance:n:main"].note = {
+  "de": "Der Wortstamm ändert sich; meist nicht zählbar. Scheduled maintenance — geplante Wartung.\n\nIn dieser Bedeutung meist unzählbar.",
+  "ru": "Изменяется основа; обычно неисчисляемое. Scheduled maintenance — плановое обслуживание.\n\nВ этом значении обычно неисчисляемое."
+};
+
+GT.packs.en.byId["en:it2:core-hours"].note = {
+  "de": "Immer Plural (anders als dt. Singular Kernarbeitszeit); Gleitzeit = flexitime.\n\nIn dieser Bedeutung meist unzählbar.",
+  "ru": "Во множественном числе (в отличие от нем. ед. ч. Kernarbeitszeit); гибкий график — flexitime.\n\nВ этом значении обычно неисчисляемое."
+};

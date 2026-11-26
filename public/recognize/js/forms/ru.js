@@ -326,8 +326,7 @@
   var SECTIONS = [['nouns', 'Noun endings'], ['adj', 'Adjectives'], ['poss', 'мой · наш · этот'], ['cases', 'Which case?'],
     ['anim', 'Animate accusative'], ['spelling', 'Spelling rules'], ['gender', 'Gender by ending']];
   function title(o, id) { return GT.whichForm.sectionTitle(T(o), id); }
-  function caseCell(c) { return '<td>' + esc0(cap(T(CN[c]))) + ' <span class="ag-q">' + CQ[c] + '</span></td>'; }
-  var esc0 = function (s) { return String(s); };
+  function caseCell(c) { return '<td>' + escHTML(cap(T(CN[c]))) + ' <span class="ag-q">' + CQ[c] + '</span></td>'; }
   function wordTable(w, esc) {
     var head = [T({ ru: 'Падеж', en: 'Case', de: 'Kasus' })].concat(GENDERS.map(function (g) { return T(GS[g]); }));
     return '<div class="table-wrap"><table class="ag-table"><thead><tr>' + head.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join('') + '</tr></thead><tbody>' +

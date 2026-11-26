@@ -278,7 +278,7 @@
     PREFIX_PLAN: PREFIX_PLAN,
     levelName: 'B1–B2',
     nounHint: 'noun',
-    features: { rootMapVerbs: true, prefixDrill: true, goetheB1: false, ruLink: false },
+    features: { rootMapVerbs: true, prefixDrill: true, rootRoulette: true, goetheB1: false, ruLink: false },
     prefixWord: 'Particle',
     prefixTab: 'Particles & Prefixes',
     prefixMatchTitle: 'Parallels in Russian and German',

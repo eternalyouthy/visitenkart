@@ -272,3 +272,2249 @@
       ex('Благодар+я пон+ятным указ+ателям перес+адка в н+овом аэропорт+у прошл+а [[без зам+инок]].', 'Thanks to the clear signs, our transfer at the new airport went smoothly.', 'Dank der klaren Beschilderung verlief der Umstieg am neuen Flughafen völlig reibungslos.'))
   ]);
 })();
+
+/* RECGZ content expansion 2026-11-26 — content only.
+ * Editorial learning targets; original examples; permanent IDs. */
+GT.packs.ru.config.TOPICS.words.push({
+  "id": "leisure",
+  "name": "Leisure, Media & Culture",
+  "level": "b1",
+  "group": "B1 topics",
+  "desc": "Hobbies, events, reading and making plans.",
+  "scenario": {
+    "en": "We plan an evening out and compare a concert, a museum and a film. You are a friend.",
+    "de": "Wir planen einen Abend und vergleichen Konzert, Museum und Film. Du bist ein Freund."
+  }
+});
+GT.packs.ru.config.TOPICS.words.push({
+  "id": "society",
+  "name": "Society, Nature & Education",
+  "level": "b1",
+  "group": "B1 topics",
+  "desc": "Community, the environment and everyday learning.",
+  "scenario": {
+    "en": "We discuss a neighbourhood clean-up and a local evening course. You are a neighbour.",
+    "de": "Wir sprechen über eine Aufräumaktion im Viertel und einen Abendkurs. Du bist ein Nachbar."
+  }
+});
+GT.packs.ru.config.TOPICS.words.push({
+  "id": "b2_education",
+  "name": "Learning & Education",
+  "level": "b2",
+  "group": "B2 topics",
+  "desc": "Study choices, qualifications, feedback and learning strategies.",
+  "scenario": {
+    "en": "We compare two training courses and their admission requirements. You are a course adviser.",
+    "de": "Wir vergleichen zwei Weiterbildungen und ihre Zugangsvoraussetzungen. Du bist Kursberater."
+  }
+});
+GT.packs.ru.config.TOPICS.words.push({
+  "id": "b2_economy",
+  "name": "Economy & Consumption",
+  "level": "b2",
+  "group": "B2 topics",
+  "desc": "Prices, household budgets, markets and consumer choices.",
+  "scenario": {
+    "en": "We compare household expenses and discuss a recent price increase. You are a friend.",
+    "de": "Wir vergleichen Haushaltsausgaben und sprechen über gestiegene Preise. Du bist ein Freund."
+  }
+});
+GT.packs.ru.config.TOPICS.words.push({
+  "id": "b2_science",
+  "name": "Science & Technology",
+  "level": "b2",
+  "group": "B2 topics",
+  "desc": "Evidence, experiments, results and uncertainty.",
+  "scenario": {
+    "en": "We discuss a research summary and distinguish findings from assumptions. You are a colleague.",
+    "de": "Wir besprechen eine Studie und unterscheiden Ergebnisse von Annahmen. Du bist ein Kollege."
+  }
+});
+GT.packs.ru.config.TOPICS.words.push({
+  "id": "b2_psyche",
+  "name": "Wellbeing & Psychology",
+  "level": "b2",
+  "group": "B2 topics",
+  "desc": "Motivation, emotions, boundaries and recovery.",
+  "scenario": {
+    "en": "We discuss workload, rest and realistic personal boundaries. You are a friend.",
+    "de": "Wir sprechen über Belastung, Erholung und persönliche Grenzen. Du bist ein Freund."
+  }
+});
+GT.packs.ru.config.TOPICS.words.push({
+  "id": "b2_culture",
+  "name": "Culture & Public Life",
+  "level": "b2",
+  "group": "B2 topics",
+  "desc": "Creative work, heritage, criticism and public events.",
+  "scenario": {
+    "en": "We discuss a cultural festival and how public funding should be used. You are a friend.",
+    "de": "Wir sprechen über ein Kulturfestival und die Verwendung öffentlicher Fördermittel. Du bist ein Freund."
+  }
+});
+GT.packs.ru.config.TOPICS.words.push({
+  "id": "c1_argumentation",
+  "name": "Evidence & Nuance",
+  "level": "c1",
+  "group": "C1 topics",
+  "desc": "Precise language for assumptions, scope, evidence and qualified conclusions.",
+  "scenario": {
+    "en": "We review a proposal, challenge its assumptions and qualify our conclusions. You are a colleague.",
+    "de": "Wir prüfen einen Vorschlag, hinterfragen seine Annahmen und wägen Schlussfolgerungen ab. Du bist ein Kollege."
+  }
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "leisure",
+  "items": [
+    {
+      "id": "ru-content26-leisure-uvlechenie",
+      "t": "увлеч+ение",
+      "level": "B1",
+      "pos": "noun",
+      "en": "hobby",
+      "de": "das Hobby",
+      "examples": [
+        {
+          "t": "Моё н+овое [[увлеч+ение]] — фотогр+афия.",
+          "en": "My new hobby is photography.",
+          "de": "Mein neues Hobby ist Fotografie."
+        }
+      ],
+      "gender": "n",
+      "plural": "увлеч+ения"
+    },
+    {
+      "id": "ru-content26-leisure-dosug",
+      "t": "дос+уг",
+      "level": "B1",
+      "pos": "noun",
+      "en": "leisure",
+      "de": "die Freizeit",
+      "examples": [
+        {
+          "t": "В своб+одное вр+емя я предпочит+аю акт+ивный [[дос+уг]].",
+          "en": "In my free time I prefer active leisure.",
+          "de": "In meiner Freizeit bin ich lieber aktiv."
+        }
+      ],
+      "gender": "m",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-leisure-koncert",
+      "t": "конц+ерт",
+      "level": "B1",
+      "pos": "noun",
+      "en": "concert",
+      "de": "das Konzert",
+      "examples": [
+        {
+          "t": "На [[конц+ерт]] ещё есть бил+еты.",
+          "en": "There are still tickets for the concert.",
+          "de": "Für das Konzert gibt es noch Karten."
+        }
+      ],
+      "gender": "m",
+      "plural": "конц+ерты"
+    },
+    {
+      "id": "ru-content26-leisure-spektakl",
+      "t": "спект+акль",
+      "level": "B1",
+      "pos": "noun",
+      "en": "theatre performance",
+      "de": "die Theateraufführung",
+      "examples": [
+        {
+          "t": "[[Спект+акль]] началс+я без опозд+ания.",
+          "en": "The theatre performance started on time.",
+          "de": "Die Theateraufführung begann pünktlich."
+        }
+      ],
+      "gender": "m",
+      "plural": "спект+акли"
+    },
+    {
+      "id": "ru-content26-leisure-zritel",
+      "t": "зр+итель",
+      "level": "B1",
+      "pos": "noun",
+      "en": "spectator",
+      "de": "der Zuschauer",
+      "examples": [
+        {
+          "t": "К+аждый [[зр+итель]] получ+ил прогр+амму.",
+          "en": "Every spectator received a programme.",
+          "de": "Jeder Zuschauer bekam ein Programmheft."
+        }
+      ],
+      "gender": "m",
+      "plural": "зр+ители"
+    },
+    {
+      "id": "ru-content26-leisure-vpechatlenie",
+      "t": "впечатл+ение",
+      "level": "B1",
+      "pos": "noun",
+      "en": "impression",
+      "de": "der Eindruck",
+      "examples": [
+        {
+          "t": "По+ездка произвел+а на мен+я с+ильное [[впечатл+ение]].",
+          "en": "The trip made a strong impression on me.",
+          "de": "Die Reise hat einen starken Eindruck auf mich gemacht."
+        }
+      ],
+      "gender": "n",
+      "plural": "впечатл+ения"
+    },
+    {
+      "id": "ru-content26-leisure-biblioteka",
+      "t": "библиот+ека",
+      "level": "B1",
+      "pos": "noun",
+      "en": "library",
+      "de": "die Bibliothek",
+      "examples": [
+        {
+          "t": "Н+аша [[библиот+ека]] раб+отает и по субб+отам.",
+          "en": "Our library is also open on Saturdays.",
+          "de": "Unsere Bibliothek ist auch samstags geöffnet."
+        }
+      ],
+      "gender": "f",
+      "plural": "библиот+еки"
+    },
+    {
+      "id": "ru-content26-leisure-roman",
+      "t": "ром+ан",
+      "level": "B1",
+      "pos": "noun",
+      "en": "novel",
+      "de": "der Roman",
+      "examples": [
+        {
+          "t": "+Этот [[ром+ан]] я прочит+ал за нед+елю.",
+          "en": "I read this novel in a week.",
+          "de": "Diesen Roman habe ich in einer Woche gelesen."
+        }
+      ],
+      "gender": "m",
+      "plural": "ром+аны"
+    },
+    {
+      "id": "ru-content26-leisure-syuzhet",
+      "t": "сюж+ет",
+      "level": "B1",
+      "pos": "noun",
+      "en": "plot",
+      "de": "die Handlung",
+      "examples": [
+        {
+          "t": "[[Сюж+ет]] ф+ильма +очень прост+ой.",
+          "en": "The plot of the film is very simple.",
+          "de": "Die Handlung des Films ist sehr einfach."
+        }
+      ],
+      "gender": "m",
+      "plural": "сюж+еты"
+    },
+    {
+      "id": "ru-content26-leisure-orchestra",
+      "t": "орк+естр",
+      "level": "B1",
+      "pos": "noun",
+      "en": "orchestra",
+      "de": "das Orchester",
+      "examples": [
+        {
+          "t": "П+еред нач+алом [[орк+естр]] настр+аивал инструм+енты.",
+          "en": "The orchestra tuned its instruments before the start.",
+          "de": "Vor Beginn stimmte das Orchester seine Instrumente."
+        }
+      ],
+      "gender": "m",
+      "plural": "орк+естры"
+    },
+    {
+      "id": "ru-content26-leisure-poem",
+      "t": "стихотвор+ение",
+      "level": "B1",
+      "pos": "noun",
+      "en": "poem",
+      "de": "das Gedicht",
+      "examples": [
+        {
+          "t": "На ур+оке мы прочит+али кор+откое [[стихотвор+ение]].",
+          "en": "We read a short poem in class.",
+          "de": "Im Unterricht haben wir ein kurzes Gedicht gelesen."
+        }
+      ],
+      "gender": "n",
+      "plural": "стихотвор+ения"
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "society",
+  "items": [
+    {
+      "id": "ru-content26-society-priroda",
+      "t": "прир+ода",
+      "level": "B1",
+      "pos": "noun",
+      "en": "nature",
+      "de": "die Natur",
+      "examples": [
+        {
+          "t": "П+осле раб+оты мне х+очется поб+ыть на [[прир+оде]].",
+          "en": "After work I want to spend some time in nature.",
+          "de": "Nach der Arbeit möchte ich etwas Zeit in der Natur verbringen."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-society-musor",
+      "t": "бытов+ой м+усор",
+      "level": "B1",
+      "pos": "noun",
+      "en": "household waste",
+      "de": "der Hausmüll",
+      "examples": [
+        {
+          "t": "[[Бытов+ой м+усор]] н+ужно сортиров+ать по м+естным пр+авилам.",
+          "en": "Household waste should be sorted according to local rules.",
+          "de": "Hausmüll sollte nach den örtlichen Regeln getrennt werden."
+        }
+      ],
+      "gender": "m",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-society-uchastie",
+      "t": "уч+астие",
+      "level": "B1",
+      "pos": "noun",
+      "en": "participation",
+      "de": "die Teilnahme",
+      "examples": [
+        {
+          "t": "[[Уч+астие]] в про+екте беспл+атное.",
+          "en": "Participation in the project is free.",
+          "de": "Die Teilnahme am Projekt ist kostenlos."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-society-sosedstvo",
+      "t": "сос+едство",
+      "level": "B1",
+      "pos": "noun",
+      "en": "neighbourhood relations",
+      "de": "die Nachbarschaft",
+      "examples": [
+        {
+          "t": "Хор+ошее [[сос+едство]] начин+ается с уваж+ения.",
+          "en": "Good neighbourhood relations begin with respect.",
+          "de": "Eine gute Nachbarschaft beginnt mit Respekt."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-society-pravilo",
+      "t": "пр+авило",
+      "level": "B1",
+      "pos": "noun",
+      "en": "rule",
+      "de": "die Regel",
+      "examples": [
+        {
+          "t": "+Это [[пр+авило]] д+ействует для всех уч+астников.",
+          "en": "This rule applies to all participants.",
+          "de": "Diese Regel gilt für alle Teilnehmenden."
+        }
+      ],
+      "gender": "n",
+      "plural": "пр+авила"
+    },
+    {
+      "id": "ru-content26-society-obrazovanie",
+      "t": "образов+ание",
+      "level": "B1",
+      "pos": "noun",
+      "en": "education",
+      "de": "die Bildung",
+      "examples": [
+        {
+          "t": "Он+а получ+ила [[образов+ание]] в друг+ом г+ороде.",
+          "en": "She received her education in another city.",
+          "de": "Sie hat ihre Ausbildung in einer anderen Stadt erhalten."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-society-urok",
+      "t": "ур+ок",
+      "level": "B1",
+      "pos": "noun",
+      "en": "lesson",
+      "de": "die Unterrichtsstunde",
+      "examples": [
+        {
+          "t": "Сег+одня [[ур+ок]] зак+ончится р+аньше.",
+          "en": "The lesson will finish earlier today.",
+          "de": "Heute endet die Unterrichtsstunde früher."
+        }
+      ],
+      "gender": "m",
+      "plural": "ур+оки"
+    },
+    {
+      "id": "ru-content26-society-uchebnik",
+      "t": "уч+ебник",
+      "level": "B1",
+      "pos": "noun",
+      "en": "textbook",
+      "de": "das Lehrbuch",
+      "examples": [
+        {
+          "t": "+Этот [[уч+ебник]] м+ожно взять в библиот+еке.",
+          "en": "You can borrow this textbook from the library.",
+          "de": "Dieses Lehrbuch kann man in der Bibliothek ausleihen."
+        }
+      ],
+      "gender": "m",
+      "plural": "уч+ебники"
+    },
+    {
+      "id": "ru-content26-society-ekzamen",
+      "t": "экз+амен",
+      "level": "B1",
+      "pos": "noun",
+      "en": "exam",
+      "de": "die Prüfung",
+      "examples": [
+        {
+          "t": "Я сдал [[экз+амен]] со втор+ой поп+ытки.",
+          "en": "I passed the exam on my second attempt.",
+          "de": "Ich habe die Prüfung beim zweiten Versuch bestanden."
+        }
+      ],
+      "gender": "m",
+      "plural": "экз+амены"
+    },
+    {
+      "id": "ru-content26-society-uslovie",
+      "t": "усл+овие",
+      "level": "B1",
+      "pos": "noun",
+      "en": "condition",
+      "de": "die Bedingung",
+      "examples": [
+        {
+          "t": "Гл+авное [[усл+овие]] — прийт+и в+овремя.",
+          "en": "The main condition is to arrive on time.",
+          "de": "Die wichtigste Bedingung ist, pünktlich zu kommen."
+        }
+      ],
+      "gender": "n",
+      "plural": "усл+овия"
+    },
+    {
+      "id": "ru-content26-society-iniciativa",
+      "t": "инициат+ива",
+      "level": "B1",
+      "pos": "noun",
+      "en": "initiative",
+      "de": "die Initiative",
+      "examples": [
+        {
+          "t": "[[Инициат+ива]] сос+едей помогл+а сохран+ить сад.",
+          "en": "The neighbours' initiative helped save the garden.",
+          "de": "Die Initiative der Nachbarn half, den Garten zu erhalten."
+        }
+      ],
+      "gender": "f",
+      "plural": "инициат+ивы"
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_education",
+  "items": [
+    {
+      "id": "ru-content26-edu-uspevaemost",
+      "t": "успев+аемость",
+      "level": "B2",
+      "pos": "noun",
+      "en": "academic performance",
+      "de": "die schulischen Leistungen",
+      "examples": [
+        {
+          "t": "За полг+ода её [[успев+аемость]] зам+етно ул+учшилась.",
+          "en": "Her academic performance improved noticeably over six months.",
+          "de": "Ihre schulischen Leistungen haben sich innerhalb eines halben Jahres deutlich verbessert."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-edu-stipendiya",
+      "t": "стип+ендия",
+      "level": "B2",
+      "pos": "noun",
+      "en": "scholarship",
+      "de": "das Stipendium",
+      "examples": [
+        {
+          "t": "[[Стип+ендия]] покр+оет часть расх+одов на учёбу.",
+          "en": "The scholarship will cover part of the study costs.",
+          "de": "Das Stipendium deckt einen Teil der Studienkosten."
+        }
+      ],
+      "gender": "f",
+      "plural": "стип+ендии"
+    },
+    {
+      "id": "ru-content26-edu-postuplenie",
+      "t": "поступл+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "university admission",
+      "de": "die Hochschulzulassung",
+      "examples": [
+        {
+          "t": "Для [[поступл+ения]] н+ужен языков+ой сертифик+ат.",
+          "en": "A language certificate is required for university admission.",
+          "de": "Für die Hochschulzulassung ist ein Sprachzertifikat erforderlich."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-edu-uchebny-plan",
+      "t": "уч+ебный план",
+      "level": "B2",
+      "pos": "noun",
+      "en": "curriculum",
+      "de": "der Lehrplan",
+      "examples": [
+        {
+          "t": "В [[уч+ебный план]] доб+авили пр+актику.",
+          "en": "Practical training has been added to the curriculum.",
+          "de": "Der Lehrplan wurde um ein Praktikum ergänzt."
+        }
+      ],
+      "gender": "m",
+      "plural": "уч+ебные пл+аны"
+    },
+    {
+      "id": "ru-content26-edu-specialnost",
+      "t": "специ+альность",
+      "level": "B2",
+      "pos": "noun",
+      "en": "field of study",
+      "de": "das Studienfach",
+      "examples": [
+        {
+          "t": "Я в+ыбрал [[специ+альность]], кот+орая мне интер+есна.",
+          "en": "I chose a field of study that interests me.",
+          "de": "Ich habe ein Studienfach gewählt, das mich interessiert."
+        }
+      ],
+      "gender": "f",
+      "plural": "специ+альности"
+    },
+    {
+      "id": "ru-content26-edu-kvalifikaciya",
+      "t": "квалифик+ация",
+      "level": "B2",
+      "pos": "noun",
+      "en": "qualification",
+      "de": "die Qualifikation",
+      "examples": [
+        {
+          "t": "Для +этой раб+оты нужн+а дополн+ительная [[квалифик+ация]].",
+          "en": "This job requires an additional qualification.",
+          "de": "Für diese Arbeit ist eine zusätzliche Qualifikation nötig."
+        }
+      ],
+      "gender": "f",
+      "plural": "квалифик+ации"
+    },
+    {
+      "id": "ru-content26-edu-samoobrazovanie",
+      "t": "самообразов+ание",
+      "level": "B2",
+      "pos": "noun",
+      "en": "self-directed learning",
+      "de": "das Selbststudium",
+      "examples": [
+        {
+          "t": "[[Самообразов+ание]] тр+ебует регул+ярной пр+актики.",
+          "en": "Self-directed learning requires regular practice.",
+          "de": "Selbststudium erfordert regelmäßige Übung."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-edu-usvoenie",
+      "t": "усво+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "assimilation of knowledge",
+      "de": "die Aneignung von Wissen",
+      "examples": [
+        {
+          "t": "Для [[усво+ения]] матери+ала пол+езно повтор+ение.",
+          "en": "Revision helps with the assimilation of knowledge.",
+          "de": "Wiederholung hilft bei der Aneignung von Wissen."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-edu-otsenka",
+      "t": "оц+енка",
+      "level": "B2",
+      "pos": "noun",
+      "en": "grade",
+      "de": "die Note",
+      "examples": [
+        {
+          "t": "Ит+оговая [[оц+енка]] уч+итывает и +устный отв+ет.",
+          "en": "The final grade also takes the oral answer into account.",
+          "de": "Die Endnote berücksichtigt auch die mündliche Antwort."
+        }
+      ],
+      "gender": "f",
+      "plural": "оц+енки"
+    },
+    {
+      "id": "ru-content26-edu-nagruzka",
+      "t": "уч+ебная нагр+узка",
+      "level": "B2",
+      "pos": "noun",
+      "en": "academic workload",
+      "de": "die Studienbelastung",
+      "examples": [
+        {
+          "t": "К конц+у сем+естра [[уч+ебная нагр+узка]] возросл+а.",
+          "en": "The academic workload increased towards the end of the semester.",
+          "de": "Gegen Semesterende stieg die Studienbelastung."
+        }
+      ],
+      "gender": "f",
+      "plural": "уч+ебные нагр+узки"
+    },
+    {
+      "id": "ru-content26-edu-poseshchaemost",
+      "t": "посещ+аемость",
+      "level": "B2",
+      "pos": "noun",
+      "en": "attendance",
+      "de": "die Anwesenheit",
+      "examples": [
+        {
+          "t": "Преподав+атель отмеч+ает [[посещ+аемость]] к+аждую нед+елю.",
+          "en": "The teacher records attendance every week.",
+          "de": "Die Lehrkraft erfasst jede Woche die Anwesenheit."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_economy",
+  "items": [
+    {
+      "id": "ru-content26-econ-inflyaciya",
+      "t": "инфл+яция",
+      "level": "B2",
+      "pos": "noun",
+      "en": "inflation",
+      "de": "die Inflation",
+      "examples": [
+        {
+          "t": "Из-за [[инфл+яции]] на ту же с+умму м+ожно куп+ить м+еньше.",
+          "en": "Because of inflation, the same amount buys less.",
+          "de": "Wegen der Inflation kann man für denselben Betrag weniger kaufen."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-econ-pokupatelnaya",
+      "t": "покуп+ательная спос+обность",
+      "level": "B2",
+      "pos": "noun",
+      "en": "purchasing power",
+      "de": "die Kaufkraft",
+      "examples": [
+        {
+          "t": "Рост цен сн+изил [[покуп+ательную спос+обность]] семь+и.",
+          "en": "Rising prices reduced the family's purchasing power.",
+          "de": "Steigende Preise verringerten die Kaufkraft der Familie."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-econ-spros",
+      "t": "спрос",
+      "level": "B2",
+      "pos": "noun",
+      "en": "demand",
+      "de": "die Nachfrage",
+      "examples": [
+        {
+          "t": "Л+етом [[спрос]] на велосип+еды об+ычно растёт.",
+          "en": "Demand for bicycles usually rises in summer.",
+          "de": "Im Sommer steigt gewöhnlich die Nachfrage nach Fahrrädern."
+        }
+      ],
+      "gender": "m",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-econ-predlozhenie",
+      "t": "р+ыночное предлож+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "market supply",
+      "de": "das Marktangebot",
+      "examples": [
+        {
+          "t": "При р+осте цен [[р+ыночное предлож+ение]] об+ычно растёт.",
+          "en": "When prices rise, market supply usually increases.",
+          "de": "Bei steigenden Preisen wächst das Marktangebot gewöhnlich."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-econ-konkurenciya",
+      "t": "конкур+енция",
+      "level": "B2",
+      "pos": "noun",
+      "en": "competition",
+      "de": "der Wettbewerb",
+      "examples": [
+        {
+          "t": "[[Конкур+енция]] заставл+яет ф+ирмы улучш+ать с+ервис.",
+          "en": "Competition pushes companies to improve their service.",
+          "de": "Wettbewerb zwingt Firmen, ihren Service zu verbessern."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-econ-potrebitel",
+      "t": "потреб+итель",
+      "level": "B2",
+      "pos": "noun",
+      "en": "consumer",
+      "de": "der Verbraucher",
+      "examples": [
+        {
+          "t": "[[Потреб+итель]] м+ожет сравн+ить ц+ены п+еред пок+упкой.",
+          "en": "The consumer can compare prices before buying.",
+          "de": "Der Verbraucher kann vor dem Kauf Preise vergleichen."
+        }
+      ],
+      "gender": "m",
+      "plural": "потреб+ители"
+    },
+    {
+      "id": "ru-content26-econ-sberezheniya",
+      "t": "сбереж+ения",
+      "level": "B2",
+      "pos": "noun",
+      "en": "savings",
+      "de": "die Ersparnisse",
+      "examples": [
+        {
+          "t": "Мы потр+атили часть [[сбереж+ений]] на рем+онт.",
+          "en": "We spent part of our savings on repairs.",
+          "de": "Wir haben einen Teil unserer Ersparnisse für Reparaturen ausgegeben."
+        }
+      ],
+      "gender": "pl",
+      "plural": "сбереж+ения",
+      "note": {
+        "en": "Plural-only expression in this sense.",
+        "de": "In dieser Bedeutung nur im Plural gebräuchlich."
+      }
+    },
+    {
+      "id": "ru-content26-econ-rassrochka",
+      "t": "расср+очка",
+      "level": "B2",
+      "pos": "noun",
+      "en": "payment by instalments",
+      "de": "die Ratenzahlung",
+      "examples": [
+        {
+          "t": "[[Расср+очка]] позв+олит распредел+ить платёж на полг+ода.",
+          "en": "Payment by instalments will spread the payment over six months.",
+          "de": "Mit Ratenzahlung lässt sich der Betrag auf sechs Monate verteilen."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-econ-procentnaya",
+      "t": "проц+ентная ст+авка",
+      "level": "B2",
+      "pos": "noun",
+      "en": "interest rate",
+      "de": "der Zinssatz",
+      "examples": [
+        {
+          "t": "Н+овая [[проц+ентная ст+авка]] ук+азана в догов+оре.",
+          "en": "The new interest rate is stated in the contract.",
+          "de": "Der neue Zinssatz steht im Vertrag."
+        }
+      ],
+      "gender": "f",
+      "plural": "проц+ентные ст+авки"
+    },
+    {
+      "id": "ru-content26-econ-ubytok",
+      "t": "уб+ыток",
+      "level": "B2",
+      "pos": "noun",
+      "en": "loss",
+      "de": "der Verlust",
+      "examples": [
+        {
+          "t": "В +этом м+есяце магаз+ин понёс [[уб+ыток]].",
+          "en": "The shop made a loss this month.",
+          "de": "Das Geschäft hat diesen Monat einen Verlust gemacht."
+        }
+      ],
+      "gender": "m",
+      "plural": "уб+ытки"
+    },
+    {
+      "id": "ru-content26-econ-pribyl",
+      "t": "пр+ибыль",
+      "level": "B2",
+      "pos": "noun",
+      "en": "profit",
+      "de": "der Gewinn",
+      "examples": [
+        {
+          "t": "[[Пр+ибыль]] — +это не то же с+амое, что в+ыручка.",
+          "en": "Profit is not the same as revenue.",
+          "de": "Gewinn ist nicht dasselbe wie Umsatz."
+        }
+      ],
+      "gender": "f",
+      "plural": "пр+ибыли"
+    },
+    {
+      "id": "ru-content26-econ-byudzhet",
+      "t": "бюдж+ет",
+      "level": "B2",
+      "pos": "noun",
+      "en": "budget",
+      "de": "das Budget",
+      "examples": [
+        {
+          "t": "Мы зар+анее расплан+ировали сем+ейный [[бюдж+ет]].",
+          "en": "We planned the household budget in advance.",
+          "de": "Wir haben das Haushaltsbudget im Voraus geplant."
+        }
+      ],
+      "gender": "m",
+      "plural": "бюдж+еты"
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_science",
+  "items": [
+    {
+      "id": "ru-content26-sci-issledovanie",
+      "t": "иссл+едование",
+      "level": "B2",
+      "pos": "noun",
+      "en": "research",
+      "de": "die Forschung",
+      "examples": [
+        {
+          "t": "[[Иссл+едование]] продолж+алось два г+ода.",
+          "en": "The research lasted two years.",
+          "de": "Die Forschung dauerte zwei Jahre."
+        }
+      ],
+      "gender": "n",
+      "plural": "иссл+едования"
+    },
+    {
+      "id": "ru-content26-sci-eksperiment",
+      "t": "эксперим+ент",
+      "level": "B2",
+      "pos": "noun",
+      "en": "experiment",
+      "de": "das Experiment",
+      "examples": [
+        {
+          "t": "Учёные повтор+или [[эксперим+ент]] в друг+ой лаборат+ории.",
+          "en": "The scientists repeated the experiment in another laboratory.",
+          "de": "Die Forschenden wiederholten das Experiment in einem anderen Labor."
+        }
+      ],
+      "gender": "m",
+      "plural": "эксперим+енты"
+    },
+    {
+      "id": "ru-content26-sci-nablyudenie",
+      "t": "наблюд+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "observation",
+      "de": "die Beobachtung",
+      "examples": [
+        {
+          "t": "+Это [[наблюд+ение]] пок+а не подтвержд+ает гип+отезу.",
+          "en": "This observation does not yet confirm the hypothesis.",
+          "de": "Diese Beobachtung bestätigt die Hypothese noch nicht."
+        }
+      ],
+      "gender": "n",
+      "plural": "наблюд+ения"
+    },
+    {
+      "id": "ru-content26-sci-dokazatelstvo",
+      "t": "доказ+ательство",
+      "level": "B2",
+      "pos": "noun",
+      "en": "evidence",
+      "de": "der Beleg",
+      "examples": [
+        {
+          "t": "Одног+о прим+ера недост+аточно в к+ачестве [[доказ+ательства]].",
+          "en": "A single example is not enough as evidence.",
+          "de": "Ein einzelnes Beispiel reicht als Beleg nicht aus."
+        }
+      ],
+      "gender": "n",
+      "plural": "доказ+ательства"
+    },
+    {
+      "id": "ru-content26-sci-prichina",
+      "t": "прич+ина",
+      "level": "B2",
+      "pos": "noun",
+      "en": "cause",
+      "de": "die Ursache",
+      "examples": [
+        {
+          "t": "Т+очная [[прич+ина]] сб+оя пок+а неизв+естна.",
+          "en": "The exact cause of the failure is still unknown.",
+          "de": "Die genaue Ursache des Ausfalls ist noch unbekannt."
+        }
+      ],
+      "gender": "f",
+      "plural": "прич+ины"
+    },
+    {
+      "id": "ru-content26-sci-sledstvie",
+      "t": "сл+едствие",
+      "level": "B2",
+      "pos": "noun",
+      "en": "consequence",
+      "de": "die Folge",
+      "examples": [
+        {
+          "t": "Рост расх+одов — [[сл+едствие]] +этого реш+ения.",
+          "en": "The increase in costs is a consequence of this decision.",
+          "de": "Der Kostenanstieg ist eine Folge dieser Entscheidung."
+        }
+      ],
+      "gender": "n",
+      "plural": "сл+едствия"
+    },
+    {
+      "id": "ru-content26-sci-veroyatnost",
+      "t": "веро+ятность",
+      "level": "B2",
+      "pos": "noun",
+      "en": "probability",
+      "de": "die Wahrscheinlichkeit",
+      "examples": [
+        {
+          "t": "[[Веро+ятность]] ош+ибки здесь невелик+а.",
+          "en": "The probability of an error is low here.",
+          "de": "Die Wahrscheinlichkeit eines Fehlers ist hier gering."
+        }
+      ],
+      "gender": "f",
+      "plural": "веро+ятности"
+    },
+    {
+      "id": "ru-content26-sci-izmerenie",
+      "t": "измер+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "measurement",
+      "de": "die Messung",
+      "examples": [
+        {
+          "t": "П+еред н+овым т+естом повтор+ите [[измер+ение]].",
+          "en": "Repeat the measurement before the new test.",
+          "de": "Wiederholen Sie die Messung vor dem neuen Test."
+        }
+      ],
+      "gender": "n",
+      "plural": "измер+ения"
+    },
+    {
+      "id": "ru-content26-sci-vosproizvodimost",
+      "t": "воспроизвод+имость",
+      "level": "B2",
+      "pos": "noun",
+      "en": "reproducibility",
+      "de": "die Reproduzierbarkeit",
+      "examples": [
+        {
+          "t": "Для пров+ерки результ+ата важн+а [[воспроизвод+имость]].",
+          "en": "Reproducibility matters when verifying a result.",
+          "de": "Bei der Überprüfung eines Ergebnisses ist Reproduzierbarkeit wichtig."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-sci-izobretenie",
+      "t": "изобрет+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "invention",
+      "de": "die Erfindung",
+      "examples": [
+        {
+          "t": "+Это [[изобрет+ение]] упрост+ило раб+оту инжен+еров.",
+          "en": "This invention made engineers' work easier.",
+          "de": "Diese Erfindung erleichterte die Arbeit der Ingenieure."
+        }
+      ],
+      "gender": "n",
+      "plural": "изобрет+ения"
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_psyche",
+  "items": [
+    {
+      "id": "ru-content26-psy-trevozhnost",
+      "t": "трев+ожность",
+      "level": "B2",
+      "pos": "noun",
+      "en": "anxiety",
+      "de": "die Ängstlichkeit",
+      "examples": [
+        {
+          "t": "П+еред экз+аменом ег+о [[трев+ожность]] ус+илилась.",
+          "en": "His anxiety increased before the exam.",
+          "de": "Vor der Prüfung nahm seine Ängstlichkeit zu."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-psy-napryazhenie",
+      "t": "напряж+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "tension",
+      "de": "die Anspannung",
+      "examples": [
+        {
+          "t": "П+осле прог+улки [[напряж+ение]] немн+ого сп+ало.",
+          "en": "The tension eased a little after the walk.",
+          "de": "Nach dem Spaziergang ließ die Anspannung etwas nach."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-psy-samoocenka",
+      "t": "самооц+енка",
+      "level": "B2",
+      "pos": "noun",
+      "en": "self-esteem",
+      "de": "das Selbstwertgefühl",
+      "examples": [
+        {
+          "t": "Её [[самооц+енка]] не зав+исит от чуж+их коммент+ариев.",
+          "en": "Her self-esteem does not depend on other people's comments.",
+          "de": "Ihr Selbstwertgefühl hängt nicht von fremden Kommentaren ab."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-psy-motivaciya",
+      "t": "мотив+ация",
+      "level": "B2",
+      "pos": "noun",
+      "en": "motivation",
+      "de": "die Motivation",
+      "examples": [
+        {
+          "t": "М+аленькие усп+ехи помог+ают сохран+ить [[мотив+ацию]].",
+          "en": "Small successes help maintain motivation.",
+          "de": "Kleine Erfolge helfen, die Motivation zu erhalten."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-psy-privychka",
+      "t": "прив+ычка",
+      "level": "B2",
+      "pos": "noun",
+      "en": "habit",
+      "de": "die Gewohnheit",
+      "examples": [
+        {
+          "t": "У мен+я появ+илась [[прив+ычка]] чит+ать п+еред сном.",
+          "en": "I have developed a habit of reading before bed.",
+          "de": "Ich habe mir angewöhnt, vor dem Schlafen zu lesen."
+        }
+      ],
+      "gender": "f",
+      "plural": "прив+ычки"
+    },
+    {
+      "id": "ru-content26-psy-osoznannost",
+      "t": "ос+ознанность",
+      "level": "B2",
+      "pos": "noun",
+      "en": "awareness",
+      "de": "die Bewusstheit",
+      "examples": [
+        {
+          "t": "[[Ос+ознанность]] помог+ает зам+етить сво+и ре+акции.",
+          "en": "Awareness helps you notice your own reactions.",
+          "de": "Bewusstheit hilft dabei, die eigenen Reaktionen wahrzunehmen."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-psy-sostoyanie",
+      "t": "состо+яние",
+      "level": "B2",
+      "pos": "noun",
+      "en": "state",
+      "de": "der Zustand",
+      "examples": [
+        {
+          "t": "Моё эмоцион+альное [[состо+яние]] постеп+енно улучш+ается.",
+          "en": "My emotional state is gradually improving.",
+          "de": "Mein emotionaler Zustand verbessert sich allmählich."
+        }
+      ],
+      "gender": "n",
+      "plural": "состо+яния"
+    },
+    {
+      "id": "ru-content26-psy-vosstanovlenie",
+      "t": "восстановл+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "recovery",
+      "de": "die Erholung",
+      "examples": [
+        {
+          "t": "П+осле напряжённой нед+ели мне н+ужно [[восстановл+ение]].",
+          "en": "After an intense week I need time for recovery.",
+          "de": "Nach einer anstrengenden Woche brauche ich Zeit zur Erholung."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-psy-soperezhivanie",
+      "t": "сопережив+ание",
+      "level": "B2",
+      "pos": "noun",
+      "en": "empathy",
+      "de": "das Mitgefühl",
+      "examples": [
+        {
+          "t": "Он прояв+ил [[сопережив+ание]] и в+ыслушал подр+угу.",
+          "en": "He showed empathy and listened to his friend.",
+          "de": "Er zeigte Mitgefühl und hörte seiner Freundin zu."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-psy-granicy",
+      "t": "л+ичные гран+ицы",
+      "level": "B2",
+      "pos": "noun",
+      "en": "personal boundaries",
+      "de": "die persönlichen Grenzen",
+      "examples": [
+        {
+          "t": "В др+ужбе т+оже в+ажно уваж+ать [[л+ичные гран+ицы]].",
+          "en": "It is important to respect personal boundaries in friendships too.",
+          "de": "Auch in Freundschaften ist es wichtig, persönliche Grenzen zu respektieren."
+        }
+      ],
+      "gender": "pl",
+      "plural": "л+ичные гран+ицы",
+      "note": {
+        "en": "Plural-only expression in this sense.",
+        "de": "In dieser Bedeutung nur im Plural gebräuchlich."
+      }
+    },
+    {
+      "id": "ru-content26-psy-ustoichivost",
+      "t": "уст+ойчивость",
+      "level": "B2",
+      "pos": "noun",
+      "en": "resilience",
+      "de": "die Widerstandsfähigkeit",
+      "examples": [
+        {
+          "t": "Подд+ержка бл+изких помогл+а ей сохран+ить [[уст+ойчивость]].",
+          "en": "Support from loved ones helped her maintain resilience.",
+          "de": "Die Unterstützung nahestehender Menschen half ihr, widerstandsfähig zu bleiben."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-psy-razocharovanie",
+      "t": "разочаров+ание",
+      "level": "B2",
+      "pos": "noun",
+      "en": "disappointment",
+      "de": "die Enttäuschung",
+      "examples": [
+        {
+          "t": "Отм+ена по+ездки в+ызвала [[разочаров+ание]].",
+          "en": "The cancellation of the trip caused disappointment.",
+          "de": "Die Absage der Reise sorgte für Enttäuschung."
+        }
+      ],
+      "gender": "n",
+      "plural": "разочаров+ания"
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_culture",
+  "items": [
+    {
+      "id": "ru-content26-culture-nasledie",
+      "t": "культ+урное насл+едие",
+      "level": "B2",
+      "pos": "noun",
+      "en": "cultural heritage",
+      "de": "das Kulturerbe",
+      "examples": [
+        {
+          "t": "Реставр+ация помог+ает сохран+ить [[культ+урное насл+едие]].",
+          "en": "Restoration helps preserve cultural heritage.",
+          "de": "Restaurierung hilft, das Kulturerbe zu bewahren."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-culture-tvorchestvo",
+      "t": "тв+орчество",
+      "level": "B2",
+      "pos": "noun",
+      "en": "creative work",
+      "de": "das künstlerische Schaffen",
+      "examples": [
+        {
+          "t": "На в+ыставке предст+авлено р+аннее [[тв+орчество]] худ+ожницы.",
+          "en": "The exhibition presents the artist's early creative work.",
+          "de": "Die Ausstellung zeigt das frühe künstlerische Schaffen der Künstlerin."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-culture-proizvedenie",
+      "t": "произвед+ение",
+      "level": "B2",
+      "pos": "noun",
+      "en": "work of art",
+      "de": "das Kunstwerk",
+      "examples": [
+        {
+          "t": "+Это [[произвед+ение]] хран+ится в городск+ом муз+ее.",
+          "en": "This work of art is kept in the city museum.",
+          "de": "Dieses Kunstwerk wird im Stadtmuseum aufbewahrt."
+        }
+      ],
+      "gender": "n",
+      "plural": "произвед+ения"
+    },
+    {
+      "id": "ru-content26-culture-zamysel",
+      "t": "з+амысел",
+      "level": "B2",
+      "pos": "noun",
+      "en": "artistic intention",
+      "de": "die künstlerische Absicht",
+      "examples": [
+        {
+          "t": "Режиссёр объясн+ил [[з+амысел]] ф+ильма.",
+          "en": "The director explained the artistic intention behind the film.",
+          "de": "Der Regisseur erläuterte die künstlerische Absicht hinter dem Film."
+        }
+      ],
+      "gender": "m",
+      "plural": "з+амыслы"
+    },
+    {
+      "id": "ru-content26-culture-interpretaciya",
+      "t": "интерпрет+ация",
+      "level": "B2",
+      "pos": "noun",
+      "en": "interpretation",
+      "de": "die Interpretation",
+      "examples": [
+        {
+          "t": "Её [[интерпрет+ация]] р+оли мне показ+алась необ+ычной.",
+          "en": "Her interpretation of the role seemed unusual to me.",
+          "de": "Ihre Interpretation der Rolle erschien mir ungewöhnlich."
+        }
+      ],
+      "gender": "f",
+      "plural": "интерпрет+ации"
+    },
+    {
+      "id": "ru-content26-culture-recenziya",
+      "t": "рец+ензия",
+      "level": "B2",
+      "pos": "noun",
+      "en": "review",
+      "de": "die Rezension",
+      "examples": [
+        {
+          "t": "Я прочит+ал подр+обную [[рец+ензию]] на +эту кн+игу.",
+          "en": "I read a detailed review of this book.",
+          "de": "Ich habe eine ausführliche Rezension zu diesem Buch gelesen."
+        }
+      ],
+      "gender": "f",
+      "plural": "рец+ензии"
+    },
+    {
+      "id": "ru-content26-culture-postanovka",
+      "t": "постан+овка",
+      "level": "B2",
+      "pos": "noun",
+      "en": "stage production",
+      "de": "die Inszenierung",
+      "examples": [
+        {
+          "t": "Н+овая [[постан+овка]] в+ызвала мн+ого сп+оров.",
+          "en": "The new stage production sparked much debate.",
+          "de": "Die neue Inszenierung löste viele Diskussionen aus."
+        }
+      ],
+      "gender": "f",
+      "plural": "постан+овки"
+    },
+    {
+      "id": "ru-content26-culture-preemstvennost",
+      "t": "пре+емственность",
+      "level": "C1",
+      "pos": "noun",
+      "en": "continuity",
+      "de": "die Kontinuität",
+      "examples": [
+        {
+          "t": "Фестив+аль сохран+яет [[пре+емственность]] покол+ений.",
+          "en": "The festival preserves continuity between generations.",
+          "de": "Das Festival bewahrt die Kontinuität zwischen den Generationen."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-culture-samobytnost",
+      "t": "самоб+ытность",
+      "level": "C1",
+      "pos": "noun",
+      "en": "cultural distinctiveness",
+      "de": "die kulturelle Eigenständigkeit",
+      "examples": [
+        {
+          "t": "М+естные трад+иции сохран+яют сво+ю [[самоб+ытность]].",
+          "en": "Local traditions retain their cultural distinctiveness.",
+          "de": "Die örtlichen Traditionen bewahren ihre kulturelle Eigenständigkeit."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-culture-obshchestvenny",
+      "t": "общ+ественный",
+      "level": "B2",
+      "pos": "adj",
+      "en": "public",
+      "de": "öffentlich",
+      "examples": [
+        {
+          "t": "Библиот+ека — в+ажное [[общ+ественное]] простр+анство.",
+          "en": "A library is an important public space.",
+          "de": "Eine Bibliothek ist ein wichtiger öffentlicher Raum."
+        }
+      ]
+    },
+    {
+      "id": "ru-content26-culture-dostupny",
+      "t": "дост+упный",
+      "level": "B2",
+      "pos": "adj",
+      "en": "accessible",
+      "de": "zugänglich",
+      "examples": [
+        {
+          "t": "Муз+ей д+олжен быть [[дост+упным]] для всех посет+ителей.",
+          "en": "The museum should be accessible to all visitors.",
+          "de": "Das Museum sollte für alle Besucher zugänglich sein."
+        }
+      ]
+    },
+    {
+      "id": "ru-content26-culture-mnogoobrazie",
+      "t": "многообр+азие",
+      "level": "B2",
+      "pos": "noun",
+      "en": "diversity",
+      "de": "die Vielfalt",
+      "examples": [
+        {
+          "t": "Прогр+амма отраж+ает культ+урное [[многообр+азие]] г+орода.",
+          "en": "The programme reflects the city's cultural diversity.",
+          "de": "Das Programm spiegelt die kulturelle Vielfalt der Stadt wider."
+        }
+      ],
+      "gender": "n",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "c1_argumentation",
+  "items": [
+    {
+      "id": "ru-content26-c1-predposylka",
+      "t": "предпос+ылка",
+      "level": "C1",
+      "pos": "noun",
+      "en": "premise",
+      "de": "die Prämisse",
+      "examples": [
+        {
+          "t": "Исх+одная [[предпос+ылка]] оказ+алась нев+ерной.",
+          "en": "The initial premise turned out to be wrong.",
+          "de": "Die ursprüngliche Prämisse erwies sich als falsch."
+        }
+      ],
+      "gender": "f",
+      "plural": "предпос+ылки"
+    },
+    {
+      "id": "ru-content26-c1-dopushchenie",
+      "t": "допущ+ение",
+      "level": "C1",
+      "pos": "noun",
+      "en": "assumption",
+      "de": "die Annahme",
+      "examples": [
+        {
+          "t": "+Это [[допущ+ение]] н+ужно пров+ерить отд+ельно.",
+          "en": "This assumption needs to be checked separately.",
+          "de": "Diese Annahme muss gesondert überprüft werden."
+        }
+      ],
+      "gender": "n",
+      "plural": "допущ+ения"
+    },
+    {
+      "id": "ru-content26-c1-obosnovanie",
+      "t": "обоснов+ание",
+      "level": "C1",
+      "pos": "noun",
+      "en": "justification",
+      "de": "die Begründung",
+      "examples": [
+        {
+          "t": "В докум+енте н+ужно привест+и [[обоснов+ание]] реш+ения.",
+          "en": "The document needs to include a justification for the decision.",
+          "de": "Das Dokument muss eine Begründung für die Entscheidung enthalten."
+        }
+      ],
+      "gender": "n",
+      "plural": "обоснов+ания"
+    },
+    {
+      "id": "ru-content26-c1-dvusmyslennost",
+      "t": "двусм+ысленность",
+      "level": "C1",
+      "pos": "noun",
+      "en": "ambiguity",
+      "de": "die Mehrdeutigkeit",
+      "examples": [
+        {
+          "t": "В +этом предлож+ении есть [[двусм+ысленность]].",
+          "en": "There is an ambiguity in this sentence.",
+          "de": "In diesem Satz liegt eine Mehrdeutigkeit vor."
+        }
+      ],
+      "gender": "f",
+      "plural": "двусм+ысленности"
+    },
+    {
+      "id": "ru-content26-c1-protivorechie",
+      "t": "противор+ечие",
+      "level": "C1",
+      "pos": "noun",
+      "en": "contradiction",
+      "de": "der Widerspruch",
+      "examples": [
+        {
+          "t": "М+ежду двум+я утвержд+ениями есть [[противор+ечие]].",
+          "en": "There is a contradiction between the two statements.",
+          "de": "Zwischen den beiden Aussagen besteht ein Widerspruch."
+        }
+      ],
+      "gender": "n",
+      "plural": "противор+ечия"
+    },
+    {
+      "id": "ru-content26-c1-soglasovannost",
+      "t": "соглас+ованность",
+      "level": "C1",
+      "pos": "noun",
+      "en": "consistency",
+      "de": "die Konsistenz",
+      "examples": [
+        {
+          "t": "Ред+актор пров+ерил [[соглас+ованность]] терминол+огии.",
+          "en": "The editor checked the consistency of the terminology.",
+          "de": "Der Redakteur prüfte die Konsistenz der Terminologie."
+        }
+      ],
+      "gender": "f",
+      "note": {
+        "en": "Normally used in the singular in this sense; other senses may differ.",
+        "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein."
+      }
+    },
+    {
+      "id": "ru-content26-c1-ogovorka",
+      "t": "огов+орка",
+      "level": "C1",
+      "pos": "noun",
+      "en": "caveat",
+      "de": "der Vorbehalt",
+      "examples": [
+        {
+          "t": "Я подд+ерживаю предлож+ение с одн+ой [[огов+оркой]].",
+          "en": "I support the proposal with one caveat.",
+          "de": "Ich unterstütze den Vorschlag mit einem Vorbehalt."
+        }
+      ],
+      "gender": "f",
+      "plural": "огов+орки"
+    },
+    {
+      "id": "ru-content26-c1-oblast-primeneniya",
+      "t": "+область примен+ения",
+      "level": "C1",
+      "pos": "noun",
+      "en": "scope of application",
+      "de": "der Anwendungsbereich",
+      "examples": [
+        {
+          "t": "[[+Область примен+ения]] пр+авила огран+ичена.",
+          "en": "The rule's scope of application is limited.",
+          "de": "Der Anwendungsbereich der Regel ist begrenzt."
+        }
+      ],
+      "gender": "f",
+      "plural": "+области примен+ения"
+    },
+    {
+      "id": "ru-content26-c1-nyuans",
+      "t": "ню+анс",
+      "level": "C1",
+      "pos": "noun",
+      "en": "nuance",
+      "de": "die Nuance",
+      "examples": [
+        {
+          "t": "Здесь есть в+ажный [[ню+анс]], кот+орый мы упуст+или.",
+          "en": "There is an important nuance here that we missed.",
+          "de": "Hier gibt es eine wichtige Nuance, die wir übersehen haben."
+        }
+      ],
+      "gender": "m",
+      "plural": "ню+ансы"
+    },
+    {
+      "id": "ru-content26-c1-obobshchenie",
+      "t": "обобщ+ение",
+      "level": "C1",
+      "pos": "noun",
+      "en": "generalisation",
+      "de": "die Verallgemeinerung",
+      "examples": [
+        {
+          "t": "+Это сл+ишком шир+окое [[обобщ+ение]] по одном+у прим+еру.",
+          "en": "This is too broad a generalisation from a single example.",
+          "de": "Das ist eine zu weitgehende Verallgemeinerung anhand eines einzelnen Beispiels."
+        }
+      ],
+      "gender": "n",
+      "plural": "обобщ+ения"
+    },
+    {
+      "id": "ru-content26-c1-obosnovanny",
+      "t": "обосн+ованный",
+      "level": "C1",
+      "pos": "adj",
+      "en": "justified",
+      "de": "begründet",
+      "examples": [
+        {
+          "t": "+Это [[обосн+ованное]] опас+ение, а не пр+осто слух.",
+          "en": "This is a justified concern, not just a rumour.",
+          "de": "Das ist eine begründete Sorge und nicht bloß ein Gerücht."
+        }
+      ]
+    },
+    {
+      "id": "ru-content26-c1-posledovatelny",
+      "t": "посл+едовательный",
+      "level": "C1",
+      "pos": "adj",
+      "en": "consistent, coherent",
+      "de": "folgerichtig, schlüssig",
+      "examples": [
+        {
+          "t": "+Автор излож+ил [[посл+едовательную]] поз+ицию.",
+          "en": "The author set out a coherent position.",
+          "de": "Der Autor legte eine schlüssige Position dar."
+        }
+      ]
+    },
+    {
+      "id": "ru-content26-c1-proizvolny",
+      "t": "произв+ольный",
+      "level": "C1",
+      "pos": "adj",
+      "en": "arbitrary",
+      "de": "willkürlich",
+      "examples": [
+        {
+          "t": "Пор+ог не д+олжен быть [[произв+ольным]].",
+          "en": "The threshold should not be arbitrary.",
+          "de": "Der Schwellenwert sollte nicht willkürlich sein."
+        }
+      ]
+    },
+    {
+      "id": "ru-content26-c1-kosvenny",
+      "t": "к+освенный",
+      "level": "C1",
+      "pos": "adj",
+      "en": "indirect",
+      "de": "indirekt",
+      "examples": [
+        {
+          "t": "+Это лишь [[к+освенное]] подтвержд+ение гип+отезы.",
+          "en": "This is only indirect support for the hypothesis.",
+          "de": "Das ist nur eine indirekte Bestätigung der Hypothese."
+        }
+      ]
+    },
+    {
+      "id": "ru-content26-c1-sootnoshenie",
+      "t": "соотнош+ение",
+      "level": "C1",
+      "pos": "noun",
+      "en": "ratio",
+      "de": "das Verhältnis",
+      "examples": [
+        {
+          "t": "Н+ужно уч+есть [[соотнош+ение]] затр+ат и п+ользы.",
+          "en": "We need to consider the ratio of cost to benefit.",
+          "de": "Wir müssen das Verhältnis von Kosten und Nutzen berücksichtigen."
+        }
+      ],
+      "gender": "n",
+      "plural": "соотнош+ения"
+    }
+  ]
+});
+
+/* TELC B2 source expansion 2026-11-26 — data only.
+ * Source: Einfach besser! 500, B2, English word list; original examples.
+ * Permanent IDs; existing cards reused by lemma, part of speech and sense. */
+GT.register({
+  "tab": "words",
+  "topic": "b2_education",
+  "items": [
+    {
+      "id": "ru-telc26-lehrgang",
+      "t": "уч+ебный курс",
+      "pos": "noun",
+      "gender": "m",
+      "plural": "уч+ебные к+урсы",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 5,
+          "headword": "Lehrgang",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "training course",
+      "de": "der Lehrgang",
+      "examples": [
+        {
+          "t": "[[Уч+ебный курс]] зак+анчивается практ+ическим экз+аменом.",
+          "de": "Der Lehrgang endet mit einer praktischen Prüfung.",
+          "en": "The training course ends with a practical examination.",
+          "sense": {
+            "en": "training course",
+            "de": "der Lehrgang"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-vorkenntnisse",
+      "t": "предвар+ительные зн+ания",
+      "pos": "noun",
+      "gender": "pl",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 5,
+          "headword": "Vorkenntnisse",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "prior knowledge",
+      "de": "die Vorkenntnisse",
+      "examples": [
+        {
+          "t": "Для +этого к+урса не н+ужны [[предвар+ительные зн+ания]].",
+          "de": "Für diesen Kurs brauchen Sie keine Vorkenntnisse.",
+          "en": "You do not need any prior knowledge for this course.",
+          "sense": {
+            "en": "prior knowledge",
+            "de": "die Vorkenntnisse"
+          }
+        }
+      ],
+      "note": {
+        "en": "Plural-only expression in this sense.",
+        "de": "In dieser Bedeutung nur im Plural gebräuchlich."
+      },
+      "plural": "предвар+ительные зн+ания"
+    },
+    {
+      "id": "ru-telc26-zulassung",
+      "t": "д+опуск к обуч+ению",
+      "pos": "noun",
+      "gender": "m",
+      "plural": "д+опуски к обуч+ению",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 5,
+          "headword": "Zulassung",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "admission",
+      "de": "die Zulassung",
+      "examples": [
+        {
+          "t": "[[Д+опуск к обуч+ению]] на к+урсе подтверд+или п+исьменно.",
+          "de": "Die Zulassung zum Lehrgang wurde schriftlich bestätigt.",
+          "en": "Admission to the training course was confirmed in writing.",
+          "sense": {
+            "en": "admission",
+            "de": "die Zulassung"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-fachwortschatz",
+      "t": "профессион+альная л+ексика",
+      "pos": "noun",
+      "gender": "f",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 5,
+          "headword": "Fachwortschatz",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "specialist vocabulary",
+      "de": "der Fachwortschatz",
+      "examples": [
+        {
+          "t": "Во вр+емя пр+актики она расшир+яет сво+ю [[профессион+альную л+ексику]].",
+          "de": "Im Praktikum erweitert sie ihren Fachwortschatz.",
+          "en": "She is expanding her specialist vocabulary during the placement.",
+          "sense": {
+            "en": "specialist vocabulary",
+            "de": "der Fachwortschatz"
+          }
+        }
+      ],
+      "note": {
+        "en": "Normally singular in this sense.",
+        "de": "In dieser Bedeutung meist im Singular."
+      }
+    },
+    {
+      "id": "ru-telc26-handwerklich",
+      "t": "рем+есленный",
+      "pos": "adj",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 1,
+          "headword": "handwerklich",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "manual",
+      "de": "handwerklich",
+      "examples": [
+        {
+          "t": "Для +этой зад+ачи н+ужны [[рем+есленные]] нав+ыки.",
+          "de": "Diese Aufgabe erfordert handwerkliche Fähigkeiten.",
+          "en": "This task requires manual skills.",
+          "sense": {
+            "en": "manual",
+            "de": "handwerklich"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-lernbereit",
+      "t": "гот+овый уч+иться",
+      "pos": "adj",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 4,
+          "headword": "lernbereit",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "willing to learn",
+      "de": "lernbereit",
+      "examples": [
+        {
+          "t": "Мы +ищем люд+ей, кот+орые любозн+ательны и [[гот+овы уч+иться]].",
+          "de": "Wir suchen Menschen, die neugierig und lernbereit sind.",
+          "en": "We are looking for people who are curious and willing to learn.",
+          "sense": {
+            "en": "willing to learn",
+            "de": "lernbereit"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-absolvieren",
+      "t": "пройт+и",
+      "pos": "verb",
+      "aspect": "pf",
+      "forms": {
+        "praes": "пройд+у, пройдёшь",
+        "praet": "прошёл",
+        "perf": "impf. проход+ить"
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 15,
+          "headword": "absolvieren",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "complete",
+      "de": "absolvieren",
+      "examples": [
+        {
+          "t": "Она [[прошл+а]] курс по бухг+алтерскому учёту.",
+          "de": "Sie hat einen Lehrgang zur Buchhaltung absolviert.",
+          "en": "She has completed a bookkeeping course.",
+          "sense": {
+            "en": "complete",
+            "de": "absolvieren"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_travel",
+  "items": [
+    {
+      "id": "ru-telc26-buchungsbestaetigung",
+      "t": "подтвержд+ение брон+ирования",
+      "pos": "noun",
+      "gender": "n",
+      "plural": "подтвержд+ения брон+ирования",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 19,
+          "headword": "Buchungsbestätigung",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "booking confirmation",
+      "de": "die Buchungsbestätigung",
+      "examples": [
+        {
+          "t": "[[Подтвержд+ение брон+ирования]] содерж+ит +адрес гост+иницы для конфер+енции.",
+          "de": "Die Buchungsbestätigung enthält die Adresse des Tagungshotels.",
+          "en": "The booking confirmation contains the conference hotel’s address.",
+          "sense": {
+            "en": "booking confirmation",
+            "de": "die Buchungsbestätigung"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-fahrgemeinschaft",
+      "t": "совм+естные по+ездки на маш+ине",
+      "pos": "noun",
+      "gender": "pl",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 19,
+          "headword": "Fahrgemeinschaft",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "carpool",
+      "de": "die Fahrgemeinschaft",
+      "examples": [
+        {
+          "t": "Для по+ездки на в+ыставку мы организ+уем [[совм+естные по+ездки на маш+ине]].",
+          "de": "Für die Fahrt zur Messe bilden wir eine Fahrgemeinschaft.",
+          "en": "We are forming a carpool for the trip to the trade fair.",
+          "sense": {
+            "en": "carpool",
+            "de": "die Fahrgemeinschaft"
+          }
+        }
+      ],
+      "note": {
+        "en": "Plural-only expression in this sense.",
+        "de": "In dieser Bedeutung nur im Plural gebräuchlich."
+      },
+      "plural": "совм+естные по+ездки на маш+ине"
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_psyche",
+  "items": [
+    {
+      "id": "ru-telc26-belastbar",
+      "t": "стрессоуст+ойчивый",
+      "pos": "adj",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 4,
+          "headword": "belastbar",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "resilient",
+      "de": "belastbar",
+      "examples": [
+        {
+          "t": "Д+аже в напр+яжённые пери+оды она остаётся [[стрессоуст+ойчивой]].",
+          "de": "Auch in hektischen Phasen bleibt sie belastbar.",
+          "en": "She remains resilient even during hectic periods.",
+          "sense": {
+            "en": "resilient",
+            "de": "belastbar"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_relations",
+  "items": [
+    {
+      "id": "ru-telc26-angemessen",
+      "t": "ум+естный",
+      "pos": "adj",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 15,
+          "headword": "angemessen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "appropriate",
+      "de": "angemessen",
+      "examples": [
+        {
+          "t": "В +этой ситу+ации спок+ойный отв+ет [[ум+естен]].",
+          "de": "In dieser Situation ist eine ruhige Antwort angemessen.",
+          "en": "In this situation, a calm reply is appropriate.",
+          "sense": {
+            "en": "appropriate",
+            "de": "angemessen"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "words",
+  "topic": "b2_science",
+  "items": [
+    {
+      "id": "ru-telc26-verallgemeinern",
+      "t": "обобщ+ать",
+      "pos": "verb",
+      "aspect": "impf",
+      "forms": {
+        "praes": "обобщ+аю, обобщ+аешь",
+        "praet": "обобщ+ал",
+        "perf": "pf. обобщ+ить"
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 28,
+          "headword": "verallgemeinern",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "generalise",
+      "de": "verallgemeinern",
+      "examples": [
+        {
+          "t": "Не ст+оит ср+азу [[обобщ+ать]] отд+ельные сл+учаи.",
+          "de": "Wir sollten einzelne Erfahrungen nicht sofort verallgemeinern.",
+          "en": "We should not immediately generalise from individual experiences.",
+          "sense": {
+            "en": "generalise",
+            "de": "verallgemeinern"
+          }
+        }
+      ]
+    }
+  ]
+});
