@@ -809,10 +809,16 @@
     /* Phones: the article sits above the panel, collapsed to its first paragraph (Read More / Show Less),
      * Desktop ignores all of this via CSS. */
     var expanded = !!ui.bysExpanded;
-    var mustRead = { ru: 'Важно прочитать', en: 'Before you start', de: 'Unbedingt lesen' };
+    var mustRead = {
+      ru: ['Важно', 'прочитать'],
+      en: ['Before', 'you\u00A0start'],
+      de: ['Unbedingt', 'lesen']
+    };
     var stickerText = { ru: 'Не пролистывай!', en: 'Don’t skip this!', de: 'Nicht überspringen!' };
     var labels = languages.map(function (code) {
-      return '<span class="eyebrow bys-label' + (code === lang ? ' active' : '') + '" lang="' + code + '">' + esc(mustRead[code] || 'Before you start') + '</span>';
+      var parts = mustRead[code] || mustRead.en;
+      return '<span class="eyebrow bys-label' + (code === lang ? ' active' : '') + '" lang="' + code + '">' +
+        parts.map(function (s) { return esc(s); }).join(' <br class="bys-br">') + '</span>';
     }).join('');
     var article = '<article class="prose about-article' + (expanded ? '' : ' bys-collapsed') + '" id="bys" lang="' + lang + '"><header class="page-head bys-head">' +
       '<div class="bys-labels" aria-hidden="true">' + labels + '</div>' +
@@ -2706,7 +2712,7 @@
   /* Page eyebrows (the "PROFESSIONAL · GROUP · TOPIC" trail above a title) take at most two lines:
      if they wrap to more, letter-spacing and then font size step down until they fit. */
   function fitEyebrows() {
-    document.querySelectorAll('.crumbs .eyebrow, .page-head .eyebrow').forEach(function (el) {
+    document.querySelectorAll('.crumbs .eyebrow, .page-head .eyebrow:not(.bys-label)').forEach(function (el) {
       el.style.letterSpacing = ''; el.style.fontSize = ''; el.style.paddingLeft = ''; el.style.textIndent = '';
       el.classList.remove('eb-2l', 'eb-c');
       el.querySelectorAll('.eb-joint').forEach(function (sp) { sp.classList.remove('eb-joint'); sp.style.removeProperty('--eb-rule-w'); sp.style.removeProperty('--eb-rule-l'); });
