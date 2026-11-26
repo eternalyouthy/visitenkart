@@ -132,6 +132,11 @@ GT.START_NOTES = {
     ],
     newsTitle: 'Последние обновления',
     news: [
+      { date: '26.11.2026', items: [
+        { h: 'Новые карточки', p: 'Много новых карточек, особенно для русского и английского: слова уровня B2 под telc, профессиональная лексика и IT, выражения и чанки. В Roots появилась рулетка: собираешь слово из корня и приставки и угадываешь значение.' },
+        { h: 'Исправления в русском и английском', p: 'Поправили ударения в русском, заметки, формы множественного числа, кальки и неестественные формулировки. Связи между словами разных языков стали точнее.' },
+        { h: 'Стабильность', p: 'Синхронизация с Google Drive больше не затирает прогресс после неудачного сохранения. Ключ прогресса, повторения и офлайн-режим стали надёжнее. А ссылка на сайт теперь показывает красивое превью в мессенджерах.' }
+      ] },
       { date: '25.11.2026', items: [
         { h: 'Перенос прогресса', p: 'Добавили перенос прогресса между устройствами одним ключом. Прогресс суммируется: новое с телефона добавляется к старому на ПК и наоборот.' },
         { h: 'Новый контент', p: 'Добавили много нового контента.' },
@@ -163,6 +168,11 @@ GT.START_NOTES = {
     ],
     newsTitle: 'Latest updates',
     news: [
+      { date: '26 Nov 2026', items: [
+        { h: 'New cards', p: 'Lots of new cards, especially for Russian and English: telc B2 words, professional and IT vocabulary, expressions and chunks. Roots now has a roulette: build a word from a root and a prefix and guess what it means.' },
+        { h: 'Russian and English fixes', p: 'Fixed Russian stress marks, notes, plural forms, calques and unnatural phrasing. Links between words across languages are more accurate.' },
+        { h: 'Stability', p: 'Google Drive sync no longer overwrites your progress after a failed save. The progress key, reviews and offline mode are more reliable. And links to the site now show a proper preview in messengers.' }
+      ] },
       { date: '25 Nov 2026', items: [
         { h: 'Progress transfer', p: 'You can now move your progress between devices with a single key. Progress adds up: what you learn on your phone joins your PC progress, and the other way round.' },
         { h: 'New content', p: 'Lots of new content added.' },
@@ -194,6 +204,11 @@ GT.START_NOTES = {
     ],
     newsTitle: 'Letzte Updates',
     news: [
+      { date: '26.11.2026', items: [
+        { h: 'Neue Karten', p: 'Viele neue Karten, vor allem für Russisch und Englisch: B2-Wortschatz für telc, Berufs- und IT-Wortschatz, Redewendungen und Chunks. Unter Roots gibt es jetzt ein Roulette: Sie bilden ein Wort aus Stamm und Präfix und erraten die Bedeutung.' },
+        { h: 'Korrekturen in Russisch und Englisch', p: 'Russische Betonungen, Notizen, Pluralformen, Lehnübersetzungen und unnatürliche Formulierungen wurden korrigiert. Die Verknüpfungen zwischen Wörtern verschiedener Sprachen sind jetzt genauer.' },
+        { h: 'Stabilität', p: 'Die Google-Drive-Synchronisierung überschreibt den Fortschritt nach einem fehlgeschlagenen Speichern nicht mehr. Fortschrittsschlüssel, Wiederholungen und Offline-Modus sind zuverlässiger. Und Links zur Website zeigen jetzt eine schöne Vorschau in Messengern.' }
+      ] },
       { date: '25.11.2026', items: [
         { h: 'Fortschritt übertragen', p: 'Der Fortschritt lässt sich jetzt mit einem einzigen Schlüssel zwischen Geräten übertragen. Er summiert sich: Was Sie auf dem Handy lernen, kommt zum Fortschritt auf dem PC dazu und umgekehrt.' },
         { h: 'Neue Inhalte', p: 'Viele neue Inhalte hinzugefügt.' },
