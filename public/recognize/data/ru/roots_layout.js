@@ -1360,7 +1360,7 @@ GT.packs.ru.byId["ru-pro5-otgul"].examples.push({
 GT.packs.ru.byId["ru-pro5-otgul"].plural = "отг+улы";
 
 GT.packs.ru.byId["ru-w2-podrabotka"].examples.push({
-  "t": "Она обсужд+ает план+ируемую [[подраб+отку]] с отд+елом к+адров.",
+  "t": "Он+а обсужд+ает план+ируемую [[подраб+отку]] с отд+елом к+адров.",
   "de": "Sie bespricht ihre geplante Nebentätigkeit mit der Personalabteilung.",
   "en": "She is discussing her planned secondary employment with HR.",
   "sense": {
@@ -1443,6 +1443,8 @@ GT.addMember("ru-telc26-zulassung", "it", "b2_work");
 
 GT.addMember("ru-telc26-fachwortschatz", "it", "b2_work");
 
+GT.addMember("ru-telc26-einzelunternehmer", "it", "clients");
+
 GT.addMember("ru-telc26-gehaltsvorstellung", "it", "fin_hr");
 
 GT.addMember("ru-telc26-arbeitsablauf", "it", "ops_trades");
@@ -1479,6 +1481,8 @@ GT.addMember("ru-telc26-fahrgemeinschaft", "it", "svc_hotel");
 
 GT.addMember("ru-telc26-handwerklich", "it", "b2_work");
 
+GT.addMember("ru-telc26-handwerklich", "it", "ops_trades");
+
 GT.addMember("ru-telc26-belastbar", "it", "b2_work");
 
 GT.addMember("ru-telc26-lernbereit", "it", "b2_work");
@@ -1512,16 +1516,16 @@ GT.addMember("ru-telc26-ch-gegenvorschlag", "it", "workcomm");
 GT.addMember("ru-telc26-ch-verstaendnis", "it", "clients");
 
 GT.packs.ru.byId["ru-content26-trade-maintenance"].note = {
-  "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein.\n\nIn dieser Bedeutung meist im Singular.",
-  "en": "Normally used in the singular in this sense; other senses may differ.\n\nNormally singular in this sense."
+  "de": "In dieser Bedeutung normalerweise im Singular; bei anderen Bedeutungen kann es anders sein.",
+  "en": "Normally used in the singular in this sense; other senses may differ."
 };
 
 GT.packs.ru.byId["ru-w3-rabochiy-den"].note = {
-  "de": "Flüchtiges e fällt im Genitiv weg: в конце́ рабо́чего дня.\n\nHier bezeichnet Werktag eine Einheit der Lieferfrist, nicht die Dauer einer Schicht. Welche Tage zählen, ergibt sich aus den konkreten Bedingungen.",
+  "de": "Flüchtiges e fällt im Genitiv weg: в конце́ рабо́чего дня.\n\nHier bezeichnet рабо́чий день eine Einheit der Lieferfrist, nicht die Dauer einer Schicht. Welche Tage zählen, ergibt sich aus den konkreten Bedingungen.",
   "en": "Fleeting е drops in oblique cases: в тече́ние рабо́чего дня (during the workday).\n\nHere a working day is used to state a delivery period, not the length of a shift. Read the actual terms for which days count."
 };
 
 GT.packs.ru.byId["ru-r-da-peredavat"].note = {
-  "de": "Hier bedeutet ausrichten, jemandem eine Nachricht weiterzugeben.",
-  "en": "Here ausrichten means to pass a message on to someone."
+  "de": "Hier bedeutet передава́ть, jemandem eine Nachricht weiterzugeben.",
+  "en": "Here передава́ть means to pass a message on to someone."
 };

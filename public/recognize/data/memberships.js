@@ -560,6 +560,8 @@ GT.addMember("telc26-zulassung", "it", "b2_beruf");
 
 GT.addMember("b2-m3-fachwortschatz", "it", "b2_beruf");
 
+GT.addMember("telc26-einzelunternehmer", "it", "clients");
+
 GT.addMember("pro-m4-gehaltsvorstellung", "it", "fin_hr");
 
 GT.addMember("b2-m3-verschwiegenheitspflicht", "it", "legal_corporate");
@@ -603,6 +605,8 @@ GT.addMember("b2-reisen-buchungsbestaetigung", "it", "svc_hotel");
 GT.addMember("b2-m3-fahrgemeinschaft", "it", "svc_hotel");
 
 GT.addMember("b2-m3-handwerklich", "it", "b2_beruf");
+
+GT.addMember("b2-m3-handwerklich", "it", "ops_trades");
 
 GT.addMember("telc26-belastbar", "it", "b2_beruf");
 

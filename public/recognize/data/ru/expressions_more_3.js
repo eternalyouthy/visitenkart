@@ -693,7 +693,7 @@ GT.register({
       "en": "Please let us know in good time.",
       "examples": [
         {
-          "t": "Если вы не см+ожете прийт+и на встр+ечу, [[пож+алуйста, сообщ+ите нам зар+анее]].",
+          "t": "+Если вы не см+ожете прийт+и на встр+ечу, [[пож+алуйста, сообщ+ите нам зар+анее]].",
           "de": "Falls Sie den Termin nicht wahrnehmen können, geben Sie uns bitte rechtzeitig Bescheid.",
           "en": "If you cannot attend the appointment, please let us know in good time."
         }
@@ -758,8 +758,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Formelle Konstruktion: bedürfen + Genitiv. Im Beispiel wird eine Vorgabe aus einem Vertragsentwurf wiedergegeben.",
-        "en": "Formal German: bedürfen takes the genitive, der Schriftform. The example reports a clause in a draft document; it does not establish a legal rule."
+        "de": "Formelle Wendung für eine schriftliche Formvorschrift in Verträgen oder Entwürfen.",
+        "en": "Formal wording for a written-form requirement in contracts or draft documents."
       }
     },
     {
@@ -782,7 +782,7 @@ GT.register({
       "en": "ex works",
       "examples": [
         {
-          "t": "В предлож+ении ук+азана отгр+узка [[с зав+ода]] поставщ+ика.",
+          "t": "В предлож+ении ук+азана отгр+узка [[с зав+ода]] поставщик+а.",
           "de": "Das Angebot gilt ab Werk des Lieferanten.",
           "en": "The quote is ex works at the supplier’s premises."
         }
@@ -827,7 +827,7 @@ GT.register({
   "items": [
     {
       "id": "ru-telc26-ch-gegenvorschlag",
-      "t": "Я хот+ел(а) бы предлож+ить встр+ечный вар+иант.",
+      "t": "Я хот+ел(а) бы предлож+ить встр+ечный вари+ант.",
       "type": "chunk",
       "pos": "chunk",
       "level": "B2",
@@ -845,7 +845,7 @@ GT.register({
       "en": "I’d like to make a counterproposal.",
       "examples": [
         {
-          "t": "[[Я хот+ел бы предлож+ить встр+ечный вар+иант]]: снач+ала пров+ерим б+олее прост+ое реш+ение.",
+          "t": "[[Я хот+ел бы предлож+ить встр+ечный вари+ант]]: снач+ала пров+ерим б+олее прост+ое реш+ение.",
           "de": "Ich möchte einen Gegenvorschlag machen: Wir testen zuerst eine kleinere Lösung.",
           "en": "I’d like to make a counterproposal: let’s test a smaller solution first."
         }
@@ -878,7 +878,7 @@ GT.register({
       "en": "We ask for your understanding.",
       "examples": [
         {
-          "t": "Дост+авка зад+ерживается на один день. [[Пр+осим отнест+ись с поним+анием]].",
+          "t": "Дост+авка зад+ерживается на од+ин день. [[Пр+осим отнест+ись с поним+анием]].",
           "de": "Die Lieferung verzögert sich um einen Tag. Wir bitten um Ihr Verständnis.",
           "en": "The delivery is delayed by one day. We ask for your understanding."
         }

@@ -2335,7 +2335,7 @@ GT.register({
       "de": "die Beratung",
       "examples": [
         {
-          "t": "П+еред в+ыбором к+урса она запис+алась на [[консульт+ацию]].",
+          "t": "П+еред в+ыбором к+урса он+а запис+алась на [[консульт+ацию]].",
           "de": "Vor der Kurswahl vereinbarte sie eine Beratung.",
           "en": "Before choosing a course, she arranged a consultation.",
           "sense": {
@@ -2395,7 +2395,7 @@ GT.register({
       "de": "das Stellengesuch",
       "examples": [
         {
-          "t": "В своём [[объявл+ении о п+оиске раб+оты]] она указ+ала +опыт в прод+ажах.",
+          "t": "В своём [[объявл+ении о п+оиске раб+оты]] он+а указ+ала +опыт в прод+ажах.",
           "de": "In ihrem Stellengesuch nennt sie ihre Erfahrung im Verkauf.",
           "en": "Her job-seeking advertisement mentions her sales experience.",
           "sense": {
@@ -2424,7 +2424,7 @@ GT.register({
       "de": "die Gehaltsvorstellung",
       "examples": [
         {
-          "t": "На собес+едовании она объясн+ила сво+и [[зарпл+атные ожид+ания]].",
+          "t": "На собес+едовании он+а объясн+ила сво+и [[зарпл+атные ожид+ания]].",
           "de": "Im Gespräch erklärte sie ihre Gehaltsvorstellung.",
           "en": "During the interview, she explained her salary expectation.",
           "sense": {
@@ -2537,7 +2537,7 @@ GT.register({
       "de": "der Einzelhandel",
       "examples": [
         {
-          "t": "Она получ+ает п+ервый +опыт раб+оты в [[р+озничной торг+овле]].",
+          "t": "Он+а получ+ает п+ервый +опыт раб+оты в [[р+озничной торг+овле]].",
           "de": "Sie sammelt erste Berufserfahrung im Einzelhandel.",
           "en": "She is gaining her first work experience in retail.",
           "sense": {
@@ -2735,7 +2735,7 @@ GT.register({
       "de": "die Anweisung",
       "examples": [
         {
-          "t": "Пож+алуйста, прочит+айте [[указ+ание]] п+еред использов+анием приб+ора.",
+          "t": "Пож+алуйста, прочит+айте [[указ+ание]] п+еред исп+ользованием приб+ора.",
           "de": "Bitte lesen Sie die Anweisung, bevor Sie das Gerät benutzen.",
           "en": "Please read the instruction before using the device.",
           "sense": {
@@ -2835,8 +2835,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Weiblich: die Ersthelferin. Eine in Erster Hilfe ausgebildete Person; nicht automatisch ein Rettungssanitäter.",
-        "en": "Feminine: die Ersthelferin. A person trained in first aid, not necessarily a paramedic."
+        "de": "Eine in Erster Hilfe ausgebildete Person am Arbeitsplatz; nicht automatisch ein Rettungssanitäter.",
+        "en": "A workplace employee trained in first aid, not necessarily a paramedic."
       }
     },
     {
@@ -3080,7 +3080,7 @@ GT.register({
       "de": "der Schutzhelm",
       "examples": [
         {
-          "t": "На его [[защ+итной к+аске]] есть логот+ип комп+ании.",
+          "t": "На ег+о [[защ+итной к+аске]] есть логот+ип комп+ании.",
           "de": "Sein Schutzhelm trägt das Logo des Betriebs.",
           "en": "His hard hat carries the company logo.",
           "sense": {
@@ -3153,8 +3153,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Englisch guideline bezeichnet hier eine Arbeitsrichtlinie, keine geometrische Linie.",
-        "en": "Singular die Richtlinie, plural die Richtlinien. A work guideline, rule or directive, rather than a single drawn line."
+        "de": "Bezeichnet im Arbeitskontext eine Richtlinie oder Vorgabe, keine geometrische Linie.",
+        "en": "A workplace guideline, rule or directive."
       }
     },
     {
@@ -3193,8 +3193,8 @@ GT.register({
       "pos": "verb",
       "aspect": "impf",
       "forms": {
-        "praes": "защёлкиваюсь, защёлкиваешься",
-        "praet": "защёлкивался",
+        "praes": "защёлкивается, защёлкиваются",
+        "praet": "защёлкивался (-лась, -лось)",
         "perf": "pf. защёлкнуться"
       },
       "level": "B2",
@@ -3211,7 +3211,7 @@ GT.register({
       "de": "einrasten",
       "examples": [
         {
-          "t": "Кр+ышка [[защёлкивается]] со сл+ышимым щелчк+ом.",
+          "t": "Кр+ышка [[защёлкивается]] с отчётливым щелчк+ом.",
           "de": "Die Abdeckung rastet mit einem hörbaren Klick ein.",
           "en": "The cover clicks into place with an audible click.",
           "sense": {
@@ -3248,7 +3248,7 @@ GT.register({
       "de": "die beglaubigte Übersetzung",
       "examples": [
         {
-          "t": "К заявл+ению прилож+ен [[зав+еренный перев+од]] свид+етельства.",
+          "t": "К заявл+ению прил+ожен [[зав+еренный перев+од]] свид+етельства.",
           "de": "Dem Antrag liegt eine beglaubigte Übersetzung des Zeugnisses bei.",
           "en": "A certified translation of the certificate is enclosed with the application.",
           "sense": {
@@ -3263,7 +3263,7 @@ GT.register({
 
 GT.register({
   "tab": "it",
-  "topic": "clients",
+  "topic": "legal_corporate",
   "items": [
     {
       "id": "ru-telc26-einzelunternehmer",
@@ -3295,192 +3295,39 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Weibliche Form: die Einzelunternehmerin. Die Karte vermittelt Wortschatz, keine identischen Gründungsregeln in verschiedenen Ländern.",
-        "en": "Feminine German form: die Einzelunternehmerin. Business-form vocabulary; do not infer identical registration rules across countries."
+        "de": "Einzelunternehmer als natürliche Person; die konkreten Rechtsformen hängen vom jeweiligen Land ab.",
+        "en": "A sole proprietor operating in their own name; exact legal registration rules depend on the country."
       }
     },
     {
-      "id": "ru-telc26-preisnachlass",
-      "t": "сниж+ение цен+ы",
-      "pos": "noun",
-      "gender": "n",
-      "plural": "сниж+ения цен+ы",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 11,
-          "headword": "Preisnachlass",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "en": "price reduction",
-      "de": "der Preisnachlass",
-      "examples": [
-        {
-          "t": "Для б+олее кр+упного зак+аза согласов+али [[сниж+ение цен+ы]].",
-          "de": "Für die größere Bestellung wurde ein Preisnachlass vereinbart.",
-          "en": "A price reduction was agreed for the larger order.",
-          "sense": {
-            "en": "price reduction",
-            "de": "der Preisnachlass"
-          }
-        }
-      ]
-    },
-    {
-      "id": "ru-telc26-sonderwunsch",
-      "t": "ос+обое пожел+ание",
-      "pos": "noun",
-      "gender": "n",
-      "plural": "ос+обые пожел+ания",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 24,
-          "headword": "Sonderwunsch",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "en": "special request",
-      "de": "der Sonderwunsch",
-      "examples": [
-        {
-          "t": "Пож+алуйста, сообщ+ите нам сво+ё [[ос+обое пожел+ание]] п+еред зак+азом.",
-          "de": "Bitte teilen Sie uns Ihren Sonderwunsch vor der Bestellung mit.",
-          "en": "Please tell us your special request before placing the order.",
-          "sense": {
-            "en": "special request",
-            "de": "der Sonderwunsch"
-          }
-        }
-      ]
-    },
-    {
-      "id": "ru-telc26-bestandskunde",
-      "t": "д+ействующий кли+ент",
-      "pos": "noun",
-      "gender": "m",
-      "plural": "д+ействующие кли+енты",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 26,
-          "headword": "Bestandskunde",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "en": "existing customer",
-      "de": "der Bestandskunde",
-      "examples": [
-        {
-          "t": "Как [[д+ействующий кли+ент]], он уж+е име+ет н+омер кли+ента.",
-          "de": "Als Bestandskunde hat er bereits eine Kundennummer.",
-          "en": "As an existing customer, he already has a customer number.",
-          "sense": {
-            "en": "existing customer",
-            "de": "der Bestandskunde"
-          }
-        }
-      ]
-    },
-    {
-      "id": "ru-telc26-kundennummer",
-      "t": "н+омер кли+ента",
-      "pos": "noun",
-      "gender": "m",
-      "plural": "номер+а кли+ентов",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 26,
-          "headword": "Kundennummer",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "en": "customer number",
-      "de": "die Kundennummer",
-      "examples": [
-        {
-          "t": "Ваш [[н+омер кли+ента]] ук+азан в в+ерхней ч+асти счёта.",
-          "de": "Ihre Kundennummer steht oben auf der Rechnung.",
-          "en": "Your customer number is at the top of the invoice.",
-          "sense": {
-            "en": "customer number",
-            "de": "die Kundennummer"
-          }
-        }
-      ]
-    },
-    {
-      "id": "ru-telc26-neukunde",
-      "t": "н+овый кли+ент",
-      "pos": "noun",
-      "gender": "m",
-      "plural": "н+овые кли+енты",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 26,
-          "headword": "Neukunde",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "en": "new customer",
-      "de": "der Neukunde",
-      "examples": [
-        {
-          "t": "К+аждый [[н+овый кли+ент]] получ+ает кор+откое введ+ение в раб+оту с порт+алом.",
-          "de": "Jeder Neukunde erhält eine kurze Einführung in das Portal.",
-          "en": "Each new customer receives a short introduction to the portal.",
-          "sense": {
-            "en": "new customer",
-            "de": "der Neukunde"
-          }
-        }
-      ]
-    },
-    {
-      "id": "ru-telc26-entgegenkommen",
-      "t": "гот+овность пойт+и навстр+ечу",
+      "id": "ru-telc26-verschwiegenheitspflicht",
+      "t": "об+язанность сохран+ять конфиденци+альность",
       "pos": "noun",
       "gender": "f",
+      "plural": "об+язанности сохран+ять конфиденци+альность",
       "level": "B2",
       "sourceRefs": [
         {
           "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
           "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 18,
-          "headword": "Entgegenkommen",
+          "page": 9,
+          "headword": "Verschwiegenheitspflicht",
           "selection": "telc-b2-2026-11-26"
         }
       ],
-      "en": "goodwill",
-      "de": "das Entgegenkommen",
+      "en": "duty of confidentiality",
+      "de": "die Verschwiegenheitspflicht",
       "examples": [
         {
-          "t": "Спас+ибо за в+ашу [[гот+овность пойт+и навстр+ечу]] при измен+ении д+аты.",
-          "de": "Vielen Dank für Ihr Entgegenkommen bei der Terminänderung.",
-          "en": "Thank you for your goodwill in accommodating the change of date.",
+          "t": "Во вр+емя вв+одного обуч+ения объясн+яют [[об+язанность сохран+ять конфиденци+альность]].",
+          "de": "Bei der Einarbeitung wird die Verschwiegenheitspflicht erklärt.",
+          "en": "The duty of confidentiality is explained during induction.",
           "sense": {
-            "en": "goodwill",
-            "de": "das Entgegenkommen"
+            "en": "duty of confidentiality",
+            "de": "die Verschwiegenheitspflicht"
           }
         }
-      ],
-      "note": {
-        "en": "Normally singular in this sense.",
-        "de": "In dieser Bedeutung meist im Singular."
-      }
+      ]
     }
   ]
 });
@@ -3542,7 +3389,7 @@ GT.register({
       "de": "die Lohnfortzahlung",
       "examples": [
         {
-          "t": "Догов+ор опред+еляет [[сохран+ение з+аработной пл+аты]] во вр+емя бол+езни.",
+          "t": "Догов+ор определ+яет [[сохран+ение з+аработной пл+аты]] во вр+емя бол+езни.",
           "de": "Der Vertrag regelt die Lohnfortzahlung im Krankheitsfall.",
           "en": "The contract addresses the continued payment of wages during illness.",
           "sense": {
@@ -3575,7 +3422,7 @@ GT.register({
       "de": "die Kernzeit",
       "examples": [
         {
-          "t": "[[Обяз+ательные час+ы прис+утствия]] ук+азаны в календ+аре ком+анды.",
+          "t": "[[Обяз+ательные час+ы прис+утствия]] ук+азаны в календар+е ком+анды.",
           "de": "Die Kernzeit wird im Teamkalender angezeigt.",
           "en": "The core hours are shown in the team calendar.",
           "sense": {
@@ -3628,7 +3475,6 @@ GT.register({
       "t": "освобожд+ение от раб+оты",
       "pos": "noun",
       "gender": "n",
-      "plural": "освобожд+ения от раб+оты",
       "level": "B2",
       "sourceRefs": [
         {
@@ -3653,46 +3499,9 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Freistellung beschreibt hier die Befreiung von der Arbeitspflicht für eine Fortbildung. Ob sie bezahlt ist, ergibt sich aus der jeweiligen Vereinbarung.",
-        "en": "Freistellung means release from work duties, here for training. The word alone does not specify whether it is paid and does not mean dismissal."
+        "de": "In dieser Bedeutung meist im Singular. Befreiung von der Arbeitspflicht, z. B. für eine Fortbildung; ob bezahlt, hängt von der Vereinbarung ab.",
+        "en": "Normally singular in this sense. Release from work duties, e.g. for training; whether paid depends on the agreement."
       }
-    }
-  ]
-});
-
-GT.register({
-  "tab": "it",
-  "topic": "legal_corporate",
-  "items": [
-    {
-      "id": "ru-telc26-verschwiegenheitspflicht",
-      "t": "об+язанность сохран+ять конфиденци+альность",
-      "pos": "noun",
-      "gender": "f",
-      "plural": "об+язанности сохран+ять конфиденци+альность",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 9,
-          "headword": "Verschwiegenheitspflicht",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "en": "duty of confidentiality",
-      "de": "die Verschwiegenheitspflicht",
-      "examples": [
-        {
-          "t": "Во вр+емя вводного обуч+ения объясн+яют [[об+язанность сохран+ять конфиденци+альность]].",
-          "de": "Bei der Einarbeitung wird die Verschwiegenheitspflicht erklärt.",
-          "en": "The duty of confidentiality is explained during induction.",
-          "sense": {
-            "en": "duty of confidentiality",
-            "de": "die Verschwiegenheitspflicht"
-          }
-        }
-      ]
     }
   ]
 });
@@ -3766,7 +3575,6 @@ GT.register({
       "t": "пор+ядок д+ействий",
       "pos": "noun",
       "gender": "m",
-      "plural": "пор+ядки д+ействий",
       "level": "B2",
       "sourceRefs": [
         {
@@ -3791,8 +3599,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Das Substantiv das Vorgehen und das Verb vorgehen haben unterschiedliche Wortarten und deshalb eigene Karten.",
-        "en": "Das Vorgehen is a neuter noun meaning procedure or approach. The lower-case verb vorgehen is a different part of speech."
+        "de": "In dieser Bedeutung meist im Singular. Bezeichnet ein festgelegtes Vorgehen im Arbeitsalltag.",
+        "en": "Normally singular in this sense. Refers to an established procedure or sequence of steps."
       }
     },
     {
@@ -3871,15 +3679,15 @@ GT.register({
           "selection": "telc-b2-2026-11-26"
         }
       ],
-      "en": "decision minutes",
+      "en": "action minutes",
       "de": "das Ergebnisprotokoll",
       "examples": [
         {
-          "t": "В [[проток+оле пр+инятых реш+ений]] ук+азаны реш+ения и сл+едующие зад+ачи.",
+          "t": "В [[проток+оле пр+инятых реш+ений]] ук+азаны ит+оги и сл+едующие зад+ачи.",
           "de": "Im Ergebnisprotokoll stehen die Beschlüsse und die nächsten Aufgaben.",
-          "en": "The decision minutes list the decisions and the next tasks.",
+          "en": "The action minutes list the decisions and the next tasks.",
           "sense": {
-            "en": "decision minutes",
+            "en": "action minutes",
             "de": "das Ergebnisprotokoll"
           }
         }
@@ -3901,15 +3709,15 @@ GT.register({
           "selection": "telc-b2-2026-11-26"
         }
       ],
-      "en": "discussion minutes",
+      "en": "detailed minutes",
       "de": "das Verlaufsprotokoll",
       "examples": [
         {
-          "t": "[[Проток+ол х+ода обсужд+ения]] сохран+яет основн+ые выст+упления в их послед+овательности.",
+          "t": "[[Проток+ол х+ода обсужд+ения]] фикс+ирует основн+ые выступл+ения в их посл+едовательности.",
           "de": "Das Verlaufsprotokoll hält die wichtigsten Beiträge in ihrer Reihenfolge fest.",
-          "en": "The discussion minutes record the main contributions in their order.",
+          "en": "The detailed minutes record the main contributions in their order.",
           "sense": {
-            "en": "discussion minutes",
+            "en": "detailed minutes",
             "de": "das Verlaufsprotokoll"
           }
         }
@@ -4003,7 +3811,7 @@ GT.register({
       "de": "nachvollziehen",
       "examples": [
         {
-          "t": "Она [[понял+а]] л+огику рассужд+ений, просл+едив к+аждый шаг.",
+          "t": "Он+а [[понял+а]] л+огику рассужд+ений, прослед+ив к+аждый шаг.",
           "de": "Sie vollzog die Argumentation Schritt für Schritt nach.",
           "en": "She followed the reasoning step by step.",
           "sense": {
@@ -4047,8 +3855,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Im Beispiel widersprechen Zahlen einem Bericht. Russisch противоречить beschreibt hier einen Widerspruch zwischen Informationen.",
-        "en": "Here the figures contradict a report. Widersprechen can also mean disagree with a person; the German complement is dative."
+        "de": "Im Beispiel widersprechen Daten einem Bericht. Russisch противоре́чить steht mit dem Dativ.",
+        "en": "Here the figures contradict a report. Russian противоре́чить takes the dative case."
       }
     },
     {
@@ -4075,7 +3883,7 @@ GT.register({
       "de": "zustimmen",
       "examples": [
         {
-          "t": "Она [[соглаш+ается]] с предлож+енным гр+афиком.",
+          "t": "Он+а [[соглаш+ается]] с предл+оженным гр+афиком.",
           "de": "Sie stimmt dem vorgeschlagenen Zeitplan zu.",
           "en": "She agrees to the proposed schedule.",
           "sense": {
@@ -4216,6 +4024,199 @@ GT.register({
           }
         }
       ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "it",
+  "topic": "clients",
+  "items": [
+    {
+      "id": "ru-telc26-preisnachlass",
+      "t": "сниж+ение цен+ы",
+      "pos": "noun",
+      "gender": "n",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 11,
+          "headword": "Preisnachlass",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "price reduction",
+      "de": "der Preisnachlass",
+      "examples": [
+        {
+          "t": "Для б+олее кр+упного зак+аза согласов+али [[сниж+ение цен+ы]].",
+          "de": "Für die größere Bestellung wurde ein Preisnachlass vereinbart.",
+          "en": "A price reduction was agreed for the larger order.",
+          "sense": {
+            "en": "price reduction",
+            "de": "der Preisnachlass"
+          }
+        }
+      ],
+      "note": {
+        "en": "Normally singular in this sense.",
+        "de": "In dieser Bedeutung meist im Singular."
+      }
+    },
+    {
+      "id": "ru-telc26-sonderwunsch",
+      "t": "ос+обое пожел+ание",
+      "pos": "noun",
+      "gender": "n",
+      "plural": "ос+обые пожел+ания",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 24,
+          "headword": "Sonderwunsch",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "special request",
+      "de": "der Sonderwunsch",
+      "examples": [
+        {
+          "t": "Пож+алуйста, сообщ+ите нам своё [[ос+обое пожел+ание]] п+еред зак+азом.",
+          "de": "Bitte teilen Sie uns Ihren Sonderwunsch vor der Bestellung mit.",
+          "en": "Please tell us your special request before placing the order.",
+          "sense": {
+            "en": "special request",
+            "de": "der Sonderwunsch"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-bestandskunde",
+      "t": "д+ействующий кли+ент",
+      "pos": "noun",
+      "gender": "m",
+      "plural": "д+ействующие кли+енты",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 26,
+          "headword": "Bestandskunde",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "existing customer",
+      "de": "der Bestandskunde",
+      "examples": [
+        {
+          "t": "Как [[д+ействующий кли+ент]], он уж+е им+еет н+омер кли+ента.",
+          "de": "Als Bestandskunde hat er bereits eine Kundennummer.",
+          "en": "As an existing customer, he already has a customer number.",
+          "sense": {
+            "en": "existing customer",
+            "de": "der Bestandskunde"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-kundennummer",
+      "t": "н+омер кли+ента",
+      "pos": "noun",
+      "gender": "m",
+      "plural": "номер+а кли+ентов",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 26,
+          "headword": "Kundennummer",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "customer number",
+      "de": "die Kundennummer",
+      "examples": [
+        {
+          "t": "Ваш [[н+омер кли+ента]] ук+азан в в+ерхней ч+асти счёта.",
+          "de": "Ihre Kundennummer steht oben auf der Rechnung.",
+          "en": "Your customer number is at the top of the invoice.",
+          "sense": {
+            "en": "customer number",
+            "de": "die Kundennummer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-neukunde",
+      "t": "н+овый кли+ент",
+      "pos": "noun",
+      "gender": "m",
+      "plural": "н+овые кли+енты",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 26,
+          "headword": "Neukunde",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "new customer",
+      "de": "der Neukunde",
+      "examples": [
+        {
+          "t": "К+аждый [[н+овый кли+ент]] получ+ает кор+откое введ+ение в раб+оту с порт+алом.",
+          "de": "Jeder Neukunde erhält eine kurze Einführung in das Portal.",
+          "en": "Each new customer receives a short introduction to the portal.",
+          "sense": {
+            "en": "new customer",
+            "de": "der Neukunde"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ru-telc26-entgegenkommen",
+      "t": "гот+овность пойт+и навстр+ечу",
+      "pos": "noun",
+      "gender": "f",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 18,
+          "headword": "Entgegenkommen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "en": "goodwill",
+      "de": "das Entgegenkommen",
+      "examples": [
+        {
+          "t": "Спас+ибо за в+ашу [[гот+овность пойт+и навстр+ечу]] при измен+ении д+аты.",
+          "de": "Vielen Dank für Ihr Entgegenkommen bei der Terminänderung.",
+          "en": "Thank you for your goodwill in accommodating the change of date.",
+          "sense": {
+            "en": "goodwill",
+            "de": "das Entgegenkommen"
+          }
+        }
+      ],
+      "note": {
+        "en": "Normally singular in this sense.",
+        "de": "In dieser Bedeutung meist im Singular."
+      }
     }
   ]
 });
@@ -4411,8 +4412,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Skonto ist ein Preisnachlass bei früher Zahlung. Zulässig sind der und das Skonto sowie die Plurale Skonti und Skontos.",
-        "en": "The PDF uses das Skonto; der Skonto is also accepted. Plural: die Skonti or die Skontos. A discount for payment within a short agreed period."
+        "de": "Preisnachlass bei Zahlung innerhalb einer kurzen vereinbarten Frist.",
+        "en": "A discount for paying within a short agreed period."
       }
     },
     {
@@ -4435,7 +4436,7 @@ GT.register({
       "de": "die Mahnung",
       "examples": [
         {
-          "t": "[[Тр+ебование об опл+ате]] относ+ится к ещё не опл+аченному счёту.",
+          "t": "[[Тр+ебование об опл+ате]] отн+осится к ещё не опл+аченному счёту.",
           "de": "Die Mahnung bezieht sich auf die noch offene Rechnung.",
           "en": "The payment demand concerns the outstanding invoice.",
           "sense": {
@@ -4445,8 +4446,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Hier geht es um eine offene Rechnung. Die Karte meint eine Zahlungsmahnung, keine arbeitsrechtliche Abmahnung.",
-        "en": "Here Mahnung concerns an overdue invoice. Do not learn the PDF’s broad “written warning” as a disciplinary warning; that context normally uses Abmahnung."
+        "de": "Zahlungsaufforderung für eine überfällige Rechnung, keine arbeitsrechtliche Abmahnung.",
+        "en": "A formal request to pay an overdue invoice, not a disciplinary warning."
       }
     },
     {
@@ -4469,7 +4470,7 @@ GT.register({
       "de": "die Lastschrift",
       "examples": [
         {
-          "t": "Счёт опл+ачивается ч+ерез [[прям+ое спис+ание]] согл+асно соглас+ованному спос+обу опл+аты.",
+          "t": "Счёт опл+ачивается ч+ерез [[прям+ое спис+ание]] согл+асно соглас+ованному сп+особу опл+аты.",
           "de": "Die Rechnung wird nach der vereinbarten Zahlungsart per Lastschrift bezahlt.",
           "en": "The invoice is paid by direct debit under the agreed payment arrangement.",
           "sense": {
@@ -4621,7 +4622,6 @@ GT.register({
       "t": "з+аработок п+осле в+ычетов",
       "pos": "noun",
       "gender": "m",
-      "plural": "з+аработки п+осле в+ычетов",
       "level": "B2",
       "sourceRefs": [
         {
@@ -4644,14 +4644,17 @@ GT.register({
             "de": "der Nettoverdienst"
           }
         }
-      ]
+      ],
+      "note": {
+        "en": "Normally singular in this sense.",
+        "de": "In dieser Bedeutung meist im Singular."
+      }
     },
     {
       "id": "ru-telc26-bruttoverguetung",
       "t": "вознагражд+ение до в+ычетов",
       "pos": "noun",
       "gender": "n",
-      "plural": "вознагражд+ения до в+ычетов",
       "level": "B2",
       "sourceRefs": [
         {
@@ -4674,7 +4677,11 @@ GT.register({
             "de": "die Bruttovergütung"
           }
         }
-      ]
+      ],
+      "note": {
+        "en": "Normally singular in this sense.",
+        "de": "In dieser Bedeutung meist im Singular."
+      }
     },
     {
       "id": "ru-telc26-rentenversicherung",
@@ -4728,7 +4735,7 @@ GT.register({
       "de": "die Pflegeversicherung",
       "examples": [
         {
-          "t": "В докум+ентах есть информ+ация про [[страхов+ание на сл+учай потр+ебности в ух+оде]].",
+          "t": "В докум+ентах есть информ+ация о [[страхов+ании на сл+учай потр+ебности в ух+оде]].",
           "de": "Die Unterlagen enthalten Informationen zur Pflegeversicherung.",
           "en": "The documents contain information about long-term care insurance.",
           "sense": {
@@ -4840,7 +4847,7 @@ GT.register({
       "de": "der USB-Anschluss",
       "examples": [
         {
-          "t": "[[USB-порт]] на передн+ей п+анели своб+оден.",
+          "t": "[[USB-порт]] на пер+едней пан+ели своб+оден.",
           "de": "Der USB-Anschluss an der Vorderseite ist frei.",
           "en": "The USB port on the front is available.",
           "sense": {

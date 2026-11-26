@@ -331,3 +331,45 @@
       ['В отличие от геометрического blueprint, schematic показывает именно функциональные связи и цепи.', 'Zeigt anders als ein Grundriss keine Maße, sondern logische und elektrische Verbindungen.'])
   ]);
 })();
+
+/* TELC B2 source expansion 2026-11-26 — data only.
+ * Source: Einfach besser! 500, B2, English word list; original examples.
+ * Permanent IDs; existing cards reused by lemma, part of speech and sense. */
+GT.register({
+  "tab": "it",
+  "topic": "ops_logistics",
+  "items": [
+    {
+      "id": "en:telc26:versand",
+      "t": "dispatch",
+      "pos": "noun",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 25,
+          "headword": "Versand",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "отправка",
+      "de": "der Versand",
+      "examples": [
+        {
+          "t": "After inspection, the goods are ready for [[dispatch]].",
+          "de": "Nach der Prüfung ist die Ware für den Versand bereit.",
+          "ru": "После проверки товар готов к отправке.",
+          "sense": {
+            "ru": "отправка",
+            "de": "der Versand"
+          }
+        }
+      ],
+      "note": {
+        "ru": "В этом значении обычно неисчисляемое.",
+        "de": "In dieser Bedeutung meist unzählbar."
+      }
+    }
+  ]
+});

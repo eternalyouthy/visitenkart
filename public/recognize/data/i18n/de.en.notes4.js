@@ -1685,7 +1685,7 @@ GT.packs.de.byId["it-sec-richtlinie"].note = {
 };
 
 GT.packs.de.byId["pro-b6-mahnung"].note = {
-  "en": "A polite first notice is often titled Zahlungserinnerung; formal follow-ups are numbered Mahnungen.\n\nHere Mahnung concerns an overdue invoice. Do not learn the PDF’s broad “written warning” as a disciplinary warning; that context normally uses Abmahnung.",
+  "en": "A polite first notice is often titled Zahlungserinnerung; formal follow-ups are numbered Mahnungen.\n\nHere Mahnung concerns an overdue invoice, not a disciplinary warning (which normally uses Abmahnung).",
   "ru": "Дружелюбное первое письмо часто называют Zahlungserinnerung, а строгие последующие — 1./2. Mahnung.\n\nВ разделе оплаты Mahnung означает требование или напоминание о просроченной оплате. Не путайте с Abmahnung — предупреждением в трудовом или ином правовом контексте."
 };
 

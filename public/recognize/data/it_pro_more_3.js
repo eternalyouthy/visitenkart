@@ -561,8 +561,8 @@ GT.register({
         }
       ],
       "note": {
-        "en": "For the product-reference sense, Russian stress is арти́кул, plural арти́кулы. An item number is distinct from an order number.",
-        "ru": "В значении товарного обозначения ударение: арти́кул, арти́кулы. Это не номер отдельного заказа."
+        "en": "An item number identifies a product; it is distinct from an order number.",
+        "ru": "Артикул обозначает конкретный товар; его не стоит путать с номером отдельного заказа."
       }
     },
     {
@@ -1141,7 +1141,7 @@ GT.register({
 
 GT.register({
   "tab": "it",
-  "topic": "clients",
+  "topic": "legal_corporate",
   "items": [
     {
       "id": "telc26-einzelunternehmer",
@@ -1177,169 +1177,6 @@ GT.register({
       "note": {
         "en": "Feminine German form: die Einzelunternehmerin. Business-form vocabulary; do not infer identical registration rules across countries.",
         "ru": "Женская форма: die Einzelunternehmerin. Здесь обозначается предприниматель, работающий от своего имени; конкретные правовые формы зависят от страны."
-      }
-    },
-    {
-      "id": "telc26-sonderwunsch",
-      "t": "Sonderwunsch",
-      "pos": "noun",
-      "article": "der",
-      "plural": "die Sonderwünsche",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 24,
-          "headword": "Sonderwunsch",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "de": "Sonderwunsch",
-      "ru": "особое пожелание",
-      "en": "special request",
-      "examples": [
-        {
-          "t": "Bitte teilen Sie uns Ihren [[Sonderwunsch]] vor der Bestellung mit.",
-          "en": "Please tell us your special request before placing the order.",
-          "ru": "Пожалуйста, сообщите нам своё особое пожелание перед заказом.",
-          "de": "Bitte teilen Sie uns Ihren [[Sonderwunsch]] vor der Bestellung mit.",
-          "sense": {
-            "ru": "особое пожелание",
-            "en": "special request"
-          }
-        }
-      ]
-    },
-    {
-      "id": "telc26-bestandskunde",
-      "t": "Bestandskunde",
-      "pos": "noun",
-      "article": "der",
-      "plural": "die Bestandskunden",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 26,
-          "headword": "Bestandskunde",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "de": "Bestandskunde",
-      "ru": "действующий клиент",
-      "en": "existing customer",
-      "examples": [
-        {
-          "t": "Als [[Bestandskunde]] hat er bereits eine Kundennummer.",
-          "en": "As an existing customer, he already has a customer number.",
-          "ru": "Как действующий клиент, он уже имеет номер клиента.",
-          "de": "Als [[Bestandskunde]] hat er bereits eine Kundennummer.",
-          "sense": {
-            "ru": "действующий клиент",
-            "en": "existing customer"
-          }
-        }
-      ]
-    },
-    {
-      "id": "telc26-kundennummer",
-      "t": "Kundennummer",
-      "pos": "noun",
-      "article": "die",
-      "plural": "die Kundennummern",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 26,
-          "headword": "Kundennummer",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "de": "Kundennummer",
-      "ru": "номер клиента",
-      "en": "customer number",
-      "examples": [
-        {
-          "t": "Ihre [[Kundennummer]] steht oben auf der Rechnung.",
-          "en": "Your customer number is at the top of the invoice.",
-          "ru": "Ваш номер клиента указан в верхней части счёта.",
-          "de": "Ihre [[Kundennummer]] steht oben auf der Rechnung.",
-          "sense": {
-            "ru": "номер клиента",
-            "en": "customer number"
-          }
-        }
-      ]
-    },
-    {
-      "id": "telc26-neukunde",
-      "t": "Neukunde",
-      "pos": "noun",
-      "article": "der",
-      "plural": "die Neukunden",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 26,
-          "headword": "Neukunde",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "de": "Neukunde",
-      "ru": "новый клиент",
-      "en": "new customer",
-      "examples": [
-        {
-          "t": "Jeder [[Neukunde]] erhält eine kurze Einführung in das Portal.",
-          "en": "Each new customer receives a short introduction to the portal.",
-          "ru": "Каждый новый клиент получает короткое введение в работу с порталом.",
-          "de": "Jeder [[Neukunde]] erhält eine kurze Einführung in das Portal.",
-          "sense": {
-            "ru": "новый клиент",
-            "en": "new customer"
-          }
-        }
-      ]
-    },
-    {
-      "id": "telc26-entgegenkommen",
-      "t": "Entgegenkommen",
-      "pos": "noun",
-      "article": "das",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 18,
-          "headword": "Entgegenkommen",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "de": "Entgegenkommen",
-      "ru": "готовность пойти навстречу",
-      "en": "goodwill",
-      "examples": [
-        {
-          "t": "Vielen Dank für Ihr [[Entgegenkommen]] bei der Terminänderung.",
-          "en": "Thank you for your goodwill in accommodating the change of date.",
-          "ru": "Спасибо за вашу готовность пойти навстречу при изменении даты.",
-          "de": "Vielen Dank für Ihr [[Entgegenkommen]] bei der Terminänderung.",
-          "sense": {
-            "ru": "готовность пойти навстречу",
-            "en": "goodwill"
-          }
-        }
-      ],
-      "note": {
-        "ru": "В данном значении обычно употребляется в единственном числе.",
-        "en": "Normally singular in this sense."
       }
     }
   ]
@@ -1736,16 +1573,16 @@ GT.register({
       ],
       "de": "Ergebnisprotokoll",
       "ru": "протокол принятых решений",
-      "en": "decision minutes",
+      "en": "action minutes",
       "examples": [
         {
           "t": "Im [[Ergebnisprotokoll]] stehen die Beschlüsse und die nächsten Aufgaben.",
-          "en": "The decision minutes list the decisions and the next tasks.",
+          "en": "The action minutes list the decisions and the next tasks.",
           "ru": "В протоколе принятых решений указаны решения и следующие задачи.",
           "de": "Im [[Ergebnisprotokoll]] stehen die Beschlüsse und die nächsten Aufgaben.",
           "sense": {
             "ru": "протокол принятых решений",
-            "en": "decision minutes"
+            "en": "action minutes"
           }
         }
       ]
@@ -1768,16 +1605,16 @@ GT.register({
       ],
       "de": "Verlaufsprotokoll",
       "ru": "протокол хода обсуждения",
-      "en": "discussion minutes",
+      "en": "detailed minutes",
       "examples": [
         {
           "t": "Das [[Verlaufsprotokoll]] hält die wichtigsten Beiträge in ihrer Reihenfolge fest.",
-          "en": "The discussion minutes record the main contributions in their order.",
+          "en": "The detailed minutes record the main contributions in their order.",
           "ru": "Протокол хода обсуждения сохраняет основные выступления в их последовательности.",
           "de": "Das [[Verlaufsprotokoll]] hält die wichtigsten Beiträge in ihrer Reihenfolge fest.",
           "sense": {
             "ru": "протокол хода обсуждения",
-            "en": "discussion minutes"
+            "en": "detailed minutes"
           }
         }
       ]
@@ -2028,8 +1865,8 @@ GT.register({
         }
       ],
       "note": {
-        "en": "The PDF uses das Skonto; der Skonto is also accepted. Plural: die Skonti or die Skontos. A discount for payment within a short agreed period.",
-        "ru": "В PDF используется das Skonto; допустимо также der Skonto. Множественное число: die Skonti или die Skontos. Это скидка за оплату в короткий согласованный срок."
+        "en": "Usually das Skonto (der Skonto is also accepted). Plural: die Skonti or die Skontos. A discount for payment within a short agreed period.",
+        "ru": "Обычно das Skonto (допустимо также der Skonto). Множественное число: die Skonti или die Skontos. Скидка за оплату в короткий согласованный срок."
       }
     },
     {
@@ -2200,6 +2037,176 @@ GT.register({
           }
         }
       ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "it",
+  "topic": "clients",
+  "items": [
+    {
+      "id": "telc26-sonderwunsch",
+      "t": "Sonderwunsch",
+      "pos": "noun",
+      "article": "der",
+      "plural": "die Sonderwünsche",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 24,
+          "headword": "Sonderwunsch",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Sonderwunsch",
+      "ru": "особое пожелание",
+      "en": "special request",
+      "examples": [
+        {
+          "t": "Bitte teilen Sie uns Ihren [[Sonderwunsch]] vor der Bestellung mit.",
+          "en": "Please tell us your special request before placing the order.",
+          "ru": "Пожалуйста, сообщите нам своё особое пожелание перед заказом.",
+          "de": "Bitte teilen Sie uns Ihren [[Sonderwunsch]] vor der Bestellung mit.",
+          "sense": {
+            "ru": "особое пожелание",
+            "en": "special request"
+          }
+        }
+      ]
+    },
+    {
+      "id": "telc26-bestandskunde",
+      "t": "Bestandskunde",
+      "pos": "noun",
+      "article": "der",
+      "plural": "die Bestandskunden",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 26,
+          "headword": "Bestandskunde",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Bestandskunde",
+      "ru": "действующий клиент",
+      "en": "existing customer",
+      "examples": [
+        {
+          "t": "Als [[Bestandskunde]] hat er bereits eine Kundennummer.",
+          "en": "As an existing customer, he already has a customer number.",
+          "ru": "Как действующий клиент, он уже имеет номер клиента.",
+          "de": "Als [[Bestandskunde]] hat er bereits eine Kundennummer.",
+          "sense": {
+            "ru": "действующий клиент",
+            "en": "existing customer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "telc26-kundennummer",
+      "t": "Kundennummer",
+      "pos": "noun",
+      "article": "die",
+      "plural": "die Kundennummern",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 26,
+          "headword": "Kundennummer",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Kundennummer",
+      "ru": "номер клиента",
+      "en": "customer number",
+      "examples": [
+        {
+          "t": "Ihre [[Kundennummer]] steht oben auf der Rechnung.",
+          "en": "Your customer number is at the top of the invoice.",
+          "ru": "Ваш номер клиента указан в верхней части счёта.",
+          "de": "Ihre [[Kundennummer]] steht oben auf der Rechnung.",
+          "sense": {
+            "ru": "номер клиента",
+            "en": "customer number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "telc26-neukunde",
+      "t": "Neukunde",
+      "pos": "noun",
+      "article": "der",
+      "plural": "die Neukunden",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 26,
+          "headword": "Neukunde",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Neukunde",
+      "ru": "новый клиент",
+      "en": "new customer",
+      "examples": [
+        {
+          "t": "Jeder [[Neukunde]] erhält eine kurze Einführung in das Portal.",
+          "en": "Each new customer receives a short introduction to the portal.",
+          "ru": "Каждый новый клиент получает короткое введение в работу с порталом.",
+          "de": "Jeder [[Neukunde]] erhält eine kurze Einführung in das Portal.",
+          "sense": {
+            "ru": "новый клиент",
+            "en": "new customer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "telc26-entgegenkommen",
+      "t": "Entgegenkommen",
+      "pos": "noun",
+      "article": "das",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 18,
+          "headword": "Entgegenkommen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "de": "Entgegenkommen",
+      "ru": "готовность пойти навстречу",
+      "en": "goodwill",
+      "examples": [
+        {
+          "t": "Vielen Dank für Ihr [[Entgegenkommen]] bei der Terminänderung.",
+          "en": "Thank you for your goodwill in accommodating the change of date.",
+          "ru": "Спасибо за вашу готовность пойти навстречу при изменении даты.",
+          "de": "Vielen Dank für Ihr [[Entgegenkommen]] bei der Terminänderung.",
+          "sense": {
+            "ru": "готовность пойти навстречу",
+            "en": "goodwill"
+          }
+        }
+      ],
+      "note": {
+        "ru": "В данном значении обычно употребляется в единственном числе.",
+        "en": "Normally singular in this sense."
+      }
     }
   ]
 });

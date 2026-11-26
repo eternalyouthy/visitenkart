@@ -3737,7 +3737,7 @@ GT.link([
     ],
     "en": [
       "en:telc26:ergebnisprotokoll",
-      "decision minutes"
+      "action minutes"
     ],
     "de": [
       "telc26-ergebnisprotokoll",
@@ -3751,7 +3751,7 @@ GT.link([
     ],
     "en": [
       "en:telc26:verlaufsprotokoll",
-      "discussion minutes"
+      "detailed minutes"
     ],
     "de": [
       "telc26-verlaufsprotokoll",
@@ -4167,7 +4167,7 @@ GT.link([
   {
     "ru": [
       "ru-telc26-ch-gegenvorschlag",
-      "Я хот+ел(а) бы предлож+ить встр+ечный вар+иант."
+      "Я хот+ел(а) бы предлож+ить встр+ечный вари+ант."
     ],
     "en": [
       "en:telc26:ch-gegenvorschlag",

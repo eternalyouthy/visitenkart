@@ -538,8 +538,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Im russischen Wort für die Artikelkennzeichnung liegt die Betonung auf и: арти́кул, Plural арти́кулы. Nicht mit der Bestellnummer verwechseln.",
-        "ru": "В значении товарного обозначения ударение: арти́кул, арти́кулы. Это не номер отдельного заказа."
+        "de": "Eindeutige Kennnummer eines Produkts; nicht mit der Bestellnummer verwechseln.",
+        "ru": "Уникальный код товара; не путать с номером отдельного заказа."
       }
     },
     {
@@ -726,8 +726,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Weiblich: die Ersthelferin. Eine in Erster Hilfe ausgebildete Person; nicht automatisch ein Rettungssanitäter.",
-        "ru": "Женская форма: die Ersthelferin. Сотрудник, обученный первой помощи; это не обязательно фельдшер или парамедик."
+        "de": "Eine in Erster Hilfe ausgebildete Person am Arbeitsplatz; nicht automatisch ein Rettungssanitäter.",
+        "ru": "Человек, обученный оказывать первую помощь на рабочем месте; это не обязательно врач или фельдшер."
       }
     },
     {
@@ -1026,8 +1026,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Englisch guideline bezeichnet hier eine Arbeitsrichtlinie, keine geometrische Linie.",
-        "ru": "Единственное число — die Richtlinie, множественное — die Richtlinien. В рабочем контексте: принцип, правило или директива."
+        "de": "Bezeichnet hier eine Arbeitsrichtlinie oder Vorgabe, keine geometrische Linie.",
+        "ru": "В рабочем контексте: руководство, правило или директива, а не геометрическая линия."
       }
     },
     {
@@ -1133,7 +1133,7 @@ GT.register({
 
 GT.register({
   "tab": "it",
-  "topic": "clients",
+  "topic": "legal_corporate",
   "items": [
     {
       "id": "en:telc26:einzelunternehmer",
@@ -1164,10 +1164,731 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Weibliche Form: die Einzelunternehmerin. Die Karte vermittelt Wortschatz, keine identischen Gründungsregeln in verschiedenen Ländern.",
-        "ru": "Женская форма: die Einzelunternehmerin. Здесь обозначается предприниматель, работающий от своего имени; конкретные правовые формы зависят от страны."
+        "de": "Bezeichnet eine natürliche Person, die ein Unternehmen allein auf eigene Rechnung führt; die konkreten Rechtsformen hängen vom jeweiligen Land ab.",
+        "ru": "Предприниматель, ведущий дело самостоятельно от своего имени; конкретные правовые формы зависят от страны."
       }
     },
+    {
+      "id": "en:telc26:verschwiegenheitspflicht",
+      "t": "duty of confidentiality",
+      "pos": "noun",
+      "plural": "duties of confidentiality",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 9,
+          "headword": "Verschwiegenheitspflicht",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "обязанность сохранять конфиденциальность",
+      "de": "die Verschwiegenheitspflicht",
+      "examples": [
+        {
+          "t": "The [[duty of confidentiality]] is explained during induction.",
+          "de": "Bei der Einarbeitung wird die Verschwiegenheitspflicht erklärt.",
+          "ru": "Во время вводного обучения объясняют обязанность сохранять конфиденциальность.",
+          "sense": {
+            "ru": "обязанность сохранять конфиденциальность",
+            "de": "die Verschwiegenheitspflicht"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "it",
+  "topic": "legal_labour",
+  "items": [
+    {
+      "id": "en:telc26:arbeitsverhaeltnis",
+      "t": "employment relationship",
+      "pos": "noun",
+      "plural": "employment relationships",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 8,
+          "headword": "Arbeitsverhältnis",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "трудовые отношения",
+      "de": "das Arbeitsverhältnis",
+      "examples": [
+        {
+          "t": "The [[employment relationship]] begins on the first day of next month.",
+          "de": "Das Arbeitsverhältnis beginnt am ersten Tag des nächsten Monats.",
+          "ru": "Трудовые отношения начинаются с первого дня следующего месяца.",
+          "sense": {
+            "ru": "трудовые отношения",
+            "de": "das Arbeitsverhältnis"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:lohnfortzahlung",
+      "t": "continued payment of wages",
+      "pos": "noun",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 8,
+          "headword": "Lohnfortzahlung",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "сохранение заработной платы",
+      "de": "die Lohnfortzahlung",
+      "examples": [
+        {
+          "t": "The contract addresses the [[continued payment of wages]] during illness.",
+          "de": "Der Vertrag regelt die Lohnfortzahlung im Krankheitsfall.",
+          "ru": "Договор определяет сохранение заработной платы во время болезни.",
+          "sense": {
+            "ru": "сохранение заработной платы",
+            "de": "die Lohnfortzahlung"
+          }
+        }
+      ],
+      "note": {
+        "ru": "В этом значении обычно неисчисляемое.",
+        "de": "In dieser Bedeutung meist unzählbar."
+      }
+    },
+    {
+      "id": "en:telc26:wechselschicht",
+      "t": "rotating shift",
+      "pos": "noun",
+      "plural": "rotating shifts",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 19,
+          "headword": "Wechselschicht",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "работа в чередующиеся смены",
+      "de": "die Wechselschicht",
+      "examples": [
+        {
+          "t": "Production introduced a [[rotating shift]] system.",
+          "de": "In der Produktion wurde Wechselschicht eingeführt.",
+          "ru": "На производстве введена работа в чередующиеся смены.",
+          "sense": {
+            "ru": "работа в чередующиеся смены",
+            "de": "die Wechselschicht"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:freistellung",
+      "t": "leave of absence",
+      "pos": "noun",
+      "plural": "leaves of absence",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 33,
+          "headword": "Freistellung",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "освобождение от работы",
+      "de": "die Freistellung",
+      "examples": [
+        {
+          "t": "He is applying for [[leave of absence]] for the training course.",
+          "de": "Für die Fortbildung beantragt er eine Freistellung.",
+          "ru": "Для повышения квалификации он запрашивает освобождение от работы.",
+          "sense": {
+            "ru": "освобождение от работы",
+            "de": "die Freistellung"
+          }
+        }
+      ],
+      "note": {
+        "de": "Befreiung von der Arbeitspflicht, z. B. für eine Fortbildung; ob sie bezahlt ist, hängt von der Vereinbarung ab.",
+        "ru": "Временное освобождение от работы, например для обучения; оплата зависит от конкретной договорённости."
+      }
+    },
+    {
+      "id": "en:telc26:freizeitausgleich",
+      "t": "time off in lieu",
+      "pos": "noun",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 33,
+          "headword": "Freizeitausgleich",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "отгул",
+      "de": "der Freizeitausgleich",
+      "examples": [
+        {
+          "t": "The plan accounts for the overtime as [[time off in lieu]].",
+          "de": "Die geleisteten Überstunden werden im Plan als Freizeitausgleich berücksichtigt.",
+          "ru": "В плане учтён отгул за отработанные сверхурочные часы.",
+          "sense": {
+            "ru": "отгул",
+            "de": "der Freizeitausgleich"
+          }
+        }
+      ],
+      "note": {
+        "ru": "В этом значении обычно неисчисляемое.",
+        "de": "In dieser Bedeutung meist unzählbar."
+      }
+    },
+    {
+      "id": "en:telc26:nebentaetigkeit",
+      "t": "secondary employment",
+      "pos": "noun",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 35,
+          "headword": "Nebentätigkeit",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "подработка",
+      "de": "die Nebentätigkeit",
+      "examples": [
+        {
+          "t": "She is discussing her planned [[secondary employment]] with HR.",
+          "de": "Sie bespricht ihre geplante Nebentätigkeit mit der Personalabteilung.",
+          "ru": "Она обсуждает планируемую подработку с отделом кадров.",
+          "sense": {
+            "ru": "подработка",
+            "de": "die Nebentätigkeit"
+          }
+        }
+      ],
+      "note": {
+        "ru": "В этом значении обычно неисчисляемое.",
+        "de": "In dieser Bedeutung meist unzählbar."
+      }
+    }
+  ]
+});
+
+GT.register({
+  "tab": "it",
+  "topic": "work",
+  "items": [
+    {
+      "id": "en:telc26:arbeitsablauf",
+      "t": "workflow",
+      "pos": "noun",
+      "plural": "workflows",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 5,
+          "headword": "Arbeitsablauf",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "рабочий процесс",
+      "de": "der Arbeitsablauf",
+      "examples": [
+        {
+          "t": "A checklist makes the [[workflow]] easier to follow.",
+          "de": "Eine Checkliste macht den Arbeitsablauf übersichtlicher.",
+          "ru": "Контрольный список делает рабочий процесс понятнее.",
+          "sense": {
+            "ru": "рабочий процесс",
+            "de": "der Arbeitsablauf"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:verbesserungsvorschlag",
+      "t": "suggestion for improvement",
+      "pos": "noun",
+      "plural": "suggestions for improvement",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 9,
+          "headword": "Verbesserungsvorschlag",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "предложение по улучшению",
+      "de": "der Verbesserungsvorschlag",
+      "examples": [
+        {
+          "t": "The team will discuss each [[suggestion for improvement]] at the next meeting.",
+          "de": "Das Team bespricht jeden Verbesserungsvorschlag in der nächsten Sitzung.",
+          "ru": "Команда обсудит каждое предложение по улучшению на следующей встрече.",
+          "sense": {
+            "ru": "предложение по улучшению",
+            "de": "der Verbesserungsvorschlag"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:vorgehen",
+      "t": "procedure",
+      "pos": "noun",
+      "plural": "procedures",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 20,
+          "headword": "Vorgehen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "порядок действий",
+      "de": "das Vorgehen",
+      "examples": [
+        {
+          "t": "We will agree on the next [[procedure]] with the client.",
+          "de": "Wir stimmen das weitere Vorgehen mit der Kundin ab.",
+          "ru": "Мы согласуем дальнейший порядок действий с клиенткой.",
+          "sense": {
+            "ru": "порядок действий",
+            "de": "das Vorgehen"
+          }
+        }
+      ],
+      "note": {
+        "de": "Bezeichnet hier ein festgelegtes Verfahren oder Vorgehen im Arbeitsalltag.",
+        "ru": "Установленный порядок действий или процедура в работе."
+      }
+    },
+    {
+      "id": "en:telc26:besprechungsraum",
+      "t": "meeting room",
+      "pos": "noun",
+      "plural": "meeting rooms",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 19,
+          "headword": "Besprechungsraum",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "переговорная комната",
+      "de": "der Besprechungsraum",
+      "examples": [
+        {
+          "t": "The [[meeting room]] is reserved for two hours.",
+          "de": "Der Besprechungsraum ist für zwei Stunden reserviert.",
+          "ru": "Переговорная комната забронирована на два часа.",
+          "sense": {
+            "ru": "переговорная комната",
+            "de": "der Besprechungsraum"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:ergebnisprotokoll",
+      "t": "action minutes",
+      "pos": "noun",
+      "plural": "action minutes",
+      "note": {
+        "ru": "Minutes — протокол; в этом значении употребляется во множественном числе. Action minutes фиксируют принятые решения.",
+        "de": "Minutes steht in dieser Bedeutung im Plural. Action minutes halten die gefassten Beschlüsse fest."
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 30,
+          "headword": "Ergebnisprotokoll",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "протокол принятых решений",
+      "de": "das Ergebnisprotokoll",
+      "examples": [
+        {
+          "t": "The [[action minutes]] list the decisions and the next tasks.",
+          "de": "Im Ergebnisprotokoll stehen die Beschlüsse und die nächsten Aufgaben.",
+          "ru": "В протоколе принятых решений указаны решения и следующие задачи.",
+          "sense": {
+            "ru": "протокол принятых решений",
+            "de": "das Ergebnisprotokoll"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:verlaufsprotokoll",
+      "t": "detailed minutes",
+      "pos": "noun",
+      "plural": "detailed minutes",
+      "note": {
+        "ru": "Minutes — протокол; в этом значении употребляется во множественном числе. Здесь подробно отражается ход обсуждения.",
+        "de": "Minutes steht in dieser Bedeutung im Plural. Hier wird der Verlauf der Besprechung ausführlicher festgehalten."
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 30,
+          "headword": "Verlaufsprotokoll",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "протокол хода обсуждения",
+      "de": "das Verlaufsprotokoll",
+      "examples": [
+        {
+          "t": "The [[detailed minutes]] record the main contributions in their order.",
+          "de": "Das Verlaufsprotokoll hält die wichtigsten Beiträge in ihrer Reihenfolge fest.",
+          "ru": "Протокол хода обсуждения сохраняет основные выступления в их последовательности.",
+          "sense": {
+            "ru": "протокол хода обсуждения",
+            "de": "das Verlaufsprotokoll"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:vorbesprechung",
+      "t": "preliminary meeting",
+      "pos": "noun",
+      "plural": "preliminary meetings",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 31,
+          "headword": "Vorbesprechung",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "предварительное обсуждение",
+      "de": "die Vorbesprechung",
+      "examples": [
+        {
+          "t": "In the [[preliminary meeting]], we will clarify the roles for the presentation.",
+          "de": "In der Vorbesprechung klären wir die Rollen für die Präsentation.",
+          "ru": "На предварительном обсуждении мы уточним роли для презентации.",
+          "sense": {
+            "ru": "предварительное обсуждение",
+            "de": "die Vorbesprechung"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:protokollieren",
+      "t": "take minutes",
+      "pos": "verb",
+      "forms": {
+        "praes": "takes minutes",
+        "praet": "took minutes",
+        "perf": "has taken minutes"
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 31,
+          "headword": "protokollieren",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "протоколировать",
+      "de": "protokollieren",
+      "examples": [
+        {
+          "t": "The colleague [[takes minutes]] at the meeting.",
+          "de": "Die Kollegin protokolliert die Besprechung.",
+          "ru": "Коллега протоколирует совещание.",
+          "sense": {
+            "ru": "протоколировать",
+            "de": "protokollieren"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:nachvollziehen",
+      "t": "follow the reasoning",
+      "pos": "verb",
+      "forms": {
+        "praes": "follows the reasoning",
+        "praet": "followed the reasoning",
+        "perf": "has followed the reasoning"
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 31,
+          "headword": "nachvollziehen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "понять",
+      "de": "nachvollziehen",
+      "examples": [
+        {
+          "t": "She [[followed the reasoning]] step by step.",
+          "de": "Sie vollzog die Argumentation Schritt für Schritt nach.",
+          "ru": "Она поняла логику рассуждений, проследив каждый шаг.",
+          "sense": {
+            "ru": "понять",
+            "de": "nachvollziehen"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:widersprechen",
+      "t": "contradict",
+      "pos": "verb",
+      "forms": {
+        "praes": "contradicts",
+        "praet": "contradicted",
+        "perf": "has contradicted"
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 31,
+          "headword": "widersprechen",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "противоречить",
+      "de": "widersprechen",
+      "examples": [
+        {
+          "t": "The new figures [[contradict]] the previous report.",
+          "de": "Die neuen Zahlen widersprechen dem bisherigen Bericht.",
+          "ru": "Новые данные противоречат прежнему отчёту.",
+          "sense": {
+            "ru": "противоречить",
+            "de": "widersprechen"
+          }
+        }
+      ],
+      "note": {
+        "de": "Im Beispiel stehen Zahlen im Widerspruch zu einem Bericht; im Englischen folgt ein direktes Objekt (contradict something).",
+        "ru": "В этом примере данные противоречат отчёту; в английском используется без предлога (contradict something)."
+      }
+    },
+    {
+      "id": "en:telc26:ausrichten",
+      "t": "pass on",
+      "pos": "verb",
+      "forms": {
+        "praes": "passes on",
+        "praet": "passed on",
+        "perf": "has passed on"
+      },
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 26,
+          "headword": "ausrichten",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "передавать",
+      "de": "ausrichten",
+      "examples": [
+        {
+          "t": "The colleague [[passes on]] your message.",
+          "de": "Die Kollegin richtet Ihre Nachricht aus.",
+          "ru": "Коллега передаёт ваше сообщение.",
+          "sense": {
+            "ru": "передавать",
+            "de": "ausrichten"
+          }
+        }
+      ],
+      "note": {
+        "de": "Bedeutet hier, jemandem eine Nachricht weiterzugeben (pass a message on).",
+        "ru": "Здесь означает передать кому-либо сообщение (pass a message on)."
+      }
+    }
+  ]
+});
+
+GT.register({
+  "tab": "it",
+  "topic": "dev",
+  "items": [
+    {
+      "id": "en:telc26:datenblatt",
+      "t": "datasheet",
+      "pos": "noun",
+      "plural": "datasheets",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 21,
+          "headword": "Datenblatt",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "техническое описание",
+      "de": "das Datenblatt",
+      "examples": [
+        {
+          "t": "The technical dimensions are listed in the [[datasheet]].",
+          "de": "Die technischen Maße stehen im Datenblatt.",
+          "ru": "Технические размеры указаны в техническом описании.",
+          "sense": {
+            "ru": "техническое описание",
+            "de": "das Datenblatt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:fehlerhaft",
+      "t": "faulty",
+      "pos": "adj",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 28,
+          "headword": "fehlerhaft",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "ошибочный",
+      "de": "fehlerhaft",
+      "examples": [
+        {
+          "t": "A [[faulty]] calculation produced an incorrect total price.",
+          "de": "Eine fehlerhafte Berechnung führte zum falschen Gesamtpreis.",
+          "ru": "Ошибочный расчёт привёл к неверной общей сумме.",
+          "sense": {
+            "ru": "ошибочный",
+            "de": "fehlerhaft"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "it",
+  "topic": "fin_marketing",
+  "items": [
+    {
+      "id": "en:telc26:aussteller",
+      "t": "exhibitor",
+      "pos": "noun",
+      "plural": "exhibitors",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 21,
+          "headword": "Aussteller",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "участник выставки",
+      "de": "der Aussteller",
+      "examples": [
+        {
+          "t": "Each [[exhibitor]] gets a separate stand.",
+          "de": "Jeder Aussteller bekommt einen eigenen Stand.",
+          "ru": "Каждый участник выставки получает отдельный стенд.",
+          "sense": {
+            "ru": "участник выставки",
+            "de": "der Aussteller"
+          }
+        }
+      ]
+    },
+    {
+      "id": "en:telc26:wettbewerber",
+      "t": "competitor",
+      "pos": "noun",
+      "plural": "competitors",
+      "level": "B2",
+      "sourceRefs": [
+        {
+          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
+          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
+          "page": 22,
+          "headword": "Wettbewerber",
+          "selection": "telc-b2-2026-11-26"
+        }
+      ],
+      "ru": "конкурент",
+      "de": "der Wettbewerber",
+      "examples": [
+        {
+          "t": "A [[competitor]] offers a similar service.",
+          "de": "Ein Wettbewerber bietet einen ähnlichen Service an.",
+          "ru": "Конкурент предлагает похожую услугу.",
+          "sense": {
+            "ru": "конкурент",
+            "de": "der Wettbewerber"
+          }
+        }
+      ]
+    }
+  ]
+});
+
+GT.register({
+  "tab": "it",
+  "topic": "clients",
+  "items": [
     {
       "id": "en:telc26:preisnachlass",
       "t": "price reduction",
@@ -1350,725 +2071,6 @@ GT.register({
 
 GT.register({
   "tab": "it",
-  "topic": "legal_labour",
-  "items": [
-    {
-      "id": "en:telc26:arbeitsverhaeltnis",
-      "t": "employment relationship",
-      "pos": "noun",
-      "plural": "employment relationships",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 8,
-          "headword": "Arbeitsverhältnis",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "трудовые отношения",
-      "de": "das Arbeitsverhältnis",
-      "examples": [
-        {
-          "t": "The [[employment relationship]] begins on the first day of next month.",
-          "de": "Das Arbeitsverhältnis beginnt am ersten Tag des nächsten Monats.",
-          "ru": "Трудовые отношения начинаются с первого дня следующего месяца.",
-          "sense": {
-            "ru": "трудовые отношения",
-            "de": "das Arbeitsverhältnis"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:lohnfortzahlung",
-      "t": "continued payment of wages",
-      "pos": "noun",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 8,
-          "headword": "Lohnfortzahlung",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "сохранение заработной платы",
-      "de": "die Lohnfortzahlung",
-      "examples": [
-        {
-          "t": "The contract addresses the [[continued payment of wages]] during illness.",
-          "de": "Der Vertrag regelt die Lohnfortzahlung im Krankheitsfall.",
-          "ru": "Договор определяет сохранение заработной платы во время болезни.",
-          "sense": {
-            "ru": "сохранение заработной платы",
-            "de": "die Lohnfortzahlung"
-          }
-        }
-      ],
-      "note": {
-        "ru": "В этом значении обычно неисчисляемое.",
-        "de": "In dieser Bedeutung meist unzählbar."
-      }
-    },
-    {
-      "id": "en:telc26:wechselschicht",
-      "t": "rotating shift",
-      "pos": "noun",
-      "plural": "rotating shifts",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 19,
-          "headword": "Wechselschicht",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "работа в чередующиеся смены",
-      "de": "die Wechselschicht",
-      "examples": [
-        {
-          "t": "Production introduced a [[rotating shift]] system.",
-          "de": "In der Produktion wurde Wechselschicht eingeführt.",
-          "ru": "На производстве введена работа в чередующиеся смены.",
-          "sense": {
-            "ru": "работа в чередующиеся смены",
-            "de": "die Wechselschicht"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:freistellung",
-      "t": "leave of absence",
-      "pos": "noun",
-      "plural": "leaves of absence",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 33,
-          "headword": "Freistellung",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "освобождение от работы",
-      "de": "die Freistellung",
-      "examples": [
-        {
-          "t": "He is applying for [[leave of absence]] for the training course.",
-          "de": "Für die Fortbildung beantragt er eine Freistellung.",
-          "ru": "Для повышения квалификации он запрашивает освобождение от работы.",
-          "sense": {
-            "ru": "освобождение от работы",
-            "de": "die Freistellung"
-          }
-        }
-      ],
-      "note": {
-        "de": "Freistellung beschreibt hier die Befreiung von der Arbeitspflicht für eine Fortbildung. Ob sie bezahlt ist, ergibt sich aus der jeweiligen Vereinbarung.",
-        "ru": "Freistellung — освобождение от обязанности работать, например для обучения. Само слово не сообщает, оплачивается ли этот период, и не означает увольнение."
-      }
-    },
-    {
-      "id": "en:telc26:freizeitausgleich",
-      "t": "time off in lieu",
-      "pos": "noun",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 33,
-          "headword": "Freizeitausgleich",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "отгул",
-      "de": "der Freizeitausgleich",
-      "examples": [
-        {
-          "t": "The plan accounts for the overtime as [[time off in lieu]].",
-          "de": "Die geleisteten Überstunden werden im Plan als Freizeitausgleich berücksichtigt.",
-          "ru": "В плане учтён отгул за отработанные сверхурочные часы.",
-          "sense": {
-            "ru": "отгул",
-            "de": "der Freizeitausgleich"
-          }
-        }
-      ],
-      "note": {
-        "ru": "В этом значении обычно неисчисляемое.",
-        "de": "In dieser Bedeutung meist unzählbar."
-      }
-    },
-    {
-      "id": "en:telc26:nebentaetigkeit",
-      "t": "secondary employment",
-      "pos": "noun",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 35,
-          "headword": "Nebentätigkeit",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "подработка",
-      "de": "die Nebentätigkeit",
-      "examples": [
-        {
-          "t": "She is discussing her planned [[secondary employment]] with HR.",
-          "de": "Sie bespricht ihre geplante Nebentätigkeit mit der Personalabteilung.",
-          "ru": "Она обсуждает планируемую подработку с отделом кадров.",
-          "sense": {
-            "ru": "подработка",
-            "de": "die Nebentätigkeit"
-          }
-        }
-      ],
-      "note": {
-        "ru": "В этом значении обычно неисчисляемое.",
-        "de": "In dieser Bedeutung meist unzählbar."
-      }
-    }
-  ]
-});
-
-GT.register({
-  "tab": "it",
-  "topic": "legal_corporate",
-  "items": [
-    {
-      "id": "en:telc26:verschwiegenheitspflicht",
-      "t": "duty of confidentiality",
-      "pos": "noun",
-      "plural": "duties of confidentiality",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 9,
-          "headword": "Verschwiegenheitspflicht",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "обязанность сохранять конфиденциальность",
-      "de": "die Verschwiegenheitspflicht",
-      "examples": [
-        {
-          "t": "The [[duty of confidentiality]] is explained during induction.",
-          "de": "Bei der Einarbeitung wird die Verschwiegenheitspflicht erklärt.",
-          "ru": "Во время вводного обучения объясняют обязанность сохранять конфиденциальность.",
-          "sense": {
-            "ru": "обязанность сохранять конфиденциальность",
-            "de": "die Verschwiegenheitspflicht"
-          }
-        }
-      ]
-    }
-  ]
-});
-
-GT.register({
-  "tab": "it",
-  "topic": "work",
-  "items": [
-    {
-      "id": "en:telc26:arbeitsablauf",
-      "t": "workflow",
-      "pos": "noun",
-      "plural": "workflows",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 5,
-          "headword": "Arbeitsablauf",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "рабочий процесс",
-      "de": "der Arbeitsablauf",
-      "examples": [
-        {
-          "t": "A checklist makes the [[workflow]] easier to follow.",
-          "de": "Eine Checkliste macht den Arbeitsablauf übersichtlicher.",
-          "ru": "Контрольный список делает рабочий процесс понятнее.",
-          "sense": {
-            "ru": "рабочий процесс",
-            "de": "der Arbeitsablauf"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:verbesserungsvorschlag",
-      "t": "suggestion for improvement",
-      "pos": "noun",
-      "plural": "suggestions for improvement",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 9,
-          "headword": "Verbesserungsvorschlag",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "предложение по улучшению",
-      "de": "der Verbesserungsvorschlag",
-      "examples": [
-        {
-          "t": "The team will discuss each [[suggestion for improvement]] at the next meeting.",
-          "de": "Das Team bespricht jeden Verbesserungsvorschlag in der nächsten Sitzung.",
-          "ru": "Команда обсудит каждое предложение по улучшению на следующей встрече.",
-          "sense": {
-            "ru": "предложение по улучшению",
-            "de": "der Verbesserungsvorschlag"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:vorgehen",
-      "t": "procedure",
-      "pos": "noun",
-      "plural": "procedures",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 20,
-          "headword": "Vorgehen",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "порядок действий",
-      "de": "das Vorgehen",
-      "examples": [
-        {
-          "t": "We will agree on the next [[procedure]] with the client.",
-          "de": "Wir stimmen das weitere Vorgehen mit der Kundin ab.",
-          "ru": "Мы согласуем дальнейший порядок действий с клиенткой.",
-          "sense": {
-            "ru": "порядок действий",
-            "de": "das Vorgehen"
-          }
-        }
-      ],
-      "note": {
-        "de": "Das Substantiv das Vorgehen und das Verb vorgehen haben unterschiedliche Wortarten und deshalb eigene Karten.",
-        "ru": "Das Vorgehen — существительное среднего рода: порядок действий. Глагол vorgehen в семье gehen — отдельная часть речи."
-      }
-    },
-    {
-      "id": "en:telc26:besprechungsraum",
-      "t": "meeting room",
-      "pos": "noun",
-      "plural": "meeting rooms",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 19,
-          "headword": "Besprechungsraum",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "переговорная комната",
-      "de": "der Besprechungsraum",
-      "examples": [
-        {
-          "t": "The [[meeting room]] is reserved for two hours.",
-          "de": "Der Besprechungsraum ist für zwei Stunden reserviert.",
-          "ru": "Переговорная комната забронирована на два часа.",
-          "sense": {
-            "ru": "переговорная комната",
-            "de": "der Besprechungsraum"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:ergebnisprotokoll",
-      "t": "decision minutes",
-      "pos": "noun",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 30,
-          "headword": "Ergebnisprotokoll",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "протокол принятых решений",
-      "de": "das Ergebnisprotokoll",
-      "examples": [
-        {
-          "t": "The [[decision minutes]] list the decisions and the next tasks.",
-          "de": "Im Ergebnisprotokoll stehen die Beschlüsse und die nächsten Aufgaben.",
-          "ru": "В протоколе принятых решений указаны решения и следующие задачи.",
-          "sense": {
-            "ru": "протокол принятых решений",
-            "de": "das Ergebnisprotokoll"
-          }
-        }
-      ],
-      "note": {
-        "ru": "В этом значении обычно неисчисляемое.",
-        "de": "In dieser Bedeutung meist unzählbar."
-      }
-    },
-    {
-      "id": "en:telc26:verlaufsprotokoll",
-      "t": "discussion minutes",
-      "pos": "noun",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 30,
-          "headword": "Verlaufsprotokoll",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "протокол хода обсуждения",
-      "de": "das Verlaufsprotokoll",
-      "examples": [
-        {
-          "t": "The [[discussion minutes]] record the main contributions in their order.",
-          "de": "Das Verlaufsprotokoll hält die wichtigsten Beiträge in ihrer Reihenfolge fest.",
-          "ru": "Протокол хода обсуждения сохраняет основные выступления в их последовательности.",
-          "sense": {
-            "ru": "протокол хода обсуждения",
-            "de": "das Verlaufsprotokoll"
-          }
-        }
-      ],
-      "note": {
-        "ru": "В этом значении обычно неисчисляемое.",
-        "de": "In dieser Bedeutung meist unzählbar."
-      }
-    },
-    {
-      "id": "en:telc26:vorbesprechung",
-      "t": "preliminary meeting",
-      "pos": "noun",
-      "plural": "preliminary meetings",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 31,
-          "headword": "Vorbesprechung",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "предварительное обсуждение",
-      "de": "die Vorbesprechung",
-      "examples": [
-        {
-          "t": "In the [[preliminary meeting]], we will clarify the roles for the presentation.",
-          "de": "In der Vorbesprechung klären wir die Rollen für die Präsentation.",
-          "ru": "На предварительном обсуждении мы уточним роли для презентации.",
-          "sense": {
-            "ru": "предварительное обсуждение",
-            "de": "die Vorbesprechung"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:protokollieren",
-      "t": "take minutes",
-      "pos": "verb",
-      "forms": {
-        "praes": "takes minutes",
-        "praet": "took minutes",
-        "perf": "has taken minutes"
-      },
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 31,
-          "headword": "protokollieren",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "протоколировать",
-      "de": "protokollieren",
-      "examples": [
-        {
-          "t": "The colleague [[takes minutes]] at the meeting.",
-          "de": "Die Kollegin protokolliert die Besprechung.",
-          "ru": "Коллега протоколирует совещание.",
-          "sense": {
-            "ru": "протоколировать",
-            "de": "protokollieren"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:nachvollziehen",
-      "t": "follow the reasoning",
-      "pos": "verb",
-      "forms": {
-        "praes": "follows the reasoning",
-        "praet": "followed the reasoning",
-        "perf": "has followed the reasoning"
-      },
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 31,
-          "headword": "nachvollziehen",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "понять",
-      "de": "nachvollziehen",
-      "examples": [
-        {
-          "t": "She [[followed the reasoning]] step by step.",
-          "de": "Sie vollzog die Argumentation Schritt für Schritt nach.",
-          "ru": "Она поняла логику рассуждений, проследив каждый шаг.",
-          "sense": {
-            "ru": "понять",
-            "de": "nachvollziehen"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:widersprechen",
-      "t": "contradict",
-      "pos": "verb",
-      "forms": {
-        "praes": "contradicts",
-        "praet": "contradicted",
-        "perf": "has contradicted"
-      },
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 31,
-          "headword": "widersprechen",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "противоречить",
-      "de": "widersprechen",
-      "examples": [
-        {
-          "t": "The new figures [[contradict]] the previous report.",
-          "de": "Die neuen Zahlen widersprechen dem bisherigen Bericht.",
-          "ru": "Новые данные противоречат прежнему отчёту.",
-          "sense": {
-            "ru": "противоречить",
-            "de": "widersprechen"
-          }
-        }
-      ],
-      "note": {
-        "de": "Im Beispiel widersprechen Zahlen einem Bericht. Russisch противоречить beschreibt hier einen Widerspruch zwischen Informationen.",
-        "ru": "В этом примере факты противоречат отчёту. У widersprechen также есть значение «возражать человеку»; дополнение в немецком стоит в Dativ."
-      }
-    },
-    {
-      "id": "en:telc26:ausrichten",
-      "t": "pass on",
-      "pos": "verb",
-      "forms": {
-        "praes": "passes on",
-        "praet": "passed on",
-        "perf": "has passed on"
-      },
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 26,
-          "headword": "ausrichten",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "передавать",
-      "de": "ausrichten",
-      "examples": [
-        {
-          "t": "The colleague [[passes on]] your message.",
-          "de": "Die Kollegin richtet Ihre Nachricht aus.",
-          "ru": "Коллега передаёт ваше сообщение.",
-          "sense": {
-            "ru": "передавать",
-            "de": "ausrichten"
-          }
-        }
-      ],
-      "note": {
-        "de": "Hier bedeutet ausrichten, jemandem eine Nachricht weiterzugeben.",
-        "ru": "Здесь ausrichten означает передать сообщение кому-либо. Пример тренирует именно передачу сообщения, а не организацию мероприятия."
-      }
-    }
-  ]
-});
-
-GT.register({
-  "tab": "it",
-  "topic": "dev",
-  "items": [
-    {
-      "id": "en:telc26:datenblatt",
-      "t": "datasheet",
-      "pos": "noun",
-      "plural": "datasheets",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 21,
-          "headword": "Datenblatt",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "техническое описание",
-      "de": "das Datenblatt",
-      "examples": [
-        {
-          "t": "The technical dimensions are listed in the [[datasheet]].",
-          "de": "Die technischen Maße stehen im Datenblatt.",
-          "ru": "Технические размеры указаны в техническом описании.",
-          "sense": {
-            "ru": "техническое описание",
-            "de": "das Datenblatt"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:fehlerhaft",
-      "t": "faulty",
-      "pos": "adj",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 28,
-          "headword": "fehlerhaft",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "ошибочный",
-      "de": "fehlerhaft",
-      "examples": [
-        {
-          "t": "A [[faulty]] calculation produced an incorrect total price.",
-          "de": "Eine fehlerhafte Berechnung führte zum falschen Gesamtpreis.",
-          "ru": "Ошибочный расчёт привёл к неверной общей сумме.",
-          "sense": {
-            "ru": "ошибочный",
-            "de": "fehlerhaft"
-          }
-        }
-      ]
-    }
-  ]
-});
-
-GT.register({
-  "tab": "it",
-  "topic": "fin_marketing",
-  "items": [
-    {
-      "id": "en:telc26:aussteller",
-      "t": "exhibitor",
-      "pos": "noun",
-      "plural": "exhibitors",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 21,
-          "headword": "Aussteller",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "участник выставки",
-      "de": "der Aussteller",
-      "examples": [
-        {
-          "t": "Each [[exhibitor]] gets a separate stand.",
-          "de": "Jeder Aussteller bekommt einen eigenen Stand.",
-          "ru": "Каждый участник выставки получает отдельный стенд.",
-          "sense": {
-            "ru": "участник выставки",
-            "de": "der Aussteller"
-          }
-        }
-      ]
-    },
-    {
-      "id": "en:telc26:wettbewerber",
-      "t": "competitor",
-      "pos": "noun",
-      "plural": "competitors",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 22,
-          "headword": "Wettbewerber",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "конкурент",
-      "de": "der Wettbewerber",
-      "examples": [
-        {
-          "t": "A [[competitor]] offers a similar service.",
-          "de": "Ein Wettbewerber bietet einen ähnlichen Service an.",
-          "ru": "Конкурент предлагает похожую услугу.",
-          "sense": {
-            "ru": "конкурент",
-            "de": "der Wettbewerber"
-          }
-        }
-      ]
-    }
-  ]
-});
-
-GT.register({
-  "tab": "it",
   "topic": "ops_logistics",
   "items": [
     {
@@ -2131,38 +2133,6 @@ GT.register({
       "note": {
         "de": "Hier bezeichnet Werktag eine Einheit der Lieferfrist, nicht die Dauer einer Schicht. Welche Tage zählen, ergibt sich aus den konkreten Bedingungen.",
         "ru": "Здесь рабочий день — единица срока доставки, а не продолжительность смены. Какие дни учитываются, нужно читать в конкретных условиях."
-      }
-    },
-    {
-      "id": "en:telc26:versand",
-      "t": "dispatch",
-      "pos": "noun",
-      "level": "B2",
-      "sourceRefs": [
-        {
-          "title": "Einfach besser! 500 Deutsch für Berufssprachkurse B2",
-          "file": "Einfach_besser_500_Wortschatzliste_Englisch.pdf",
-          "page": 25,
-          "headword": "Versand",
-          "selection": "telc-b2-2026-11-26"
-        }
-      ],
-      "ru": "отправка",
-      "de": "der Versand",
-      "examples": [
-        {
-          "t": "After inspection, the goods are ready for [[dispatch]].",
-          "de": "Nach der Prüfung ist die Ware für den Versand bereit.",
-          "ru": "После проверки товар готов к отправке.",
-          "sense": {
-            "ru": "отправка",
-            "de": "der Versand"
-          }
-        }
-      ],
-      "note": {
-        "ru": "В этом значении обычно неисчисляемое.",
-        "de": "In dieser Bedeutung meist unzählbar."
       }
     },
     {
@@ -2288,8 +2258,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Skonto ist ein Preisnachlass bei früher Zahlung. Zulässig sind der und das Skonto sowie die Plurale Skonti und Skontos.",
-        "ru": "В PDF используется das Skonto; допустимо также der Skonto. Множественное число: die Skonti или die Skontos. Это скидка за оплату в короткий согласованный срок."
+        "de": "Ein Preisnachlass bei Zahlung innerhalb einer kurzen vereinbarten Frist.",
+        "ru": "Скидка за быструю оплату в короткий согласованный срок."
       }
     },
     {
@@ -2350,8 +2320,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Hier geht es um eine offene Rechnung. Die Karte meint eine Zahlungsmahnung, keine arbeitsrechtliche Abmahnung.",
-        "ru": "В разделе оплаты Mahnung означает требование или напоминание о просроченной оплате. Не путайте с Abmahnung — предупреждением в трудовом или ином правовом контексте."
+        "de": "Formelle Zahlungsaufforderung für eine überfällige Rechnung, keine arbeitsrechtliche Abmahnung.",
+        "ru": "Официальное требование оплатить просроченный счёт, а не дисциплинарное предупреждение."
       }
     },
     {
@@ -2521,6 +2491,11 @@ GT.register({
       "id": "en:telc26:nettoverdienst",
       "t": "net earnings",
       "pos": "noun",
+      "plural": "net earnings",
+      "note": {
+        "ru": "Earnings в этом значении употребляется во множественном числе.",
+        "de": "Earnings steht in dieser Bedeutung im Plural."
+      },
       "level": "B2",
       "sourceRefs": [
         {
@@ -2543,11 +2518,7 @@ GT.register({
             "de": "der Nettoverdienst"
           }
         }
-      ],
-      "note": {
-        "ru": "В этом значении обычно неисчисляемое.",
-        "de": "In dieser Bedeutung meist unzählbar."
-      }
+      ]
     },
     {
       "id": "en:telc26:bruttoverguetung",

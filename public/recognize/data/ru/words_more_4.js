@@ -2166,7 +2166,7 @@ GT.register({
       "de": "die Vorkenntnisse",
       "examples": [
         {
-          "t": "Для +этого к+урса не н+ужны [[предвар+ительные зн+ания]].",
+          "t": "Для +этого к+урса не нужн+ы [[предвар+ительные зн+ания]].",
           "de": "Für diesen Kurs brauchen Sie keine Vorkenntnisse.",
           "en": "You do not need any prior knowledge for this course.",
           "sense": {
@@ -2186,7 +2186,6 @@ GT.register({
       "t": "д+опуск к обуч+ению",
       "pos": "noun",
       "gender": "m",
-      "plural": "д+опуски к обуч+ению",
       "level": "B2",
       "sourceRefs": [
         {
@@ -2209,7 +2208,11 @@ GT.register({
             "de": "die Zulassung"
           }
         }
-      ]
+      ],
+      "note": {
+        "en": "Normally singular in this sense.",
+        "de": "In dieser Bedeutung meist im Singular."
+      }
     },
     {
       "id": "ru-telc26-fachwortschatz",
@@ -2230,7 +2233,7 @@ GT.register({
       "de": "der Fachwortschatz",
       "examples": [
         {
-          "t": "Во вр+емя пр+актики она расшир+яет сво+ю [[профессион+альную л+ексику]].",
+          "t": "Во вр+емя пр+актики он+а расшир+яет сво+ю [[профессион+альную л+ексику]].",
           "de": "Im Praktikum erweitert sie ihren Fachwortschatz.",
           "en": "She is expanding her specialist vocabulary during the placement.",
           "sense": {
@@ -2262,7 +2265,7 @@ GT.register({
       "de": "handwerklich",
       "examples": [
         {
-          "t": "Для +этой зад+ачи н+ужны [[рем+есленные]] нав+ыки.",
+          "t": "Для +этой зад+ачи нужн+ы [[рем+есленные]] н+авыки.",
           "de": "Diese Aufgabe erfordert handwerkliche Fähigkeiten.",
           "en": "This task requires manual skills.",
           "sense": {
@@ -2324,7 +2327,7 @@ GT.register({
       "de": "absolvieren",
       "examples": [
         {
-          "t": "Она [[прошл+а]] курс по бухг+алтерскому учёту.",
+          "t": "Он+а [[прошл+а]] курс по бухг+алтерскому учёту.",
           "de": "Sie hat einen Lehrgang zur Buchhaltung absolviert.",
           "en": "She has completed a bookkeeping course.",
           "sense": {
@@ -2361,7 +2364,7 @@ GT.register({
       "de": "die Buchungsbestätigung",
       "examples": [
         {
-          "t": "[[Подтвержд+ение брон+ирования]] содерж+ит +адрес гост+иницы для конфер+енции.",
+          "t": "[[Подтвержд+ение брон+ирования]] сод+ержит +адрес гост+иницы для конфер+енции.",
           "de": "Die Buchungsbestätigung enthält die Adresse des Tagungshotels.",
           "en": "The booking confirmation contains the conference hotel’s address.",
           "sense": {
@@ -2390,7 +2393,7 @@ GT.register({
       "de": "die Fahrgemeinschaft",
       "examples": [
         {
-          "t": "Для по+ездки на в+ыставку мы организ+уем [[совм+естные по+ездки на маш+ине]].",
+          "t": "Чт+обы до+ехать до в+ыставки, мы организ+уем [[совм+естные по+ездки на маш+ине]].",
           "de": "Für die Fahrt zur Messe bilden wir eine Fahrgemeinschaft.",
           "en": "We are forming a carpool for the trip to the trade fair.",
           "sense": {
@@ -2430,7 +2433,7 @@ GT.register({
       "de": "belastbar",
       "examples": [
         {
-          "t": "Д+аже в напр+яжённые пери+оды она остаётся [[стрессоуст+ойчивой]].",
+          "t": "Д+аже в напряжённые пер+иоды он+а остаётся [[стрессоуст+ойчивой]].",
           "de": "Auch in hektischen Phasen bleibt sie belastbar.",
           "en": "She remains resilient even during hectic periods.",
           "sense": {

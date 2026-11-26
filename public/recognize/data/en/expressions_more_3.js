@@ -881,8 +881,8 @@ GT.register({
         }
       ],
       "note": {
-        "de": "Formelle Konstruktion: bedürfen + Genitiv. Im Beispiel wird eine Vorgabe aus einem Vertragsentwurf wiedergegeben.",
-        "ru": "Формальная конструкция bedürfen + Genitiv: der Schriftform. Пример передаёт условие из проекта документа, а не универсальное юридическое правило."
+        "de": "Formelle Wendung für eine schriftliche Formvorschrift in Verträgen oder Entwürfen.",
+        "ru": "Формальная формулировка требования письменной формы в договорах и проектах документов."
       }
     },
     {
@@ -1084,6 +1084,8 @@ GT.packs.en.byId["en:it2:core-hours"].examples.push({
   "selection": "telc-b2-2026-11-26"
 });
 
+GT.packs.en.byId["en:it2:core-hours"].plural = "core hours";
+
 GT.packs.en.byId["en:request:n:main"].examples.push({
   "t": "He politely explained his [[request]] on the phone.",
   "de": "Er schilderte sein Anliegen höflich am Telefon.",
@@ -1152,6 +1154,8 @@ GT.addMember("en:telc26:zulassung", "it", "career-paths");
 
 GT.addMember("en:telc26:fachwortschatz", "it", "career-paths");
 
+GT.addMember("en:telc26:einzelunternehmer", "it", "clients");
+
 GT.addMember("en:it4:salary-expectation", "it", "fin_hr");
 
 GT.addMember("en:telc26:arbeitsablauf", "it", "ops_trades");
@@ -1184,6 +1188,8 @@ GT.addMember("en:telc26:fahrgemeinschaft", "it", "svc_hotel");
 
 GT.addMember("en:telc26:handwerklich", "it", "career-paths");
 
+GT.addMember("en:telc26:handwerklich", "it", "ops_trades");
+
 GT.addMember("en:telc26:belastbar", "it", "career-paths");
 
 GT.addMember("en:telc26:lernbereit", "it", "career-paths");
@@ -1215,16 +1221,16 @@ GT.addMember("en:telc26:ch-gegenvorschlag", "it", "work");
 GT.addMember("en:telc26:ch-verstaendnis", "it", "clients");
 
 GT.packs.en.byId["en:care:n:main"].note = {
-  "de": "Unzählbar; take care of — sich kümmern um.\n\nIn dieser Bedeutung meist unzählbar.",
-  "ru": "Неисчисляемое; take care of — заботиться.\n\nВ этом значении обычно неисчисляемое."
+  "de": "Unzählbar; take care of — sich kümmern um.",
+  "ru": "Неисчисляемое; take care of — заботиться."
 };
 
 GT.packs.en.byId["en:maintenance:n:main"].note = {
-  "de": "Der Wortstamm ändert sich; meist nicht zählbar. Scheduled maintenance — geplante Wartung.\n\nIn dieser Bedeutung meist unzählbar.",
-  "ru": "Изменяется основа; обычно неисчисляемое. Scheduled maintenance — плановое обслуживание.\n\nВ этом значении обычно неисчисляемое."
+  "de": "Der Wortstamm ändert sich; meist nicht zählbar. Scheduled maintenance — geplante Wartung.",
+  "ru": "Изменяется основа; обычно неисчисляемое. Scheduled maintenance — плановое обслуживание."
 };
 
 GT.packs.en.byId["en:it2:core-hours"].note = {
-  "de": "Immer Plural (anders als dt. Singular Kernarbeitszeit); Gleitzeit = flexitime.\n\nIn dieser Bedeutung meist unzählbar.",
-  "ru": "Во множественном числе (в отличие от нем. ед. ч. Kernarbeitszeit); гибкий график — flexitime.\n\nВ этом значении обычно неисчисляемое."
+  "de": "Immer Plural (anders als dt. Singular Kernarbeitszeit); Gleitzeit = flexitime.\n\nPlural: die festgelegten Anwesenheitsstunden bei Gleitzeit.",
+  "ru": "Во множественном числе (в отличие от нем. ед. ч. Kernarbeitszeit); гибкий график — flexitime.\n\nМножественное число: обязательные часы присутствия при гибком графике."
 };
