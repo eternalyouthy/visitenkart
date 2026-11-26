@@ -22,6 +22,7 @@
     retention: 0.9,
     showMediumWhy: true,       // show WHY? notes with confidence 'medium'
     hideSidePractice: false,   // hide the "Practice now" box in the sidebar
+    hidePracticeReminder: false, // hide the "You haven't practised speaking…" banner on pages
     hideBasics: false,         // hide elementary/obvious words in Words & Professional
     theme: 'orbit',            // see THEMES in app.js
     speechRate: 0.9,
@@ -210,7 +211,7 @@
       var nps = Math.round(Number(src.newPerSession));
       if (Number.isFinite(nps)) out.newPerSession = Math.max(1, Math.min(50, nps));
     }
-    ['typing', 'showRu', 'showMediumWhy', 'hideSidePractice', 'hideBasics'].forEach(function (k) {
+    ['typing', 'showRu', 'showMediumWhy', 'hideSidePractice', 'hidePracticeReminder', 'hideBasics'].forEach(function (k) {
       if (typeof src[k] === 'boolean') out[k] = src[k];
     });
     if (src.reviewModes === 'mix' || src.reviewModes === 'meaning' || src.reviewModes === 'cloze') out.reviewModes = src.reviewModes;

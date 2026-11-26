@@ -835,9 +835,10 @@
     if (n) {
       var since = d.lastPractice || d.created;
       var days = Math.floor((GT.now() - since) / DAY);
-      if (days >= 2) {
+      if (days >= 2 && !S.settings.hidePracticeReminder) {
         out += notice('chat', (d.lastPractice ? 'It’s been <b>' + days + ' days</b> since you last practised speaking.' : 'You haven’t practised speaking with your words yet.') +
-          ' Open a topic and use <b>Practice now</b> to get a ready-made role-play prompt for your AI chat.');
+          ' Open a topic and use <b>Practice now</b> to get a ready-made role-play prompt for your AI chat.', 'practice-reminder')
+          .replace(/<\/div>$/, '<button class="side-practice-close notice-close" type="button" data-act="hide-practice-reminder" aria-label="Hide this reminder" title="Hide (turn back on in Settings)">' + icon('x') + '</button></div>');
       }
     }
     if (!S.storageOk()) out += notice('info', 'This browser is blocking local storage, so progress can’t be saved. Try another browser or host the app.', 'subtle');
@@ -2162,6 +2163,7 @@
       '</div>';
     h += '<h3 class="section-title">Look & sound</h3><div class="box">' +
       row('Hide sidebar Practice box', 'Hide the "Practice now" card in the sidebar.', sw('hideSidePractice', 'Hide sidebar Practice box')) +
+      row('Hide speaking reminder', 'Hide the “You haven’t practised speaking…” banner at the top of pages.', sw('hidePracticeReminder', 'Hide speaking reminder')) +
       row('' + langMeta().name + ' voice', '<span id="voiceInfo">' + (tts.ok ? 'Loading voices…' : 'Speech is not supported in this browser.') + '</span>',
         tts.ok ? '<select id="voiceSelect" class="voice-select" data-set="' + voiceKey() + '" aria-label="' + esc(langMeta().name) + ' voice"></select>' : '<span class="mono-muted">—</span>') +
       row('Speech rate', 'Applied to all pronunciation buttons.', '<div class="setting-ctl">' + sel('speechRate', [['0.75', 'Slow'], ['0.9', 'Normal'], ['1', 'Fast']], 'Speech rate') + '<button class="btn small" type="button" data-act="test-voice">Test</button></div>') +
@@ -2274,6 +2276,12 @@
         el.textContent = ui.bysExpanded ? 'Show Less ↑' : 'Read More ↓';
         /* Show Less: return to the top of the page (on phones the article is the first block), heading included. */
         if (!ui.bysExpanded) window.scrollTo({ top: 0, behavior: 'smooth' });
+        break;
+      }
+      case 'hide-practice-reminder': {
+        S.setSetting('hidePracticeReminder', true);
+        document.querySelectorAll('.notice.practice-reminder').forEach(function (n) { n.remove(); });
+        GT.toast('Hidden · turn it back on in Settings');
         break;
       }
       case 'hide-side-practice': {
@@ -2549,7 +2557,7 @@
         var curTab = curP[0] === 'item' && GT.byId[curP[1]] ? GT.byId[curP[1]].tab : (curP[0] || 'words');
         renderSidebar(curTab, curP);
       }
-      if (k === 'hideBasics') route({ keep: true });
+      if (k === 'hideBasics' || k === 'hidePracticeReminder') route({ keep: true });
       if (/^speechVoice/.test(k) || k === 'speechRate') {
         stopSpeak();
         if (/^speechVoice/.test(k)) pickVoice();

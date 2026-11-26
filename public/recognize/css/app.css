@@ -322,6 +322,8 @@ body.side-collapsed .side-toggle svg { transform: scaleX(-1); }
 .tag.outline.warn { color: var(--bad); border-color: var(--bad); }
 .box.box-warn { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 8%, transparent); }
 .box.box-warn .label { color: var(--bad); }
+.notice .notice-close { flex: none; margin: -4px -8px -4px 0; }
+.notice .notice-close svg { width: 14px; height: 14px; color: inherit; margin: 0; }
 .notice.subtle { border-color: var(--line-2); background: transparent; }
 .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line-2); margin-bottom: 32px; }
 .stat { padding: 20px 22px; border-right: 1px solid var(--line-2); }
