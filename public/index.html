@@ -115,15 +115,17 @@
   .panel-head{
     width:100%;background:none;border:none;color:#fff;font:inherit;
     text-align:center;cursor:pointer;
-    display:flex;justify-content:center;align-items:baseline;gap:1rem;
+    display:grid;grid-template-columns:minmax(1.5rem,1fr) auto minmax(1.5rem,1fr);
+    align-items:baseline;column-gap:1rem;
     padding:22px 0;
   }
   .panel-head:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
   .p-idx{
+    justify-self:end;white-space:nowrap;
     font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
     font-size:.72rem;letter-spacing:.1em;color:var(--muted);
   }
-  .p-label{font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:300;letter-spacing:-.01em}
+  .p-label{grid-column:2;font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:300;letter-spacing:-.01em}
   .panel-head:is(:hover,[aria-expanded="true"]) .p-label{
     text-decoration:underline;text-decoration-color:var(--muted);
     text-decoration-thickness:1px;text-underline-offset:.3em;
