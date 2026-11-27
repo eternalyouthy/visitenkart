@@ -14,7 +14,7 @@
       },
       meaningExplanation: 'schlagen means “to hit, to strike”, “to beat” (of a heart or clock) and “to beat/defeat an opponent” (in sport or competition).',
       meaningExamples: ['to sound the alarm', 'My heart is beating faster.'],
-      senses: ['to beat (of the heart)', 'to beat / to defeat']
+      senses: ['to hit, to strike (incl. Alarm schlagen)', 'to beat / to defeat', 'to beat (of the heart)']
     },
     'r-schlagen-vorschlagen': {
       note: 'The key verb for business meetings and the B1 exam! Noun: “der Vorschlag” (pl. die Vorschläge). “Ich schlage vor, dass …” or “Ich schlage vor, … zu + inf.”.',
@@ -119,9 +119,9 @@
       prefixDrill: 'With reflexive sich, the prefix ver- regularly denotes an error in an action — “to misspeak” (like sich verschreiben, sich verhören).'
     },
     'r-sprechen-ansprechen': {
-      note: 'Very common office word: “der Ansprechpartner / die Ansprechpartnerin” — contact person (“Wer ist mein Ansprechpartner dafür?”).',
-      meaningExplanation: 'ansprechen means “to approach / speak to someone” and in business “to bring up, to raise an important topic in a discussion”.',
-      meaningExamples: ['to speak to someone in the street', 'to raise a point in the meeting'],
+      note: 'Very common office word: “der Ansprechpartner / die Ansprechpartnerin” — contact person (“Wer ist mein Ansprechpartner dafür?”). Also “etw. spricht mich an” — “that appeals to me” (e.g. a design or offer).',
+      meaningExplanation: 'ansprechen means in business “to bring up, to raise an important topic in a discussion” and in everyday life “to approach / speak to someone”.',
+      meaningExamples: ['to raise a point in the meeting', 'to speak to someone in the street'],
       senses: ['to raise a topic, to address an issue', 'to speak to someone, to approach'],
       drill: 'to raise a topic (at a meeting); to approach someone',
       prefixDrill: 'an- denotes directing speech towards a person or a specific topic — “to address an issue directly”.'
@@ -177,8 +177,8 @@
     'r-sprechen-widerspruch': {
       note: '“Widerspruch einlegen” — to lodge a formal objection/appeal (e.g. with the Krankenkasse, Finanzamt or Ausländerbehörde).',
       meaningExplanation: 'der Widerspruch is both a “logical contradiction” and a vital legal term in Germany: a “formal objection/appeal against a decision by a public authority or insurer” (Widerspruch einlegen).',
-      meaningExamples: ['to lodge a formal appeal against an official notice', 'to be in contradiction with something'],
-      senses: ['formal objection / appeal (to an authority)', 'contradiction']
+      meaningExamples: ['to be in contradiction with something', 'to lodge a formal appeal against an official notice'],
+      senses: ['contradiction', 'formal objection / appeal (to an authority)']
     },
 
     // SEHEN
@@ -249,7 +249,7 @@
     },
     'r-sehen-sicht': {
       note: '“Aus meiner Sicht” is one of the best professional ways to say “in my view”. Usually has no plural.',
-      meaningExplanation: 'die Sicht is both physical visibility (on the road, from a window) and a professional “point of view” (“aus meiner Sicht”, “aus Sicht der IT-Sicherheit”).',
+      meaningExplanation: 'die Sicht is first and foremost a professional “point of view” (“aus meiner Sicht”, “aus Sicht der IT-Sicherheit”), and also physical visibility (on the road, in fog).',
       meaningExamples: ['from my point of view', 'poor visibility in fog'],
       senses: ['point of view, perspective', 'visibility (weather)']
     },
@@ -289,9 +289,9 @@
     },
     'r-fallen-ausfallen': {
       note: 'Always with sein: ist ausgefallen. Noun: “der Ausfall” (failure, outage, downtime, cancellation).',
-      meaningExplanation: 'ausfallen has three crucial meanings in Germany: “to fail / go down” (a server, power), “to be cancelled” (a DB train, a meeting, a lesson) and “to turn out (well/badly)” (“Der Test ist gut ausgefallen”).',
-      meaningExamples: ['The train is cancelled today.', 'The heating has broken down.'],
-      senses: ['to fail, to go down (IT, equipment)', 'to be cancelled (a meeting, a train, a class)'],
+      meaningExplanation: 'ausfallen has three crucial meanings in Germany (from most frequent): “to be cancelled” (a DB train, a meeting, a lesson), “to fail / go down” (power, heating, a server), and “to turn out (well/badly)” (“Der Test ist gut ausgefallen”).',
+      meaningExamples: ['The train is cancelled today.', 'The heating has broken down.', 'The result turned out positive.'],
+      senses: ['to be cancelled (a meeting, a train, a class)', 'to fail, to go down (equipment, IT)', 'to turn out (a result)'],
       drill: 'to go down (of a server); to be cancelled (of a train)',
       prefixDrill: 'aus- here denotes switching off or dropping out of service — the system “fell out of operation”.'
     },
@@ -318,7 +318,7 @@
     },
     'r-fallen-abfallen': {
       note: 'Related noun: “der Abfall” — waste, rubbish (literally “what falls off as scrap”).',
-      meaningExplanation: 'abfallen means “to fall off / drop” (leaves, plaster) and in technical contexts “to drop, to fall” (pressure, speed, load).',
+      meaningExplanation: 'abfallen means “to drop, to fall” (pressure, speed, load) and literally “to fall off / drop” (leaves, plaster).',
       meaningExamples: ['Blood pressure drops.', 'The leaves are falling off.'],
       senses: ['to drop, to fall (of metrics)', 'to fall off'],
       prefixDrill: 'ab- here denotes a decrease or drop — the load on the servers dropped noticeably.'
@@ -356,7 +356,7 @@
       },
       meaningExplanation: 'stehen means not only “to stand physically”, but also “to be written” (in an email, contract, logs: “Was steht im Protokoll?”), and with the dative of clothes — “to suit” (“Die Farbe steht dir gut”).',
       meaningExamples: ['What does the email say?', 'That jacket suits you well.'],
-      senses: ['to be written (in a document, an email)', 'to stand physically / to be stopped']
+      senses: ['to stand physically / to be stopped', 'to be written (in a document, an email)']
     },
     'r-stehen-verstehen': {
       note: 'A classic example of “meaning drifted”: in modern German it has nothing to do with “standing”. Nouns: “das Verständnis” (understanding), “das Missverständnis” (misunderstanding).',
@@ -612,8 +612,8 @@
       prefixDrill: 'ab- = cancellation: the process is “broken off” — aborted and cancelled.'
     },
     'r-brechen-aufbrechen': {
-      meaningExamples: ['to break into a car', 'to set off on a journey'],
-      senses: ['to break open, to force open', 'to set off (with sein)'],
+      meaningExamples: ['to set off on a journey', 'to break into a car'],
+      senses: ['to set off (with sein)', 'to break open, to force open'],
       prefixDrill: 'auf- = opening: a door is “broken open” — forced.'
     },
     'r-brechen-ausbrechen': {
@@ -634,7 +634,7 @@
     // LAUFEN
     'r-laufen-laufen': {
       meaningExamples: ['How is the project going?', 'What’s on at the cinema today?'],
-      senses: ['to run, to be running (a service, a program)', 'to walk, to go on foot']
+      senses: ['to walk, to go on foot (colloq.)', 'to work, to be running (service, program, film)', 'to run, to jog (sport)']
     },
     'r-laufen-ablaufen': {
       meaningExamples: ['The milk has expired.', 'Everything went well.'],

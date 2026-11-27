@@ -5,18 +5,19 @@ GT.registerRoot({
     {
       id: 'r-laufen-laufen', base: true, pos: 'verb',
       de: 'laufen', forms: { praes: 'läuft', praet: 'lief', perf: 'ist gelaufen' },
-      ru: 'бегать; (разг.) идти пешком; работать, идти (о технике, программе, процессе, фильме)', en: 'to run; (colloq.) to walk; to run, to be running (machines, programs, processes, films)',
+      ru: '(разг.) идти пешком; работать, идти (о технике, программе, процессе, фильме); бегать (спорт)', en: '(colloq.) to walk; to run, to be running (machines, programs, processes, films); to run, to jog',
       examples: [
-        { sense: 'работать (о сервисе, программе)', de: 'Der Dienst [[läuft]] seit dem Neustart wieder stabil.', ru: 'Сервис после перезапуска снова работает стабильно.', en: 'The service has been running stably again since the restart.' },
-        { sense: 'идти пешком', de: 'Bis zum Bahnhof sind es nur zehn Minuten, wir [[laufen]].', ru: 'До вокзала всего десять минут, пойдём пешком.', en: 'It’s only ten minutes to the station — we’ll walk.' }
+        { sense: 'идти пешком (разг.)', de: 'Bis zum Bahnhof sind es nur zehn Minuten, wir [[laufen]].', ru: 'До вокзала всего десять минут, пойдём пешком.', en: 'It’s only ten minutes to the station — we’ll walk.' },
+        { sense: 'работать, идти (о сервисе, программе, фильме)', de: 'Der Dienst [[läuft]] seit dem Neustart wieder stabil.', ru: 'Сервис после перезапуска снова работает стабильно.', en: 'The service has been running stably again since the restart.' },
+        { sense: 'бегать (спорт)', de: 'Morgens [[laufe]] ich oft fünf Kilometer im Park.', ru: 'По утрам я часто бегаю пять километров в парке.', en: 'In the morning I often run five kilometres in the park.' }
       ],
       morph: 'lauf-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'laufen — «бегать», в разговорной речи часто просто «идти пешком», а также «работать, функционировать» (Server, Programm, Motor) и «идти, протекать» (Film, Projekt, Vertrag): «Wie läuft’s?» — как дела?',
+      meaningExplanation: 'В повседневной речи laufen чаще всего значит просто «идти пешком», «работать, функционировать» (Server, Programm, Motor) и «идти, протекать» (Film, Projekt, Vertrag: «Wie läuft’s?»), а также «бегать» (спорт).',
       meaningExamples: [{ de: 'Wie läuft das Projekt?', ru: 'Как идёт проект?' }, { de: 'Was läuft heute im Kino?', ru: 'Что сегодня идёт в кино?' }],
       note: 'Сильный глагол: läuft, lief, ist gelaufen (Perfekt с sein). Умлаут в 2–3 л. ед. ч.: du läufst, er läuft.',
       i18n: { en: {
-        meaningExplanation: 'laufen means “to run”, in everyday speech often just “to walk”, and also “to work, to function” (server, program, engine) and “to go, to be on” (film, project, contract): “Wie läuft’s?” — how’s it going?',
+        meaningExplanation: 'In everyday speech laufen most often means simply “to walk”, “to work, to function” (server, program, engine), and “to go, to be on” (film, project, contract: “Wie läuft’s?”), as well as “to run, to jog”.',
         note: 'Strong verb: läuft, lief, ist gelaufen (Perfekt with sein). Umlaut in 2nd/3rd person singular: du läufst, er läuft.' } },
       why: {
         confidence: 'high',

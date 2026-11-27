@@ -31,7 +31,7 @@
   T('r-legen-ueberlegen', ['I need to think about the offer again calmly.', 'Let’s think briefly about how we can solve the problem.']);
   T('r-legen-anlegen', ['Can you create a user account for the new colleague?', 'He wants to invest his money long-term.', 'Please fasten your seat belt before take-off.']);
   T('r-legen-festlegen', ['In the meeting we fixed the next steps.', 'I don’t want to commit to a date yet today.']);
-  T('r-legen-ablegen', ['Come in, you can leave your jacket here.', 'Next month I want to take the B2 exam.', 'Where did you save the final report?']);
+  T('r-legen-ablegen', ['Next month I want to take the B2 exam.', 'Where did you save the final report?', 'Come in, you can leave your jacket here.']);
   T('r-legen-auflegen', ['He was angry and simply hung up.', 'For a headache it helps to put a cold cloth on your forehead.']);
   T('r-legen-verlegen', ['We’ve moved the meeting to Tuesday.', 'New network cables are being laid in the office.', 'I’ve mislaid my ID card again.']);
   T('r-legen-belegen', ['The logs prove that the access came from outside.', 'I’ve enrolled in a B2 course at the adult education centre.', 'The old backups take up almost all the storage space.']);
@@ -99,7 +99,7 @@
   T('r-kommen-klarkommen', ['Are you getting on well with the new SIEM system yet?', 'I get on really well with my new colleagues.']);
   T('r-kommen-auskommen', ['This month we have to manage on a smaller budget.', 'The two teams get on very well with each other.']);
   T('r-kommen-durchkommen', ['The traffic isn’t getting through, the firewall is blocking it.', 'I just can’t get through to the doctor’s surgery by phone.']);
-  T('r-kommen-reinkommen', ['A critical ticket has just come in.', 'Come on in, the door is open!']);
+  T('r-kommen-reinkommen', ['Come on in, the door is open!', 'A critical ticket has just come in.']);
   T('r-kommen-ankunft', ['The arrival of the ICE from Frankfurt is delayed by 15 minutes.']);
   T('r-kommen-auskunft', ['Could you give me some brief information about my application?']);
   T('r-kommen-zukunft', ['In future we should check all access rights automatically.']);

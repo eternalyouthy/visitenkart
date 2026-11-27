@@ -81,7 +81,7 @@ GT.registerRoot({
       meaningType: 'polysemous',
       meaningExplanation: 'Три совершенно разных словарных значения: «нанять в штат», «настроить параметры» и «прекратить деятельность/поддержку».',
       meaningExamples: [{ de: 'zwei neue Analysten einstellen', ru: 'нанять двух новых аналитиков' }, { de: 'die Sprache in den Einstellungen einstellen', ru: 'настроить язык' }, { de: 'Der Support wird eingestellt.', ru: 'Поддержка прекращается.' }],
-      note: 'Три частых значения: нанять, настроить, прекратить («Der Betrieb wurde eingestellt» — работу прекратили). «Die Einstellungen» (мн. ч.) — настройки; «die Einstellung zu + Dat.» — отношение к чему-то.'
+      note: 'Три частых значения: нанять, настроить, прекратить («Der Betrieb wurde eingestellt» — работу прекратили). «Die Einstellungen» (мн. ч.) — настройки; «die Einstellung zu + Dat.» — отношение к чему-то. Также очень частое возвратное «sich auf + Akk. einstellen» — настроиться, подготовиться к чему-то («Wir müssen uns auf längere Wartezeiten einstellen»).'
     },
     {
       id: 'r-stellen-abstellen', prefix: 'ab', sep: 'trennbar', stress: 'ábstellen', pos: 'verb',
@@ -104,34 +104,34 @@ GT.registerRoot({
       id: 'r-stellen-anstellen', prefix: 'an', sep: 'trennbar', stress: 'ánstellen', pos: 'verb',
       transparency: 'figurative',
       de: 'anstellen', forms: { praes: 'stellt an', praet: 'stellte an', perf: 'hat angestellt' }, gov: '+ Akk.',
-      ru: 'включать (прибор); нанимать; (sich anstellen) вставать в очередь; натворить',
-      prefixDrill: { ex: 0, meaning: 2, explain: 'an- здесь означает «включение прибора» (как anmachen, anschalten; по-русски приставка другая — в-ключать).' },
+      ru: '(sich anstellen) вставать в очередь; нанимать (на работу, в штат); (разг.) натворить, устроить; включать (прибор, воду)',
+      prefixDrill: { ex: 3, meaning: 2, explain: 'an- здесь означает «включение прибора» (как anmachen, anschalten; по-русски приставка другая — в-ключать).' },
       examples: [
-        { sense: 'включать (прибор)', de: '[[Stell]] bitte mal den Fernseher [[an]].', ru: 'Включи-ка, пожалуйста, телевизор.' },
         { sense: 'вставать в очередь (sich anstellen)', de: 'An der Kasse musste ich mich eine halbe Stunde [[anstellen]].', ru: 'На кассе мне пришлось полчаса стоять в очереди.' },
         { sense: 'нанимать на работу (в штат)', de: 'Die Behörde hat zwei neue IT-Experten fest [[angestellt]].', ru: 'Ведомство взяло в штат двух новых IT-специалистов.' },
-        { sense: 'натворить (разг.)', de: 'Was hast du denn da wieder [[angestellt]]?', ru: 'Ну и что ты там опять натворил?' }
+        { sense: 'натворить (разг.)', de: 'Was hast du denn da wieder [[angestellt]]?', ru: 'Ну и что ты там опять натворил?' },
+        { sense: 'включать (прибор)', de: '[[Stell]] bitte mal den Fernseher [[an]].', ru: 'Включи-ка, пожалуйста, телевизор.' }
       ],
       morph: 'an-stell-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'anstellen значит «включать прибор», «нанимать на работу», sich anstellen — «вставать в очередь», а разговорное was anstellen — «натворить что-то».',
-      meaningExamples: [{ de: 'die Heizung anstellen', ru: 'включить отопление' }, { de: 'sich an der Kasse anstellen', ru: 'встать в очередь на кассу' }, { de: 'Was hast du angestellt?', ru: 'Что ты натворил? (разг.)' }],
+      meaningExplanation: 'sich anstellen значит «вставать в очередь», anstellen — «нанимать на работу», разговорное was anstellen — «натворить что-то», а также «включать прибор/воду» (в быту чаще anmachen/einschalten).',
+      meaningExamples: [{ de: 'sich an der Kasse anstellen', ru: 'встать в очередь на кассу' }, { de: 'Was hast du angestellt?', ru: 'Что ты натворил? (разг.)' }, { de: 'die Heizung anstellen', ru: 'включить отопление' }],
       note: '«Angestellt sein» — работать по найму (der/die Angestellte — служащий). «Was hast du wieder angestellt?» — что ты опять натворил? Это значение уже не выводится из «ставить» — просто запомните.'
     },
     {
       id: 'r-stellen-aufstellen', prefix: 'auf', sep: 'trennbar', stress: 'áufstellen', pos: 'verb',
       core: true, transparency: 'figurative',
       de: 'aufstellen', forms: { praes: 'stellt auf', praet: 'stellte auf', perf: 'hat aufgestellt' }, gov: '+ Akk.',
-      ru: 'ставить, устанавливать; составлять (план, правила); выдвигать (кандидата)',
-      prefixDrill: { ex: 2, meaning: 0, explain: 'auf- здесь означает «вверх, поставить вертикально» (установить стенд / оборудование).' },
+      ru: 'составлять, устанавливать (правила, план, список); ставить, устанавливать (физически); выдвигать (кандидата)',
+      prefixDrill: { ex: 1, meaning: 0, explain: 'auf- здесь означает «вверх, поставить вертикально» (установить стенд / оборудование).' },
       examples: [
         { sense: 'составлять (правила, план)', de: 'Wir müssen neue Regeln für Passwörter [[aufstellen]].', ru: 'Нам нужно составить новые правила для паролей.' },
-        { sense: 'выдвигать (кандидата)', de: 'Die Partei hat eine junge Kandidatin [[aufgestellt]].', ru: 'Партия выдвинула молодую кандидатку.' },
-        { sense: 'ставить, устанавливать (физически)', de: 'Am Eingang wurde ein neuer Monitor [[aufgestellt]].', ru: 'У входа установили новый монитор.' }
+        { sense: 'ставить, устанавливать (физически)', de: 'Am Eingang wurde ein neuer Monitor [[aufgestellt]].', ru: 'У входа установили новый монитор.' },
+        { sense: 'выдвигать (кандидата)', de: 'Die Partei hat eine junge Kandidatin [[aufgestellt]].', ru: 'Партия выдвинула молодую кандидатку.' }
       ],
       morph: 'auf-stell-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'aufstellen значит «устанавливать физически», «составлять план/правила» и «выдвигать кандидата или рекорд».',
+      meaningExplanation: 'aufstellen значит «составлять план/правила», «устанавливать физически» и «выдвигать кандидата или устанавливать рекорд».',
       meaningExamples: [{ de: 'klare Regeln aufstellen', ru: 'установить чёткие правила' }, { de: 'einen neuen Tisch aufstellen', ru: 'поставить новый стол' }],
       note: '«Einen Plan / eine Liste / eine Regel aufstellen» — по-русски здесь «составлять» (тоже от «ставить», но приставка другая). «Gut aufgestellt sein» — быть хорошо подготовленным (о фирме, команде).'
     },

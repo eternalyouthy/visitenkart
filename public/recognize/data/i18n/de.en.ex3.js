@@ -74,12 +74,12 @@
   T('exp-day-schauen-wir-mal', ['Let’s have a look at why the login fails.', 'Let’s look together at how we can solve this. (formal “Sie”)']);
   T('r-bauen-bauen', ['My parents built a house in the nineties.', 'The team is currently building a new platform for log analysis.']);
   T('r-bauen-aufbauen', ['We built the SOC from scratch in two years.', 'Can you help me assemble the wardrobe?', 'The B2 course builds directly on the B1 vocabulary.']);
-  T('r-bauen-abbauen', ['The company wants to cut 200 jobs.', 'The stage is taken down straight after the concert.', 'After my shift I go jogging to work off stress.']);
-  T('r-bauen-anbauen', ['We want to build a garage onto the house.', 'A lot of wine is grown in this region.']);
+  T('r-bauen-abbauen', ['The company wants to cut 200 jobs.', 'After my shift I go jogging to work off stress.', 'The stage is taken down straight after the concert.']);
+  T('r-bauen-anbauen', ['A lot of wine is grown in this region.', 'We want to build a garage onto the house.']);
   T('r-bauen-ausbauen', ['The city wants to expand the fibre-optic network further.', 'The technician removed the old hard drive.']);
   T('r-bauen-umbauen', ['We’re refurbishing the office, so everyone is working from home.', 'The architecture has to be completely rebuilt.']);
   T('r-bauen-einbauen', ['We built an additional check into the process.', 'The new kitchen will be fitted next week.']);
-  T('r-bauen-verbauen', ['The new high-rise blocks our whole view.', 'With this decision he ruined his future.', 'This server has two fast SSDs built in.']);
+  T('r-bauen-verbauen', ['This server has two fast SSDs built in.', 'With this decision he ruined his future.', 'The new high-rise blocks our whole view.']);
   T('r-bauen-bebauen', ['The plot may not be built on.', 'The fields have been farmed for centuries.']);
   T('r-bauen-nachbauen', ['The attackers replicated the bank’s login page exactly.', 'We built the model from old photos.']);
   T('r-bauen-bau', ['Construction of the new bridge will take three years.', 'The data centre is still under construction.']);
@@ -92,8 +92,8 @@
   T('r-stellen-ausstellen', ['The citizens’ office issued me a new passport.', 'The museum is currently exhibiting paintings by Klimt.']);
   T('r-stellen-einstellen', ['The company hired ten new people this year.', 'Where can I set the language?', 'Support for the old operating system has been discontinued.']);
   T('r-stellen-abstellen', ['You can leave your bike in the courtyard.', 'Tomorrow the water will be turned off from 8 to 12.', 'We have to fix this fault as quickly as possible.']);
-  T('r-stellen-anstellen', ['Please turn on the TV.', 'I had to queue at the checkout for half an hour.', 'The authority has hired two new IT experts on permanent contracts.', 'What have you been up to now?']);
-  T('r-stellen-aufstellen', ['We need to draw up new password rules.', 'The party has nominated a young candidate.', 'A new monitor was set up at the entrance.']);
+  T('r-stellen-anstellen', ['I had to queue at the checkout for half an hour.', 'The authority has hired two new IT experts on permanent contracts.', 'What have you been up to now?', 'Please turn on the TV.']);
+  T('r-stellen-aufstellen', ['We need to draw up new password rules.', 'A new monitor was set up at the entrance.', 'The party has nominated a young candidate.']);
   T('r-stellen-darstellen', ['The chart shows the attacks per month.', 'The outdated system poses a major risk.']);
   T('r-stellen-feststellen', ['During the analysis we found that two accounts are compromised.', 'The doctor didn’t find anything serious.']);
   T('r-stellen-herstellen', ['The company makes sensors for cars.', 'I can’t establish a connection to the server.']);

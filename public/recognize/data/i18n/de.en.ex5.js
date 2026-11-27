@@ -8,7 +8,7 @@
   T('r-gehen-ausgang', ['The emergency exit is on the left at the end of the corridor.', 'The outcome of the negotiations is still completely open.']);
   T('r-gehen-umgang', ['Handling passwords securely is part of our training.']);
   T('r-gehen-vorgang', ['The process usually takes only a few seconds.']);
-  T('r-schlagen-schlagen', ['Before the interview my heart was beating very fast.', 'Our team beat the favourites 2–1.']);
+  T('r-schlagen-schlagen', ['Monitoring immediately sounded the alarm.', 'Our team beat the favourites 2–1.', 'Before the interview my heart was beating very fast.']);
   T('r-schlagen-vorschlagen', ['I suggest we only patch the server on Sunday.', 'Can you suggest another time for the meeting?']);
   T('r-schlagen-nachschlagen', ['I need to look up the exact error code in the documentation.', 'When I don’t know a word, I look it up straight away.']);
   T('r-schlagen-aufschlagen', ['Please open the book at page 42.', 'We pitched our tent right by the lake.']);
@@ -36,7 +36,7 @@
   T('r-sprechen-sprache', ['Which languages do you speak besides German and Russian?']);
   T('r-sprechen-gespraech', ['Thank you very much for the pleasant conversation today!']);
   T('r-sprechen-ansprechpartner', ['I am your direct contact for questions about IT security.']);
-  T('r-sprechen-widerspruch', ['You can lodge an objection to the decision within one month.', 'There is a clear contradiction between the two statements.']);
+  T('r-sprechen-widerspruch', ['There is a clear contradiction between the two statements.', 'You can lodge an objection to the decision within one month.']);
   T('r-sehen-sehen', ['In the firewall logs you can see the suspicious IP address straight away.', 'I see it exactly the same way as you.']);
   T('r-sehen-ansehen', ['I’ll look at the ticket right after the meeting.', 'We regard this vulnerability as a critical risk.']);
   T('r-sehen-aussehen', ['At first glance the email looks genuine, but it’s phishing.', 'How are things looking with your holiday next week?']);
@@ -54,7 +54,7 @@
   T('r-sehen-absicht', ['Don’t worry, I didn’t delete the file on purpose.']);
   T('r-fallen-fallen', ['I dropped my phone on the floor, but the display is still intact.', 'Temperatures fell below zero during the night.']);
   T('r-fallen-auffallen', ['I immediately noticed a strange IP address in the logs.', 'Have you noticed that the server is responding much more slowly today?']);
-  T('r-fallen-ausfallen', ['The central VPN server went down for twenty minutes last night.', 'Unfortunately today’s meeting is cancelled due to illness.']);
+  T('r-fallen-ausfallen', ['Unfortunately today’s meeting is cancelled due to illness.', 'The central VPN server went down for twenty minutes last night.', 'The audit result turned out better than expected.']);
   T('r-fallen-einfallen', ['I just can’t think of the name of that tool.', 'I’ve just thought of another good solution!']);
   T('r-fallen-gefallen', ['I really like the new overview in the dashboard.', 'How did you like the conference in Munich?']);
   T('r-fallen-durchfallen', ['He failed the practical exam at the first attempt.', 'No system may fail the security audit.']);
@@ -66,7 +66,7 @@
   T('r-fallen-vorfall', ['After the incident we tightened all the rules in the SIEM.']);
   T('r-fallen-zufall', ['Two servers failing at exactly the same second is certainly no coincidence.']);
   T('r-fallen-abfall', ['In Germany you have to separate your rubbish carefully.']);
-  T('r-stehen-stehen', ['The contract says the notice period is three months.', 'The whole operation was at a standstill for two hours.']);
+  T('r-stehen-stehen', ['The whole operation was at a standstill for two hours.', 'The contract says the notice period is three months.']);
   T('r-stehen-verstehen', ['Did I understand you correctly that the update won’t come until Monday?', 'We all get on very well in the team.']);
   T('r-stehen-bestehen', ['She passed the certification at the first attempt.', 'A strong password consists of at least twelve characters.', 'With this vulnerability there is acute danger.']);
   T('r-stehen-entstehen', ['The misconfiguration caused considerable damage.', 'Unexpected dependencies often arise during a migration.']);

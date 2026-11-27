@@ -10,10 +10,10 @@
     },
     "r-bauen-aufbauen": {
       "note": "“Der Kurs baut auf B1 auf” — the course builds on B1. “Die Firma / ein Netzwerk / Vertrauen aufbauen” — to build up a company / a network / trust. Noun: der Aufbau.",
-      "meaningExplanation": "The verb aufbauen has three distinct senses: to assemble a physical structure, to build up a system/team from scratch, and to be based on something (auf + dat.).",
+      "meaningExplanation": "The verb aufbauen has three distinct senses: to build up a system/team/relationships from scratch, to assemble a physical structure, and to be based on something (auf + dat.).",
       "meaningExamples": [
-        "to assemble a wardrobe",
         "to build up a SOC team",
+        "to assemble a wardrobe",
         "The course builds on A2."
       ],
       "senses": [
@@ -25,30 +25,30 @@
     },
     "r-bauen-abbauen": {
       "note": "A very frequent word: “Stellen abbauen”, “Überstunden abbauen” (to take time off in lieu of overtime), “Stress abbauen” (to relieve stress), “Vorurteile abbauen” (to break down prejudices). Noun: der Abbau, “der Stellenabbau”.",
-      "meaningExplanation": "abbauen is used both literally (to dismantle a structure) and as an established term for cutting jobs, working off overtime, and relieving stress.",
+      "meaningExplanation": "abbauen is most commonly used for cutting jobs, working off overtime, and relieving stress, as well as literally “to dismantle a structure”.",
       "meaningExamples": [
-        "to take down a tent",
         "to cut jobs / to reduce overtime",
-        "to relieve stress"
+        "to relieve stress",
+        "to take down a tent"
       ],
       "senses": [
         "to cut, to reduce (jobs)",
-        "to dismantle, to take down (a structure, a stage)",
-        "to relieve stress / to reduce overtime"
+        "to relieve stress / to reduce overtime",
+        "to dismantle, to take down (a structure, a stage)"
       ],
       "drill": "to cut jobs",
       "prefixDrill": "ab- here means “reduction, decrease” — cutting jobs."
     },
     "r-bauen-anbauen": {
       "note": "The second sense comes from the old meaning “bauen = to cultivate the soil” (see WHY? under bauen). “Der Anbau” — an extension or cultivation.",
-      "meaningExplanation": "anbauen means both “to add an extension to a building” and “to grow agricultural crops” — both are standard dictionary senses.",
+      "meaningExplanation": "anbauen means “to grow agricultural crops, vegetables” and “to add an extension to a building” — both are standard dictionary senses.",
       "meaningExamples": [
-        "to build on a garage",
-        "to grow vegetables in the garden"
+        "to grow vegetables in the garden",
+        "to build on a garage"
       ],
       "senses": [
-        "to build an extension onto a building",
-        "to grow, to cultivate (plants, crops)"
+        "to grow, to cultivate (plants, crops)",
+        "to build an extension onto a building"
       ],
       "prefixDrill": "an- here denotes “contact, attachment” — building a garage directly onto the house."
     },
@@ -73,22 +73,23 @@
       "prefixDrill": "stressed separable um- means “remodelling, reconstruction” (to rebuild, to convert)."
     },
     "r-bauen-einbauen": {
-      "note": "“Die Einbauküche” — fitted kitchen (often abbreviated “EBK” in rental ads). “Eingebaut” — built-in: “eine eingebaute Kamera”.",
+      "note": "“Die Einbauküche” — fitted kitchen (often abbreviated “EBK” in rental ads). “Eingebaut” — built-in: “eine eingebaute Kamera”. Unlike verbauen (what is already fitted inside a device: “ist verbaut”), einbauen emphasises the act of installing/fitting something in.",
       "prefixDrill": "ein- here means “building in, installation” — building a check into the process."
     },
     "r-bauen-verbauen": {
-      "note": "Inseparable: verbaut (no ge-). The figurative sense is transparent: “to build over” → “to block the way” → “to ruin one’s chances”. In engineering, “verbaut” means “installed, fitted”.",
-      "meaningExplanation": "Besides literally “blocking a view with a building”, verbauen is vividly used figuratively: “to block one’s own path, to ruin a chance”.",
+      "note": "Inseparable: verbaut (no ge-). In everyday German it is most often heard about tech and cars (“In meinem PC sind 32 GB RAM verbaut”, “Welche Grafikkarte ist verbaut?”) and missed opportunities (“Du verbaust dir deine Zukunft”). In construction it also means “to use up building materials” (“Es wurde viel Holz verbaut”). Difference from einbauen: einbauen focuses on the installation process, while verbauen (especially “ist/sind verbaut”) describes what parts/materials are built into a finished product or building.",
+      "meaningExplanation": "In everyday life verbauen most often appears in three contexts (from most frequent to least frequent): 1) in tech and construction — “to install, to fit parts/components” (often as ist/sind verbaut) or “to use up building materials”; 2) figuratively with sich (dat.) — “to ruin one’s own chances, to block one’s future”; 3) literally — “to block (a view, light) with a building”.",
       "meaningExamples": [
-        "The new buildings block the view (literally).",
-        "to ruin one’s own future (figuratively)"
+        "Which processor is installed there? (tech., most frequent)",
+        "I don’t want to ruin this chance for myself. (fig.)",
+        "The new building blocks our view. (lit.)"
       ],
       "senses": [
-        "to block by building (a view)",
-        "to block one’s own path, to spoil a chance (fig.)",
-        "to install inside (tech.)"
+        "to install, to fit (parts, components)",
+        "to ruin one’s chances, to block one’s own path (fig.)",
+        "to block by building (a view, light)"
       ],
-      "prefixDrill": "ver- here means “blocking, obstructing” — the high-rise builds over and blocks the view."
+      "prefixDrill": "In the sense “to block a view”, ver- means closing off or obstructing — the high-rise builds over and blocks the view."
     },
     "r-bauen-bebauen": {
       "note": "The prefix be- makes the verb transitive: the direct object is the plot of land itself (das Grundstück bebauen). “Bebaut” — built-up.",
@@ -194,7 +195,7 @@
       "prefixDrill": "aus- here means “displaying, putting out” — paintings are exhibited in a museum."
     },
     "r-stellen-einstellen": {
-      "note": "Three frequent senses: to hire, to adjust/configure, to discontinue (“Der Betrieb wurde eingestellt” — operations were discontinued). “Die Einstellungen” (pl.) — settings; “die Einstellung zu + dat.” — attitude towards something.",
+      "note": "Three frequent senses: to hire, to adjust/configure, to discontinue (“Der Betrieb wurde eingestellt” — operations were discontinued). “Die Einstellungen” (pl.) — settings; “die Einstellung zu + dat.” — attitude towards something. Also very common reflexively: “sich auf + acc. einstellen” — to prepare for, to brace oneself for (“Wir müssen uns auf längere Wartezeiten einstellen”).",
       "meaningExplanation": "Three completely different dictionary senses: “to hire staff”, “to configure parameters/settings”, and “to discontinue an activity or support”.",
       "meaningExamples": [
         "to hire two new analysts",
@@ -225,31 +226,31 @@
     },
     "r-stellen-anstellen": {
       "note": "“Angestellt sein” — to be employed (der/die Angestellte — salaried employee). “Was hast du wieder angestellt?” — what mischief have you been up to again? This sense can no longer be deduced from “to put” — simply memorise it.",
-      "meaningExplanation": "anstellen means “to switch on an appliance”, “to employ someone”, sich anstellen — “to queue up”, and colloquial was anstellen — “to get up to mischief”.",
+      "meaningExplanation": "sich anstellen means “to queue up”, anstellen means “to employ someone”, colloquial was anstellen means “to get up to mischief”, and also “to turn on an appliance/water” (in everyday speech more often anmachen/einschalten).",
       "meaningExamples": [
-        "to turn on the heating",
         "to queue up at the checkout",
-        "What have you done / got up to? (colloq.)"
+        "What have you done / got up to? (colloq.)",
+        "to turn on the heating"
       ],
       "senses": [
-        "to switch on (an appliance)",
         "to queue up, to get in line (sich anstellen)",
         "to employ, to hire (on staff)",
-        "to get up to mischief (colloq.)"
+        "to get up to mischief (colloq.)",
+        "to switch on (an appliance)"
       ],
       "prefixDrill": "an- here means “switching on a device” (like anmachen, anschalten)."
     },
     "r-stellen-aufstellen": {
       "note": "“Einen Plan / eine Liste / eine Regel aufstellen” — to draw up a plan / list / rule. “Gut aufgestellt sein” — to be well positioned (of a company or team).",
-      "meaningExplanation": "aufstellen means “to set up physically”, “to draw up a plan/rules”, and “to nominate a candidate or set a record”.",
+      "meaningExplanation": "aufstellen means “to draw up a plan/rules”, “to set up physically”, and “to nominate a candidate or set a record”.",
       "meaningExamples": [
         "to establish clear rules",
         "to set up a new table"
       ],
       "senses": [
         "to draw up (rules, a plan)",
-        "to nominate (a candidate)",
-        "to put up, to set up (physically)"
+        "to put up, to set up (physically)",
+        "to nominate (a candidate)"
       ],
       "prefixDrill": "auf- here means “upwards, putting upright” (setting up a stand / equipment)."
     },
@@ -470,7 +471,7 @@
       }
     },
     "r-ziehen-beziehen": {
-      "note": "The senses have diverged and can no longer be deduced from “pulling” — learn them as distinct expressions. “Bezugnehmend auf …” — with reference to (formal letters). “Das Bett beziehen” — to put clean sheets on the bed.",
+      "note": "The senses have diverged and can no longer be deduced from “pulling” — learn them as distinct expressions. “Bezugnehmend auf …” — with reference to (formal letters). “Das Bett beziehen” — to put clean sheets on the bed. Also formally “eine neue Wohnung beziehen” — to move into a new flat.",
       "why": {
         "text": "Composition: inseparable prefix be- + ziehen.\nOrigin: historically connected with ziehen (“to pull”): in Middle High German beziehen meant “to stretch over, to cover” (whence “to make a bed” — stretching the sheets over it), “to draw to oneself, to receive” (benefits, goods), and “to relate to something” (sich beziehen auf).\nTransparency: opaque — etymologically the verb goes back to ziehen, but its modern meanings have diverged so far that they must be memorised.",
         "evidence": "MHG beziehen (from ziehen): “to cover” → “to put sheets on a bed”, “to draw/receive”, “to relate to”."
@@ -570,7 +571,7 @@
         "text": "Composition: root verb setz- + -en.\nOrigin: Old High German setzen is the causative verb to sitzen (“to cause to sit”, i.e. “to seat, to set”). The Indo-European root *sed- is cognate with English “sit” and “set”.\nTransparency: base root of the family.",
         "evidence": "OHG setzen < Gmc. *satjaną (causative to sitzen) < PIE *sed- (cognate with Eng. “set / sit”)."
       },
-      "meaningExplanation": "setzen means “to place, to put”, sich setzen — “to sit down”, and setzen auf + acc. — “to bet on, to rely on something”.",
+      "meaningExplanation": "sich setzen means “to sit down”, setzen auf + acc. means “to bet on, to rely on something”, and with a direct object setzen means “to place, to put, to set” (ein Ziel / eine Grenze setzen).",
       "meaningExamples": [
         "Please take a seat.",
         "We are banking on Zero Trust."
@@ -790,20 +791,20 @@
     },
     "r-legen-ablegen": {
       "note": "In the office and IT “Dateien ablegen” — to file/store files in a folder (“die Ablage” — filing tray, archive; clipboard in “Zwischenablage”).",
-      "meaningExplanation": "ablegen means “to take off outer clothing”, “to take/sit an exam” (eine Prüfung ablegen), and “to file, to store files or documents”.",
+      "meaningExplanation": "ablegen most often means “to take/sit an exam” (eine Prüfung ablegen) and “to file, to store files or documents”, as well as politely “to take off outer clothing” and “to drop a habit”.",
       "meaningExamples": [
         "to take the B1 exam",
         "to file documents in the right folder"
       ],
       "senses": [
-        "to take off (outer clothing)",
         "to take, to sit (an exam, a certification)",
-        "to file, to store (files, documents)"
+        "to file, to store (files, documents)",
+        "to take off (outer clothing)"
       ],
       "prefixDrill": "ab- here means “downward, off” — taking off a jacket and laying it down."
     },
     "r-legen-auflegen": {
-      "note": "“Bitte legen Sie nicht auf!” — please do not hang up! (standard customer-support phrase).",
+      "note": "“Bitte legen Sie nicht auf!” — please do not hang up! (standard customer-support phrase). Colloquially also “to DJ, to spin records” (“Heute legt ein bekannter DJ auf”).",
       "meaningExplanation": "On the telephone auflegen means “to hang up (end a call)”, while in everyday life and medicine it means “to apply on top (a compress, a bandage)”.",
       "meaningExamples": [
         "He simply hung up.",
@@ -1352,10 +1353,10 @@
     },
     "r-halten-festhalten": {
       "note": "Very useful in meetings: “Halten wir das kurz fest” — let’s briefly note/record that.",
-      "meaningExplanation": "Besides physical “holding on tight” (sich festhalten), in business German festhalten is the standard verb for “to record in writing in the minutes/report”.",
+      "meaningExplanation": "In business German festhalten is the standard verb for “to record in writing in the minutes/report”; literally it also means “to hold on tight” (sich festhalten) and “to stick to a plan/opinion” (an + dat.).",
       "meaningExamples": [
-        "Please hold on tight on the bus!",
-        "to record all results in the minutes"
+        "to record all results in the minutes",
+        "Please hold on tight on the bus!"
       ],
       "senses": [
         "to record in writing (in a report, minutes)",
@@ -1512,8 +1513,8 @@
         "A call is just coming in."
       ],
       "senses": [
-        "to come in, to arrive (of a ticket, a message)",
-        "to come inside"
+        "to come inside",
+        "to come in, to arrive (of a ticket, a message)"
       ]
     },
     "r-kommen-ankunft": {
@@ -1602,7 +1603,7 @@
     },
     "r-gehen-eingehen": {
       "note": "Always with sein (even the transitive idiom “ein Risiko eingehen” — to take a risk — forms its perfect with sein: ist ein Risiko eingegangen!).",
-      "meaningExplanation": "eingehen means “to arrive, to come in” (of letters, orders, payments), “to go into detail / respond to” (auf + acc. eingehen), and in everyday life of clothing — “to shrink in the wash”.",
+      "meaningExplanation": "eingehen means “to go into detail / respond to / agree to” (auf + acc. eingehen), “to arrive, to come in” (of letters, orders, payments), and in everyday life of clothing — “to shrink in the wash”.",
       "meaningExamples": [
         "to take a risk / to address a risk",
         "The payment has been received."
