@@ -125,7 +125,6 @@
       if (ch === 'u') return '[uü]';
       return escRe(ch);
     }).join('');
-    // Strong vowel changes (e -> i/ie in nehmen/sehen/sprechen/brechen, e -> a in stehen)
     if (baseClean === 'nehmen') pat = 'n(?:ehm|imm)';
     else if (baseClean === 'geben') pat = 'g(?:eb|ib)';
     else if (baseClean === 'sehen') pat = 's(?:eh|ieh)';
@@ -307,12 +306,25 @@
       isParticle: !!(w.particle || pool.rootIsParticle[w.rootId]),
       pfxKey: w.prefix || '',
       pfxDisplay: pfxDisplayOf(w, r),
-      optPfx: built.optPfx
+      optPfx: built.optPfx,
+      elim: []
     };
     G.chosen = null;
     G.revealed = false;
     G.hint = 0;
     G.spinSeq++;
+  }
+
+  function sepLabel(sep) {
+    if (!sep) return '';
+    if (GT.know === 'ru') {
+      if (sep === 'trennbar') return 'отделяемая (trennbar)';
+      if (sep === 'untrennbar') return 'неотделяемая (untrennbar)';
+    } else if (GT.know === 'en') {
+      if (sep === 'trennbar') return 'separable (trennbar)';
+      if (sep === 'untrennbar') return 'inseparable (untrennbar)';
+    }
+    return sep;
   }
 
   function prefixHintText(w) {
@@ -323,7 +335,9 @@
       var mg = GT.gl(pf.meanings[pd.meaning]);
       if (mg) return mg;
     }
-    return GT.gl(pf) || '';
+    var g = String(GT.gl(pf) || '').trim();
+    var parts = g.split(/\s*;\s*/).filter(Boolean);
+    return parts.length > 2 ? parts.slice(0, 2).join('; ') : g;
   }
 
   function prefixExplainInfo(w) {
@@ -344,37 +358,59 @@
     return null;
   }
 
-  function hintsFor(w, r, pfxDisplay, isBase) {
+  function maskedSentenceHTML(w, esc) {
+    var ex = exampleFor(w);
+    if (!ex || !ex.t) return '';
+    return esc(ex.t).replace(/\[\[.+?\]\]/g, '<span class="rr-h-blank">____</span>');
+  }
+
+  function hintsFor(w, r, pfxDisplay, isBase, esc) {
+    esc = esc || escHTML;
     var hints = [];
-    var rGloss = r && GT.gl(r);
-    if (rGloss) {
-      var baseVerb = r.t || r.verb || r.id;
+    var sent = maskedSentenceHTML(w, esc);
+    if (sent) {
       hints.push({
-        label: 'Hint · root',
-        html: 'Base verb: <b lang="' + escHTML(GT.learn) + '">' + escHTML(baseVerb) + '</b> = <b>' + escHTML(rGloss) + '</b>'
+        type: 'sentence',
+        tag: 'Sentence',
+        btn: 'Hint',
+        lang: GT.learn,
+        html: sent
       });
     }
     if (isBase) {
-      hints.push({
-        label: 'Hint · ' + pwLower(),
-        html: 'No extra ' + escHTML(pwLower()) + ' is needed here (<b>' + escHTML(NO_PFX) + '</b>).'
-      });
-      return hints;
+      var rGloss = r && GT.gl(r);
+      if (rGloss) {
+        var baseVerb = r.t || r.verb || r.id;
+        hints.push({
+          type: 'sense',
+          tag: 'Base',
+          btn: hints.length ? 'More hint' : 'Hint',
+          lang: GT.glLang(r),
+          html: '<b lang="' + esc(GT.learn) + '">' + esc(baseVerb) + '</b> = ' + esc(rGloss)
+        });
+      }
+    } else {
+      var parts = [];
+      var pfxHint = prefixHintText(w);
+      if (pfxHint) parts.push(esc(pfxHint));
+      if (GT.learn === 'de' && w.sep) parts.push('<span class="mono-muted">' + esc(sepLabel(w.sep)) + '</span>');
+      if (parts.length) {
+        hints.push({
+          type: 'sense',
+          tag: PW(),
+          btn: hints.length ? 'More hint' : 'Hint',
+          lang: GT.know,
+          html: parts.join(' · ')
+        });
+      }
     }
-    var pfxHint = prefixHintText(w);
-    if (pfxHint) {
-      hints.push({
-        label: 'Hint · ' + pwLower(),
-        html: escHTML(PW()) + ' meaning: <b>' + escHTML(pfxHint) + '</b>'
-      });
-    }
-    var ch = pfxDisplay.replace(/^…\s*/, '').charAt(0);
-    if (ch) {
-      hints.push({
-        label: 'Hint · first letter',
-        html: escHTML(PW()) + ' starts with <b>' + escHTML(ch) + '…</b>'
-      });
-    }
+    hints.push({
+      type: 'elim',
+      tag: '50/50',
+      btn: '50/50 (−3)',
+      lang: 'en',
+      html: '3 wrong options crossed out.'
+    });
     return hints;
   }
 
@@ -430,21 +466,28 @@
     }
     h += '</p>';
 
-    var hints = hintsFor(w, r, pfxDisplay, G.cur.isBase);
+    var hints = hintsFor(w, r, pfxDisplay, G.cur.isBase, esc);
     if (G.hint && !G.revealed && hints.length) {
-      h += '<p class="ag-hint" lang="' + GT.know + '">Hint: ' + hints.slice(0, G.hint).map(function (x) { return x.html; }).join(' · ') + '</p>';
+      h += '<div class="rr-hints">' + hints.slice(0, G.hint).map(function (x) {
+        return '<div class="rr-hint-row"><span class="rr-hint-tag">' + esc(x.tag) + '</span>' +
+          '<span class="rr-hint-val" lang="' + esc(x.lang) + '">' + x.html + '</span></div>';
+      }).join('') + '</div>';
     }
 
     var ans = answerKeyOf(G);
+    var elim = G.cur.elim || [];
     var opts = (G.cur.optPfx || []).map(function (p) { return { val: p, label: p, lang: lang }; });
 
     h += '<div class="options rr-opts rr-opts-pfx">' + opts.map(function (o, i) {
+      var isElim = !G.revealed && elim.indexOf(o.val) >= 0;
       var cls = '';
       if (G.revealed) {
         if (o.val === ans) cls = ' ok';
         else if (o.val === G.chosen) cls = ' bad';
+      } else if (isElim) {
+        cls = ' rr-elim';
       }
-      return '<button class="opt' + cls + '" type="button" data-rr="opt" data-v="' + esc(o.val) + '"' + (G.revealed ? ' disabled' : '') + ' lang="' + esc(o.lang) + '"><span class="ag-key">' + (i + 1) + '</span><span>' + esc(o.label) + '</span></button>';
+      return '<button class="opt' + cls + '" type="button" data-rr="opt" data-v="' + esc(o.val) + '"' + (G.revealed || isElim ? ' disabled' : '') + ' lang="' + esc(o.lang) + '"><span class="ag-key">' + (i + 1) + '</span><span>' + esc(o.label) + '</span></button>';
     }).join('') + '</div>';
 
     if (G.revealed) {
@@ -462,18 +505,27 @@
         '</div></div>';
     }
 
-    h += '</div><div class="actions-row ag-actions">';
+    h += '</div><div class="rr-actions">';
     if (!G.revealed) {
+      h += '<div class="rr-tools">';
       if (hints.length) {
-        var hintLbl = G.hint === 0 ? 'Hint' : (hints.length > 1 ? 'More hint' : 'Hint');
-        h += '<button class="btn small" type="button" data-rr="hint"' + (G.hint >= hints.length ? ' disabled' : '') + '>' + esc(hintLbl) + '</button>';
+        var nextHint = G.hint < hints.length ? hints[G.hint] : null;
+        var hintLbl = nextHint ? nextHint.btn : 'All hints';
+        h += '<button class="btn small" type="button" data-rr="hint"' + (!nextHint ? ' disabled' : '') + '>' + esc(hintLbl) + '</button>';
       }
       h += '<button class="btn small" type="button" data-rr="show">Show answer</button>';
+      if (G.mode === 'same') {
+        h += '<button class="btn small" type="button" data-rr="newroot">Switch root ↻</button>';
+      }
+      h += '</div>';
+      h += '<button class="btn primary rr-next" type="button" data-rr="next">Next →</button>';
+    } else {
+      h += '<button class="btn primary rr-next" type="button" data-rr="next">Next →</button>';
+      if (G.mode === 'same') {
+        h += '<div class="rr-tools"><button class="btn small" type="button" data-rr="newroot">Switch root ↻</button></div>';
+      }
     }
-    if (G.mode === 'same') {
-      h += '<button class="btn small" type="button" data-rr="newroot">Switch root ↻</button>';
-    }
-    h += '<button class="btn small primary" type="button" data-rr="next">Next →</button></div>';
+    h += '</div>';
     h += '<p class="mono-muted ag-keys">1–' + opts.length + ' · H hint · Enter next</p>';
     return h;
   }
@@ -490,6 +542,7 @@
     switch (name) {
       case 'opt':
         if (G.revealed || !G.cur) return;
+        if (G.cur.elim && G.cur.elim.indexOf(el.dataset.v) >= 0) return;
         G.chosen = el.dataset.v;
         G.revealed = true;
         if (G.chosen === answerKeyOf(G)) { G.ok++; G.streak++; G.best = Math.max(G.best, G.streak); }
@@ -504,9 +557,14 @@
       case 'hint': {
         if (G.revealed || !G.cur) return;
         var w = GT.byId[G.cur.wid], r = GT.roots[G.cur.rid];
-        var maxH = w ? hintsFor(w, r, G.cur.pfxDisplay, G.cur.isBase).length : 0;
-        if (G.hint >= maxH) return;
+        var hints = w ? hintsFor(w, r, G.cur.pfxDisplay, G.cur.isBase, escHTML) : [];
+        if (G.hint >= hints.length) return;
+        var picked = hints[G.hint];
         G.hint++;
+        if (picked && picked.type === 'elim' && (!G.cur.elim || !G.cur.elim.length)) {
+          var wrong = (G.cur.optPfx || []).filter(function (p) { return p !== G.cur.pfxDisplay; });
+          G.cur.elim = shuffle(wrong).slice(0, 3);
+        }
         break;
       }
       case 'next':
@@ -549,7 +607,7 @@
       var k = e.key, G2 = state(GT.learn);
       if (/^[1-9]$/.test(k)) {
         var bt = document.querySelectorAll('#rrGame [data-rr="opt"]')[Number(k) - 1];
-        if (bt && !G2.revealed) { e.preventDefault(); act('opt', bt); }
+        if (bt && !bt.disabled && !G2.revealed) { e.preventDefault(); act('opt', bt); }
       } else if (k === 'h' || k === 'H') {
         e.preventDefault(); act('hint');
       } else if (k === 'Enter' || k === 'n' || k === 'N') {
