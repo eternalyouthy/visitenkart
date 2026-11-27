@@ -186,8 +186,8 @@ GT.registerRoot({
       ru: 'войти внутрь; поступить (о тикете, алерте, деньгах)',
       parallel: 'ВОйти внутрь',
       examples: [
-        { sense: 'поступить (о тикете, сообщении)', de: 'Gerade ist ein kritisches Ticket [[reingekommen]].', ru: 'Только что пришёл критический тикет.' },
-        { sense: 'войти внутрь', de: '[[Komm]] ruhig [[rein]], die Tür ist offen!', ru: 'Заходи спокойно, дверь открыта!' }
+        { sense: 'войти внутрь', de: '[[Komm]] ruhig [[rein]], die Tür ist offen!', ru: 'Заходи спокойно, дверь открыта!' },
+        { sense: 'поступить (о тикете, сообщении)', de: 'Gerade ist ein kritisches Ticket [[reingekommen]].', ru: 'Только что пришёл критический тикет.' }
       ],
       morph: 'rein-komm-en',
       meaningType: 'colloquial',

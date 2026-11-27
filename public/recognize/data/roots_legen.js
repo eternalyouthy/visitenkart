@@ -75,16 +75,16 @@ GT.registerRoot({
       id: 'r-legen-ablegen', prefix: 'ab', sep: 'trennbar', stress: 'áblegen', pos: 'verb',
       core: true, transparency: 'figurative',
       de: 'ablegen', forms: { praes: 'legt ab', praet: 'legte ab', perf: 'hat abgelegt' }, gov: '+ Akk.',
-      ru: 'снимать (одежду); сдавать (экзамен); складывать, сохранять (файлы, документы)',
-      prefixDrill: { ex: 0, meaning: 1, explain: 'ab- здесь означает «вниз, с поверхности» — снять куртку и положить её.' },
+      ru: 'сдавать (экзамен, тест); сохранять, складывать (файлы, документы); снимать, оставлять (верхнюю одежду); избавляться (от привычки)',
+      prefixDrill: { ex: 2, meaning: 1, explain: 'ab- здесь означает «вниз, с поверхности» — снять куртку и положить её.' },
       examples: [
-        { sense: 'снимать (верхнюю одежду)', de: 'Komm rein, du kannst deine Jacke hier [[ablegen]].', ru: 'Заходи, можешь оставить куртку здесь.' },
         { sense: 'сдавать (экзамен, сертификацию)', de: 'Nächsten Monat will ich die B2-Prüfung [[ablegen]].', ru: 'В следующем месяце я хочу сдать экзамен B2.' },
-        { sense: 'сохранять, складывать (файлы, документы)', de: 'Wo hast du den Abschlussbericht [[abgelegt]]?', ru: 'Куда ты сохранил итоговый отчёт?' }
+        { sense: 'сохранять, складывать (файлы, документы)', de: 'Wo hast du den Abschlussbericht [[abgelegt]]?', ru: 'Куда ты сохранил итоговый отчёт?' },
+        { sense: 'снимать (верхнюю одежду)', de: 'Komm rein, du kannst deine Jacke hier [[ablegen]].', ru: 'Заходи, можешь оставить куртку здесь.' }
       ],
       morph: 'ab-leg-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'ablegen значит «снимать верхнюю одежду», «сдавать экзамен» (eine Prüfung ablegen) и «сохранять, подшивать файлы/документы».',
+      meaningExplanation: 'ablegen чаще всего значит «сдавать экзамен» (eine Prüfung ablegen) и «сохранять, подшивать файлы/документы», а также вежливое «снимать верхнюю одежду» и «избавляться от привычки».',
       meaningExamples: [{ de: 'die B1-Prüfung ablegen', ru: 'сдать экзамен B1' }, { de: 'Dateien im richtigen Ordner ablegen', ru: 'сохранить файлы в нужной папке' }],
       note: 'В офисе и IT «Dateien ablegen» — положить/сохранить файлы в папку («die Ablage» — папка, архив, буфер обмена в «Zwischenablage»).'
     },
@@ -102,7 +102,7 @@ GT.registerRoot({
       meaningType: 'polysemous',
       meaningExplanation: 'В телефонном разговоре auflegen значит «положить трубку (завершить звонок)», а в быту и медицине — «положить сверху (компресс, повязку)».',
       meaningExamples: [{ de: 'Er hat einfach aufgelegt.', ru: 'Он просто повесил трубку.' }, { de: 'einen kalten Umschlag auflegen', ru: 'приложить холодный компресс' }],
-      note: '«Bitte legen Sie nicht auf!» — пожалуйста, не кладите трубку! (стандартная фраза поддержки).'
+      note: '«Bitte legen Sie nicht auf!» — пожалуйста, не кладите трубку! (стандартная фраза поддержки). В разговорной речи также «ставить музыку, диджеить» («Heute legt ein bekannter DJ auf»).'
     },
     {
       id: 'r-legen-verlegen', prefix: 'ver', sep: 'untrennbar', stress: 'verlégen', pos: 'verb',

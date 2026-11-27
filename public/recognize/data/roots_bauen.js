@@ -24,7 +24,7 @@ GT.registerRoot({
       id: 'r-bauen-aufbauen', prefix: 'auf', sep: 'trennbar', stress: 'áufbauen', pos: 'verb',
       core: true, transparency: 'figurative',
       de: 'aufbauen', forms: { praes: 'baut auf', praet: 'baute auf', perf: 'hat aufgebaut' }, gov: '+ Akk.; auf + Dat.',
-      ru: 'собирать (конструкцию), возводить; создавать с нуля; (auf etw.) основываться на',
+      ru: 'создавать с нуля, выстраивать (систему, команду, доверие); собирать (мебель, конструкцию); (auf + Dat.) основываться на',
       prefixDrill: { ex: 1, meaning: 0, explain: 'auf- здесь означает движение вверх, возведение конструкции («собрать шкаф»).' },
       examples: [
         { sense: 'создавать с нуля (организацию, систему)', de: 'Wir haben das SOC in zwei Jahren von null [[aufgebaut]].', ru: 'Мы с нуля создали SOC за два года.' },
@@ -33,44 +33,44 @@ GT.registerRoot({
       ],
       morph: 'auf-bau-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'Глагол aufbauen имеет три самостоятельных значения: собирать физическую конструкцию, выстраивать систему/команду с нуля и основываться на чём-то (auf + Dat.).',
-      meaningExamples: [{ de: 'einen Schrank aufbauen', ru: 'собрать шкаф' }, { de: 'ein SOC-Team aufbauen', ru: 'выстроить команду SOC' }, { de: 'Der Kurs baut auf A2 auf.', ru: 'Курс опирается на A2.' }],
+      meaningExplanation: 'Глагол aufbauen имеет три самостоятельных значения: выстраивать систему/команду/отношения с нуля, собирать физическую конструкцию и основываться на чём-то (auf + Dat.).',
+      meaningExamples: [{ de: 'ein SOC-Team aufbauen', ru: 'выстроить команду SOC' }, { de: 'einen Schrank aufbauen', ru: 'собрать шкаф' }, { de: 'Der Kurs baut auf A2 auf.', ru: 'Курс опирается на A2.' }],
       note: '«Der Kurs baut auf B1 auf» — курс основывается на B1. «Die Firma / ein Netzwerk / Vertrauen aufbauen» — построить фирму / сеть / доверие. Существительное: der Aufbau.'
     },
     {
       id: 'r-bauen-abbauen', prefix: 'ab', sep: 'trennbar', stress: 'ábbauen', pos: 'verb',
       core: true, transparency: 'transparent',
       de: 'abbauen', forms: { praes: 'baut ab', praet: 'baute ab', perf: 'hat abgebaut' }, gov: '+ Akk.',
-      ru: 'разбирать (конструкцию); сокращать (рабочие места, переработки); снимать (стресс)',
+      ru: 'сокращать (рабочие места, переработки); снимать (стресс); разбирать (конструкцию, палатку)',
       parallel: 'РАЗбирать / СОкращать',
       drill: { ru: 'сокращать рабочие места', de: 'Stellen ___bauen' },
       prefixDrill: { ex: 0, meaning: 2, explain: 'ab- здесь означает «уменьшение, сокращение» — сокращать рабочие места (ср. рус. со-кращать).' },
       examples: [
         { sense: 'сокращать (рабочие места)', de: 'Die Firma will 200 Stellen [[abbauen]].', ru: 'Фирма хочет сократить 200 рабочих мест.' },
-        { sense: 'разбирать (конструкцию, сцену)', de: 'Nach dem Konzert wird die Bühne sofort [[abgebaut]].', ru: 'После концерта сцену сразу разбирают.' },
-        { sense: 'снимать стресс / отгуливать переработки', de: 'Nach der Schicht gehe ich joggen, um Stress [[abzubauen]].', ru: 'После смены я иду бегать, чтобы снять стресс.' }
+        { sense: 'снимать стресс / отгуливать переработки', de: 'Nach der Schicht gehe ich joggen, um Stress [[abzubauen]].', ru: 'После смены я иду бегать, чтобы снять стресс.' },
+        { sense: 'разбирать (конструкцию, сцену)', de: 'Nach dem Konzert wird die Bühne sofort [[abgebaut]].', ru: 'После концерта сцену сразу разбирают.' }
       ],
       morph: 'ab-bau-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'abbauen используется и буквально (разбирать конструкцию), и как устоявшийся термин для сокращения рабочих мест, отгуливания переработок и снятия стресса.',
-      meaningExamples: [{ de: 'ein Zelt abbauen', ru: 'разобрать палатку' }, { de: 'Stellen / Überstunden abbauen', ru: 'сокращать места / отгуливать переработки' }, { de: 'Stress abbauen', ru: 'снимать стресс' }],
+      meaningExplanation: 'abbauen чаще всего используется для сокращения рабочих мест, отгуливания переработок и снятия стресса, а также буквально — «разбирать конструкцию».',
+      meaningExamples: [{ de: 'Stellen / Überstunden abbauen', ru: 'сокращать места / отгуливать переработки' }, { de: 'Stress abbauen', ru: 'снимать стресс' }, { de: 'ein Zelt abbauen', ru: 'разобрать палатку' }],
       note: 'Очень частое слово: «Stellen abbauen», «Überstunden abbauen» (отгулять переработки), «Stress abbauen» (снять стресс), «Vorurteile abbauen» (избавиться от предрассудков). Существительное: der Abbau, «der Stellenabbau».'
     },
     {
       id: 'r-bauen-anbauen', prefix: 'an', sep: 'trennbar', stress: 'ánbauen', pos: 'verb',
       core: true, transparency: 'transparent',
       de: 'anbauen', forms: { praes: 'baut an', praet: 'baute an', perf: 'hat angebaut' }, gov: '+ Akk.',
-      ru: 'пристраивать; выращивать (растения)',
-      parallel: 'ПРИстраивать',
-      prefixDrill: { ex: 0, meaning: 1, explain: 'an- здесь означает «контакт, прикрепление» — пристроить гараж вплотную к дому (рус. при-страивать).' },
+      ru: 'выращивать (растения, овощи, культуры); пристраивать (к зданию)',
+      parallel: 'ПРИстраивать (к зданию)',
+      prefixDrill: { ex: 1, meaning: 1, explain: 'an- здесь означает «контакт, прикрепление» — пристроить гараж вплотную к дому (рус. при-страивать).' },
       examples: [
-        { sense: 'пристраивать к зданию', de: 'Wir wollen eine Garage ans Haus [[anbauen]].', ru: 'Мы хотим пристроить к дому гараж.' },
-        { sense: 'выращивать (растения, культуры)', de: 'In dieser Region wird viel Wein [[angebaut]].', ru: 'В этом регионе выращивают много винограда.' }
+        { sense: 'выращивать (растения, культуры)', de: 'In dieser Region wird viel Wein [[angebaut]].', ru: 'В этом регионе выращивают много винограда.' },
+        { sense: 'пристраивать к зданию', de: 'Wir wollen eine Garage ans Haus [[anbauen]].', ru: 'Мы хотим пристроить к дому гараж.' }
       ],
       morph: 'an-bau-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'anbauen значит и «пристраивать к зданию», и «выращивать сельскохозяйственные культуры» — оба значения обычные словарные.',
-      meaningExamples: [{ de: 'eine Garage anbauen', ru: 'пристроить гараж' }, { de: 'Gemüse im Garten anbauen', ru: 'выращивать овощи в саду' }],
+      meaningExplanation: 'anbauen значит «выращивать сельскохозяйственные культуры, овощи» и «пристраивать к зданию» — оба значения обычные словарные.',
+      meaningExamples: [{ de: 'Gemüse im Garten anbauen', ru: 'выращивать овощи в саду' }, { de: 'eine Garage anbauen', ru: 'пристроить гараж' }],
       note: 'Второе значение — от старого «bauen = возделывать землю» (см. WHY? у bauen). «Der Anbau» — пристройка или выращивание.'
     },
     {
@@ -118,25 +118,28 @@ GT.registerRoot({
         { de: 'Nächste Woche wird die neue Küche [[eingebaut]].', ru: 'На следующей неделе установят новую кухню.' }
       ],
       morph: 'ein-bau-en',
-      note: '«Die Einbauküche» — встроенная кухня (в объявлениях об аренде часто «EBK»). «Eingebaut» — встроенный: «eine eingebaute Kamera».'
+      note: '«Die Einbauküche» — встроенная кухня (в объявлениях об аренде часто «EBK»). «Eingebaut» — встроенный: «eine eingebaute Kamera». В отличие от verbauen (что уже стоит в устройстве: «ist verbaut»), einbauen чаще подчёркивает сам процесс установки внутрь.'
     },
     {
       id: 'r-bauen-verbauen', prefix: 'ver', sep: 'untrennbar', stress: 'verbáuen', pos: 'verb',
       core: true, transparency: 'figurative',
-      de: 'verbauen', forms: { praes: 'verbaut', praet: 'verbaute', perf: 'hat verbaut' }, gov: '+ Akk.',
-      ru: 'загородить постройкой; (перен.) закрыть себе путь; (техн.) установить в устройство',
-      parallel: 'ЗАстраивать (вид)',
-      prefixDrill: { ex: 0, meaning: 3, explain: 'ver- здесь означает «закрытие, загораживание» — высотка застраивает и закрывает вид.' },
+      de: 'verbauen', forms: { praes: 'verbaut', praet: 'verbaute', perf: 'hat verbaut' }, gov: '+ Akk.; sich (Dat.) etw.',
+      ru: 'устанавливать, встраивать (детали, компоненты); (перен.) лишать себя возможности, перекрывать себе путь; загораживать постройкой (вид)',
+      prefixDrill: { ex: 2, meaning: 3, explain: 'В значении «перекрыть вид» ver- обозначает закрытие, загораживание — высотка застраивает и закрывает обзор.' },
       examples: [
-        { sense: 'загородить постройкой (вид)', de: 'Das neue Hochhaus [[verbaut]] uns die ganze Aussicht.', ru: 'Новая высотка закрывает нам весь вид.' },
-        { sense: 'закрыть себе путь, испортить шанс (перен.)', de: 'Mit dieser Entscheidung hat er sich die Zukunft [[verbaut]].', ru: 'Этим решением он закрыл себе путь в будущее.' },
-        { sense: 'установить внутрь (техн.)', de: 'In diesem Server sind zwei schnelle SSDs [[verbaut]].', ru: 'В этом сервере установлены два быстрых SSD.' }
+        { sense: 'устанавливать, встраивать (детали, компоненты)', de: 'In diesem Server sind zwei schnelle SSDs [[verbaut]].', ru: 'В этом сервере установлены два быстрых SSD.' },
+        { sense: 'лишать себя возможности, перекрывать себе путь (перен.)', de: 'Mit dieser Entscheidung hat er sich die Zukunft [[verbaut]].', ru: 'Этим решением он перекрыл себе путь в будущее.' },
+        { sense: 'загораживать постройкой (вид, свет)', de: 'Das neue Hochhaus [[verbaut]] uns die ganze Aussicht.', ru: 'Новая высотка загораживает нам весь вид.' }
       ],
       morph: 'ver-bau-en',
-      meaningType: 'figurative',
-      meaningExplanation: 'Помимо буквального «загородить вид постройкой», verbauen ярко используется образно: «перекрыть себе путь, испортить шанс».',
-      meaningExamples: [{ de: 'Die Neubauten verbauen die Sicht.', ru: 'Новостройки загораживают вид (буквально).' }, { de: 'sich die Zukunft verbauen', ru: 'перекрыть себе будущее (образно)' }],
-      note: 'Неотделяемый: verbaut (без ge-). Переносное значение прозрачно: «застроить» → «загородить дорогу» → «лишить шанса». В технике «verbaut» — «установлен».'
+      meaningType: 'polysemous',
+      meaningExplanation: 'В повседневной жизни verbauen чаще всего встречается в трёх контекстах (от самого частого к менее частому): 1) в технике и строительстве — «устанавливать, встраивать детали/компоненты» (часто в форме ist/sind verbaut) или «расходовать стройматериалы»; 2) образно с sich (Dat.) — «лишать себя возможности, рушить перспективы»; 3) буквально — «перекрывать, загораживать постройкой (вид, свет)».',
+      meaningExamples: [
+        { de: 'Welcher Prozessor ist da verbaut?', ru: 'Какой там установлен процессор? (техн., самое частое)' },
+        { de: 'Ich möchte mir diese Chance nicht verbauen.', ru: 'Я не хочу лишать себя этой возможности (перен.)' },
+        { de: 'Das neue Gebäude verbaut uns die Aussicht.', ru: 'Новое здание загораживает нам вид (букв.)' }
+      ],
+      note: 'Неотделяемый: verbaut (без ge-). В жизни чаще всего слышится про технику и машины («In meinem PC sind 32 GB RAM verbaut», «Welche Grafikkarte ist verbaut?») и про упущенные перспективы («Du verbaust dir deine Zukunft»). В строительстве также «израсходовать материал» («Es wurde viel Holz verbaut»). Отличие от einbauen: einbauen — сам процесс монтажа, а verbauen (особенно «ist/sind verbaut») — то, какие детали/материалы уже стоят в готовом устройстве или постройке.'
     },
     {
       id: 'r-bauen-bebauen', prefix: 'be', sep: 'untrennbar', stress: 'bebáuen', pos: 'verb',

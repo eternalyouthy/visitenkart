@@ -54,17 +54,17 @@ GT.registerRoot({
       id: 'r-brechen-aufbrechen', prefix: 'auf', sep: 'trennbar', stress: 'áufbrechen', pos: 'verb',
       core: true, transparency: 'figurative',
       de: 'aufbrechen', forms: { praes: 'bricht auf', praet: 'brach auf', perf: 'hat / ist aufgebrochen' }, gov: '+ Akk.',
-      ru: 'взламывать (дверь, замок); (с sein) отправляться в путь', en: 'to break open; (with sein) to set off',
+      ru: '(с sein) отправляться в путь, выдвигаться; (с haben) взламывать (дверь, замок)', en: '(with sein) to set off; (with haben) to break open',
       examples: [
-        { sense: 'взломать', de: 'Die Diebe haben die Tür mit einer Brechstange [[aufgebrochen]].', ru: 'Воры взломали дверь ломом.', en: 'The thieves broke the door open with a crowbar.' },
-        { sense: 'отправиться в путь (sein)', de: 'Wir [[brechen]] morgen früh um sechs [[auf]].', ru: 'Мы выдвигаемся завтра в шесть утра.', en: 'We’re setting off tomorrow at six in the morning.' }
+        { sense: 'отправиться в путь (sein)', de: 'Wir [[brechen]] morgen früh um sechs [[auf]].', ru: 'Мы выдвигаемся завтра в шесть утра.', en: 'We’re setting off tomorrow at six in the morning.' },
+        { sense: 'взломать', de: 'Die Diebe haben die Tür mit einer Brechstange [[aufgebrochen]].', ru: 'Воры взломали дверь ломом.', en: 'The thieves broke the door open with a crowbar.' }
       ],
-      prefixDrill: { ex: 0, meaning: 1, explain: 'auf- = открытие: дверь «раскрывают ломая» — взламывают.' },
+      prefixDrill: { ex: 1, meaning: 1, explain: 'auf- = открытие: дверь «раскрывают ломая» — взламывают.' },
       morph: 'auf-brech-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'aufbrechen — «вскрыть, взломать» (с haben) и «отправиться в путь, сняться с места» (с sein; образ — «сорваться с места»).',
-      meaningExamples: [{ de: 'ein Auto aufbrechen', ru: 'вскрыть машину' }, { de: 'zu einer Reise aufbrechen', ru: 'отправиться в поездку' }],
-      i18n: { en: { meaningExplanation: 'aufbrechen means “to break open” (with haben) and “to set off” (with sein; the image is “breaking camp”).' } }
+      meaningExplanation: 'aufbrechen — «отправиться в путь, выдвинуться» (с sein; образ — «сорваться с места») и «вскрыть, взломать» (с haben).',
+      meaningExamples: [{ de: 'zu einer Reise aufbrechen', ru: 'отправиться в поездку' }, { de: 'ein Auto aufbrechen', ru: 'вскрыть машину' }],
+      i18n: { en: { meaningExplanation: 'aufbrechen means “to set off” (with sein; the image is “breaking camp”) and “to break open” (with haben).' } }
     },
     {
       id: 'r-brechen-ausbrechen', prefix: 'aus', sep: 'trennbar', stress: 'áusbrechen', pos: 'verb',

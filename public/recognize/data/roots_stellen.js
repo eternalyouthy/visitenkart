@@ -52,7 +52,7 @@ GT.registerRoot({
       id: 'r-stellen-ausstellen', prefix: 'aus', sep: 'trennbar', stress: 'áusstellen', pos: 'verb',
       core: true, transparency: 'figurative',
       de: 'ausstellen', forms: { praes: 'stellt aus', praet: 'stellte aus', perf: 'hat ausgestellt' }, gov: '+ Akk.',
-      ru: 'выставлять (экспонаты); выписывать, выдавать (документ, счёт); выключать (разг.)',
+      ru: 'выдавать, выписывать (документ, справку, счёт); выставлять (экспонаты); (разг.) выключать (прибор)',
       parallel: 'ВЫставлять (на выставке; счёт)',
       prefixDrill: { ex: 1, meaning: 3, explain: 'aus- здесь означает «выставление, оформление» — картины выставлены в музее (рус. вы-ставлять).' },
       examples: [
@@ -201,7 +201,7 @@ GT.registerRoot({
       id: 'r-stellen-umstellen', prefix: 'um', sep: 'trennbar', stress: 'úmstellen', pos: 'verb',
       transparency: 'figurative',
       de: 'umstellen', forms: { praes: 'stellt um', praet: 'stellte um', perf: 'hat umgestellt' }, gov: '+ Akk.; auf + Akk.',
-      ru: 'переставлять; переводить (на другую систему), перестраивать; (sich umstellen) перестраиваться, привыкать',
+      ru: 'переводить (на другую систему), перестраивать; (sich umstellen) перестраиваться, привыкать; переставлять, переводить (часы)',
       parallel: 'ПЕРЕставлять',
       prefixDrill: { ex: 0, meaning: 0, explain: 'ударная отделяемая um- означает «переделка, переход» — перейти на новую тикет-систему.' },
       examples: [
@@ -255,7 +255,7 @@ GT.registerRoot({
     {
       id: 'r-stellen-vorstellung', pos: 'noun', transparency: 'figurative',
       de: 'Vorstellung', article: 'die', plural: 'die Vorstellungen',
-      ru: 'представление (знакомство); представление, идея; спектакль, сеанс',
+      ru: 'представление, идея, воображение; спектакль, сеанс; представление (знакомство, презентация)',
       examples: [
         { sense: 'представление, идея', de: 'Ich habe noch keine klare [[Vorstellung]], wie das funktionieren soll.', ru: 'У меня пока нет чёткого представления, как это должно работать.' },
         { sense: 'спектакль, сеанс', de: 'Die [[Vorstellung]] beginnt um 20 Uhr.', ru: 'Спектакль начинается в 20:00.' }

@@ -63,7 +63,7 @@ GT.registerRoot({
       id: 'r-sprechen-ansprechen', prefix: 'an', sep: 'trennbar', stress: 'ánsprechen', pos: 'verb',
       core: true, transparency: 'transparent',
       de: 'ansprechen', forms: { praes: 'spricht an', praet: 'sprach an', perf: 'hat angesprochen' }, gov: '+ Akk.',
-      ru: 'заговорить с кем-то, обратиться; поднять тему, затронуть вопрос',
+      ru: 'поднять тему, затронуть вопрос; заговорить с кем-то, обратиться',
       parallel: 'ЗАговорить с / затронуть',
       drill: { ru: 'поднять тему (на встрече); обратиться к кому-то', de: 'ein Problem offen ___sprechen' },
       prefixDrill: { ex: 0, meaning: 3, explain: 'an- обозначает направленность речи к собеседнику или к конкретной теме — «поднять вопрос напрямую».' },
@@ -73,9 +73,9 @@ GT.registerRoot({
       ],
       morph: 'an-sprech-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'ansprechen значит «обратиться к человеку / заговорить с ним» и деловое «поднять, затронуть важную тему на обсуждении».',
-      meaningExamples: [{ de: 'jdn. auf der Straße ansprechen', ru: 'заговорить с кем-то на улице' }, { de: 'einen Punkt im Meeting ansprechen', ru: 'затронуть пункт на встрече' }],
-      note: 'Очень офисное слово: «der Ansprechpartner / die Ansprechpartnerin» — контактное лицо («Wer ist mein Ansprechpartner dafür?»).'
+      meaningExplanation: 'ansprechen значит деловое «поднять, затронуть важную тему на обсуждении» и повседневное «обратиться к человеку / заговорить с ним».',
+      meaningExamples: [{ de: 'einen Punkt im Meeting ansprechen', ru: 'затронуть пункт на встрече' }, { de: 'jdn. auf der Straße ansprechen', ru: 'заговорить с кем-то на улице' }],
+      note: 'Очень офисное слово: «der Ansprechpartner / die Ansprechpartnerin» — контактное лицо («Wer ist mein Ansprechpartner dafür?»). Также «etw. spricht mich an» — «мне это откликается / нравится» (например, о дизайне или предложении).'
     },
     {
       id: 'r-sprechen-aussprechen', prefix: 'aus', sep: 'trennbar', stress: 'áussprechen', pos: 'verb',
@@ -222,13 +222,13 @@ GT.registerRoot({
       transparency: 'transparent',
       ru: 'противоречие; возражение, официальное обжалование (в ведомстве)',
       examples: [
-        { sense: 'официальное обжалование (в ведомстве)', de: 'Gegen den Bescheid können Sie innerhalb eines Monats [[Widerspruch]] einlegen.', ru: 'Решение ведомства вы можете обжаловать в течение месяца.' },
-        { sense: 'противоречие', de: 'Zwischen den beiden Aussagen gibt es einen klaren [[Widerspruch]].', ru: 'Между этими двумя утверждениями есть явное противоречие.' }
+        { sense: 'противоречие', de: 'Zwischen den beiden Aussagen gibt es einen klaren [[Widerspruch]].', ru: 'Между этими двумя утверждениями есть явное противоречие.' },
+        { sense: 'официальное обжалование (в ведомстве)', de: 'Gegen den Bescheid können Sie innerhalb eines Monats [[Widerspruch]] einlegen.', ru: 'Решение ведомства вы можете обжаловать в течение месяца.' }
       ],
       morph: 'Wider-spruch',
       meaningType: 'polysemous',
       meaningExplanation: 'der Widerspruch — это «логическое противоречие» и важнейший юридический термин в Германии «официальное обжалование решения ведомства / страховки» (Widerspruch einlegen).',
-      meaningExamples: [{ de: 'Widerspruch gegen einen Bescheid einlegen', ru: 'подать возражение/апелляцию на решение ведомства' }, { de: 'im Widerspruch zu etw. stehen', ru: 'противоречить чему-то' }],
+      meaningExamples: [{ de: 'im Widerspruch zu etw. stehen', ru: 'противоречить чему-то' }, { de: 'Widerspruch gegen einen Bescheid einlegen', ru: 'подать возражение/апелляцию на решение ведомства' }],
       note: '«Widerspruch einlegen» — подать официальное возражение (например, в Krankenkasse, Finanzamt или Ausländerbehörde).'
     },
     {

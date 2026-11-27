@@ -87,7 +87,7 @@ GT.registerRoot({
       id: 'r-gehen-eingehen', prefix: 'ein', sep: 'trennbar', stress: 'éingehen', pos: 'verb',
       core: true, transparency: 'figurative',
       de: 'eingehen', forms: { praes: 'geht ein', praet: 'ging ein', perf: 'ist eingegangen' }, gov: 'auf + Akk.',
-      ru: 'поступать (о заявках, платежах); (auf + Akk.) останавливаться на вопросе, учитывать, соглашаться на',
+      ru: '(auf + Akk.) останавливаться на вопросе, реагировать, соглашаться на; поступать (о заявках, платежах)',
       drill: { ru: 'поступать (о сообщениях); реагировать на вопрос', de: 'auf die Frage ___gehen' },
       examples: [
         { sense: 'останавливаться на вопросе, реагировать (auf + Akk.)', de: 'Auf diesen Punkt [[gehe]] ich am Ende der Präsentation noch genauer [[ein]].', ru: 'На этом пункте я остановлюсь подробнее в конце презентации.' },
@@ -95,7 +95,7 @@ GT.registerRoot({
       ],
       morph: 'ein-geh-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'eingehen значит «поступать» (о письмах, заказах, платежах), «подробно разобрать / откликнуться» (auf + Akk. eingehen), а в быту про одежду — «сесть после стирки».',
+      meaningExplanation: 'eingehen значит «подробно разобрать / откликнуться / согласиться» (auf + Akk. eingehen), «поступать» (о письмах, заказах, платежах), а в быту про одежду — «сесть после стирки».',
       meaningExamples: [{ de: 'auf ein Risiko eingehen', ru: 'пойти на риск / разобрать риск' }, { de: 'Die Zahlung ist eingegangen.', ru: 'Платёж поступил.' }],
       note: 'Всегда с sein (кроме устойчивого «ein Risiko eingehen» — пойти на риск, которое тоже с sein: ist ein Risiko eingegangen!).'
     },

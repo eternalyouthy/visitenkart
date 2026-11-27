@@ -140,7 +140,7 @@ GT.registerRoot({
       id: 'r-laufen-durchlaufen', prefix: 'durch', sep: 'trennbar', stress: 'dúrchlaufen', pos: 'verb',
       core: true, transparency: 'transparent',
       de: 'durchlaufen', forms: { praes: 'läuft durch', praet: 'lief durch', perf: 'ist durchgelaufen' },
-      ru: 'пробежать насквозь; пройти полностью (о процессе, задании); протечь (о кофе через фильтр)', en: 'to run through; to run to completion (a process, a job); to drip through (coffee)',
+      ru: 'пройти полностью, отработать до конца (о процессе, скрипте, задании); пробежать насквозь; протечь (о кофе через фильтр)', en: 'to run to completion (a process, a script, a job); to run through; to drip through (coffee)',
       prefixDrill: { ex: 0, meaning: 0, explain: 'Отделяемое durch- = до конца: скрипт отработал от начала до конца.' },
       examples: [{ de: 'Ist das Backup-Skript heute Nacht [[durchgelaufen]]?', ru: 'Скрипт бэкапа отработал этой ночью до конца?', en: 'Did the backup script run through last night?' }],
       morph: 'durch-lauf-en',

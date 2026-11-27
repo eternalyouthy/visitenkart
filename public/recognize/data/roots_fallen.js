@@ -44,18 +44,19 @@ GT.registerRoot({
       alsoIn: [['words', 'travel']], // Wortliste p. 21
       core: true, transparency: 'figurative',
       de: 'ausfallen', forms: { praes: 'fällt aus', praet: 'fiel aus', perf: 'ist ausgefallen' },
-      ru: 'выходить из строя, падать (о сервере, сети); отменяться (о встрече, поезде); выпадать (о волосах); получаться (о результате)',
+      ru: 'отменяться (о поезде, встрече, уроке); выходить из строя, падать (о технике, электричестве, сервере); получаться, оказываться (о результате); выпадать (о волосах)',
       parallel: 'ВЫпадать / ВЫходить из строя',
       drill: { ru: 'выйти из строя (о сервере); отмениться (о поезде)', de: 'Der Server ist heute Nacht ___gefallen' },
-      prefixDrill: { ex: 0, meaning: 1, explain: 'aus- здесь обозначает отключение, выход из работы — система «выпала из строя».' },
+      prefixDrill: { ex: 1, meaning: 1, explain: 'aus- здесь обозначает отключение, выход из работы — система «выпала из строя».' },
       examples: [
-        { sense: 'выйти из строя (IT, техника)', de: 'Heute Nacht ist der zentrale VPN-Server für zwanzig Minuten [[ausgefallen]].', ru: 'Сегодня ночью главный VPN-сервер упал на двадцать минут.' },
-        { sense: 'отмениться (встреча, поезд, занятие)', de: 'Wegen Krankheit [[fällt]] das heutige Meeting leider [[aus]].', ru: 'Из-за болезни сегодняшняя встреча, к сожалению, отменяется.' }
+        { sense: 'отмениться (поезд, встреча, занятие)', de: 'Wegen Krankheit [[fällt]] das heutige Meeting leider [[aus]].', ru: 'Из-за болезни сегодняшняя встреча, к сожалению, отменяется.' },
+        { sense: 'выйти из строя (техника, IT)', de: 'Heute Nacht ist der zentrale VPN-Server für zwanzig Minuten [[ausgefallen]].', ru: 'Сегодня ночью главный VPN-сервер упал на двадцать минут.' },
+        { sense: 'получиться, оказаться (о результате)', de: 'Das Ergebnis des Audits ist besser [[ausgefallen]] als erwartet.', ru: 'Результат аудита оказался лучше, чем ожидалось.' }
       ],
       morph: 'aus-fall-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'ausfallen имеет три важнейших значения в Германии: «выйти из строя» (сервер, электричество), «отмениться» (поезд DB, встреча, урок) и «выдать результат» («Der Test ist gut ausgefallen»).',
-      meaningExamples: [{ de: 'Der Zug fällt heute aus.', ru: 'Поезд сегодня отменён.' }, { de: 'Die Heizung ist ausgefallen.', ru: 'Отопление вышло из строя.' }],
+      meaningExplanation: 'ausfallen имеет три важнейших значения в Германии (от самых частых): «отмениться» (поезд DB, встреча, урок), «выйти из строя» (электричество, отопление, сервер) и «получиться, оказаться каким-то» («Der Test ist gut ausgefallen»).',
+      meaningExamples: [{ de: 'Der Zug fällt heute aus.', ru: 'Поезд сегодня отменён.' }, { de: 'Die Heizung ist ausgefallen.', ru: 'Отопление вышло из строя.' }, { de: 'Das Ergebnis ist positiv ausgefallen.', ru: 'Результат оказался положительным.' }],
       note: 'Всегда с sein: ist ausgefallen. Существительное: «der Ausfall» (сбой, простой, отмена).'
     },
     {
@@ -124,7 +125,7 @@ GT.registerRoot({
       id: 'r-fallen-abfallen', prefix: 'ab', sep: 'trennbar', stress: 'ábfallen', pos: 'verb',
       core: true, transparency: 'transparent',
       de: 'abfallen', forms: { praes: 'fällt ab', praet: 'fiel ab', perf: 'ist abgefallen' },
-      ru: 'отваливаться, опадать (о листьях); снижаться, падать (о давлении, напряжении, нагрузке)',
+      ru: 'снижаться, падать (о давлении, напряжении, нагрузке); отваливаться, опадать (о листьях)',
       parallel: 'ОТваливаться / спадать',
       prefixDrill: { ex: 0, meaning: 2, explain: 'ab- здесь обозначает уменьшение, спад — нагрузка на серверы заметно снизилась.' },
       examples: [
@@ -133,7 +134,7 @@ GT.registerRoot({
       ],
       morph: 'ab-fall-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'abfallen значит «отваливаться / опадать» (листья, штукатурка) и техническое «снижаться, падать» (давление, скорость, нагрузка).',
+      meaningExplanation: 'abfallen значит «снижаться, спадать» (давление, скорость, нагрузка) и буквально «отваливаться / опадать» (листья, штукатурка).',
       meaningExamples: [{ de: 'Der Blutdruck fällt ab.', ru: 'Давление падает.' }, { de: 'Die Blätter fallen ab.', ru: 'Листья опадают.' }],
       note: 'Родственное существительное: «der Abfall» — мусор, отходы (буквально «то, что отпадает лишним»).'
     },

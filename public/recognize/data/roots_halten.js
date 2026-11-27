@@ -185,15 +185,15 @@ GT.registerRoot({
       id: 'r-halten-festhalten', prefix: 'fest', sep: 'trennbar', stress: 'fésthalten', pos: 'verb',
       transparency: 'transparent',
       de: 'festhalten', forms: { praes: 'hält fest', praet: 'hielt fest', perf: 'hat festgehalten' }, gov: '+ Akk.; an + Dat.',
-      ru: 'крепко держать; фиксировать письменно (в протоколе, отчёте); держаться за (an + Dat.)',
+      ru: 'фиксировать письменно (в протоколе, отчёте); крепко держать(ся); придерживаться (плана, мнения — an + Dat.)',
       examples: [
         { sense: 'фиксировать письменно (в отчёте, протоколе)', de: 'Alle wichtigen Schritte sollten wir im Protokoll [[festhalten]].', ru: 'Все важные шаги стоит зафиксировать в протоколе.' },
         { sense: 'крепко держаться (sich an + Dat.)', de: 'In der vollen Straßenbahn musste ich mich gut [[festhalten]].', ru: 'В полном трамвае мне пришлось крепко держаться.' }
       ],
       morph: 'fest-halt-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'Помимо физического «крепко держаться» (sich festhalten), в деловой речи festhalten стандартно значит «зафиксировать письменно в протоколе/отчёте».',
-      meaningExamples: [{ de: 'Bitte im Bus gut festhalten!', ru: 'Держитесь крепко в автобусе!' }, { de: 'alle Ergebnisse im Protokoll festhalten', ru: 'зафиксировать все итоги в протоколе' }],
+      meaningExplanation: 'В деловой речи festhalten стандартно значит «зафиксировать письменно в протоколе/отчёте»; также буквально «крепко держать(ся)» и «придерживаться плана/мнения» (an + Dat.).',
+      meaningExamples: [{ de: 'alle Ergebnisse im Protokoll festhalten', ru: 'зафиксировать все итоги в протоколе' }, { de: 'Bitte im Bus gut festhalten!', ru: 'Держитесь крепко в автобусе!' }],
       note: 'Очень полезно на совещаниях: «Halten wir das kurz fest» — давай коротко зафиксируем это.'
     },
     {

@@ -125,7 +125,7 @@ GT.registerRoot({
       id: 'r-sehen-absehen', prefix: 'ab', sep: 'trennbar', stress: 'ábsehen', pos: 'verb',
       core: true, transparency: 'figurative',
       de: 'absehen', forms: { praes: 'sieht ab', praet: 'sah ab', perf: 'hat abgesehen' }, gov: 'von + Dat. / + Akk.',
-      ru: '(von + Dat.) воздержаться от; (abgesehen von) помимо, не считая; предвидеть (последствия)',
+      ru: '(abgesehen von) помимо, не считая; предвидеть, оценить (последствия); (von + Dat.) воздержаться от',
       examples: [
         { sense: 'помимо, не считая (abgesehen von + Dat.)', de: '[[Abgesehen]] von ein paar Fehlalarmen war die Nachtschicht ruhig.', ru: 'Не считая пары ложных срабатываний, ночная смена была спокойной.' },
         { sense: 'предвидеть, оценить масштаб', de: 'Die Folgen des Datenlecks sind noch nicht [[abzusehen]].', ru: 'Последствия утечки данных пока невозможно оценить до конца.' }
@@ -175,14 +175,14 @@ GT.registerRoot({
       id: 'r-sehen-sicht', pos: 'noun',
       de: 'Sicht', article: 'die',
       transparency: 'transparent',
-      ru: 'видимость (на дороге); точка зрения, взгляд («aus meiner Sicht»)',
+      ru: 'точка зрения, взгляд («aus meiner Sicht»); видимость (на дороге, из окна)',
       examples: [
         { sense: 'точка зрения, взгляд', de: 'Aus meiner [[Sicht]] sollten wir die Firewall-Regel sofort anpassen.', ru: 'С моей точки зрения, нам стоит сразу скорректировать правило файрвола.' },
         { sense: 'видимость (погода)', de: 'Wegen des Nebels war die [[Sicht]] auf der Autobahn sehr schlecht.', ru: 'Из-за тумана видимость на автобане была очень плохой.' }
       ],
       morph: 'Sicht',
       meaningType: 'polysemous',
-      meaningExplanation: 'die Sicht — это и физическая видимость (на дороге, из окна), и деловая «точка зрения» («aus meiner Sicht», «aus Sicht der IT-Sicherheit»).',
+      meaningExplanation: 'die Sicht — это прежде всего деловая «точка зрения» («aus meiner Sicht», «aus Sicht der IT-Sicherheit»), а также физическая видимость (на дороге, в тумане).',
       meaningExamples: [{ de: 'aus meiner Sicht', ru: 'с моей точки зрения' }, { de: 'schlechte Sicht bei Nebel', ru: 'плохая видимость в тумане' }],
       note: '«Aus meiner Sicht» — один из лучших профессиональных вариантов для «по-моему». Обычно без мн. ч.'
     },

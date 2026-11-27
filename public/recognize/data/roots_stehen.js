@@ -7,8 +7,8 @@ GT.registerRoot({
       de: 'stehen', forms: { praes: 'steht', praet: 'stand', perf: 'hat gestanden' },
       ru: 'стоять; быть написанным (в тексте, логе); идти (об одежде)',
       examples: [
-        { sense: 'быть написанным (в документе, письме)', de: 'Im Vertrag [[steht]], dass die Kündigungsfrist drei Monate beträgt.', ru: 'В договоре написано, что срок уведомления об увольнении — три месяца.' },
-        { sense: 'стоять физически / на паузе', de: 'Der ganze Betrieb [[stand]] zwei Stunden lang still.', ru: 'Вся работа стояла два часа.' }
+        { sense: 'стоять физически / на паузе', de: 'Der ganze Betrieb [[stand]] zwei Stunden lang still.', ru: 'Вся работа стояла два часа.' },
+        { sense: 'быть написанным (в документе, письме)', de: 'Im Vertrag [[steht]], dass die Kündigungsfrist drei Monate beträgt.', ru: 'В договоре написано, что срок уведомления об увольнении — три месяца.' }
       ],
       morph: 'steh-en',
       meaningType: 'polysemous',

@@ -7,8 +7,9 @@ GT.registerRoot({
       de: 'schlagen', forms: { praes: 'schlägt', praet: 'schlug', perf: 'hat geschlagen' }, gov: '+ Akk.',
       ru: 'бить, ударять; побеждать (в игре); биться (о сердце)',
       examples: [
-        { sense: 'биться (о сердце)', de: 'Vor dem Gespräch hat mein Herz ganz schnell [[geschlagen]].', ru: 'Перед собеседованием у меня очень быстро билось сердце.' },
-        { sense: 'побеждать / обыгрывать', de: 'Unsere Mannschaft hat den Favoriten 2:1 [[geschlagen]].', ru: 'Наша команда обыграла фаворита 2:1.' }
+        { sense: 'бить, ударять (в т. ч. Alarm schlagen)', de: 'Das Monitoring hat sofort Alarm [[geschlagen]].', ru: 'Мониторинг сразу забил тревогу.' },
+        { sense: 'побеждать / обыгрывать', de: 'Unsere Mannschaft hat den Favoriten 2:1 [[geschlagen]].', ru: 'Наша команда обыграла фаворита 2:1.' },
+        { sense: 'биться (о сердце)', de: 'Vor dem Gespräch hat mein Herz ganz schnell [[geschlagen]].', ru: 'Перед собеседованием у меня очень быстро билось сердце.' }
       ],
       morph: 'schlag-en',
       meaningType: 'polysemous',

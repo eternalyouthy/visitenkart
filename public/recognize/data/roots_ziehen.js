@@ -154,7 +154,7 @@ GT.registerRoot({
       id: 'r-ziehen-beziehen', prefix: 'be', sep: 'untrennbar', stress: 'bezíehen', pos: 'verb',
       core: true, transparency: 'opaque',
       de: 'beziehen', forms: { praes: 'bezieht', praet: 'bezog', perf: 'hat bezogen' }, gov: '+ Akk.; sich auf + Akk.',
-      ru: 'получать (зарплату, товар, пособие); застилать (постель); (sich beziehen auf) ссылаться на, относиться к',
+      ru: '(sich beziehen auf) ссылаться на, относиться к; получать (пособие, доход, товар); застилать (постель)',
       examples: [
         { sense: 'ссылаться на, относиться к (sich auf + Akk.)', de: 'Ich [[beziehe]] mich auf Ihre E-Mail vom 3. März.', ru: 'Ссылаюсь на ваше письмо от 3 марта.' },
         { sense: 'получать (пособие, доход, товар)', de: 'Er [[bezieht]] seit zwei Monaten Arbeitslosengeld.', ru: 'Он уже два месяца получает пособие по безработице.' },
@@ -164,7 +164,7 @@ GT.registerRoot({
       meaningType: 'polysemous',
       meaningExplanation: 'beziehen объединяет три частых значения: sich beziehen auf («ссылаться на»), «получать» (пособие, доход, товар) и «застилать постель».',
       meaningExamples: [{ de: 'Ich beziehe mich auf Ihre E-Mail.', ru: 'Я ссылаюсь на ваше письмо.' }, { de: 'Strom aus erneuerbaren Energien beziehen', ru: 'получать электричество из ВИЭ' }, { de: 'das Bett frisch beziehen', ru: 'постелить свежее бельё' }],
-      note: 'Значения разошлись и из «тянуть» уже не выводятся — учите как отдельные выражения. «Bezugnehmend auf …» — ссылаясь на (официальные письма). «Das Bett beziehen» — застелить постель.',
+      note: 'Значения разошлись и из «тянуть» уже не выводятся — учите как отдельные выражения. «Bezugnehmend auf …» — ссылаясь на (официальные письма). «Das Bett beziehen» — застелить постель. Также официально «eine neue Wohnung beziehen» — въехать в новую квартиру.',
       why: {
         confidence: 'high',
         root: 'ziehen',

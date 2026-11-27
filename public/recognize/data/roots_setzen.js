@@ -5,14 +5,14 @@ GT.registerRoot({
     {
       id: 'r-setzen-setzen', base: true, pos: 'verb',
       de: 'setzen', forms: { praes: 'setzt', praet: 'setzte', perf: 'hat gesetzt' }, gov: '+ Akk.; sich setzen',
-      ru: 'сажать, помещать; (sich setzen) садиться; делать ставку на (auf + Akk.)',
+      ru: '(sich setzen) садиться; делать ставку на (auf + Akk.); ставить, помещать (цель, границу, предмет)',
       examples: [
         { sense: 'садиться (sich setzen)', de: 'Bitte [[setzen]] Sie sich, der Arzt kommt gleich.', ru: 'Пожалуйста, садитесь, врач сейчас придёт.' },
         { sense: 'делать ставку на (auf + Akk.)', de: 'Unsere Firma [[setzt]] voll auf Zero-Trust-Sicherheit.', ru: 'Наша компания делает полную ставку на безопасность Zero Trust.' }
       ],
       morph: 'setz-en',
       meaningType: 'polysemous',
-      meaningExplanation: 'setzen значит «сажать, помещать», sich setzen — «садиться», а setzen auf + Akk. — «делать ставку на что-то, полагаться на».',
+      meaningExplanation: 'sich setzen значит «садиться», setzen auf + Akk. — «делать ставку на что-то, полагаться на», а с прямым объектом — «ставить, помещать, устанавливать» (ein Ziel / eine Grenze setzen).',
       meaningExamples: [{ de: 'Setzen Sie sich bitte.', ru: 'Присаживайтесь, пожалуйста.' }, { de: 'Wir setzen auf Zero Trust.', ru: 'Мы делаем ставку на Zero Trust.' }],
       note: 'Слабый глагол (в отличие от сильного sitzen — сидеть). Куда? → Akkusativ: «Ich setze mich auf den Stuhl». Устойчиво: «ein Ziel setzen» (поставить цель), «etw. aufs Spiel setzen» (рисковать чем-то).',
       why: {
@@ -170,7 +170,7 @@ GT.registerRoot({
       id: 'r-setzen-versetzen', prefix: 'ver', sep: 'untrennbar', stress: 'versétzen', pos: 'verb',
       transparency: 'figurative',
       de: 'versetzen', forms: { praes: 'versetzt', praet: 'versetzte', perf: 'hat versetzt' }, gov: '+ Akk.',
-      ru: 'переводить (сотрудника, в другой класс); переставлять; (разг.) не прийти на встречу',
+      ru: 'переводить (сотрудника, в другой класс); (разг.) не прийти на встречу, «кинуть»; (sich in jds. Lage versetzen) поставить себя на чьё-то место; переставлять',
       parallel: 'ПЕРЕводить (в другой отдел)',
       prefixDrill: { ex: 0, meaning: 4, explain: 'ver- здесь означает «перемещение в другое место» — перевести сотрудника в другой филиал.' },
       examples: [

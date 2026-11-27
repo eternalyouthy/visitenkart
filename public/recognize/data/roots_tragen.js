@@ -138,7 +138,7 @@ GT.registerRoot({
       id: 'r-tragen-austragen', prefix: 'aus', sep: 'trennbar', stress: 'áustragen', pos: 'verb',
       transparency: 'transparent',
       de: 'austragen', forms: { praes: 'trägt aus', praet: 'trug aus', perf: 'hat ausgetragen' }, gov: '+ Akk.',
-      ru: 'разносить (почту, газеты); вычёркивать (из списка); проводить (матч), решать (конфликт)',
+      ru: '(sich austragen) выписаться, отписаться / вычеркнуть из списка; разносить (почту, газеты); проводить (матч), выяснять (конфликт)',
       parallel: 'РАЗносить / ВЫчёркивать',
       prefixDrill: { ex: 0, meaning: 0, explain: 'aus- здесь означает «наружу, из списка» — выписать себя из рассылки (антоним к eintragen).' },
       examples: [
