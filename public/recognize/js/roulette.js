@@ -1,13 +1,14 @@
 /* ROOT ROULETTE — sandbox word-building game for Roots (#/roots/roulette).
  * Reuses the visual layout and controls of js/whichform.js (Endings / Articles "Which form?").
  * Modes:
- *   build — meaning + base root -> pick the right prefix/particle
- *   same  — one root stays fixed while meanings rotate -> pick the right prefix/particle
+ *   build — meaning + base root -> pick the right prefix/particle (or — for the base verb)
+ *   same  — one root stays fixed while meanings rotate -> pick the right prefix/particle (or —)
  * Sandbox only: never writes to GT.store / FSRS Review. */
 (function () {
   'use strict';
 
   var STATES = {}, lastApi = null;
+  var NO_PFX = '—', PFX_DISTRACTOR_SLOTS = 5;
   var MODES = [
     { id: 'build', label: 'Build the word' },
     { id: 'same', label: 'Same root' }
@@ -56,20 +57,26 @@
   function isVerbPos(p) { return p === 'verb' || p === 'phrasal verb'; }
   function pfLabel(id) { var pf = GT.prefixes[id]; return pf ? pf.label : id + '-'; }
 
+  function formatPfLabel(label, isParticle) {
+    if (isParticle) return String(label || '').replace(/^…\s*/, '').trim();
+    return String(label || '').replace(/\s*\([^)]*\)/g, '').trim();
+  }
+
   function pfxDisplayOf(w, r) {
+    if (!w.prefix) return NO_PFX;
     if (w.particle) {
       var base = String((r && (r.t || r.verb)) || '').trim();
       var target = String(w.t || '').trim();
       if (base && target.toLowerCase().indexOf(base.toLowerCase() + ' ') === 0) {
         return target.slice(base.length + 1).trim();
       }
-      return String(pfLabel(w.prefix)).replace(/^…\s*/, '');
+      return formatPfLabel(pfLabel(w.prefix), true);
     }
     var tLow = String(w.t || '').toLowerCase();
     var bLow = String((r && (r.t || r.verb)) || '').toLowerCase();
     if (w.prefix === 'о' && tLow.indexOf('об') === 0 && bLow.indexOf('б') !== 0) return 'об-';
     if (w.prefix === 'be' && tLow.indexOf('bean') === 0) return 'bean-';
-    return String(pfLabel(w.prefix)).replace(/\s*\([^)]*\)/g, '').trim();
+    return formatPfLabel(pfLabel(w.prefix), false);
   }
 
   function reflSuffix(w, r) {
@@ -89,24 +96,40 @@
   }
 
   function buildPool() {
-    var all = [], byRoot = Object.create(null), multiRoots = [];
+    var all = [], allPrefixed = [], byRoot = Object.create(null), prefixedByRoot = Object.create(null),
+      rootIsParticle = Object.create(null), multiRoots = [];
     Object.keys(GT.roots).forEach(function (rid) {
       var r = GT.roots[rid];
       var words = (r.ids || []).map(function (id) { return GT.byId[id]; }).filter(Boolean);
-      var seenT = Object.create(null), list = [];
+      var seenT = Object.create(null), prefixed = [], baseWord = null;
       words.forEach(function (w) {
-        if (w.base || !w.prefix || !isVerbPos(w.pos) || w.rootId !== rid || !GT.gl(w)) return;
-        if (seenT[w.t]) return;
+        if (w.rootId !== rid || !isVerbPos(w.pos) || !GT.gl(w)) return;
+        if (w.base && !w.prefix) {
+          if (!baseWord && !seenT[w.t]) baseWord = w;
+          return;
+        }
+        if (w.base || !w.prefix || seenT[w.t]) return;
         seenT[w.t] = 1;
-        list.push(w);
+        prefixed.push(w);
       });
-      if (list.length) {
-        byRoot[rid] = list;
-        all = all.concat(list);
-        if (list.length >= 3) multiRoots.push(rid);
-      }
+      if (!prefixed.length) return;
+      var isParticle = prefixed.some(function (x) { return !!x.particle; });
+      var list = baseWord && !seenT[baseWord.t] ? prefixed.concat([baseWord]) : prefixed.slice();
+      byRoot[rid] = list;
+      prefixedByRoot[rid] = prefixed;
+      rootIsParticle[rid] = isParticle;
+      all = all.concat(list);
+      allPrefixed = allPrefixed.concat(prefixed);
+      if (prefixed.length >= 3) multiRoots.push(rid);
     });
-    return { all: all, byRoot: byRoot, multiRoots: multiRoots };
+    return {
+      all: all,
+      allPrefixed: allPrefixed,
+      byRoot: byRoot,
+      prefixedByRoot: prefixedByRoot,
+      rootIsParticle: rootIsParticle,
+      multiRoots: multiRoots
+    };
   }
 
   function pickLockedRoot(pool, excludeRid) {
@@ -117,24 +140,38 @@
   }
 
   function makeOptions(w, r, pool) {
-    var siblings = pool.byRoot[w.rootId] || [];
-    var ans = pfxDisplayOf(w, r);
+    var isBase = !w.prefix;
+    var isParticle = !!(w.particle || pool.rootIsParticle[w.rootId]);
+    var pfxOpts = [];
     var used = Object.create(null);
-    used[normKey(ans)] = 1;
-    var opts = [ans];
-    shuffle(siblings).forEach(function (x) {
-      if (opts.length >= 4) return;
+    used[normKey(NO_PFX)] = 1;
+    if (!isBase) {
+      var ans = pfxDisplayOf(w, r);
+      used[normKey(ans)] = 1;
+      pfxOpts.push(ans);
+    }
+    shuffle(pool.prefixedByRoot[w.rootId] || []).forEach(function (x) {
+      if (pfxOpts.length >= PFX_DISTRACTOR_SLOTS) return;
       var d = pfxDisplayOf(x, r), k = normKey(d);
-      if (!used[k]) { used[k] = 1; opts.push(d); }
+      if (d && !used[k]) { used[k] = 1; pfxOpts.push(d); }
     });
-    if (opts.length < 4) {
-      shuffle(pool.all).forEach(function (x) {
-        if (opts.length >= 4) return;
+    if (pfxOpts.length < PFX_DISTRACTOR_SLOTS) {
+      shuffle(pool.allPrefixed).forEach(function (x) {
+        if (pfxOpts.length >= PFX_DISTRACTOR_SLOTS || !!x.particle !== isParticle) return;
         var d = pfxDisplayOf(x, GT.roots[x.rootId]), k = normKey(d);
-        if (!used[k]) { used[k] = 1; opts.push(d); }
+        if (d && !used[k]) { used[k] = 1; pfxOpts.push(d); }
       });
     }
-    return { optPfx: shuffle(opts) };
+    if (pfxOpts.length < PFX_DISTRACTOR_SLOTS) {
+      shuffle(Object.keys(GT.prefixes)).forEach(function (pid) {
+        if (pfxOpts.length >= PFX_DISTRACTOR_SLOTS) return;
+        var pf = GT.prefixes[pid];
+        if (!pf || (isParticle ? pf.kind !== 'particle' : pf.kind === 'particle')) return;
+        var d = formatPfLabel(pf.label, isParticle), k = normKey(d);
+        if (d && !used[k]) { used[k] = 1; pfxOpts.push(d); }
+      });
+    }
+    return { optPfx: shuffle(pfxOpts).concat([NO_PFX]) };
   }
 
   function nextTask(G) {
@@ -165,7 +202,9 @@
     G.cur = {
       wid: w.id,
       rid: w.rootId,
-      pfxKey: w.prefix,
+      isBase: !w.prefix,
+      isParticle: !!(w.particle || pool.rootIsParticle[w.rootId]),
+      pfxKey: w.prefix || '',
       pfxDisplay: pfxDisplayOf(w, r),
       optPfx: built.optPfx
     };
@@ -204,8 +243,23 @@
     return null;
   }
 
-  function hintsFor(w, pfxDisplay) {
+  function hintsFor(w, r, pfxDisplay, isBase) {
     var hints = [];
+    var rGloss = r && GT.gl(r);
+    if (rGloss) {
+      var baseVerb = r.t || r.verb || r.id;
+      hints.push({
+        label: 'Hint · root',
+        html: 'Base verb: <b lang="' + escHTML(GT.learn) + '">' + escHTML(baseVerb) + '</b> = <b>' + escHTML(rGloss) + '</b>'
+      });
+    }
+    if (isBase) {
+      hints.push({
+        label: 'Hint · ' + pwLower(),
+        html: 'No extra ' + escHTML(pwLower()) + ' is needed here (<b>' + escHTML(NO_PFX) + '</b>).'
+      });
+      return hints;
+    }
     var pfxHint = prefixHintText(w);
     if (pfxHint) {
       hints.push({
@@ -224,8 +278,8 @@
   }
 
   function modeNote(modeId) {
-    if (modeId === 'same') return 'One root stays fixed while meanings rotate — pick the ' + pwLower() + ' that builds each word.';
-    return 'The translation and base verb are shown — pick the ' + pwLower() + ' that builds the word.';
+    if (modeId === 'same') return 'One root stays fixed while meanings rotate — pick the ' + pwLower() + ' (or — for the base verb) for each meaning.';
+    return 'The translation and base verb are shown — pick the ' + pwLower() + ' (or — if the base verb fits) to build the word.';
   }
 
   function modeOf(id) {
@@ -265,16 +319,15 @@
     var pfxBlank = G.revealed ? '<mark class="hl" lang="' + lang + '">' + esc(pfxDisplay) + '</mark>' : '<span class="blank">____</span>';
     h += '<p class="rr-prompt-mean" lang="' + GT.glLang(w) + '">' + esc(shortGloss(w)) + '</p>';
     h += '<p class="drill-q ag-q-text" lang="' + lang + '">';
-    if (w.particle) {
+    if (G.cur.isParticle) {
       h += '<span class="rr-base">' + esc(baseVerb) + '</span> <span class="rr-op">+</span> <span class="rr-slot' + spinCls + '">' + pfxBlank + '</span>';
     } else {
       h += '<span class="rr-slot' + spinCls + '">' + pfxBlank + '</span> <span class="rr-op">+</span> <span class="rr-base">' + esc(baseVerb) + '</span>' +
         (refl ? ' <span class="mono-muted">' + esc(refl) + '</span>' : '');
     }
     h += '</p>';
-    if (GT.gl(r)) h += '<p class="rr-base-gl" lang="' + GT.glLang(r) + '">' + esc(baseVerb) + ' = ' + esc(GT.gl(r)) + '</p>';
 
-    var hints = hintsFor(w, pfxDisplay);
+    var hints = hintsFor(w, r, pfxDisplay, G.cur.isBase);
     if (G.hint && !G.revealed && hints.length) {
       h += '<p class="ag-hint" lang="' + GT.know + '">Hint: ' + hints.slice(0, G.hint).map(function (x) { return x.html; }).join(' · ') + '</p>';
     }
@@ -295,11 +348,13 @@
       var verdict = G.chosen === ans ? '✓ Correct' : G.chosen ? '✗ Not quite' : 'Answer';
       var pd = Array.isArray(w.prefixDrill) ? w.prefixDrill[0] : w.prefixDrill;
       var ex = (pd && w.examples && w.examples[pd.ex]) || (w.examples && w.examples[0]);
-      var pfxExp = prefixExplainInfo(w);
+      var pfxExp = G.cur.isBase ? null : prefixExplainInfo(w);
       h += '<div class="drill-answer"><div class="a">' + verdict + ' — <span lang="' + lang + '">' + esc(w.t) + '</span></div>' +
         '<div class="x">' +
         '<p class="rr-ans-tr" lang="' + GT.glLang(w) + '">' + esc(GT.gl(w)) + '</p>' +
-        (pfxExp ? '<p class="rr-ans-pfx" lang="' + esc(pfxExp.lang) + '"><b lang="' + lang + '">' + esc(pfxDisplay) + '</b> — ' + esc(pfxExp.text) + '</p>' : '') +
+        (GT.gl(r) && !G.cur.isBase ? '<p class="rr-base-gl" lang="' + GT.glLang(r) + '">' + esc(baseVerb) + ' = ' + esc(GT.gl(r)) + '</p>' : '') +
+        (G.cur.isBase ? '<p class="rr-ans-pfx"><b>' + esc(NO_PFX) + '</b> — No ' + esc(pwLower()) + ' (base verb)</p>' :
+          (pfxExp ? '<p class="rr-ans-pfx" lang="' + esc(pfxExp.lang) + '"><b lang="' + lang + '">' + esc(pfxDisplay) + '</b> — ' + esc(pfxExp.text) + '</p>' : '')) +
         (ex ? '<div class="rr-ans-ex"><p class="rr-ex-t" lang="' + lang + '">' + richHTML(ex.t, esc) + '</p>' +
           (GT.gl(ex) ? '<p class="rr-ex-tr" lang="' + GT.glLang(ex) + '">' + esc(GT.gl(ex)) + '</p>' : '') + '</div>' : '') +
         '</div></div>';
@@ -346,8 +401,8 @@
         break;
       case 'hint': {
         if (G.revealed || !G.cur) return;
-        var w = GT.byId[G.cur.wid];
-        var maxH = w ? hintsFor(w, G.cur.pfxDisplay).length : 0;
+        var w = GT.byId[G.cur.wid], r = GT.roots[G.cur.rid];
+        var maxH = w ? hintsFor(w, r, G.cur.pfxDisplay, G.cur.isBase).length : 0;
         if (G.hint >= maxH) return;
         G.hint++;
         break;
@@ -385,12 +440,12 @@
     if (!G.cur || !GT.byId[G.cur.wid] || !GT.roots[G.cur.rid]) nextTask(G);
     G.drawnSpinSeq = -1;
     var h = api.crumbs('<a href="#/roots">Roots</a> · Root roulette');
-    h += '<header class="page-head"><h1>Root roulette</h1><p class="lead">See the meaning and base root — pick the right ' + api.esc(pwLower()) + ' to build the word. Endless sandbox: nothing is saved to Review.</p></header>';
+    h += '<header class="page-head"><h1>Root roulette</h1><p class="lead">See the meaning and base root — pick the right ' + api.esc(pwLower()) + ' (or — if none) to build the word. Endless sandbox: nothing is saved to Review.</p></header>';
     h += '<div id="rrGame">' + gameHTML(G, api) + '</div>';
     api.page(h, 'mid');
     api.setKeys(function (e) {
       var k = e.key, G2 = state(GT.learn);
-      if (/^[1-4]$/.test(k)) {
+      if (/^[1-9]$/.test(k)) {
         var bt = document.querySelectorAll('#rrGame [data-rr="opt"]')[Number(k) - 1];
         if (bt && !G2.revealed) { e.preventDefault(); act('opt', bt); }
       } else if (k === 'h' || k === 'H') {
