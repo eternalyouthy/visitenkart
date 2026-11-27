@@ -1751,6 +1751,7 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 .rr-op { color: var(--dim); font-weight: 400; }
 .rr-base-gl { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
 .rr-prompt-mean { margin: 0 0 10px; font-size: 18px; color: var(--text); line-height: 1.45; }
+.rr-prompt-ctx { margin: -4px 0 12px; font-size: 14.5px; color: var(--muted); line-height: 1.45; }
 .rr-opts { display: grid; gap: 10px; }
 .rr-opts .opt {
   position: relative;

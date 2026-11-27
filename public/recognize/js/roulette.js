@@ -1,7 +1,7 @@
 /* ROOT ROULETTE — sandbox word-building game for Roots (#/roots/roulette).
  * Reuses the visual layout and controls of js/whichform.js (Endings / Articles "Which form?").
  * Modes:
- *   build — meaning + base root -> pick the right prefix/particle (or — for the base verb)
+ *   build — meaning + context + base root -> pick the right prefix/particle (or — for the base verb)
  *   same  — one root stays fixed while meanings rotate -> pick the right prefix/particle (or —)
  * Sandbox only: never writes to GT.store / FSRS Review. */
 (function () {
@@ -13,6 +13,12 @@
     { id: 'build', label: 'Build the word' },
     { id: 'same', label: 'Same root' }
   ];
+  var DE_BASE_FORMS = {
+    bauen: 'baut', brechen: 'bricht', fallen: 'fällt', führen: 'führt', geben: 'gibt',
+    gehen: 'geht', halten: 'hält', kommen: 'kommt', laufen: 'läuft', legen: 'legt',
+    nehmen: 'nimmt', schlagen: 'schlägt', schreiben: 'schreibt', sehen: 'sieht', setzen: 'setzt',
+    sprechen: 'spricht', stehen: 'steht', stellen: 'stellt', tragen: 'trägt', ziehen: 'zieht'
+  };
 
   function state(lang) {
     if (!STATES[lang]) {
@@ -40,6 +46,9 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
+  function escRe(s) {
+    return String(s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
   function richHTML(s, esc) {
     return esc(s).replace(/\[\[(.+?)\]\]/g, '<mark class="hl">$1</mark>');
   }
@@ -52,14 +61,22 @@
     return a;
   }
   function normKey(s) { return String(s || '').trim().toLowerCase(); }
+  function normPfxKey(id) { return GT.learn === 'ru' && id === 'об' ? 'о' : id; }
   function PW() { return GT.cfg('prefixWord', 'Prefix'); }
   function pwLower() { return PW().toLowerCase(); }
   function isVerbPos(p) { return p === 'verb' || p === 'phrasal verb'; }
-  function pfLabel(id) { var pf = GT.prefixes[id]; return pf ? pf.label : id + '-'; }
+  function pfLabel(id) { var pf = GT.prefixes[normPfxKey(id)]; return pf ? pf.label : id + '-'; }
 
   function formatPfLabel(label, isParticle) {
     if (isParticle) return String(label || '').replace(/^…\s*/, '').trim();
     return String(label || '').replace(/\s*\([^)]*\)/g, '').trim();
+  }
+
+  function isRoulettePrefixed(w, rid) {
+    if (!w || w.base || !w.prefix || !w.core || w.rootId !== rid || !isVerbPos(w.pos) || !GT.gl(w)) return false;
+    if (!GT.prefixes[normPfxKey(w.prefix)]) return false;
+    if (GT.learn === 'de' && w.prefix === 'be' && /^bean/i.test(w.t || '')) return false;
+    return true;
   }
 
   function pfxDisplayOf(w, r) {
@@ -74,8 +91,7 @@
     }
     var tLow = String(w.t || '').toLowerCase();
     var bLow = String((r && (r.t || r.verb)) || '').toLowerCase();
-    if (w.prefix === 'о' && tLow.indexOf('об') === 0 && bLow.indexOf('б') !== 0) return 'об-';
-    if (w.prefix === 'be' && tLow.indexOf('bean') === 0) return 'bean-';
+    if (w.prefix === 'об' || (w.prefix === 'о' && tLow.indexOf('об') === 0 && bLow.indexOf('б') !== 0)) return 'об-';
     return formatPfLabel(pfLabel(w.prefix), false);
   }
 
@@ -88,11 +104,94 @@
     return '';
   }
 
-  function shortGloss(w) {
+  function exampleFor(w) {
+    var pd = Array.isArray(w.prefixDrill) ? w.prefixDrill[0] : w.prefixDrill;
+    return (pd && w.examples && w.examples[pd.ex]) || (w.examples && w.examples[0]) || null;
+  }
+
+  function replaceWordIn(text, word, rep, isCyrillic) {
+    if (!word) return text;
+    var cls = isCyrillic ? 'а-яА-ЯёЁ' : 'a-zA-ZäöüÄÖÜß';
+    var re = new RegExp('(^|[^' + cls + '])' + escRe(word) + '(?=[^' + cls + ']|$)', 'gi');
+    return text.replace(re, '$1' + rep);
+  }
+
+  function deStemHintRe(baseClean) {
+    var stem = baseClean.replace(/e?n$/, '').slice(0, 3);
+    if (!stem) return '';
+    var pat = stem.split('').map(function (ch) {
+      if (ch === 'a') return '[aä]';
+      if (ch === 'o') return '[oö]';
+      if (ch === 'u') return '[uü]';
+      return escRe(ch);
+    }).join('');
+    // Strong vowel changes (e -> i/ie in nehmen/sehen/sprechen/brechen, e -> a in stehen)
+    if (baseClean === 'nehmen') pat = 'n(?:ehm|imm)';
+    else if (baseClean === 'geben') pat = 'g(?:eb|ib)';
+    else if (baseClean === 'sehen') pat = 's(?:eh|ieh)';
+    else if (baseClean === 'sprechen') pat = 'spr(?:ech|ich)';
+    else if (baseClean === 'brechen') pat = 'br(?:ech|ich)';
+    else if (baseClean === 'stehen') pat = 'st(?:eh|and)';
+    return pat;
+  }
+
+  function promptGloss(w, r, pfxDisplay, isBase, isParticle) {
     var g = String(GT.gl(w) || '').trim();
-    var parts = g.split(/\s*;\s*/).filter(Boolean);
-    if (parts.length > 1 && (parts[0] + '; ' + parts[1]).length <= 72) return parts[0] + '; ' + parts[1];
-    return parts[0] || g;
+    if (!g) return '';
+    var learn = GT.learn;
+    var baseClean = String((r && (r.t || r.verb)) || '').replace(/\u0301/g, '').trim();
+    var tClean = String(w.t || '').replace(/^sich\s+/, '').replace(/\u0301/g, '').trim();
+    var pfxCore = String(pfxDisplay || '').replace(/-$/, '').trim();
+    var stemPat = learn === 'de' ? deStemHintRe(baseClean.toLowerCase()) : '';
+
+    return g.replace(/\([^)]*\)/g, function (paren) {
+      if (isBase) {
+        if (learn === 'de' && /(sich\b|\bes\s+|von\b|für\b|Akk\.|Dat\.|acc\.|dat\.)/i.test(paren)) {
+          var out = replaceWordIn(paren, baseClean, '____', false);
+          var sg3 = DE_BASE_FORMS[baseClean.toLowerCase()];
+          if (sg3) out = replaceWordIn(out, sg3, '____', false);
+          return out;
+        }
+        return paren;
+      }
+      if (isParticle) {
+        var outP = replaceWordIn(paren, tClean, baseClean + ' ____', false);
+        var bPre = baseClean.slice(0, 4).toLowerCase();
+        if (bPre && outP.toLowerCase().indexOf(bPre) >= 0) {
+          outP = replaceWordIn(outP, pfxCore, '____', false);
+        }
+        return outP;
+      }
+      if (learn === 'ru') {
+        var outRu = replaceWordIn(paren, tClean, '____', true);
+        if (pfxCore && new RegExp('(^|[^а-яА-ЯёЁ])' + escRe(pfxCore) + '\\s*\\+', 'i').test(outRu)) {
+          outRu = outRu.replace(new RegExp('(^|[^а-яА-ЯёЁ])' + escRe(pfxCore) + '(?=\\s*\\+)', 'gi'), '$1____');
+        }
+        return outRu;
+      }
+      if (learn === 'de') {
+        var outDe = replaceWordIn(paren, tClean, '____', false);
+        if (pfxCore && stemPat) {
+          var formRe = new RegExp('(^|[^a-zA-ZäöüÄÖÜß])' + escRe(pfxCore) + '(?:ge)?[a-zäöüß]*' + stemPat + '[a-zäöüß]*(?=[^a-zA-ZäöüÄÖÜß]|$)', 'gi');
+          outDe = outDe.replace(formRe, '$1____');
+        }
+        if (pfxCore && /(jdm\.|jdn\.|etw\.|\bsich\b|\bes\s+\w+|Dat\.|Akk\.|dat\.|acc\.)/i.test(outDe)) {
+          outDe = replaceWordIn(outDe, pfxCore, '____', false);
+        }
+        return outDe;
+      }
+      return paren;
+    });
+  }
+
+  function promptContext(w) {
+    var ex = exampleFor(w);
+    if (!ex) return null;
+    var tr = String(GT.gl(ex) || '').trim();
+    if (!tr) return null;
+    var lang = GT.glLang(ex);
+    var quoted = lang === 'ru' ? '«' + tr + '»' : (lang === 'de' ? '„' + tr + '“' : '“' + tr + '”');
+    return { text: quoted, lang: lang };
   }
 
   function buildPool() {
@@ -108,7 +207,7 @@
           if (!baseWord && !seenT[w.t]) baseWord = w;
           return;
         }
-        if (w.base || !w.prefix || seenT[w.t]) return;
+        if (!isRoulettePrefixed(w, rid) || seenT[w.t]) return;
         seenT[w.t] = 1;
         prefixed.push(w);
       });
@@ -144,31 +243,33 @@
     var isParticle = !!(w.particle || pool.rootIsParticle[w.rootId]);
     var pfxOpts = [];
     var used = Object.create(null);
+    var usedKeys = Object.create(null);
     used[normKey(NO_PFX)] = 1;
+    function tryPush(d, pfxId) {
+      if (!d || pfxOpts.length >= PFX_DISTRACTOR_SLOTS) return;
+      var k = normKey(d), pk = !isParticle && pfxId ? normPfxKey(pfxId) : '';
+      if (used[k] || (pk && usedKeys[pk])) return;
+      used[k] = 1;
+      if (pk) usedKeys[pk] = 1;
+      pfxOpts.push(d);
+    }
     if (!isBase) {
-      var ans = pfxDisplayOf(w, r);
-      used[normKey(ans)] = 1;
-      pfxOpts.push(ans);
+      tryPush(pfxDisplayOf(w, r), w.prefix);
     }
     shuffle(pool.prefixedByRoot[w.rootId] || []).forEach(function (x) {
-      if (pfxOpts.length >= PFX_DISTRACTOR_SLOTS) return;
-      var d = pfxDisplayOf(x, r), k = normKey(d);
-      if (d && !used[k]) { used[k] = 1; pfxOpts.push(d); }
+      tryPush(pfxDisplayOf(x, r), x.prefix);
     });
     if (pfxOpts.length < PFX_DISTRACTOR_SLOTS) {
       shuffle(pool.allPrefixed).forEach(function (x) {
-        if (pfxOpts.length >= PFX_DISTRACTOR_SLOTS || !!x.particle !== isParticle) return;
-        var d = pfxDisplayOf(x, GT.roots[x.rootId]), k = normKey(d);
-        if (d && !used[k]) { used[k] = 1; pfxOpts.push(d); }
+        if (!!x.particle !== isParticle) return;
+        tryPush(pfxDisplayOf(x, GT.roots[x.rootId]), x.prefix);
       });
     }
     if (pfxOpts.length < PFX_DISTRACTOR_SLOTS) {
       shuffle(Object.keys(GT.prefixes)).forEach(function (pid) {
-        if (pfxOpts.length >= PFX_DISTRACTOR_SLOTS) return;
         var pf = GT.prefixes[pid];
         if (!pf || (isParticle ? pf.kind !== 'particle' : pf.kind === 'particle')) return;
-        var d = formatPfLabel(pf.label, isParticle), k = normKey(d);
-        if (d && !used[k]) { used[k] = 1; pfxOpts.push(d); }
+        tryPush(formatPfLabel(pf.label, isParticle), pid);
       });
     }
     return { optPfx: shuffle(pfxOpts).concat([NO_PFX]) };
@@ -215,7 +316,7 @@
   }
 
   function prefixHintText(w) {
-    var pf = GT.prefixes[w.prefix];
+    var pf = GT.prefixes[normPfxKey(w.prefix)];
     if (!pf) return '';
     var pd = Array.isArray(w.prefixDrill) ? w.prefixDrill[0] : w.prefixDrill;
     if (pd && pf.meanings && pf.meanings[pd.meaning]) {
@@ -231,7 +332,7 @@
       var txt = GT.lx(pd, 'explain');
       if (txt) return { text: txt, lang: GT.lxLang(pd, 'explain') };
     }
-    var pf = GT.prefixes[w.prefix];
+    var pf = GT.prefixes[normPfxKey(w.prefix)];
     if (pf) {
       if (pd && pf.meanings && pf.meanings[pd.meaning]) {
         var m = pf.meanings[pd.meaning], mg = GT.gl(m);
@@ -317,7 +418,9 @@
       '<p class="drill-kind ag-score">✓ ' + G.ok + ' · ✗ ' + G.bad + (total ? ' · streak ' + G.streak : '') + '</p></div>';
 
     var pfxBlank = G.revealed ? '<mark class="hl" lang="' + lang + '">' + esc(pfxDisplay) + '</mark>' : '<span class="blank">____</span>';
-    h += '<p class="rr-prompt-mean" lang="' + GT.glLang(w) + '">' + esc(shortGloss(w)) + '</p>';
+    h += '<p class="rr-prompt-mean" lang="' + GT.glLang(w) + '">' + esc(promptGloss(w, r, pfxDisplay, G.cur.isBase, G.cur.isParticle)) + '</p>';
+    var ctx = promptContext(w);
+    if (ctx) h += '<p class="rr-prompt-ctx" lang="' + esc(ctx.lang) + '">' + esc(ctx.text) + '</p>';
     h += '<p class="drill-q ag-q-text" lang="' + lang + '">';
     if (G.cur.isParticle) {
       h += '<span class="rr-base">' + esc(baseVerb) + '</span> <span class="rr-op">+</span> <span class="rr-slot' + spinCls + '">' + pfxBlank + '</span>';
@@ -346,8 +449,7 @@
 
     if (G.revealed) {
       var verdict = G.chosen === ans ? '✓ Correct' : G.chosen ? '✗ Not quite' : 'Answer';
-      var pd = Array.isArray(w.prefixDrill) ? w.prefixDrill[0] : w.prefixDrill;
-      var ex = (pd && w.examples && w.examples[pd.ex]) || (w.examples && w.examples[0]);
+      var ex = exampleFor(w);
       var pfxExp = G.cur.isBase ? null : prefixExplainInfo(w);
       h += '<div class="drill-answer"><div class="a">' + verdict + ' — <span lang="' + lang + '">' + esc(w.t) + '</span></div>' +
         '<div class="x">' +
@@ -465,6 +567,9 @@
 
   GT.roulette = {
     render: render,
-    state: function () { return state(GT.learn); }
+    state: function () { return state(GT.learn); },
+    pool: buildPool,
+    promptGloss: promptGloss,
+    pfxDisplayOf: pfxDisplayOf
   };
 })();
