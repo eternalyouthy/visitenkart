@@ -239,12 +239,14 @@
       });
     });
     T.expressions = list;
-    // Menu: Idioms · Slang · Everyday Phrases · Chunks · Literary Phrases
+    // Menu: Idioms · Chunks · Slang · Everyday Phrases · Literary Phrases
     (p.config.NAV || []).forEach(function (g) {
       if (g.id !== 'expressions') return;
       var secItems = GT.EXP_SECTIONS.map(function (sec) { return { label: sec.name, href: '#/expressions/' + sec.id, tab: 'expressions', topic: sec.id }; });
+      var idIdx = secItems.findIndex(function (x) { return x.topic === 'idioms'; });
+      var chItem = { label: 'Chunks', href: '#/chunks', match: ['chunks'] };
+      if (idIdx >= 0) secItems.splice(idIdx + 1, 0, chItem); else secItems.unshift(chItem);
       g.items = secItems.concat([
-        { label: 'Chunks', href: '#/chunks', match: ['chunks'] },
         { label: 'Literary Phrases', href: '#/literature', match: ['literature'] }
       ]);
     });

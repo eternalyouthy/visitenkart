@@ -567,7 +567,7 @@
       (right !== '' && right != null ? '<span class="ct' + (opts.due ? ' due' : '') + '">' + right + '</span>' : '') + '</a>';
   }
 
-  /* Expressions sidebar: one collapsible group per section (Idioms, Slang, Chunks, Everyday Phrases, Literary
+  /* Expressions sidebar: one collapsible group per section (Idioms, Chunks, Slang, Everyday Phrases, Literary
    * Phrases). Each group starts with "All …", then its categories. The group you are in opens by itself;
    * groups you open or close by hand stay that way until the page reloads. */
   ui.sideOpen = ui.sideOpen || {};
@@ -619,7 +619,7 @@
       });
       groups.push([sec.id, sec.name, ctOf(all), here, inner]);
     });
-    // Chunks: All chunks, then functions grouped (Discussion, Problems & Services, …); placed 3rd before Everyday Phrases
+    // Chunks: All chunks, then functions grouped (Discussion, Problems & Services, …); placed 2nd after Idioms
     if ((GT.TOPICS.chunks || []).length) {
       var chAll = itemsFor('chunks', 'all'), chInner = sideLink('#/chunks/all', '—', 'All chunks', ctOf(chAll), { active: tab === 'chunks' && cur === 'all' });
       var names = (GT.CHUNK_GROUPS || []).map(function (g) { return g.name; });
@@ -634,9 +634,9 @@
         });
       });
       var chunkGroup = ['chunks', 'Chunks', ctOf(chAll), tab === 'chunks', chInner];
-      var evIdx = groups.findIndex(function (g) { return g[0] === 'everyday'; });
-      if (evIdx >= 0) groups.splice(evIdx, 0, chunkGroup);
-      else groups.push(chunkGroup);
+      var idIdx = groups.findIndex(function (g) { return g[0] === 'idioms'; });
+      if (idIdx >= 0) groups.splice(idIdx + 1, 0, chunkGroup);
+      else groups.unshift(chunkGroup);
     }
     var litTopics = (GT.TOPICS.literature || []).filter(visibleTopic);
     if (litTopics.length) {
@@ -1282,9 +1282,9 @@
     var h = '<header class="page-head"><span class="eyebrow">03 · Expressions</span><h1>Expressions</h1><p class="lead">' + intro('expressions') + '</p></header>' + reminders();
     var expTopics = GT.TOPICS.expressions.filter(function (t) { return t.section && visibleTopic(t); });
     var sectionRows = expTopics.map(function (t) { return { kind: 'exp', topic: t }; });
-    var evAt = sectionRows.findIndex(function (r) { return r.topic.id === 'everyday'; });
+    var idAt = sectionRows.findIndex(function (r) { return r.topic.id === 'idioms'; });
     var chRow = { kind: 'tab', tab: 'chunks', label: 'Chunks' };
-    if (evAt >= 0) sectionRows.splice(evAt, 0, chRow); else sectionRows.push(chRow);
+    if (idAt >= 0) sectionRows.splice(idAt + 1, 0, chRow); else sectionRows.unshift(chRow);
     sectionRows.push({ kind: 'tab', tab: 'literature', label: 'Literary Phrases' });
     h += '<h3 class="section-title">Sections</h3><div class="grid">' + sectionRows.map(function (r, i) {
       return r.kind === 'exp' ? tile('expressions', r.topic, i + 1) : expressionSectionTile(r.tab, r.label, i + 1);
