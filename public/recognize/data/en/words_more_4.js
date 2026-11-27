@@ -914,3 +914,382 @@ GT.register({
     }
   ]
 });
+
+/* === Content expansion 2026-11-27 (EN B1, B2, C1 Words) === */
+(function () {
+  'use strict';
+  function ex(t, ru, de) { return { t: t, ru: ru, de: de }; }
+  function W(id, pos, t, level, ru, de, e, plural) {
+    var o = { id: 'en:x27:' + id, pos: pos, t: t, level: level, ru: ru, de: de, examples: [e], learnable: true };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function reg(topic, items) { GT.register({ tab: 'words', topic: topic, items: items }); }
+
+  reg('everyday', [
+    W('matchstick', 'noun', 'matchstick', 'B1', 'спичка', 'das Streichholz',
+      ex('She lit the candle on the table with a single [[matchstick]].', 'Она зажгла свечу на столе одной-единственной спичкой.', 'Sie zündete die Kerze auf dem Tisch mit einem einzigen Streichholz an.'), 'matchsticks'),
+    W('keyring', 'noun', 'keyring', 'B1', 'брелок, связка ключей', 'der Schlüsselbund, Schlüsselanhänger',
+      ex('I found my [[keyring]] at the bottom of my backpack.', 'Я нашёл свою связку ключей на самом дне рюкзака.', 'Ich fand meinen Schlüsselbund ganz unten im Rucksack.'), 'keyrings'),
+    W('mishap', 'noun', 'mishap', 'B2', 'неприятная случайность, мелкий конфуз', 'das Missgeschick',
+      ex('Despite a minor [[mishap]] with the projector, the talk went well.', 'Несмотря на небольшую накладку с проектором, выступление прошло хорошо.', 'Trotz eines kleinen Missgeschicks mit dem Beamer lief der Vortrag gut.'), 'mishaps'),
+    W('spontaneous', 'adj', 'spontaneous', 'B1', 'спонтанный', 'spontan',
+      ex('We made a [[spontaneous]] decision to take the evening train to the coast.', 'Мы приняли спонтанное решение поехать вечерним поездом к морю.', 'Wir trafen eine spontane Entscheidung, mit dem Abendzug an die Küste zu fahren.')),
+    W('handy', 'adj', 'handy', 'B1', 'удобный, полезный под рукой', 'praktisch, griffbereit',
+      ex('Keep a small notebook [[handy]] during the inspection.', 'Держи под рукой небольшой блокнот во время осмотра.', 'Halte während der Besichtigung ein kleines Notizbuch griffbereit.'))
+  ]);
+
+  reg('people', [
+    W('role-model', 'noun', 'role model', 'B1', 'пример для подражания', 'das Vorbild',
+      ex('Her older brother has always been a [[role model]] for her.', 'Её старший брат всегда был для неё примером для подражания.', 'Ihr älterer Bruder war für sie schon immer ein Vorbild.'), 'role models'),
+    W('patience', 'noun', 'patience', 'B1', 'терпение', 'die Geduld',
+      ex('Teaching beginners takes plenty of [[patience]] and clear examples.', 'Обучение новичков требует большого терпения и ясных примеров.', 'Anfänger zu unterrichten erfordert viel Geduld und klare Beispiele.')),
+    W('trustworthy', 'adj', 'trustworthy', 'B2', 'надёжный, заслуживающий доверия', 'vertrauenswürdig',
+      ex('Clients stay with advisers who prove to be [[trustworthy]] over time.', 'Клиенты остаются с консультантами, которые со временем доказывают свою надёжность.', 'Kunden bleiben bei Beratern, die sich auf Dauer als vertrauenswürdig erweisen.')),
+    W('polite', 'adj', 'polite', 'B1', 'вежливый', 'höflich',
+      ex('Even a [[polite]] refusal sounds better when you explain the reason.', 'Даже вежливый отказ звучит лучше, если объяснить причину.', 'Selbst eine höfliche Absage klingt besser, wenn man den Grund nennt.')),
+    W('grateful', 'adj', 'grateful', 'B1', 'благодарный', 'dankbar',
+      ex('We are truly [[grateful]] for your quick help yesterday.', 'Мы искренне благодарны за вашу быструю помощь вчера.', 'Wir sind wirklich dankbar für Ihre schnelle Hilfe gestern.')),
+    W('honest', 'adj', 'honest', 'B1', 'честный, откровенный', 'ehrlich',
+      ex('Give me an [[honest]] answer before we send the proposal out.', 'Дай мне честный ответ, прежде чем мы отправим предложение.', 'Gib mir eine ehrliche Antwort, bevor wir das Angebot abschicken.'))
+  ]);
+
+  reg('home', [
+    W('towel', 'noun', 'towel', 'B1', 'полотенце', 'das Handtuch',
+      ex('Clean [[towels]] are stacked on the top shelf in the bathroom.', 'Чистые полотенца сложены на верхней полке в ванной.', 'Frische Handtücher liegen auf dem obersten Regal im Bad.'), 'towels'),
+    W('remote-control', 'noun', 'remote control', 'B1', 'пульт дистанционного управления', 'die Fernbedienung',
+      ex('The batteries in the [[remote control]] need replacing again.', 'Батарейки в пульте снова нужно заменить.', 'Die Batterien in der Fernbedienung müssen schon wieder gewechselt werden.'), 'remote controls'),
+    W('renovation', 'noun', 'renovation', 'B2', 'ремонт, обновление помещения', 'die Renovierung',
+      ex('The flat needs a light [[renovation]] before the new tenants move in.', 'Квартире нужен лёгкий ремонт до заезда новых жильцов.', 'Die Wohnung braucht vor dem Einzug der neuen Mieter eine leichte Renovierung.'), 'renovations'),
+    W('viewing', 'noun', 'viewing', 'B1', 'осмотр (недвижимости)', 'die Besichtigung',
+      ex('Four applicants came to the afternoon [[viewing]] of the flat.', 'Четыре претендента пришли на дневной осмотр квартиры.', 'Vier Bewerber kamen zur Besichtigung der Wohnung am Nachmittag.'), 'viewings'),
+    W('messy', 'adj', 'messy', 'B1', 'беспорядочный, захламлённый', 'unordentlich, chaotisch',
+      ex('The hallway stayed [[messy]] for days while we unpacked the boxes.', 'В прихожей несколько дней царил беспорядок, пока мы разбирали коробки.', 'Der Flur blieb tagelang unordentlich, während wir die Kisten auspackten.')),
+    W('tidy', 'adj', 'tidy', 'B1', 'аккуратный, прибранный', 'ordentlich',
+      ex('She likes to keep her desk [[tidy]] before leaving the office.', 'Она любит оставлять свой стол аккуратно убранным перед уходом из офиса.', 'Sie hält ihren Schreibtisch gern ordentlich, bevor sie das Büro verlässt.'))
+  ]);
+
+  reg('food', [
+    W('shelf-life', 'noun', 'shelf life', 'B2', 'срок годности / хранения', 'die Haltbarkeit',
+      ex('Always check the [[shelf life]] on dairy products before buying.', 'Всегда проверяйте срок годности на молочных продуктах перед покупкой.', 'Prüfen Sie vor dem Kauf immer die Haltbarkeit von Milchprodukten.')),
+    W('tap-water', 'noun', 'tap water', 'B1', 'водопроводная вода', 'das Leitungswasser',
+      ex('In this city, [[tap water]] is completely safe to drink.', 'В этом городе водопроводную воду совершенно безопасно пить.', 'In dieser Stadt kann man Leitungswasser bedenkenlos trinken.')),
+    W('kettle', 'noun', 'kettle', 'B1', 'чайник (для кипячения)', 'der Wasserkocher',
+      ex('Put the [[kettle]] on while I fetch two clean mugs.', 'Поставь чайник, пока я принесу две чистые кружки.', 'Stell den Wasserkocher an, während ich zwei saubere Tassen hole.'), 'kettles'),
+    W('tasty', 'adj', 'tasty', 'B1', 'вкусный, аппетитный', 'lecker, schmackhaft',
+      ex('The soup looked simple, yet it turned out surprisingly [[tasty]].', 'Суп выглядел просто, но оказался удивительно вкусным.', 'Die Suppe sah schlicht aus, war aber überraschend lecker.')),
+    W('complimentary', 'adj', 'complimentary', 'B2', 'бесплатный (в подарок от заведения)', 'kostenlos, gratis',
+      ex('The hotel offered [[complimentary]] coffee in the lobby all morning.', 'Отель предлагал гостям бесплатный кофе в лобби всё утро.', 'Das Hotel bot den ganzen Morgen kostenlosen Kaffee in der Lobby an.'))
+  ]);
+
+  reg('health', [
+    W('chemist', 'noun', 'chemist', 'B1', 'аптека; фармацевт', 'die Apotheke; der Apotheker',
+      ex('The local [[chemist]] stays open until eight on weekdays.', 'Местная аптека по будням открыта до восьми вечера.', 'Die Apotheke vor Ort hat werktags bis zwanzig Uhr geöffnet.'), 'chemists'),
+    W('nausea', 'noun', 'nausea', 'B2', 'тошнота', 'die Übelkeit',
+      ex('Rest and small sips of water usually ease mild [[nausea]].', 'Отдых и маленькие глотки воды обычно облегчают лёгкую тошноту.', 'Ruhe und kleine Schlucke Wasser lindern leichte Übelkeit meist.')),
+    W('ambulance', 'noun', 'ambulance', 'B1', 'машина скорой помощи', 'der Rettungswagen, Krankenwagen',
+      ex('Someone called an [[ambulance]] immediately after the cyclist fell.', 'Сразу после падения велосипедиста кто-то вызвал скорую помощь.', 'Sofort nach dem Sturz des Radfahrers rief jemand einen Rettungswagen.'), 'ambulances'),
+    W('bandage', 'noun', 'bandage', 'B1', 'бинт, повязка', 'der Verband',
+      ex('The nurse wrapped a clean [[bandage]] firmly around his wrist.', 'Медсестра плотно наложила чистый бинт на его запястье.', 'Die Pflegekraft legte ihm fest einen sauberen Verband um das Handgelenk.'), 'bandages'),
+    W('painkiller', 'noun', 'painkiller', 'B1', 'обезболивающее', 'das Schmerzmittel',
+      ex('Do not take a [[painkiller]] on an empty stomach.', 'Не принимайте обезболивающее на голодный желудок.', 'Nehmen Sie Schmerzmittel nicht auf nüchternen Magen ein.'), 'painkillers'),
+    W('dizzy', 'adj', 'dizzy', 'B1', 'испытывающий головокружение', 'schwindelig',
+      ex('Stand up slowly if you still feel [[dizzy]] after standing.', 'Вставайте медленно, если у вас всё ещё кружится голова.', 'Stehen Sie langsam auf, wenn Ihnen noch schwindelig ist.'))
+  ]);
+
+  reg('work', [
+    W('public-holiday', 'noun', 'public holiday', 'B1', 'официальный праздничный день', 'der gesetzliche Feiertag',
+      ex('All banks are closed on Monday because of the [[public holiday]].', 'Все банки закрыты в понедельник из-за государственного праздника.', 'Alle Banken bleiben am Montag wegen des gesetzlichen Feiertags geschlossen.'), 'public holidays'),
+    W('exhausting', 'adj', 'exhausting', 'B1', 'изнурительный, утомительный', 'anstrengend, erschöpfend',
+      ex('Working a twelve-hour trade fair shift on your feet is [[exhausting]].', 'Отработать двенадцатичасовую смену на выставке на ногах очень утомительно.', 'Eine Zwölf-Stunden-Schicht auf der Messe im Stehen ist sehr anstrengend.')),
+    W('fulfilling', 'adj', 'fulfilling', 'B2', 'приносящий глубокое удовлетворение', 'erfüllend',
+      ex('She finds mentoring junior developers genuinely [[fulfilling]].', 'Наставничество для младших разработчиков приносит ей настоящее удовлетворение.', 'Jüngere Entwickler anzuleiten empfindet sie als wirklich erfüllend.')),
+    W('capable', 'adj', 'capable', 'B1', 'способный, компетентный', 'fähig, kompetent',
+      ex('He is fully [[capable]] of leading the audit on his own.', 'Он вполне способен провести аудит самостоятельно.', 'Er ist durchaus fähig, das Audit selbstständig zu leiten.'))
+  ]);
+
+  reg('authorities', [
+    W('ban', 'noun', 'ban', 'B1', 'запрет', 'das Verbot',
+      ex('The council introduced a [[ban]] on loud construction work after eight p.m.', 'Муниципалитет ввёл запрет на шумные строительные работы после восьми вечера.', 'Die Gemeinde führte ein Verbot für laute Bauarbeiten nach zwanzig Uhr ein.'), 'bans'),
+    W('submission', 'noun', 'submission', 'B2', 'подача (документов, заявки)', 'die Einreichung',
+      ex('Keep the email confirmation after the online [[submission]] of your forms.', 'Сохраните письмо-подтверждение после онлайн-подачи ваших форм.', 'Bewahren Sie die E-Mail-Bestätigung nach der Online-Einreichung Ihrer Formulare auf.'), 'submissions'),
+    W('valid', 'adj', 'valid', 'B1', 'действительный, имеющий силу', 'gültig',
+      ex('Your passport must remain [[valid]] for at least six months.', 'Ваш паспорт должен оставаться действительным ещё минимум шесть месяцев.', 'Ihr Reisepass muss noch mindestens sechs Monate gültig sein.')),
+    W('expired', 'adj', 'expired', 'B1', 'просроченный, истёкший', 'abgelaufen',
+      ex('The office could not process the request with an [[expired]] residence card.', 'Ведомство не смогло обработать запрос с просроченным видом на жительство.', 'Das Amt konnte den Antrag mit einem abgelaufenen Aufenthaltstitel nicht bearbeiten.'))
+  ]);
+
+  reg('travel', [
+    W('passenger', 'noun', 'passenger', 'B1', 'пассажир', 'der Passagier',
+      ex('Every [[passenger]] received a message about the gate change.', 'Каждый пассажир получил сообщение о смене выхода на посадку.', 'Jeder Passagier erhielt eine Nachricht über den Gate-Wechsel.'), 'passengers'),
+    W('layover', 'noun', 'layover', 'B2', 'пересадка, ожидание между рейсами', 'der Aufenthalt (Zwischenstopp)',
+      ex('We had a three-hour [[layover]] in Frankfurt before the final flight.', 'Перед последним рейсом у нас была трёхчасовая пересадка во Франкфурте.', 'Vor dem letzten Flug hatten wir einen dreistündigen Aufenthalt in Frankfurt.'), 'layovers'),
+    W('luggage-rack', 'noun', 'luggage rack', 'B1', 'багажная полка', 'die Gepäckablage',
+      ex('Please lift heavy suitcases carefully onto the overhead [[luggage rack]].', 'Пожалуйста, осторожно поднимайте тяжёлые чемоданы на верхнюю багажную полку.', 'Bitte heben Sie schwere Koffer vorsichtig auf die Gepäckablage.'), 'luggage racks'),
+    W('commuter', 'noun', 'commuter', 'B2', 'человек, ежедневно ездящий на работу в другой город/район', 'der Pendler',
+      ex('Many [[commuters]] rely on the regional train every morning.', 'Многие пригородные пассажиры каждое утро полагаются на региональный поезд.', 'Viele Pendler sind jeden Morgen auf den Regionalzug angewiesen.'), 'commuters'),
+    W('rebook', 'verb', 'rebook', 'B1', 'перебронировать (билет, отель)', 'umbuchen',
+      ex('The agent helped us [[rebook]] onto the next available train.', 'Сотрудник помог нам перебронировать билеты на следующий свободный поезд.', 'Der Mitarbeiter half uns, auf den nächsten freien Zug umzubuchen.'))
+  ]);
+
+  reg('leisure', [
+    W('lecture', 'noun', 'lecture', 'B1', 'лекция', 'der Vortrag, die Vorlesung',
+      ex('The evening [[lecture]] on urban architecture drew a full hall.', 'Вечерняя лекция о городской архитектуре собрала полный зал.', 'Der Abendvortrag über Stadtarchitektur füllte den ganzen Saal.'), 'lectures'),
+    W('trade-fair', 'noun', 'trade fair', 'B2', 'отраслевая выставка, ярмарка', 'die Fachmesse',
+      ex('Our team met three new suppliers at the annual [[trade fair]].', 'На ежегодной выставке наша команда познакомилась с тремя новыми поставщиками.', 'Auf der jährlichen Fachmesse lernte unser Team drei neue Lieferanten kennen.'), 'trade fairs'),
+    W('pastime', 'noun', 'pastime', 'B2', 'хобби, любимое занятие в свободное время', 'der Zeitvertreib, das Hobby',
+      ex('Gardening has become his favourite weekend [[pastime]].', 'Садоводство стало его любимым занятием на выходных.', 'Gartenarbeit ist zu seinem liebsten Zeitvertreib am Wochenende geworden.'), 'pastimes'),
+    W('thrilling', 'adj', 'thrilling', 'B1', 'захватывающий, волнующий', 'packend, spannend',
+      ex('The final ten minutes of the match were genuinely [[thrilling]].', 'Последние десять минут матча были по-настоящему захватывающими.', 'Die letzten zehn Minuten des Spiels waren wirklich packend.'))
+  ]);
+
+  reg('society', [
+    W('primary-school', 'noun', 'primary school', 'B1', 'начальная школа', 'die Grundschule',
+      ex('Children usually start [[primary school]] at the age of five or six.', 'Дети обычно начинают учиться в начальной школе в пять или шесть лет.', 'Kinder kommen meist mit fünf oder sechs Jahren in die Grundschule.'), 'primary schools'),
+    W('grammar-school', 'noun', 'grammar school', 'B2', 'гимназия (академическая средняя школа)', 'das Gymnasium',
+      ex('She attended a local [[grammar school]] before studying engineering.', 'Она училась в местной гимназии до поступления на инженерный факультет.', 'Sie besuchte ein örtliches Gymnasium, bevor sie Ingenieurwesen studierte.'), 'grammar schools'),
+    W('scholarship', 'noun', 'scholarship', 'B2', 'стипендия (учебная, грант)', 'das Stipendium',
+      ex('He won a [[scholarship]] that covered his tuition for two semesters.', 'Он получил стипендию, которая покрыла обучение за два семестра.', 'Er erhielt ein Stipendium, das die Studiengebühren für zwei Semester deckte.'), 'scholarships'),
+    W('literacy', 'noun', 'literacy', 'B2', 'грамотность', 'die Lese- und Schreibfähigkeit',
+      ex('Digital [[literacy]] helps citizens spot manipulated news reports.', 'Цифровая грамотность помогает гражданам распознавать искажённые новости.', 'Digitale Kompetenz hilft Bürgern, manipulierte Meldungen zu erkennen.'))
+  ]);
+
+  reg('wellbeing', [
+    W('disappointment', 'noun', 'disappointment', 'B1', 'разочарование', 'die Enttäuschung',
+      ex('Not getting the grant was a sharp [[disappointment]], yet she tried again.', 'Отказ в гранте стал болезненным разочарованием, но она попробовала снова.', 'Die Absage für das Stipendium war eine herbe Enttäuschung, doch sie versuchte es erneut.'), 'disappointments'),
+    W('self-esteem', 'noun', 'self-esteem', 'B2', 'самооценка, самоуважение', 'das Selbstwertgefühl',
+      ex('Constant comparison online can quietly wear down a teenager’s [[self-esteem]].', 'Постоянное сравнение себя с другими в сети способно незаметно подорвать самооценку подростка.', 'Ständiger Vergleich im Netz kann das Selbstwertgefühl Jugendlicher schleichend schwächen.')),
+    W('empathetic', 'adj', 'empathetic', 'B2', 'чуткий, эмпатичный', 'empathisch, einfühlsam',
+      ex('An [[empathetic]] listener lets the other person finish without interrupting.', 'Чуткий собеседник даёт другому человеку выговориться, не перебивая.', 'Ein einfühlsamer Zuhörer lässt das Gegenüber ohne Unterbrechung ausreden.')),
+    W('open-minded', 'adj', 'open-minded', 'B2', 'широких взглядов, открытый новому', 'aufgeschlossen',
+      ex('Staying [[open-minded]] makes it easier to learn from unfamiliar methods.', 'Открытость новому помогает легче учиться непривычным подходам.', 'Aufgeschlossen zu bleiben erleichtert es, aus ungewohnten Methoden zu lernen.'))
+  ]);
+
+  reg('digital-life', [
+    W('newsletter', 'noun', 'newsletter', 'B1', 'информационная рассылка', 'der Newsletter',
+      ex('I unsubscribed from every promotional [[newsletter]] that cluttered my inbox.', 'Я отписался от всех рекламных рассылок, которые засоряли почту.', 'Ich habe jeden Werbe-Newsletter abbestellt, der mein Postfach füllte.'), 'newsletters'),
+    W('rumour', 'noun', 'rumour', 'B2', 'слух, непроверенная молва', 'das Gerücht',
+      ex('Do not repeat an unverified [[rumour]] as if it were a confirmed fact.', 'Не повторяйте непроверенный слух так, словно это подтверждённый факт.', 'Geben Sie kein ungeprüftes Gerücht so weiter, als wäre es eine bestätigte Tatsache.'), 'rumours'),
+    W('fact-check', 'verb', 'fact-check', 'B2', 'проверять факты', 'Fakten prüfen',
+      ex('Editors should [[fact-check]] every statistic before publishing the chart.', 'Редакторам следует проверять каждую цифру перед публикацией графика.', 'Redaktionen sollten jede Zahl vor der Veröffentlichung einer Grafik prüfen.')),
+    W('misleading', 'adj', 'misleading', 'B2', 'вводящий в заблуждение', 'irreführend',
+      ex('The headline was technically true yet still deeply [[misleading]].', 'Заголовок формально был верным, но всё равно глубоко вводил в заблуждение.', 'Die Schlagzeile war formal korrekt und dennoch stark irreführend.'))
+  ]);
+
+  reg('environment', [
+    W('landfill', 'noun', 'landfill', 'B2', 'свалка, полигон отходов', 'die Mülldeponie',
+      ex('Repairing electronics keeps usable metals out of [[landfill]].', 'Ремонт техники не даёт пригодным металлам оказаться на свалке.', 'Die Reparatur von Geräten hält nutzbare Metalle von der Mülldeponie fern.'), 'landfills'),
+    W('emissions', 'noun', 'emissions', 'B2', 'выбросы (в атмосферу)', 'die Emissionen',
+      ex('Cleaner freight rail can cut regional transport [[emissions]] sharply.', 'Более экологичные грузовые поезда способны резко сократить выбросы транспорта.', 'Sauberer Güterverkehr auf der Schiene kann regionale Verkehrsemissionen deutlich senken.')),
+    W('dispose', 'verb', 'dispose', 'B2', 'избавляться, утилизировать (dispose of)', 'entsorgen',
+      ex('Check local rules before you [[dispose]] of old paint tins.', 'Проверьте местные правила, прежде чем утилизировать старые банки с краской.', 'Prüfen Sie die örtlichen Regeln, bevor Sie alte Farbdosen entsorgen.')),
+    W('scarce', 'adj', 'scarce', 'B2', 'дефицитный, скудный, редкий', 'knapp',
+      ex('Fresh water becomes [[scarce]] during a prolonged summer drought.', 'Во время затяжной летней засухи пресная вода становится дефицитной.', 'Während einer langen Sommerdürre wird Frischwasser knapp.'))
+  ]);
+
+  reg('economy', [
+    W('retailer', 'noun', 'retailer', 'B2', 'розничный продавец, ритейлер', 'der Einzelhändler',
+      ex('The online [[retailer]] offers a thirty-day return window on clothes.', 'Онлайн-ритейлер предлагает тридцатидневный срок возврата одежды.', 'Der Online-Einzelhändler bietet ein dreißigtägiges Rückgaberecht für Kleidung.'), 'retailers'),
+    W('affordable', 'adj', 'affordable', 'B2', 'доступный по цене', 'erschwinglich, bezahlbar',
+      ex('Reliable public transport keeps commuting [[affordable]] for students.', 'Надёжный общественный транспорт делает поездки доступными для студентов.', 'Zuverlässiger Nahverkehr hält das Pendeln für Studierende bezahlbar.')),
+    W('bankrupt', 'adj', 'bankrupt', 'B2', 'банкрот, неплатёжеспособный', 'bankrott, insolvent',
+      ex('After two slow winters, the regional supplier went [[bankrupt]].', 'После двух слабых зимних сезонов региональный поставщик обанкротился.', 'Nach zwei schwachen Wintern ging der regionale Zulieferer bankrott.'))
+  ]);
+
+  reg('society-politics', [
+    W('bureaucracy', 'noun', 'bureaucracy', 'B2', 'бюрократия', 'die Bürokratie',
+      ex('Digital forms helped cut down routine [[bureaucracy]] at the town hall.', 'Цифровые формы помогли сократить рутинную бюрократию в ратуше.', 'Digitale Formulare halfen, routinemäßige Bürokratie im Rathaus abzubauen.')),
+    W('fairness', 'noun', 'fairness', 'B2', 'справедливость, беспристрастность', 'die Fairness, Gerechtigkeit',
+      ex('In [[fairness]], both teams met the deadline under tough conditions.', 'По справедливости, обе команды уложились в срок в сложных условиях.', 'Fairerweise muss man sagen, dass beide Teams die Frist unter harten Bedingungen einhielten.')),
+    W('solidarity', 'noun', 'solidarity', 'B2', 'солидарность', 'die Solidarität',
+      ex('Neighbours showed real [[solidarity]] when the basement flooded.', 'Соседи проявили настоящую солидарность, когда затопило подвал.', 'Die Nachbarn zeigten echte Solidarität, als der Keller überflutet war.'))
+  ]);
+
+  reg('education', [
+    W('apprenticeship', 'noun', 'apprenticeship', 'B2', 'производственное обучение, ученичество (Ausbildung)', 'die Berufsausbildung, Lehre',
+      ex('He completed a three-year [[apprenticeship]] as an industrial electrician.', 'Он прошёл трёхлетнее производственное обучение на промышленного электрика.', 'Er absolvierte eine dreijährige Berufsausbildung zum Industrieelektriker.'), 'apprenticeships'),
+    W('competence', 'noun', 'competence', 'B2', 'компетентность, квалификация', 'die Kompetenz',
+      ex('Practical [[competence]] often weighs as much as formal grades.', 'Практическая компетентность часто значит не меньше, чем формальные оценки.', 'Praktische Kompetenz wiegt oft ebenso viel wie formale Noten.'), 'competences'),
+    W('fluent', 'adj', 'fluent', 'B1', 'свободно владеющий языком, беглый', 'fließend',
+      ex('She became [[fluent]] in German after working two years in Munich.', 'Она стала свободно говорить по-немецки, проработав два года в Мюнхене.', 'Sie sprach fließend Deutsch, nachdem sie zwei Jahre in München gearbeitet hatte.'))
+  ]);
+
+  reg('c1_argumentation', [
+    W('implication', 'noun', 'implication', 'C1', 'скрытое следствие, последствие, подтекст', 'die Tragweite, Auswirkung',
+      ex('Few realised the full [[implication]] of that clause until the audit.', 'Мало кто осознавал все последствия этого пункта договора до самого аудита.', 'Nur wenige erkannten die volle Tragweite dieser Klausel bis zum Audit.'), 'implications'),
+    W('plausibility', 'noun', 'plausibility', 'C1', 'правдоподобие, убедительность', 'die Plausibilität',
+      ex('Reviewers first test the [[plausibility]] of the model’s baseline figures.', 'Рецензенты сначала проверяют правдоподобие базовых цифр модели.', 'Prüfer testen zunächst die Plausibilität der Ausgangszahlen des Modells.')),
+    W('fallacy', 'noun', 'fallacy', 'C1', 'логическая ошибка, заблуждение', 'der Trugschluss',
+      ex('Assuming that correlation proves cause is a classic [[fallacy]].', 'Считать, что корреляция доказывает причину, — классическая логическая ошибка.', 'Anzunehmen, Korrelation beweise Kausalität, ist ein klassischer Trugschluss.'), 'fallacies'),
+    W('discrepancy', 'noun', 'discrepancy', 'C1', 'расхождение, несоответствие', 'die Diskrepanz',
+      ex('There is a sharp [[discrepancy]] between the two quarterly totals.', 'Между двумя квартальными итогами есть резкое расхождение.', 'Zwischen beiden Quartalssummen besteht eine deutliche Diskrepanz.'), 'discrepancies'),
+    W('corroborate', 'verb', 'corroborate', 'C1', 'подкреплять, подтверждать (независимыми данными)', 'untermauern, bestätigen',
+      ex('Two independent logs [[corroborate]] the engineer’s timeline of the outage.', 'Два независимых журнала подтверждают хронологию сбоя, описанную инженером.', 'Zwei unabhängige Protokolle untermauern den Zeitablauf des Ingenieurs.')),
+    W('refute', 'verb', 'refute', 'C1', 'опровергать (доказательно)', 'widerlegen',
+      ex('New test data [[refutes]] the claim that the delay was unavoidable.', 'Новые тестовые данные опровергают утверждение о неизбежности задержки.', 'Neue Testdaten widerlegen die Behauptung, die Verzögerung sei unvermeidlich gewesen.')),
+    W('nuanced', 'adj', 'nuanced', 'C1', 'тонкий, нюансированный, взвешенный', 'differenziert, nuanciert',
+      ex('The report offers a [[nuanced]] view rather than easy slogans.', 'Отчёт предлагает взвешенный взгляд вместо простых лозунгов.', 'Der Bericht bietet eine differenzierte Sicht statt einfacher Parolen.')),
+    W('untenable', 'adj', 'untenable', 'C1', 'несостоятельный (об аргументе, позиции)', 'unhaltbar',
+      ex('Once the figures were corrected, that position became [[untenable]].', 'После исправления цифр эта позиция стала несостоятельной.', 'Nach der Korrektur der Zahlen wurde diese Position unhaltbar.'))
+  ]);
+})();
+
+/* === Content expansion Wave 2 (2026-11-27): +65 EN Words (c1_argumentation + 5 thinnest topics) === */
+(function () {
+  'use strict';
+  function ex(t, ru, de) { return { t: t, ru: ru, de: de }; }
+  function W(id, pos, t, level, ru, de, e, plural) {
+    var o = { id: 'en:w2:' + id, pos: pos, t: t, level: level, learnable: true, ru: ru, de: de, examples: [e] };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function reg(topic, items) { GT.register({ tab: 'words', topic: topic, items: items }); }
+
+  reg('c1_argumentation', [
+    W('counterargument', 'noun', 'counterargument', 'C1', 'контраргумент, возражение', 'das Gegenargument',
+      ex('A strong essay anticipates every obvious [[counterargument]] in advance.', 'Сильное эссе заранее учитывает каждое очевидное возражение.', 'Ein starker Aufsatz greift jedes naheliegende Gegenargument vorab auf.'), 'counterarguments'),
+    W('crux', 'noun', 'crux', 'C1', 'суть вопроса, ключевой узел проблемы', 'der Kernpunkt',
+      ex('The [[crux]] of the disagreement lies in how risk is measured.', 'Суть разногласий кроется в том, как именно измеряют риск.', 'Der Kernpunkt der Meinungsverschiedenheit liegt in der Risikomessung.')),
+    W('trade-off', 'noun', 'deadlock', 'C1', 'тупик, безвыходная ситуация на переговорах', 'die Sackgasse, Pattsituation',
+      ex('Both sides reached a [[deadlock]] over freight rates until an independent mediator stepped in.', 'Обе стороны зашли в тупик по тарифам на перевозки, пока не вмешался посредник.', 'Beide Seiten gerieten bei den Frachttarifen in eine Sackgasse, bis ein Vermittler half.'), 'deadlocks'),
+    W('caveat', 'noun', 'corollary', 'C1', 'логическое следствие, естественный вывод', 'die logische Folge, Konsequenz',
+      ex('Greater transparency is a natural [[corollary]] of publishing quarterly audits.', 'Большая прозрачность — естественное следствие публикации квартальных аудитов.', 'Mehr Transparenz ist eine logische Folge der Veröffentlichung von Quartalsaudits.'), 'corollaries'),
+    W('baseline', 'noun', 'baseline', 'C1', 'исходный уровень, базовая точка сравнения', 'die Ausgangsbasis, Richtlinie',
+      ex('Without a clean [[baseline]], quarterly growth percentages mislead readers.', 'Без чистой базовой линии квартальные проценты роста вводят читателей в заблуждение.', 'Ohne verlässliche Ausgangsbasis führen Quartalsprozente in die Irre.'), 'baselines'),
+    W('concede', 'verb', 'concede', 'C1', 'признавать (слабость довода, правоту оппонента)', 'einräumen, zugestehen',
+      ex('Even critics [[concede]] that the updated guide is easier to scan.', 'Даже критики признают, что обновлённое руководство читать проще.', 'Selbst Kritiker räumen ein, dass der aktualisierte Leitfaden leichter lesbar ist.')),
+    W('substantiate', 'verb', 'substantiate', 'C1', 'подкреплять фактами, обосновывать доказательно', 'belegen, untermauern',
+      ex('The auditor asked the team to [[substantiate]] each expense claim with receipts.', 'Аудитор попросил команду подтвердить каждую статью расходов чеками.', 'Der Prüfer bat das Team, jede Ausgabenforderung mit Belegen zu untermauern.')),
+    W('dispel', 'verb', 'dispel', 'C1', 'рассеивать, снимать (сомнения, миф)', 'zerstreuen, entkräften',
+      ex('Open Q&A sessions help [[dispel]] rumours during reorganisations.', 'Открытые сессии вопросов помогают рассеивать слухи при реорганизации.', 'Offene Fragerunden helfen, Gerüchte während Umstrukturierungen zu zerstreuen.')),
+    W('overstate', 'verb', 'overstate', 'C1', 'преувеличивать (значение, эффект)', 'überbewerten, übertreiben',
+      ex('Headline summaries often [[overstate]] tiny differences between test groups.', 'Заголовки часто преувеличивают крошечные различия между тестовыми группами.', 'Schlagzeilen übertreiben oft winzige Unterschiede zwischen Testgruppen.')),
+    W('qualify', 'verb', 'qualify', 'C1', 'оговаривать, уточнять границы утверждения', 'einschränken, relativieren',
+      ex('Let me [[qualify]] that statement: it holds only for urban routes.', 'Позвольте уточнить это утверждение: оно верно только для городских маршрутов.', 'Lassen Sie mich diese Aussage relativieren: Sie gilt nur für Stadtstrecken.')),
+    W('cogent', 'adj', 'cogent', 'C1', 'убедительный, веский, логичный', 'stichhaltig, schlüssig',
+      ex('She presented a brief yet [[cogent]] case for keeping local backups.', 'Она изложила краткий, но веский довод в пользу локальных копий.', 'Sie legte ein kurzes, aber stichhaltiges Argument für lokale Backups vor.')),
+    W('indispensable', 'adj', 'indispensable', 'C1', 'незаменимый, абсолютно необходимый', 'unabdingbar, unverzichtbar',
+      ex('Clear version control is [[indispensable]] once five developers share a repo.', 'Чёткий контроль версий незаменим, когда в одном репозитории работают пятеро.', 'Klare Versionskontrolle ist unverzichtbar, sobald fünf Entwickler zusammenarbeiten.')),
+    W('arbitrary', 'noun', 'conjecture', 'C1', 'догадка, предположение без твёрдых фактов', 'die Vermutung, Mutmaßung',
+      ex('Without raw measurements, the cause of the slowdown remains mere [[conjecture]].', 'Без исходных замеров причина замедления остаётся голой догадкой.', 'Ohne Rohdaten bleibt die Ursache der Verlangsamung bloße Mutmaßung.'), 'conjectures'),
+    W('tentative', 'adj', 'tentative', 'C1', 'предварительный, осторожный, ориентировочный', 'vorläufig, vorsichtig',
+      ex('Until lab samples return, every conclusion remains strictly [[tentative]].', 'Пока не вернулись анализы, любой вывод остаётся сугубо предварительным.', 'Bis die Laborproben vorliegen, bleibt jedes Fazit strikt vorläufig.')),
+    W('conducive', 'adj', 'conducive', 'C1', 'способствующий, благоприятный (для чего-л.)', 'förderlich',
+      ex('Quiet study booths are far more [[conducive]] to reading than open lounges.', 'Тихие кабинки намного лучше способствуют чтению, чем открытый холл.', 'Ruhige Lernkabinen sind für das Lesen deutlich förderlicher als offene Lounges.')),
+    W('inadvertently', 'adv', 'inadvertently', 'C1', 'непреднамеренно, по невнимательности', 'unbeabsichtigt, versehentlich',
+      ex('Changing the default filter [[inadvertently]] hid older client records.', 'Смена фильтра по умолчанию непреднамеренно скрыла старые записи клиентов.', 'Das Ändern des Standardfilters verbarg unbeabsichtigt ältere Kundendaten.'))
+  ]);
+
+  reg('environment', [
+    W('renewable-energy', 'noun', 'renewable energy', 'B1', 'возобновляемая энергия', 'erneuerbare Energie',
+      ex('Half the town’s electricity now comes from [[renewable energy]].', 'Половина электричества города теперь поступает из возобновляемых источников.', 'Die Hälfte des Stadtstroms stammt nun aus erneuerbarer Energie.')),
+    W('biodiversity', 'noun', 'biodiversity', 'B2', 'биоразнообразие', 'die Artenvielfalt',
+      ex('Restoring wetlands quickly boosts local [[biodiversity]].', 'Восстановление болот быстро повышает местное биоразнообразие.', 'Die Wiederherstellung von Feuchtgebieten stärkt rasch die Artenvielfalt.')),
+    W('soil-erosion', 'noun', 'erosion', 'B2', 'эрозия (почвы, берега)', 'die Erosion',
+      ex('Planting hedgerows helps slow wind [[erosion]] across open fields.', 'Посадка живых изгородей замедляет ветровую эрозию на открытых полях.', 'Hecken zu pflanzen bremst die Winderosion auf offenen Feldern.')),
+    W('drought-tolerant', 'noun', 'deforestation', 'B2', 'вырубка лесов', 'die Entwaldung, Abholzung',
+      ex('Satellite maps track illegal [[deforestation]] in near real time.', 'Спутниковые карты отслеживают незаконную вырубку лесов почти в реальном времени.', 'Satellitenkarten verfolgen illegale Abholzung fast in Echtzeit.')),
+    W('insulation', 'noun', 'insulation', 'B2', 'утепление, теплоизоляция', 'die Wärmedämmung',
+      ex('Better roof [[insulation]] cuts winter heating bills noticeably.', 'Качественное утепление крыши заметно снижает зимние счета за отопление.', 'Bessere Dachdämmung senkt die Heizkosten im Winter spürbar.')),
+    W('conserve', 'verb', 'conserve', 'B2', 'беречь, экономить (ресурсы)', 'schonen, einsparen',
+      ex('Drip irrigation allows farms to [[conserve]] groundwater during dry summers.', 'Капельный полив позволяет хозяйствам экономить грунтовые воды в засушливое лето.', 'Tröpfchenbewässerung hilft Betrieben, im trockenen Sommer Grundwasser zu sparen.')),
+    W('contaminate', 'verb', 'contaminate', 'B2', 'загрязнять, заражать (воду, почву)', 'verunreinigen, kontaminieren',
+      ex('Leaking storage tanks can [[contaminate]] nearby wells for years.', 'Протекающие резервуары могут на годы загрязнить ближайшие колодцы.', 'Undichte Tanks können nahe Brunnen jahrelang verunreinigen.')),
+    W('replenish', 'verb', 'replenish', 'C1', 'восполнять, пополнять (запасы, водоносные слои)', 'wieder auffüllen, erneuern',
+      ex('Steady autumn rain finally helped [[replenish]] the dry reservoirs.', 'Затяжные осенние дожди наконец помогли восполнить пересохшие водохранилища.', 'Anhaltender Herbstregen füllte die leeren Stauseen endlich wieder auf.')),
+    W('sustainable', 'adj', 'emissions-free', 'B2', 'без выбросов, с нулевыми выбросами', 'emissionsfrei',
+      ex('Two electric delivery vans make local parcel routes [[emissions-free]].', 'Два электрических фургона делают местную доставку посылок безвыбросной.', 'Zwei elektrische Lieferwagen machen lokale Paketzustellungen emissionsfrei.')),
+    W('biodegradable', 'adj', 'biodegradable', 'B2', 'биоразлагаемый', 'biologisch abbaubar',
+      ex('The café switched to [[biodegradable]] cups for takeaway drinks.', 'Кафе перешло на биоразлагаемые стаканчики для напитков на вынос.', 'Das Café stellte für Getränke zum Mitnehmen auf biologisch abbaubare Becher um.'))
+  ]);
+
+  reg('society-politics', [
+    W('referendum', 'noun', 'referendum', 'B2', 'референдум', 'der Volksentscheid, das Referendum',
+      ex('Voters decided the transport expansion in a local [[referendum]].', 'Жители решили вопрос о расширении транспорта на местном референдуме.', 'Die Wähler entschieden über den Verkehrsausbau in einem lokalen Referendum.'), 'referendums'),
+    W('voter-turnout', 'noun', 'ballot box', 'B2', 'избирательная урна', 'die Wahlurne',
+      ex('Inspectors sealed each [[ballot box]] before polling stations opened at eight.', 'Наблюдатели опечатали каждую избирательную урну до открытия участков в восемь.', 'Wahlhelfer versiegelten jede Wahlurne vor Öffnung der Wahllokale um acht Uhr.'), 'ballot boxes'),
+    W('consensus', 'noun', 'unanimity', 'C1', 'единогласие, полное согласие', 'die Einstimmigkeit',
+      ex('Budget rules require [[unanimity]] among all regional members.', 'Бюджетные правила требуют единогласия среди всех региональных участников.', 'Haushaltsregeln verlangen Einstimmigkeit unter allen regionalen Mitgliedern.')),
+    W('accountability', 'noun', 'accountability', 'C1', 'подотчётность, ответственность перед обществом', 'die Rechenschaftspflicht',
+      ex('Public spending requires strict financial [[accountability]].', 'Государственные расходы требуют строгой финансовой подотчётности.', 'Öffentliche Ausgaben verlangen eine strikte finanzielle Rechenschaftspflicht.')),
+    W('legislation', 'noun', 'legislation', 'B2', 'законодательство, принятый закон', 'die Gesetzgebung',
+      ex('Updated consumer [[legislation]] guarantees two years of warranty.', 'Обновлённое законодательство о правах потребителей гарантирует два года гарантии.', 'Neue Verbraucherschutzgesetze garantieren zwei Jahre Gewährleistung.')),
+    W('subsidy', 'noun', 'subsidy', 'B2', 'субсидия, дотация', 'die Subvention, Förderung',
+      ex('Small farms received a state [[subsidy]] to install solar panels.', 'Малые фермы получили государственную субсидию на солнечные панели.', 'Kleine Höfe erhielten eine staatliche Förderung für Solaranlagen.'), 'subsidies'),
+    W('advocate', 'verb', 'advocate', 'C1', 'выступать в поддержку, отстаивать (идею)', 'befürworten, sich einsetzen für',
+      ex('Several urban planners [[advocate]] wider cycle lanes near schools.', 'Несколько урбанистов выступают за более широкие велодорожки у школ.', 'Mehrere Stadtplaner setzen sich für breitere Radwege an Schulen ein.')),
+    W('enforce', 'verb', 'enforce', 'B2', 'обеспечивать соблюдение (правил, закона)', 'durchsetzen',
+      ex('Inspectors will strictly [[enforce]] the new noise curfew after ten p.m.', 'Инспекторы будут строго следить за соблюдением режима тишины после десяти вечера.', 'Inspektoren werden das neue Lärmverbot ab 22 Uhr strikt durchsetzen.')),
+    W('transparent', 'adj', 'impartial', 'C1', 'беспристрастный, непредвзятый', 'unparteiisch, objektiv',
+      ex('An [[impartial]] mediator helped both sides settle the boundary dispute.', 'Беспристрастный посредник помог обеим сторонам урегулировать спор.', 'Ein unparteiischer Vermittler half beiden Seiten bei der Streitbeilegung.')),
+    W('polarised', 'adj', 'polarised', 'C1', 'поляризованный, расколотый на противоположные лагеря', 'polarisiert',
+      ex('On social platforms, public debate often sounds sharply [[polarised]].', 'В соцсетях общественные споры нередко звучат резко поляризованно.', 'In sozialen Medien wirkt die öffentliche Debatte oft stark polarisiert.'))
+  ]);
+
+  reg('authorities', [
+    W('certificate-of-good-conduct', 'noun', 'criminal record check', 'B2', 'справка об отсутствии судимости', 'das polizeiliche Führungszeugnis',
+      ex('Teachers submit a fresh [[criminal record check]] before starting work.', 'Учителя подают свежую справку об отсутствии судимости перед началом работы.', 'Lehrkräfte reichen vor Arbeitsbeginn ein aktuelles Führungszeugnis ein.'), 'criminal record checks'),
+    W('residence-registration', 'noun', 'address registration', 'B1', 'регистрация по месту жительства', 'die Anmeldung (Wohnsitz)',
+      ex('Take your rental contract to complete [[address registration]] within two weeks.', 'Возьмите договор аренды для регистрации по месту жительства в течение двух недель.', 'Nehmen Sie den Mietvertrag mit, um die Wohnsitzanmeldung binnen zwei Wochen zu erledigen.'), 'address registrations'),
+    W('official-stamp', 'noun', 'apostille', 'C1', 'апостиль, штамп легализации документа', 'die Apostille',
+      ex('Foreign marriage certificates need an [[apostille]] before local registration.', 'Иностранные свидетельства о браке требуют апостиля перед местной регистрацией.', 'Ausländische Heiratsurkunden brauchen vor der Anmeldung eine Apostille.'), 'apostilles'),
+    W('ombudsman', 'noun', 'eligibility', 'B2', 'право на получение (льготы, допуска)', 'die Berechtigung, Anspruchsberechtigung',
+      ex('The portal checks your [[eligibility]] for housing support in two steps.', 'Портал проверяет ваше право на жилищную поддержку за два шага.', 'Das Portal prüft Ihre Berechtigung für Wohngeld in zwei Schritten.')),
+    W('municipality', 'noun', 'municipality', 'B2', 'муниципалитет, городская управа', 'die Gemeinde, Stadtverwaltung',
+      ex('Each [[municipality]] sets its own opening hours for citizen offices.', 'Каждый муниципалитет сам устанавливает часы приёма граждан.', 'Jede Gemeinde legt eigene Öffnungszeiten für Bürgerämter fest.'), 'municipalities'),
+    W('counter-clerk', 'noun', 'caseworker', 'B2', 'ведущий специалист ведомства, инспектор по делу', 'der Sachbearbeiter',
+      ex('My [[caseworker]] emailed to ask for one missing bank page.', 'Мой специалист в ведомстве написал и попросил одну недостающую выписку.', 'Mein Sachbearbeiter fragte per Mail nach einem fehlenden Kontoauszug.'), 'caseworkers'),
+    W('certify', 'verb', 'certify', 'B2', 'заверять (подпись, копию), удостоверять', 'beglaubigen',
+      ex('A town clerk can [[certify]] translations and passport copies for a small fee.', 'Секретарь мэрии может заверить переводы и копии паспорта за небольшую пошлину.', 'Ein Standesbeamter kann Übersetzungen und Passkopien gegen geringe Gebühr beglaubigen.')),
+    W('exempt', 'adj', 'exempt', 'C1', 'освобождённый (от налога, пошлины, правила)', 'befreit',
+      ex('Full-time students are [[exempt]] from the local registration fee.', 'Студенты очного отделения освобождены от местного регистрационного сбора.', 'Vollzeitstudierende sind von der örtlichen Anmeldegebühr befreit.')),
+    W('mandatory', 'adj', 'mandatory', 'B2', 'обязательный (по закону или регламенту)', 'verpflichtend, vorgeschrieben',
+      ex('In-person ID verification remains [[mandatory]] when opening this account.', 'Личное подтверждение личности остаётся обязательным при открытии этого счёта.', 'Die persönliche Ausweisprüfung bleibt für dieses Konto verpflichtend.')),
+    W('pending', 'adj', 'pending', 'B2', 'на рассмотрении, ожидающий решения', 'ausstehend, schwebend',
+      ex('Your permit renewal is still [[pending]] final verification.', 'Ваше продление разрешения всё ещё ожидает итоговой проверки.', 'Ihre Verlängerung befindet sich noch in der abschließenden Prüfung.'))
+  ]);
+
+  reg('home', [
+    W('circuit-breaker', 'noun', 'fuse box', 'B1', 'электрощиток с предохранителями', 'der Sicherungskasten',
+      ex('When the kettle tripped the power, I checked the [[fuse box]] in the hall.', 'Когда чайник выбил пробки, я проверил электрощиток в прихожей.', 'Als der Wasserkocher den Strom abschaltete, prüfte ich den Sicherungskasten im Flur.'), 'fuse boxes'),
+    W('radiator', 'noun', 'thermostat', 'B1', 'термостат, регулятор температуры', 'der Thermostat',
+      ex('Lower the hallway [[thermostat]] by two degrees overnight to save heating fuel.', 'Убавь термостат в прихожей на два градуса на ночь, чтобы сэкономить тепло.', 'Dreh den Thermostat im Flur nachts zwei Grad herunter, um Heizkosten zu sparen.'), 'thermostats'),
+    W('shutters', 'noun', 'blinds', 'B1', 'жалюзи, рулонные шторы', 'die Jalousie, das Rollo',
+      ex('Lower the [[blinds]] in the afternoon to keep the living room cool.', 'Опусти жалюзи днём, чтобы в гостиной оставалось прохладно.', 'Lass nachmittags die Jalousien herunter, damit das Wohnzimmer kühl bleibt.')),
+    W('stairwell', 'noun', 'stairwell', 'B2', 'лестничная клетка, подъезд', 'das Treppenhaus',
+      ex('Keep prams and bikes out of the narrow [[stairwell]] for fire safety.', 'Не ставьте коляски и велосипеды в узком подъезде ради пожарной безопасности.', 'Lass Kinderwagen und Räder aus Brandschutzgründen nicht im Treppenhaus.'), 'stairwells'),
+    W('tenant-association', 'noun', 'leasehold', 'B2', 'долгосрочная аренда недвижимости', 'die Pacht, Erbpacht',
+      ex('The commercial space is sold on a ninety-year [[leasehold]] rather than freehold.', 'Коммерческое помещение продаётся на правах долгосрочной аренды на девяносто лет.', 'Die Gewerbefläche wird in neunzigjähriger Erbpacht statt Volleigentum vergeben.')),
+    W('drain-pipe', 'noun', 'clogged drain', 'B2', 'засорившийся слив / труба', 'der verstopfte Abfluss',
+      ex('A [[clogged drain]] under the kitchen sink took the plumber ten minutes to clear.', 'Засорившийся слив под кухонной раковиной сантехник прочистил за десять минут.', 'Den verstopften Abfluss unter der Spüle reinigte der Klempner in zehn Minuten.'), 'clogged drains'),
+    W('ventilate', 'verb', 'ventilate', 'B2', 'проветривать (помещение)', 'lüften',
+      ex('Always [[ventilate]] the bathroom briefly after a hot shower to stop mould.', 'Всегда ненадолго проветривайте ванную после горячего душа, чтобы не появилась плесень.', 'Lüften Sie das Bad nach einer heißen Dusche kurz, um Schimmel zu vermeiden.')),
+    W('evict', 'verb', 'evict', 'C1', 'выселять (арендатора в установленном порядке)', 'räumen lassen, kündigen',
+      ex('A landlord cannot [[evict]] a tenant without proper legal notice.', 'Арендодатель не может выселить жильца без законного уведомления.', 'Ein Vermieter kann einen Mieter nicht ohne wirksame Kündigung räumen lassen.')),
+    W('spacious', 'adj', 'spacious', 'B1', 'просторный', 'geräumig',
+      ex('The top-floor studio has a surprisingly [[spacious]] kitchen.', 'В студии на верхнем этаже неожиданно просторная кухня.', 'Das Studio unterm Dach hat eine überraschend geräumige Küche.')),
+    W('soundproof', 'adj', 'soundproof', 'B2', 'звуконепроницаемый, с хорошей шумоизоляцией', 'schalldicht, schallisoliert',
+      ex('Triple-glazed windows make the street-facing bedroom practically [[soundproof]].', 'Тройные стеклопакеты делают спальню окнами на улицу почти бесшумной.', 'Dreifachverglasung macht das Schlafzimmer zur Straße hin nahezu schalldicht.'))
+  ]);
+
+  reg('work', [
+    W('workload', 'noun', 'pay grade', 'B2', 'тарифный разряд, категория оплаты', 'die Entgeltgruppe, Gehaltsstufe',
+      ex('Moving up a [[pay grade]] requires an annual performance review and new duties.', 'Переход на следующий тарифный разряд требует ежегодной оценки и новых обязанностей.', 'Der Aufstieg in eine höhere Entgeltgruppe erfordert ein Jahresgespräch und neue Aufgaben.'), 'pay grades'),
+    W('internship', 'noun', 'shift allowance', 'B2', 'доплата / надбавка за сменную работу', 'die Schichtzulage',
+      ex('Nurses working night rotations receive a twenty-percent [[shift allowance]].', 'Медсёстры на ночных сменах получают двадцатипроцентную надбавку за сменность.', 'Pflegekräfte im Nachtdienst erhalten eine zwanzigprozentige Schichtzulage.'), 'shift allowances'),
+    W('bonus', 'noun', 'annual bonus', 'B2', 'годовая премия, бонус по итогам года', 'der Jahresbonus',
+      ex('Staff meeting annual targets receive an [[annual bonus]] in December.', 'Сотрудники, выполнившие годовой план, получают годовую премию в декабре.', 'Mitarbeitende mit erfüllten Jahreszielen erhalten im Dezember einen Jahresbonus.'), 'annual bonuses'),
+    W('sick-note', 'noun', 'sick note', 'B1', 'больничный лист, справка о болезни', 'die Krankschreibung, das Attest',
+      ex('From day three of illness, HR requires an electronic [[sick note]].', 'С третьего дня болезни отдел кадров просит электронный больничный лист.', 'Ab dem dritten Krankheitstag verlangt die Personalabteilung eine elektronische Krankschreibung.'), 'sick notes'),
+    W('payslip', 'noun', 'job rotation', 'B2', 'ротация должностей внутри компании', 'die Jobrotation',
+      ex('Structured [[job rotation]] helps junior staff understand every department.', 'Плановая ротация должностей помогает новичкам разобраться в работе каждого отдела.', 'Gezielte Jobrotation hilft Nachwuchskräften, jede Abteilung kennenzulernen.')),
+    W('reassign', 'noun', 'mentoring', 'B2', 'наставничество, менторинг', 'das Mentoring',
+      ex('Formal [[mentoring]] pairs new engineers with senior specialists for six months.', 'Программа наставничества закрепляет за новыми инженерами старших специалистов на полгода.', 'Strukturiertes Mentoring verbindet neue Ingenieure sechs Monate lang mit Erfahrenen.')),
+    W('resign', 'noun', 'redundancy pay', 'C1', 'выходное пособие при сокращении штата', 'die Entlassungsabfindung',
+      ex('Long-serving staff laid off during restructuring received statutory [[redundancy pay]].', 'Сотрудники со стажем при сокращении получили положенное по закону пособие.', 'Langjährige Mitarbeitende erhielten bei der Umstrukturierung eine gesetzliche Abfindung.')),
+    W('entitled', 'adj', 'entitled', 'B2', 'имеющий право (на отпуск, компенсацию)', 'berechtigt, anspruchsberechtigt',
+      ex('Part-time staff are equally [[entitled]] to paid annual leave.', 'Сотрудники на неполной ставке так же имеют право на оплачиваемый отпуск.', 'Teilzeitkräfte sind gleichermaßen zu bezahltem Jahresurlaub berechtigt.')),
+    W('flexible', 'adj', 'monotonous', 'B2', 'однообразный, монотонный', 'eintönig, monoton',
+      ex('Automated templates eliminated the most [[monotonous]] copy-paste steps.', 'Автоматические шаблоны убрали самую монотонную ручную рутину.', 'Automatisierte Vorlagen beseitigten die monotonsten manuellen Schritte.'))
+  ]);
+})();

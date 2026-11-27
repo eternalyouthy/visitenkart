@@ -2815,3 +2815,218 @@ GT.register({
     }
   ]
 });
+
+/* === Content expansion 2026-11-27 (EN Professional) === */
+(function () {
+  'use strict';
+  function ex(t, ru, de) { return { t: t, ru: ru, de: de }; }
+  function W(id, pos, t, level, ru, de, e, plural) {
+    var o = { id: 'en:x27:pro:' + id, pos: pos, t: t, level: level, ru: ru, de: de, examples: [e], learnable: true };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function reg(topic, items) { GT.register({ tab: 'it', topic: topic, items: items }); }
+
+  reg('bureau_offices', [
+    W('advice-centre', 'noun', 'advice centre', 'B1', 'консультационный центр', 'die Beratungsstelle',
+      ex('The municipal [[advice centre]] helps newcomers sort out permit paperwork.', 'Муниципальный консультационный центр помогает приезжим разобраться с бумагами на разрешение.', 'Die städtische Beratungsstelle hilft Neuzugezogenen bei den Anträgen.'), 'advice centres'),
+    W('work-permit', 'noun', 'work permit', 'B1', 'разрешение на работу', 'die Arbeitserlaubnis',
+      ex('HR cannot activate the contract until your [[work permit]] arrives.', 'Отдел кадров не сможет активировать договор, пока не придёт разрешение на работу.', 'Die Personalabteilung kann den Vertrag erst nach Vorlage der Arbeitserlaubnis freigeben.'), 'work permits'),
+    W('case-officer', 'noun', 'case officer', 'B2', 'специалист ведомства, ведущий дело', 'der Sachbearbeiter',
+      ex('The [[case officer]] asked for one more stamped copy before final approval.', 'Сотрудник ведомства запросил ещё одну заверенную копию перед финальным одобрением.', 'Der Sachbearbeiter bat vor der endgültigen Genehmigung um eine weitere beglaubigte Kopie.'), 'case officers')
+  ]);
+
+  reg('bureau_docs', [
+    W('marriage-certificate', 'noun', 'marriage certificate', 'B1', 'свидетельство о браке', 'die Eheurkunde',
+      ex('Attach a certified translation of your [[marriage certificate]] to the file.', 'Приложите к пакету документов заверенный перевод свидетельства о браке.', 'Fügen Sie der Akte eine beglaubigte Übersetzung Ihrer Eheurkunde bei.'), 'marriage certificates'),
+    W('tax-number', 'noun', 'tax number', 'B1', 'налоговый номер', 'die Steuernummer',
+      ex('Every freelance invoice must show your official [[tax number]].', 'Каждый счёт от фрилансера должен содержать ваш официальный налоговый номер.', 'Jede Freelancer-Rechnung muss Ihre amtliche Steuernummer enthalten.'), 'tax numbers'),
+    W('bank-statement', 'noun', 'bank statement', 'B1', 'банковская выписка', 'der Kontoauszug',
+      ex('Download the latest [[bank statement]] as proof of the paid deposit.', 'Скачайте свежую банковскую выписку как подтверждение оплаты залога.', 'Laden Sie den aktuellen Kontoauszug als Nachweis für die gezahlte Kaution herunter.'), 'bank statements')
+  ]);
+
+  reg('bureau_tax', [
+    W('tax-office', 'noun', 'tax office', 'B1', 'налоговая инспекция', 'das Finanzamt',
+      ex('The [[tax office]] sends annual assessments by post unless you opt in online.', 'Налоговая отправляет ежегодные уведомления почтой, если вы не выбрали онлайн-формат.', 'Das Finanzamt verschickt jährliche Bescheide per Post, sofern man nicht online zustimmt.'), 'tax offices'),
+    W('gross-salary', 'noun', 'gross salary', 'B2', 'зарплата до вычета налогов (брутто)', 'das Bruttogehalt',
+      ex('Job adverts usually quote the annual [[gross salary]] before deductions.', 'В вакансиях обычно указывают годовую зарплату брутто до вычетов.', 'Stellenanzeigen nennen meist das jährliche Bruttogehalt vor Abzügen.')),
+    W('net-salary', 'noun', 'net salary', 'B2', 'зарплата на руки (нетто)', 'das Nettogehalt',
+      ex('After taxes and health contributions, his [[net salary]] is easier to budget with.', 'После налогов и медвзносов бюджет проще планировать по зарплате нетто.', 'Nach Steuern und Krankenkassenbeiträgen lässt sich mit dem Nettogehalt leichter planen.')),
+    W('hourly-wage', 'noun', 'hourly wage', 'B1', 'почасовая оплата', 'der Stundenlohn',
+      ex('Part-time staff are paid an agreed [[hourly wage]] plus weekend extras.', 'Сотрудникам на неполной ставке платят согласованную почасовую ставку плюс доплату за выходные.', 'Teilzeitkräfte erhalten einen vereinbarten Stundenlohn plus Wochenendzuschläge.'), 'hourly wages')
+  ]);
+
+  reg('legal_ip', [
+    W('trademark-infringement', 'noun', 'trademark infringement', 'C1', 'нарушение прав на товарный знак', 'die Markenrechtsverletzung',
+      ex('Using a lookalike logo triggered a claim for [[trademark infringement]].', 'Использование похожего логотипа привело к претензии о нарушении прав на товарный знак.', 'Die Nutzung eines ähnlichen Logos löste eine Klage wegen Markenrechtsverletzung aus.')),
+    W('licensing-fee', 'noun', 'licensing fee', 'B2', 'лицензионный сбор, плата за лицензию', 'die Lizenzgebühr',
+      ex('The illustrator receives a [[licensing fee]] for each commercial print run.', 'Иллюстратор получает лицензионный сбор за каждый коммерческий тираж.', 'Die Illustratorin erhält eine Lizenzgebühr für jede kommerzielle Auflage.'), 'licensing fees'),
+    W('prior-art', 'noun', 'prior art', 'C1', 'уровень техники, более ранние аналоги (патентное право)', 'der Stand der Technik',
+      ex('Patent examiners search [[prior art]] before granting exclusive rights.', 'Патентные эксперты проверяют уже известные аналоги перед выдачей исключительных прав.', 'Patentprüfer sichten den Stand der Technik, bevor sie Schutzrechte erteilen.'))
+  ]);
+
+  reg('legal_criminal', [
+    W('court-summons', 'noun', 'court summons', 'C1', 'судебная повестка', 'die gerichtliche Vorladung',
+      ex('The witness received an official [[court summons]] two weeks before the trial.', 'Свидетель получил официальную судебную повестку за две недели до процесса.', 'Der Zeuge erhielt zwei Wochen vor dem Prozess eine gerichtliche Vorladung.'), 'court summonses'),
+    W('plea', 'noun', 'plea', 'C1', 'заявление подсудимого о виновности/невиновности; ходатайство', 'das Plädoyer; das Schuldbekenntnis',
+      ex('His lawyer entered a not-guilty [[plea]] at the start of the hearing.', 'Его адвокат заявил о невиновности в начале слушания.', 'Sein Anwalt plädierte zu Beginn der Verhandlung auf nicht schuldig.'), 'pleas'),
+    W('alibi', 'noun', 'alibi', 'B2', 'алиби', 'das Alibi',
+      ex('Badge records from the office confirmed her [[alibi]] for that evening.', 'Записи пропусков в офисе подтвердили её алиби на тот вечер.', 'Zugangsdaten aus dem Büro bestätigten ihr Alibi für jenen Abend.'), 'alibis')
+  ]);
+
+  reg('legal_labour', [
+    W('parental-leave', 'noun', 'parental leave', 'B2', 'отпуск по уходу за ребёнком', 'die Elternzeit',
+      ex('Both parents are entitled to take [[parental leave]] during the first year.', 'Оба родителя имеют право взять отпуск по уходу за ребёнком в первый год.', 'Beide Elternteile haben Anspruch auf Elternzeit im ersten Jahr.')),
+    W('reprimand', 'noun', 'reprimand', 'B2', 'выговор, официальное предупреждение', 'die Abmahnung, Verwarnung',
+      ex('Repeatedly ignoring safety gear leads to a formal written [[reprimand]].', 'Систематическое игнорирование защитной экипировки ведёт к официальному выговору.', 'Wiederholtes Ignorieren von Schutzkleidung führt zu einer schriftlichen Abmahnung.'), 'reprimands'),
+    W('misconduct', 'noun', 'misconduct', 'B2', 'должностной проступок, нарушение дисциплины', 'das Fehlverhalten',
+      ex('Sharing client records externally counts as gross [[misconduct]].', 'Передача клиентских данных вовне считается грубым должностным проступком.', 'Die Weitergabe von Kundendaten nach außen gilt als grobes Fehlverhalten.'))
+  ]);
+
+  reg('fin_hr', [
+    W('supervisor', 'noun', 'supervisor', 'B1', 'непосредственный руководитель, супервайзер', 'der Vorgesetzte',
+      ex('Let your [[supervisor]] know early if a task blocks the rest of the shift.', 'Заранее предупредите руководителя, если задача тормозит остальную смену.', 'Informieren Sie Ihre Vorgesetzte frühzeitig, falls eine Aufgabe den Schichtablauf blockiert.'), 'supervisors'),
+    W('successor', 'noun', 'successor', 'B2', 'преемник', 'der Nachfolger',
+      ex('She spent two months training her [[successor]] before moving abroad.', 'Она два месяца готовила своего преемника перед переездом за границу.', 'Sie arbeitete ihren Nachfolger zwei Monate lang ein, bevor sie ins Ausland ging.'), 'successors'),
+    W('intern', 'noun', 'intern', 'B1', 'стажёр', 'der Praktikant',
+      ex('Our summer [[intern]] helped automate the weekly test report.', 'Наш летний стажёр помог автоматизировать еженедельный отчёт по тестам.', 'Unser Sommerpraktikant half dabei, den wöchentlichen Testbericht zu automatisieren.'), 'interns')
+  ]);
+
+  reg('fin_marketing', [
+    W('brochure', 'noun', 'brochure', 'B1', 'брошюра, буклет', 'die Broschüre',
+      ex('Pick up a printed [[brochure]] with full pricing at our stand.', 'Возьмите на нашем стенде печатную брошюру с полным прайс-листом.', 'Nehmen Sie an unserem Stand eine gedruckte Broschüre mit allen Preisen mit.'), 'brochures'),
+    W('press-kit', 'noun', 'press kit', 'B2', 'пресс-кит (материалы для СМИ)', 'die Pressemappe',
+      ex('Journalists can download logos and photos from our online [[press kit]].', 'Журналисты могут скачать логотипы и фото из нашего онлайн-пресс-кита.', 'Journalisten können Logos und Fotos aus unserer Online-Pressemappe herunterladen.'), 'press kits'),
+    W('brand-awareness', 'noun', 'brand awareness', 'B2', 'узнаваемость бренда', 'die Markenbekanntheit',
+      ex('Sponsoring local workshops steadily grew [[brand awareness]].', 'Спонсорство локальных воркшопов постепенно повысило узнаваемость бренда.', 'Das Sponsoring lokaler Workshops steigerte die Markenbekanntheit stetig.'))
+  ]);
+
+  reg('svc_hotel', [
+    W('front-desk', 'noun', 'front desk', 'B1', 'стойка регистрации, ресепшен', 'die Rezeption',
+      ex('Leave your room key at the [[front desk]] if you check out before seven.', 'Оставьте ключ от номера на ресепшене, если выезжаете до семи утра.', 'Geben Sie Ihren Zimmerschlüssel an der Rezeption ab, wenn Sie vor sieben Uhr auschecken.'), 'front desks'),
+    W('check-in', 'noun', 'check-in', 'B1', 'регистрация заезда', 'der Check-in, die Anmeldung',
+      ex('Online [[check-in]] cuts waiting time at the reception desk in half.', 'Онлайн-регистрация заезда вдвое сокращает ожидание на стойке.', 'Der Online-Check-in halbiert die Wartezeit an der Rezeption.'), 'check-ins'),
+    W('room-upgrade', 'noun', 'room upgrade', 'B2', 'повышение категории номера', 'das Zimmer-Upgrade',
+      ex('To resolve the overbooking, the clerk offered a free [[room upgrade]].', 'Чтобы решить проблему овербукинга, администратор предложил бесплатное повышение категории номера.', 'Um die Überbuchung zu lösen, bot der Mitarbeiter ein kostenloses Zimmer-Upgrade an.'), 'room upgrades')
+  ]);
+
+  reg('svc_gastro', [
+    W('food-allergen', 'noun', 'food allergen', 'B2', 'пищевой аллерген', 'das Lebensmittelallergen',
+      ex('Staff must list every [[food allergen]] clearly on the banquet card.', 'Персонал должен чётко указать каждый пищевой аллерген в банкетном меню.', 'Das Personal muss jedes Lebensmittelallergen deutlich auf der Menükarte vermerken.'), 'food allergens'),
+    W('table-service', 'noun', 'table service', 'B1', 'обслуживание за столиками', 'der Tischservice',
+      ex('After five p.m. the bistro switches from counter orders to full [[table service]].', 'После пяти вечера бистро переходит от заказов у стойки к полному обслуживанию за столиками.', 'Ab siebzehn Uhr stellt das Bistro von Thekenbestellung auf vollen Tischservice um.')),
+    W('catering-order', 'noun', 'catering order', 'B2', 'заказ на кейтеринг', 'der Catering-Auftrag',
+      ex('Confirm guest numbers forty-eight hours before a large [[catering order]].', 'Подтверждайте число гостей за сорок восемь часов до крупного заказа на кейтеринг.', 'Bestätigen Sie die Gästezahl achtundvierzig Stunden vor einem großen Catering-Auftrag.'), 'catering orders')
+  ]);
+
+  reg('med_clinical', [
+    W('outpatient', 'adj', 'outpatient', 'B2', 'амбулаторный', 'ambulant',
+      ex('The minor procedure is handled on an [[outpatient]] basis without a hospital stay.', 'Небольшая процедура проводится амбулаторно, без госпитализации.', 'Der kleine Eingriff erfolgt ambulant ohne Krankenhausaufenthalt.')),
+    W('inpatient', 'adj', 'inpatient', 'B2', 'стационарный (с госпитализацией)', 'stationär',
+      ex('Patients recovering from surgery stay under [[inpatient]] observation for three days.', 'Пациенты после операции остаются под стационарным наблюдением три дня.', 'Patienten bleiben nach der Operation drei Tage zur stationären Beobachtung.')),
+    W('emergency-service', 'noun', 'emergency service', 'B1', 'служба экстренной помощи', 'der Rettungsdienst, Notdienst',
+      ex('Call the [[emergency service]] immediately if a colleague shows signs of shock.', 'Немедленно вызывайте скорую помощь, если у коллеги признаки шока.', 'Rufen Sie sofort den Rettungsdienst, wenn ein Kollege Anzeichen eines Schocks zeigt.'), 'emergency services')
+  ]);
+})();
+
+/* === Content expansion Wave 2 (2026-11-27): +36 EN Pro terms (thin legal & service topics) === */
+(function () {
+  'use strict';
+  function ex(t, ru, de) { return { t: t, ru: ru, de: de }; }
+  function W(id, pos, t, level, ru, de, e, plural) {
+    var o = { id: 'en:w2:pro:' + id, pos: pos, t: t, level: level, learnable: true, ru: ru, de: de, examples: [e] };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function reg(topic, items) { GT.register({ tab: 'it', topic: topic, items: items }); }
+
+  reg('legal_corporate', [
+    W('articles-of-association', 'noun', 'bylaws', 'C1', 'внутренний устав, регламент организации', 'die Satzung, Geschäftsordnung',
+      ex('Any change to the corporate [[bylaws]] requires a two-thirds vote.', 'Любое изменение корпоративного регламента требует двух третей голосов.', 'Jede Änderung der Geschäftsordnung bedarf einer Zweidrittelmehrheit.')),
+    W('managing-director', 'noun', 'managing director', 'B2', 'управляющий директор', 'der Geschäftsführer',
+      ex('The [[managing director]] signs all leases above fifty thousand euros.', 'Управляющий директор подписывает все договоры аренды свыше пятидесяти тысяч евро.', 'Der Geschäftsführer unterzeichnet alle Mietverträge über fünfzigtausend Euro.'), 'managing directors'),
+    W('commercial-register', 'noun', 'commercial register', 'B2', 'торговый реестр', 'das Handelsregister',
+      ex('Newly appointed board members appear in the [[commercial register]].', 'Новые члены правления вносятся в торговый реестр.', 'Neu bestellte Vorstände erscheinen im Handelsregister.'), 'commercial registers'),
+    W('fiduciary-duty', 'noun', 'shareholding', 'C1', 'доля акций, долевое участие в компании', 'die Beteiligung, der Aktienanteil',
+      ex('The founders retained a majority [[shareholding]] after the second funding round.', 'Основатели сохранили контрольную долю участия после второго раунда инвестиций.', 'Die Gründer behielten nach der zweiten Finanzierungsrunde eine Mehrheitsbeteiligung.'), 'shareholdings'),
+    W('whistleblower', 'noun', 'audit committee', 'C1', 'комитет по внутреннему аудиту', 'der Prüfungsausschuss',
+      ex('The independent [[audit committee]] reviews quarterly risk reports.', 'Независимый комитет по аудиту проверяет квартальные отчёты о рисках.', 'Der unabhängige Prüfungsausschuss prüft die vierteljährlichen Risikoberichte.'), 'audit committees'),
+    W('merger', 'noun', 'merger', 'B2', 'слияние (компаний)', 'die Fusion, der Zusammenschluss',
+      ex('Competition authorities reviewed the proposed bank [[merger]].', 'Антимонопольные органы рассмотрели планируемое слияние банков.', 'Die Wettbewerbsbehörden prüften die geplante Bankenfusion.'), 'mergers')
+  ]);
+
+  reg('legal_contracts', [
+    W('force-majeure', 'noun', 'rescission', 'C1', 'расторжение договора с возвратом сторон в исходное положение', 'der Rücktritt vom Vertrag, die Aufhebung',
+      ex('Material misrepresentation entitles the buyer to contract [[rescission]].', 'Существенное искажение фактов даёт покупателю право на расторжение договора.', 'Wesentliche Täuschung berechtigt den Käufer zum Vertragsrücktritt.')),
+    W('contractual-penalty', 'noun', 'contractual penalty', 'C1', 'договорная неустойка, штраф', 'die Vertragsstrafe',
+      ex('Delays exceeding ten days trigger a daily [[contractual penalty]].', 'Задержка более десяти дней включает ежедневную договорную неустойку.', 'Verzögerungen von über zehn Tagen lösen eine tägliche Vertragsstrafe aus.'), 'contractual penalties'),
+    W('severability-clause', 'noun', 'retention clause', 'C1', 'оговорка о сохранении права собственности до полной оплаты', 'die Eigentumsvorbehaltsklausel',
+      ex('Under the [[retention clause]], goods remain seller property until settled in full.', 'Согласно оговорке о сохранении права собственности, товар остаётся у продавца до полной оплаты.', 'Nach der Vorbehaltsklausel bleibt die Ware bis zur vollständigen Zahlung Eigentum des Verkäufers.'), 'retention clauses'),
+    W('indemnify', 'verb', 'assign', 'C1', 'переуступать, передавать права или обязанности по договору', 'abtreten, übertragen',
+      ex('Neither party may [[assign]] its payment rights without written approval.', 'Ни одна из сторон не вправе уступать свои права требования без письменного согласия.', 'Keine Partei darf Forderungen ohne schriftliche Zustimmung abtreten.')),
+    W('waive', 'verb', 'waive', 'C1', 'добровольно отказываться от права / требования', 'verzichten auf',
+      ex('The bank agreed to [[waive]] the late fee as a goodwill gesture.', 'Банк согласился отменить комиссию за просрочку в качестве жеста доброй воли.', 'Die Bank verzichtete aus Kulanz auf die Verzugsgebühr.')),
+    W('binding', 'adj', 'legally binding', 'B2', 'юридически обязывающий', 'rechtsverbindlich',
+      ex('Verbal quotes are advisory; only a signed order is [[legally binding]].', 'Устные оценки носят предварительный характер; обязывает только подписанный заказ.', 'Mündliche Preise sind unverbindlich; nur ein unterschriebener Auftrag ist rechtsverbindlich.'))
+  ]);
+
+  reg('legal_ip', [
+    W('licensing-agreement', 'noun', 'licensing agreement', 'B2', 'лицензионное соглашение', 'der Lizenzvertrag',
+      ex('Our [[licensing agreement]] covers commercial deployment across Europe.', 'Наше лицензионное соглашение охватывает коммерческое внедрение в Европе.', 'Unser Lizenzvertrag deckt die kommerzielle Nutzung in Europa ab.'), 'licensing agreements'),
+    W('cease-and-desist', 'noun', 'injunction', 'C1', 'судебный запрет (обеспечительная мера)', 'die einstweilige Verfügung',
+      ex('The court issued an urgent [[injunction]] halting sales of the copied device.', 'Суд вынес срочный запрет, остановивший продажи скопированного прибора.', 'Das Gericht erließ eine einstweilige Verfügung gegen den Verkauf des kopierten Geräts.'), 'injunctions'),
+    W('infringement', 'noun', 'infringement', 'C1', 'нарушение (прав, патента)', 'die Rechtsverletzung, der Verstoß',
+      ex('Selling counterfeit parts constitutes a clear trademark [[infringement]].', 'Продажа поддельных деталей является прямым нарушением прав на товарный знак.', 'Der Verkauf gefälschter Teile stellt eine klare Markenrechtsverletzung dar.'), 'infringements'),
+    W('public-domain', 'noun', 'royalty fee', 'B2', 'роялти, лицензионный платёж автору', 'die Lizenzgebühr, Tantieme',
+      ex('Each textbook reprint earns the illustrator a small [[royalty fee]].', 'С каждого переиздания учебника иллюстратор получает небольшое роялти.', 'Bei jeder Neuauflage erhält der Illustrator eine kleine Lizenzgebühr.'), 'royalty fees'),
+    W('proprietary', 'adj', 'proprietary', 'C1', 'запатентованный, проприетарный, принадлежащий компании', 'urheberrechtlich geschützt, proprietär',
+      ex('Never upload [[proprietary]] source code to unapproved external tools.', 'Никогда не загружайте закрытый исходный код в несогласованные внешние сервисы.', 'Laden Sie niemals proprietären Quellcode in ungeprüfte externe Tools hoch.')),
+    W('plagiarise', 'verb', 'plagiarise', 'B2', 'заниматься плагиатом, присваивать чужой текст', 'plagiieren',
+      ex('Training manuals must cite sources rather than [[plagiarise]] competitor guides.', 'Учебные пособия должны указывать источники, а не копировать чужие инструкции.', 'Handbücher müssen Quellen nennen statt Konkurrenztexte zu plagiieren.'))
+  ]);
+
+  reg('legal_criminal', [
+    W('prosecutor', 'noun', 'public prosecutor', 'B2', 'прокурор, государственный обвинитель', 'der Staatsanwalt',
+      ex('The [[public prosecutor]] presented bank transfers from three shell firms.', 'Прокурор представил банковские переводы с трёх подставных фирм.', 'Die Staatsanwaltschaft legte Überweisungen dreier Briefkastenfirmen vor.'), 'public prosecutors'),
+    W('acquittal', 'noun', 'parole', 'C1', 'условно-досрочное освобождение', 'die vorzeitige Haftentlassung auf Bewährung',
+      ex('The inmate became eligible for supervised [[parole]] after completing rehabilitation.', 'Заключённый получил право на условно-досрочное освобождение после программы реабилитации.', 'Der Häftling erfüllte nach der Resozialisierung die Voraussetzungen für Haftentlassung auf Bewährung.')),
+    W('suspended-sentence', 'noun', 'suspended sentence', 'C1', 'условный срок', 'die Bewährungsstrafe',
+      ex('First-time tax offenders often receive a [[suspended sentence]] plus a fine.', 'При первом налоговом нарушении часто назначают условный срок и штраф.', 'Ersttäter bei Steuervergehen erhalten oft eine Bewährungsstrafe plus Geldstrafe.'), 'suspended sentences'),
+    W('plea', 'noun', 'testimony', 'B2', 'свидетельские показания', 'die Zeugenaussage',
+      ex('Eyewitness [[testimony]] matched the timestamp on the security footage.', 'Показания очевидца совпали со временем на записи камеры наблюдения.', 'Die Zeugenaussage deckte sich mit dem Zeitstempel der Überwachungskamera.'), 'testimonies'),
+    W('custody', 'noun', 'subpoena', 'C1', 'судебная повестка / требование о предоставлении документов', 'die gerichtliche Vorladung',
+      ex('Accounting received a formal [[subpoena]] to produce five years of ledgers.', 'Бухгалтерия получила судебную повестку с требованием предоставить книги за пять лет.', 'Die Buchhaltung erhielt eine gerichtliche Vorladung zur Vorlage von fünf Jahresbüchern.'), 'subpoenas'),
+    W('embezzle', 'verb', 'embezzle', 'C1', 'присваивать / растрачивать (вверенные деньги)', 'veruntreuen, unterschlagen',
+      ex('Internal audit rules make it much harder to [[embezzle]] petty cash.', 'Правила внутреннего аудита значительно усложняют растрату наличных средств.', 'Interne Revisionsregeln erschweren es erheblich, Kassenmittel zu veruntreuen.'))
+  ]);
+
+  reg('svc_hotel', [
+    W('overbooking', 'noun', 'express checkout', 'B1', 'экспресс-выезд (без очереди на ресепшене)', 'der Express-Check-out',
+      ex('Guests with an emailed invoice can use the lobby [[express checkout]] box.', 'Гости с электронным счётом могут воспользоваться ящиком экспресс-выезда в холле.', 'Gäste mit elektronischer Rechnung können den Express-Check-out nutzen.')),
+    W('concierge', 'noun', 'valet parking', 'B2', 'услуга парковки автомобиля сотрудником отеля', 'der Parkservice',
+      ex('Hotel [[valet parking]] drops your car back at the entrance within five minutes.', 'Парковщик отеля подаст вашу машину ко входу за пять минут.', 'Der Parkservice des Hotels bringt Ihr Auto binnen fünf Minuten zum Eingang.')),
+    W('late-checkout', 'noun', 'luggage storage', 'B1', 'камера хранения багажа', 'die Gepäckaufbewahrung',
+      ex('Free [[luggage storage]] lets early arrivals explore the old town hands-free.', 'Бесплатная камера хранения позволяет приехавшим пораньше гулять по городу налегке.', 'Kostenlose Gepäckaufbewahrung lässt Frühankommende unbeschwert die Altstadt erkunden.')),
+    W('housekeeping', 'noun', 'bed and breakfast', 'B1', 'мини-отель / тариф «ночлег и завтрак»', 'Übernachtung mit Frühstück',
+      ex('We booked a quiet family-run [[bed and breakfast]] near the harbour.', 'Мы забронировали тихий семейный мини-отель типа «ночлег и завтрак» у гавани.', 'Wir buchten eine ruhige Pension mit Frühstück nahe dem Hafen.')),
+    W('no-show', 'noun', 'doorman', 'B1', 'швейцар, портье у входа', 'der Portier, Türsteher',
+      ex('The evening [[doorman]] hailed a licensed taxi during the downpour.', 'Вечерний швейцар поймал официальное такси во время ливня.', 'Der Abendportier rief während des Platzregens ein lizenziertes Taxi.'), 'doormen'),
+    W('tourist-tax', 'noun', 'tourist tax', 'B1', 'туристический / курортный налог', 'die Kurtaxe',
+      ex('The municipal [[tourist tax]] is payable at reception upon departure.', 'Муниципальный туристический сбор оплачивается на ресепшене при выезде.', 'Die städtische Kurtaxe wird bei Abreise an der Rezeption gezahlt.'), 'tourist taxes')
+  ]);
+
+  reg('svc_gastro', [
+    W('dietary-requirement', 'noun', 'side dish', 'B1', 'гарнир', 'die Beilage',
+      ex('Roasted greens come as a complimentary [[side dish]] with every main course.', 'Запечённые овощи подаются как бесплатный гарнир к каждому горячему блюду.', 'Ofengemüse gibt es als kostenlose Beilage zu jedem Hauptgericht.'), 'side dishes'),
+    W('food-intolerance', 'noun', 'food intolerance', 'B2', 'пищевая непереносимость', 'die Lebensmittelunverträglichkeit',
+      ex('Lactose [[food intolerance]] is flagged clearly beside each cream sauce.', 'Непереносимость лактозы чётко отмечена рядом с каждым сливочным соусом.', 'Laktose-Unverträglichkeit ist neben jeder Sahnesoße deutlich vermerkt.'), 'food intolerances'),
+    W('daily-special', 'noun', 'daily special', 'B1', 'блюдо дня', 'das Tagesgericht',
+      ex('The waiter wrote three seasonal [[daily specials]] on the chalkboard.', 'Официант написал мелом на доске три сезонных блюда дня.', 'Der Kellner schrieb drei saisonale Tagesgerichte auf die Kreidetafel.'), 'daily specials'),
+    W('waiting-staff', 'noun', 'waiting staff', 'B2', 'обслуживающий персонал (официанты)', 'das Servicepersonal',
+      ex('Brief [[waiting staff]] on new menu ingredients before the lunch rush.', 'Проведите инструктаж официантов по составу новых блюд до обеденного наплыва.', 'Unterweisen Sie das Servicepersonal vor dem Mittagsandrang über neue Zutaten.')),
+    W('corkage-fee', 'noun', 'set menu', 'B2', 'комплексное меню, сет из нескольких перемен', 'das Festmenü, Tagesmenü',
+      ex('On Sundays the kitchen offers a three-course [[set menu]] at a fixed price.', 'По воскресеньям кухня предлагает сет-меню из трёх блюд по фиксированной цене.', 'Sonntags bietet die Küche ein dreigängiges Festmenü zum Festpreis.'), 'set menus'),
+    W('settle-the-bill', 'verb', 'settle the bill', 'B1', 'оплатить счёт, рассчитаться', 'die Rechnung begleichen',
+      ex('Can we [[settle the bill]] at the bar before our taxi arrives?', 'Можно оплатить счёт у стойки до того, как приедет такси?', 'Können wir die Rechnung an der Bar begleichen, bevor das Taxi kommt?'))
+  ]);
+})();

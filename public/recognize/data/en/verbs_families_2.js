@@ -410,3 +410,351 @@
   P.config.ROOT_PLAN = P.config.ROOT_PLAN.filter(function (id) { return /^vf-/.test(id) && ORDER.indexOf(id) < 0; })
     .concat(ORDER, P.config.ROOT_PLAN.filter(function (id) { return !/^vf-/.test(id); }));
 })();
+
+/* === Content expansion 2026-11-27 (6 EN phrasal verb families + 4 word-building families) === */
+(function () {
+  'use strict';
+  var P = GT.packs.en, NEW_ORDER = [];
+  function ex(t, ru, de) { return { t: t, ru: ru, de: de }; }
+  function existing(t) { return P.items.filter(function (x) { return x.t === t; })[0] || null; }
+  function base(verb, forms, level, ru, de, examples, note) {
+    var exst = existing(verb);
+    if (exst) return exst;
+    return { id: 'en:x27:vf:' + verb, base: true, core: true, pos: 'verb', t: verb, level: level, learnable: true,
+      forms: { praes: forms[0], praet: forms[1], perf: forms[2] }, ru: ru, de: de, examples: examples,
+      note: note ? { ru: note[0], de: note[1] } : null };
+  }
+  function pv(t, pfx, m, level, ru, de, examples, par, expl, opts) {
+    opts = opts || {};
+    var exst = existing(t);
+    if (exst) return exst;
+    var w = { id: 'en:x27:vf:' + t.replace(/ /g, '-'), t: t, pos: 'phrasal verb', level: level, ru: ru, de: de, examples: examples, learnable: true };
+    if (pfx) { w.prefix = 'pv-' + pfx; w.particle = true; }
+    w.core = opts.core !== false;
+    w.transparency = opts.tr || (pfx ? 'transparent' : 'figurative');
+    if (par) w.parallel = { ru: par[0], de: par[1] };
+    if (pfx && expl && m != null) w.prefixDrill = { ex: 0, meaning: m, explain: { ru: expl[0], de: expl[1] } };
+    if (opts.note) w.note = { ru: opts.note[0], de: opts.note[1] };
+    return w;
+  }
+  function word(id, pos, t, level, ru, de, examples, opts) {
+    var exst = existing(t);
+    if (exst) return exst;
+    opts = opts || {};
+    var o = { id: 'en:x27:fam:' + id, pos: pos, t: t, level: level, ru: ru, de: de, examples: examples, learnable: true };
+    if (opts.base) o.base = true;
+    if (opts.core !== false) o.core = true;
+    if (opts.plural) o.plural = opts.plural;
+    return o;
+  }
+  function family(verb, ru, de, note, words) {
+    var id = 'vf-' + verb;
+    words = words.filter(Boolean);
+    GT.registerRoot({ id: id, verb: verb, t: verb, label: verb.toUpperCase(), ru: ru, de: de, note: { ru: note[0], de: note[1] },
+      words: words, group: 'Verbs + particles', mapVerbs: true });
+    NEW_ORDER.push(id);
+  }
+  function wbFamily(id, baseWord, ru, de, note, words) {
+    words = words.filter(Boolean);
+    GT.registerRoot({ id: id, verb: baseWord, t: baseWord, label: baseWord.toUpperCase(), ru: ru, de: de, note: { ru: note[0], de: note[1] },
+      words: words, group: 'Word-building families', mapVerbs: false });
+    NEW_ORDER.push(id);
+  }
+
+  /* 1. WORK */
+  family('work', 'работать', 'arbeiten', [
+    'Правильный глагол: work — worked — worked. С частицами охватывает тренировки, налаживание и постепенную проработку: work out, work on, work through, work up.',
+    'Regelmäßiges Verb: work — worked — worked. Mit Partikeln für Training, Feinschliff und Durcharbeiten: work out, work on, work through, work up.'
+  ], [
+    base('work', ['works', 'worked', 'worked'], 'A1', 'работать; функционировать', 'arbeiten; funktionieren', [
+      ex('Does the new card reader [[work]] offline as well?', 'Новый считыватель карт работает и без сети?', 'Funktioniert das neue Kartenlesegerät auch offline?')
+    ]),
+    pv('work on', 'on', null, 'B1', 'работать над (улучшением), дорабатывать', 'arbeiten an, feilen an', [
+      ex('We are still [[working on]] a clearer onboarding checklist.', 'Мы всё ещё работаем над более понятным чек-листом адаптации.', 'Wir arbeiten noch an einer klareren Einarbeitungs-Checkliste.')
+    ], ['работать НАД', 'arbeiten AN']),
+    pv('work through', 'through', 0, 'B2', 'последовательно проработать, разобрать до конца', 'durcharbeiten, bewältigen', [
+      ex('Let’s [[work through]] the audit comments item by item.', 'Давай последовательно разберём замечания аудита пункт за пунктом.', 'Lass uns die Audit-Hinweise Punkt für Punkt durcharbeiten.')
+    ], ['ПРОработать насквозь', 'DURCHarbeiten']),
+    pv('work off', 'off', null, 'B2', 'сбросить (стресс, лишнее), отработать', 'abarbeiten, abbauen (Stress)', [
+      ex('She went for a brisk walk to [[work off]] the stress after the call.', 'Она вышла на быструю прогулку, чтобы сбросить стресс после звонка.', 'Sie ging zügig spazieren, um den Stress nach dem Anruf abzubauen.')
+    ], ['Сбросить', 'ABbauen']),
+    pv('work up', 'up', null, 'B2', 'наработать (аппетит), подготовить; (get worked up) разволноваться', 'aufbauen (Appetit); sich aufregen', [
+      ex('The team [[worked up]] three rough prototypes in two days.', 'Команда подготовила три черновых прототипа за два дня.', 'Das Team erarbeitete in zwei Tagen drei grobe Prototypen.')
+    ], ['НАработать', 'er-arbeiten'], null, { tr: 'figurative' }),
+    pv('work around', 'around', null, 'B2', 'обойти (ограничение, проблему)', 'umgehen (ein Hindernis)', [
+      ex('Until the patch arrives, we can [[work around]] the limit manually.', 'Пока не вышел патч, мы можем обойти это ограничение вручную.', 'Bis der Patch eintrifft, können wir die Begrenzung manuell umgehen.')
+    ], ['Обойти', 'UMgehen']),
+    existing('work out'),
+    word('workout', 'noun', 'workout', 'B1', 'тренировка', 'das Training, Workout', [
+      ex('A short morning [[workout]] helps him focus during long meetings.', 'Короткая утренняя тренировка помогает ему сосредоточиться на долгих встречах.', 'Ein kurzes Morgen-Training hilft ihm, sich in langen Meetings zu konzentrieren.')
+    ], { plural: 'workouts' })
+  ]);
+
+  /* 2. CUT */
+  family('cut', 'резать; сокращать', 'schneiden; kürzen', [
+    'Неправильный глагол: cut — cut — cut. Очень продуктивен для деловой и бытовой речи: cut down (сократить), cut off (отрезать/прервать), cut out (вырезать/убрать), cut back (урезать бюджет).',
+    'Unregelmäßiges Verb: cut — cut — cut. Häufig in Alltag und Beruf: cut down (reduzieren), cut off (abschneiden), cut out (streichen), cut back (kürzen).'
+  ], [
+    base('cut', ['cuts', 'cut', 'cut'], 'A1', 'резать; сокращать', 'schneiden; kürzen', [
+      ex('Please [[cut]] the tape carefully so you don’t scratch the frame.', 'Пожалуйста, аккуратно разрежь скотч, чтобы не поцарапать раму.', 'Bitte schneide das Klebeband vorsichtig auf, um den Rahmen nicht zu zerkratzen.')
+    ]),
+    pv('cut off', 'off', 0, 'B1', 'отрезать, отключать (связь, воду); прерывать собеседника', 'abschneiden, unterbrechen, abstellen', [
+      ex('Sorry, the tunnel [[cut]] us [[off]] — could you repeat that last sentence?', 'Извини, в тоннеле прервалась связь — повтори последнюю фразу?', 'Entschuldigung, der Tunnel hat uns unterbrochen — kannst du den letzten Satz wiederholen?')
+    ], ['ОТрезать', 'ABschneiden']),
+    pv('cut down', 'down', 0, 'B2', 'сокращать, урезать (расходы, потребление)', 'reduzieren, senken', [
+      ex('Switching to LED bulbs helped [[cut down]] electricity bills.', 'Переход на светодиодные лампы помог сократить счета за электричество.', 'Der Umstieg auf LED-Lampen half, die Stromrechnung zu senken.')
+    ], ['Урезать', 'herunterkürzen']),
+    pv('cut out', 'out', 0, 'B1', 'вырезать; исключить, убрать (из рациона, текста)', 'ausschneiden; weglassen, streichen', [
+      ex('Let’s [[cut out]] the repetition in the second paragraph.', 'Давай уберём повтор во втором абзаце.', 'Lass uns die Wiederholung im zweiten Absatz streichen.')
+    ], ['ВЫрезать', 'AUSschneiden']),
+    pv('cut back', 'back', null, 'B2', 'сокращать (бюджет, штат, расходы)', 'kürzen, zurückfahren', [
+      ex('During the winter slump, the café had to [[cut back]] on evening shifts.', 'Во время зимнего спада кафе пришлось сократить вечерние смены.', 'In der Winterflaute musste das Café die Abendschichten zurückfahren.')
+    ], ['урезать', 'zurückfahren']),
+    pv('cut in', 'in', null, 'B2', 'вклиниваться, перебивать (в разговоре или на дороге)', 'unterbrechen; einscheren', [
+      ex('A delivery van [[cut in]] sharply right in front of the bus.', 'Фургон доставки резко подрезал прямо перед автобусом.', 'Ein Lieferwagen scherte scharf direkt vor dem Bus ein.')
+    ], ['Вклиниться', 'dazwischengehen'], null, { tr: 'figurative' }),
+    pv('cut across', null, null, 'C1', 'сокращать путь напрямую; затрагивать разные группы', 'abkürzen; übergreifen auf', [
+      ex('Data protection rules [[cut across]] almost every department.', 'Правила защиты данных затрагивают почти каждый отдел.', 'Datenschutzregeln betreffen fast jede Abteilung.')
+    ], null, null, { core: false, tr: 'figurative' }),
+    word('cutback', 'noun', 'cutback', 'B2', 'сокращение, урезание (расходов)', 'die Kürzung, Einsparung', [
+      ex('Budget [[cutbacks]] delayed the office renovation until autumn.', 'Урезание бюджета отложило ремонт офиса до осени.', 'Budgetkürzungen verschoben die Bürorenovierung bis zum Herbst.')
+    ], { plural: 'cutbacks' })
+  ]);
+
+  /* 3. PULL */
+  family('pull', 'тянуть', 'ziehen', [
+    'Правильный глагол: pull — pulled — pulled. С частицами: pull off (провернуть/справиться), pull out (выйти из сделки/вытащить), pull over (прижаться к обочине), pull through (выкарабкаться).',
+    'Regelmäßiges Verb: pull — pulled — pulled. Mit Partikeln: pull off (schaffen), pull out (aussteigen), pull over (rechts ranfahren), pull through (durchkommen).'
+  ], [
+    base('pull', ['pulls', 'pulled', 'pulled'], 'A1', 'тянуть, тащить', 'ziehen', [
+      ex('[[Pull]] the handle firmly towards you to open the side door.', 'Потяни ручку уверенно на себя, чтобы открыть боковую дверь.', 'Ziehe den Griff fest zu dir, um die Seitentür zu öffnen.')
+    ]),
+    pv('pull off', 'off', null, 'B2', 'провернуть, успешно справиться с трудным делом', 'etwas Schwieriges schaffen', [
+      ex('I didn’t think we could migrate the database overnight, yet the team [[pulled]] it [[off]].', 'Я не думал, что мы перенесём базу за ночь, но команда справилась.', 'Ich hätte nicht gedacht, dass wir die Datenbank über Nacht umziehen, aber das Team hat es geschafft.')
+    ], null, null, { tr: 'figurative' }),
+    pv('pull out', 'out', 0, 'B2', 'вытащить; выйти из проекта/сделки', 'herausziehen; aussteigen', [
+      ex('One investor decided to [[pull out]] two days before signing.', 'Один инвестор решил выйти из сделки за два дня до подписания.', 'Ein Investor entschied sich zwei Tage vor der Unterschrift auszusteigen.')
+    ], ['ВЫтянуть; выйти', 'herausziehen; aussteigen']),
+    pv('pull over', 'over', null, 'B1', 'съехать на обочину, припарковаться у края дороги', 'rechts ranfahren', [
+      ex('When a warning light flashed, the driver [[pulled over]] safely.', 'Когда замигал предупреждающий сигнал, водитель аккуратно съехал на обочину.', 'Als eine Warnleuchte blinkte, fuhr der Fahrer sicher rechts ran.')
+    ], null, null, { tr: 'figurative' }),
+    pv('pull through', 'through', null, 'B2', 'выкарабкаться, пережить трудный период/болезнь', 'durchkommen, überstehen', [
+      ex('With careful rehab after the accident, he [[pulled through]] well.', 'Благодаря аккуратной реабилитации после аварии он хорошо поправился.', 'Mit sorgfältiger Reha nach dem Unfall kam er gut durch.')
+    ], ['ПРОтянуть/выстоять', 'durchkommen'], null, { tr: 'figurative' }),
+    pv('pull back', 'back', 0, 'B2', 'отступить, оттянуть назад; свернуть планы', 'zurückziehen; zurückweichen', [
+      ex('The firm [[pulled back]] from the new market after high customs fees.', 'Фирма отступила с нового рынка из-за высоких таможенных пошлин.', 'Die Firma zog sich nach hohen Zollgebühren aus dem neuen Markt zurück.')
+    ], ['ОТтянуть назад', 'ZURÜCKziehen']),
+    pv('pull up', 'up', null, 'B1', 'подъехать и остановиться; подтянуть вверх', 'vorfahren und anhalten; hochziehen', [
+      ex('A taxi [[pulled up]] outside the station entrance right on time.', 'Такси подъехало ко входу на вокзал ровно вовремя.', 'Ein Taxi fuhr pünktlich vor dem Bahnhofseingang vor.')
+    ], ['ПОДъехать', 'vorfahren']),
+    pv('pull together', null, null, 'B2', 'собраться с силами; сработать слаженно', 'sich zusammenreißen; zusammenhalten', [
+      ex('Everyone [[pulled together]] to ship the release before Friday.', 'Все сплотились, чтобы выпустить релиз до пятницы.', 'Alle hielten zusammen, um das Release vor Freitag auszuliefern.')
+    ], null, null, { core: false, tr: 'figurative' })
+  ]);
+
+  /* 4. STAND */
+  family('stand', 'стоять; терпеть', 'stehen; aushalten', [
+    'Неправильный глагол: stand — stood — stood. Частые пары: stand out (выделяться), stand by (быть наготове / поддерживать), stand up for (отстаивать), stand in for (подменять).',
+    'Unregelmäßiges Verb: stand — stood — stood. Häufig: stand out (herausragen), stand by (bereitstehen/unterstützen), stand down (zurücktreten), stand in (vertreten).'
+  ], [
+    base('stand', ['stands', 'stood', 'stood'], 'A1', 'стоять; выносить, терпеть', 'stehen; ertragen', [
+      ex('Please [[stand]] clear of the closing doors.', 'Пожалуйста, не стойте в проёме закрывающихся дверей.', 'Bitte bleiben Sie von den schließenden Türen zurück.')
+    ]),
+    pv('stand up', 'up', 0, 'B1', 'встать (со стула); (stand up for) отстаивать', 'aufstehen; (für etw.) einstehen', [
+      ex('Please [[stand up]] slowly if you felt dizzy earlier.', 'Пожалуйста, вставайте медленно, если у вас раньше кружилась голова.', 'Bitte stehen Sie langsam auf, wenn Ihnen vorhin schwindelig war.')
+    ], ['Встать', 'AUFstehen']),
+    pv('stand out', 'out', 0, 'B2', 'выделяться, бросаться в глаза', 'herausragen, auffallen', [
+      ex('Her clear summary made her application [[stand out]] immediately.', 'Чёткое резюме сразу выделило её заявку среди остальных.', 'Ihre klare Zusammenfassung ließ ihre Bewerbung sofort herausstechen.')
+    ], ['ВЫделяться', 'HERAUSstechen']),
+    pv('stand by', null, null, 'B2', 'поддерживать; быть в режиме готовности', 'beistehen; bereitstehen', [
+      ex('Two technicians will [[stand by]] during the overnight server switch.', 'Два техника будут дежурить в готовности во время ночного переключения сервера.', 'Zwei Techniker stehen während der nächtlichen Serverumstellung bereit.')
+    ], null, null, { core: false, tr: 'figurative' }),
+    pv('stand down', 'down', null, 'C1', 'уйти с поста, сложить полномочия; отступить', 'zurücktreten, abtreten', [
+      ex('The committee chair decided to [[stand down]] after six years.', 'Председатель комитета решил сложить полномочия после шести лет работы.', 'Die Ausschussvorsitzende beschloss, nach sechs Jahren zurückzutreten.')
+    ], ['сойти вниз (с поста)', 'zurücktreten'], null, { tr: 'figurative' }),
+    pv('stand in', 'in', null, 'B2', 'подменять, временно заменять (for someone)', 'einspringen, vertreten', [
+      ex('Can you [[stand in]] for me at tomorrow’s stand-up?', 'Можешь подменить меня завтра на стендапе?', 'Kannst du morgen beim Stand-up für mich einspringen?')
+    ], ['подменить', 'EINSPRINGEN'], null, { tr: 'figurative' }),
+    pv('stand for', null, null, 'B1', 'означать (аббревиатура); отстаивать, мириться с', 'stehen für; bedeuten', [
+      ex('What does the abbreviation VAT [[stand for]] on this invoice?', 'Что означает аббревиатура VAT в этом счёте?', 'Wofür steht die Abkürzung VAT auf dieser Rechnung?')
+    ], null, null, { core: false, tr: 'figurative' }),
+    word('standoff', 'noun', 'standoff', 'C1', 'тупиковая ситуация, противостояние', 'die Pattsituation', [
+      ex('Neither side blinked during the two-hour [[standoff]] over pricing.', 'Ни одна сторона не уступила за два часа жёсткого противостояния из-за цены.', 'Keine Seite gab während der zweistündigen Pattsituation beim Preis nach.')
+    ], { plural: 'standoffs' })
+  ]);
+
+  /* 5. CHECK */
+  family('check', 'проверять', 'prüfen, kontrollieren', [
+    'Правильный глагол: check — checked — checked. В быту и поездках незаменимы check in (зарегистрироваться), check out (выехать из отеля / посмотреть), check up on (проверить состояние), check over (бегло перепроверить).',
+    'Regelmäßiges Verb: check — checked — checked. Im Alltag und auf Reisen: check in (einchecken), check out (auschecken/prüfen), check over (gegenprüfen), check off (abhaken).'
+  ], [
+    base('check', ['checks', 'checked', 'checked'], 'A2', 'проверять, сверять', 'prüfen, nachsehen', [
+      ex('Always [[check]] the attachment before hitting send.', 'Всегда проверяйте вложение перед отправкой письма.', 'Prüfen Sie immer den Anhang, bevor Sie auf Senden klicken.')
+    ]),
+    pv('check on', 'on', null, 'B1', 'проверить, заглянуть проверить (состояние)', 'nachsehen, prüfen', [
+      ex('The supervisor walked by to [[check on]] the new team during training.', 'Руководитель заглянул проверить, как дела у новой команды на обучении.', 'Die Vorgesetzte schaute vorbei, um nach dem neuen Team in der Schulung zu sehen.')
+    ], ['ПРОВЕРИТЬ', 'nachsehen']),
+    pv('check out', 'out', 0, 'B1', 'выписаться (из отеля); проверить, заглянуть', 'auschecken; sich ansehen', [
+      ex('Guests must [[check out]] before eleven unless they book a late departure.', 'Гости должны выписаться до одиннадцати, если не заказали поздний выезд.', 'Gäste müssen vor elf Uhr auschecken, sofern sie keinen späten Check-out buchen.')
+    ], ['ВЫписаться', 'AUSchecken']),
+    pv('check up', 'up', null, 'B2', 'навестить / проверить состояние (check up on)', 'nach dem Rechten sehen, prüfen', [
+      ex('The nurse came by to [[check up]] on the patient after the procedure.', 'Медсестра зашла проверить состояние пациента после процедуры.', 'Die Pflegekraft sah nach dem Eingriff nach dem Patienten.')
+    ], null, null, { tr: 'figurative' }),
+    pv('check over', 'over', 0, 'B2', 'бегло просмотреть, перепроверить целиком', 'durchsehen, gegenprüfen', [
+      ex('Could you [[check over]] the figures on slide four before the pitch?', 'Можешь перепроверить цифры на четвёртом слайде перед питчем?', 'Könntest du die Zahlen auf Folie vier vor dem Pitch noch einmal durchsehen?')
+    ], ['ПЕРЕпроверить', 'ÜBERprüfen']),
+    pv('check off', 'off', null, 'B2', 'отметить галочкой (в списке), вычеркнуть выполненное', 'abhaken', [
+      ex('We [[checked off]] every item on the safety list before opening.', 'Мы отметили галочкой каждый пункт списка безопасности перед открытием.', 'Wir hakten jeden Punkt auf der Sicherheitsliste vor der Öffnung ab.')
+    ], ['отметить', 'ABhaken']),
+    word('checkout', 'noun', 'checkout', 'B1', 'касса; выезд из отеля', 'die Kasse; der Check-out', [
+      ex('Enter the voucher code at [[checkout]] before confirming payment.', 'Введите промокод на кассе перед подтверждением оплаты.', 'Geben Sie den Gutscheincode an der Kasse vor der Zahlungsbestätigung ein.')
+    ], { plural: 'checkouts' })
+  ]);
+
+  /* 6. HAND */
+  family('hand', 'передавать; рука', 'übergeben, reichen; Hand', [
+    'Существительное и глагол hand: hand in (сдать документ/заявление), hand out (раздать), hand over (передать дела/власть), hand back (вернуть), hand down (передать по наследству / огласить решение).',
+    'Substantiv und Verb hand: hand in (einreichen), hand out (austeilen), hand over (übergeben), hand back (zurückgeben), hand down (weitergeben/verkünden).'
+  ], [
+    base('hand', ['hands', 'handed', 'handed'], 'B1', 'вручать, передавать рукой', 'reichen, übergeben', [
+      ex('Please [[hand]] your passport to the officer at the desk.', 'Пожалуйста, передайте ваш паспорт сотруднику за стойкой.', 'Bitte reichen Sie Ihren Pass dem Beamten am Schalter.')
+    ]),
+    pv('hand in', 'in', 0, 'B1', 'сдавать (работу, отчёт, заявление)', 'einreichen, abgeben', [
+      ex('Remember to [[hand in]] your travel receipts by Friday.', 'Не забудьте сдать чеки по командировке до пятницы.', 'Denken Sie daran, Ihre Reisebelege bis Freitag einzureichen.')
+    ], ['Сдать (в инстанцию)', 'EINreichen']),
+    pv('hand out', 'out', 0, 'B1', 'раздавать (материалы, листовки)', 'austeilen, verteilen', [
+      ex('Trainers [[handed out]] safety leaflets at the start of the shift.', 'Инструкторы раздали памятки по безопасности в начале смены.', 'Die Ausbilder teilten zu Schichtbeginn Sicherheitsmerkblätter aus.')
+    ], ['РАЗдать', 'AUSteilen']),
+    existing('hand over'),
+    pv('hand back', 'back', 0, 'B1', 'отдавать обратно, возвращать', 'zurückgeben', [
+      ex('The clerk checked the signature and [[handed]] the card [[back]].', 'Сотрудник проверил подпись и вернул карту обратно.', 'Der Sachbearbeiter prüfte die Unterschrift und gab die Karte zurück.')
+    ], ['отдать НАЗАД', 'ZURÜCKgeben']),
+    pv('hand down', 'down', null, 'C1', 'передавать следующим поколениям; выносить (приговор)', 'weitergeben; (Urteil) verkünden', [
+      ex('The court will [[hand down]] its written ruling next Tuesday.', 'Суд огласит письменное решение в следующий вторник.', 'Das Gericht wird sein schriftliches Urteil am nächsten Dienstag verkünden.')
+    ], null, null, { tr: 'figurative' }),
+    word('handbook', 'noun', 'handbook', 'B1', 'справочник, руководство', 'das Handbuch', [
+      ex('Every new hire receives the staff [[handbook]] on day one.', 'Каждый новый сотрудник получает справочник персонала в первый день.', 'Jeder neue Mitarbeiter erhält am ersten Tag das Mitarbeiterhandbuch.')
+    ], { plural: 'handbooks' }),
+    existing('handover')
+  ]);
+
+  /* 7. SENSE (Word-building family, mapVerbs: false) */
+  wbFamily('sense', 'sense', 'смысл; чувство', 'Sinn, Gefühl', [
+    'Как в немецком der Sinn: одно слово даёт целый пучок прилагательных с разными оттенками: sensible (разумный!), sensitive (чувствительный — ложный друг!), senseless (бессмысленный), nonsense (чепуха).',
+    'Wie deutsch Sinn: sensible = vernünftig (nicht „sensibel“!), sensitive = empfindlich/sensibel, senseless = sinnlos, nonsense = Unsinn.'
+  ], [
+    word('sense', 'noun', 'sense', 'B1', 'смысл; чувство', 'der Sinn; das Gefühl', [
+      ex('That short summary makes much more [[sense]] now.', 'Теперь это короткое резюме имеет гораздо больше смысла.', 'Diese kurze Zusammenfassung ergibt jetzt viel mehr Sinn.')
+    ], { base: true, plural: 'senses' }),
+    word('sensible', 'adj', 'sensible', 'B1', 'разумный, благоразумный (НЕ «чувствительный»!)', 'vernünftig, sinnvoll', [
+      ex('Keeping a backup copy on an external drive is a [[sensible]] precaution.', 'Хранить резервную копию на внешнем диске — разумная мера предосторожности.', 'Eine Sicherungskopie auf einer externen Festplatte ist eine vernünftige Vorsichtsmaßnahme.')
+    ]),
+    word('sensitive', 'adj', 'sensitive', 'B2', 'чувствительный; конфиденциальный (о данных)', 'empfindlich; sensibel', [
+      ex('Never send [[sensitive]] payroll files in an unencrypted email.', 'Никогда не отправляйте конфиденциальные зарплатные файлы незашифрованным письмом.', 'Senden Sie sensible Gehaltsdateien niemals in einer unverschlüsselten E-Mail.')
+    ]),
+    word('senseless', 'adj', 'senseless', 'B2', 'бессмысленный', 'sinnlos', [
+      ex('Arguing over minor formatting details felt completely [[senseless]].', 'Спорить о мелких деталях оформления казалось совершенно бессмысленным.', 'Über winzige Formatierungsdetails zu streiten erschien völlig sinnlos.')
+    ]),
+    word('nonsense', 'noun', 'nonsense', 'B1', 'вздор, бессмыслица, чепуха', 'der Unsinn', [
+      ex('Don’t repeat unverified [[nonsense]] from random posts.', 'Не повторяйте непроверенную чепуху из случайных постов.', 'Wiederholen Sie keinen ungeprüften Unsinn aus beliebigen Posts.')
+    ]),
+    word('sensation', 'noun', 'sensation', 'B2', 'ощущение; сенсация', 'das Gefühl, Empfinden; die Sensation', [
+      ex('A tingling [[sensation]] in the fingers can be a sign of nerve strain.', 'Ощущение покалывания в пальцах может быть признаком нагрузки на нерв.', 'Ein Kribbeln in den Fingern kann auf eine Nervenreizung hindeuten.')
+    ], { plural: 'sensations' }),
+    word('sensational', 'adj', 'sensational', 'B2', 'сенсационный, потрясающий', 'sensationell', [
+      ex('Critics praised the ensemble’s [[sensational]] opening performance.', 'Критики высоко оценили потрясающую премьерную постановку труппы.', 'Kritiker lobten die sensationelle Eröffnungsvorstellung des Ensembles.')
+    ])
+  ]);
+
+  /* 8. SIGN (Word-building family, mapVerbs: false) */
+  wbFamily('sign', 'sign', 'знак; подписывать', 'Zeichen; unterschreiben', [
+    'Латинский корень signum («знак») даёт sign (знак/подписывать), signal (сигнал), signature (подпись), significant (значительный), design (дизайн/проект), resign (уволиться по собственному желанию).',
+    'Die lateinische Wurzel signum („Zeichen“) ergibt sign, signal, signature (Unterschrift), significant (bedeutend), design, resign (kündigen).'
+  ], [
+    word('sign', 'noun', 'sign', 'B1', 'знак, табличка; признак', 'das Zeichen, Schild; Anzeichen', [
+      ex('Follow the green [[signs]] towards the emergency assembly point.', 'Идите по зелёным указателям к точке сбора при эвакуации.', 'Folgen Sie den grünen Schildern zum Sammelplatz.')
+    ], { base: true, plural: 'signs' }),
+    word('signal', 'noun', 'signal', 'B1', 'сигнал, знак', 'das Signal', [
+      ex('A sudden drop in pressure is an early warning [[signal]].', 'Резкое падение давления — ранний предупреждающий сигнал.', 'Ein plötzlicher Druckabfall ist ein frühes Warnsignal.')
+    ], { plural: 'signals' }),
+    existing('signature'),
+    word('significant', 'adj', 'significant', 'B2', 'значительный, существенный', 'bedeutend, wesentlich', [
+      ex('There was a [[significant]] improvement in response times after the update.', 'После обновления время отклика существенно улучшилось.', 'Nach dem Update gab es eine deutliche Verbesserung der Reaktionszeiten.')
+    ]),
+    word('significance', 'noun', 'significance', 'C1', 'значимость, важность, смысл', 'die Bedeutung, Tragweite', [
+      ex('Few noticed the wider [[significance]] of that short footnote.', 'Мало кто заметил более широкую значимость этого короткого примечания.', 'Nur wenige bemerkten die größere Tragweite dieser kurzen Fußnote.')
+    ]),
+    word('signpost', 'noun', 'signpost', 'B1', 'дорожный указатель; ориентир', 'der Wegweiser', [
+      ex('Follow the wooden [[signpost]] past the pond to reach the station.', 'Идите по деревянному указателю мимо пруда, чтобы дойти до станции.', 'Folgen Sie dem hölzernen Wegweiser am Teich vorbei bis zum Bahnhof.')
+    ], { plural: 'signposts' }),
+    word('signify', 'verb', 'signify', 'C1', 'означать, знаменовать', 'bedeuten, anzeigen', [
+      ex('A red status light may [[signify]] a loose power cable.', 'Красный индикатор может означать неплотный кабель питания.', 'Eine rote Statusleuchte kann auf ein loses Netzkabel hinweisen.')
+    ])
+  ]);
+
+  /* 9. CLEAR (Word-building family, mapVerbs: false) */
+  wbFamily('clear', 'clear', 'ясный, чёткий; очищать', 'klar; klären', [
+    'База clear даёт наречие clearly, существительное clarity (ясность), глагол clarify (прояснять), clearance (таможенная очистка / допуск), unclear (неясный) и фразовый глагол clear up.',
+    'Die Basis clear bildet clearly, clarity (Klarheit), clarify (klären), clearance (Freigabe/Zollabfertigung), unclear (unklar) und clear up (aufklären).'
+  ], [
+    word('clear', 'adj', 'clear', 'A2', 'ясный, чёткий; свободный (о пути)', 'klar, deutlich; frei', [
+      ex('Keep the fire exit corridor [[clear]] at all times.', 'Держите проход к запасному выходу всегда свободным.', 'Halten Sie den Fluchtweg jederzeit frei.')
+    ], { base: true }),
+    word('clearly', 'adv', 'clearly', 'B1', 'ясно, отчётливо; очевидно', 'klar, deutlich; offensichtlich', [
+      ex('State the deadline [[clearly]] at the top of the email.', 'Чётко укажите срок в самом начале письма.', 'Nennen Sie die Frist klar ganz oben in der E-Mail.')
+    ]),
+    word('clarity', 'noun', 'clarity', 'C1', 'ясность, чёткость', 'die Klarheit, Deutlichkeit', [
+      ex('Thank you for the [[clarity]] of your step-by-step instructions.', 'Спасибо за ясность ваших пошаговых инструкций.', 'Vielen Dank für die Klarheit Ihrer Schritt-für-Schritt-Anleitung.')
+    ]),
+    existing('clarify'),
+    word('clear-away', 'phrasal verb', 'clear away', 'B1', 'убирать (со стола, лишние вещи)', 'abräumen, wegräumen', [
+      ex('Let’s [[clear away]] the empty boxes before the guests arrive.', 'Давай уберём пустые коробки до прихода гостей.', 'Räumen wir die leeren Kartons weg, bevor die Gäste kommen.')
+    ]),
+    word('unclear', 'adj', 'unclear', 'B1', 'неясный, неопределённый', 'unklar', [
+      ex('Several points in the draft contract remain [[unclear]].', 'Несколько пунктов в проекте договора остаются неясными.', 'Mehrere Punkte im Vertragsentwurf bleiben unklar.')
+    ]),
+    word('clear-up', 'phrasal verb', 'clear up', 'B1', 'прояснить (недоразумение); прибраться', 'klären; aufräumen', [
+      ex('A quick phone call helped [[clear up]] the billing misunderstanding.', 'Короткий звонок помог прояснить недоразумение со счётом.', 'Ein kurzes Telefonat half, das Missverständnis bei der Abrechnung zu klären.')
+    ])
+  ]);
+
+  /* 10. TRUST (Word-building family, mapVerbs: false) */
+  wbFamily('trust', 'trust', 'доверие; доверять', 'Vertrauen; vertrauen', [
+    'Вокруг trust собираются антонимы и оттенки доверия: trustworthy (надёжный), untrustworthy (ненадёжный), distrust (недоверие), mistrust (подозрительность), entrust (доверить кому-л.).',
+    'Rund um trust sammeln sich Wörter zu Vertrauen und Misstrauen: trustworthy (vertrauenswürdig), distrust (Misstrauen), entrust (anvertrauen).'
+  ], [
+    existing('trust'),
+    word('trustful', 'adj', 'trustful', 'B2', 'доверчивый, исполненный доверия', 'vertrauensvoll', [
+      ex('A [[trustful]] working relationship makes honest feedback much easier.', 'Доверительные рабочие отношения делают честную обратную связь намного проще.', 'Ein vertrauensvolles Arbeitsverhältnis macht ehrliches Feedback viel leichter.')
+    ]),
+    word('untrustworthy', 'adj', 'untrustworthy', 'B2', 'ненадёжный, не заслуживающий доверия', 'unzuverlässig, nicht vertrauenswürdig', [
+      ex('Never rely on [[untrustworthy]] third-party browser extensions.', 'Никогда не полагайтесь на ненадёжные сторонние расширения для браузера.', 'Verlassen Sie sich nie auf nicht vertrauenswürdige Browser-Erweiterungen.')
+    ]),
+    word('distrust', 'noun', 'distrust', 'B2', 'недоверие (обычно обоснованное)', 'das Misstrauen', [
+      ex('Repeated delays created growing [[distrust]] among long-term clients.', 'Повторяющиеся задержки вызвали растущее недоверие среди постоянных клиентов.', 'Wiederholte Verzögerungen führten bei Stammkunden zu wachsendem Misstrauen.')
+    ]),
+    word('mistrust', 'noun', 'mistrust', 'C1', 'недоверие, подозрительность', 'das Misstrauen, Argwohn', [
+      ex('Unclear pricing often breeds [[mistrust]] before talks even begin.', 'Непрозрачные цены часто порождают подозрительность ещё до начала переговоров.', 'Unklare Preise erzeugen oft Misstrauen, noch bevor Gespräche beginnen.')
+    ]),
+    word('entrust', 'verb', 'entrust', 'C1', 'доверять, поручать (ответственное дело)', 'anvertrauen', [
+      ex('They [[entrusted]] the new lead with the most sensitive client account.', 'Новому руководителю доверили самого важного клиента.', 'Sie vertrauten der neuen Teamleiterin den sensibelsten Kunden an.')
+    ]),
+    word('trusting', 'adj', 'trusting', 'B2', 'доверчивый', 'vertrauensselig, gutgläubig', [
+      ex('Phishing emails exploit people who are overly [[trusting]] under time pressure.', 'Фишинговые письма используют людей, слишком доверчивых в спешке.', 'Phishing-Mails nutzen Menschen aus, die unter Zeitdruck zu gutgläubig sind.')
+    ])
+  ]);
+
+  /* Register new particle examples into P.prefixes and update ROOT_PLAN */
+  P.items.forEach(function (w) {
+    if (!w.particle || !w.prefixDrill || !P.prefixes[w.prefix]) return;
+    var m = P.prefixes[w.prefix].meanings[w.prefixDrill.meaning];
+    if (!m || m.examples.some(function (e) { return e.t === w.t; })) return;
+    var first = function (s) { return String(s || '').split(';')[0].trim(); };
+    m.examples.push(ex(w.t, first(w.ru), first(w.de)));
+  });
+
+  P.config.ROOT_PLAN = P.config.ROOT_PLAN.filter(function (id) { return /^vf-/.test(id) && NEW_ORDER.indexOf(id) < 0; })
+    .concat(NEW_ORDER.filter(function (id) { return /^vf-/.test(id); }),
+      P.config.ROOT_PLAN.filter(function (id) { return !/^vf-/.test(id); }),
+      NEW_ORDER.filter(function (id) { return !/^vf-/.test(id); }));
+})();

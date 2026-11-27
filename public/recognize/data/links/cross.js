@@ -4193,3 +4193,3490 @@ GT.link([
     ]
   }
 ]);
+
+
+/* === Content expansion 2026-11-27 (Wave 1 cross-language sense links: 124) === */
+GT.link([
+  {
+    "de": [
+      "b1-x27-dringend",
+      "dringend"
+    ],
+    "en": [
+      "en:m3:urgent",
+      "urgent"
+    ],
+    "ru": [
+      "ru-x27-srochnyy",
+      "сро́чный"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-geduldig",
+      "geduldig"
+    ],
+    "en": [
+      "en:m3:patient",
+      "patient"
+    ],
+    "ru": [
+      "ru-w3-terpelivy",
+      "терпели́вый"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-ehrlich",
+      "ehrlich"
+    ],
+    "en": [
+      "en:x27:honest",
+      "honest"
+    ],
+    "ru": [
+      "ru-x27-chestnyy",
+      "че́стный"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-handtuch",
+      "Handtuch"
+    ],
+    "en": [
+      "en:x27:towel",
+      "towel"
+    ],
+    "ru": [
+      "ru-x27-polotentse",
+      "полоте́нце"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-fernbedienung",
+      "Fernbedienung"
+    ],
+    "en": [
+      "en:x27:remote-control",
+      "remote control"
+    ],
+    "ru": [
+      "ru-x27-pult",
+      "пульт"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-besichtigung",
+      "Besichtigung"
+    ],
+    "en": [
+      "en:x27:viewing",
+      "viewing"
+    ],
+    "ru": [
+      "ru-r-smotr-prosmotr",
+      "просмо́тр"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-ordentlich",
+      "ordentlich"
+    ],
+    "en": [
+      "en:x27:tidy",
+      "tidy"
+    ],
+    "ru": [
+      "ru-x27-akkuratnyy",
+      "аккура́тный"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-apotheke",
+      "Apotheke"
+    ],
+    "en": [
+      "en:m3:pharmacy",
+      "pharmacy"
+    ],
+    "ru": [
+      "ru-w-apteka",
+      "апте́ка"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-uebelkeit",
+      "Übelkeit"
+    ],
+    "en": [
+      "en:x27:nausea",
+      "nausea"
+    ],
+    "ru": [
+      "ru-x27-toshnota",
+      "тошнота́"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-schwindel",
+      "Schwindel"
+    ],
+    "en": [
+      "en:dizziness:n:main",
+      "dizziness"
+    ],
+    "ru": [
+      "ru-w2-golovokruzhenie",
+      "головокруже́ние"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-erlaubnis",
+      "Erlaubnis"
+    ],
+    "en": [
+      "en:permit:n:main",
+      "permit"
+    ],
+    "ru": [
+      "ru-content26-office-razreshenie",
+      "разреше́ние"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-verbot",
+      "Verbot"
+    ],
+    "en": [
+      "en:x27:ban",
+      "ban"
+    ],
+    "ru": [
+      "ru-x27-zapret",
+      "запре́т"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-erinnerung",
+      "Erinnerung"
+    ],
+    "en": [
+      "en:reminder:n:main",
+      "reminder"
+    ],
+    "ru": [
+      "ru-pro-napominanie",
+      "напомина́ние"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-bordkarte",
+      "Bordkarte"
+    ],
+    "en": [
+      "en:m3:boarding-pass",
+      "boarding pass"
+    ],
+    "ru": [
+      "ru-w3-posadochny",
+      "поса́дочный тало́н"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-passagier",
+      "Passagier"
+    ],
+    "en": [
+      "en:x27:passenger",
+      "passenger"
+    ],
+    "ru": [
+      "ru-x27-passazhir",
+      "пассажи́р"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-umbuchen",
+      "umbuchen"
+    ],
+    "en": [
+      "en:x27:rebook",
+      "rebook"
+    ],
+    "ru": [
+      "ru-x27-perebronirovat",
+      "переброни́ровать"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-vortrag",
+      "Vortrag"
+    ],
+    "en": [
+      "en:x27:lecture",
+      "lecture"
+    ],
+    "ru": [
+      "ru-x27-lektsiya",
+      "ле́кция"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-messe",
+      "Messe"
+    ],
+    "en": [
+      "en:x27:trade-fair",
+      "trade fair"
+    ],
+    "ru": [
+      "ru-r-stav-vystavka",
+      "вы́ставка"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-grundschule",
+      "Grundschule"
+    ],
+    "en": [
+      "en:x27:primary-school",
+      "primary school"
+    ],
+    "ru": [
+      "ru-x27-nachalnaya-shkola",
+      "нача́льная шко́ла"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-gymnasium",
+      "Gymnasium"
+    ],
+    "en": [
+      "en:x27:grammar-school",
+      "grammar school"
+    ],
+    "ru": [
+      "ru-x27-gimnaziya",
+      "гимна́зия"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-mehrheit",
+      "Mehrheit"
+    ],
+    "en": [
+      "en:more2:majority",
+      "majority"
+    ],
+    "ru": [
+      "ru-x27-bolshinstvo",
+      "большинство́"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-herausforderung",
+      "Herausforderung"
+    ],
+    "en": [
+      "en:challenge:n:main",
+      "challenge"
+    ],
+    "ru": [
+      "ru-x27-vyzov",
+      "вы́зов"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-konkurrenz",
+      "Konkurrenz"
+    ],
+    "en": [
+      "en:more2:competition",
+      "competition"
+    ],
+    "ru": [
+      "ru-content26-econ-konkurenciya",
+      "конкуре́нция"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-verantwortungsbewusst",
+      "verantwortungsbewusst"
+    ],
+    "en": [
+      "en:telc26:gewissenhaft",
+      "conscientious"
+    ],
+    "ru": [
+      "ru-telc26-gewissenhaft",
+      "добросо́вестный"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-qualifikation",
+      "Qualifikation"
+    ],
+    "en": [
+      "en:qualification:n:main",
+      "qualification"
+    ],
+    "ru": [
+      "ru-content26-edu-kvalifikaciya",
+      "квалифика́ция"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-kompetenz",
+      "Kompetenz"
+    ],
+    "en": [
+      "en:x27:competence",
+      "competence"
+    ],
+    "ru": [
+      "ru-x27-kompetentsiya",
+      "компете́нция"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-renovierung",
+      "Renovierung"
+    ],
+    "en": [
+      "en:x27:renovation",
+      "renovation"
+    ],
+    "ru": [
+      "ru-w-remont",
+      "ремо́нт"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-vermutung",
+      "Vermutung"
+    ],
+    "en": [
+      "en:content26:c1-assumption",
+      "assumption"
+    ],
+    "ru": [
+      "ru-content26-c1-dopushchenie",
+      "допуще́ние"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-vorbehalt",
+      "Vorbehalt"
+    ],
+    "en": [
+      "en:content26:c1-caveat",
+      "caveat"
+    ],
+    "ru": [
+      "ru-content26-c1-ogovorka",
+      "огово́рка"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-plausibilitaet",
+      "Plausibilität"
+    ],
+    "en": [
+      "en:x27:plausibility",
+      "plausibility"
+    ],
+    "ru": [
+      "ru-x27-pravdopodobie",
+      "правдоподо́бие"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-trugschluss",
+      "Trugschluss"
+    ],
+    "en": [
+      "en:x27:fallacy",
+      "fallacy"
+    ],
+    "ru": [
+      "ru-x27-zabluzhdenie",
+      "заблужде́ние"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-diskrepanz",
+      "Diskrepanz"
+    ],
+    "en": [
+      "en:x27:discrepancy",
+      "discrepancy"
+    ],
+    "ru": [
+      "ru-x27-nesootvetstvie",
+      "несоотве́тствие"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-praemisse",
+      "Prämisse"
+    ],
+    "en": [
+      "en:content26:c1-premise",
+      "premise"
+    ],
+    "ru": [
+      "ru-content26-c1-predposylka",
+      "предпосы́лка"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-differenziert",
+      "differenziert"
+    ],
+    "en": [
+      "en:x27:nuanced",
+      "nuanced"
+    ],
+    "ru": [
+      "ru-x27-tonkiy",
+      "то́нкий"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-einleuchtend",
+      "einleuchtend"
+    ],
+    "en": [
+      "en:content26:c1-convincing",
+      "convincing"
+    ],
+    "ru": [
+      "ru-pro4-ubeditelny",
+      "убеди́тельный"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-arbeitserlaubnis",
+      "Arbeitserlaubnis"
+    ],
+    "en": [
+      "en:x27:pro:work-permit",
+      "work permit"
+    ],
+    "ru": [
+      "ru-x27-pro-razreshenie-rabota",
+      "разреше́ние на рабо́ту"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-eheurkunde",
+      "Eheurkunde"
+    ],
+    "en": [
+      "en:x27:pro:marriage-certificate",
+      "marriage certificate"
+    ],
+    "ru": [
+      "ru-x27-pro-svidetelstvo-brake",
+      "свиде́тельство о бра́ке"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-finanzamt",
+      "Finanzamt"
+    ],
+    "en": [
+      "en:x27:pro:tax-office",
+      "tax office"
+    ],
+    "ru": [
+      "ru-x27-pro-nalogovaya-inspektsiya",
+      "нало́говая инспе́кция"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-gehaltsabrechnung",
+      "Gehaltsabrechnung"
+    ],
+    "en": [
+      "en:payslip:n:main",
+      "payslip"
+    ],
+    "ru": [
+      "ru-x27-pro-raschetnyy-listok",
+      "расчётный листо́к"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-kontoauszug",
+      "Kontoauszug"
+    ],
+    "en": [
+      "en:x27:pro:bank-statement",
+      "bank statement"
+    ],
+    "ru": [
+      "ru-x27-pro-vypiska-scheta",
+      "вы́писка со счёта"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-vorkasse",
+      "Vorkasse"
+    ],
+    "en": [
+      "en:telc26:vorauszahlung",
+      "advance payment"
+    ],
+    "ru": [
+      "ru-pro4-predoplata",
+      "предопла́та"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-betriebsgeheimnis",
+      "Betriebsgeheimnis"
+    ],
+    "en": [
+      "en:pro5:trade-secret",
+      "trade secret"
+    ],
+    "ru": [
+      "ru-content26-ip-secret",
+      "комме́рческая та́йна"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-vorgesetzte",
+      "Vorgesetzte"
+    ],
+    "en": [
+      "en:x27:pro:supervisor",
+      "supervisor"
+    ],
+    "ru": [
+      "ru-r-vod-rukovoditel",
+      "руководи́тель"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-nachfolger",
+      "Nachfolger"
+    ],
+    "en": [
+      "en:x27:pro:successor",
+      "successor"
+    ],
+    "ru": [
+      "ru-x27-pro-preemnik",
+      "прее́мник"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-praktikant",
+      "Praktikant"
+    ],
+    "en": [
+      "en:x27:pro:intern",
+      "intern"
+    ],
+    "ru": [
+      "ru-x27-pro-stazher",
+      "стажёр"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-ambulant",
+      "ambulant"
+    ],
+    "en": [
+      "en:x27:pro:outpatient",
+      "outpatient"
+    ],
+    "ru": [
+      "ru-x27-pro-ambulatornyy",
+      "амбулато́рный"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-stationaer",
+      "stationär"
+    ],
+    "en": [
+      "en:x27:pro:inpatient",
+      "inpatient"
+    ],
+    "ru": [
+      "ru-x27-pro-statsionarnyy",
+      "стациона́рный"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-unterweisung",
+      "Unterweisung"
+    ],
+    "en": [
+      "en:telc26:anweisung",
+      "instruction"
+    ],
+    "ru": [
+      "ru-pro5-poruchenie",
+      "поруче́ние"
+    ]
+  },
+  {
+    "de": [
+      "b1-m3-geduld",
+      "Geduld"
+    ],
+    "en": [
+      "en:x27:patience",
+      "patience"
+    ],
+    "ru": [
+      "ru-w4-terpenie",
+      "терпе́ние"
+    ]
+  },
+  {
+    "de": [
+      "b1-health-krankenwagen",
+      "Krankenwagen"
+    ],
+    "en": [
+      "en:x27:ambulance",
+      "ambulance"
+    ],
+    "ru": [
+      "ru-x27-skoraya-pomoshch",
+      "ско́рая по́мощь"
+    ]
+  },
+  {
+    "de": [
+      "b1-health-schmerzmittel",
+      "Schmerzmittel"
+    ],
+    "en": [
+      "en:x27:painkiller",
+      "painkiller"
+    ],
+    "ru": [
+      "ru-x27-obezbolivayushchee",
+      "обезбо́ливающее"
+    ]
+  },
+  {
+    "de": [
+      "b2-bildung-stipendium",
+      "Stipendium"
+    ],
+    "en": [
+      "en:x27:scholarship",
+      "scholarship"
+    ],
+    "ru": [
+      "ru-content26-edu-stipendiya",
+      "стипе́ндия"
+    ]
+  },
+  {
+    "de": [
+      "b2-m2-enttaeuschung",
+      "Enttäuschung"
+    ],
+    "en": [
+      "en:x27:disappointment",
+      "disappointment"
+    ],
+    "ru": [
+      "ru-content26-psy-razocharovanie",
+      "разочарова́ние"
+    ]
+  },
+  {
+    "de": [
+      "b2-gesellschaft-zusammenhalt",
+      "Zusammenhalt"
+    ],
+    "en": [
+      "en:x27:solidarity",
+      "solidarity"
+    ],
+    "ru": [
+      "ru-x27-solidarnost",
+      "солида́рность"
+    ]
+  },
+  {
+    "de": [
+      "b2-wiss-widerlegen",
+      "widerlegen"
+    ],
+    "en": [
+      "en:x27:refute",
+      "refute"
+    ],
+    "ru": [
+      "ru-x27-oprovergat",
+      "опроверга́ть"
+    ]
+  },
+  {
+    "de": [
+      "r-fallen-vorfall",
+      "Vorfall"
+    ],
+    "en": [
+      "en:incident:n:main",
+      "incident"
+    ],
+    "ru": [
+      "ru-x27-proisshestvie",
+      "происше́ствие"
+    ]
+  },
+  {
+    "de": [
+      "b1-leisure-hobby",
+      "Hobby"
+    ],
+    "en": [
+      "en:more2:hobby",
+      "hobby"
+    ],
+    "ru": [
+      "ru-x27-khobbi",
+      "хо́бби"
+    ]
+  },
+  {
+    "de": [
+      "b1-leisure-entspannen",
+      "sich entspannen"
+    ],
+    "en": [
+      "en:more2:relax",
+      "relax"
+    ],
+    "ru": [
+      "ru-x27-otdykhat",
+      "отдыха́ть"
+    ]
+  },
+  {
+    "de": [
+      "r-setzen-gesetz",
+      "Gesetz"
+    ],
+    "en": [
+      "en:more2:law",
+      "law"
+    ],
+    "ru": [
+      "ru-x27-pravo",
+      "пра́во"
+    ]
+  },
+  {
+    "de": [
+      "b1-society-umwelt",
+      "Umwelt"
+    ],
+    "en": [
+      "en:environment:n:main",
+      "environment"
+    ],
+    "ru": [
+      "ru-x27-ekologiya",
+      "эколо́гия"
+    ]
+  },
+  {
+    "de": [
+      "b2-m3-ausblick",
+      "Ausblick"
+    ],
+    "en": [
+      "en:vf:n:outlook",
+      "outlook"
+    ],
+    "ru": [
+      "ru-x27-krugozor",
+      "кругозо́р"
+    ]
+  },
+  {
+    "de": [
+      "b2-m2-umschulung",
+      "Umschulung"
+    ],
+    "en": [
+      "en:m3:retraining",
+      "retraining"
+    ],
+    "ru": [
+      "ru-x27-perepodgotovka",
+      "переподгото́вка"
+    ]
+  },
+  {
+    "de": [
+      "telc26-einzelhandel",
+      "Einzelhandel"
+    ],
+    "en": [
+      "en:telc26:einzelhandel",
+      "retail"
+    ],
+    "ru": [
+      "ru-x27-roznitsa",
+      "ро́зница"
+    ]
+  },
+  {
+    "de": [
+      "b2-wirtschaft-kaufkraft",
+      "Kaufkraft"
+    ],
+    "en": [
+      "en:m4:purchasing-power",
+      "purchasing power"
+    ],
+    "ru": [
+      "ru-x27-pokupatelskaya-sposobnost",
+      "покупа́тельская спосо́бность"
+    ]
+  },
+  {
+    "de": [
+      "b1-health-stress",
+      "Stress"
+    ],
+    "en": [
+      "en:stress:n:main",
+      "stress"
+    ],
+    "ru": [
+      "ru-x27-stress",
+      "стресс"
+    ]
+  },
+  {
+    "de": [
+      "it-comm-rueckmeldung",
+      "Rückmeldung"
+    ],
+    "en": [
+      "en:feedback:n:main",
+      "feedback"
+    ],
+    "ru": [
+      "ru-x27-otklik",
+      "о́тклик"
+    ]
+  },
+  {
+    "de": [
+      "b2-kultur-publikum",
+      "Publikum"
+    ],
+    "en": [
+      "en:audience:n:main",
+      "audience"
+    ],
+    "ru": [
+      "ru-x27-publika",
+      "пу́блика"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-lizenzgebuehr",
+      "Lizenzgebühr"
+    ],
+    "en": [
+      "en:pro5:royalty",
+      "royalty"
+    ],
+    "ru": [
+      "ru-x27-pro-litsenzionnoe-voznagrazhdenie",
+      "лицензио́нное вознагражде́ние"
+    ]
+  },
+  {
+    "de": [
+      "b2-recht-urteil",
+      "Urteil"
+    ],
+    "en": [
+      "en:pro5:verdict",
+      "verdict"
+    ],
+    "ru": [
+      "ru-x27-pro-prigovor",
+      "пригово́р"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-ein-herz-und-eine-seele",
+      "Ein Herz und eine Seele sein"
+    ],
+    "en": [
+      "en:x27:idiom:two-peas-in-a-pod",
+      "two peas in a pod"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-ne-razley-voda",
+      "не разле́й вода́"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-aus-der-haut-fahren",
+      "Aus der Haut fahren"
+    ],
+    "en": [
+      "en:x27:idiom:fly-off-handle",
+      "fly off the handle"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-vyyti-iz-sebya",
+      "вы́йти из себя́"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-mit-dem-linken-fuss",
+      "Mit dem linken Fuß zuerst aufstehen"
+    ],
+    "en": [
+      "en:x27:idiom:wrong-side-of-bed",
+      "get up on the wrong side of the bed"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-vstat-ne-s-toy-nogi",
+      "встать не с той ноги́"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-ein-dickes-fell",
+      "Ein dickes Fell haben"
+    ],
+    "en": [
+      "en:x27:idiom:thick-skin",
+      "have thick skin"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-jemanden-um-den-finger",
+      "Jemanden um den Finger wickeln"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-obvesti-vokrug-paltsa",
+      "обвести́ вокру́г па́льца"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-tacheles-reden",
+      "Tacheles reden"
+    ],
+    "en": [
+      "en:x27:idiom:talk-turkey",
+      "speak your mind"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-na-chistotu",
+      "поговори́ть начистоту́"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-den-mund-fusselig",
+      "Sich den Mund fusselig reden"
+    ],
+    "en": [
+      "en:x27:idiom:blue-in-face",
+      "until you’re blue in the face"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-auf-der-zunge",
+      "Es liegt mir auf der Zunge"
+    ],
+    "en": [
+      "en:x27:idiom:tip-of-tongue",
+      "on the tip of my tongue"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-vertitsya-na-yazyke",
+      "верте́ться на языке́"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-um-den-heissen-kern",
+      "Auf den Punkt kommen"
+    ],
+    "en": [
+      "en:x27:idiom:cut-to-chase",
+      "cut to the chase"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-pereyti-k-delu",
+      "перейти́ к де́лу"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-ins-rollen-bringen",
+      "Etwas ins Rollen bringen"
+    ],
+    "en": [
+      "en:x27:idiom:get-off-ground",
+      "get something off the ground"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-sdvinut-s-mertvoy",
+      "сдви́нуть с мёртвой то́чки"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-ueber-stunden-klagen",
+      "Auf Hochtouren laufen"
+    ],
+    "en": [
+      "en:x27:idiom:in-full-swing",
+      "in full swing"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-na-polnuyu-katushku",
+      "рабо́тать на по́лную кату́шку"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-hand-in-hand",
+      "Hand in Hand gehen"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-ruka-ob-ruku",
+      "идти́ рука́ о́б руку"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-schritt-fuer-schritt",
+      "Schritt für Schritt vorankommen"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-shag-za-shagom",
+      "шаг за ша́гом"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-eine-extra-meile",
+      "Den Bogen überspannen"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-peregibat-palku",
+      "перегиба́ть па́лку"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-in-der-klemme",
+      "In der Klemme stecken"
+    ],
+    "en": [
+      "en:x27:idiom:tight-spot",
+      "in a tight spot"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-glueck-im-unglueck",
+      "Glück im Unglück haben"
+    ],
+    "en": [
+      "en:x27:idiom:silver-lining",
+      "every cloud has a silver lining"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-net-huda-bez-dobra",
+      "нет ху́да без добра́"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-auf-messers-schneide",
+      "Auf Messers Schneide stehen"
+    ],
+    "en": [
+      "en:x27:idiom:knife-edge",
+      "on a knife-edge"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-na-voloske",
+      "висе́ть на волоске́"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-im-dunkeln-tappen",
+      "Im Dunkeln tappen"
+    ],
+    "en": [
+      "en:x27:idiom:in-the-dark",
+      "in the dark"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-brodit-v-potemkah",
+      "броди́ть в потёмках"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-auf-nummer-sicher",
+      "Auf Nummer sicher gehen"
+    ],
+    "en": [
+      "en:x27:idiom:play-it-safe",
+      "play it safe"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-podstrakhovatsya",
+      "подстрахова́ться на вся́кий слу́чай"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-zwei-mal-ueberlegen",
+      "Sich etwas zweimal überlegen"
+    ],
+    "en": [
+      "en:x27:idiom:think-twice",
+      "think twice"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-sem-raz-otmer",
+      "семь раз отме́рь, оди́н раз отре́жь"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-ins-gewissen-reden",
+      "Auf eigene Faust handeln"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-na-svoy-strah",
+      "на свой страх и риск"
+    ]
+  },
+  {
+    "de": [
+      "exp-idiom-x27-ein-auge-zudruecken",
+      "Ein Auge zudrücken"
+    ],
+    "en": [
+      "en:x27:idiom:turn-blind-eye",
+      "turn a blind eye"
+    ],
+    "ru": [
+      "ru-ex-idiom-x27-zakryt-glaza",
+      "закры́ть глаза́ на что́-то"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-echt-gesagt",
+      "Du sagst es!"
+    ],
+    "en": [
+      "en:x27:ev:tell-me-about-it",
+      "Tell me about it!"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-i-ne-govori",
+      "И не говори́!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-kaum-zu-glauben",
+      "Kaum zu glauben!"
+    ],
+    "en": [
+      "en:x27:ev:hard-to-believe",
+      "Hard to believe!"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-trudno-poverit",
+      "Тру́дно пове́рить!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-mach-sachen",
+      "Ach was!"
+    ],
+    "en": [
+      "en:x27:ev:youre-kidding",
+      "You’re kidding!"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-ne-mozhet-byt",
+      "Не мо́жет быть!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-hab-ich-mir-gedacht",
+      "Das habe ich mir schon gedacht."
+    ],
+    "en": [
+      "en:x27:ev:i-thought-as-much",
+      "I thought as much."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-ya-tak-i-dumal",
+      "Я так и ду́мал!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-moment-mal",
+      "Moment mal!"
+    ],
+    "en": [
+      "en:x27:ev:hang-on",
+      "Hang on a second."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-podozhdi-sekundu",
+      "Подожди́ секу́нду."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-meiner-ansicht-nach",
+      "Meiner Meinung nach …"
+    ],
+    "en": [
+      "en:x27:ev:in-my-view",
+      "In my view, …"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-na-moy-vzglyad",
+      "По моему́ мне́нию, …"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-bin-ganz-deiner-meinung",
+      "Da bin ich ganz deiner Meinung."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-polnostyu-soglasen",
+      "По́лностью согла́сен (согла́сна)."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-da-bin-ich-skeptisch",
+      "Da bin ich eher skeptisch."
+    ],
+    "en": [
+      "en:x27:ev:im-not-sure-about-that",
+      "I’m not so sure about that."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-somnevayus",
+      "Что-то я сомнева́юсь."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-auf-keinen-fall",
+      "Auf keinen Fall!"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-ni-v-koem-sluchae",
+      "Ни в ко́ем слу́чае!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-abgemacht",
+      "Abgemacht!"
+    ],
+    "en": [
+      "en:x27:ev:deal",
+      "Deal!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-ich-gebe-bescheid",
+      "Ich gebe dir Bescheid."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-day-znat",
+      "Дай знать."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-ich-bin-unterwegs",
+      "Ich bin schon unterwegs."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-ya-uzhe-v-puti",
+      "Я уже́ в пути́."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-bis-morgen",
+      "Bis morgen!"
+    ],
+    "en": [
+      "en:x27:ev:see-you-tomorrow",
+      "See you tomorrow!"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-do-zavtra",
+      "До за́втра!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-halb-so-schlimm",
+      "Das ist halb so schlimm."
+    ],
+    "en": [
+      "en:x27:ev:could-be-worse",
+      "It could be worse."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-byvaet-huzhe",
+      "Быва́ет и ху́же."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-alles-wird-gut",
+      "Das wird schon wieder."
+    ],
+    "en": [
+      "en:x27:ev:itll-turn-out-fine",
+      "It’ll turn out fine."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-vsyo-budet-horosho",
+      "Всё бу́дет хорошо́."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-kein-grund-zur-sorge",
+      "Kein Grund zur Sorge."
+    ],
+    "en": [
+      "en:x27:ev:nothing-to-worry-about",
+      "Nothing to worry about."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-net-povoda-dlya",
+      "Нет по́вода для волне́ния."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-nimm-dir-zeit",
+      "Lass dir ruhig Zeit."
+    ],
+    "ru": [
+      "ru-ex-ev-x27-ne-toropis",
+      "Не торопи́сь."
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-schoenes-wochenende",
+      "Schönes Wochenende!"
+    ],
+    "en": [
+      "en:x27:ev:have-a-nice-weekend",
+      "Have a nice weekend!"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-horoshih-vyhodnyh",
+      "Хоро́ших выходны́х!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-guten-appetit",
+      "Guten Appetit!"
+    ],
+    "en": [
+      "en:x27:ev:enjoy-your-meal",
+      "Enjoy your meal!"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-priyatnogo-appetita",
+      "Прия́тного аппети́та!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-auf-wiedersehen",
+      "Mach’s gut!"
+    ],
+    "en": [
+      "en:x27:ev:take-care",
+      "Take care!"
+    ],
+    "ru": [
+      "ru-ex-ev-x27-beregi-sebya",
+      "Береги́ себя́!"
+    ]
+  },
+  {
+    "de": [
+      "exp-day-x27-herzlichen-glueckwunsch",
+      "Herzlichen Glückwunsch!"
+    ],
+    "en": [
+      "en:x27:ev:congratulations",
+      "Congratulations!"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-untermauern",
+      "untermauern"
+    ],
+    "ru": [
+      "ru-x27-podkreplyat",
+      "подкрепля́ть"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-steuernummer",
+      "Steuernummer"
+    ],
+    "ru": [
+      "ru-x27-pro-inn",
+      "ИНН"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-verwarnung",
+      "Verwarnung"
+    ],
+    "ru": [
+      "ru-x27-pro-vigovor",
+      "вы́говор"
+    ]
+  },
+  {
+    "de": [
+      "pro-x27-aufstiegschance",
+      "Aufstiegschance"
+    ],
+    "ru": [
+      "ru-x27-pro-karyernyy-rost",
+      "карье́рный рост"
+    ]
+  },
+  {
+    "en": [
+      "en:x27:matchstick",
+      "matchstick"
+    ],
+    "ru": [
+      "ru-w4-spichka",
+      "спи́чка"
+    ]
+  },
+  {
+    "en": [
+      "en:x27:polite",
+      "polite"
+    ],
+    "ru": [
+      "ru-x27-vezhlivyy",
+      "ве́жливый"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-dankbar",
+      "dankbar"
+    ],
+    "en": [
+      "en:x27:grateful",
+      "grateful"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-vorbild",
+      "Vorbild"
+    ],
+    "en": [
+      "en:x27:role-model",
+      "role model"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-feiertag",
+      "Feiertag"
+    ],
+    "en": [
+      "en:x27:public-holiday",
+      "public holiday"
+    ]
+  },
+  {
+    "en": [
+      "en:x27:bandage",
+      "bandage"
+    ],
+    "ru": [
+      "ru-x27-bint",
+      "бинт"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-entsorgen",
+      "entsorgen"
+    ],
+    "en": [
+      "en:x27:dispose",
+      "dispose"
+    ]
+  },
+  {
+    "en": [
+      "en:x27:self-esteem",
+      "self-esteem"
+    ],
+    "ru": [
+      "ru-content26-psy-samoocenka",
+      "самооце́нка"
+    ]
+  }
+]);
+
+/* === Content expansion Wave 2 (2026-11-27): cross-language sense links (167) === */
+GT.link([
+  {
+    "de": [
+      "c1-w2-einwand",
+      "Gegenargument"
+    ],
+    "en": [
+      "en:w2:counterargument",
+      "counterargument"
+    ],
+    "ru": [
+      "ru-w2-kontrargument",
+      "контраргуме́нт"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-kernpunkt",
+      "Kernpunkt"
+    ],
+    "en": [
+      "en:w2:crux",
+      "crux"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-ausgangslage",
+      "Ausgangslage"
+    ],
+    "en": [
+      "en:w2:baseline",
+      "baseline"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-spannungsfeld",
+      "Spannungsfeld"
+    ],
+    "ru": [
+      "ru-w4-konflikt-interesov",
+      "конфли́кт интере́сов"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-hervorheben",
+      "herausstellen"
+    ],
+    "en": [
+      "en:it4:highlight",
+      "highlight"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-einraeumen",
+      "einräumen"
+    ],
+    "en": [
+      "en:w2:concede",
+      "concede"
+    ],
+    "ru": [
+      "ru-r-zna-priznavat",
+      "признава́ть"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-triftig",
+      "triftig"
+    ],
+    "en": [
+      "en:x27:valid",
+      "valid"
+    ],
+    "ru": [
+      "ru-w2-veskiy",
+      "ве́ский"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-schluessig",
+      "schlüssig"
+    ],
+    "en": [
+      "en:content26:c1-coherent",
+      "coherent"
+    ],
+    "ru": [
+      "ru-content26-c1-posledovatelny",
+      "после́довательный"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-maßgeblich",
+      "maßgeblich"
+    ],
+    "en": [
+      "en:decisive:adj:main",
+      "decisive"
+    ]
+  },
+  {
+    "de": [
+      "c1-w2-vorlaeufig",
+      "vorläufig"
+    ],
+    "ru": [
+      "ru-w2-predvaritelnyy",
+      "предвари́тельный"
+    ]
+  },
+  {
+    "de": [
+      "r-legen-belegen",
+      "belegen"
+    ],
+    "en": [
+      "en:w2:substantiate",
+      "substantiate"
+    ]
+  },
+  {
+    "de": [
+      "pro-new-entkraeften",
+      "entkräften"
+    ],
+    "en": [
+      "en:w2:dispel",
+      "dispel"
+    ],
+    "ru": [
+      "ru-w2-rasseyat-somneniya",
+      "рассе́ивать"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-relativieren",
+      "relativieren"
+    ],
+    "en": [
+      "en:w2:qualify",
+      "qualify"
+    ],
+    "ru": [
+      "ru-w2-smyagchat-tezis",
+      "огова́ривать"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-stichhaltig",
+      "stichhaltig"
+    ],
+    "en": [
+      "en:w2:cogent",
+      "cogent"
+    ],
+    "ru": [
+      "ru-pro4-ubeditelny",
+      "убеди́тельный"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-unabdingbar",
+      "unabdingbar"
+    ],
+    "en": [
+      "en:w2:indispensable",
+      "indispensable"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-vermutung",
+      "Vermutung"
+    ],
+    "en": [
+      "en:w2:arbitrary",
+      "conjecture"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:tentative",
+      "tentative"
+    ],
+    "ru": [
+      "ru-pro5-orientirovochny",
+      "ориентиро́вочный"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:inadvertently",
+      "inadvertently"
+    ],
+    "ru": [
+      "ru-w2-neprednamerenno",
+      "непреднаме́ренно"
+    ]
+  },
+  {
+    "de": [
+      "b2-umwelt-artenvielfalt",
+      "Artenvielfalt"
+    ],
+    "en": [
+      "en:w2:biodiversity",
+      "biodiversity"
+    ]
+  },
+  {
+    "de": [
+      "b2-umwelt-waermedaemmung",
+      "Wärmedämmung"
+    ],
+    "en": [
+      "en:w2:insulation",
+      "insulation"
+    ],
+    "ru": [
+      "ru-x27-uteplenie",
+      "утепле́ние"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:subsidy",
+      "subsidy"
+    ],
+    "ru": [
+      "ru-x27-subsidiya",
+      "субси́дия"
+    ]
+  },
+  {
+    "de": [
+      "r-setzen-durchsetzen",
+      "durchsetzen"
+    ],
+    "en": [
+      "en:w2:enforce",
+      "enforce"
+    ]
+  },
+  {
+    "de": [
+      "b1-auth-anmeldung",
+      "Anmeldung"
+    ],
+    "en": [
+      "en:w2:residence-registration",
+      "address registration"
+    ],
+    "ru": [
+      "ru-x27-pro-registratsiya-adresa",
+      "регистра́ция по ме́сту жи́тельства"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-apostille",
+      "Apostille"
+    ],
+    "en": [
+      "en:w2:official-stamp",
+      "apostille"
+    ],
+    "ru": [
+      "ru-x27-pro-apostil",
+      "апости́ль"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:municipality",
+      "municipality"
+    ],
+    "ru": [
+      "ru-x27-pro-munitsipalitet",
+      "муниципалите́т"
+    ]
+  },
+  {
+    "de": [
+      "b1-auth-sachbearbeiter",
+      "Sachbearbeiter"
+    ],
+    "en": [
+      "en:w2:counter-clerk",
+      "caseworker"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:certify",
+      "certify"
+    ],
+    "ru": [
+      "ru-w2-pro-udostoveryat",
+      "удостоверя́ть"
+    ]
+  },
+  {
+    "de": [
+      "b2-x27-verpflichtend",
+      "verpflichtend"
+    ],
+    "en": [
+      "en:w2:mandatory",
+      "mandatory"
+    ],
+    "ru": [
+      "ru-pro4-obyazatelny",
+      "обяза́тельный"
+    ]
+  },
+  {
+    "de": [
+      "b1-home-treppenhaus",
+      "Treppenhaus"
+    ],
+    "en": [
+      "en:w2:stairwell",
+      "stairwell"
+    ],
+    "ru": [
+      "ru-w-podezd",
+      "подъе́зд"
+    ]
+  },
+  {
+    "de": [
+      "b2-ges-krankschreibung",
+      "Krankschreibung"
+    ],
+    "en": [
+      "en:w2:sick-note",
+      "sick note"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:reassign",
+      "mentoring"
+    ],
+    "ru": [
+      "ru-x27-nastavnichestvo",
+      "наста́вничество"
+    ]
+  },
+  {
+    "en": [
+      "en:it3:benchmark",
+      "benchmark"
+    ],
+    "ru": [
+      "ru-w2-kriteriy",
+      "крите́рий"
+    ]
+  },
+  {
+    "de": [
+      "c1-x27-schlussfolgerung",
+      "Schlussfolgerung"
+    ],
+    "ru": [
+      "ru-w2-vyvod",
+      "умозаключе́ние"
+    ]
+  },
+  {
+    "de": [
+      "r-lassen-zulassen",
+      "zulassen"
+    ],
+    "ru": [
+      "ru-w2-priznavat-ustupku",
+      "допуска́ть"
+    ]
+  },
+  {
+    "de": [
+      "r-stellen-aufstellen",
+      "aufstellen"
+    ],
+    "ru": [
+      "ru-w2-vydvigat",
+      "выдвига́ть"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-anfechten",
+      "anfechten"
+    ],
+    "ru": [
+      "ru-w2-stavit-pod-somnenie",
+      "оспа́ривать"
+    ]
+  },
+  {
+    "de": [
+      "pro-new-zusammenfassen",
+      "zusammenfassen"
+    ],
+    "en": [
+      "en:pro3:summarise",
+      "summarise"
+    ],
+    "ru": [
+      "ru-w2-podytozhivat",
+      "подыто́живать"
+    ]
+  },
+  {
+    "en": [
+      "en:x27:untenable",
+      "untenable"
+    ],
+    "ru": [
+      "ru-w2-nesostoyatelnyy",
+      "несостоя́тельный"
+    ]
+  },
+  {
+    "en": [
+      "en:reliable:adj:main",
+      "reliable"
+    ],
+    "ru": [
+      "ru-w2-dostovernyy",
+      "достове́рный"
+    ]
+  },
+  {
+    "de": [
+      "b2-ges-vorsorgeuntersuchung",
+      "Vorsorgeuntersuchung"
+    ],
+    "ru": [
+      "ru-w2-profilaktika",
+      "диспансериза́ция"
+    ]
+  },
+  {
+    "de": [
+      "b1-health-therapie",
+      "Therapie"
+    ],
+    "ru": [
+      "ru-w2-immunitet",
+      "терапи́я"
+    ]
+  },
+  {
+    "de": [
+      "b2-m2-zollkontrolle",
+      "Zollkontrolle"
+    ],
+    "ru": [
+      "ru-w2-tamozhennyy-kontrol",
+      "тамо́женный контро́ль"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-salvatorische-klausel",
+      "Vertragsbruch"
+    ],
+    "en": [
+      "en:pro5:breach-of-contract",
+      "breach of contract"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-verjaehrungsfrist",
+      "Verjährungsfrist"
+    ],
+    "ru": [
+      "ru-content26-contract-davnost",
+      "срок исково́й да́вности"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-lizenzvertrag",
+      "Lizenzvertrag"
+    ],
+    "en": [
+      "en:w2:pro:licensing-agreement",
+      "licensing agreement"
+    ],
+    "ru": [
+      "ru-x27-pro-litsenzionnyy-dogovor",
+      "лицензио́нный догово́р"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-abmahnung-ip",
+      "Vervielfältigung"
+    ],
+    "en": [
+      "en:reproduction:n:main",
+      "reproduction"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-strafverteidiger",
+      "Strafverteidiger"
+    ],
+    "ru": [
+      "ru-w2-pro-zashchitnik",
+      "адвока́т по уголо́вным дела́м"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-hinweisgeber",
+      "Hinweisgeber"
+    ],
+    "en": [
+      "en:pro5:whistleblower",
+      "whistleblower"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-geschaeftsfuehrer",
+      "Geschäftsführer"
+    ],
+    "en": [
+      "en:w2:pro:managing-director",
+      "managing director"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-ueberbuchung",
+      "Überbuchung"
+    ],
+    "en": [
+      "en:pro6:overbooking",
+      "overbooking"
+    ],
+    "ru": [
+      "ru-w2-pro-overbuking",
+      "избыто́чное брони́рование"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-unvertraeglichkeit",
+      "Beilage"
+    ],
+    "en": [
+      "en:w2:pro:dietary-requirement",
+      "side dish"
+    ],
+    "ru": [
+      "ru-w-garnir",
+      "гарни́р"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-kuechenbrigade",
+      "Küchenbrigade"
+    ],
+    "en": [
+      "en:pro6:kitchen-brigade",
+      "kitchen brigade"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-abkassieren",
+      "abkassieren"
+    ],
+    "en": [
+      "en:w2:pro:settle-the-bill",
+      "settle the bill"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-zimmerkategorie",
+      "Schlüsselkarte"
+    ],
+    "ru": [
+      "ru-w2-pro-klyuch-karta",
+      "электронная ка́рта-клю́ч"
+    ]
+  },
+  {
+    "de": [
+      "pro-w2-tagesgericht",
+      "Tagesmenü"
+    ],
+    "en": [
+      "en:w2:pro:corkage-fee",
+      "set menu"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-satzung",
+      "Satzung"
+    ],
+    "en": [
+      "en:w2:pro:articles-of-association",
+      "bylaws"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-handelsregister",
+      "Handelsregister"
+    ],
+    "en": [
+      "en:w2:pro:commercial-register",
+      "commercial register"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-vertragsstrafe",
+      "Vertragsstrafe"
+    ],
+    "en": [
+      "en:w2:pro:contractual-penalty",
+      "contractual penalty"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:pro:binding",
+      "legally binding"
+    ],
+    "ru": [
+      "ru-w2-pro-yuridicheski-obyazyvayushchiy",
+      "юриди́чески обя́зывающий"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-lizenzgebuehr",
+      "Lizenzgebühr"
+    ],
+    "en": [
+      "en:w2:pro:public-domain",
+      "royalty fee"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:pro:proprietary",
+      "proprietary"
+    ],
+    "ru": [
+      "ru-w2-pro-okhranyaemyy-zakonom",
+      "проприета́рный"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-bewaehrungsstrafe",
+      "Bewährungsstrafe"
+    ],
+    "en": [
+      "en:w2:pro:suspended-sentence",
+      "suspended sentence"
+    ],
+    "ru": [
+      "ru-w2-pro-uslovnyy-srok",
+      "усло́вный срок"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:pro:plea",
+      "testimony"
+    ],
+    "ru": [
+      "ru-content26-crime-testimony",
+      "свиде́тельские показа́ния"
+    ]
+  },
+  {
+    "de": [
+      "b2-m3-gepaeckaufbewahrung",
+      "Gepäckaufbewahrung"
+    ],
+    "en": [
+      "en:w2:pro:late-checkout",
+      "luggage storage"
+    ]
+  },
+  {
+    "de": [
+      "pro-b6-kurtaxe",
+      "Kurtaxe"
+    ],
+    "en": [
+      "en:w2:pro:tourist-tax",
+      "tourist tax"
+    ]
+  },
+  {
+    "de": [
+      "pro-b6-tagesgericht",
+      "Tagesgericht"
+    ],
+    "en": [
+      "en:w2:pro:daily-special",
+      "daily special"
+    ],
+    "ru": [
+      "ru-content26-gastro-dish",
+      "блю́до дня"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:pro:waiting-staff",
+      "waiting staff"
+    ],
+    "ru": [
+      "ru-w2-pro-komanda-zala",
+      "обслу́живающий персона́л"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-vertragsklausel",
+      "Vertragsklausel"
+    ],
+    "ru": [
+      "ru-w2-pro-punkt-dogovora",
+      "пункт догово́ра"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-hoehere-gewalt",
+      "höhere Gewalt"
+    ],
+    "en": [
+      "en:pro5:force-majeure",
+      "force majeure"
+    ],
+    "ru": [
+      "ru-w2-pro-fors-mazhor",
+      "форс-мажо́р"
+    ]
+  },
+  {
+    "de": [
+      "pro-b6-gewaehrleistungsfrist",
+      "Gewährleistungsfrist"
+    ],
+    "ru": [
+      "ru-w2-pro-garantiynyy-srok",
+      "гаранти́йный срок"
+    ]
+  },
+  {
+    "de": [
+      "b1-auth-verlaengern",
+      "verlängern"
+    ],
+    "ru": [
+      "ru-w2-pro-prolongirovat",
+      "пролонги́ровать"
+    ]
+  },
+  {
+    "de": [
+      "pro-b6-frachtbrief",
+      "Frachtbrief"
+    ],
+    "ru": [
+      "ru-w2-pro-nakladnaya-tovarnaya",
+      "това́рная накладна́я"
+    ]
+  },
+  {
+    "de": [
+      "pro-b6-zollabfertigung",
+      "Zollabfertigung"
+    ],
+    "en": [
+      "en:pro6:customs-clearance",
+      "customs clearance"
+    ],
+    "ru": [
+      "ru-w2-pro-rastamozhka",
+      "тамо́женная очи́стка"
+    ]
+  },
+  {
+    "en": [
+      "en:pro6:consignment",
+      "consignment"
+    ],
+    "ru": [
+      "ru-w2-pro-partiya-tovara",
+      "па́ртия това́ра"
+    ]
+  },
+  {
+    "de": [
+      "telc26-versand",
+      "Versand"
+    ],
+    "en": [
+      "en:telc26:versand",
+      "dispatch"
+    ],
+    "ru": [
+      "ru-w2-pro-otgruzka",
+      "отгру́зка"
+    ]
+  },
+  {
+    "en": [
+      "en:x27:shelf-life",
+      "shelf life"
+    ],
+    "ru": [
+      "ru-w2-pro-srok-khraneniya",
+      "срок реализа́ции"
+    ]
+  },
+  {
+    "de": [
+      "b1-authorities-behoerde",
+      "Behörde"
+    ],
+    "ru": [
+      "ru-w2-pro-vedomstvo",
+      "инста́нция"
+    ]
+  },
+  {
+    "de": [
+      "r-tragen-antrag",
+      "Antrag"
+    ],
+    "ru": [
+      "ru-w2-pro-khodataystvo",
+      "ходата́йство"
+    ]
+  },
+  {
+    "de": [
+      "pro-m4-zustaendigkeit",
+      "Zuständigkeit"
+    ],
+    "en": [
+      "en:pro5:jurisdiction",
+      "jurisdiction"
+    ],
+    "ru": [
+      "ru-w2-pro-podvedomstvennost",
+      "юрисди́кция"
+    ]
+  },
+  {
+    "de": [
+      "b1-food-trinkgeld",
+      "Trinkgeld"
+    ],
+    "ru": [
+      "ru-w2-pro-chayovye",
+      "чаевы́е"
+    ]
+  },
+  {
+    "de": [
+      "pro-b6-anrichten",
+      "anrichten"
+    ],
+    "ru": [
+      "ru-w2-pro-servirovat",
+      "сервирова́ть"
+    ]
+  },
+  {
+    "de": [
+      "b2-m3-uebergabeprotokoll",
+      "Übergabeprotokoll"
+    ],
+    "ru": [
+      "ru-w2-pro-akt-priema",
+      "протоко́л переда́чи"
+    ]
+  },
+  {
+    "de": [
+      "pro-b5-untersuchungshaft",
+      "Untersuchungshaft"
+    ],
+    "en": [
+      "en:pro5:remand",
+      "remand"
+    ],
+    "ru": [
+      "ru-w2-pro-soderzhanie-pod-strazhey",
+      "заключе́ние под стра́жу"
+    ]
+  },
+  {
+    "en": [
+      "en:investigate:v:main",
+      "investigate"
+    ],
+    "ru": [
+      "ru-w2-pro-rassledovat",
+      "рассле́довать"
+    ]
+  },
+  {
+    "de": [
+      "r-sprechen-freisprechen",
+      "freisprechen"
+    ],
+    "ru": [
+      "ru-w2-pro-opravdat",
+      "опра́вдывать"
+    ]
+  },
+  {
+    "de": [
+      "pro-b6-schichtuebergabe",
+      "Schichtübergabe"
+    ],
+    "en": [
+      "en:pro6:shift-handover",
+      "shift handover"
+    ],
+    "ru": [
+      "ru-w2-pro-peredacha-smeny",
+      "переда́ча сме́ны"
+    ]
+  },
+  {
+    "de": [
+      "r2-machen-base",
+      "machen"
+    ],
+    "en": [
+      "en:vf:make",
+      "make"
+    ],
+    "ru": [
+      "ru-r-del-delat",
+      "де́лать"
+    ]
+  },
+  {
+    "de": [
+      "r2-druecken-ausdruecken",
+      "ausdrücken"
+    ],
+    "en": [
+      "en:express:v:main",
+      "express"
+    ]
+  },
+  {
+    "de": [
+      "r2-druecken-ausdruck",
+      "Ausdruck"
+    ],
+    "en": [
+      "en:expression:n:main",
+      "expression"
+    ]
+  },
+  {
+    "de": [
+      "r2-druecken-eindruck",
+      "Eindruck"
+    ],
+    "ru": [
+      "ru-content26-leisure-vpechatlenie",
+      "впечатле́ние"
+    ]
+  },
+  {
+    "de": [
+      "r2-denken-base",
+      "denken"
+    ],
+    "ru": [
+      "ru-content26-root-dumat",
+      "ду́мать"
+    ]
+  },
+  {
+    "de": [
+      "r2-denken-nachdenken",
+      "nachdenken"
+    ],
+    "ru": [
+      "ru-content26-root-zadumyvatsya",
+      "заду́мываться"
+    ]
+  },
+  {
+    "de": [
+      "r2-denken-bedenken",
+      "bedenken"
+    ],
+    "en": [
+      "en:consider:v:main",
+      "consider"
+    ]
+  },
+  {
+    "de": [
+      "r2-denken-ueberdenken",
+      "überdenken"
+    ],
+    "en": [
+      "en:reconsider:v:main",
+      "reconsider"
+    ],
+    "ru": [
+      "ru-r-smotr-peresmatrivat",
+      "пересма́тривать"
+    ]
+  },
+  {
+    "de": [
+      "r2-denken-ausdenken",
+      "ausdenken"
+    ],
+    "ru": [
+      "ru-content26-root-pridumyvat",
+      "приду́мывать"
+    ]
+  },
+  {
+    "de": [
+      "r2-sagen-base",
+      "sagen"
+    ],
+    "ru": [
+      "ru-r-govor-govorit",
+      "говори́ть"
+    ]
+  },
+  {
+    "de": [
+      "r2-sagen-absagen",
+      "absagen"
+    ],
+    "ru": [
+      "ru-content26-root-otmenyat",
+      "отменя́ть"
+    ]
+  },
+  {
+    "de": [
+      "r2-sagen-zusagen",
+      "zusagen"
+    ],
+    "en": [
+      "en:confirm:v:main",
+      "confirm"
+    ]
+  },
+  {
+    "de": [
+      "r2-sagen-aussagen",
+      "aussagen"
+    ],
+    "en": [
+      "en:pro5:testify",
+      "testify"
+    ]
+  },
+  {
+    "de": [
+      "r2-sagen-besagen",
+      "besagen"
+    ],
+    "en": [
+      "en:pro5:stipulate",
+      "stipulate"
+    ]
+  },
+  {
+    "de": [
+      "r2-werfen-wegwerfen",
+      "wegwerfen"
+    ],
+    "en": [
+      "en:pro3:discard",
+      "discard"
+    ]
+  },
+  {
+    "de": [
+      "r2-schneiden-base",
+      "schneiden"
+    ],
+    "en": [
+      "en:x27:vf:cut",
+      "cut"
+    ],
+    "ru": [
+      "ru-r28-rez-rezat",
+      "ре́зать"
+    ]
+  },
+  {
+    "de": [
+      "r2-schneiden-abschneiden",
+      "abschneiden"
+    ],
+    "ru": [
+      "ru-r28-rez-otrezat",
+      "отре́зать"
+    ]
+  },
+  {
+    "de": [
+      "r2-schneiden-ausschneiden",
+      "ausschneiden"
+    ],
+    "ru": [
+      "ru-r28-rez-vyrezat",
+      "вы́резать"
+    ]
+  },
+  {
+    "de": [
+      "r2-schneiden-schnitt",
+      "Schnitt"
+    ],
+    "ru": [
+      "ru-r28-rez-razrez",
+      "разре́з"
+    ]
+  },
+  {
+    "de": [
+      "r2-teilen-mitteilen",
+      "mitteilen"
+    ],
+    "en": [
+      "en:inform:v:main",
+      "inform"
+    ]
+  },
+  {
+    "de": [
+      "r2-teilen-verteilen",
+      "verteilen"
+    ],
+    "ru": [
+      "ru-r-da-razdavat",
+      "раздава́ть"
+    ]
+  },
+  {
+    "de": [
+      "r2-teilen-aufteilen",
+      "aufteilen"
+    ],
+    "ru": [
+      "ru-r-bit-razbivat",
+      "разбива́ть"
+    ]
+  },
+  {
+    "de": [
+      "r2-teilen-beurteilen",
+      "beurteilen"
+    ],
+    "en": [
+      "en:evaluate:v:main",
+      "evaluate"
+    ],
+    "ru": [
+      "ru-pro4-otsenivat",
+      "оце́нивать"
+    ]
+  },
+  {
+    "de": [
+      "r2-hoeren-base",
+      "hören"
+    ],
+    "ru": [
+      "ru-r28-slysh-slyshat",
+      "слы́шать"
+    ]
+  },
+  {
+    "de": [
+      "r2-hoeren-gehoer",
+      "Gehör"
+    ],
+    "ru": [
+      "ru-r28-slysh-sluh",
+      "слух"
+    ]
+  },
+  {
+    "de": [
+      "r2-hoeren-aufhoeren",
+      "aufhören"
+    ],
+    "ru": [
+      "ru-r28-stan-perestat",
+      "переста́ть"
+    ]
+  },
+  {
+    "de": [
+      "r-stehen-aufstehen",
+      "aufstehen"
+    ],
+    "ru": [
+      "ru-r28-stan-vstat",
+      "встать"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-besorgen",
+      "besorgen"
+    ],
+    "ru": [
+      "ru-r28-stan-dostat",
+      "доста́ть"
+    ]
+  },
+  {
+    "de": [
+      "r-ziehen-ziehen",
+      "ziehen"
+    ],
+    "en": [
+      "en:x27:vf:pull",
+      "pull"
+    ],
+    "ru": [
+      "ru-r28-tyan-tyanut",
+      "тяну́ть"
+    ]
+  },
+  {
+    "de": [
+      "r-ziehen-anziehen",
+      "anziehen"
+    ],
+    "ru": [
+      "ru-r28-tyan-prityanut",
+      "притяну́ть"
+    ]
+  },
+  {
+    "en": [
+      "en:postpone:v:main",
+      "postpone"
+    ],
+    "ru": [
+      "ru-r28-tyan-ottyanut",
+      "оттяну́ть"
+    ]
+  },
+  {
+    "en": [
+      "en:m4:tension",
+      "tension"
+    ],
+    "ru": [
+      "ru-r28-tyan-natyazhenie",
+      "натяже́ние"
+    ]
+  },
+  {
+    "de": [
+      "r-richten-berichten",
+      "berichten"
+    ],
+    "ru": [
+      "ru-r28-klad-dokladyvat",
+      "докла́дывать"
+    ]
+  },
+  {
+    "de": [
+      "b1-travel-verpassen",
+      "verpassen"
+    ],
+    "ru": [
+      "ru-r28-pusk-propuskat",
+      "пропуска́ть"
+    ]
+  },
+  {
+    "de": [
+      "r-geben-freigeben",
+      "freigeben"
+    ],
+    "ru": [
+      "ru-r28-pusk-vypuskat",
+      "выпуска́ть"
+    ]
+  },
+  {
+    "de": [
+      "b1-authorities-ausweis",
+      "Ausweis"
+    ],
+    "ru": [
+      "ru-r28-pusk-propusk",
+      "про́пуск"
+    ]
+  },
+  {
+    "de": [
+      "r-arbeit-arbeiten",
+      "arbeiten"
+    ],
+    "en": [
+      "en:x27:vf:work",
+      "work"
+    ],
+    "ru": [
+      "ru-r28-rabot-rabotat",
+      "рабо́тать"
+    ]
+  },
+  {
+    "de": [
+      "b1-x27-verdienen",
+      "verdienen"
+    ],
+    "ru": [
+      "ru-r28-rabot-zarabotat",
+      "зарабо́тать"
+    ]
+  },
+  {
+    "de": [
+      "pro-new-ueberarbeiten",
+      "überarbeiten"
+    ],
+    "ru": [
+      "ru-r28-rabot-pererabotat",
+      "перерабо́тать"
+    ]
+  },
+  {
+    "en": [
+      "en:pro3:refine",
+      "refine"
+    ],
+    "ru": [
+      "ru-r28-rabot-dorabotat",
+      "дорабо́тать"
+    ]
+  },
+  {
+    "en": [
+      "en:develop:v:main",
+      "develop"
+    ],
+    "ru": [
+      "ru-r28-rabot-razrabotat",
+      "разрабо́тать"
+    ]
+  },
+  {
+    "en": [
+      "en:vf:n:income",
+      "income"
+    ],
+    "ru": [
+      "ru-r28-rabot-zarabotok",
+      "за́работок"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-es-laesst-sich-nicht-leugnen",
+      "Es lässt sich nicht leugnen, dass [X]."
+    ],
+    "en": [
+      "en:w2:ch:there-is-no-denying",
+      "There is no denying that [X]."
+    ],
+    "ru": [
+      "ru-ch-w2-nelzya-ne-priznat",
+      "Нельзя́ не призна́ть, что …"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-alles-in-allem",
+      "Alles in allem halte ich [X] für sinnvoll."
+    ],
+    "en": [
+      "en:w2:ch:on-balance",
+      "On balance, I’d argue that [X]."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-man-muss-allerdings-bedenken",
+      "Man muss allerdings bedenken, dass [X]."
+    ],
+    "en": [
+      "en:w2:ch:its-worth-bearing-in-mind",
+      "It’s worth bearing in mind that [X]."
+    ],
+    "ru": [
+      "ru-ch-w2-imeet-smysl-uchityvat",
+      "Сто́ит учи́тывать, что …"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-da-ist-was-dran",
+      "Da ist durchaus etwas dran."
+    ],
+    "en": [
+      "en:w2:ch:fair-point",
+      "That’s a fair point, though [X]."
+    ],
+    "ru": [
+      "ru-ch-w2-v-etom-est-ratsionalnoe-zerno",
+      "В э́том есть разу́мное зерно́."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-dem-kann-ich-nur-zustimmen",
+      "Dem kann ich nur uneingeschränkt zustimmen."
+    ],
+    "ru": [
+      "ru-ch-w2-razdelyayu-vashu-pozitsiyu",
+      "Я по́лностью разделяю ва́шу пози́цию."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-mit-verlaub-sehe-ich-anders",
+      "Bei allem Respekt, das sehe ich anders."
+    ],
+    "en": [
+      "en:w2:ch:with-all-due-respect",
+      "With all due respect, I see it differently."
+    ],
+    "ru": [
+      "ru-ch-w2-pri-vsem-uvazhenii",
+      "При всём уваже́нии, я с э́тим не согла́сен (согла́сна)."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-in-diesem-punkt-stimme-zu",
+      "In diesem Punkt gehen wir konform, aber [X]."
+    ],
+    "ru": [
+      "ru-ch-w2-soglashus-s-ogovorkoy",
+      "В це́лом да, но с одно́й огово́ркой: …"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-das-würde-ich-so-nicht-unterschreiben",
+      "Das würde ich so pauschal nicht unterschreiben."
+    ],
+    "en": [
+      "en:w2:ch:wouldnt-go-so-far",
+      "I wouldn’t go quite that far, because [X]."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-koennten-sie-das-naeher",
+      "Könnten Sie das bitte etwas näher ausführen?"
+    ],
+    "en": [
+      "en:w2:ch:could-you-elaborate",
+      "Could you elaborate slightly on [X]?"
+    ],
+    "ru": [
+      "ru-ch-w2-mozhno-po-podrobnee",
+      "Не могли́ бы вы поясни́ть э́то на приме́ре?"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-um-missverstaendnisse",
+      "Um Missverständnisse auszuschließen: [X]"
+    ],
+    "en": [
+      "en:w2:ch:just-to-avoid-ambiguity",
+      "Just to avoid any ambiguity: [X]"
+    ],
+    "ru": [
+      "ru-ch-w2-chtoby-isklyuchit-raznochteniya",
+      "Что́бы не возни́кло недоразуме́ний: …"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-heisst-das-im-klartext",
+      "Heißt das im Klartext, dass [X]?"
+    ],
+    "en": [
+      "en:w2:ch:am-i-right-in-thinking",
+      "Am I right in thinking that [X]?"
+    ],
+    "ru": [
+      "ru-ch-w2-pravilno-li-ya-ponyal",
+      "Пра́вильно ли я по́нял(а), что …?"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-entspricht-nicht-vereinbarung",
+      "Das entspricht leider nicht unserer Vereinbarung."
+    ],
+    "ru": [
+      "ru-ch-w2-eto-ne-sootvetstvuet",
+      "Э́то не соотве́тствует на́шим договорённостям."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-ich-bestehe-auf-nachbesserung",
+      "Ich bestehe auf einer schnellen Nachbesserung."
+    ],
+    "ru": [
+      "ru-ch-w2-prosim-ustranit-nedostatki",
+      "Про́сим устрани́ть э́тот недостаток в кратча́йшие сро́ки."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-trotz-mehrfacher-nachfrage",
+      "Trotz mehrfacher Nachfrage habe ich noch keine Antwort erhalten."
+    ],
+    "ru": [
+      "ru-ch-w2-nesmotrya-na-napominanie",
+      "Несмотря́ на повторное обраще́ние, отве́та пока́ нет."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-wir-suchen-nach-uebergangsloesung",
+      "Wir arbeiten bereits an einer Übergangslösung."
+    ],
+    "en": [
+      "en:w2:ch:working-on-workaround",
+      "In the meantime, we’ve put a workaround in place."
+    ],
+    "ru": [
+      "ru-ch-w2-my-ishchem-vremennoe-reshenie",
+      "Мы сейча́с и́щем вре́менный обходно́й путь."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-das-problem-ist-dringend",
+      "Das Problem blockiert derzeit den gesamten Ablauf."
+    ],
+    "en": [
+      "en:w2:ch:currently-blocked-by",
+      "We’re currently blocked by [X]."
+    ],
+    "ru": [
+      "ru-ch-w2-blokiruet-dalneyshuyu-rabotu",
+      "Э́та оши́бка пока́ блоки́рует дальнейшую рабо́ту."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-wir-muessen-ursache-pruefen",
+      "Wir müssen zuerst prüfen, woran das liegt."
+    ],
+    "en": [
+      "en:w2:ch:get-to-bottom-of",
+      "We need to get to the bottom of why [X]."
+    ],
+    "ru": [
+      "ru-ch-w2-nuzhno-ponyat-pervoprichinu",
+      "Снача́ла ва́жно выясни́ть первопричи́ну сбо́я."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-bleiben-wir-beim-thema",
+      "Lass uns bitte kurz beim eigentlichen Thema bleiben."
+    ],
+    "ru": [
+      "ru-ch-w2-vernemsya-k-glavnoy-teme",
+      "Давайте вернёмся к основно́й те́ме пове́стки."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-bleiben-sie-einen-moment-dran",
+      "Bleiben Sie bitte einen Moment in der Leitung."
+    ],
+    "en": [
+      "en:w2:ch:ill-put-you-through",
+      "Hold the line, I’ll put you straight through."
+    ],
+    "ru": [
+      "ru-ch-w2-podozhdite-na-linii-pozhaluysta",
+      "Не кладите трубку, я сейчас переключу́ вас."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-schoenen-feierabend-gewuenscht",
+      "Ich wünsche dir einen schönen Feierabend!"
+    ],
+    "ru": [
+      "ru-ch-w2-horoshego-otdyha-vecherom",
+      "Желаю хоро́шего ве́чера по́сле рабо́ты!"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-bin-im-plan-keine-blocker",
+      "Ich liege im Plan und habe aktuell keine Blocker."
+    ],
+    "en": [
+      "en:w2:ch:on-track-no-blockers",
+      "Everything’s on track — no blockers on my side."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-das-verhalten-ist-neu",
+      "Dieses Verhalten tritt erst seit dem letzten Update auf."
+    ],
+    "en": [
+      "en:w2:ch:regression-since-update",
+      "This looks like a regression from yesterday’s deploy."
+    ],
+    "ru": [
+      "ru-ch-w2-sboy-poyavilsya-posle-reliza",
+      "Сбой возник сразу по́сле вчера́шнего рели́за."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-habe-screenshot-und-logs-angehaengt",
+      "Ich habe Screenshot und Log-Auszug ans Ticket gehängt."
+    ],
+    "ru": [
+      "ru-ch-w2-prilozhil-skrinshot-i-logi",
+      "Скриншо́т и фрагмент ло́га прикрепи́л к зада́че."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-nach-cache-leeren-weg",
+      "Nach dem Leeren des Caches war das Problem weg."
+    ],
+    "en": [
+      "en:w2:ch:flushing-cache-resolved",
+      "Clearing the cache resolved the glitch."
+    ],
+    "ru": [
+      "ru-ch-w2-posle-ochistki-kesha-ok",
+      "По́сле сброса кэша оши́бка исче́зла."
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-kannst-du-kurz-draufschauen",
+      "Könntest du kurz auf meine Fehlermeldung schauen?"
+    ],
+    "en": [
+      "en:w2:ch:second-pair-of-eyes",
+      "Could I grab a second pair of eyes on this config?"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-teilen-wir-kurz-bildschirm",
+      "Sollen wir kurz den Bildschirm teilen?"
+    ],
+    "ru": [
+      "ru-ch-w2-davay-rassharim-ekran",
+      "Давай на пару мину́т расша́рим экра́н?"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-welcher-zweig-ist-aktuell",
+      "Welcher Branch ist dafür der richtige Ausgangspunkt?"
+    ],
+    "en": [
+      "en:w2:ch:which-branch-base",
+      "Which branch should I cut my feature branch from?"
+    ],
+    "ru": [
+      "ru-ch-w2-ot-kakoy-vetki-otvetvitsya",
+      "От како́й ве́тки сейчас пра́вильнее ответви́ться?"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-uebersehe-hier-etwas",
+      "Habe ich hier irgendeine Voraussetzung übersehen?"
+    ],
+    "ru": [
+      "ru-ch-w2-ya-zdes-chto-to-upustil",
+      "Подскажи́, я здесь ничего́ в настройках не упусти́л(а)?"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-darf-ich-kurz-einhaken",
+      "Darf ich an dieser Stelle kurz einhaken?"
+    ],
+    "en": [
+      "en:w2:ch:can-i-chime-in",
+      "May I chime in briefly before we move on?"
+    ],
+    "ru": [
+      "ru-ch-w2-mozhno-korotko-vklinit-sya",
+      "Мо́жно коро́ткое дополне́ние по э́тому пункту?"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-halten-wir-das-als-aufgabe-fest",
+      "Halten wir das direkt als To-do mit Besitzer fest."
+    ],
+    "ru": [
+      "ru-ch-w2-zafiksiruem-zadachu-i-srok",
+      "Давайте сра́зу зафикси́руем отве́тственного и срок."
+    ]
+  },
+  {
+    "en": [
+      "en:w2:ch:how-did-weekend-go",
+      "How did your weekend go? Get much rest?"
+    ],
+    "ru": [
+      "ru-ch-w2-kak-proshli-vyhodnye",
+      "Как провёл (провела́) выходны́е?"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:ch:where-do-we-draw-line",
+      "Where exactly do we draw the line on scope?"
+    ],
+    "ru": [
+      "ru-ch-w2-utochnite-pozh-granitsy",
+      "Что́ и́менно вхо́дит в ра́мки э́той зада́чи?"
+    ]
+  },
+  {
+    "en": [
+      "en:w2:ch:reproducible-only-in-prod",
+      "It passes locally, yet fails under production load."
+    ],
+    "ru": [
+      "ru-ch-w2-problema-tolko-v-prode",
+      "На те́стовом стенде тишина́, а на боево́м падает."
+    ]
+  },
+  {
+    "en": [
+      "en:w2:ch:following-up-on-thread",
+      "Just following up on my previous email regarding [X]."
+    ],
+    "ru": [
+      "ru-ch-w2-dubliruyu-pismo",
+      "Дубли́рую письмо́, что́бы оно не затерялось."
+    ]
+  },
+  {
+    "en": [
+      "en:w2:ch:gentle-reminder-deadline",
+      "This is a gentle reminder that [X] is due by Friday."
+    ],
+    "ru": [
+      "ru-ch-w2-napominayu-o-sroke",
+      "Позвольте корректно напо́мнить о ближа́йшем сро́ке."
+    ]
+  },
+  {
+    "en": [
+      "en:w2:ch:broadly-speaking",
+      "Broadly speaking, [X]."
+    ],
+    "ru": [
+      "ru-ch-w2-na-moy-subjektivnyy-vzglyad",
+      "Е́сли смотре́ть ши́ре, …"
+    ]
+  },
+  {
+    "de": [
+      "ch-w2-etwas-laesst-sich-nicht-oeffnen",
+      "[X] lässt sich nicht mehr [Infinitiv]."
+    ],
+    "ru": [
+      "ru-ch-w2-ne-poluchaetsya-otkryt",
+      "Не получа́ется [инфинити́в], хотя́ всё сде́лано по инстру́кции."
+    ]
+  },
+  {
+    "de": [
+      "it-dev-deployen",
+      "deployen"
+    ],
+    "ru": [
+      "ru-w2-razvyortyvat",
+      "развёртывать"
+    ]
+  },
+  {
+    "de": [
+      "pro-m3-berufserfahrung",
+      "Berufserfahrung"
+    ],
+    "ru": [
+      "ru-w2-stazh",
+      "стаж"
+    ]
+  }
+]);

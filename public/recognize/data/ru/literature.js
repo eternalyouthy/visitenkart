@@ -297,3 +297,185 @@
         ex('«[[Сюд+а я б+ольше не езд+ок]]», — сказ+ал он, когд+а в от+еле в тр+етий раз проп+ала гор+ячая вод+а.', '“I won’t be coming back here,” he said when the hotel lost its hot water for the third time.', '„Hierher komme ich nicht wieder“, sagte er, als im Hotel zum dritten Mal das Warmwasser ausfiel.')])
   ]);
 })();
+
+/* === Content expansion 2026-11-27 (+15 RU Literary Phrases) === */
+(function () {
+  'use strict';
+  function pair(en, de) { return { en: en, de: de }; }
+  function ex(t, en, de) { return { t: t, en: en, de: de }; }
+  function source(authorOrig, en, de, workOrig, year, workEn, workDe) {
+    return { author: pair(en, de), authorOrig: authorOrig, work: pair(workEn, workDe), workOrig: workOrig, year: year };
+  }
+  function card(id, t, level, register, source, meaning, literal, breakdown, context, tone, token, grammar, examples) {
+    return {
+      id: 'lit-ru-' + id, t: t, type: 'chunk', level: level, register: register,
+      en: meaning.en, de: meaning.de, examples: examples, parts: [[token, grammar]],
+      lit: { author: source.author, authorOrig: source.authorOrig, work: source.work, workOrig: source.workOrig, year: source.year,
+        quote: t, literal: literal, breakdown: breakdown, context: context, tone: tone }
+    };
+  }
+  function add(topic, items) { GT.register({ tab: 'literature', topic: topic, items: items }); }
+  var master = source('Михаил Булгаков', 'Mikhail Bulgakov', 'Michail Bulgakow', 'Мастер и Маргарита', '1966–1967', 'The Master and Margarita', 'Der Meister und Margarita');
+  var onegin = source('Александр Пушкин', 'Alexander Pushkin', 'Alexander Puschkin', 'Евгений Онегин', 1833, 'Eugene Onegin', 'Eugen Onegin');
+
+  add('love', [
+    card('vse-vozrasty', 'Любв+и все в+озрасты пок+орны', 'B2', 'literary', onegin,
+      pair('you can fall in love at any age', 'Liebe kennt kein Alter'),
+      pair('all ages are submissive to love', 'Alle Altersstufen sind der Liebe untertan.'),
+      pair('Любви is dative after the short adjective покорны (submissive to). Все возрасты is the subject.', 'Любви steht im Dativ nach dem Kurzadj. покорны (untertan). Все возрасты ist Subjekt.'),
+      pair('Pushkin reflects on how love catches people of every generation off guard.', 'Puschkin bedenkt, wie die Liebe Menschen jeden Alters unerwartet trifft.'),
+      pair('Warm, lightly playful quotation whenever someone falls in love later in life.', 'Ein herzliches, leicht augenzwinkerndes Zitat, wenn sich jemand später im Leben verliebt.'),
+      'пок+орны (+ Dat.)', pair('short plural adjective: submissive/subject to', 'Kurzform Plural: jemandem untertan'),
+      [ex('Отец сн+ова влюб+ился в шестьдес+ят лет — прав был П+ушкин: [[любв+и все в+озрасты пок+орны]].', 'Father fell in love again at sixty — Pushkin was right: love knows no age.', 'Vater verliebte sich mit sechzig neu — Puschkin hatte recht: Liebe kennt kein Alter.'),
+        ex('[[Любв+и все в+озрасты пок+орны]], по+этому не ст+оит списывать со счетов новые встречи.', 'You can fall in love at any age, so don’t write off new encounters.', 'Liebe kennt kein Alter, deshalb sollte man neue Begegnungen nicht abschreiben.')]),
+    card('o-doblestyah', 'О д+облестях, о п+одвигах, о сл+аве', 'C1', 'elevated',
+      source('Александр Блок', 'Alexander Blok', 'Alexander Blok', 'О доблестях, о подвигах, о славе…', 1908, 'Of Valour, of Exploits, of Glory…', 'Von Tapferkeit, von Taten, von Ruhm …'),
+      pair('in deep devotion or grief, worldly ambitions fade away', 'angesichts großer Liebe oder Enttäuschung verblassen Ruhm und Ehrgeiz'),
+      pair('about valour, about exploits, about glory', 'Von Heldenmut, von Taten, von Ruhm.'),
+      pair('Three prepositional nouns build an elevated rhythm before the next line says “I forgot them on the sorrowful earth”.', 'Drei Nomen im Präpositiv bauen einen feierlichen Rhythmus auf, bevor es heißt: „ich vergaß sie auf der traurigen Erde“.'),
+      pair('Blok looks at a portrait of his beloved and remembers how everything else faded beside her.', 'Blok blickt auf ein Porträt seiner Geliebten und erinnert sich, wie alles andere neben ihr verblasste.'),
+      pair('Lyrical and solemn; instantly recognisable across Russian poetry.', 'Lyrisch und feierlich; eine der berühmtesten Anfangszeilen der russischen Lyrik.'),
+      'о + Prep.', pair('about, concerning (prepositional case)', 'über, von (Präpositiv)'),
+      [ex('Когда она ушла, он повторял строку Блока: «[[О д+облестях, о п+одвигах, о сл+аве]] я забывал…»', 'When she left, he repeated Blok’s line: “Of valour, of exploits, of glory I forgot…”', 'Als sie ging, wiederholte er Bloks Zeile: „Von Tapferkeit, von Taten, von Ruhm vergaß ich …“'),
+        ex('В стихах часто пишут [[о д+облестях, о п+одвигах, о сл+аве]], но цепляют простые детали.', 'Poems often speak of valour and glory, yet it’s the simple details that stay with you.', 'Gedichte sprechen oft von Ruhm und Taten, doch einfache Details bleiben im Gedächtnis.')]),
+    card('vechnoy-lyubvi', 'Кто сказ+ал теб+е, что нет на св+ете насто+ящей, в+ерной, в+ечной любв+и?', 'B2', 'elevated', master,
+      pair('true, lasting love really does exist', 'wahre, treue und ewige Liebe gibt es doch'),
+      pair('who told you that there is no real, faithful, eternal love in the world?', 'Wer hat dir gesagt, dass es auf der Welt keine echte, treue, ewige Liebe gibt?'),
+      pair('Нет + genitive (настоящей, верной, вечной любви) denies existence; the rhetorical question insists on the opposite.', 'Нет + Genitiv (настоящей … любви) verneint die Existenz; die rhetorische Frage behauptet das Gegenteil.'),
+      pair('The narrator interrupts his story to defend the bond between the Master and Margarita.', 'Der Erzähler unterbricht seine Geschichte, um die Liebe zwischen Meister und Margarita zu verteidigen.'),
+      pair('Passionate and iconic; immediately known to almost every Russian reader.', 'Leidenschaftlich und ikonisch; fast jedem russischen Leser sofort bekannt.'),
+      'нет + Gen.', pair('there is no … (genitive of absence)', 'es gibt kein … (Genitiv)'),
+      [ex('П+осле пятидесяти лет вместе они смеются над скептиками: «[[Кто сказ+ал теб+е, что нет на св+ете насто+ящей, в+ерной, в+ечной любв+и?]]»', 'After fifty years together they laugh at sceptics: “Who told you there is no true, faithful, eternal love?”', 'Nach fünfzig Jahren zusammen lachen sie über Skeptiker: „Wer hat dir gesagt, dass es keine ewige Liebe gibt?“'),
+        ex('В этом письме он впервые написал о [[насто+ящей, в+ерной, в+ечной любв+и]].', 'In that letter he wrote for the first time of true, faithful, eternal love.', 'In diesem Brief schrieb er erstmals von wahrer, treuer, ewiger Liebe.')])
+  ]);
+
+  add('longing', [
+    card('parus-odinokiy', 'Бел+еет п+арус один+окий', 'B2', 'literary',
+      source('Михаил Лермонтов', 'Mikhail Lermontov', 'Michail Lermontow', 'Парус', 1832, 'The Sail', 'Das Segel'),
+      pair('a solitary figure or longing against a vast misty backdrop', 'ein Bild einsamer Sehnsucht vor weiter, nebliger Ferne'),
+      pair('a lonely sail gleams white (in the blue sea mist)', 'Weiß schimmert ein einsames Segel.'),
+      pair('Белеет is an inchoative-visual verb (“shows white in the distance”), putting the colour before the noun.', 'Белеет heißt „schimmert weiß“; das Verb steht vor dem Subjekt und lenkt den Blick auf den Horizont.'),
+      pair('Written when Lermontov was seventeen, it became Russia’s emblem of restlessness and inner storm.', 'Mit siebzehn Jahren geschrieben, wurde es zum Sinnbild von Fernweh und innerer Unruhe.'),
+      pair('Every native Russian knows this line from school; used both seriously and lightly at sea.', 'Jeder Muttersprachler kennt diese Zeile aus der Schule; am Meer ernst wie heiter zitiert.'),
+      'бел+еть', pair('to show / gleam white against a background', 'weiß schimmern, sich weiß abheben'),
+      [ex('На горизонте далеко в заливе [[бел+еет п+арус один+окий]].', 'Far out on the horizon in the bay, a lonely sail gleams white.', 'Weit am Horizont in der Bucht schimmert ein einsames Segel weiß.'),
+        ex('Глядя на пустой зимний пляж, он вспомнил Лермонтова: «[[Бел+еет п+арус один+окий]]».', 'Looking at the empty winter beach, he recalled Lermontov: “A lonely sail gleams white.”', 'Beim Blick auf den leeren Winterstrand dachte er an Lermontow: „Weiß schimmert ein einsames Segel.“')]),
+    card('ne-zhaleyu', 'Не жал+ею, не зов+у, не пл+ачу', 'B2', 'elevated',
+      source('Сергей Есенин', 'Sergei Yesenin', 'Sergej Jessenin', 'Не жалею, не зову, не плачу…', 1921, 'I Have No Regrets, I Do Not Call, I Do Not Weep…', 'Ich bedaure nichts, ich rufe nicht, ich weine nicht …'),
+      pair('quiet acceptance that a chapter of youth and life has passed', 'stilles Einverständnis damit, dass ein Lebensabschnitt vorüber ist'),
+      pair('I do not regret, I do not call, I do not weep', 'Ich bedaure nicht, ich rufe nicht, ich weine nicht.'),
+      pair('Three short negated imperfectives without pronouns create calm resignation.', 'Drei kurze verneinte imperfektive Verben ohne Pronomen erzeugen gefasste Ruhe.'),
+      pair('Yesenin accepts fading youth as naturally as white apple blossom falling in spring.', 'Jessenin nimmt das Vergehen der Jugend so gelassen hin wie fallende Apfelblüten.'),
+      pair('Wistful yet dignified; often quoted when closing a long chapter without bitterness.', 'Wehmütig und doch gefasst; oft zitiert beim Abschied von einem Lebensabschnitt.'),
+      'не жал+еть', pair('not to regret, to feel no sorrow for', 'nicht bedauern, nicht bereuen'),
+      [ex('Когда он продал старую дачу, сказал спокойно: «[[Не жал+ею, не зов+у, не пл+ачу]]».', 'When he sold the old summer cottage, he said calmly: “I have no regrets, I do not call, I do not weep.”', 'Als er die alte Datscha verkaufte, sagte er ruhig: „Ich bedaure nichts, ich rufe nicht, ich weine nicht.“'),
+        ex('О прошлых ошибках он говорит без горечи — [[не жал+еет и не пл+ачет]].', 'He speaks of past mistakes without bitterness — neither regretting nor weeping.', 'Über frühere Fehler spricht er ohne Bitterkeit — er bedauert nicht und weint nicht.')]),
+    card('svecha-gorela', 'Свеч+а гор+ела на стол+е', 'B2', 'literary',
+      source('Борис Пастернак', 'Boris Pasternak', 'Boris Pasternak', 'Зимняя ночь', 1946, 'Winter Night', 'Winternacht'),
+      pair('a quiet pocket of warmth and intimacy amid a winter blizzard', 'eine kleine Insel aus Wärme und Nähe mitten im Wintersturm'),
+      pair('a candle was burning on the table', 'Eine Kerze brannte auf dem Tisch.'),
+      pair('Simple past imperfective горела holds the scene still while the snowstorm rages outside.', 'Das imperfektive Präteritum горела hält den ruhigen Moment fest, während draußen der Schneesturm tobt.'),
+      pair('Refrain of the poem from “Doctor Zhivago”, contrasting a blizzard outside with a lit room inside.', 'Refrain aus dem Gedicht in „Doktor Schiwago“, das den Schneesturm draußen mit dem warmen Zimmer kontrastiert.'),
+      pair('Quiet, evocative shorthand for winter cosiness or fragile closeness.', 'Ruhig und bildhaft für winterliche Geborgenheit oder zerbrechliche Nähe.'),
+      'гор+еть', pair('to burn, be lit (candle, light)', 'brennen, leuchten (Kerze)'),
+      [ex('За окном метель, а дома тихо — «[[свеч+а гор+ела на стол+е]]».', 'Outside there’s a blizzard, inside it’s quiet — “a candle was burning on the table”.', 'Draußen tobt der Schneesturm, drinnen ist es still — „eine Kerze brannte auf dem Tisch“.'),
+        ex('Всю ночь на подоконнике [[гор+ела]] маленькая [[свеч+а]].', 'All night long a small candle burned on the windowsill.', 'Die ganze Nacht brannte eine kleine Kerze auf dem Fensterbrett.')])
+  ]);
+
+  add('atmosphere', [
+    card('burya-mgloyu', 'Б+уря мгл+ою н+ебо кр+оет', 'B2', 'literary',
+      source('Александр Пушкин', 'Alexander Pushkin', 'Alexander Puschkin', 'Зимний вечер', 1825, 'Winter Evening', 'Winterabend'),
+      pair('a fierce winter snowstorm engulfing the sky in gloom', 'ein heftiger Wintersturm, der den Himmel in Düsternis hüllt'),
+      pair('the storm covers the sky with haze/gloom', 'Der Sturm deckt den Himmel mit Nebeldunst zu.'),
+      pair('Мглою is an older poetic instrumental variant of мглой; кроет is a concise literary form of покрывает.', 'Мглою ist die poetische Instrumentalform zu мглой; кроет entspricht gehobenem покрывает.'),
+      pair('The famous opening of “Winter Evening”, where a storm howls outside an old cabin.', 'Der berühmte Beginn von „Winterabend“, während draußen der Schneesturm heult.'),
+      pair('Instantly invoked whenever a sudden blizzard or heavy winter wind hits.', 'Wird sofort zitiert, sobald ein heftiger Wintersturm aufzieht.'),
+      'мгл+ою', pair('poetic instrumental of мгла (haze, gloom)', 'poetischer Instrumental von мгла (Dunst, Düsternis)'),
+      [ex('Посмотрев в тёмное январское окно, он усмехнулся: «[[Б+уря мгл+ою н+ебо кр+оет]]».', 'Looking out the dark January window, he smiled: “The storm covers the sky with gloom.”', 'Als er aus dem dunklen Januarfenster sah, schmunzelte er: „Der Sturm hüllt den Himmel in Dunst.“'),
+        ex('С утра [[б+уря]] снежной [[мгл+ою кр+оет]] весь город.', 'Since morning the storm has covered the whole city in snowy haze.', 'Seit dem Morgen hüllt der Sturm die ganze Stadt in Schneedunst.')]),
+    card('molchi-skryvaysya', 'Молч+и, скрыв+айся и та+и', 'C1', 'elevated',
+      source('Фёдор Тютчев', 'Fyodor Tyutchev', 'Fjodor Tjutschew', 'Silentium!', 1830, 'Silentium!', 'Silentium!'),
+      pair('keep your deepest feelings and thoughts guarded from noise', 'bewahre deine tiefsten Gedanken und Gefühle im Stillen'),
+      pair('be silent, hide yourself and conceal (your feelings and dreams)', 'Schweig, verbirg dich und halte geheim.'),
+      pair('Three imperfective imperatives in a row urge continuous inner restraint.', 'Drei imperfektive Imperative nacheinander fordern dauerhafte innere Zurückhaltung.'),
+      pair('Opening line of “Silentium!”, which culminates in “a thought once spoken is a lie”.', 'Eröffnungszeile von „Silentium!“, das in „ein ausgesprochener Gedanke ist eine Lüge“ gipfelt.'),
+      pair('Intense and philosophical; used for protecting privacy or creative work.', 'Eindringlich und philosophisch; passend für Schutz des Inneren oder stille Arbeit.'),
+      'та+ить', pair('to conceal, keep secret', 'verbergen, geheim halten'),
+      [ex('Пока проект не доделан, лучше следовать Тютчеву: «[[Молч+и, скрыв+айся и та+и]]».', 'Until the project is finished, better follow Tyutchev: “Be silent, hide and conceal.”', 'Solange das Projekt nicht fertig ist, gilt Tjutschew: „Schweig, verbirg dich und halte geheim.“'),
+        ex('Он привык [[скрывать и та+ить]] свои сомнения до самого конца.', 'He was used to hiding and keeping his doubts to himself until the very end.', 'Er war es gewohnt, seine Zweifel bis zum Schluss zu verbergen.')]),
+    card('studenuyu-poru', 'Одн+ажды в студёную з+имнюю п+ору', 'B1', 'literary',
+      source('Николай Некрасов', 'Nikolai Nekrasov', 'Nikolai Nekrassow', 'Крестьянские дети', 1861, 'Peasant Children', 'Bauernkinder'),
+      pair('once on a bitter, freezing winter day', 'eines eisig kalten Wintertags'),
+      pair('once in a freezing winter season', 'Einst in einer klirrend kalten Winterzeit.'),
+      pair('Пора (time/season) in the accusative с в marks time; студёный is a crisp folk-literary word for icy cold.', 'В + Akkusativ (по́ру) gibt die Zeit an; студёный ist ein bildhaftes Wort für klirrende Kälte.'),
+      pair('The famous narrative opening in which a boy meets a tiny peasant boy hauling firewood out of the forest.', 'Der berühmte Erzähleinstieg eines russischen Klassikers über einen Wintertag im Wald.'),
+      pair('Half-playful, half-cozy winter opener known to every Russian speaker from childhood.', 'Halb scherzhaft, halb klassisch bei klirrendem Frost — in Russland von Kindheit an bekannt.'),
+      'студёный', pair('icy cold, freezing', 'klirrend kalt, eisig'),
+      [ex('«[[Одн+ажды в студёную з+имнюю п+ору]]» мы решили пойти пешком вместо автобуса.', '“Once on a freezing winter day” we decided to walk instead of taking the bus.', '„Einst an einem eisig kalten Wintertag“ beschlossen wir, zu Fuß zu gehen.'),
+        ex('В такую [[студёную з+имнюю п+ору]] хорошо сидеть дома с горячим чаем.', 'In such freezing winter weather it’s good to sit at home with hot tea.', 'In solch klirrend kalter Winterzeit sitzt man gern mit heißem Tee zu Hause.')])
+  ]);
+
+  add('irony', [
+    card('utrom-dengi', '+Утром д+еньги — в+ечером ст+улья', 'B2', 'ironic',
+      source('Илья Ильф и Евгений Петров', 'Ilya Ilf & Yevgeny Petrov', 'Ilja Ilf & Jewgeni Petrow', 'Двенадцать стульев', 1928, 'The Twelve Chairs', 'Zwölf Stühle'),
+      pair('pay up front before you get the goods or service', 'erst die Bezahlung, dann die Leistung'),
+      pair('money in the morning — chairs in the evening', 'Morgens das Geld — abends die Stühle.'),
+      pair('Two clipped time adverbs with verbless nouns mimic a brusque business rule.', 'Zwei knappe Zeitadverbien mit Nomen ohne Verb klingen wie eine trockene Geschäftsbedingung.'),
+      pair('The stagehand Mechnikov refuses to hand over the theatre chairs to Ostap Bender without prepayment.', 'Der Bühnenarbeiter Metschnikow weigert sich, Ostap Bender die Stühle ohne Vorkasse zu geben.'),
+      pair('One of the most popular Russian humorous quotes for prepayment and firm conditions.', 'Einer der beliebtesten russischen Scherzsätze für Vorkasse und klare Bedingungen.'),
+      'в+ечером', pair('in the evening (instrumental of time)', 'am Abend (Instrumental der Zeit)'),
+      [ex('Новым клиентам отгружаем только по предоплате — как говорится, «[[+утром д+еньги — в+ечером ст+улья]]».', 'We only ship to new clients on prepayment — as the saying goes, “money in the morning, chairs in the evening”.', 'An Neukunden liefern wir nur gegen Vorkasse — „morgens das Geld, abends die Stühle“.'),
+        ex('Он рассмеялся в ответ на просьбу об отсрочке: «[[+Утром д+еньги — в+ечером ст+улья]]!»', 'He laughed at the request for deferred payment: “Money first, chairs later!”', 'Auf die Bitte um Zahlungsaufschub lachte er: „Morgens das Geld, abends die Stühle!“')]),
+    card('kratkost-sestra', 'Кр+аткость — сестр+а тал+анта', 'B2', 'ironic',
+      source('Антон Чехов', 'Anton Chekhov', 'Anton Tschechow', 'Письмо Александру Чехову', 1889, 'Letter to Alexander Chekhov', 'Brief an Alexander Tschechow'),
+      pair('saying things concisely shows real skill', 'in der Kürze liegt die Würze / wahres Können'),
+      pair('brevity is the sister of talent', 'Kürze ist die Schwester des Talents.'),
+      pair('A clean equational sentence with a dash (A — B) gives the epigram proverb force.', 'Der reine Gleichsetzungssatz mit Gedankenstrich macht die Bemerkung zum Sprichwort.'),
+      pair('Chekhov gave this advice in a letter to his brother Alexander, urging him to cut wordy passages.', 'Tschechow gab diesen Rat in einem Brief an seinen Bruder Alexander, um Weitschweifigkeit zu kürzen.'),
+      pair('The standard Russian phrasing when praising concise writing or gently trimming a long speech.', 'Der russische Standardsatz, um knappe Präzision zu loben oder lange Texte zu kürzen.'),
+      'кр+аткость', pair('brevity, conciseness', 'die Kürze, Knappheit'),
+      [ex('Сократи вступление до трёх предложений: [[кр+аткость — сестр+а тал+анта]].', 'Trim the introduction to three sentences: brevity is the sister of talent.', 'Kürze die Einleitung auf drei Sätze: Kürze ist die Schwester des Talents.'),
+        ex('Чехов не зря напоминал брату, что [[кр+аткость — сестр+а тал+анта]].', 'Chekhov had good reason to remind his brother that brevity is the sister of talent.', 'Tschechow erinnerte seinen Bruder zu Recht daran, dass Kürze die Schwester des Talents ist.')]),
+    card('pervaya-svezhest', 'Св+ежесть быв+ает т+олько одн+а — п+ервая', 'C1', 'ironic', master,
+      pair('quality is binary: something is either fresh/authentic or spoiled', 'Qualität ist nicht verhandelbar: entweder frisch oder verdorben'),
+      pair('there is only one kind of freshness — the first one (and it is also the last)', 'Es gibt nur eine Frische — die erste.'),
+      pair('Бывает (“exists/occurs”) makes the claim sound like an iron law of nature.', 'Бывает („kommt vor“) gibt dem Satz den Ton eines unumstößlichen Gesetzes.'),
+      pair('Woland mocks the buffet manager’s claim that his sturgeon was “of the second freshness”.', 'Voland spottet über den Büfettleiter, der seinen Stör als „zweite Frische“ anpreist.'),
+      pair('Sharp satire against euphemisms for shoddy goods or half-baked excuses.', 'Scharfe Satire auf Beschönigungen für mangelhafte Qualität.'),
+      'быв+ает (+ Nom.)', pair('there is / exists (usually)', 'es gibt (gewöhnlich)'),
+      [ex('Не надо называть сырой релиз «почти готовым» — [[св+ежесть быв+ает т+олько одн+а — п+ервая]].', 'Don’t call a buggy release “nearly ready” — freshness only comes in first grade.', 'Nenn ein unfertiges Release nicht „fast fertig“ — es gibt nur eine Frische, die erste.'),
+        ex('Буфетчик оправдывался, но ему напомнили, что [[св+ежесть быв+ает т+олько одн+а]].', 'The manager made excuses, yet he was reminded there is only one kind of freshness.', 'Der Büfettleiter redete sich heraus, doch man erinnerte ihn an die einzige Frische.')])
+  ]);
+
+  add('fate', [
+    card('krasota-spaset', 'Красот+а спасёт мир', 'B2', 'elevated',
+      source('Фёдор Достоевский', 'Fyodor Dostoevsky', 'Fjodor Dostojewski', 'Идиот', 1869, 'The Idiot', 'Der Idiot'),
+      pair('beauty and harmony can redeem a troubled world', 'Schönheit und Harmonie werden die Welt retten'),
+      pair('beauty will save the world', 'Schönheit wird die Welt retten.'),
+      pair('Simple future perfective спасёт carries prophetic certainty.', 'Das perfektive Futur спасёт trägt prophetische Gewissheit.'),
+      pair('Quoted about Prince Myshkin in Dostoevsky’s “The Idiot” — both earnest and hotly debated.', 'In „Der Idiot“ Fürst Myschkin zugeschrieben — sowohl ernst als auch viel diskutiert.'),
+      pair('One of the best-known sentences in Russian literature worldwide.', 'Einer der weltweit bekanntesten Sätze der russischen Literatur.'),
+      'спасёт', pair('will save (3sg. future of спасти)', 'wird retten (3. Sg. Futur von спасти)'),
+      [ex('Любуясь отреставрированным фасадом, она улыбнулась: «Говорят же, что [[красот+а спасёт мир]]».', 'Admiring the restored facade, she smiled: “As they say, beauty will save the world.”', 'Beim Anblick der restaurierten Fassade lächelte sie: „Man sagt ja, Schönheit rettet die Welt.“'),
+        ex('Достоевский вложил мысль, что [[красот+а спасёт мир]], в споры вокруг князя Мышкина.', 'Dostoevsky placed the claim that beauty will save the world at the heart of debates around Myshkin.', 'Dostojewski stellte den Satz „Schönheit wird die Welt retten“ ins Zentrum des Romans.')]),
+    card('porazheniya-pobedy', 'И пораж+енья от поб+еды ты сам не д+олжен отлич+ать', 'C1', 'elevated',
+      source('Борис Пастернак', 'Boris Pasternak', 'Boris Pasternak', 'Быть знаменитым некрасиво…', 1956, 'It Is Unseemly to Be Famous…', 'Berühmt zu sein ist nicht schön …'),
+      pair('stay true to your work regardless of success or failure', 'bleibe deiner Sache treu, ohne nach Sieg oder Niederlage zu schielen'),
+      pair('and defeat from victory you yourself must not distinguish', 'Und Niederlage vom Sieg darfst du selbst nicht unterscheiden.'),
+      pair('Пораженья is the poetic spelling of поражения (genitive after от). Должен + imperfective infinitive states a lasting principle.', 'Пораженья ist die poetische Form zu поражения (Genitiv nach от). Должен + imperf. Infinitiv drückt ein Lebensprinzip aus.'),
+      pair('Pasternak argues that an artist should live and work earnestly without chasing applause.', 'Pasternak plädiert dafür, ernsthaft zu arbeiten, ohne Beifall oder Erfolg hinterherzujagen.'),
+      pair('Deeply respected line about inner integrity in creative work and life.', 'Hochgeschätzte Zeile über innere Integrität bei Arbeit und Berufung.'),
+      'отлич+ать (+ Acc. от + Gen.)', pair('to distinguish A from B', 'A von B unterscheiden'),
+      [ex('После трудного года он вспоминал Пастернака: «[[И пораж+енья от поб+еды ты сам не д+олжен отлич+ать]]».', 'After a hard year he recalled Pasternak: “And defeat from victory you yourself must not distinguish.”', 'Nach einem schweren Jahr dachte er an Pasternak: „Und Niederlage vom Sieg darfst du selbst nicht unterscheiden.“'),
+        ex('В долгой работе важно [[не отлич+ать пораженья от поб+еды]], а продолжать идти вперёд.', 'In long-term work it matters not to obsess over defeat versus victory, but to keep going.', 'Bei langer Arbeit kommt es darauf an, weiterzugehen statt nur auf Sieg zu schauen.')]),
+    card('annushka-maslo', 'Аннушка уж+е куп+ила подсолн+ечное м+асло', 'B2', 'ironic', master,
+      pair('the chain of events has already been set in motion and cannot be stopped', 'die Kette der Ereignisse ist längst in Gang gesetzt und nicht mehr aufzuhalten'),
+      pair('Annushka has already bought the sunflower oil (and even spilled it)', 'Annuschka hat das Sonnenblumenöl schon gekauft.'),
+      pair('Perfective купила marks an irreversible past trigger behind future consequences.', 'Das perfektive купила markiert einen unumkehrbaren Auslöser künftiger Folgen.'),
+      pair('Woland predicts Berlioz’s fatal accident, naming the tiny ordinary detail that triggers fate.', 'Voland sagt Berlioz’ tödlichen Unfall voraus und nennt das banale Detail, das das Schicksal auslöst.'),
+      pair('Wry shorthand among Russian speakers for an irreversible chain reaction already underway.', 'Ironische Redewendung dafür, dass eine unumkehrbare Kettenreaktion bereits läuft.'),
+      'уж+е куп+ила', pair('already bought (completed trigger)', 'hat bereits gekauft (vollendeter Auslöser)'),
+      [ex('Решение о слиянии приняли ещё в мае — как у Булгакова, «[[Аннушка уж+е куп+ила подсолн+ечное м+асло]]».', 'The merger was decided back in May — as in Bulgakov, “Annushka has already bought the oil”.', 'Die Fusion wurde schon im Mai beschlossen — „Annuschka hat das Öl längst gekauft“.'),
+        ex('Когда письмо ушло не тому адресату, он вздохнул: кажется, [[Аннушка уже разлила масло]].', 'When the email went to the wrong recipient, he sighed: seems the oil is already spilled.', 'Als die Mail an den falschen Empfänger ging, seufzte er: Das Schicksal nimmt schon seinen Lauf.')])
+  ]);
+})();

@@ -2521,3 +2521,441 @@ GT.register({
     }
   ]
 });
+
+/* === Content expansion 2026-11-27 (RU B1, B2, C1 Words) === */
+(function () {
+  'use strict';
+  function ex(t, en, de) { return { t: t, en: en, de: de }; }
+  function N(id, t, gender, plural, level, en, de, e) {
+    var o = { id: 'ru-x27-' + id, pos: 'noun', t: t, gender: gender, level: level, en: en, de: de, examples: [e] };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function V(id, t, aspect, level, forms, en, de, e) {
+    return { id: 'ru-x27-' + id, pos: 'verb', t: t, aspect: aspect, level: level, forms: { praes: forms[0], praet: forms[1], perf: forms[2] }, en: en, de: de, examples: [e] };
+  }
+  function A(id, pos, t, level, en, de, e) {
+    return { id: 'ru-x27-' + id, pos: pos, level: level, t: t, en: en, de: de, examples: [e] };
+  }
+  function reg(topic, items) { GT.register({ tab: 'words', topic: topic, items: items }); }
+
+  reg('everyday', [
+    N('mgnovenie', 'мгнов+ение', 'n', 'мгнов+ения', 'B1', 'moment, instant', 'der Augenblick',
+      ex('Подожд+и [[мгнов+ение]], я сейч+ас верн+усь с ключ+ами.', 'Wait a moment, I’ll be right back with the keys.', 'Warte einen Augenblick, ich bin gleich mit den Schlüsseln zurück.')),
+    N('sluchaynost', 'случ+айность', 'f', 'случ+айности', 'B2', 'coincidence, chance', 'der Zufall',
+      ex('Мы встр+етились в п+оезде по чист+ой [[случ+айности]].', 'We met on the train by pure coincidence.', 'Wir haben uns im Zug durch reinen Zufall getroffen.')),
+    N('proisshestvie', 'происш+ествие', 'n', 'происш+ествия', 'B2', 'incident, event', 'der Vorfall',
+      ex('Ночн+ое [[происш+ествие]] на вокз+але з+аняли на к+амеру.', 'The night-time incident at the station was caught on camera.', 'Der nächtliche Vorfall am Bahnhof wurde von der Kamera aufgenommen.')),
+    N('podrobnost', 'подр+обность', 'f', 'подр+обности', 'B1', 'detail', 'die Einzelheit',
+      ex('Дав+ай обсуд+им к+аждую [[подр+обность]] догов+ора з+автра.', 'Let’s discuss every detail of the contract tomorrow.', 'Lass uns morgen jede Einzelheit des Vertrags besprechen.')),
+    A('srochnyy', 'adj', 'ср+очный', 'B1', 'urgent', 'dringend',
+      ex('Это [[ср+очный]] вопр+ос, отлож+ить ег+о до понед+ельника нельз+я.', 'This is an urgent matter; we can’t put it off until Monday.', 'Das ist eine dringende Sache, man kann sie nicht bis Montag aufschieben.'))
+  ]);
+
+  reg('people', [
+    N('rasstavanie', 'расстав+ание', 'n', 'расстав+ания', 'B2', 'parting, breakup', 'der Abschied, die Trennung',
+      ex('П+осле тяжёлого [[расстав+ания]] он+а на н+есколько м+есяцев у+ехала в друг+ой г+ород.', 'After a difficult breakup, she moved to another city for a few months.', 'Nach einer schweren Trennung ging sie für einige Monate in eine andere Stadt.')),
+    A('vezhlivyy', 'adj', 'в+ежливый', 'B1', 'polite', 'höflich',
+      ex('[[В+ежливый]] отк+аз всегд+а звуч+ит л+учше, чем молч+ание.', 'A polite refusal always sounds better than silence.', 'Eine höfliche Absage klingt immer besser als Schweigen.')),
+    A('chestnyy', 'adj', 'ч+естный', 'B1', 'honest', 'ehrlich',
+      ex('Мн+е н+ужен [[ч+естный]] отв+ет, пусть он и непр+остой.', 'I need an honest answer, even if it isn’t easy.', 'Ich brauche eine ehrliche Antwort, auch wenn sie nicht leicht ist.')),
+    A('zabotlivyy', 'adj', 'заб+отливый', 'B1', 'caring', 'fürsorglich',
+      ex('У нег+о +очень [[заб+отливый]] ст+арший брат.', 'He has a very caring older brother.', 'Er hat einen sehr fürsorglichen älteren Bruder.')),
+    A('skromnyy', 'adj', 'скр+омный', 'B1', 'modest', 'bescheiden',
+      ex('Он+а [[скр+омный]] челов+ек и р+едко хв+алится сво+ими усп+ехами.', 'She is a modest person and rarely boasts about her achievements.', 'Sie ist ein bescheidener Mensch und prahlt selten mit ihren Erfolgen.'))
+  ]);
+
+  reg('home', [
+    N('polotentse', 'полот+енце', 'n', 'полот+енца', 'B1', 'towel', 'das Handtuch',
+      ex('Ч+истые [[полот+енца]] леж+ат на в+ерхней п+олке в шкаф+у.', 'Clean towels are on the top shelf in the cupboard.', 'Frische Handtücher liegen im Schrank auf dem obersten Regal.')),
+    N('pult', 'пульт', 'm', 'п+ульты', 'B1', 'remote control', 'die Fernbedienung',
+      ex('Батар+ейки в [[п+ульте]] от телев+изора оп+ять с+ели.', 'The batteries in the TV remote have run out again.', 'Die Batterien in der Fernbedienung sind schon wieder leer.')),
+    N('domofon', 'домоф+он', 'm', 'домоф+оны', 'B1', 'intercom (door entry system)', 'die Gegensprechanlage',
+      ex('Позвон+и в [[домоф+он]], когд+а подойдёшь к дв+ери.', 'Ring the intercom when you reach the door.', 'Klingle an der Gegensprechanlage, wenn du vor der Tür stehst.')),
+    A('akkuratnyy', 'adj', 'аккур+атный', 'B1', 'tidy, neat', 'ordentlich',
+      ex('На ег+о стол+е всегд+а [[аккур+атный]] пор+ядок.', 'His desk is always neatly tidy.', 'Auf seinem Schreibtisch herrscht immer ordentliche Sauberkeit.'))
+  ]);
+
+  reg('food', [
+    N('srok-godnosti', 'срок г+одности', 'm', 'ср+оки г+одности', 'B1', 'expiry date, shelf life', 'das Mindesthaltbarkeitsdatum',
+      ex('Перед пок+упкой мол+очных прод+уктов провер+яйте [[срок г+одности]].', 'Check the expiry date before buying dairy products.', 'Prüfen Sie vor dem Kauf von Milchprodukten das Mindesthaltbarkeitsdatum.')),
+    N('kipyatok', 'кипят+ок', 'm', '', 'B1', 'boiling water', 'das kochende Wasser',
+      ex('Зал+ей чай [[кипятк+ом]] и дай ему насто+яться три мин+уты.', 'Pour boiling water over the tea and let it steep for three minutes.', 'Übergieße den Tee mit kochendem Wasser und lass ihn drei Minuten ziehen.')),
+    N('priprava', 'припр+ава', 'f', 'припр+авы', 'B1', 'seasoning, condiment', 'das Gewürz',
+      ex('+Эта [[припр+ава]] д+елает овощн+ое раг+у гор+аздо ароматн+ее.', 'This seasoning makes the vegetable stew much more aromatic.', 'Dieses Gewürz macht das Gemüsegericht deutlich aromatischer.')),
+    A('svezhiy', 'adj', 'св+ежий', 'B1', 'fresh', 'frisch',
+      ex('На р+ынке с утр+а прода+ют [[св+ежий]] тёплый хлеб.', 'At the market they sell fresh warm bread in the morning.', 'Auf dem Markt wird morgens frisches warmes Brot verkauft.'))
+  ]);
+
+  reg('health', [
+    N('toshnota', 'тошнот+а', 'f', '', 'B2', 'nausea', 'die Übelkeit',
+      ex('При [[тошнот+е]] врач+и сов+етуют пить в+оду м+аленькими глотк+ами.', 'For nausea, doctors advise drinking water in small sips.', 'Bei Übelkeit raten Ärzte dazu, Wasser in kleinen Schlucken zu trinken.')),
+    N('skoraya-pomoshch', 'ск+орая п+омощь', 'f', '', 'B1', 'ambulance, emergency medical service', 'der Rettungsdienst, Krankenwagen',
+      ex('После пад+ения велосипед+иста прох+ожие ср+азу в+ызвали [[ск+орую п+омощь]].', 'After the cyclist fell, passers-by immediately called an ambulance.', 'Nach dem Sturz des Radfahrers riefen Passanten sofort den Rettungsdienst.')),
+    N('bint', 'бинт', 'm', 'бинт+ы', 'B1', 'bandage', 'der Verband, die Mullbinde',
+      ex('Медсестр+а аккуратно налож+ила ч+истый [[бинт]] на зап+ястье.', 'The nurse carefully wrapped a clean bandage around the wrist.', 'Die Pflegekraft legte sorgfältig einen sauberen Verband um das Handgelenk.')),
+    N('ozhog', 'ож+ог', 'm', 'ож+оги', 'B1', 'burn (injury)', 'die Verbrennung',
+      ex('При лёгком [[ож+оге]] подерж+ите р+уку под прохл+адной вод+ой.', 'For a mild burn, hold your hand under cool running water.', 'Halten Sie bei einer leichten Verbrennung die Hand unter kühles Wasser.')),
+    N('obezbolivayushchee', 'обезб+оливающее', 'n', 'обезб+оливающие', 'B2', 'painkiller', 'das Schmerzmittel',
+      ex('Не приним+айте [[обезб+оливающее]] на гол+одный жел+удок.', 'Do not take a painkiller on an empty stomach.', 'Nehmen Sie kein Schmerzmittel auf nüchternen Magen ein.'))
+  ]);
+
+  reg('travel', [
+    N('prilet', 'прилёт', 'm', 'прилёты', 'B1', 'arrival (by air)', 'die Ankunft (Flug)',
+      ex('Зал [[прилёта]] нах+одится на первом этаж+е термин+ала.', 'The arrivals hall is on the ground floor of the terminal.', 'Die Ankunftshalle befindet sich im Erdgeschoss des Terminals.')),
+    N('passazhir', 'пассаж+ир', 'm', 'пассаж+иры', 'B1', 'passenger', 'der Passagier',
+      ex('К+аждый [[пассаж+ир]] получ+ил сообщ+ение об измен+ении в+ыхода.', 'Every passenger received a message about the gate change.', 'Jeder Passagier erhielt eine Nachricht über den Gate-Wechsel.')),
+    N('perron', 'перр+он', 'm', 'перр+оны', 'B1', 'station platform', 'der Bahnsteig',
+      ex('П+оезд на Каз+ань отправл+яется с третьего [[перр+она]].', 'The train to Kazan departs from platform three.', 'Der Zug nach Kasan fährt von Bahnsteig drei ab.')),
+    V('perebronirovat', 'переброн+ировать', 'pf', 'B2', ['переброн+ирую, переброн+ируешь', 'переброн+ировал', 'impf. переброн+ировать'], 'to rebook', 'umbuchen',
+      ex('Авиакомп+ания помогл+а [[переброн+ировать]] бил+еты на сл+едующий р+ейс.', 'The airline helped rebook the tickets onto the next flight.', 'Die Fluggesellschaft half dabei, die Tickets auf den nächsten Flug umzubuchen.')),
+    V('nochevat', 'ночев+ать', 'impf', 'B1', ['ноч+ую, ноч+уешь', 'ночев+ал', 'pf. переночев+ать'], 'to stay overnight', 'übernachten',
+      ex('В командир+овке мы б+удем [[ночев+ать]] в небольш+ом от+еле у вокз+ала.', 'On the business trip we will stay overnight in a small hotel near the station.', 'Auf der Dienstreise übernachten wir in einem kleinen Hotel am Bahnhof.'))
+  ]);
+
+  reg('authorities', [
+    N('zapret', 'запр+ет', 'm', 'запр+еты', 'B1', 'ban, prohibition', 'das Verbot',
+      ex('В п+арке д+ействует [[запр+ет]] на развед+ение костр+ов.', 'There is a ban on lighting fires in the park.', 'Im Park gilt ein Verbot für offenes Feuer.')),
+    N('spravochnaya', 'спр+авочная', 'f', 'спр+авочные', 'B1', 'information desk', 'die Auskunft, Informationsstelle',
+      ex('Уточн+ите в [[спр+авочной]], в как+ое окн+о подав+ать заявл+ение.', 'Ask at the information desk which counter to submit the application at.', 'Fragen Sie an der Auskunft nach, an welchem Schalter Sie den Antrag abgeben müssen.')),
+    A('deystvitelnyy', 'adj', 'действ+ительный', 'B1', 'valid', 'gültig',
+      ex('Для про+езда н+ужен [[действ+ительный]] п+аспорт.', 'You need a valid passport for the journey.', 'Für die Reise brauchen Sie einen gültigen Reisepass.'))
+  ]);
+
+  reg('leisure', [
+    N('lektsiya', 'л+екция', 'f', 'л+екции', 'B1', 'lecture, talk', 'der Vortrag, die Vorlesung',
+      ex('В четверг в муз+ее пройдёт откр+ытая [[л+екция]] об архитект+уре.', 'On Thursday there will be an open lecture on architecture at the museum.', 'Am Donnerstag findet im Museum ein öffentlicher Vortrag über Architektur statt.')),
+    N('yarmarka', '+ярмарка', 'f', '+ярмарки', 'B1', 'fair, market', 'die Messe, der Markt',
+      ex('На ос+енней [[+ярмарке]] местные маст+ера продав+али кер+амику.', 'At the autumn fair, local craftspeople sold ceramics.', 'Auf dem Herbstmarkt verkauften lokale Handwerker Keramik.')),
+    N('khobbi', 'х+обби', 'n', '', 'B1', 'hobby', 'das Hobby',
+      ex('Фотогр+афия давн+о ст+ала ег+о гл+авным [[х+обби]].', 'Photography has long been his main hobby.', 'Fotografie ist längst sein liebstes Hobby geworden.')),
+    N('teatr', 'те+атр', 'm', 'те+атры', 'B1', 'theatre', 'das Theater',
+      ex('В субб+оту мы идём в [[те+атр]] на премь+еру пь+есы.', 'On Saturday we are going to the theatre for the play’s premiere.', 'Am Samstag gehen wir ins Theater zur Premiere des Stücks.')),
+    N('muzey', 'муз+ей', 'm', 'муз+еи', 'B1', 'museum', 'das Museum',
+      ex('По вторникам вход в городск+ой [[муз+ей]] своб+одный.', 'On Tuesdays admission to the city museum is free.', 'Dienstags ist der Eintritt ins Stadtmuseum frei.')),
+    N('kinoteatr', 'киноте+атр', 'm', 'киноте+атры', 'B1', 'cinema', 'das Kino',
+      ex('В ст+аром [[киноте+атре]] до сих пор пок+азывают ф+ильмы на языке оригинала.', 'The old cinema still screens films in their original language.', 'Im alten Kino werden Filme noch immer im Original gezeigt.')),
+    N('sportzal', 'спортз+ал', 'm', 'спортз+алы', 'B1', 'gym', 'das Fitnessstudio, die Sporthalle',
+      ex('П+осле раб+оты я заезж+аю в [[спортз+ал]] на час.', 'After work I drop by the gym for an hour.', 'Nach der Arbeit gehe ich für eine Stunde ins Fitnessstudio.')),
+    N('premyera', 'премь+ера', 'f', 'премь+еры', 'B2', 'premiere', 'die Premiere',
+      ex('Бил+еты на [[премь+еру]] раскуп+или за нед+елю.', 'Tickets for the premiere sold out a week in advance.', 'Die Karten für die Premiere waren eine Woche vorher ausverkauft.')),
+    N('anshlag', 'аншл+аг', 'm', 'аншл+аги', 'B2', 'full house, sold-out show', 'das ausverkaufte Haus',
+      ex('Все ос+енние спект+акли труппы прошл+и с [[аншл+агом]].', 'All of the company’s autumn performances played to a full house.', 'Alle Herbstvorstellungen des Ensembles fanden vor ausverkauftem Haus statt.')),
+    N('piknik', 'пикн+ик', 'm', 'пикник+и', 'B1', 'picnic', 'das Picknick',
+      ex('В тёплое воскрес+енье мы устр+оили [[пикн+ик]] у +озера.', 'On a warm Sunday we had a picnic by the lake.', 'An einem warmen Sonntag machten wir ein Picknick am See.')),
+    V('otdykhat', 'отдых+ать', 'impf', 'B1', ['отдых+аю, отдых+аешь', 'отдых+ал', 'pf. отдохн+уть'], 'to rest, relax', 'sich ausruhen, Urlaub machen',
+      ex('По выходн+ым он старается [[отдых+ать]] от экр+ана и гул+ять.', 'At weekends he tries to take a break from screens and go for a walk.', 'Am Wochenende versucht er, sich vom Bildschirm zu erholen und spazieren zu gehen.')),
+    A('populyarnyy', 'adj', 'попул+ярный', 'B1', 'popular', 'beliebt',
+      ex('+Этот маршрут ст+ал [[попул+ярным]] среди велосипед+истов.', 'This route has become popular with cyclists.', 'Diese Strecke ist bei Radfahrern beliebt geworden.')),
+    A('uvlekatelnyy', 'adj', 'увлек+ательный', 'B2', 'fascinating, gripping', 'fesselnd, spannend',
+      ex('Нам порекомендов+али [[увлек+ательный]] подк+аст об ист+ории на+уки.', 'We were recommended a fascinating podcast on the history of science.', 'Man hat uns einen fesselnden Podcast über Wissenschaftsgeschichte empfohlen.')),
+    N('ekskursiya', 'экск+урсия', 'f', 'экск+урсии', 'B1', 'guided tour, excursion', 'die Führung, der Ausflug',
+      ex('Утр+енняя [[экск+урсия]] по ст+арому ц+ентру длил+ась два час+а.', 'The morning guided tour of the old town lasted two hours.', 'Die morgendliche Führung durch die Altstadt dauerte zwei Stunden.'))
+  ]);
+
+  reg('society', [
+    N('nachalnaya-shkola', 'нач+альная шк+ола', 'f', 'нач+альные шк+олы', 'B1', 'primary school', 'die Grundschule',
+      ex('В [[нач+альной шк+оле]] д+ети уч+атся четыре года.', 'Children attend primary school for four years.', 'In der Grundschule lernen die Kinder vier Jahre lang.')),
+    N('gimnaziya', 'гимн+азия', 'f', 'гимн+азии', 'B1', 'grammar school, academic secondary school', 'das Gymnasium',
+      ex('П+осле [[гимн+азии]] он+а поступ+ила на медицинский факульт+ет.', 'After grammar school, she entered the medical faculty.', 'Nach dem Gymnasium begann sie ein Medizinstudium.')),
+    N('bolshinstvo', 'большинств+о', 'n', '', 'B1', 'majority', 'die Mehrheit',
+      ex('[[Большинств+о]] ж+ителей поддерж+ало благоустр+ойство двора.', 'The majority of residents supported improving the courtyard.', 'Die Mehrheit der Anwohner unterstützte die Neugestaltung des Hofs.')),
+    N('trudnost', 'тр+удность', 'f', 'тр+удности', 'B1', 'difficulty', 'die Schwierigkeit',
+      ex('При первых [[тр+удностях]] не ст+оит ср+азу сдав+аться.', 'At the first difficulties, you shouldn’t give up right away.', 'Bei den ersten Schwierigkeiten sollte man nicht sofort aufgeben.')),
+    N('udovletvorenie', 'удовлетвор+ение', 'n', '', 'B2', 'satisfaction', 'die Zufriedenheit, Genugtuung',
+      ex('Хорошо сд+еланный про+ект принос+ит настоящ+ее [[удовлетвор+ение]].', 'A well-done project brings genuine satisfaction.', 'Ein gut umgesetztes Projekt bringt echte Zufriedenheit.')),
+    N('svoboda', 'своб+ода', 'f', 'своб+оды', 'B1', 'freedom', 'die Freiheit',
+      ex('[[Своб+ода]] сл+ова закреплен+а в констит+уции.', 'Freedom of speech is enshrined in the constitution.', 'Die Meinungsfreiheit ist in der Verfassung verankert.')),
+    N('pravo', 'пр+аво', 'n', 'прав+а', 'B1', 'right; law', 'das Recht',
+      ex('К+аждый граждан+ин им+еет [[пр+аво]] на беспл+атную консульт+ацию.', 'Every citizen has the right to a free consultation.', 'Jeder Bürger hat das Recht auf eine kostenlose Beratung.')),
+    N('obshchina', 'общ+ина', 'f', 'общ+ины', 'B2', 'community', 'die Gemeinde, Gemeinschaft',
+      ex('Местная [[общ+ина]] организов+ала субб+отник в скв+ере.', 'The local community organised a clean-up day in the park.', 'Die örtliche Gemeinde organisierte einen Aufräumtag im Park.')),
+    N('norma', 'н+орма', 'f', 'н+ормы', 'B2', 'norm, standard', 'die Norm',
+      ex('Раздельный сбор отх+одов постеп+енно стан+овится городск+ой [[н+ормой]].', 'Separate waste collection is gradually becoming the urban norm.', 'Getrennte Müllsammlung wird allmählich zur städtischen Norm.')),
+    N('solidarnost', 'солид+арность', 'f', '', 'B2', 'solidarity', 'die Solidarität',
+      ex('Жильц+ы прояв+или [[солид+арность]] и помогл+и сос+едям после аварии.', 'Residents showed solidarity and helped neighbours after the pipe burst.', 'Die Bewohner zeigten Solidarität und halfen den Nachbarn nach dem Rohrbruch.')),
+    N('ekologiya', 'экол+огия', 'f', '', 'B1', 'ecology, environment', 'die Ökologie, Umwelt',
+      ex('З+абота об [[экол+огии]] начин+ается с прост+ых бытов+ых привычек.', 'Caring for the environment starts with simple everyday habits.', 'Umweltschutz beginnt mit einfachen Alltagsgewohnheiten.')),
+    N('golosovanie', 'голосов+ание', 'n', 'голосов+ания', 'B1', 'voting, ballot', 'die Abstimmung',
+      ex('В +этом год+у [[голосов+ание]] в городск+ой сов+ет пройдёт в сентябр+е.', 'This year the vote for the city council will take place in September.', 'Dieses Jahr findet die Abstimmung zum Stadtrat im September statt.')),
+    N('volonterstvo', 'волонтёрство', 'n', '', 'B2', 'volunteering', 'das Ehrenamt',
+      ex('[[Волонтёрство]] помог+ает познак+омиться с н+овыми людьми в городе.', 'Volunteering helps you meet new people in the city.', 'Ehrenamtliches Engagement hilft, neue Menschen in der Stadt kennenzulernen.')),
+    N('paritet', 'парит+ет', 'm', '', 'B2', 'parity, equal footing', 'die Gleichberechtigung, Parität',
+      ex('Уч+астники переговоров сохран+яют [[парит+ет]] прав и обяз+анностей.', 'The negotiating parties maintain parity of rights and duties.', 'Die Verhandlungspartner wahren Parität bei Rechten und Pflichten.'))
+  ]);
+
+  reg('b2_education', [
+    N('kompetentsiya', 'компет+енция', 'f', 'компет+енции', 'B2', 'competence', 'die Kompetenz',
+      ex('Цифров+ая [[компет+енция]] тр+ебуется почти в к+аждой профессии.', 'Digital competence is required in almost every profession.', 'Digitale Kompetenz wird in fast jedem Beruf verlangt.')),
+    N('krugozor', 'кругоз+ор', 'm', '', 'B2', 'outlook, general knowledge', 'der Horizont, die Allgemeinbildung',
+      ex('Чтение разн+ой литерат+уры расшир+яет [[кругоз+ор]].', 'Reading diverse literature broadens your outlook.', 'Das Lesen vielfältiger Literatur erweitert den Horizont.')),
+    N('perepodgotovka', 'переподгот+овка', 'f', 'переподгот+овки', 'B2', 'retraining', 'die Umschulung',
+      ex('П+осле десяти л+ет в продажах он прошёл [[переподгот+овку]] на тестир+овщика.', 'After ten years in sales, he retrained as a QA tester.', 'Nach zehn Jahren im Vertrieb machte er eine Umschulung zum Softwaretester.')),
+    N('diplom', 'дипл+ом', 'm', 'дипл+омы', 'B1', 'degree certificate, diploma', 'das Diplom, der Studienabschluss',
+      ex('Её [[дипл+ом]] инженера признали ср+азу п+осле пров+ерки документов.', 'Her engineering degree was recognised right after document verification.', 'Ihr Ingenieurdiplom wurde direkt nach der Dokumentenprüfung anerkannt.')),
+    N('bakalavriat', 'бакалаври+ат', 'm', 'бакалаври+аты', 'B2', 'bachelor’s programme', 'das Bachelorstudium',
+      ex('Обуч+ение в [[бакалаври+ате]] обычно дл+ится чет+ыре года.', 'A bachelor’s degree programme usually lasts four years.', 'Das Bachelorstudium dauert in der Regel vier Jahre.')),
+    N('magistratura', 'магистрат+ура', 'f', 'магистрат+уры', 'B2', 'master’s programme', 'das Masterstudium',
+      ex('П+осле в+ыпуска он реш+ил поступ+ить в [[магистрат+уру]] по аналитике данных.', 'After graduating, he decided to enter a master’s programme in data analytics.', 'Nach dem Abschluss beschloss er, einen Master in Datenanalyse zu machen.')),
+    N('attestat', 'аттест+ат', 'm', 'аттест+аты', 'B1', 'school-leaving certificate', 'das Schulzeugnis',
+      ex('Для поступл+ения нужн+а зав+еренная к+опия школьн+ого [[аттест+ата]].', 'You need a certified copy of your school-leaving certificate to apply.', 'Für die Bewerbung brauchen Sie eine beglaubigte Kopie des Schulzeugnisses.')),
+    N('nastavnichestvo', 'наст+авничество', 'n', '', 'B2', 'mentoring', 'das Mentoring',
+      ex('Прогр+амма [[наст+авничества]] помог+ает стажёрам быстрее осв+оиться.', 'The mentoring programme helps interns settle in faster.', 'Das Mentoring-Programm hilft Praktikanten, sich schneller einzuarbeiten.'))
+  ]);
+
+  reg('b2_economy', [
+    N('roznitsa', 'р+озница', 'f', '', 'B2', 'retail', 'der Einzelhandel',
+      ex('В [[р+ознице]] цены в+ыше, чем при прям+ом заказе со скл+ада.', 'In retail, prices are higher than when ordering directly from the warehouse.', 'Im Einzelhandel sind die Preise höher als bei Direktbestellung ab Lager.')),
+    N('rynok', 'р+ынок', 'm', 'р+ынки', 'B1', 'market', 'der Markt',
+      ex('[[Р+ынок]] услуг быстро мен+яется под вли+янием автоматиз+ации.', 'The services market is changing rapidly under the impact of automation.', 'Der Dienstleistungsmarkt verändert sich durch Automatisierung rasant.')),
+    N('pereproizvodstvo', 'перепроизв+одство', 'n', '', 'B2', 'overproduction', 'die Überproduktion',
+      ex('[[Перепроизв+одство]] в +отрасли привел+о к резк+ому сниж+ению ц+ен.', 'Overproduction in the sector led to a sharp drop in prices.', 'Überproduktion in der Branche führte zu einem starken Preisverfall.')),
+    N('defitsit', 'дефиц+ит', 'm', 'дефиц+иты', 'B2', 'shortage, deficit', 'der Mangel, das Defizit',
+      ex('Из-за нехв+атки к+адров возн+ик [[дефиц+ит]] пр+офильных специал+истов.', 'Because of staffing gaps, a shortage of specialist staff emerged.', 'Wegen fehlender Fachkräfte entstand ein Mangel an Spezialisten.')),
+    N('pokupatelskaya-sposobnost', 'покуп+ательская спос+обность', 'f', '', 'B2', 'purchasing power', 'die Kaufkraft',
+      ex('Рост ц+ен на прод+укты сниж+ает [[покуп+ательскую спос+обность]] сем+ей.', 'Rising food prices reduce families’ purchasing power.', 'Steigende Lebensmittelpreise verringern die Kaufkraft der Familien.')),
+    N('natsenka', 'нац+енка', 'f', 'нац+енки', 'B2', 'markup, surcharge', 'der Aufschlag',
+      ex('Магазин сн+изил [[нац+енку]] на сезонные товары в конц+е лета.', 'The shop lowered its markup on seasonal goods at the end of summer.', 'Das Geschäft senkte Ende des Sommers den Aufschlag auf Saisonware.')),
+    N('sebestoimost', 'себест+оимость', 'f', '', 'B2', 'cost price, unit cost', 'die Selbstkosten, Herstellungskosten',
+      ex('Н+овая линия позв+олила уменьш+ить [[себест+оимость]] к+аждой дет+али.', 'The new line made it possible to reduce the unit cost of each part.', 'Die neue Anlage ermöglichte es, die Herstellungskosten pro Teil zu senken.')),
+    N('investitsiya', 'инвест+иция', 'f', 'инвест+иции', 'B2', 'investment', 'die Investition',
+      ex('Обуч+ение ком+анды — долгоср+очная [[инвест+иция]] в к+ачество про+екта.', 'Training the team is a long-term investment in project quality.', 'Die Weiterbildung des Teams ist eine langfristige Investition in die Projektqualität.')),
+    N('bankrotstvo', 'банкр+отство', 'n', 'банкр+отства', 'B2', 'bankruptcy', 'der Konkurs, die Insolvenz',
+      ex('После затяжных долг+ов комп+ания объяв+ила о [[банкр+отстве]].', 'After prolonged debts, the company declared bankruptcy.', 'Nach anhaltenden Schulden meldete das Unternehmen Insolvenz an.')),
+    N('subsidiya', 'субс+идия', 'f', 'субс+идии', 'B2', 'subsidy, grant', 'die Subvention, Förderung',
+      ex('Госуд+арственная [[субс+идия]] покрыла ч+асть расходов на утепл+ение д+ома.', 'A state subsidy covered part of the house insulation costs.', 'Eine staatliche Förderung deckte einen Teil der Dämmungskosten.')),
+    N('zakupka', 'зак+упка', 'f', 'зак+упки', 'B2', 'procurement, purchase', 'der Einkauf, die Beschaffung',
+      ex('Отд+ел [[зак+упок]] согласов+ал поставки до конц+а г+ода.', 'The procurement department agreed deliveries through the end of the year.', 'Die Einkaufsabteilung stimmte die Lieferungen bis Jahresende ab.')),
+    N('postavshchik', 'поставщ+ик', 'm', 'поставщик+и', 'B2', 'supplier', 'der Lieferant',
+      ex('Надёжный [[поставщ+ик]] всегд+а предупрежд+ает о задержках зар+анее.', 'A reliable supplier always warns of delays in advance.', 'Ein zuverlässiger Lieferant warnt immer rechtzeitig vor Verzögerungen.')),
+    N('rasprodazha', 'распрод+ажа', 'f', 'распрод+ажи', 'B1', 'sale, clearance', 'der Ausverkauf, Schlussverkauf',
+      ex('На ос+енней [[распрод+аже]] зимние куртки сто+или вдвое деш+евле.', 'In the autumn sale, winter jackets cost half as much.', 'Beim Herbstschlussverkauf kosteten Winterjacken nur halb so viel.')),
+    N('tovarooborot', 'товарообор+от', 'm', '', 'B2', 'turnover of goods', 'der Warenumsatz',
+      ex('За посл+едний кварт+ал [[товарообор+от]] сети вырос на пять проц+ентов.', 'Over the last quarter, the chain’s turnover grew by five percent.', 'Im letzten Quartal stieg der Warenumsatz der Kette um fünf Prozent.'))
+  ]);
+
+  reg('b2_science', [
+    N('otkrytie', 'откр+ытие', 'n', 'откр+ытия', 'B2', 'discovery', 'die Entdeckung',
+      ex('Это на+учное [[откр+ытие]] измен+ило подх+од к леч+ению инф+екций.', 'This scientific discovery changed the approach to treating infections.', 'Diese wissenschaftliche Entdeckung veränderte den Ansatz zur Behandlung von Infektionen.')),
+    N('analiz', 'ан+ализ', 'm', 'ан+ализы', 'B2', 'analysis', 'die Analyse',
+      ex('Подр+обный [[ан+ализ]] д+анных занял у ком+анды две нед+ели.', 'A detailed analysis of the data took the team two weeks.', 'Eine detaillierte Datenanalyse dauerte für das Team zwei Wochen.')),
+    N('tekhnologiya', 'технол+огия', 'f', 'технол+огии', 'B1', 'technology', 'die Technologie',
+      ex('Новая [[технол+огия]] оч+истки воды расх+одует м+еньше эн+ергии.', 'The new water purification technology uses less energy.', 'Die neue Wasserreinigungstechnologie verbraucht weniger Energie.')),
+    N('innovatsiya', 'иннов+ация', 'f', 'иннов+ации', 'B2', 'innovation', 'die Innovation',
+      ex('Без постоянных [[иннов+аций]] комп+ания теряет поз+иции на р+ынке.', 'Without constant innovation, a company loses ground in the market.', 'Ohne ständige Innovationen verliert ein Unternehmen Marktanteile.')),
+    N('pribor', 'приб+ор', 'm', 'приб+оры', 'B2', 'device, instrument', 'das Gerät, Messinstrument',
+      ex('Этот [[приб+ор]] измеряет температ+уру и вл+ажность в помещ+ении.', 'This device measures room temperature and humidity.', 'Dieses Gerät misst Temperatur und Luftfeuchtigkeit im Raum.')),
+    N('energiya', 'эн+ергия', 'f', '', 'B1', 'energy', 'die Energie',
+      ex('Солн+ечные пан+ели да+ют д+ому чист+ую [[эн+ергию]] летом.', 'Solar panels supply the house with clean energy in summer.', 'Solarmodule liefern dem Haus im Sommer saubere Energie.')),
+    N('iskusstvennyy-intellekt', 'иск+усственный интелл+ект', 'm', '', 'B2', 'artificial intelligence', 'die künstliche Intelligenz',
+      ex('[[Иск+усственный интелл+ект]] помог+ает сортиров+ать однотипные запр+осы.', 'Artificial intelligence helps sort routine requests.', 'Künstliche Intelligenz hilft dabei, wiederkehrende Anfragen zu sortieren.')),
+    N('razrabotka', 'разраб+отка', 'f', 'разраб+отки', 'B2', 'development, R&D', 'die Entwicklung',
+      ex('[[Разраб+отка]] нового аккумулятора занял+а три г+ода.', 'Developing the new battery took three years.', 'Die Entwicklung des neuen Akkus dauerte drei Jahre.')),
+    N('podtverzhdenie', 'подтвержд+ение', 'n', 'подтвержд+ения', 'B2', 'confirmation, corroboration', 'die Bestätigung',
+      ex('Независимая лаборат+ория получ+ила [[подтвержд+ение]] результ+атов.', 'An independent laboratory obtained confirmation of the results.', 'Ein unabhängiges Labor erhielt die Bestätigung der Ergebnisse.')),
+    A('eksperimentalnyy', 'adj', 'эксперимент+альный', 'B2', 'experimental', 'experimentell',
+      ex('Пока метод работает лишь в [[эксперимент+альном]] режиме.', 'So far the method only works in experimental mode.', 'Bisher funktioniert die Methode nur im experimentellen Betrieb.')),
+    A('nezavisimyy', 'adj', 'незав+исимый', 'B2', 'independent', 'unabhängig',
+      ex('Проверку провел+а [[незав+исимая]] эксп+ертная ком+иссия.', 'The review was conducted by an independent expert committee.', 'Die Prüfung wurde von einer unabhängigen Expertenkommission durchgeführt.')),
+    N('svodka', 'св+одка', 'f', 'св+одки', 'B2', 'summary report, bulletin', 'die Übersicht, der Bericht',
+      ex('Утр+енняя [[св+одка]] пог+оды обещ+ает сильный дождь к в+ечеру.', 'The morning weather bulletin forecasts heavy rain by evening.', 'Der morgendliche Wetterbericht kündigt starken Regen bis zum Abend an.')),
+    N('dannye', 'д+анные', 'pl', 'д+анные', 'B2', 'data', 'die Daten',
+      ex('Собр+анные [[д+анные]] позв+олили в+ыявить главную причину сб+оя.', 'The collected data made it possible to identify the main cause of the outage.', 'Die gesammelten Daten machten es möglich, die Hauptursache des Ausfalls zu ermitteln.'))
+  ]);
+
+  reg('b2_psyche', [
+    N('vyzov', 'в+ызов', 'm', 'в+ызовы', 'B2', 'challenge', 'die Herausforderung',
+      ex('Перех+од на руковод+ящую должность стал для него серьёзным [[в+ызовом]].', 'Moving into a management role became a serious challenge for him.', 'Der Wechsel in eine Führungsposition war für ihn eine ernsthafte Herausforderung.')),
+    N('uverennost', 'ув+еренность', 'f', '', 'B2', 'confidence', 'das Selbstvertrauen, die Sicherheit',
+      ex('Подд+ержка колл+ег придал+а ему [[ув+еренности]] перед выступл+ением.', 'Support from colleagues gave him confidence before the talk.', 'Die Unterstützung der Kollegen gab ihm Selbstvertrauen vor dem Vortrag.')),
+    N('empatiya', 'эмп+атия', 'f', '', 'B2', 'empathy', 'die Empathie',
+      ex('[[Эмп+атия]] помог+ает сл+ышать не только слов+а, но и ч+увства собеседника.', 'Empathy helps you hear not only the words, but also the feelings of the other person.', 'Empathie hilft, nicht nur die Worte, sondern auch die Gefühle des Gegenübers zu hören.')),
+    N('spokoystvie', 'спок+ойствие', 'n', '', 'B1', 'calmness, peace of mind', 'die Ruhe, Gelassenheit',
+      ex('В споре в+ажно сохран+ять внешн+ее [[спок+ойствие]].', 'In an argument it is important to keep outward calm.', 'In einem Streit ist es wichtig, äußerlich Ruhe zu bewahren.')),
+    N('trevoga', 'трев+ога', 'f', 'трев+оги', 'B2', 'anxiety, alarm', 'die Sorge, Unruhe',
+      ex('Постоянные ночн+ые уведомл+ения вызыв+али у неё ч+увство [[трев+оги]].', 'Constant night-time notifications caused her a feeling of anxiety.', 'Ständige nächtliche Benachrichtigungen lösten bei ihr ein Gefühl der Unruhe aus.')),
+    N('stress', 'стресс', 'm', 'стр+ессы', 'B1', 'stress', 'der Stress',
+      ex('Короткие перер+ывы в теч+ение дня помог+ают сниз+ить [[стресс]].', 'Short breaks during the day help reduce stress.', 'Kurze Pausen über den Tag helfen, Stress abzubauen.')),
+    N('prioritety', 'приорит+еты', 'pl', 'приорит+еты', 'B2', 'priorities', 'die Prioritäten',
+      ex('Важно в+овремя расст+авить [[приорит+еты]] на новой раб+оте.', 'It is important to set your priorities in time at a new job.', 'Es ist wichtig, im neuen Job rechtzeitig Prioritäten zu setzen.')),
+    N('ustalost', 'уст+алость', 'f', '', 'B1', 'tiredness, fatigue', 'die Müdigkeit, Erschöpfung',
+      ex('К п+ятнице накоп+илась [[уст+алость]] после напряжённой нед+ели.', 'By Friday, fatigue had built up after a tense week.', 'Bis Freitag hatte sich nach einer anstrengenden Woche Müdigkeit angestaut.')),
+    N('razdrazhenie', 'раздраж+ение', 'n', '', 'B2', 'irritation', 'die Gereiztheit, Verärgerung',
+      ex('Он не мог сдерж+ать [[раздраж+ения]] из-за сл+оманного лифта.', 'He couldn’t hide his irritation over the broken lift.', 'Er konnte seine Verärgerung über den kaputten Aufzug nicht verbergen.')),
+    N('vdokhnovenie', 'вдохнов+ение', 'n', '', 'B2', 'inspiration', 'die Inspiration',
+      ex('По+ездка в горы вернула ей [[вдохнов+ение]] для работы.', 'The trip to the mountains brought back her inspiration for work.', 'Die Reise in die Berge gab ihr die Inspiration für die Arbeit zurück.')),
+    N('prisposoblenie', 'приспос+обление', 'n', 'приспос+обления', 'B2', 'adaptation (to circumstances)', 'die Anpassung',
+      ex('[[Приспос+обление]] к новому гр+афику заняло около м+есяца.', 'Adapting to the new schedule took about a month.', 'Die Anpassung an den neuen Zeitplan dauerte etwa einen Monat.')),
+    N('otklik', '+отклик', 'm', '+отклики', 'B2', 'response, feedback', 'die Resonanz, Rückmeldung',
+      ex('Статья получ+ила тёплый [[+отклик]] среди читателей.', 'The article received a warm response from readers.', 'Der Artikel erhielt eine herzliche Resonanz bei den Lesern.')),
+    N('nastroenie', 'настро+ение', 'n', 'настро+ения', 'B1', 'mood', 'die Stimmung',
+      ex('Утренняя пробежка зам+етно улучш+ает [[настро+ение]] на весь день.', 'A morning run noticeably improves your mood for the whole day.', 'Ein morgendlicher Lauf verbessert die Stimmung für den ganzen Tag spürbar.'))
+  ]);
+
+  reg('b2_culture', [
+    N('kultura', 'культ+ура', 'f', 'культ+уры', 'B1', 'culture', 'die Kultur',
+      ex('Живая городск+ая [[культ+ура]] объедин+яет разные поколения.', 'Lively urban culture brings different generations together.', 'Eine lebendige Stadtkultur verbindet verschiedene Generationen.')),
+    N('traditsiya', 'трад+иция', 'f', 'трад+иции', 'B1', 'tradition', 'die Tradition',
+      ex('У н+ашего города есть давняя [[трад+иция]] летних концертов на пл+ощади.', 'Our city has a long tradition of summer concerts in the square.', 'Unsere Stadt hat eine lange Tradition von Sommerkonzerten auf dem Platz.')),
+    N('nasledie', 'насл+едие', 'n', '', 'B2', 'heritage, legacy', 'das Erbe',
+      ex('Охр+ана исторического [[насл+едия]] требует регулярного ремонта фас+адов.', 'Preserving historical heritage requires regular facade repairs.', 'Der Schutz des historischen Erbes erfordert regelmäßige Fassadenrenovierungen.')),
+    N('publika', 'п+ублика', 'f', '', 'B2', 'public, audience', 'das Publikum',
+      ex('[[П+ублика]] долго не отпуск+ала оркестр со сцены.', 'The audience wouldn’t let the orchestra leave the stage for a long time.', 'Das Publikum ließ das Orchester lange nicht von der Bühne.')),
+    N('arkhitektura', 'архитект+ура', 'f', '', 'B1', 'architecture', 'die Architektur',
+      ex('[[Архитект+ура]] этого квартала сочетает ст+арый кирпич и стекло.', 'The architecture of this district combines old brick and glass.', 'Die Architektur dieses Viertels verbindet alten Backstein mit Glas.')),
+    N('zhivopis', 'ж+ивопись', 'f', '', 'B2', 'painting (art)', 'die Malerei',
+      ex('На в+ыставке предст+авлена русская [[ж+ивопись]] начал+а двадцатого века.', 'The exhibition presents Russian painting of the early twentieth century.', 'Die Ausstellung zeigt russische Malerei des frühen zwanzigsten Jahrhunderts.')),
+    N('literatura', 'литерат+ура', 'f', '', 'B1', 'literature', 'die Literatur',
+      ex('Современная [[литерат+ура]] всё чаще обращ+ается к теме миграции.', 'Contemporary literature increasingly turns to the theme of migration.', 'Zeitgenössische Literatur widmet sich immer häufiger dem Thema Migration.')),
+    N('skulptura', 'скульпт+ура', 'f', 'скульпт+уры', 'B2', 'sculpture', 'die Skulptur',
+      ex('В центре парка установ+или соврем+енную бр+онзовую [[скульпт+уру]].', 'A modern bronze sculpture was installed in the middle of the park.', 'In der Mitte des Parks wurde eine moderne Bronzeskulptur aufgestellt.')),
+    N('festival', 'фестив+аль', 'm', 'фестив+али', 'B1', 'festival', 'das Festival',
+      ex('Ежег+одный кино[[фестив+аль]] собирает зрителей со всего реги+она.', 'The annual film festival draws viewers from across the region.', 'Das jährliche Filmfestival zieht Zuschauer aus der ganzen Region an.')),
+    N('kritika', 'кр+итика', 'f', '', 'B2', 'criticism', 'die Kritik',
+      ex('Конструкт+ивная [[кр+итика]] помогла режиссёру дораб+отать финал.', 'Constructive criticism helped the director refine the ending.', 'Konstruktive Kritik half dem Regisseur, das Finale zu überarbeiten.')),
+    N('sovremennoe-iskusstvo', 'соврем+енное иск+усство', 'n', '', 'B2', 'contemporary art', 'die zeitgenössische Kunst',
+      ex('[[Соврем+енное иск+усство]] нередко вызыв+ает жаркие споры среди зрителей.', 'Contemporary art often sparks heated debate among viewers.', 'Zeitgenössische Kunst löst beim Publikum oft hitzige Debatten aus.')),
+    N('vkus', 'вкус', 'm', 'вк+усы', 'B1', 'taste (aesthetic)', 'der Geschmack',
+      ex('О [[вк+усах]] не спорят — одн+им нр+авится классика, друг+им аванг+ард.', 'There is no accounting for taste — some like the classics, others the avant-garde.', 'Über Geschmack lässt sich nicht streiten — die einen mögen Klassik, die anderen Avantgarde.')),
+    N('tvorcheskiy-vecher', 'тв+орческий в+ечер', 'm', 'творческие вечер+а', 'B2', 'artist’s / author’s evening event', 'der Autorenabend, Künstlerabend',
+      ex('В п+ятницу в библиотеке пройдёт [[тв+орческий в+ечер]] поэта.', 'On Friday the library is hosting a poet’s evening.', 'Am Freitag findet in der Bibliothek ein Autorenabend des Dichters statt.')),
+    N('poyezdka-v-galereyu', 'галер+ея', 'f', 'галер+еи', 'B1', 'gallery', 'die Galerie',
+      ex('В небольшой [[галер+ее]] на набережной открылась фотовыст+авка.', 'A photography exhibition opened in a small gallery on the embankment.', 'In einer kleinen Galerie am Ufer wurde eine Fotoausstellung eröffnet.'))
+  ]);
+
+  reg('b2_housing', [
+    N('tishina', 'тишин+а', 'f', '', 'B1', 'silence, quiet', 'die Ruhe, Stille',
+      ex('После пере+езда за город мы наконец цен+им настоящую [[тишин+у]].', 'After moving out to the countryside, we truly value real quiet.', 'Nach dem Umzug aufs Land schätzen wir endlich echte Ruhe.')),
+    N('uteplenie', 'утепл+ение', 'n', '', 'B2', 'insulation (thermal)', 'die Wärmedämmung',
+      ex('Качественное [[утепл+ение]] фас+ада снижает расходы на отопление зимой.', 'Good facade insulation reduces heating costs in winter.', 'Eine gute Fassadendämmung senkt im Winter die Heizkosten.')),
+    N('shumoizolyatsiya', 'шумоизол+яция', 'f', '', 'B2', 'soundproofing', 'der Schallschutz, die Schalldämmung',
+      ex('В панельном доме [[шумоизол+яция]] стен часто оставл+яет жел+ать лучшего.', 'In a prefab block, wall soundproofing often leaves much to be desired.', 'Im Plattenbau lässt der Schallschutz der Wände oft zu wünschen übrig.')),
+    N('tszh', 'ТСЖ', 'n', '', 'B2', 'homeowners’ association', 'die Eigentümergemeinschaft',
+      ex('Все вопросы по ремонту подъезда жильц+ы решают через [[ТСЖ]].', 'Residents settle all hallway repair questions through the homeowners’ association.', 'Alle Fragen zur Treppenhausrenovierung klären die Bewohner über die Eigentümergemeinschaft.')),
+    N('subarenda', 'субар+енда', 'f', '', 'B2', 'subletting', 'die Untermiete',
+      ex('[[Субар+енда]] квартиры возможна т+олько с письменного согласия собственника.', 'Subletting the flat is only possible with the owner’s written consent.', 'Eine Untervermietung der Wohnung ist nur mit schriftlicher Zustimmung des Eigentümers möglich.')),
+    V('zatopit', 'затоп+ить', 'pf', 'B2', ['зат+опит (3 sg.)', 'затоп+ил', 'impf. зат+апливать'], 'to flood (a flat downstairs)', 'überschwemmen, unter Wasser setzen',
+      ex('Из-за сл+оманного шланга сос+еди сверху чуть не [[затоп+или]] нашу кухню.', 'Because of a broken hose, the upstairs neighbours nearly flooded our kitchen.', 'Wegen eines defekten Schlauchs hätten die Nachbarn von oben fast unsere Küche überschwemmt.')),
+    N('kluch-ot-domofona', 'объявл+ение в подъ+езде', 'n', 'объявл+ения', 'B1', 'notice on the hallway board', 'der Aushang im Hausflur',
+      ex('О плановом отключении воды жильц+ов предупредили через [[объявл+ение в подъ+езде]].', 'Residents were warned about the scheduled water shut-off via a notice in the hallway.', 'Über die geplante Wasserabschaltung wurden die Bewohner per Aushang im Hausflur informiert.'))
+  ]);
+
+  reg('c1_argumentation', [
+    N('posledstvie', 'посл+едствие', 'n', 'посл+едствия', 'C1', 'consequence, implication', 'die Auswirkung, Folge',
+      ex('Все долгосрочные [[посл+едствия]] этого шага стали ясны не сразу.', 'All the long-term implications of this step did not become clear right away.', 'Alle langfristigen Auswirkungen dieses Schritts wurden nicht sofort klar.')),
+    N('pravdopodobie', 'правдопод+обие', 'n', '', 'C1', 'plausibility', 'die Plausibilität',
+      ex('Сначала эксперты проверили [[правдопод+обие]] исходных расчётов.', 'First, the experts checked the plausibility of the initial calculations.', 'Zunächst prüften die Experten die Plausibilität der Ausgangsberechnungen.')),
+    N('zabluzhdenie', 'заблужд+ение', 'n', 'заблужд+ения', 'C1', 'fallacy, misconception', 'der Irrtum, Trugschluss',
+      ex('Путать совпад+ение с причиной — распространённое [[заблужд+ение]].', 'Confusing coincidence with cause is a widespread fallacy.', 'Zufall mit Ursache zu verwechseln ist ein verbreiteter Trugschluss.')),
+    N('nesootvetstvie', 'несоотв+етствие', 'n', 'несоотв+етствия', 'C1', 'discrepancy, mismatch', 'die Diskrepanz, Unstimmigkeit',
+      ex('Аудит в+ыявил заметное [[несоотв+етствие]] между двумя отчётами.', 'The audit uncovered a noticeable discrepancy between the two reports.', 'Das Audit deckte eine deutliche Diskrepanz zwischen beiden Berichten auf.')),
+    V('podkreplyat', 'подкрепл+ять', 'impf', 'C1', ['подкрепл+яю, подкрепл+яешь', 'подкрепл+ял', 'pf. подкреп+ить'], 'to substantiate, back up', 'untermauern, belegen',
+      ex('Свои выводы автор старается [[подкрепл+ять]] независимыми источниками.', 'The author tries to back up his conclusions with independent sources.', 'Seine Schlussfolgerungen versucht der Autor mit unabhängigen Quellen zu untermauern.')),
+    V('oprovergat', 'опроверг+ать', 'impf', 'C1', ['опроверг+аю, опроверг+аешь', 'опроверг+ал', 'pf. опров+ергнуть'], 'to refute, disprove', 'widerlegen',
+      ex('Новые данные прямо [[опроверг+ают]] прежнюю версию событий.', 'New data directly refute the earlier account of events.', 'Neue Daten widerlegen direkt die frühere Darstellung der Ereignisse.')),
+    A('tonkiy', 'adj', 'т+онкий', 'C1', 'subtle, nuanced', 'fein, differenziert',
+      ex('Между остор+ожным сомнением и полным отказом есть [[т+онкая]] граница.', 'There is a subtle line between cautious doubt and outright rejection.', 'Zwischen vorsichtigem Zweifel und völliger Ablehnung liegt eine feine Grenze.')),
+    A('neodnoznachnyy', 'adj', 'неоднозн+ачный', 'C1', 'ambiguous, mixed', 'ambivalent, zweideutig',
+      ex('Оценка последствий реформы остаётся весьма [[неоднозн+ачной]].', 'The assessment of the reform’s effects remains quite mixed.', 'Die Bewertung der Reformfolgen bleibt ziemlich ambivalent.'))
+  ]);
+})();
+
+/* === Content expansion Wave 2 (2026-11-27): +35 RU C1 & B2 Words === */
+(function () {
+  'use strict';
+  function ex(t, en, de) { return { t: t, en: en, de: de }; }
+  function N(id, t, gender, plural, level, en, de, e) {
+    var o = { id: 'ru-w2-' + id, pos: 'noun', t: t, gender: gender, level: level, en: en, de: de, examples: [e] };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function V(id, t, aspect, level, forms, en, de, e) {
+    return { id: 'ru-w2-' + id, pos: 'verb', t: t, aspect: aspect, level: level, forms: { praes: forms[0], praet: forms[1], perf: forms[2] }, en: en, de: de, examples: [e] };
+  }
+  function A(id, pos, t, level, en, de, e) {
+    return { id: 'ru-w2-' + id, pos: pos, level: level, t: t, en: en, de: de, examples: [e] };
+  }
+  function reg(topic, items) { GT.register({ tab: 'words', topic: topic, items: items }); }
+
+  reg('c1_argumentation', [
+    N('kontrargument', 'контраргум+ент', 'm', 'контраргум+енты', 'C1', 'counterargument', 'das Gegenargument',
+      ex('Эксперт зар+анее продумал отв+ет на гл+авный [[контраргум+ент]].', 'The expert thought out a reply to the main counterargument in advance.', 'Der Experte überlegte vorab eine Antwort auf das wichtigste Gegenargument.')),
+    N('sut-voprosa', 'первоприч+ина', 'f', 'первоприч+ины', 'C1', 'root cause', 'die Grundursache',
+      ex('Вр+еменные м+еры скрыв+ают симптомы, но не устран+яют [[первоприч+ину]].', 'Temporary fixes hide symptoms without removing the root cause.', 'Übergangsmaßnahmen verbergen Symptome, beseitigen aber nicht die Grundursache.')),
+    N('kompromiss', 'дил+емма', 'f', 'дил+еммы', 'C1', 'dilemma', 'das Dilemma',
+      ex('Перед отделом встала сложная [[дил+емма]]: скорость или полная автономность.', 'The department faced a tough dilemma: speed or full autonomy.', 'Die Abteilung stand vor einem schwierigen Dilemma: Tempo oder volle Autonomie.')),
+    N('kriteriy', 'крит+ерий', 'm', 'крит+ерии', 'C1', 'criterion, benchmark', 'das Kriterium',
+      ex('Прозр+ачность расчётов — гл+авный [[крит+ерий]] при оценке тендеров.', 'Calculation transparency is the main criterion when evaluating bids.', 'Transparenz der Kalkulation ist das Hauptkriterium bei Ausschreibungen.')),
+    N('analogiya', 'анал+огия', 'f', 'анал+огии', 'C1', 'analogy', 'die Analogie',
+      ex('Провед+ите [[анал+огию]] с более пр+остым и нагл+ядным сл+учаем.', 'Draw an analogy with a simpler, clearer case.', 'Ziehen Sie eine Analogie zu einem einfacheren, anschaulicheren Fall.')),
+    N('vyvod', 'умозаключ+ение', 'n', 'умозаключ+ения', 'C1', 'inference, deduction', 'die Schlussfolgerung',
+      ex('Такое [[умозаключ+ение]] строится на слишком узкой в+ыборке.', 'Such an inference rests on too narrow a sample.', 'Eine solche Schlussfolgerung beruht auf einer zu kleinen Stichprobe.')),
+    N('ishodnaya-tochka', 'т+очка отсчёта', 'f', 'т+очки отсчёта', 'C1', 'baseline, reference point', 'der Ausgangspunkt, Referenzpunkt',
+      ex('Без чёткой [[т+очки отсчёта]] тр+удно судить о дин+амике за год.', 'Without a clear baseline it is hard to judge year-on-year progress.', 'Ohne klaren Referenzpunkt lässt sich die Jahresdynamik schwer bewerten.')),
+    N('paradigma', 'конц+епция', 'f', 'конц+епции', 'C1', 'concept, framework', 'das Konzept, Leitbild',
+      ex('В +этом докум+енте изл+ожена н+овая [[конц+епция]] городск+ого трансп+орта.', 'This document outlines a new framework for urban transport.', 'Dieses Dokument legt ein neues Konzept für den Stadtverkehr dar.')),
+    V('priznavat-ustupku', 'допуск+ать', 'impf', 'C1', ['допуск+аю, допуск+аешь', 'допуск+ал', 'pf. допуст+ить'], 'to concede; allow as possible', 'einräumen, zulassen',
+      ex('Скептики [[допуск+ают]], что пил+отная сд+елка может окуп+иться быстрее.', 'Sceptics concede that the pilot deal might pay off sooner.', 'Skeptiker räumen ein, dass sich das Pilotprojekt schneller rentieren könnte.')),
+    V('vydvigat', 'выдвиг+ать', 'impf', 'C1', ['выдвиг+аю, выдвиг+аешь', 'выдвиг+ал', 'pf. в+ыдвинуть'], 'to put forward (a hypothesis, argument)', 'vorbringen, aufstellen',
+      ex('Иссл+едователи [[выдвиг+ают]] две альтернат+ивные гип+отезы.', 'Researchers put forward two alternative hypotheses.', 'Forschende stellen zwei alternative Hypothesen auf.')),
+    V('smyagchat-tezis', 'огов+аривать', 'impf', 'C1', ['огов+ариваю, огов+ариваешь', 'огов+аривал', 'pf. оговор+ить'], 'to qualify, stipulate explicitly', 'einschränken, ausdrücklich festlegen',
+      ex('В выводах в+ажно чётко [[огов+аривать]] гран+ицы применимости д+анных.', 'In conclusions it is important to clearly qualify the limits of the data.', 'Im Fazit muss man die Gültigkeitsgrenzen der Daten klar einschränken.')),
+    V('stavit-pod-somnenie', 'осп+аривать', 'impf', 'C1', ['осп+ариваю, осп+ариваешь', 'осп+аривал', 'pf. осп+орить'], 'to contest, challenge, dispute', 'anfechten, bestreiten',
+      ex('Никт+о не стал [[осп+аривать]] точность приведённых замеров.', 'Nobody chose to dispute the accuracy of the given measurements.', 'Niemand bestritt die Genauigkeit der vorgelegten Messwerte.')),
+    V('podytozhivat', 'подыт+оживать', 'impf', 'C1', ['подыт+оживаю, подыт+оживаешь', 'подыт+оживал', 'pf. подыт+ожить'], 'to summarise, sum up', 'zusammenfassen, bilanzieren',
+      ex('Пора [[подыт+ожить]] ключев+ые результ+аты нашего обсужд+ения.', 'It is time to summarise the key outcomes of our discussion.', 'Es ist Zeit, die wichtigsten Ergebnisse unserer Diskussion zusammenzufassen.')),
+    V('rasseyat-somneniya', 'расс+еивать', 'impf', 'C1', ['расс+еиваю, расс+еиваешь', 'расс+еивал', 'pf. расс+еять'], 'to dispel (doubts, rumours)', 'zerstreuen',
+      ex('Прозр+ачная статистика помог+ает быстро [[расс+еивать]] трев+ожные слухи.', 'Transparent figures quickly help dispel alarming rumours.', 'Transparente Statistiken helfen, beunruhigende Gerüchte rasch zu zerstreuen.')),
+    A('veskiy', 'adj', 'в+еский', 'C1', 'weighty, compelling, cogent', 'triftig, gewichtig',
+      ex('Для пересмотра бюджета н+ужен [[в+еский]] и провер+яемый аргум+ент.', 'Revising the budget requires a weighty and verifiable argument.', 'Für eine Budgetrevision braucht man ein triftiges und prüfbares Argument.')),
+    A('nesostoyatelnyy', 'adj', 'несосто+ятельный', 'C1', 'untenable, unfounded', 'unhaltbar',
+      ex('После проверки архивов прежняя те+ория оказалась [[несосто+ятельной]].', 'After checking the archives, the former theory proved untenable.', 'Nach Prüfung der Archive erwies sich die alte Theorie als unhaltbar.')),
+    A('predvaritelnyy', 'adj', 'предвар+ительный', 'B2', 'preliminary, tentative', 'vorläufig',
+      ex('Пока это лишь [[предвар+ительный]] расчёт до в+ыхода квартального отчёта.', 'So far this is only a preliminary estimate ahead of the quarterly report.', 'Vorerst ist dies nur eine vorläufige Schätzung vor dem Quartalsbericht.')),
+    A('dostovernyy', 'adj', 'достов+ерный', 'C1', 'reliable, authentic, verified', 'verlässlich, glaubwürdig',
+      ex('Журнал+исты опираются исключительно на [[достов+ерные]] первоист+очники.', 'Journalists rely exclusively on verified primary sources.', 'Journalisten stützen sich ausschließlich auf verlässliche Primärquellen.')),
+    A('neobhodimyy-uslov', 'adj', 'неотъ+емлемый', 'C1', 'integral, inalienable', 'unverzichtbar, untrennbar',
+      ex('Регулярное ревью — [[неотъ+емлемый]] элемент спокойной разработки.', 'Regular review is an integral part of calm software engineering.', 'Regelmäßige Reviews sind ein unverzichtbarer Teil ruhiger Entwicklung.')),
+    A('neprednamerenno', 'adv', 'непреднам+еренно', 'C1', 'inadvertently, unintentionally', 'unbeabsichtigt, versehentlich',
+      ex('Оператор [[непреднам+еренно]] удалил старый шабл+он при обновлении.', 'The operator inadvertently deleted the old template during the update.', 'Der Bediener löschte beim Update unbeabsichtigt die alte Vorlage.'))
+  ]);
+
+  reg('b2_health', [
+    N('profilaktika', 'диспансериз+ация', 'f', '', 'B2', 'preventive medical check-up', 'die Vorsorgeuntersuchung',
+      ex('Ежегодная [[диспансериз+ация]] выявляет скрытые проблемы на ранней ст+адии.', 'An annual preventive check-up spots hidden issues early.', 'Die jährliche Vorsorgeuntersuchung erkennt verborgene Probleme früh.')),
+    N('reabilitatsiya', 'рем+иссия', 'f', 'рем+иссии', 'C1', 'remission', 'die Remission',
+      ex('После курса лекарств наступила устойчивая [[рем+иссия]].', 'After the course of medication, a stable remission followed.', 'Nach der Medikation trat eine stabile Remission ein.')),
+    N('oslozhnenie', 'осложн+ение', 'n', 'осложн+ения', 'B2', 'complication', 'die Komplikation',
+      ex('Своевр+еменное леч+ение снижает риск серьёзных [[осложн+ений]].', 'Timely treatment lowers the risk of serious complications.', 'Rechtzeitige Behandlung senkt das Risiko ernster Komplikationen.')),
+    N('immunitet', 'терап+ия', 'f', 'терап+ии', 'B2', 'therapy, treatment course', 'die Therapie',
+      ex('Комплексная [[терап+ия]] помогла снять боль за две нед+ели.', 'Combined therapy eased the pain within two weeks.', 'Die kombinierte Therapie linderte den Schmerz binnen zwei Wochen.')),
+    N('hronicheskiy', 'хрон+ический рецид+ив', 'm', 'хрон+ические рецид+ивы', 'B2', 'chronic relapse', 'chronischer Rückfall',
+      ex('При нарушении режима возможен [[хрон+ический рецид+ив]].', 'Breaking the regimen can trigger a chronic relapse.', 'Bei Nichteinhaltung droht ein chronischer Rückfall.'))
+  ]);
+
+  reg('b2_travel', [
+    N('komandirovka', 'путев+ой лист', 'm', 'путев+ые лист+ы', 'B2', 'trip sheet, travel log', 'das Fahrtenbuch',
+      ex('Водитель сдаёт заполненный [[путев+ой лист]] в конце каждой смены.', 'The driver hands in the completed trip sheet at the end of every shift.', 'Der Fahrer gibt das ausgefüllte Fahrtenbuch am Ende jeder Schicht ab.')),
+    N('tranzit', 'перес+адочный р+ейс', 'm', 'перес+адочные р+ейсы', 'B2', 'connecting flight', 'der Anschlussflug',
+      ex('Из-за тумана мы чуть не опозд+али на [[перес+адочный р+ейс]].', 'Because of fog we nearly missed our connecting flight.', 'Wegen Nebels hätten wir fast den Anschlussflug verpasst.')),
+    N('tamozhennyy-kontrol', 'там+оженный контр+оль', 'm', '', 'B2', 'customs control', 'die Zollkontrolle',
+      ex('При ввозе техники нужно пройти [[там+оженный контр+оль]].', 'When importing equipment you must pass through customs control.', 'Bei der Einfuhr von Geräten muss man durch die Zollkontrolle.')),
+    N('putevoj-list', 'маршр+утная квит+анция', 'f', 'маршр+утные квит+анции', 'B2', 'itinerary receipt, flight ticket receipt', 'der Reiseplan, Ticketbeleg',
+      ex('Для возмещения билета сохраните электронную [[маршр+утную квит+анцию]].', 'Keep your electronic itinerary receipt to claim ticket reimbursement.', 'Bewahren Sie den elektronischen Ticketbeleg für die Erstattung auf.')),
+    V('zaderzhat-reys', 'зад+ерживать', 'impf', 'B2', ['зад+ерживаю, зад+ерживаешь', 'зад+ерживал', 'pf. задерж+ать'], 'to delay (a train, flight)', 'verzögern, aufhalten',
+      ex('Сильный встречный ветер может [[зад+ерживать]] вылет на сорок мин+ут.', 'Strong headwinds can delay departure by forty minutes.', 'Starker Gegenwind kann den Abflug um vierzig Minuten verzögern.'))
+  ]);
+
+  reg('b2_science', [
+    N('metodologiya', 'методол+огия', 'f', 'методол+огии', 'C1', 'methodology', 'die Methodik',
+      ex('Во введении автор подробно описал [[методол+огию]] эксперимента.', 'In the introduction the author described the experiment’s methodology in detail.', 'In der Einleitung beschrieb der Autor die Methodik des Experiments.')),
+    N('pogreshnost', 'отклон+ение', 'n', 'отклон+ения', 'C1', 'deviation, variance', 'die Abweichung',
+      ex('Допустимое [[отклон+ение]] от нормы составляет менее двух процентов.', 'Acceptable deviation from the norm is under two percent.', 'Die zulässige Abweichung von der Norm liegt unter zwei Prozent.')),
+    A('zakonomernost', 'adj', 'законом+ерный', 'C1', 'natural, logical, regular', 'gesetzmäßig, folgerichtig',
+      ex('Снижение ошибок стало [[законом+ерным]] результатом обучения.', 'Fewer errors were a natural result of the training.', 'Weniger Fehler waren ein folgerichtiger Erfolg der Schulung.')),
+    N('nabludenie', 'полев+ой журн+ал', 'm', 'полев+ые журн+алы', 'B2', 'field log, observation notebook', 'das Feldprotokoll',
+      ex('Биолог вносит все замеры температуры в [[полев+ой журн+ал]].', 'The biologist enters every temperature reading in the field log.', 'Der Biologe trägt alle Temperaturwerte ins Feldprotokoll ein.')),
+    V('verifitsirovat', 'провер+ять эмпир+ически', 'impf', 'C1', ['провер+яю, провер+яешь', 'провер+ял', 'pf. пров+ерить'], 'to verify empirically', 'empirisch überprüfen',
+      ex('Любую красивую те+орию необходимо [[провер+ять эмпир+ически]].', 'Any neat theory must be verified empirically.', 'Jede elegante Theorie muss empirisch überprüft werden.'))
+  ]);
+})();

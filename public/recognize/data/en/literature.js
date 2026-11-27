@@ -305,3 +305,187 @@
         ex('When the coalition’s final partner left, [[the centre could no longer hold]].', 'Когда последний партнёр вышел из коалиции, её центр уже не мог удержаться.', 'Als der letzte Partner die Koalition verließ, konnte deren Mitte nicht länger halten.')])
   ]);
 })();
+
+/* === Content expansion 2026-11-27 (+15 EN Literary Phrases) === */
+(function () {
+  'use strict';
+  function pair(ru, de) { return { ru: ru, de: de }; }
+  function ex(t, ru, de) { return { t: t, ru: ru, de: de }; }
+  function source(ru, author, workOrig, year, workRu, workDe) {
+    return { author: pair(ru, author), work: pair(workRu, workDe), workOrig: workOrig, year: year };
+  }
+  function card(id, t, level, register, source, meaning, literal, breakdown, context, tone, token, grammar, examples) {
+    return {
+      id: 'lit-en-' + id, t: t, type: 'chunk', pos: 'chunk', level: level, register: register, learnable: true,
+      ru: meaning.ru, de: meaning.de, examples: examples, parts: [[token, grammar]],
+      lit: { author: source.author, work: source.work, workOrig: source.workOrig, year: source.year,
+        quote: t, literal: literal, breakdown: breakdown, context: context, tone: tone }
+    };
+  }
+  function add(topic, items) { GT.register({ tab: 'literature', topic: topic, items: items }); }
+
+  add('love', [
+    card('count-the-ways', 'How do I love thee? Let me count the ways', 'B2', 'literary',
+      source('Элизабет Барретт Браунинг', 'Elizabeth Barrett Browning', 'Sonnets from the Portuguese', 1850, 'Сонеты с португальского', 'Sonette nach dem Portugiesischen'),
+      pair('столько причин, почему я тебя люблю', 'so many reasons why I love you'),
+      pair('как я люблю тебя? позволь перечислить способы', 'Wie liebe ich dich? Lass mich die Arten zählen.'),
+      pair('Устаревшее thee (= you в объектном падеже) сразу задаёт возвышенный тон сонета.', 'Das veraltete thee (= dich) gibt der Zeile sofort den feierlichen Ton eines Sonetts.'),
+      pair('Знаменитое начало 43-го сонета, написанного поэтессой для её мужа Роберта Браунинга.', 'Der berühmte Anfang von Sonett 43, das die Dichterin für ihren Mann Robert Browning schrieb.'),
+      pair('Узнаваемая фраза, которую часто перефразируют и шутливо о любви к чему угодно.', 'Ein bekannter Satz, der oft auch augenzwinkernd auf Alltagsvorlieben übertragen wird.'),
+      'count the ways', pair('перечислить способы / причины', 'die Arten / Gründe aufzählen'),
+      [ex('“[[How do I love thee? Let me count the ways]],” she joked, listing every good bakery in town.', '«Как я тебя люблю? Позволь перечислить способы», — пошутила она, перечисляя все хорошие булочные города.', '„Wie liebe ich dich? Lass mich die Arten zählen“, scherzte sie und nannte jede gute Bäckerei der Stadt.'),
+        ex('That sonnet opens with the famous question: “[[How do I love thee? Let me count the ways]].”', 'Этот сонет открывается знаменитым вопросом: «Как я люблю тебя? Позволь перечислить способы».', 'Dieses Sonett beginnt mit der berühmten Frage: „Wie liebe ich dich? Lass mich die Arten zählen.“')]),
+    card('loved-and-lost', 'Tis better to have loved and lost than never to have loved at all', 'C1', 'elevated',
+      source('Альфред Теннисон', 'Alfred, Lord Tennyson', 'In Memoriam A.H.H.', 1850, 'Памяти А. Х. Х.', 'In Memoriam A.H.H.'),
+      pair('лучше пережить любовь и потерю, чем вообще никогда не любить', 'es ist besser, geliebt und verloren zu haben, als nie geliebt zu haben'),
+      pair('лучше было любить и потерять, чем никогда вообще не любить', 'Es ist besser, geliebt und verloren zu haben, als überhaupt nie geliebt zu haben.'),
+      pair('Tis — поэтическое сокращение от it is; перфектный инфинитив to have loved подводит итог опыту.', 'Tis ist poetisch für it is; der Infinitiv Perfekt to have loved blickt auf die Erfahrung zurück.'),
+      pair('Теннисон написал эту поэму в память о безвременно ушедшем близком друге.', 'Tennyson schrieb das Gedicht im Gedenken an einen früh verstorbenen engen Freund.'),
+      pair('Одна из самых цитируемых английских фраз об утрате и ценности опыта.', 'Einer der meistzitierten englischen Sätze über Verlust und den Wert gelebter Nähe.'),
+      'to have loved and lost', pair('перфектный инфинитив для завершённого опыта', 'Infinitiv Perfekt für eine abgeschlossene Erfahrung'),
+      [ex('Even after the breakup, she still believed it was [[better to have loved and lost than never to have loved at all]].', 'Даже после расставания она всё равно считала, что лучше любить и потерять, чем не любить вовсе.', 'Selbst nach der Trennung glaubte sie, dass es besser sei, geliebt und verloren zu haben, als nie geliebt zu haben.'),
+        ex('People quote Tennyson’s line “[[Tis better to have loved and lost]]” to comfort a heartbroken friend.', 'Строку Теннисона «Лучше любить и потерять» часто цитируют, чтобы утешить друга.', 'Tennysons Zeile „Es ist besser, geliebt und verloren zu haben“ zitiert man oft zum Trost.')]),
+    card('food-of-love', 'If music be the food of love, play on', 'C1', 'literary',
+      source('Уильям Шекспир', 'William Shakespeare', 'Twelfth Night', 1602, 'Двенадцатая ночь', 'Was ihr wollt'),
+      pair('если музыка питает любовь, играйте дальше', 'wenn Musik die Nahrung der Liebe ist, spielt weiter'),
+      pair('если музыка есть пища любви, играйте дальше', 'Wenn die Musik der Liebe Nahrung ist, spielt weiter.'),
+      pair('Союз if с сослагательным be (вместо is) — яркая примета шекспировского синтаксиса.', 'Der Konjunktiv be nach if (statt is) ist ein klares Merkmal der Sprache Shakespeares.'),
+      pair('Первая реплика герцога Орсино, открывающая комедию «Двенадцатая ночь».', 'Der allererste Satz von Herzog Orsino zu Beginn der Komödie „Was ihr wollt“.'),
+      pair('Изящная цитата о музыке, влюблённости и наслаждении моментом.', 'Ein elegantes Zitat über Musik, Verliebtheit und Genuss.'),
+      'play on', pair('on здесь = «продолжать действие»', 'on bedeutet hier „weiter“ (weiterspielen)'),
+      [ex('As the string quartet tuned up, someone murmured, “[[If music be the food of love, play on]].”', 'Когда струнный квартет настраивал инструменты, кто-то прошептал: «Если музыка — пища любви, играйте дальше».', 'Als das Streichquartett stimmte, murmelte jemand: „Wenn die Musik der Liebe Nahrung ist, spielt weiter.“'),
+        ex('That comedy opens immediately with Orsino’s plea to [[play on]].', 'Эта комедия сразу открывается просьбой Орсино продолжать играть.', 'Die Komödie beginnt direkt mit Orsinos Bitte weiterzuspielen.')])
+  ]);
+
+  add('longing', [
+    card('innisfree', 'I will arise and go now, and go to Innisfree', 'B2', 'literary',
+      source('Уильям Батлер Йейтс', 'W. B. Yeats', 'The Lake Isle of Innisfree', 1890, 'Озёрный остров Иннисфри', 'Die Seeinsel Innisfree'),
+      pair('я всё брошу и уеду в тихое уединённое место на природе', 'ich breche jetzt auf und ziehe mich an einen ruhigen Ort in der Natur zurück'),
+      pair('я встану и пойду сейчас, и пойду в Иннисфри', 'Ich will mich nun erheben und gehen, und nach Innisfree gehen.'),
+      pair('Торжественное «arise and go» отсылает к библейской интонации, превращая мечту об острове в решение.', 'Das feierliche „arise and go“ greift biblischen Tonfall auf und macht den Wunsch zum Entschluss.'),
+      pair('Йейтс написал это стихотворение, стоя на шумной лондонской улице и тоскуя по западной Ирландии.', 'Yeats schrieb das Gedicht auf einer lauten Londoner Straße aus Heimweh nach Westirland.'),
+      pair('Классика англоязычной поэзии о бегстве от городской суеты.', 'Ein Klassiker der englischsprachigen Lyrik über die Sehnsucht nach Stille fern der Stadt.'),
+      'arise and go', pair('подняться и отправиться в путь', 'aufbrechen und gehen'),
+      [ex('Stuck in Friday traffic, he muttered Yeats: “[[I will arise and go now, and go to Innisfree]].”', 'Застряв в пятничной пробке, он пробормотал Йейтса: «Встану и уеду в Иннисфри».', 'Im Freitagsstau murmelte er Yeats: „Ich will jetzt aufbrechen und nach Innisfree gehen.“'),
+        ex('Every summer she dreams of a quiet cabin where she can [[arise and go]] for two weeks.', 'Каждое лето она мечтает о тихом домике, куда можно уехать на две недели.', 'Jeden Sommer träumt sie von einer ruhigen Hütte, zu der sie für zwei Wochen aufbrechen kann.')]),
+    card('lonely-cloud', 'I wandered lonely as a cloud', 'B2', 'literary',
+      source('Уильям Вордсворт', 'William Wordsworth', 'I Wandered Lonely as a Cloud', 1807, 'Я одиноко брёл, как облако', 'Ich zog einsam wie eine Wolke'),
+      pair('я бродил в одиночестве и задумчивости, без цели', 'ich streifte einsam und nachdenklich umher'),
+      pair('я бродил одиноким, как облако', 'Ich wanderte einsam wie eine Wolke.'),
+      pair('Наречное употребление прилагательного lonely после глагола движения рисует состояние героя.', 'Das prädikative Adjektiv lonely nach dem Bewegungsverb beschreibt den inneren Zustand.'),
+      pair('Начало знаменитого стихотворения о том, как одинокая прогулка сменяется радостью при виде поля нарциссов.', 'Der Beginn des berühmten Gedichts über den Anblick eines Feldes goldener Narzissen.'),
+      pair('Одно из самых узнаваемых стихотворений британской традиции.', 'Eines der bekanntesten Gedichte der britischen Literatur.'),
+      'wander lonely', pair('бродить без цели в одиночестве', 'einsam umherstreifen'),
+      [ex('Before meeting his friends, he [[wandered lonely as a cloud]] through the misty botanical garden.', 'До встречи с друзьями он одиноко бродил по туманному ботаническому саду.', 'Bevor er seine Freunde traf, streifte er einsam wie eine Wolke durch den nebligen Garten.'),
+        ex('Every British schoolchild recognises the opening line “[[I wandered lonely as a cloud]].”', 'В Британии каждый школьник знает начальную строку «Я одиноко брёл, как облако».', 'In Großbritannien kennt jedes Schulkind die Eingangszeile „Ich wanderte einsam wie eine Wolke“. ')]),
+    card('hope-feathers', 'Hope is the thing with feathers', 'B2', 'literary',
+      source('Эмили Дикинсон', 'Emily Dickinson', '“Hope” is the thing with feathers', 1891, 'Надежда — это существо с перьями', 'Die Hoffnung ist das Ding mit Federn'),
+      pair('надежда — как маленькая упрямая птица внутри души, что поёт даже в бурю', 'Hoffnung ist wie ein kleiner Vogel in der Seele, der auch im Sturm weitersingt'),
+      pair('надежда — это вещь с перьями', 'Hoffnung ist das Ding mit Federn.'),
+      pair('Прозаическое слово thing в сочетании с with feathers делает метафору живой и тёплой.', 'Das schlichte Wort thing wirkt zusammen mit with feathers überraschend zärtlich.'),
+      pair('Дикинсон уподобляет надежду птице, которая поёт без слов и никогда не просит крошки взамен.', 'Dickinson vergleicht Hoffnung mit einem Vogel, der im Sturm singt und nichts dafür verlangt.'),
+      pair('Тёплое и очень известное стихотворение о стойкости перед трудностями.', 'Ein tröstliches und sehr bekanntes Gedicht über Zuversicht in schweren Zeiten.'),
+      'the thing with feathers', pair('создание с перьями (о птице)', 'das Wesen mit Federn'),
+      [ex('In difficult months, it helps to remember Dickinson’s image: “[[Hope is the thing with feathers]].”', 'В трудные месяцы помогает вспомнить образ Дикинсон: «Надежда — существо с перьями».', 'In schweren Monaten hilft Dickinsons Bild: „Hoffnung ist das Ding mit Federn.“'),
+        ex('Her letter ended gently, reminding us that [[hope stays perched in the soul]].', 'Её письмо закончилось мягко, напомнив, что надежда продолжает петь даже в непогоду.', 'Ihr Brief endete sanft mit der Erinnerung, dass Hoffnung auch im Sturm weitersingt.')])
+  ]);
+
+  add('atmosphere', [
+    card('tyger-bright', 'Tyger Tyger, burning bright', 'B2', 'literary',
+      source('Уильям Блейк', 'William Blake', 'The Tyger', 1794, 'Тигр', 'Der Tiger'),
+      pair('яркий, пугающий и завораживающий образ хищной силы в ночи', 'ein leuchtendes, ehrfurchtgebietendes Bild wilder Kraft in der Nacht'),
+      pair('Тигр, тигр, горящий ярко (в лесах ночи)', 'Tiger, Tiger, leuchtend hell.'),
+      pair('Повтор обращения (со старинным написанием Tyger) и причастие burning задают чеканный ритм.', 'Die Wiederholung (mit alter Schreibung Tyger) und burning prägen den markanten Rhythmus.'),
+      pair('Начало стихотворения из «Песен Опыта» о красоте и грозной тайне творения.', 'Der Auftakt eines der berühmtesten Gedichte aus Blakes „Songs of Experience“.'),
+      pair('Иконическое двустишие английской поэзии, мгновенно узнаваемое по первым словам.', 'Ein Kultvers der englischen Dichtung, sofort an den ersten Worten erkennbar.'),
+      'burning bright', pair('прилагательное bright в роли наречия («ярко»)', 'Adjektiv bright adverbial gebraucht („hell“)'),
+      [ex('The neon sign glowed in the alley like Blake’s “[[Tyger Tyger, burning bright]].”', 'Неоновая вывеска светилась в переулке, словно блейковский «Тигр, горящий ярко».', 'Das Neonschild leuchtete in der Gasse wie Blakes „Tiger, Tiger, leuchtend hell“.'),
+        ex('From the first line — “[[Tyger Tyger, burning bright]]” — the poem sounds like a drumbeat.', 'С первой же строки «Тигр, тигр, горящий ярко» стихотворение звучит как удар барабана.', 'Schon ab der ersten Zeile klingt das Gedicht wie ein Trommelschlag.')]),
+    card('water-everywhere', 'Water, water, every where, nor any drop to drink', 'B2', 'literary',
+      source('Сэмюэл Тейлор Кольридж', 'Samuel Taylor Coleridge', 'The Rime of the Ancient Mariner', 1798, 'Сказание о старом мореходе', 'Die Ballade vom alten Seemann'),
+      pair('вокруг полно чего-то, но воспользоваться этим невозможно', 'überall gibt es etwas im Überfluss, aber nichts davon lässt sich nutzen'),
+      pair('вода, вода повсюду, и ни капли, чтобы выпить', 'Wasser, Wasser überall, und kein Tropfen zu trinken.'),
+      pair('Союз nor без предшествующего neither усиливает безысходность («и ни единой капли»).', 'Das alleinstehende nor verstärkt die Ausweglosigkeit („und kein einziger Tropfen“).'),
+      pair('Корабль стоит в мёртвом штиле посреди океана: моряки умирают от жажды среди солёной воды.', 'Das Schiff liegt in der Flaute mitten auf dem Ozean: Die Seeleute verdursten inmitten von Salzwasser.'),
+      pair('Очень ходовая фраза про информационный шум или обилие бесполезных вариантов.', 'Eine häufig gebrauchte Wendung bei Informationsflut oder vielen unbrauchbaren Optionen.'),
+      'nor any drop to drink', pair('и ни капли, пригодной для питья', 'und kein einziger trinkbarer Tropfen'),
+      [ex('Five hundred open tabs and zero answers — [[water, water, every where, nor any drop to drink]].', 'Пятьсот открытых вкладок и ни одного ответа — кругом вода, а напиться нечем.', 'Fünfhundert offene Tabs und keine Lösung — Wasser überall, doch kein Tropfen zu trinken.'),
+        ex('Surrounded by noisy alerts, the analyst felt there was [[not a drop of useful data to read]].', 'Окружённый шумными уведомлениями, аналитик чувствовал, что полезных данных вокруг ни капли.', 'Umgeben von lauten Meldungen fehlte ihm jeder verwertbare Hinweis.')]),
+    card('april-cruellest', 'April is the cruellest month', 'C1', 'literary',
+      source('Т. С. Элиот', 'T. S. Eliot', 'The Waste Land', 1922, 'Бесплодная земля', 'Das wüste Land'),
+      pair('весна бывает болезненной, потому что заставляет просыпаться к жизни и чувствам', 'der Frühling kann schmerzhaft sein, weil er aus der Erstarrung weckt'),
+      pair('апрель — самый жестокий месяц', 'Der April ist der grausamste Monat.'),
+      pair('Превосходная степень cruellest переворачивает привычное воспевание весны в поэзии.', 'Der Superlativ cruellest kehrt das klassische Frühlingslob radikal um.'),
+      pair('Знаменитая первая строка «Бесплодной земли», переворачивающая начало «Кентерберийских рассказов» Чосера.', 'Der berühmte Auftakt von „The Waste Land“, der Chaucers Frühlingslob ironisch umkehrt.'),
+      pair('Часто шутливо цитируют во время холодной или дождливой весенней погоды.', 'Wird gern augenzwinkernd bei wechselhaftem Aprilwetter oder Steuerfristen zitiert.'),
+      'the cruellest month', pair('самый безжалостный месяц (переворот клише)', 'der grausamste Monat (Umkehr eines Klischees)'),
+      [ex('When snow returned in mid-spring, she sighed, “[[April is the cruellest month]].”', 'Когда в середине весны снова пошёл снег, она вздохнула: «Апрель — самый жестокий месяц».', 'Als mitten im Frühling wieder Schnee fiel, seufzte sie: „Der April ist der grausamste Monat.“'),
+        ex('Eliot shocked readers in 1922 by calling spring [[the cruellest month]].', 'Элиот поразил читателей в 1922 году, назвав весну самым жестоким месяцем.', 'Eliot überraschte die Leser 1922 damit, den Frühling als grausamsten Monat zu bezeichnen.')])
+  ]);
+
+  add('irony', [
+    card('truth-rarely-pure', 'The truth is rarely pure and never simple', 'C1', 'ironic',
+      source('Оскар Уайльд', 'Oscar Wilde', 'The Importance of Being Earnest', 1895, 'Как важно быть серьёзным', 'Bunbury oder Ernst sein ist alles'),
+      pair('правда почти всегда сложнее, чем кажется на первый взгляд', 'die Wahrheit ist selten rein und fast nie einfach'),
+      pair('правда редко бывает чистой и никогда — простой', 'Die Wahrheit ist selten rein und niemals einfach.'),
+      pair('Пара симметричных наречий rarely … and never придает шутке афористичную чеканность.', 'Die Symmetrie von rarely … and never verleiht dem Bonmot epigrammatische Schärfe.'),
+      pair('Алджернон оправдывает свои уловки перед Джеком в первом действии комедии.', 'Algernon rechtfertigt im ersten Akt seine kleinen Ausflüchte gegenüber Jack.'),
+      pair('Элегантный ироничный афоризм для спорных ситуаций, отчётов и детективных историй.', 'Ein eleganter, ironischer Spruch für verwickelte Sachverhalte.'),
+      'rarely pure and never simple', pair('почти никогда не однозначная', 'kaum jemals rein und nie simpel'),
+      [ex('Once both sides shared their emails, it was clear [[the truth is rarely pure and never simple]].', 'Когда обе стороны показали переписку, стало ясно: правда редко бывает простой.', 'Als beide Seiten ihre Mails zeigten, wurde klar, dass die Wahrheit selten einfach ist.'),
+        ex('As Oscar Wilde put it, “[[The truth is rarely pure and never simple]].”', 'Как выразился Оскар Уайльд, «правда редко бывает чистой и никогда — простой».', 'Wie Oscar Wilde sagte: „Die Wahrheit ist selten rein und niemals einfach.“')]),
+    card('brevity-wit', 'Brevity is the soul of wit', 'C1', 'ironic',
+      source('Уильям Шекспир', 'William Shakespeare', 'Hamlet', 1603, 'Гамлет', 'Hamlet'),
+      pair('краткость — основа остроумия и убедительности (краткость — сестра таланта)', 'Kürze ist die Seele des Geistes / der Würze'),
+      pair('краткость есть душа остроумия', 'Kürze ist des Witzes Seele.'),
+      pair('Wit в елизаветинском английском означало ум и находчивость вообще, а не только юмор.', 'Wit meinte im elisabethanischen Englisch Klugheit und Geist, nicht nur Scherz.'),
+      pair('Ирония сцены: болтливый Полоний произносит эту фразу в середине бесконечно длинной речи.', 'Ironie der Szene: Der geschwätzige Polonius sagt diesen Satz mitten in einer endlos langen Rede.'),
+      pair('Блестящая отсылка в редактуре, презентациях и вежливых намёках сократить письмо.', 'Eine treffende Bemerkung für Präsentationen, Redaktion und zu lange E-Mails.'),
+      'soul of wit', pair('суть остроумия и ясности ума', 'Kern von Klugheit und Treffsicherheit'),
+      [ex('Our slides have forty words each — remember, [[brevity is the soul of wit]].', 'На каждом слайде по сорок слов — помните, краткость украшает речь.', 'Auf jeder Folie stehen vierzig Wörter — denk daran, in der Kürze liegt die Würze.'),
+        ex('Polonius praises [[brevity]] while delivering the longest speech in the scene.', 'Полоний расхваливает краткость, произнося самую длинную речь в сцене.', 'Polonius lobt die Kürze, während er die längste Rede der Szene hält.')]),
+    card('to-err-human', 'To err is human, to forgive divine', 'B2', 'ironic',
+      source('Александр Поуп', 'Alexander Pope', 'An Essay on Criticism', 1711, 'Опыт о критике', 'Ein Versuch über die Kritik'),
+      pair('ошибаться свойственно людям, а прощать — великодушно', 'Irren ist menschlich, Vergeben göttlich'),
+      pair('ошибаться — человеческое, прощать — божественное', 'Irren ist menschlich, Vergeben göttlich.'),
+      pair('Два инфинитива-подлежащих (to err / to forgive) стоят в зеркальном противопоставлении.', 'Zwei Infinitive als Subjekte (to err / to forgive) stehen in strenger Antithese.'),
+      pair('Поуп призывает литературных критиков судить авторов великодушно, не цепляясь к мелким промахам.', 'Pope mahnt Kritiker zur Nachsicht gegenüber kleinen Fehlern anderer.'),
+      pair('Универсальная пословица, которую часто говорят при мелкой опечатке или извинении.', 'Ein bekanntes Sprichwort bei kleinen Missgeschicken oder Entschuldigungen.'),
+      'to err', pair('ошибаться (книжн. от лат. errare)', 'sich irren (gehoben, von lat. errare)'),
+      [ex('Yes, I sent the wrong PDF — [[to err is human, to forgive divine]]!', 'Да, я отправил не тот PDF — ошибаться свойственно человеку, а прощать — божественно!', 'Ja, ich habe das falsche PDF geschickt — Irren ist menschlich, Vergeben göttlich!'),
+        ex('Good code reviews remember that [[to err is human]] and focus on fixing the bug.', 'На хорошем код-ревью помнят, что ошибиться может каждый, и спокойно чинят баг.', 'Bei guten Code-Reviews denkt man daran, dass Irren menschlich ist.')])
+  ]);
+
+  add('fate', [
+    card('two-roads', 'Two roads diverged in a yellow wood', 'B2', 'literary',
+      source('Роберт Фрост', 'Robert Frost', 'The Road Not Taken', 1916, 'Неизбранная дорога', 'Der nicht gegangene Weg'),
+      pair('жизненная развилка, где нужно выбрать один путь из двух', 'eine Lebenskreuzung, an der man sich für einen von zwei Wegen entscheiden muss'),
+      pair('две дороги разошлись в жёлтом осеннем лесу', 'Zwei Wege gingen auseinander in einem gelben Wald.'),
+      pair('Глагол diverge («расходиться в стороны») и осенний образ жёлтого леса задают тихий момент выбора.', 'Das Verb diverge (auseinandergehen) und der gelbe Herbstwald markieren den Moment der Wahl.'),
+      pair('Первая строка одного из самых известных американских стихотворений о выборе пути.', 'Die erste Zeile eines der berühmtesten amerikanischen Gedichte über Lebensentscheidungen.'),
+      pair('Стандартная метафора развилки в карьере или личной жизни.', 'Klassisches Bild für eine Weggabelung im Beruf oder Privatleben.'),
+      'diverged', pair('разошлись в разные стороны', 'gingen auseinander'),
+      [ex('When choosing between the startup and the university post, she felt like [[two roads diverged in a yellow wood]].', 'Выбирая между стартапом и работой в университете, она чувствовала себя на лесной развилке.', 'Bei der Wahl zwischen Start-up und Universität stand sie wie vor zwei sich trennenden Wegen.'),
+        ex('At twenty-five, our career paths [[diverged]] onto completely different tracks.', 'В двадцать пять наши карьерные дороги разошлись в совершенно разные стороны.', 'Mit fünfundzwanzig gingen unsere Berufswege völlig auseinander.')]),
+    card('do-not-go-gentle', 'Do not go gentle into that good night', 'C1', 'elevated',
+      source('Дилан Томас', 'Dylan Thomas', 'Do not go gentle into that good night', 1951, 'Не уходи смиренно в этот добрый мрак', 'Geh nicht gelassen in die gute Nacht'),
+      pair('не сдавайся без борьбы, борись до последнего', 'ergib dich nicht kampflos, kämpfe bis zuletzt'),
+      pair('не уходи кротко в ту добрую ночь', 'Geh nicht sanft in jene gute Nacht.'),
+      pair('Прилагательное gentle стоит как наречие (вместо gently); «that good night» — метафора конца жизни.', 'Gentle steht poetisch statt gently; „that good night“ ist eine Metapher für das Lebensende.'),
+      pair('Дилан Томас написал это стихотворение, обращаясь к умирающему отцу.', 'Dylan Thomas richtete dieses berühmte Gedicht an seinen sterbenden Vater.'),
+      pair('Мощный призыв к стойкости и сопротивлению, широко известный далеко за пределами поэзии.', 'Ein eindringlicher Appell an Kampfgeist und Standhaftigkeit.'),
+      'go gentle', pair('уйти покорно (поэтич. вместо gently)', 'gelassen/fügsam gehen'),
+      [ex('Even against stiff competition, the small team refused to [[go gentle into that good night]].', 'Даже против сильных конкурентов небольшая команда отказалась сдаться без боя.', 'Selbst gegen starke Konkurrenz wollte das kleine Team nicht kampflos aufgeben.'),
+        ex('Dylan Thomas’s refrain “[[Do not go gentle into that good night]]” echoes throughout modern cinema.', 'Рефрен Дилана Томаса «Не уходи смиренно в этот добрый мрак» часто звучит в современном кино.', 'Dylan Thomas’ Refrain wird im modernen Kino oft zitiert.')]),
+    card('not-in-our-stars', 'The fault, dear Brutus, is not in our stars, but in ourselves', 'C1', 'elevated',
+      source('Уильям Шекспир', 'William Shakespeare', 'Julius Caesar', 1599, 'Юлий Цезарь', 'Julius Cäsar'),
+      pair('винить нужно не судьбу и звёзды, а самих себя и свои решения', 'schuld ist nicht das Schicksal, sondern wir selbst'),
+      pair('вина, дорогой Брут, не в наших звёздах, а в нас самих', 'Die Schuld, teurer Brutus, liegt nicht in unseren Sternen, sondern in uns selbst.'),
+      pair('Контраст «not in X, but in Y» противопоставляет судьбу (stars) личной ответственности (ourselves).', 'Der Kontrast „not in X, but in Y“ stellt Schicksal (stars) gegen Eigenverantwortung (ourselves).'),
+      pair('Кассий убеждает Брута, что люди сами отвечают за то, что терпят тиранию.', 'Cassius überzeugt Brutus, dass die Menschen selbst für ihr Schicksal verantwortlich sind.'),
+      pair('Классическая цитата о личной ответственности вместо жалоб на невезение.', 'Ein klassisches Zitat über Eigenverantwortung statt Schicksalsgläubigkeit.'),
+      'in our stars', pair('в судьбе / предначертании', 'im Schicksal, in den Sternen'),
+      [ex('Before blaming the market, remember Cassius’s words: “[[The fault is not in our stars, but in ourselves]].”', 'Прежде чем винить рынок, вспомни слова Кассия: «Вина не в звёздах, а в нас самих».', 'Bevor wir den Markt beschuldigen: Die Schuld liegt nicht in den Sternen, sondern in uns selbst.'),
+        ex('He believes outcomes depend on preparation rather than anything written [[in our stars]].', 'Он верит, что результат зависит от подготовки, а не от предначертания звёзд.', 'Er glaubt, Ergebnisse hängen von Vorbereitung ab, nicht vom Schicksal in den Sternen.')])
+  ]);
+})();

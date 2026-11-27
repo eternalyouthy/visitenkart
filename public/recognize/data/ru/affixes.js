@@ -170,4 +170,116 @@
     limitations: { en: 'Stress is on -ло́гия: биоло́гия, техноло́гия. The person ends in -лог (биолог), the adjective in -логический.', de: 'Betonung auf -ло́гия: биоло́гия, техноло́гия. Die Person endet auf -лог (биолог), das Adjektiv auf -логический.' },
     examples: [ex('технол+огия', 'technology', 'die Technologie'), ex('экол+огия', 'ecology', 'die Ökologie'), ex('психол+огия', 'psychology', 'die Psychologie')],
     source: 'Greek -λογία; standard dictionaries of foreign words' });
+
+  /* === Content expansion 2026-11-27 (6 suffixes + 5 classical roots) === */
+  GT.registerSuffix({ id: 'chik', label: '-чик / -щик', gender: 'masc.', en: 'person by profession or role; small tool', de: 'Person nach Beruf/Tätigkeit; kleines Gerät',
+    posChange: { en: 'verb / noun → masculine noun', de: 'Verb / Substantiv → maskulines Substantiv' },
+    pattern: { en: 'stem + -чик (after д, т, з, с, ж) or -щик (elsewhere): переводить → переводчик, программировать → разработчики, сбор → сборщик.', de: 'Stamm + -чик (nach д, т, з, с, ж) oder -щик (sonst): переводить → переводчик, заказ → заказчик.' },
+    spelling: { en: 'Use -чик after д, т, з, с, ж (разведчик, подписчик, заказчик); -щик after other consonants (поставщик, сварщик).', de: 'Nach д, т, з, с, ж steht -чик (заказчик, переводчик), nach anderen Konsonanten -щик (поставщик).' },
+    exceptions: { en: 'Also marks small objects or devices: счётчик (meter/counter), диванчик (small sofa).', de: 'Bezeichnet auch kleine Gegenstände oder Geräte: счётчик (Zähler), чемоданчик (Köfferchen).' },
+    limitations: { en: 'Many professions prefer -тель (учитель) or -ист (журналист); learn each occupational noun.', de: 'Viele Berufe nutzen -тель (учитель) oder -ист (журналист); einzeln lernen.' },
+    productivity: { en: 'Very productive in everyday professions and business (заказчик, поставщик, подписчик, переводчик).', de: 'Sehr produktiv in Berufen und im Geschäftsleben (заказчик, поставщик, подписчик, переводчик).' },
+    examples: [ex('перев+одчик', 'translator', 'der Übersetzer'), ex('зак+азчик', 'client, customer', 'der Auftraggeber'), ex('поставщ+ик', 'supplier', 'der Lieferant'), ex('счётчик', 'meter, counter', 'der Zähler')],
+    exercise: {
+      question: { en: 'Which suffix rule chooses -чик vs -щик in «зак+азчик» (client)?', de: 'Warum steht in «зак+азчик» (Auftraggeber) -чик statt -щик?' },
+      answer: { en: '-чик is used after д, т, з, с, ж', de: '-чик steht nach д, т, з, с, ж' },
+      options: { en: ['-чик is used after д, т, з, с, ж', '-чик is only for feminine nouns', '-чик marks only tools, never people', '-щик is used only after vowels'], de: ['-чик steht nach д, т, з, с, ж', '-чик ist nur für Feminina', '-чик bildet nur Geräte, nie Berufe', '-щик steht nur nach Vokalen'] },
+      explain: { en: 'Because the stem ends in з (заказ-), Russian spells -чик: заказчик.', de: 'Da der Stamm auf з (заказ-) endet, steht -чик: заказчик.' } } });
+
+  GT.registerSuffix({ id: 'stvo', label: '-ство', gender: 'neut.', en: 'state, institution, collective or abstract field', de: 'Zustand, Einrichtung, Gesamtheit oder Fachgebiet',
+    posChange: { en: 'noun / adjective → neuter noun', de: 'Substantiv / Adjektiv → neutrales Substantiv' },
+    pattern: { en: 'stem + -ство (-ество): государство (state), руководство (management), качество (quality), большинство (majority).', de: 'Stamm + -ство (-ество): государство (Staat), руководство (Leitung), большинство (Mehrheit).' },
+    spelling: { en: 'Consonants before -ство can alternate or simplify: друг → дружество, брат → братство.', de: 'Vor -ство können Konsonanten wechseln: друг → дружество.' },
+    exceptions: { en: 'Often names either a collective group (руководство — management) or an abstract concept (равенство — equality).', de: 'Bezeichnet oft eine Gruppe (руководство — Leitung) oder ein Abstraktum (равенство — Gleichheit).' },
+    limitations: { en: 'Stress can stay on the stem (к+ачество) or move to the ending (большинств+о).', de: 'Die Betonung bleibt teils auf dem Stamm (к+ачество), teils rückt sie auf die Endung (большинств+о).' },
+    productivity: { en: 'Very common in social, legal and administrative vocabulary (гражданство, банкротство, ведомство).', de: 'Sehr häufig im sozialen, juristischen und behördlichen Wortschatz (гражданство, банкротство).' },
+    examples: [ex('руков+одство', 'management, leadership', 'die Leitung'), ex('большинств+о', 'majority', 'die Mehrheit'), ex('гражд+анство', 'citizenship', 'die Staatsangehörigkeit'), ex('банкр+отство', 'bankruptcy', 'die Insolvenz')],
+    exercise: {
+      question: { en: 'What grammatical gender do Russian nouns in «-ство» (большинств+о, гражд+анство) have?', de: 'Welches Genus haben russische Substantive auf «-ство» (большинств+о, гражд+анство)?' },
+      answer: { en: 'neuter', de: 'neutrum' },
+      options: { en: ['neuter', 'masculine', 'feminine', 'plural only'], de: ['neutrum', 'maskulin', 'feminin', 'nur Plural'] },
+      explain: { en: 'Nouns ending in -ство end in -о and are always neuter.', de: 'Substantive auf -ство enden auf -о und sind immer neutrum.' } } });
+
+  GT.registerSuffix({ id: 'izm', label: '-изм', gender: 'masc.', en: 'doctrine, system, movement or tendency', de: 'Lehre, System, Strömung oder Haltung',
+    posChange: { en: 'noun / adjective → masculine noun', de: 'Substantiv / Adjektiv → maskulines Substantiv' },
+    pattern: { en: 'international stem + -изм: оптимизм, капитализм, туризм, минимализм.', de: 'internationaler Stamm + -изм: оптимизм, капитализм, туризм, минимализм.' },
+    spelling: { en: 'Always masculine, hard declension (об оптимизме, с туризмом). Person nouns often use -ист (оптимист, турист).', de: 'Immer maskulin (об оптимизме). Die zugehörige Person endet oft auf -ист (оптимист, турист).' },
+    exceptions: { en: 'Stress always falls on -и́зм.', de: 'Die Betonung liegt immer auf -и́зм.' },
+    limitations: { en: 'Used mostly with international Latin/Greek roots rather than native Slavic roots.', de: 'Meist bei internationalen Wortstämmen, selten bei rein slawischen.' },
+    productivity: { en: 'High in journalism, culture, politics and everyday abstract terms.', de: 'Hoch in Medien, Kultur, Politik und abstraktem Wortschatz.' },
+    examples: [ex('оптим+изм', 'optimism', 'der Optimismus'), ex('тур+изм', 'tourism', 'der Tourismus'), ex('минимал+изм', 'minimalism', 'der Minimalismus'), ex('профессионал+изм', 'professionalism', 'die Professionalität')],
+    exercise: {
+      question: { en: 'If «оптим+изм» is the attitude, what is the person noun?', de: 'Wenn «оптим+изм» die Haltung ist, wie heißt die Person dazu?' },
+      answer: { en: 'оптим+ист', de: 'оптим+ист' },
+      options: { en: ['оптим+ист', 'оптим+изник', 'оптим+ость', 'оптим+ация'], de: ['оптим+ист', 'оптим+изник', 'оптим+ость', 'оптим+ация'] },
+      explain: { en: '-изм pairs regularly with -ист for the person (оптимизм → оптимист, туризм → турист).', de: '-изм bildet regelmäßig Personen auf -ист (оптимизм → оптимист).' } } });
+
+  GT.registerSuffix({ id: 'n_enn', label: '-н- / -енн-', gender: 'adj.', en: 'adjectives from nouns (quality, material, relation)', de: 'Adjektive aus Substantiven (Eigenschaft, Bezug)',
+    posChange: { en: 'noun → adjective', de: 'Substantiv → Adjektiv' },
+    pattern: { en: 'noun stem + -н- / -енн-: интерес → интересный, закон → законный, общество → общественный.', de: 'Substantivstamm + -н- / -енн-: интерес → интересный, закон → законный.' },
+    spelling: { en: 'Double -нн- appears in -енн- / -онн- (общественный, традиционный) and when stem ends in -н + -н- (закон + н → законный).', de: 'Doppel-нн in -енн- / -онн- (общественный, традиционный) und bei Stamm auf -н + -н- (законный).' },
+    exceptions: { en: 'Short forms keep -ен / -на / -но (важный → важен, важна).', de: 'Kurzformen: важный → важен, важна.' },
+    limitations: { en: 'Distinguish from -ский (городской, дружеский) which marks broader geographical or group ties.', de: 'Abgrenzen von -ский (городской, дружеский).' },
+    productivity: { en: 'The single most frequent adjective-forming suffix in Russian.', de: 'Das häufigste Adjektivsuffix im Russischen.' },
+    examples: [ex('интер+есный', 'interesting', 'interessant'), ex('зак+онный', 'lawful, legal', 'gesetzlich, rechtmäßig'), ex('общ+ественный', 'public, social', 'öffentlich, gesellschaftlich'), ex('традици+онный', 'traditional', 'traditionell')],
+    exercise: {
+      question: { en: 'Why is «зак+онный» (legal, from зак+он) spelled with double -нн-?', de: 'Warum schreibt man «зак+онный» (von зак+он) mit doppeltem -нн-?' },
+      answer: { en: 'stem ending in -н plus the suffix -н-', de: 'Stamm auf -н plus Suffix -н-' },
+      options: { en: ['stem ending in -н plus the suffix -н-', 'every Russian adjective takes -нн-', 'because it comes from a verb', 'stress falls on the ending'], de: ['Stamm auf -н plus Suffix -н-', 'jedes Adjektiv hat -нн-', 'weil es von einem Verb kommt', 'Endbetonung'] },
+      explain: { en: 'закон (stem ending in н) + -н- + ending -ый = законный.', de: 'закон (Stamm auf н) + -н- + Endung -ый = законный.' } } });
+
+  GT.registerSuffix({ id: 'ova', label: '-ова- / -ирова-', gender: 'verb', en: 'verbs from nouns and loanwords', de: 'Verben aus Substantiven und Lehnwörtern',
+    posChange: { en: 'noun / international stem → verb', de: 'Substantiv / internationaler Stamm → Verb' },
+    pattern: { en: 'stem + -овать / -ировать: план → планировать, тест → тестировать, совет → советовать.', de: 'Stamm + -овать / -ировать: план → планировать, тест → тестировать, совет → советовать.' },
+    spelling: { en: 'Crucial conjugation rule: -ова- / -ева- drops in the present and becomes -у- / -ю-: советовать → советую, планировать → планирую.', de: 'Wichtige Konjugationsregel: -ова- / -ева- wird im Präsens zu -у- / -ю-: советовать → советую, планировать → планирую.' },
+    exceptions: { en: 'Many -ировать verbs are biaspectual (использовать, инвестировать, бронировать can function as impf. or pf. in context, though prefixes like забронировать make clear pf.).', de: 'Viele Verben auf -ировать sind zweiaspektig (использовать, инвестировать), bilden aber oft Präfix-Perfektive (забронировать).' },
+    limitations: { en: 'Never conjugate as «планироваю» — always drop -ова- for -ую!', de: 'Nie „планироваю“ konjugieren — immer -ова- durch -ую ersetzen!' },
+    productivity: { en: 'Extremely productive for modern IT, business and everyday verbs.', de: 'Extrem produktiv für moderne IT-, Wirtschafts- und Alltagsverben.' },
+    examples: [ex('план+ировать', 'to plan', 'planen'), ex('тест+ировать', 'to test', 'testen'), ex('сов+етовать', 'to advise', 'raten'), ex('брон+ировать', 'to book, reserve', 'buchen, reservieren')],
+    exercise: {
+      question: { en: 'What is the correct 1st person singular present of «план+ировать» (to plan)?', de: 'Wie lautet die richtige 1. Person Singular Präsens von «план+ировать»?' },
+      answer: { en: 'я план+ирую', de: 'я план+ирую' },
+      options: { en: ['я план+ирую', 'я план+ироваю', 'я план+ирю', 'я план+иру'], de: ['я план+ирую', 'я план+ироваю', 'я план+ирю', 'я план+иру'] },
+      explain: { en: 'In -овать / -ировать verbs, -ова- becomes -у-: планировать → я планирую.', de: 'Bei Verben auf -овать / -ировать wird -ова- zu -у-: планировать → я планирую.' } } });
+
+  GT.registerSuffix({ id: 'ist', label: '-ист', gender: 'masc.', en: 'specialist, practitioner or supporter', de: 'Spezialist, Ausübender oder Anhänger',
+    posChange: { en: 'noun → masculine noun', de: 'Substantiv → maskulines Substantiv' },
+    pattern: { en: 'stem + -ист: журнал → журналист, финансы → финансист, спорт → спортсмен (exception), программирование → программист.', de: 'Stamm + -ист: журнал → журналист, финансы → финансист, программа → программист.' },
+    spelling: { en: 'Always masculine in grammar; many professions have a feminine partner in -истка (журналистка) or use the masculine noun formally.', de: 'Grammatisch maskulin; im Alltag oft weibliche Form auf -истка (журналистка).' },
+    exceptions: { en: 'Stress normally falls on -и́ст (программи́ст, специали́ст).', de: 'Betonung meist auf -и́ст (программи́ст, специали́ст).' },
+    limitations: { en: 'Do not attach to every noun: a doctor is врач, not «медицинист».', de: 'Nicht an jedes Nomen anhängbar: Arzt heißt врач.' },
+    productivity: { en: 'Highly productive in modern professions and tech (программист, аналитик [diff. suffix], дизайнер [loan], специалист, экономист).', de: 'Sehr produktiv in modernen Berufen (программист, специалист, экономист).' },
+    examples: [ex('программ+ист', 'programmer, developer', 'der Programmierer'), ex('специал+ист', 'specialist', 'der Spezialist'), ex('журнал+ист', 'journalist', 'der Journalist'), ex('эконом+ист', 'economist', 'der Ökonom')],
+    exercise: {
+      question: { en: 'Where does the stress fall in «специал+ист» and «журнал+ист»?', de: 'Wo liegt die Betonung bei «специал+ист» und «журнал+ист»?' },
+      answer: { en: 'on the suffix -и́ст', de: 'auf dem Suffix -и́ст' },
+      options: { en: ['on the suffix -и́ст', 'always on the first syllable', 'it shifts in the plural', 'before -ист'], de: ['auf dem Suffix -и́ст', 'immer auf der ersten Silbe', 'wechselt im Plural', 'vor -ист'] },
+      explain: { en: 'Nouns in -ист carry steady stress on -и́ст throughout the singular and plural.', de: 'Substantive auf -ист tragen durchgehend die Betonung auf -и́ст.' } } });
+
+  /* 5 new classical elements */
+  GT.registerClassical({ id: 'bio', label: 'био-', origin: 'Greek', en: 'life, living (Greek bios)', de: 'Leben, lebendig (griech. bios)',
+    history: { en: 'From Greek bios “life”, borrowed through European scientific vocabulary into words like биология (biology), биография (biography), биометрия (biometrics).', de: 'Von griech. bios „Leben“, über den europäischen Fachwortschatz ins Russische entlehnt (биология, биография, биометрия).' },
+    limitations: { en: 'Do not confuse with би- (bi- “two”, as in бинарный, биатлон).', de: 'Nicht verwechseln mit би- („zwei“, wie бинарный).' },
+    examples: [ex('биол+огия', 'biology', 'die Biologie'), ex('биогр+афия', 'biography', 'die Biografie'), ex('биом+етрия', 'biometrics', 'die Biometrie')],
+    source: 'Greek βίος; standard etymological dictionaries' });
+  GT.registerClassical({ id: 'geo', label: 'гео-', origin: 'Greek', en: 'earth, land (Greek gē)', de: 'Erde, Land (griech. gē)',
+    history: { en: 'From Greek gē “earth”, forming international terms in geography, geology and digital location services (география, геолокация).', de: 'Von griech. gē „Erde“, Basis internationaler Begriffe in Geografie, Geologie und Standortdiensten (география, геолокация).' },
+    limitations: { en: 'Pronounced with hard г [g], unstressed е approaches [ɪ]: география.', de: 'Mit hartem г [g] gesprochen; unbetontes е wird zu [ɪ].' },
+    examples: [ex('геогр+афия', 'geography', 'die Geografie'), ex('геол+огия', 'geology', 'die Geologie'), ex('геолок+ация', 'geolocation', 'die Geolokalisierung')],
+    source: 'Greek γῆ; standard dictionaries of foreign words' });
+  GT.registerClassical({ id: 'graf', label: '-граф / граф-', origin: 'Greek', en: 'writing, drawing, recording (Greek graphein)', de: 'Schreiben, Zeichnen, Aufzeichnen (griech. graphein)',
+    history: { en: 'From Greek graphein “to write, draw”, giving фотография, графика, биография, параграф.', de: 'Von griech. graphein „schreiben, zeichnen“: фотография, графика, биография, параграф.' },
+    limitations: { en: 'Watch Russian stress: фотогр+афия (stress on -а́-), фото́граф (on -о́-), гра́фика (on -а́-).', de: 'Betonung beachten: фотогр+афия (-а́-), фото́граф (-о́-), гр+афика (-а́-).' },
+    examples: [ex('фотогр+афия', 'photograph, photography', 'das Foto, die Fotografie'), ex('гр+афика', 'graphics', 'die Grafik'), ex('пар+аграф', 'paragraph, section', 'der Paragraph')],
+    source: 'Greek γράφειν; Vasmer, Etymological Dictionary of Russian' });
+  GT.registerClassical({ id: 'mikro', label: 'м+икро-', origin: 'Greek', en: 'small, minute (Greek mikros)', de: 'klein, winzig (griech. mikros)',
+    history: { en: 'From Greek mikros “small”, used across science, daily appliances and IT: микроскоп, микроволновка, микросервис.', de: 'Von griech. mikros „klein“, genutzt in Wissenschaft, Alltag und IT: микроскоп, микроволновка, микросервис.' },
+    limitations: { en: 'Opposite is макро- (macro-, large scale: макроэкономика).', de: 'Gegenstück ist макро- (Makro-, groß: макроэкономика).' },
+    examples: [ex('микроск+оп', 'microscope', 'das Mikroskop'), ex('микроф+он', 'microphone', 'das Mikrofon'), ex('микроволн+овка', 'microwave oven', 'die Mikrowelle')],
+    source: 'Greek μικρός; standard dictionaries' });
+  GT.registerClassical({ id: 'mono', label: 'м+оно-', origin: 'Greek', en: 'one, single (Greek monos)', de: 'ein, einzeln (griech. monos)',
+    history: { en: 'From Greek monos “alone, single”, forming literary and everyday words like монолог (monologue), монополия (monopoly).', de: 'Von griech. monos „allein, einzeln“: монолог (Monolog), монополия (Monopol).' },
+    limitations: { en: 'Paired naturally with диа- (“across/between”, диалог) or поли- (“many”, поликлиника).', de: 'Steht oft im Kontrast zu диа- (диалог) oder поли- (поликлиника).' },
+    examples: [ex('монол+ог', 'monologue', 'der Monolog'), ex('моноп+олия', 'monopoly', 'das Monopol'), ex('монот+онный', 'monotonous', 'monoton')],
+    source: 'Greek μόνος; standard dictionaries' });
 })();

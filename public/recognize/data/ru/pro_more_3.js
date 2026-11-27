@@ -4922,3 +4922,377 @@ GT.register({
     }
   ]
 });
+
+/* === Content expansion 2026-11-27 (RU Professional) === */
+(function () {
+  'use strict';
+  function ex(t, en, de) { return { t: t, en: en, de: de }; }
+  function N(id, t, gender, plural, level, en, de, e) {
+    var o = { id: 'ru-x27-pro-' + id, pos: 'noun', t: t, gender: gender, level: level, en: en, de: de, examples: [e] };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function A(id, pos, t, level, en, de, e) {
+    return { id: 'ru-x27-pro-' + id, pos: pos, level: level, t: t, en: en, de: de, examples: [e] };
+  }
+  function reg(topic, items) { GT.register({ tab: 'it', topic: topic, items: items }); }
+
+  reg('bureau_offices', [
+    N('razreshenie-rabota', 'разреш+ение на раб+оту', 'n', 'разреш+ения на раб+оту', 'B2', 'work permit', 'die Arbeitserlaubnis',
+      ex('Без действующего [[разреш+ения на раб+оту]] отдел кадров не подпишет договор.', 'Without a valid work permit, HR will not sign the contract.', 'Ohne gültige Arbeitserlaubnis unterschreibt die Personalabteilung den Vertrag nicht.')),
+    N('munitsipalitet', 'муниципалит+ет', 'm', 'муниципалит+еты', 'B2', 'municipality, local council', 'die Gemeinde, Stadtverwaltung',
+      ex('Профильный [[муниципалит+ет]] рассматривает подобные заявления в течение месяца.', 'The relevant municipality processes such applications within a month.', 'Die zuständige Gemeinde bearbeitet solche Anträge innerhalb eines Monats.')),
+    N('registratsiya-adresa', 'регистр+ация по м+есту ж+ительства', 'f', '', 'B1', 'address registration', 'die Anmeldung (Wohnsitz)',
+      ex('После переезда [[регистр+ация по м+есту ж+ительства]] оформляется в течение двух недель.', 'After moving, address registration is completed within two weeks.', 'Nach dem Umzug erfolgt die Wohnsitzanmeldung innerhalb von zwei Wochen.')),
+    N('priem-grazhdan', 'приём гр+аждан', 'm', '', 'B2', 'public office hours / citizen reception', 'die Sprechzeit, Bürgersprechstunde',
+      ex('[[Приём гр+аждан]] по записи ведётся по вторникам и четвергам.', 'Citizen reception by appointment takes place on Tuesdays and Thursdays.', 'Die Sprechzeit nach Termin findet dienstags und donnerstags statt.'))
+  ]);
+
+  reg('bureau_docs', [
+    N('svidetelstvo-brake', 'свид+етельство о бр+аке', 'n', 'свид+етельства о бр+аке', 'B1', 'marriage certificate', 'die Eheurkunde',
+      ex('Для смены фамилии приложите к+опию [[свид+етельства о бр+аке]].', 'To change your surname, attach a copy of the marriage certificate.', 'Für die Namensänderung fügen Sie eine Kopie der Eheurkunde bei.')),
+    N('apostil', 'апост+иль', 'm', 'апост+или', 'C1', 'apostille (official authentication stamp)', 'die Apostille',
+      ex('Для признания диплома за границей нужен [[апост+иль]] на оригинале.', 'To have your degree recognised abroad, you need an apostille on the original.', 'Für die Anerkennung des Diploms im Ausland ist eine Apostille auf dem Original nötig.')),
+    N('arkhivnaya-spravka', 'арх+ивная спр+авка', 'f', 'арх+ивные спр+авки', 'B2', 'archival certificate, record extract', 'der Archivauszug, die Bescheinigung',
+      ex('Запрос на [[арх+ивную спр+авку]] можно подать через портал госуслуг.', 'A request for an archival record extract can be submitted via the public portal.', 'Der Antrag auf eine Archivbescheinigung kann über das Portal gestellt werden.')),
+    N('blank', 'бланк', 'm', 'бл+анки', 'B1', 'official form', 'das Formular, der Vordruck',
+      ex('Заполните стандартный [[бланк]] синей ручкой без исправлений.', 'Fill out the standard form in blue ink without corrections.', 'Füllen Sie das Standardformular mit blauem Stift ohne Korrekturen aus.'))
+  ]);
+
+  reg('legal_ip', [
+    N('tovarnaya-marka', 'тов+арная м+арка', 'f', 'тов+арные м+арки', 'B2', 'brand, trademark', 'die Handelsmarke',
+      ex('Юристы зарегистрировали [[тов+арную м+арку]] до выхода продукта на рынок.', 'The lawyers registered the brand before the product launched on the market.', 'Die Juristen meldeten die Handelsmarke vor dem Marktstart an.')),
+    N('litsenzionnoe-voznagrazhdenie', 'лицензи+онное вознагражд+ение', 'n', 'лицензи+онные вознагражд+ения', 'C1', 'licensing fee, royalty', 'die Lizenzgebühr',
+      ex('Иллюстратор получает [[лицензи+онное вознагражд+ение]] с каждого коммерческого тиража.', 'The illustrator receives a licensing fee from each commercial print run.', 'Die Illustratorin erhält eine Lizenzgebühr für jede kommerzielle Auflage.')),
+    N('litsenzionnyy-dogovor', 'лицензи+онный догов+ор', 'm', 'лицензи+онные догов+оры', 'C1', 'licence agreement', 'der Lizenzvertrag',
+      ex('В [[лицензи+онном догов+оре]] прописаны границы использования шрифта.', 'The licence agreement specifies the limits on how the font may be used.', 'Im Lizenzvertrag sind die Nutzungsgrenzen der Schriftart festgelegt.')),
+    N('narushenie-patent', 'наруш+ение исключ+ительных пр+ав', 'n', 'наруш+ения', 'C1', 'infringement of exclusive rights', 'die Schutzrechtsverletzung',
+      ex('Ответчик получил претензию о [[наруш+ении исключ+ительных пр+ав]].', 'The defendant received a formal notice for infringement of exclusive rights.', 'Der Beklagte erhielt eine Abmahnung wegen Schutzrechtsverletzung.'))
+  ]);
+
+  reg('legal_criminal', [
+    N('prigovor', 'пригов+ор', 'm', 'пригов+оры', 'B2', 'verdict, sentence', 'das Urteil, Strafmaß',
+      ex('Защита обжаловала [[пригов+ор]] в апелляционном суде.', 'The defence appealed the verdict in the appellate court.', 'Die Verteidigung legte gegen das Urteil Berufung ein.')),
+    N('alibi', '+алиби', 'n', '', 'B2', 'alibi', 'das Alibi',
+      ex('Записи с проходной подтвердили [[+алиби]] подозреваемого.', 'Gatehouse logs confirmed the suspect’s alibi.', 'Die Zugangsdaten der Pforte bestätigten das Alibi des Verdächtigen.')),
+    N('apellyatsionnaya-zhaloba', 'апелляци+онная ж+алоба', 'f', 'апелляци+онные ж+алобы', 'C1', 'appeal brief, notice of appeal', 'die Berufungsschrift',
+      ex('Адвок+ат п+одал [[апелляци+онную ж+алобу]] в установленный законом срок.', 'The lawyer filed the notice of appeal within the statutory deadline.', 'Der Anwalt reichte die Berufungsschrift innerhalb der gesetzlichen Frist ein.')),
+    N('svidetel', 'свид+етель', 'm', 'свид+етели', 'B2', 'witness', 'der Zeuge',
+      ex('Ключевой [[свид+етель]] дал показания по видеосвязи.', 'The key witness gave testimony via video link.', 'Der Hauptzeuge sagte per Videoschalte aus.'))
+  ]);
+
+  reg('legal_corporate', [
+    N('audit-riskov', 'ауд+ит р+исков', 'm', 'ауд+иты р+исков', 'C1', 'risk audit', 'die Risikoprüfung',
+      ex('Ежегодный [[ауд+ит р+исков]] выявил пробелы в хранении паролей.', 'The annual risk audit uncovered gaps in password storage.', 'Die jährliche Risikoprüfung deckte Lücken bei der Passwortspeicherung auf.')),
+    N('sanktsii', 'с+анкции', 'pl', 'с+анкции', 'B2', 'sanctions, penalties', 'die Sanktionen',
+      ex('Проверка контрагентов помогает вовремя учесть действующие [[с+анкции]].', 'Screening business partners helps account for current sanctions in time.', 'Die Prüfung von Geschäftspartnern hilft, geltende Sanktionen rechtzeitig zu berücksichtigen.')),
+    N('korporativnyy-kodeks', 'корпорат+ивный к+одекс', 'm', 'корпорат+ивные к+одексы', 'C1', 'corporate code of conduct', 'der Unternehmenskodex',
+      ex('Правила предотвращения конфликта интересов закреплены в [[корпорат+ивном к+одексе]].', 'Rules for preventing conflicts of interest are laid down in the corporate code of conduct.', 'Regeln zur Vermeidung von Interessenkonflikten sind im Unternehmenskodex festgelegt.'))
+  ]);
+
+  reg('svc_hotel', [
+    N('registratsiya-zaezda', 'регистр+ация за+езда', 'f', '', 'B1', 'check-in', 'der Check-in',
+      ex('Онлайн-[[регистр+ация за+езда]] ускоряет получение ключа на стойке.', 'Online check-in speeds up picking up your key at the desk.', 'Der Online-Check-in beschleunigt die Schlüsselausgabe an der Rezeption.')),
+    N('kategoriya-nomera', 'катег+ория н+омера', 'f', 'катег+ории номер+ов', 'B2', 'room category', 'die Zimmerkategorie',
+      ex('При овербукинге гостю бесплатно повышают [[катег+орию н+омера]].', 'In case of overbooking, the guest gets a free room category upgrade.', 'Bei Überbuchung erhält der Gast ein kostenloses Upgrade der Zimmerkategorie.')),
+    N('seif-nomere', 'с+ейф в н+омере', 'm', 'с+ейфы', 'B1', 'in-room safe', 'der Zimmersafe',
+      ex('Паспорт и билеты удобнее всего оставить в [[с+ейфе в н+омере]].', 'It’s safest to leave your passport and tickets in the in-room safe.', 'Reisepass und Tickets lässt man am besten im Zimmersafe.')),
+    N('zalog-hotel', 'депоз+ит при засел+ении', 'm', 'депоз+иты', 'B2', 'check-in security deposit', 'die Kaution beim Check-in',
+      ex('При выезде [[депоз+ит при засел+ении]] автоматически возвращается на карту.', 'At check-out, the security deposit is automatically refunded to the card.', 'Beim Check-out wird die Kaution automatisch auf die Karte zurückgebucht.'))
+  ]);
+
+  reg('svc_gastro', [
+    N('allergen', 'аллерг+ен', 'm', 'аллерг+ены', 'B2', 'allergen', 'das Allergen',
+      ex('В карточке каждого блюда указаны основные [[аллерг+ены]].', 'The main allergens are listed on each dish’s card.', 'Auf jeder Speisekarte sind die wichtigsten Allergene angegeben.')),
+    N('sanitarnye-normy', 'санит+арные н+ормы', 'pl', 'санит+арные н+ормы', 'B2', 'hygiene / sanitary regulations', 'die Hygienevorschriften',
+      ex('На кухне строго соблюдаются [[санит+арные н+ормы]] хранения продуктов.', 'Hygiene regulations for food storage are strictly followed in the kitchen.', 'In der Küche werden die Hygienevorschriften zur Lagerung streng eingehalten.')),
+    N('banket', 'банк+ет', 'm', 'банк+еты', 'B1', 'banquet, catered function', 'das Bankett',
+      ex('Команда официантов заранее накрыла зал к вечернему [[банк+ету]].', 'The waitstaff set up the hall in advance for the evening banquet.', 'Das Serviceteam deckte den Saal vorab für das Abendbankett ein.')),
+    N('beznalichnyy-raschet', 'безнал+ичный расчёт', 'm', '', 'B1', 'cashless payment', 'die bargeldlose Zahlung',
+      ex('В зале принимается как наличный, так и [[безнал+ичный расчёт]].', 'Both cash and cashless payment are accepted in the dining room.', 'Im Restaurant werden sowohl Barzahlung als auch bargeldlose Zahlung akzeptiert.'))
+  ]);
+
+  reg('fin_marketing', [
+    N('prezentatsiya', 'презент+ация', 'f', 'презент+ации', 'B1', 'presentation, pitch deck', 'die Präsentation',
+      ex('Перед встречей проверьте, открывается ли [[презент+ация]] на проекторе.', 'Before the meeting, check whether the presentation opens on the projector.', 'Prüfen Sie vor dem Termin, ob sich die Präsentation auf dem Beamer öffnet.')),
+    N('lid', 'лид', 'm', 'л+иды', 'B2', 'sales lead', 'der Lead, Interessent',
+      ex('После вебинара отдел продаж получил сорок новых [[л+идов]].', 'After the webinar, sales received forty new leads.', 'Nach dem Webinar erhielt der Vertrieb vierzig neue Leads.')),
+    N('pozitsionirovanie', 'позицион+ирование', 'n', '', 'B2', 'brand positioning', 'die Positionierung',
+      ex('Обновлённое [[позицион+ирование]] помогло выделить продукт среди конкурентов.', 'Updated positioning helped set the product apart from competitors.', 'Die überarbeitete Positionierung hob das Produkt von der Konkurrenz ab.')),
+    N('tsennostnoe-predlozhenie', 'ц+енностное предлож+ение', 'n', 'ц+енностные предлож+ения', 'C1', 'value proposition', 'das Wertversprechen',
+      ex('На первом слайде важно чётко сформулировать [[ц+енностное предлож+ение]].', 'On the first slide, it’s important to state the value proposition clearly.', 'Auf der ersten Folie sollte das Wertversprechen klar formuliert werden.'))
+  ]);
+
+  reg('fin_hr', [
+    N('karyernyy-rost', 'карь+ерный рост', 'm', '', 'B1', 'career progression', 'der berufliche Aufstieg',
+      ex('Прозрачная система грейдов делает [[карь+ерный рост]] понятным для сотрудников.', 'A clear grading system makes career progression transparent to staff.', 'Ein klares Stufensystem macht den beruflichen Aufstieg für Mitarbeitende nachvollziehbar.')),
+    N('preemnik', 'пре+емник', 'm', 'пре+емники', 'B2', 'successor', 'der Nachfolger',
+      ex('Руководитель передал дела своему [[пре+емнику]] за месяц до перехода.', 'The manager handed over duties to his successor a month before moving on.', 'Der Leiter übergab die Aufgaben einen Monat vor seinem Wechsel an seinen Nachfolger.')),
+    N('stazher', 'стажёр', 'm', 'стажёры', 'B1', 'intern, trainee', 'der Praktikant',
+      ex('Наш [[стажёр]] подготовил аналитический обзор за две недели.', 'Our intern prepared the analytical overview in two weeks.', 'Unser Praktikant erstellte den Analyseüberblick in zwei Wochen.')),
+    N('vigovor', 'в+ыговор', 'm', 'в+ыговоры', 'B2', 'formal reprimand', 'die Abmahnung, Verwarnung',
+      ex('За систематическое нарушение сроков сотруднику объявили [[в+ыговор]].', 'For systematically missing deadlines, the employee was given a formal reprimand.', 'Wegen systematischer Terminverstöße erhielt der Mitarbeiter eine Verwarnung.'))
+  ]);
+
+  reg('med_clinical', [
+    N('napravlenie-vrach', 'направл+ение к специал+исту', 'n', 'направл+ения', 'B1', 'specialist referral', 'die Überweisung',
+      ex('Терапевт выписал [[направл+ение к специал+исту]] для точной диагностики.', 'The GP issued a specialist referral for an accurate diagnosis.', 'Die Hausärztin stellte eine Überweisung zum Facharzt aus.')),
+    N('triaj', 'медс+естринская сортир+овка', 'f', '', 'C1', 'triage (emergency assessment)', 'die Triage, Ersteinschätzung',
+      ex('В приёмном отделении [[медс+естринская сортир+овка]] определяет срочность помощи.', 'In the emergency ward, triage determines the urgency of care.', 'In der Notaufnahme legt die Triage die Dringlichkeit der Behandlung fest.')),
+    A('ambulatornyy', 'adj', 'амбулат+орный', 'B2', 'outpatient', 'ambulant',
+      ex('Небольшую операцию провели в [[амбулат+орном]] режиме без госпитализации.', 'The minor procedure was carried out on an outpatient basis without admission.', 'Der kleine Eingriff erfolgte ambulant ohne stationäre Aufnahme.')),
+    A('statsionarnyy', 'adj', 'стацион+арный', 'B2', 'inpatient', 'stationär',
+      ex('После травмы спортсмен три дня находился на [[стацион+арном]] лечении.', 'After the injury, the athlete stayed on inpatient treatment for three days.', 'Nach der Verletzung befand sich der Sportler drei Tage in stationärer Behandlung.'))
+  ]);
+
+  reg('bureau_tax', [
+    N('nalogovaya-inspektsiya', 'нал+оговая инсп+екция', 'f', 'нал+оговые инсп+екции', 'B1', 'tax office', 'das Finanzamt',
+      ex('[[Нал+оговая инсп+екция]] прислала уведомление о проверке вычетов.', 'The tax office sent a notice about reviewing the deductions.', 'Das Finanzamt schickte einen Bescheid zur Prüfung der Abzüge.')),
+    N('inn', 'ИНН', 'm', '', 'B2', 'taxpayer identification number', 'die Steuernummer',
+      ex('Укажите ваш [[ИНН]] в реквизитах договора с заказчиком.', 'Enter your taxpayer ID number in the contract details with the client.', 'Geben Sie Ihre Steuernummer in den Vertragsdaten für den Auftraggeber an.')),
+    N('vypiska-scheta', 'в+ыписка со счёта', 'f', 'в+ыписки со счёта', 'B1', 'bank statement', 'der Kontoauszug',
+      ex('Для бухгалтерии нужна свежая [[в+ыписка со счёта]] за прошлый месяц.', 'Accounting needs a fresh bank statement for last month.', 'Für die Buchhaltung wird ein aktueller Kontoauszug vom letzten Monat benötigt.')),
+    N('raschetnyy-listok', 'расчётный лист+ок', 'm', 'расчётные листк+и', 'B2', 'payslip', 'die Gehaltsabrechnung',
+      ex('В [[расчётном листк+е]] подробно видны начисления и налоги.', 'Earnings and taxes are shown in detail on the payslip.', 'Auf der Gehaltsabrechnung sind Vergütung und Abzüge im Detail aufgeführt.'))
+  ]);
+})();
+
+/* === Content expansion Wave 2 (2026-11-27): +95 RU Pro terms (8 thinnest Pro topics) === */
+(function () {
+  'use strict';
+  function ex(t, en, de) { return { t: t, en: en, de: de }; }
+  function N(id, t, gender, plural, level, en, de, e) {
+    var o = { id: 'ru-w2-pro-' + id, pos: 'noun', t: t, gender: gender, level: level, en: en, de: de, examples: [e] };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function V(id, t, aspect, level, forms, en, de, e) {
+    return { id: 'ru-w2-pro-' + id, pos: 'verb', t: t, aspect: aspect, level: level, forms: { praes: forms[0], praet: forms[1], perf: forms[2] }, en: en, de: de, examples: [e] };
+  }
+  function A(id, pos, t, level, en, de, e) {
+    return { id: 'ru-w2-pro-' + id, pos: pos, level: level, t: t, en: en, de: de, examples: [e] };
+  }
+  function reg(topic, items) { GT.register({ tab: 'it', topic: topic, items: items }); }
+
+  // 1. legal_contracts (+14 -> 22)
+  reg('legal_contracts', [
+    N('punkt-dogovora', 'пункт догов+ора', 'm', 'п+ункты догов+ора', 'B2', 'contract clause', 'die Vertragsklausel',
+      ex('Перечит+айте седьмой [[пункт догов+ора]] перед подписанием.', 'Re-read the seventh contract clause before signing.', 'Lesen Sie die siebte Vertragsklausel vor der Unterschrift erneut.')),
+    N('storona-sdelki', 'сторона догов+ора', 'f', 'ст+ороны догов+ора', 'B2', 'contracting party', 'die Vertragspartei',
+      ex('К+аждая [[сторона догов+ора]] получает один подписанный экземпляр.', 'Each contracting party receives one signed copy.', 'Jede Vertragspartei erhält ein unterschriebenes Exemplar.')),
+    N('rastorzhenie', 'расторж+ение догов+ора', 'n', '', 'C1', 'contract termination', 'die Vertragsauflösung',
+      ex('Уведомление о [[расторж+ении догов+ора]] направляется за тридцать дней.', 'Notice of contract termination is sent thirty days ahead.', 'Die Mitteilung zur Vertragsauflösung erfolgt dreißig Tage im Voraus.')),
+    N('fors-mazhor', 'форс-маж+ор', 'm', '', 'B2', 'force majeure', 'die höhere Gewalt',
+      ex('Стихийное бедствие считается обстоятельством [[форс-маж+ора]].', 'A natural disaster counts as force majeure.', 'Eine Naturkatastrophe gilt als höhere Gewalt.')),
+    N('dopolnitelnoe-soglashenie', 'дополн+ительное соглаш+ение', 'n', 'дополн+ительные соглаш+ения', 'B2', 'addendum, amendment', 'der Nachtrag, die Zusatzvereinbarung',
+      ex('Изменения цены оформили через [[дополн+ительное соглаш+ение]].', 'The price changes were formalised via an addendum.', 'Die Preisänderungen wurden per Zusatzvereinbarung festgehalten.')),
+    N('garantiynyy-srok', 'гарант+ийный срок', 'm', 'гарант+ийные ср+оки', 'B2', 'warranty period', 'die Gewährleistungsfrist',
+      ex('На промышленное оборудование действует [[гарант+ийный срок]] два г+ода.', 'Industrial equipment carries a two-year warranty period.', 'Für Industrieanlagen gilt eine zweijährige Gewährleistungsfrist.')),
+    N('mirovoe-soglashenie', 'миров+ое соглаш+ение', 'n', 'миров+ые соглаш+ения', 'C1', 'settlement agreement', 'der Vergleich',
+      ex('До начала суда стороны заключили [[миров+ое соглаш+ение]].', 'Before trial, the parties concluded a settlement agreement.', 'Vor Prozessbeginn schlossen die Parteien einen Vergleich.')),
+    N('konfidentsialnost', 'обяз+ательство о неразглаш+ении', 'n', 'обяз+ательства о неразглаш+ении', 'B2', 'non-disclosure undertaking', 'die Verschwiegenheitsverpflichtung',
+      ex('Перед обменом макетами партнёры подписали [[обяз+ательство о неразглаш+ении]].', 'Before exchanging mockups, the partners signed a non-disclosure undertaking.', 'Vor dem Austausch der Entwürfe unterzeichneten die Partner eine Verschwiegenheitsverpflichtung.')),
+    N('subpodryadchik', 'субподр+ядчик', 'm', 'субподр+ядчики', 'B2', 'subcontractor', 'der Subunternehmer',
+      ex('Привлечение [[субподр+ядчика]] требует согласия заказчика.', 'Engaging a subcontractor requires the client’s consent.', 'Die Beauftragung eines Subunternehmers bedarf der Zustimmung des Kunden.')),
+    N('predmet-dogovora', 'предм+ет догов+ора', 'm', '', 'B2', 'subject matter of a contract', 'der Vertragsgegenstand',
+      ex('В первой главе чётко сформулирован [[предм+ет догов+ора]].', 'The first chapter clearly defines the subject matter of the contract.', 'Im ersten Abschnitt ist der Vertragsgegenstand klar formuliert.')),
+    V('prolongirovat', 'пролонг+ировать', 'impf', 'C1', ['пролонг+ирую, пролонг+ируешь', 'пролонг+ировал', 'pf. пролонг+ировать'], 'to extend, roll over (a term/contract)', 'verlängern, prolongieren',
+      ex('Аренду офиса решили [[пролонг+ировать]] ещё на двенадцать м+есяцев.', 'They decided to roll over the office lease for another twelve months.', 'Man beschloss, den Büromietvertrag um weitere zwölf Monate zu verlängern.')),
+    V('obyazyvatsya', 'об+язываться', 'impf', 'C1', ['обяз+уюсь, обяз+уешься', 'об+язывался', 'pf. обяз+аться'], 'to undertake, commit legally', 'sich verpflichten',
+      ex('Поставщик [[обяз+уется]] заменить бракованную партию за свой счёт.', 'The supplier undertakes to replace the faulty batch at its own expense.', 'Der Lieferant verpflichtet sich, die fehlerhafte Charge auf eigene Kosten zu ersetzen.')),
+    A('yuridicheski-obyazyvayushchiy', 'adj', 'юрид+ически об+язывающий', 'C1', 'legally binding', 'rechtsverbindlich',
+      ex('Электронная подпись придаёт документу [[юрид+ически об+язывающую]] с+илу.', 'An electronic signature gives the document legally binding force.', 'Eine elektronische Signatur verleiht dem Dokument rechtsverbindliche Kraft.')),
+    A('deystvitelnyy', 'adj', 'неоспор+имый', 'C1', 'indisputable, legally sound', 'unumstößlich, unanfechtbar',
+      ex('Нотариально заверенный акт имеет [[неоспор+имую]] доказательную силу.', 'A notarised deed carries indisputable evidential weight.', 'Eine notarielle Urkunde hat unanfechtbare Beweiskraft.'))
+  ]);
+
+  // 2. ops_logistics (+12 -> 21)
+  reg('ops_logistics', [
+    N('gruzoperevozchik', 'перев+озчик', 'm', 'перев+озчики', 'B2', 'carrier, haulage firm', 'der Frachtführer, Spediteur',
+      ex('Логисты уже выбрали надёжного [[перев+озчика]] для северного маршрута.', 'Logistics staff already picked a reliable carrier for the northern route.', 'Die Logistik hat bereits einen zuverlässigen Spediteur für die Nordroute gewählt.')),
+    N('nakladnaya-tovarnaya', 'тов+арная накладн+ая', 'f', 'тов+арные накладн+ые', 'B2', 'consignment note, shipping manifest', 'der Frachtbrief, Lieferschein',
+      ex('Водитель предъявил [[тов+арную накладн+ую]] на въ+езде на склад.', 'The driver presented the shipping manifest at the warehouse gate.', 'Der Fahrer legte den Lieferschein am Lagertor vor.')),
+    N('rastamozhka', 'там+оженная оч+истка', 'f', '', 'C1', 'customs clearance', 'die Verzollung, Zollabfertigung',
+      ex('[[Там+оженная оч+истка]] груза заняла двое суток.', 'Customs clearance of the cargo took forty-eight hours.', 'Die Zollabfertigung der Fracht dauerte zwei Tage.')),
+    N('pallet', 'подд+он', 'm', 'подд+оны', 'B2', 'pallet', 'die Palette',
+      ex('На одном [[подд+оне]] помещается двадцать четыре стандартные коробки.', 'Twenty-four standard boxes fit onto a single pallet.', 'Auf eine Palette passen vierundzwanzig Standardkartons.')),
+    N('tsupochka-postavok', 'цепь пост+авок', 'f', 'ц+епи пост+авок', 'B2', 'supply network', 'das Liefernetzwerk',
+      ex('Сбой на заводе нарушил всю [[цепь пост+авок]].', 'A factory outage disrupted the entire supply network.', 'Ein Ausfall im Werk störte das gesamte Liefernetzwerk.')),
+    N('partiya-tovara', 'п+артия тов+ара', 'f', 'п+артии тов+аров', 'B2', 'consignment, batch of goods', 'die Warencharge, Sendung',
+      ex('Новая [[п+артия тов+ара]] поступит на распределительный центр в среду.', 'The new batch of goods reaches the distribution centre on Wednesday.', 'Die neue Warencharge trifft am Mittwoch im Verteilzentrum ein.')),
+    N('otgruzka', 'отгр+узка', 'f', 'отгр+узки', 'B2', 'dispatch, shipment release', 'der Versand, die Auslieferung',
+      ex('Утренняя [[отгр+узка]] начинается ровно в семь тридцать.', 'Morning dispatch begins at seven thirty sharp.', 'Der morgendliche Versand beginnt pünktlich um sieben Uhr dreißig.')),
+    N('khrupkiy-gruz', 'хр+упкий груз', 'm', '', 'B2', 'fragile cargo', 'zerbrechliche Fracht',
+      ex('Коробки с отметкой «[[хр+упкий груз]]» размещают наверху.', 'Boxes marked “fragile cargo” are placed on top.', 'Kartons mit der Kennzeichnung „zerbrechliche Fracht“ stehen ganz oben.')),
+    N('srok-khraneniya', 'срок реализ+ации', 'm', 'ср+оки реализ+ации', 'B2', 'sell-by period, shelf life', 'die Verkaufsfrist, Haltbarkeitsfrist',
+      ex('Складская программа отслеживает [[срок реализ+ации]] каждой партии.', 'Warehouse software tracks the sell-by period of every batch.', 'Die Lagersoftware überwacht die Verkaufsfrist jeder Charge.')),
+    N('vozvrat-tovara', 'возвр+атная логистика', 'f', '', 'C1', 'reverse logistics, returns handling', 'die Retourenabwicklung',
+      ex('Отдел [[возвр+атной логистики]] проверяет сохранность возвращённой техники.', 'Returns handling checks the condition of returned equipment.', 'Die Retourenabwicklung prüft den Zustand zurückgesandter Geräte.')),
+    V('upakovyvat', 'упак+овывать', 'impf', 'B1', ['упак+овываю, упак+овываешь', 'упак+овывал', 'pf. упак+овать'], 'to pack, wrap', 'verpacken',
+      ex('Стекло нужно [[упак+овывать]] в плотный пузырчатый мат+ериал.', 'Glass needs to be packed in thick bubble wrap.', 'Glas muss in dicke Luftpolsterfolie verpackt werden.')),
+    V('otslezhivat', 'отсл+еживать', 'impf', 'B2', ['отсл+еживаю, отсл+еживаешь', 'отсл+еживал', 'pf. отслед+ить'], 'to track (a parcel, fleet)', 'verfolgen, tracken',
+      ex('Клиент может [[отсл+еживать]] посылку по трек-номеру в реальном времени.', 'The client can track the parcel via tracking number in real time.', 'Der Kunde kann das Paket per Sendungsnummer in Echtzeit verfolgen.'))
+  ]);
+
+  // 3. bureau_offices (+12 -> 22)
+  reg('bureau_offices', [
+    N('vedomstvo', 'инст+анция', 'f', 'инст+анции', 'C1', 'official authority / tier of appeal', 'die Instanz, Behörde',
+      ex('Вышестоящая [[инст+анция]] пересмотрела прежнее решение за неделю.', 'The higher authority reviewed the prior ruling within a week.', 'Die übergeordnete Instanz überprüfte den früheren Bescheid binnen einer Woche.')),
+    N('vid-na-zhitelstvo', 'разреш+ение на прожив+ание', 'n', 'разреш+ения на прожив+ание', 'B2', 'residence authorisation', 'die Aufenthaltsgenehmigung',
+      ex('Заявление на [[разреш+ение на прожив+ание]] подаётся за два м+есяца.', 'The residence authorisation application is filed two months ahead.', 'Der Antrag auf Aufenthaltsgenehmigung wird zwei Monate vorher gestellt.')),
+    N('poshlina', 'госпошл+ина', 'f', 'госпошл+ины', 'B2', 'administrative / state fee', 'die Verwaltungsgebühr',
+      ex('Квитанция об оплате [[госпошл+ины]] прикладывается к анкете.', 'The receipt for paying the state fee is attached to the form.', 'Der Zahlungsbeleg über die Verwaltungsgebühr wird dem Formular beigelegt.')),
+    N('zapis-na-priem', 'предвар+ительная з+апись', 'f', '', 'B1', 'prior appointment booking', 'die Terminvereinbarung',
+      ex('Приём в окне паспортного стола идёт только по [[предвар+ительной з+аписи]].', 'Passport desk visits operate strictly by prior appointment.', 'Termine in der Passstelle gibt es nur nach vorheriger Vereinbarung.')),
+    N('srok-deystviya', 'срок д+ействия', 'm', 'ср+оки д+ействия', 'B2', 'validity period', 'die Gültigkeitsdauer',
+      ex('Проверьте [[срок д+ействия]] загранпаспорта перед покупкой билетов.', 'Check the passport’s validity period before buying tickets.', 'Prüfen Sie vor dem Ticketkauf die Gültigkeitsdauer des Reisepasses.')),
+    N('reshenie-otkaz', 'письм+енный отк+аз', 'm', 'письм+енные отк+азы', 'B2', 'written refusal / rejection notice', 'der Ablehnungsbescheid',
+      ex('На [[письм+енный отк+аз]] можно подать возражение в течение месяца.', 'You can file an objection against a written refusal within one month.', 'Gegen einen Ablehnungsbescheid kann binnen eines Monats Widerspruch eingelegt werden.')),
+    N('khodataystvo', 'ходат+айство', 'n', 'ходат+айства', 'C1', 'formal petition / motion', 'der Antrag, das Gesuch',
+      ex('Работодатель приложил [[ходат+айство]] об ускоренном рассмотрении дела.', 'The employer attached a petition for expedited review.', 'Der Arbeitgeber fügte ein Gesuch auf beschleunigte Bearbeitung bei.')),
+    N('konsultatsiya-okno', 'спр+авочное окн+о', 'n', 'спр+авочные +окна', 'B1', 'information desk / counter', 'der Informationsschalter',
+      ex('На входе работает [[спр+авочное окн+о]], где подсказывают номер кабинета.', 'There is an information counter at the entrance giving room numbers.', 'Am Eingang hilft der Informationsschalter bei der Raumnummer.')),
+    N('podvedomstvennost', 'юрисд+икция', 'f', '', 'C1', 'jurisdiction', 'die Zuständigkeit',
+      ex('Этот спор относится к [[юрисд+икции]] городского административного суда.', 'This dispute falls under the city administrative court’s jurisdiction.', 'Dieser Streit fällt in die Zuständigkeit des Verwaltungsgerichts.')),
+    N('elektronnyy-portal', 'госуд+арственный порт+ал', 'm', 'госуд+арственные порт+алы', 'B2', 'public e-services portal', 'das Bürgerportal',
+      ex('Справку о доходах теперь удобно скачать через [[госуд+арственный порт+ал]].', 'Income statements can now easily be downloaded via the citizen portal.', 'Einkommensbescheinigungen lassen sich bequem über das Bürgerportal abrufen.')),
+    V('udostoveryat', 'удостовер+ять', 'impf', 'B2', ['удостовер+яю, удостовер+яешь', 'удостовер+ял', 'pf. удостовер+ить'], 'to certify, verify identity/copy', 'beglaubigen, bescheinigen',
+      ex('Чиновник уполномочен [[удостовер+ять]] подлинность подписи гражданина.', 'The official is authorised to certify the authenticity of a citizen’s signature.', 'Der Beamte ist befugt, die Echtheit einer Unterschrift zu beglaubigen.')),
+    V('obzhalovat', 'обж+аловать', 'pf', 'C1', ['обж+алую, обж+алуешь', 'обж+аловал', 'impf. обж+аловать'], 'to appeal (a ruling)', 'anfechten, Beschwerde einlegen',
+      ex('Заявитель вправе [[обж+аловать]] постановление в вышестоящей инстанции.', 'The applicant has the right to appeal the ruling to a higher body.', 'Der Antragsteller darf den Bescheid bei der nächsthöheren Stelle anfechten.'))
+  ]);
+
+  // 4. svc_gastro (+12 -> 22)
+  reg('svc_gastro', [
+    N('zakaz-na-vynos', 'зак+аз навынос', 'm', 'зак+азы навынос', 'B1', 'takeaway order', 'die Bestellung zum Mitnehmen',
+      ex('Стойка для [[зак+азов навынос]] расположена слева от кассы.', 'The counter for takeaway orders sits to the left of the till.', 'Die Theke für Bestellungen zum Mitnehmen liegt links neben der Kasse.')),
+    N('sezonna-karta', 'сез+онное мен+ю', 'n', '', 'B2', 'seasonal menu', 'die Saisonkarte',
+      ex('Весной ресторан полностью обновляет [[сез+онное мен+ю]].', 'In spring the restaurant completely refreshes its seasonal menu.', 'Im Frühjahr erneuert das Restaurant seine Saisonkarte vollständig.')),
+    N('napitki-karta', 'в+инная к+арта', 'f', 'в+инные к+арты', 'B2', 'wine list', 'die Weinkarte',
+      ex('Сомелье помог гостям подобрать напиток по [[в+инной к+арте]].', 'The sommelier helped guests choose from the wine list.', 'Der Sommelier beriet die Gäste anhand der Weinkarte.')),
+    N('dieticheskiy-zapros', 'особ+ые тр+ебования к пит+анию', 'n', '', 'B2', 'dietary requirements', 'die Ernährungsbesonderheiten',
+      ex('Просим гостей указывать [[особ+ые тр+ебования к пит+анию]] при бронировании.', 'We ask guests to note dietary requirements when booking.', 'Bitte geben Sie Ernährungsbesonderheiten bereits bei der Buchung an.')),
+    N('komanda-zala', 'обсл+уживающий персон+ал', 'm', '', 'B2', 'waiting / service staff', 'das Servicepersonal',
+      ex('Перед банкетом [[обсл+уживающий персон+ал]] проходит инструктаж по подаче.', 'Before the banquet, service staff receive a briefing on plating and flow.', 'Vor dem Bankett erhält das Servicepersonal eine Einweisung.')),
+    N('zakupka-produktov', 'свеж+айшие прод+укты', 'pl', '', 'B1', 'fresh produce, ingredients', 'frische Zutaten',
+      ex('Шеф-повар каждое утро принимает [[свеж+айшие прод+укты]] с рынка.', 'Every morning the chef receives fresh produce from the market.', 'Der Küchenchef nimmt jeden Morgen frische Zutaten vom Markt entgegen.')),
+    N('chayovye', 'чаев+ые', 'pl', '', 'B1', 'tip, gratuity', 'das Trinkgeld',
+      ex('[[Чаев+ые]] можно добавить прямо на экране терминала картой.', 'A tip can be added directly on the card terminal screen.', 'Trinkgeld kann direkt am Kartenterminal hinzugefügt werden.')),
+    N('razdelnyy-schet', 'разд+ельный счёт', 'm', 'разд+ельные счет+а', 'B1', 'split bill', 'getrennte Rechnung',
+      ex('Компания попросила официанта принести [[разд+ельный счёт]] на четверых.', 'The group asked the waiter to bring split bills for four.', 'Die Gruppe bat den Kellner um getrennte Rechnungen für vier Personen.')),
+    N('vremya-ozhidaniya-bluda', 'вр+емя под+ачи', 'n', '', 'B2', 'serving time, kitchen wait time', 'die Wartezeit auf das Essen',
+      ex('При полной посадке предупреждайте гостей о [[вр+емени под+ачи]].', 'When the dining room is full, warn guests about the kitchen wait time.', 'Bei vollem Haus sollte man Gäste über die Wartezeit informieren.')),
+    N('sanitarnaya-knizhka', 'медиц+инская кн+ижка', 'f', 'медиц+инские кн+ижки', 'B2', 'food-handler health certificate', 'das Gesundheitszeugnis',
+      ex('Каждый повар обязан иметь действующую [[медиц+инскую кн+ижку]].', 'Every cook must hold a valid food-handler health certificate.', 'Jeder Koch muss ein gültiges Gesundheitszeugnis besitzen.')),
+    V('servirovat', 'сервиров+ать', 'impf', 'B2', ['сервир+ую, сервир+уешь', 'сервиров+ал', 'pf. отсервиров+ать'], 'to lay/set the table; plate/serve', 'den Tisch decken; anrichten',
+      ex('Столы в банкетном зале начинают [[сервиров+ать]] за два ч+аса до гостей.', 'Staff begin laying tables in the banquet hall two hours before guests arrive.', 'Die Tische im Bankettsaal werden zwei Stunden vor Eintreffen der Gäste gedeckt.')),
+    V('predlagat-alternativu', 'коррект+ировать', 'impf', 'B2', ['коррект+ирую, коррект+ируешь', 'коррект+ировал', 'pf. скоррект+ировать'], 'to adjust (a dish/recipe)', 'anpassen, korrigieren',
+      ex('По запросу кухня может [[коррект+ировать]] соус и убрать лишние специи.', 'On request the kitchen can adjust the sauce and omit extra spices.', 'Auf Wunsch kann die Küche die Soße anpassen und scharfe Gewürze weglassen.'))
+  ]);
+
+  // 5. bureau_docs (+11 -> 22)
+  reg('bureau_docs', [
+    N('zakaznoe-pismo', 'ц+енное письм+о', 'n', 'ц+енные п+исьма', 'B2', 'insured / registered post with declared value', 'der Wertbrief',
+      ex('Оригинал контракта отправили [[ц+енным письм+ом]] с описью вложения.', 'The original contract was sent by insured registered post with inventory.', 'Das Original des Vertrags wurde per Wertbrief mit Inhaltsverzeichnis verschickt.')),
+    N('doverennost-doc', 'нотари+альная дов+еренность', 'f', 'нотари+альные дов+еренности', 'B2', 'notarised power of attorney', 'die notarielle Vollmacht',
+      ex('Для получения ключей представителю нужна [[нотари+альная дов+еренность]].', 'To collect the keys, a representative needs notarised power of attorney.', 'Zur Schlüsselabholung braucht ein Vertreter eine notarielle Vollmacht.')),
+    N('zaverennaya-kopiya', 'дублик+ат докум+ента', 'm', 'дублик+аты докум+ентов', 'B2', 'official duplicate document', 'das Duplikat',
+      ex('При утрате оригинала архив выдал [[дублик+ат докум+ента]].', 'When the original was lost, the archive issued an official duplicate.', 'Bei Verlust des Originals stellte das Archiv ein Duplikat aus.')),
+    N('zaverennyy-perevod', 'нотари+альное удостовер+ение', 'n', '', 'C1', 'notarial certification / authentication', 'die notarielle Beglaubigung',
+      ex('Перевод подаётся после [[нотари+ального удостовер+ения]] подписи переводчика.', 'The translation is filed after notarial certification of the translator’s signature.', 'Die Übersetzung wird nach notarieller Beglaubigung der Unterschrift eingereicht.')),
+    N('akt-priema', 'проток+ол перед+ачи', 'm', 'проток+олы перед+ачи', 'B2', 'handover record / minutes', 'das Übergabeprotokoll',
+      ex('Показания счётчиков зафиксировали в [[проток+оле перед+ачи]].', 'Meter readings were recorded in the handover minutes.', 'Die Zählerstände wurden im Protokoll festgehalten.')),
+    N('srok-khraneniya-dok', 'срок хран+ения докум+ентов', 'm', 'ср+оки хран+ения докум+ентов', 'C1', 'statutory retention period', 'die Aufbewahrungsfrist',
+      ex('Бухгалтерские счета подлежат [[ср+оку хран+ения]] в десять лет.', 'Accounting invoices are subject to a ten-year statutory retention period.', 'Buchhaltungsbelege unterliegen einer zehnjährigen Aufbewahrungsfrist.')),
+    N('pretenzionnoe-pismo', 'досуд+ебная прет+ензия', 'f', 'досуд+ебные прет+ензии', 'C1', 'formal dunning / demand letter', 'das Mahnschreiben',
+      ex('После двух напоминаний юристы направили [[досуд+ебную прет+ензию]].', 'After two reminders, legal counsel sent a formal dunning letter.', 'Nach zwei Erinnerungen verschickte die Rechtsabteilung ein Mahnschreiben.')),
+    N('vkhodyashchiy-nomer', 'вход+ящий н+омер', 'm', 'вход+ящие номер+а', 'B2', 'incoming registration / docket number', 'die Eingangsnummer',
+      ex('В переписке с ведомством обязательно указывайте [[вход+ящий н+омер]] обращения.', 'Always quote the incoming registration number when writing to the agency.', 'Geben Sie im Schriftverkehr mit dem Amt stets die Eingangsnummer an.')),
+    N('oprosnyy-list', 'офици+альный запр+ос', 'm', 'офици+альные запр+осы', 'B2', 'official written enquiry', 'die amtliche Anfrage',
+      ex('Ответ на [[офици+альный запр+ос]] готовится в десятидневный срок.', 'A reply to an official written enquiry is prepared within ten days.', 'Die Antwort auf eine amtliche Anfrage wird binnen zehn Tagen erstellt.')),
+    V('podshivat', 'приобщ+ать к д+елу', 'impf', 'C1', ['приобщ+аю, приобщ+аешь', 'приобщ+ал', 'pf. приобщ+ить'], 'to place on file', 'zu den Akten nehmen',
+      ex('Все приложенные справки сотрудники обязаны [[приобщ+ать к д+елу]].', 'Staff must place all attached certificates on file.', 'Mitarbeitende müssen alle beigefügten Bescheinigungen zu den Akten nehmen.')),
+    A('deystvuyushchiy-obrazets', 'adj', 'установл+енного образц+а', 'C1', 'in prescribed official format', 'vorgeschriebener Form',
+      ex('Справка должна быть оформлена на бланке [[установл+енного образц+а]].', 'The certificate must be issued on a form in the prescribed official format.', 'Die Bescheinigung muss auf einem Vordruck in vorgeschriebener Form ausgestellt sein.'))
+  ]);
+
+  // 6. legal_criminal (+11 -> 22)
+  reg('legal_criminal', [
+    N('sledovatel', 'сл+едователь', 'm', 'сл+едователи', 'B2', 'investigator, detective', 'der Ermittler',
+      ex('[[Сл+едователь]] опросил трёх очевидцев происшествия.', 'The investigator questioned three eyewitnesses to the incident.', 'Der Ermittler befragte drei Augenzeugen des Vorfalls.')),
+    N('zashchitnik', 'адвок+ат по угол+овным дел+ам', 'm', 'адвок+аты по угол+овным дел+ам', 'B2', 'criminal defence counsel', 'der Strafverteidiger',
+      ex('[[Адвок+ат по угол+овным дел+ам]] заявил ходатайство о приобщении записей.', 'Defence counsel moved to admit the recordings into evidence.', 'Der Strafverteidiger beantragte die Aufnahme der Aufzeichnungen als Beweismittel.')),
+    N('uslovnyy-srok', 'усл+овный срок', 'm', 'усл+овные ср+оки', 'C1', 'suspended sentence', 'die Bewährungsstrafe',
+      ex('С учётом смягчающих обстоятельств суд назначил [[усл+овный срок]].', 'Given mitigating circumstances, the court imposed a suspended sentence.', 'Unter Berücksichtigung mildernder Umstände verhängte das Gericht eine Bewährungsstrafe.')),
+    N('soderzhanie-pod-strazhey', 'заключ+ение под стр+ажу', 'n', '', 'C1', 'pre-trial detention, remand', 'die Untersuchungshaft',
+      ex('Мера в виде [[заключ+ения под стр+ажу]] применяется при риске скрыться.', 'Pre-trial detention is ordered when there is a flight risk.', 'Untersuchungshaft wird bei Fluchtgefahr angeordnet.')),
+    N('ulika', 'ул+ика', 'f', 'ул+ики', 'B2', 'piece of physical evidence', 'das Indiz, Beweisstück',
+      ex('Криминалисты изъ+яли ключевую [[ул+ику]] для лабораторной экспертизы.', 'Forensics seized a key piece of evidence for lab analysis.', 'Die Spurensicherung beschlagnahmte ein wichtiges Beweisstück zur Laboranalyse.')),
+    N('sudimost', 'суд+имость', 'f', 'суд+имости', 'B2', 'criminal record / conviction', 'die Vorstrafe',
+      ex('Для работы в школе требуется справка об отсутствии [[суд+имости]].', 'Working at a school requires a certificate showing no criminal record.', 'Für eine Stelle an einer Schule ist ein Führungszeugnis ohne Vorstrafen nötig.')),
+    N('zalog-sud', 'освобожд+ение под зал+ог', 'n', '', 'C1', 'release on bail', 'die Freilassung gegen Kaution',
+      ex('Защита ходатайствовала об [[освобожд+ении под зал+ог]].', 'The defence applied for release on bail.', 'Die Verteidigung beantragte die Freilassung gegen Kaution.')),
+    N('poterpevshiy', 'потерп+евший', 'm', 'потерп+евшие', 'B2', 'injured party, victim', 'der Geschädigte',
+      ex('В ходе заседания суд выслушал заявления [[потерп+евших]].', 'During the hearing, the court heard statements from the injured parties.', 'In der Verhandlung hörte das Gericht die Aussagen der Geschädigten.')),
+    N('obyvsk', '+обыск', 'm', '+обыски', 'B2', 'search (of premises, by warrant)', 'die Durchsuchung',
+      ex('[[+Обыск]] офиса прошёл строго на основании судебного ордера.', 'The office search took place strictly under a court warrant.', 'Die Durchsuchung des Büros erfolgte streng aufgrund eines richterlichen Beschlusses.')),
+    V('rassledovat', 'рассл+едовать', 'impf', 'B2', ['рассл+едую, рассл+едуешь', 'рассл+едовал', 'pf. рассл+едовать'], 'to investigate (a crime/case)', 'ermitteln, untersuchen',
+      ex('Специальная комиссия продолжает [[рассл+едовать]] финансовые махинации.', 'A special committee continues to investigate the financial irregularities.', 'Eine Sonderkommission untersucht weiterhin die finanziellen Unregelmäßigkeiten.')),
+    V('opravdat', 'опр+авдывать', 'impf', 'B2', ['опр+авдываю, опр+авдываешь', 'опр+авдывал', 'pf. оправд+ать'], 'to acquit (in court)', 'freisprechen',
+      ex('Присяжные могут [[оправд+ать]] подсудимого при недостатке доказательств.', 'The jury may acquit the defendant when proof is insufficient.', 'Die Geschworenen können den Angeklagten mangels Beweisen freisprechen.'))
+  ]);
+
+  // 7. legal_ip (+11 -> 22)
+  reg('legal_ip', [
+    N('soavtorstvo', 'со+авторство', 'n', '', 'B2', 'co-authorship', 'die Miturheberschaft',
+      ex('Доли [[со+авторства]] исследователи закрепили до публикации статьи.', 'Researchers recorded co-authorship shares before publishing the paper.', 'Die Anteile an der Miturheberschaft hielten die Forschenden vorab fest.')),
+    N('pretenziya-ip', 'тр+ебование о прекращ+ении наруш+ения', 'n', '', 'C1', 'cease-and-desist demand', 'die Unterlassungsaufforderung',
+      ex('Правообладатель направил [[тр+ебование о прекращ+ении наруш+ения]] в издательство.', 'The rights holder sent a cease-and-desist demand to the publisher.', 'Der Rechteinhaber schickte eine Unterlassungsaufforderung an den Verlag.')),
+    N('kontrafakt', 'контраф+актная прод+укция', 'f', '', 'C1', 'counterfeit goods', 'gefälschte Ware, Produktpiraterie',
+      ex('Таможня задержала партию [[контраф+актной прод+укции]] без маркировки.', 'Customs intercepted a batch of counterfeit goods lacking official marks.', 'Der Zoll hielt eine Sendung gefälschter Ware ohne Kennzeichnung zurück.')),
+    N('isklyuchitelnaya-litsenziya', 'исключ+ительная лиц+ензия', 'f', 'исключ+ительные лиц+ензии', 'C1', 'exclusive licence', 'die ausschließliche Lizenz',
+      ex('Издатель получил [[исключ+ительную лиц+ензию]] на перевод книги.', 'The publisher acquired an exclusive licence to translate the book.', 'Der Verlag erwarb eine ausschließliche Lizenz für die Übersetzung.')),
+    N('avtorskoe-otchislenie', '+авторский гонор+ар', 'm', '+авторские гонор+ары', 'B2', 'royalty payment', 'das Autorenhonorar',
+      ex('Издательство выплачивает [[+авторский гонор+ар]] раз в полгода.', 'The publisher pays out royalty payments twice a year.', 'Der Verlag zahlt das Autorenhonorar halbjährlich aus.')),
+    N('tsitirovanie', 'правом+ерное цит+ирование', 'n', '', 'C1', 'fair quotation / citation', 'das Zitatrecht',
+      ex('Короткая выдержка со ссылкой подпадает под [[правом+ерное цит+ирование]].', 'A brief excerpt with attribution falls under fair quotation.', 'Ein kurzes Zitat mit Quellenangabe fällt unter das Zitatrecht.')),
+    N('otkrytaya-litsenziya', 'откр+ытая лиц+ензия', 'f', 'откр+ытые лиц+ензии', 'B2', 'open-source / open licence', 'die freie Lizenz',
+      ex('Библиотека публикуется под [[откр+ытой лиц+ензией]] с указанием автора.', 'The library is published under an open licence requiring attribution.', 'Die Bibliothek erscheint unter einer freien Lizenz mit Namensnennung.')),
+    N('registratsiya-patenta', 'пат+ентный п+оиск', 'm', 'пат+ентные п+оиски', 'C1', 'patent search, prior-art search', 'die Patentrecherche',
+      ex('[[Пат+ентный п+оиск]] проводят до подачи заявки в ведомство.', 'A patent search is carried out before filing an application.', 'Eine Patentrecherche erfolgt vor der Anmeldung beim Amt.')),
+    V('zashchishchat-prava', 'патентов+ать', 'impf', 'B2', ['патент+ую, патент+уешь', 'патентов+ал', 'pf. запатентов+ать'], 'to patent', 'patentieren lassen',
+      ex('Стартап решил [[патентов+ать]] ключевой алгоритм сжатия данных.', 'The startup decided to patent its core compression algorithm.', 'Das Start-up beschloss, den zentralen Kompressionsalgorithmus patentieren zu lassen.')),
+    V('narushat-avtorskoe', 'присв+аивать', 'impf', 'C1', ['присв+аиваю, присв+аиваешь', 'присв+аивал', 'pf. присв+оить'], 'to misappropriate, claim credit falsely', 'sich aneignen',
+      ex('Недопустимо [[присв+аивать]] чужие иллюстрации без разрешения.', 'It is unacceptable to misappropriate someone else’s artwork without permission.', 'Es ist unzulässig, sich fremde Illustrationen ohne Erlaubnis anzueignen.')),
+    A('okhranyaemyy-zakonom', 'adj', 'проприет+арный', 'C1', 'proprietary, closed-source', 'proprietär',
+      ex('Не загружайте [[проприет+арный]] код компании в публичные сервисы.', 'Do not upload the company’s proprietary code to public tools.', 'Laden Sie keinen proprietären Firmencode in öffentliche Dienste hoch.'))
+  ]);
+
+  // 8. svc_hotel (+12 -> 19)
+  reg('svc_hotel', [
+    N('overbuking', 'избыт+очное брон+ирование', 'n', '', 'B2', 'overbooking', 'die Überbuchung',
+      ex('При [[избыт+очном брон+ировании]] администратор переселяет гостя в партнерский отель.', 'During overbooking, reception moves the guest to a partner hotel.', 'Bei einer Überbuchung bringt der Empfang den Gast in einem Partnerhotel unter.')),
+    N('kompliment-otelya', 'беспл+атное повыш+ение катег+ории', 'n', '', 'B2', 'complimentary room upgrade', 'das kostenlose Zimmer-Upgrade',
+      ex('В честь юбилея гостям предложили [[беспл+атное повыш+ение катег+ории]].', 'To mark their anniversary, guests received a complimentary upgrade.', 'Zum Jubiläum erhielten die Gäste ein kostenloses Zimmer-Upgrade.')),
+    N('turisticheskiy-sbor', 'кур+ортный сбор', 'm', 'кур+ортные сб+оры', 'B1', 'tourist / city tax', 'die Kurtaxe',
+      ex('Городской [[кур+ортный сбор]] оплачивается отдельно при выезде.', 'The city tourist tax is settled separately on departure.', 'Die städtische Kurtaxe wird bei Abreise separat bezahlt.')),
+    N('otmena-broni-shtraf', 'штраф за отм+ену бр+они', 'm', 'штр+афы за отм+ену', 'B2', 'cancellation fee', 'die Stornogebühr',
+      ex('При отмене менее чем за сутки взимается [[штраф за отм+ену бр+они]].', 'Cancelling under 24 hours ahead incurs a cancellation fee.', 'Bei Stornierung unter 24 Stunden fällt eine Stornogebühr an.')),
+    N('kamera-khraneniya-hotel', 'к+омната хран+ения багаж+а', 'f', '', 'B1', 'luggage storage room', 'die Gepäckaufbewahrung',
+      ex('До заселения чемоданы можно оставить в [[к+омнате хран+ения багаж+а]].', 'Before check-in, suitcases can stay in the luggage storage room.', 'Vor dem Einchecken können Koffer in der Gepäckaufbewahrung bleiben.')),
+    N('peredacha-smeny', 'перед+ача см+ены', 'f', '', 'B2', 'shift handover', 'die Schichtübergabe',
+      ex('На [[перед+аче см+ены]] ночной портье отмечает все ранние выезды.', 'At shift handover, the night clerk notes all early departures.', 'Bei der Schichtübergabe vermerkt der Nachtportier alle Frühabreisen.')),
+    N('rannee-zaselenie', 'р+анний за+езд', 'm', 'р+анние за+езды', 'B1', 'early check-in', 'der frühe Check-in',
+      ex('[[Р+анний за+езд]] с девяти утра возможен при наличии свободных номеров.', 'Early check-in from 9 a.m. is available subject to room readiness.', 'Früher Check-in ab neun Uhr ist je nach Verfügbarkeit möglich.')),
+    N('klyuch-karta', 'электронная к+арта-кл+юч', 'f', 'электронные к+арты-ключ+и', 'B1', 'keycard', 'die Schlüsselkarte',
+      ex('Если [[электронная к+арта-кл+юч]] размагнитилась, мы заменим её на стойке.', 'If a keycard gets demagnetised, we replace it at the front desk.', 'Wenn eine Schlüsselkarte entmagnetisiert ist, tauschen wir sie am Empfang.')),
+    N('minibar', 'мини-б+ар', 'm', 'мини-б+ары', 'B1', 'minibar', 'die Minibar',
+      ex('Сотрудники пополняют [[мини-б+ар]] во время дневной уборки.', 'Staff restock the minibar during daytime housekeeping.', 'Mitarbeitende füllen die Minibar bei der täglichen Reinigung auf.')),
+    N('zavtrak-shvedskiy-stol', 'шв+едский ст+ол', 'm', '', 'B1', 'breakfast buffet', 'das Frühstücksbuffet',
+      ex('Завтрак «[[шв+едский ст+ол]]» сервируют в зимнем саду с шести тридцати.', 'The breakfast buffet is served in the conservatory from 6:30.', 'Das Frühstücksbuffet wird ab sechs Uhr dreißig im Wintergarten serviert.')),
+    V('vyselyatsya', 'высел+яться', 'impf', 'B1', ['высел+яюсь, высел+яешься', 'высел+ялся', 'pf. в+ыселиться'], 'to check out (of a hotel)', 'auschecken',
+      ex('Гости обычно начинают [[высел+яться]] после десяти утра.', 'Guests usually begin checking out after ten in the morning.', 'Gäste checken gewöhnlich ab zehn Uhr morgens aus.')),
+    A('svobodnyy-nomer', 'adj', 'звукоизол+ированный', 'B2', 'soundproofed', 'schallisoliert',
+      ex('Окна номеров со стороны трамвая полностью [[звукоизол+ированы]].', 'Rooms facing the tramway have fully soundproofed windows.', 'Die Zimmer zur Straßenbahn hin sind vollständig schallisoliert.'))
+  ]);
+})();

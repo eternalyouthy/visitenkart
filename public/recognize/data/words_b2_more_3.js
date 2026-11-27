@@ -598,3 +598,287 @@ GT.register({
     }
   ]
 });
+
+/* === Content expansion 2026-11-27 (DE B2 words + C1 Evidence & Nuance) === */
+(function () {
+  'use strict';
+  function ex(de, ru, en) { return { de: de, ru: ru, en: en }; }
+  function N(id, article, de, plural, ru, en, e, lvl) {
+    return { id: (lvl === 'C1' ? 'c1-x27-' : 'b2-x27-') + id, pos: 'noun', level: lvl || 'B2', de: de, article: article, plural: plural || undefined, ru: ru, en: en, examples: [e] };
+  }
+  function V(id, de, forms, ru, en, e, lvl) {
+    return { id: (lvl === 'C1' ? 'c1-x27-' : 'b2-x27-') + id, pos: 'verb', level: lvl || 'B2', de: de, forms: { praes: forms[0], praet: forms[1], perf: forms[2] }, ru: ru, en: en, examples: [e] };
+  }
+  function A(id, pos, de, ru, en, e, lvl) {
+    return { id: (lvl === 'C1' ? 'c1-x27-' : 'b2-x27-') + id, pos: pos, level: lvl || 'B2', de: de, ru: ru, en: en, examples: [e] };
+  }
+  function reg(topic, items) { GT.register({ tab: 'words', topic: topic, items: items }); }
+
+  reg('b2_psyche', [
+    N('herausforderung', 'die', 'Herausforderung', 'die Herausforderungen', 'вызов, сложная задача', 'challenge',
+      ex('Der Wechsel in eine neue Abteilung war eine große [[Herausforderung]] für ihn.', 'Переход в новый отдел стал для него большим вызовом.', 'Moving to a new department was a major challenge for him.')),
+    A('selbstbewusst', 'adj', 'selbstbewusst', 'уверенный в себе', 'self-confident, self-assured',
+      ex('Nach dem Training trat sie im Gespräch deutlich [[selbstbewusster]] auf.', 'После тренинга она держалась в разговоре заметно увереннее.', 'After the coaching session, she came across as much more self-confident in interviews.')),
+    A('empathisch', 'adj', 'empathisch', 'эмпатичный, чуткий', 'empathetic',
+      ex('Gerade in Konfliktsituationen hilft eine [[empathische]] Haltung weiter.', 'Именно в конфликтных ситуациях очень помогает эмпатичный подход.', 'Especially in conflict situations, an empathetic attitude helps move things forward.')),
+    A('verstaendnisvoll', 'adj', 'verständnisvoll', 'понимающий, участливый', 'understanding, sympathetic',
+      ex('Meine Kollegin reagierte sehr [[verständnisvoll]], als ich den Termin verschieben musste.', 'Моя коллега отнеслась с большим пониманием, когда мне пришлось перенести встречу.', 'My colleague was very understanding when I had to postpone the appointment.')),
+    A('aufgeschlossen', 'adj', 'aufgeschlossen', 'открытый новому, восприимчивый', 'open-minded',
+      ex('Ein [[aufgeschlossenes]] Team probiert neue Arbeitsmethoden leichter aus.', 'Открытая новому команда охотнее пробует новые методы работы.', 'An open-minded team tries out new working methods more readily.'))
+  ]);
+
+  reg('b2_medien', [
+    N('kurznachricht', 'die', 'Kurznachricht', 'die Kurznachrichten', 'короткое сообщение, месседж', 'short message, text',
+      ex('Sie schickte mir eine kurze [[Kurznachricht]], dass sich der Zug verspätet.', 'Она прислала мне короткое сообщение, что поезд задерживается.', 'She sent me a short message saying that the train was delayed.')),
+    N('neuigkeit', 'die', 'Neuigkeit', 'die Neuigkeiten', 'новость, свежее известие', 'piece of news',
+      ex('Im wöchentlichen Newsletter stehen alle wichtigen [[Neuigkeiten]] aus dem Betrieb.', 'В еженедельной рассылке собраны все важные новости компании.', 'The weekly newsletter contains all the important news from the company.')),
+    V('recherchieren', 'recherchieren', ['recherchiert', 'recherchierte', 'hat recherchiert'], 'искать и проверять информацию, исследовать', 'to research, investigate',
+      ex('Vor dem Artikel musste der Journalist drei Tage lang gründlich [[recherchieren]].', 'Перед написанием статьи журналисту пришлось три дня тщательно проверять факты.', 'Before writing the article, the journalist had to do thorough research for three days.')),
+    V('abonnieren', 'abonnieren', ['abonniert', 'abonnierte', 'hat abonniert'], 'подписываться (на рассылку, канал, газету)', 'to subscribe to',
+      ex('Viele Leser haben den kostenlosen Podcast des Magazins [[abonniert]].', 'Многие читатели подписались на бесплатный подкаст журнала.', 'Many readers have subscribed to the magazine’s free podcast.')),
+    V('aeussern', 'äußern', ['äußert', 'äußerte', 'hat geäußert'], 'высказывать, выражать (мнение, критику)', 'to express, voice',
+      ex('Im Gespräch konnte jeder seine Bedenken offen [[äußern]].', 'В разговоре каждый мог открыто высказать свои сомнения.', 'During the discussion, everyone was able to voice their concerns openly.'))
+  ]);
+
+  reg('b2_umwelt', [
+    V('entsorgen', 'entsorgen', ['entsorgt', 'entsorgte', 'hat entsorgt'], 'утилизировать, выбрасывать по правилам', 'to dispose of',
+      ex('Alte Batterien darf man nicht im Hausmüll [[entsorgen]].', 'Старые батарейки нельзя выбрасывать вместе с обычным мусором.', 'Old batteries must not be disposed of in household waste.')),
+    V('verbrauchen', 'verbrauchen', ['verbraucht', 'verbrauchte', 'hat verbraucht'], 'потреблять, расходовать', 'to consume, use up',
+      ex('Moderne Heizungen [[verbrauchen]] deutlich weniger Energie als ältere Modelle.', 'Современные системы отопления потребляют заметно меньше энергии, чем старые модели.', 'Modern heating systems consume significantly less energy than older models.')),
+    V('gefaehrden', 'gefährden', ['gefährdet', 'gefährdete', 'hat gefährdet'], 'подвергать опасности, ставить под угрозу', 'to endanger, put at risk',
+      ex('Illegale Abwässer [[gefährden]] die Qualität des Grundwassers.', 'Незаконные стоки ставят под угрозу качество грунтовых вод.', 'Illegal wastewater endangers groundwater quality.')),
+    A('nachhaltig', 'adj', 'nachhaltig', 'устойчивый, экологичный, долгосрочный', 'sustainable',
+      ex('Die Stadt setzt auf [[nachhaltige]] Konzepte für den öffentlichen Nahverkehr.', 'Город делает ставку на устойчивые решения для общественного транспорта.', 'The city relies on sustainable concepts for local public transport.'))
+  ]);
+
+  reg('b2_wirtschaft', [
+    N('konkurrenz', 'die', 'Konkurrenz', '', 'конкуренция; конкуренты', 'competition',
+      ex('Durch neue Online-Anbieter ist die [[Konkurrenz]] im Einzelhandel stark gewachsen.', 'Из-за новых онлайн-продавцов конкуренция в розничной торговле сильно выросла.', 'Competition in retail has grown sharply due to new online providers.')),
+    N('dienstleistung', 'die', 'Dienstleistung', 'die Dienstleistungen', 'услуга, сервис', 'service',
+      ex('Neben dem Verkauf bietet die Firma auch persönliche [[Dienstleistungen]] vor Ort an.', 'Помимо продажи, компания также предлагает персональные услуги на месте.', 'Alongside sales, the company also offers personal on-site services.')),
+    N('bestand', 'der', 'Bestand', 'die Bestände', 'запас на складе, наличие; фонд', 'stock, inventory',
+      ex('Jeden Freitag prüfen wir den aktuellen [[Bestand]] im Lager.', 'Каждую пятницу мы проверяем текущий остаток на складе.', 'Every Friday we check the current stock in the warehouse.')),
+    A('verfuegbar', 'adj', 'verfügbar', 'доступный, имеющийся в наличии', 'available',
+      ex('Dieses Ersatzteil ist leider erst ab nächster Woche wieder [[verfügbar]].', 'Эта запчасть, к сожалению, снова будет доступна только со следующей недели.', 'This spare part will unfortunately not be available again until next week.')),
+    A('erhaeltlich', 'adj', 'erhältlich', 'имеющийся в продаже, доступный для покупки', 'available (to buy)',
+      ex('Das Lehrbuch ist sowohl gedruckt als auch digital [[erhältlich]].', 'Учебник доступен как в печатном, так и в цифровом виде.', 'The textbook is available both in print and digitally.'))
+  ]);
+
+  reg('b2_gesellschaft', [
+    A('gerecht', 'adj', 'gerecht', 'справедливый', 'fair, just',
+      ex('Im Team legen wir großen Wert auf eine [[gerechte]] Verteilung der Aufgaben.', 'В команде мы придаём большое значение справедливому распределению задач.', 'In the team, we attach great importance to a fair distribution of tasks.')),
+    A('ungerecht', 'adj', 'ungerecht', 'несправедливый', 'unfair, unjust',
+      ex('Viele Beschäftigte fanden die plötzliche Kürzung ohne Erklärung [[ungerecht]].', 'Многие сотрудники посчитали внезапное сокращение без объяснений несправедливым.', 'Many employees felt the sudden cut without explanation was unfair.')),
+    A('verantwortungsbewusst', 'adj', 'verantwortungsbewusst', 'ответственный, сознательный', 'responsible, conscientious',
+      ex('Ein [[verantwortungsbewusster]] Umgang mit Daten gehört heute zum Alltag.', 'Ответственное обращение с данными сегодня стало частью повседневной работы.', 'Responsible handling of data is part of everyday life today.')),
+    A('kooperativ', 'adj', 'kooperativ', 'готовый к сотрудничеству, кооперативный', 'cooperative',
+      ex('Dank einer [[kooperativen]] Leitung fanden beide Abteilungen schnell eine Lösung.', 'Благодаря готовности руководства к сотрудничеству оба отдела быстро нашли решение.', 'Thanks to a cooperative leadership style, both departments quickly found a solution.')),
+    A('ehrenamtlich', 'adj', 'ehrenamtlich', 'добровольческий, на общественных началах', 'voluntary, honorary',
+      ex('Sie engagiert sich am Wochenende [[ehrenamtlich]] in einem Nachbarschaftsprojekt.', 'По выходным она работает на общественных началах в соседском проекте.', 'She volunteers at weekends in a neighbourhood project.'))
+  ]);
+
+  reg('b2_bildung', [
+    N('allgemeinbildung', 'die', 'Allgemeinbildung', '', 'общее образование, кругозор', 'general education',
+      ex('Eine breite [[Allgemeinbildung]] hilft dabei, komplexe Themen schneller einzuordnen.', 'Широкий кругозор помогает быстрее ориентироваться в сложных темах.', 'A broad general education helps you put complex topics into context more quickly.')),
+    N('qualifikation', 'die', 'Qualifikation', 'die Qualifikationen', 'квалификация', 'qualification',
+      ex('Für diese Stelle braucht man eine anerkannte fachliche [[Qualifikation]].', 'Для этой должности требуется признанная профессиональная квалификация.', 'For this position you need a recognised professional qualification.')),
+    N('fertigkeit', 'die', 'Fertigkeit', 'die Fertigkeiten', 'навык, умение', 'skill, proficiency',
+      ex('Im Praxiskurs trainieren die Teilnehmenden handwerkliche [[Fertigkeiten]].', 'На практическом курсе участники отрабатывают прикладные навыки.', 'In the practical course, participants train hands-on skills.')),
+    N('kompetenz', 'die', 'Kompetenz', 'die Kompetenzen', 'компетенция', 'competence',
+      ex('Neben Fachwissen spielt auch soziale [[Kompetenz]] eine zentrale Rolle.', 'Помимо профессиональных знаний, ключевую роль играет и социальная компетенция.', 'Alongside specialist knowledge, social competence also plays a central role.')),
+    N('lernbereitschaft', 'die', 'Lernbereitschaft', '', 'готовность учиться', 'willingness to learn',
+      ex('Gerade bei Quereinsteigern zählt vor allem hohe [[Lernbereitschaft]].', 'Особенно при смене профессии важнее всего высокая готовность учиться.', 'Especially for career changers, a strong willingness to learn counts above all.')),
+    V('beibringen', 'beibringen', ['bringt bei', 'brachte bei', 'hat beigebracht'], 'научить (кого-то чему-то)', 'to teach (someone something)',
+      ex('Mein Ausbilder hat mir im ersten Jahr alle wichtigen Handgriffe [[beigebracht]].', 'Мой наставник в первый год научил меня всем основным приёмам.', 'My trainer taught me all the key techniques in the first year.'))
+  ]);
+
+  reg('b2_wohnen', [
+    N('renovierung', 'die', 'Renovierung', 'die Renovierungen', 'ремонт, обновление помещения', 'renovation',
+      ex('Vor dem Einzug ist eine kleine [[Renovierung]] im Flur geplant.', 'Перед заселением в коридоре запланирован небольшой ремонт.', 'Before moving in, a small renovation is planned in the hallway.')),
+    N('tiefgarage', 'die', 'Tiefgarage', 'die Tiefgaragen', 'подземный гараж, паркинг', 'underground car park',
+      ex('Zur Wohnung gehört auch ein fester Stellplatz in der [[Tiefgarage]].', 'К квартире также относится закреплённое место в подземном паркинге.', 'The flat also comes with a dedicated parking space in the underground car park.')),
+    V('vermieten', 'vermieten', ['vermietet', 'vermietete', 'hat vermietet'], 'сдавать внаём, в аренду', 'to rent out, let',
+      ex('Die Eigentümer möchten die Dachwohnung ab Oktober unmöbliert [[vermieten]].', 'Владельцы хотят сдавать мансардную квартиру без мебели с октября.', 'The owners want to rent out the attic flat unfurnished from October.'))
+  ]);
+
+  reg('b2_beziehungen', [
+    N('koerperhaltung', 'die', 'Körperhaltung', 'die Körperhaltungen', 'осанка, поза', 'posture',
+      ex('Eine offene [[Körperhaltung]] signalisiert im Gespräch echtes Interesse.', 'Открытая поза в разговоре говорит об искреннем интересе.', 'An open posture signals genuine interest during a conversation.')),
+    N('kompromissbereitschaft', 'die', 'Kompromissbereitschaft', '', 'готовность к компромиссу', 'willingness to compromise',
+      ex('Ohne gegenseitige [[Kompromissbereitschaft]] lässt sich der Streit im Team kaum lösen.', 'Без взаимной готовности к компромиссу спор в команде вряд ли удастся решить.', 'Without mutual willingness to compromise, the dispute in the team can hardly be resolved.')),
+    V('wiedergutmachen', 'wiedergutmachen', ['macht wieder gut', 'machte wieder gut', 'hat wiedergutgemacht'], 'загладить (вину), компенсировать', 'to make up for',
+      ex('Mit einer ehrlichen Entschuldigung lässt sich ein Missverständnis oft [[wiedergutmachen]].', 'Искренним извинением часто можно загладить недоразумение.', 'An honest apology can often make up for a misunderstanding.')),
+    V('bedauern', 'bedauern', ['bedauert', 'bedauerte', 'hat bedauert'], 'сожалеть (о чём-то)', 'to regret',
+      ex('Wir [[bedauern]] die lange Verzögerung und bitten um Ihr Verständnis.', 'Мы сожалеем о долгой задержке и просим отнестись с пониманием.', 'We regret the long delay and ask for your understanding.'))
+  ]);
+
+  reg('b2_wissenschaft', [
+    N('vermutung', 'die', 'Vermutung', 'die Vermutungen', 'предположение, догадка', 'assumption, supposition',
+      ex('Die erste [[Vermutung]] bestätigte sich nach Auswertung der Messdaten nicht.', 'Первое предположение не подтвердилось после анализа данных измерений.', 'The initial assumption was not confirmed after evaluating the measurement data.')),
+    N('einschaetzung', 'die', 'Einschätzung', 'die Einschätzungen', 'оценка, суждение', 'assessment, estimate',
+      ex('Nach unserer [[Einschätzung]] dauert die technische Prüfung etwa drei Wochen.', 'По нашей оценке, техническая проверка займёт около трёх недель.', 'In our assessment, the technical inspection will take about three weeks.')),
+    V('kombinieren', 'kombinieren', ['kombiniert', 'kombinierte', 'hat kombiniert'], 'комбинировать, сочетать', 'to combine',
+      ex('Die Studie [[kombiniert]] Umfragedaten mit praktischen Beobachtungen im Alltag.', 'Исследование сочетает данные опросов с практическими наблюдениями в повседневной жизни.', 'The study combines survey data with practical everyday observations.')),
+    V('optimieren', 'optimieren', ['optimiert', 'optimierte', 'hat optimiert'], 'оптимизировать', 'to optimise',
+      ex('Mit der neuen Software ließ sich der Energieverbrauch spürbar [[optimieren]].', 'С новым программным обеспечением удалось заметно оптимизировать расход энергии.', 'With the new software, energy consumption could be noticeably optimised.')),
+    V('vermuten', 'vermuten', ['vermutet', 'vermutete', 'hat vermutet'], 'предполагать, подозревать', 'to suspect, assume',
+      ex('Die Forschenden [[vermuten]], dass mehrere Faktoren zusammenwirken.', 'Исследователи предполагают, что здесь действуют сразу несколько факторов.', 'The researchers suspect that several factors interact here.'))
+  ]);
+
+  reg('b2_recht', [
+    N('regelung', 'die', 'Regelung', 'die Regelungen', 'правило, регламент, урегулирование', 'regulation, arrangement',
+      ex('Ab Januar gilt eine neue gesetzliche [[Regelung]] für befristete Verträge.', 'С января действует новое законодательное правило для срочных договоров.', 'From January, a new legal regulation applies to fixed-term contracts.')),
+    V('verstossen', 'verstoßen', ['verstößt', 'verstieß', 'hat verstoßen'], 'нарушать (правило, закон — gegen + Akk.)', 'to violate, infringe',
+      ex('Wer gegen Sicherheitsvorschriften [[verstößt]], riskiert eine Abmahnung.', 'Тот, кто нарушает правила безопасности, рискует получить выговор.', 'Anyone who violates safety regulations risks a formal warning.')),
+    V('missachten', 'missachten', ['missachtet', 'missachtete', 'hat missachtet'], 'игнорировать, пренебрегать (указанием, запретом)', 'to disregard, ignore',
+      ex('Der Fahrer hatte das deutliche Parkverbot einfach [[missachtet]].', 'Водитель просто проигнорировал явный запрет на парковку.', 'The driver had simply disregarded the clear no-parking sign.')),
+    A('verpflichtend', 'adj', 'verpflichtend', 'обязательный', 'mandatory, compulsory',
+      ex('Die jährliche Sicherheitsschulung ist für alle Mitarbeitenden [[verpflichtend]].', 'Ежегодный инструктаж по безопасности обязателен для всех сотрудников.', 'The annual safety training is mandatory for all employees.')),
+    A('freiwillig', 'adj', 'freiwillig', 'добровольный', 'voluntary',
+      ex('Die Teilnahme an der Befragung ist vollkommen [[freiwillig]] und anonym.', 'Участие в опросе полностью добровольно и анонимно.', 'Participation in the survey is completely voluntary and anonymous.'))
+  ]);
+
+  reg('b2_gesundheit', [
+    N('vorsorge', 'die', 'Vorsorge', '', 'профилактика; забота на будущее (пенсионная и т. п.)', 'preventive care; provision',
+      ex('Regelmäßige [[Vorsorge]] hilft dabei, Krankheiten früh zu erkennen.', 'Регулярная профилактика помогает выявлять заболевания на ранней стадии.', 'Regular preventive care helps detect illnesses early.')),
+    N('pflegeheim', 'das', 'Pflegeheim', 'die Pflegeheime', 'дом престарелых / ухода за больными', 'nursing home, care home',
+      ex('Seine Großmutter fühlt sich in dem kleinen [[Pflegeheim]] gut betreut.', 'Его бабушка чувствует, что за ней хорошо ухаживают в этом небольшом доме престарелых.', 'His grandmother feels well cared for in the small care home.')),
+    A('einfuehlsam', 'adj', 'einfühlsam', 'чуткий, деликатный', 'empathetic, sensitive',
+      ex('Eine [[einfühlsame]] Ärztin nimmt sich Zeit für die Sorgen ihrer Patientinnen.', 'Чуткий врач находит время для тревог своих пациентов.', 'An empathetic doctor takes time for her patients’ worries.'))
+  ]);
+
+  reg('b2_reisen', [
+    N('reisedauer', 'die', 'Reisedauer', '', 'длительность поездки', 'travel duration',
+      ex('Durch die neue Schnellstrecke verkürzt sich die [[Reisedauer]] um eine halbe Stunde.', 'Благодаря новой скоростной линии время в пути сокращается на полчаса.', 'The new high-speed route shortens the travel duration by half an hour.')),
+    N('sicherheitskontrolle', 'die', 'Sicherheitskontrolle', 'die Sicherheitskontrollen', 'досмотр, контроль безопасности', 'security check',
+      ex('An der [[Sicherheitskontrolle]] müssen Flüssigkeiten separat vorgezeigt werden.', 'На контроле безопасности жидкости нужно предъявлять отдельно.', 'At the security check, liquids must be presented separately.')),
+    V('ausweichen', 'ausweichen', ['weicht aus', 'wich aus', 'ist ausgewichen'], 'уклоняться, сворачивать (чтобы избежать столкновения); объезжать', 'to dodge, swerve, avoid',
+      ex('Der Radfahrer konnte dem plötzlich öffnenden Auto gerade noch [[ausweichen]].', 'Велосипедист в последний момент успел увернуться от внезапно открывшейся двери машины.', 'The cyclist just managed to swerve past the suddenly opening car door.')),
+    A('voraussichtlich', 'adj', 'voraussichtlich', 'предположительно, по предварительным данным', 'expected, likely',
+      ex('Der Zug erreicht den Hauptbahnhof [[voraussichtlich]] mit zehn Minuten Verspätung.', 'Поезд, по предварительным данным, прибудет на главный вокзал с опозданием на десять минут.', 'The train is expected to reach the central station ten minutes late.'))
+  ]);
+
+  reg('b2_kultur', [
+    N('wandel', 'der', 'Wandel', '', 'перемены, трансформация', 'change, transformation',
+      ex('Das kulturelle Leben der Stadt befindet sich in einem ständigen [[Wandel]].', 'Культурная жизнь города находится в постоянном изменении.', 'The cultural life of the city is undergoing constant change.')),
+    A('traditionsreich', 'adj', 'traditionsreich', 'с богатыми традициями', 'rich in tradition',
+      ex('Das [[traditionsreiche]] Theater feiert in diesem Herbst sein hundertjähriges Bestehen.', 'Театр с богатыми традициями этой осенью отмечает своё столетие.', 'The theatre, rich in tradition, is celebrating its centenary this autumn.')),
+    A('vielfaeltig', 'adj', 'vielfältig', 'многообразный, разнообразный', 'diverse, varied',
+      ex('Das Festival bietet ein [[vielfältiges]] Programm aus Film, Musik und Lesungen.', 'Фестиваль предлагает разнообразную программу из кино, музыки и чтений.', 'The festival offers a varied programme of film, music and readings.')),
+    A('umfangreich', 'adj', 'umfangreich', 'обширный, объёмный', 'extensive, comprehensive',
+      ex('Die Ausstellung zeigt eine [[umfangreiche]] Sammlung früher Fotografien.', 'Выставка представляет обширную коллекцию ранних фотографий.', 'The exhibition shows an extensive collection of early photographs.'))
+  ]);
+
+  // C1 Evidence & Nuance topic + 18 C1 words
+  GT.packs.de.config.TOPICS.words.push({
+    id: 'c1_argumentation',
+    name: 'Evidence & Nuance',
+    level: 'c1',
+    group: 'C1 topics',
+    desc: 'Precision, argumentation, hedging, nuance and critical evaluation.',
+    scenario: 'дискуссия в аналитическом подкасте: мы разбираем спорное исследование, оцениваем аргументы, оговорки и контраргументы. Ты — ведущий.'
+  });
+
+  reg('c1_argumentation', [
+    N('tragweite', 'die', 'Tragweite', '', 'масштаб последствий, значимость', 'scope, far-reaching implications',
+      ex('Viele erkannten die volle [[Tragweite]] dieser Entscheidung erst Monate später.', 'Многие осознали весь масштаб последствий этого решения лишь спустя месяцы.', 'Many people only recognised the full implications of this decision months later.'), 'C1'),
+    N('vorbehalt', 'der', 'Vorbehalt', 'die Vorbehalte', 'оговорка, сомнение (unter Vorbehalt — с оговоркой)', 'reservation, caveat',
+      ex('Er stimmte dem Plan nur unter dem [[Vorbehalt]] zu, dass das Budget geprüft wird.', 'Он согласился с планом лишь с оговоркой, что бюджет будет проверен.', 'He agreed to the plan only with the reservation that the budget be reviewed.'), 'C1'),
+    N('plausibilitaet', 'die', 'Plausibilität', '', 'правдоподобие, убедительность', 'plausibility',
+      ex('Die Gutachterin prüfte zunächst die [[Plausibilität]] der vorgelegten Zahlen.', 'Эксперт сначала проверила правдоподобие представленных цифр.', 'The reviewer first checked the plausibility of the figures submitted.'), 'C1'),
+    N('trugschluss', 'der', 'Trugschluss', 'die Trugschlüsse', 'ложное умозаключение, заблуждение', 'fallacy, false conclusion',
+      ex('Aus einer bloßen Korrelation auf eine Ursache zu schließen, ist ein häufiger [[Trugschluss]].', 'Делать вывод о причине из одной лишь корреляции — распространённое заблуждение.', 'Inferring causation from mere correlation is a common fallacy.'), 'C1'),
+    N('kausalitaet', 'die', 'Kausalität', '', 'причинно-следственная связь', 'causality, causation',
+      ex('Zwischen beiden Ereignissen lässt sich bisher keine direkte [[Kausalität]] belegen.', 'Между этими двумя событиями пока не удаётся доказать прямую причинно-следственную связь.', 'So far, no direct causality can be proven between the two events.'), 'C1'),
+    N('diskrepanz', 'die', 'Diskrepanz', 'die Diskrepanzen', 'расхождение, несоответствие', 'discrepancy',
+      ex('Zwischen den beiden Berichten gibt es eine auffällige [[Diskrepanz]] bei den Kosten.', 'Между двумя отчётами есть заметное расхождение в расходах.', 'There is a striking discrepancy in costs between the two reports.'), 'C1'),
+    N('spielraum', 'der', 'Spielraum', 'die Spielräume', 'пространство для манёвра, свобода действий', 'room for manoeuvre, scope',
+      ex('Bei den Verhandlungen blieb am Ende kaum noch finanzieller [[Spielraum]].', 'На переговорах в итоге почти не осталось финансового пространства для манёвра.', 'In the negotiations, there was hardly any financial room for manoeuvre left in the end.'), 'C1'),
+    N('abwaegung', 'die', 'Abwägung', 'die Abwägungen', 'взвешивание (аргументов, интересов)', 'weighing up, balancing',
+      ex('Nach sorgfältiger [[Abwägung]] aller Risiken lehnte der Vorstand das Projekt ab.', 'После тщательного взвешивания всех рисков правление отклонило проект.', 'After carefully weighing up all risks, the board rejected the project.'), 'C1'),
+    N('schlussfolgerung', 'die', 'Schlussfolgerung', 'die Schlussfolgerungen', 'вывод, умозаключение', 'conclusion, inference',
+      ex('Diese [[Schlussfolgerung]] geht deutlich über das hinaus, was die Daten hergeben.', 'Этот вывод явно выходит за пределы того, что позволяют сказать данные.', 'This conclusion goes well beyond what the data support.'), 'C1'),
+    N('praemisse', 'die', 'Prämisse', 'die Prämissen', 'предпосылка, посылка (в аргументе)', 'premise',
+      ex('Wenn die Grundannahme nicht stimmt, fällt die gesamte [[Prämisse]] in sich zusammen.', 'Если исходное допущение неверно, рушится вся посылка.', 'If the basic assumption is wrong, the entire premise collapses.'), 'C1'),
+    A('stichhaltig', 'adj', 'stichhaltig', 'веский, обоснованный, выдерживающий проверку', 'sound, valid, cogent',
+      ex('Für diese weitreichende Behauptung fehlt bislang ein [[stichhaltiger]] Beleg.', 'Для столь далеко идущего утверждения пока не хватает веского доказательства.', 'So far, there is no sound evidence for this far-reaching claim.'), 'C1'),
+    A('differenziert', 'adj', 'differenziert', 'взвешенный, нюансированный, дифференцированный', 'nuanced, differentiated',
+      ex('Das Thema verlangt eine [[differenzierte]] Betrachtung statt schneller Parolen.', 'Эта тема требует взвешенного рассмотрения вместо скорых лозунгов.', 'The topic calls for a nuanced view instead of quick slogans.'), 'C1'),
+    A('ambivalent', 'adj', 'ambivalent', 'двойственный, амбивалентный', 'ambivalent',
+      ex('Viele Beschäftigte stehen der neuen KI-Lösung eher [[ambivalent]] gegenüber.', 'Многие сотрудники относятся к новому ИИ-решению довольно двойственно.', 'Many employees feel rather ambivalent about the new AI solution.'), 'C1'),
+    A('unabdingbar', 'adj', 'unabdingbar', 'непременный, абсолютно необходимый', 'indispensable, essential',
+      ex('Transparente Kriterien sind für das Vertrauen der Öffentlichkeit [[unabdingbar]].', 'Прозрачные критерии абсолютно необходимы для доверия общества.', 'Transparent criteria are indispensable for public trust.'), 'C1'),
+    A('einleuchtend', 'adj', 'einleuchtend', 'убедительный, ясный, понятный', 'plausible, convincing',
+      ex('Ihre Erklärung für den Rückgang der Zahlen klingt durchaus [[einleuchtend]].', 'Её объяснение снижения показателей звучит вполне убедительно.', 'Her explanation for the drop in numbers sounds quite convincing.'), 'C1'),
+    V('relativieren', 'relativieren', ['relativiert', 'relativierte', 'hat relativiert'], 'смягчать категоричность, рассматривать относительно', 'to put into perspective, qualify',
+      ex('Der Sprecher versuchte, die scharfe Kritik am Bericht etwas zu [[relativieren]].', 'Представитель попытался немного смягчить острую критику отчёта.', 'The spokesperson tried to put the sharp criticism of the report into perspective.'), 'C1'),
+    V('untermauern', 'untermauern', ['untermauert', 'untermauerte', 'hat untermauert'], 'подкреплять (доводами, фактами)', 'to substantiate, back up',
+      ex('Die Autorin [[untermauert]] ihre These mit mehreren unabhängigen Langzeitstudien.', 'Автор подкрепляет свой тезис несколькими независимыми долгосрочными исследованиями.', 'The author substantiates her thesis with several independent long-term studies.'), 'C1'),
+    V('hinterfragen', 'hinterfragen', ['hinterfragt', 'hinterfragte', 'hat hinterfragt'], 'подвергать критическому разбору, ставить под вопрос', 'to question critically',
+      ex('Wissenschaft lebt davon, eigene Annahmen immer wieder kritisch zu [[hinterfragen]].', 'Наука живёт тем, что снова и снова критически перепроверяет собственные допущения.', 'Science thrives on repeatedly questioning its own assumptions critically.'), 'C1')
+  ]);
+})();
+
+/* === Content expansion Wave 2 (2026-11-27): +22 DE C1 argumentation words === */
+(function () {
+  'use strict';
+  function ex(t, ru, en) { return { t: t, de: t, ru: ru, en: en }; }
+  function N(id, article, t, plural, ru, en, e) {
+    var o = { id: 'c1-w2-' + id, pos: 'noun', article: article, t: t, de: t, ru: ru, en: en, level: 'C1', examples: [e] };
+    if (plural) o.plural = plural;
+    return o;
+  }
+  function V(id, t, forms, ru, en, e) {
+    return { id: 'c1-w2-' + id, pos: 'verb', t: t, de: t, forms: { praes: forms[0], praet: forms[1], perf: forms[2] }, ru: ru, en: en, level: 'C1', examples: [e] };
+  }
+  function A(id, pos, t, ru, en, e) {
+    return { id: 'c1-w2-' + id, pos: pos, t: t, de: t, ru: ru, en: en, level: 'C1', examples: [e] };
+  }
+
+  GT.register({ tab: 'words', topic: 'c1_argumentation', items: [
+    N('einwand', 'das', 'Gegenargument', 'die Gegenargumente', 'контраргумент, встречный довод', 'counterargument',
+      ex('Ihr [[Gegenargument]] gegen den Zeitplan trifft genau den wunden Punkt.', 'Ваш контраргумент против графика бьёт точно в слабое место.', 'Your counterargument against the schedule hits the exact weak spot.')),
+    N('umkehrung', 'die', 'Umkehrschluss', '', 'обратный вывод, вывод от противного', 'converse inference',
+      ex('Aus der Absage folgt im [[Umkehrschluss]] aber noch keine Zustimmung für B.', 'Из отказа ещё не следует обратный вывод о согласии на вариант B.', 'Conversely, the refusal still does not imply approval of option B.')),
+    N('kernpunkt', 'der', 'Kernpunkt', 'die Kernpunkte', 'ключевой пункт, суть вопроса', 'crux, core point',
+      ex('Der [[Kernpunkt]] der Debatte liegt in der langfristigen Finanzierung.', 'Ключевой пункт дебатов заключается в долгосрочном финансировании.', 'The core point of the debate lies in long-term funding.')),
+    N('wesenszug', 'der', 'Grundsatzfrage', 'die Grundsatzfragen', 'принципиальный вопрос', 'matter of principle',
+      ex('Bei der Datensicherheit geht es um eine [[Grundsatzfrage]], nicht um Details.', 'В вопросе защиты данных речь идёт о принципиальном вопросе, а не о деталях.', 'Data security is a matter of principle rather than minor detail.')),
+    N('nebenwirkung', 'die', 'Kehrseite', 'die Kehrseiten', 'обратная сторона (медали)', 'flip side, downside',
+      ex('Jede schnelle Automatisierung hat als [[Kehrseite]] neue Abhängigkeiten.', 'У любой быстрой автоматизации есть обратная сторона — новые зависимости.', 'Every rapid automation has new dependencies as its flip side.')),
+    N('gegenposition', 'die', 'Gegenposition', 'die Gegenpositionen', 'противоположная позиция', 'opposing stance',
+      ex('In einem fairen Gutachten wird auch die [[Gegenposition]] sachlich dargestellt.', 'В объективном заключении противоположная позиция тоже излагается по делу.', 'In a fair review, the opposing stance is also presented objectively.')),
+    N('fehlschluss', 'der', 'Fehlschluss', 'die Fehlschlüsse', 'ложное умозаключение', 'false inference',
+      ex('Aus zwei Zufällen eine Regel abzuleiten ist ein methodischer [[Fehlschluss]].', 'Выводить правило из двух случайностей — методологический просчёт.', 'Deriving a rule from two coincidences is a methodological false inference.')),
+    N('ausgangslage', 'die', 'Ausgangslage', 'die Ausgangslagen', 'исходная ситуация / положение дел', 'starting position, baseline',
+      ex('Ohne klare Analyse der [[Ausgangslage]] bleibt jede Reform Stückwerk.', 'Без чёткого анализа исходной ситуации любая реформа остаётся фрагментарной.', 'Without a clear baseline analysis, every reform remains piecemeal.')),
+    N('spannungsfeld', 'das', 'Spannungsfeld', 'die Spannungsfelder', 'поле противоречий, конфликт интересов/целей', 'area of tension',
+      ex('Datenschutz bewegt sich im [[Spannungsfeld]] zwischen Transparenz und Kontrolle.', 'Защита данных находится в поле противоречия между прозрачностью и контролем.', 'Data protection operates in an area of tension between transparency and control.')),
+    N('leitgedanke', 'der', 'Leitgedanke', 'die Leitgedanken', 'руководящая идея, основной принцип', 'guiding principle',
+      ex('Verhältnismäßigkeit ist der zentrale [[Leitgedanke]] dieses Entwurfs.', 'Соразмерность — центральная идея этого проекта.', 'Proportionality is the central guiding principle of this draft.')),
+    V('abwaegen', 'aufzeigen', ['zeigt auf', 'zeigte auf', 'hat aufgezeigt'], 'наглядно показывать, выявлять (проблемы, пути)', 'to point out, demonstrate',
+      ex('Das Gutachten kann Chancen und Risiken klar [[aufzeigen]].', 'Экспертиза может наглядно показать шансы и риски.', 'The assessment can clearly point out opportunities and risks.')),
+    V('entkraeften-w2', 'unterscheiden', ['unterscheidet', 'unterschied', 'hat unterschieden'], 'различать, проводить границу между', 'to distinguish, differentiate',
+      ex('Transparente Messwerte helfen, Zufall und Ursache sauber zu [[unterscheiden]].', 'Прозрачные замеры помогают чётко отличать случайность от причины.', 'Transparent metrics help clearly distinguish coincidence from cause.')),
+    V('pauschalisieren', 'pauschalisieren', ['pauschalisiert', 'pauschalisierte', 'hat pauschalisiert'], 'обобщать огульно / чересчур упрощать', 'to overgeneralise',
+      ex('Man darf einzelne Ausfälle nicht [[pauschalisieren]] und auf alle übertragen.', 'Нельзя огульно обобщать единичные сбои и переносить их на всех.', 'One must not overgeneralise isolated failures to everyone.')),
+    V('differenzieren', 'differenzieren', ['differenziert', 'differenzierte', 'hat differenziert'], 'разграничивать, подходить дифференцированно', 'to differentiate, distinguish',
+      ex('Bei der Ursachenforschung muss man zwischen Symptomen und Auslösern [[differenzieren]].', 'При поиске причин нужно разграничивать симптомы и первоисточники.', 'When investigating causes, one has to differentiate between symptoms and triggers.')),
+    V('hervorheben', 'herausstellen', ['stellt heraus', 'stellte heraus', 'hat herausgestellt'], 'выделять, особо подчёркивать', 'to highlight, emphasise',
+      ex('Im Schlussbericht sollte man den praktischen Nutzen klar [[herausstellen]].', 'В итоговом отчёте следует чётко выделить практическую пользу.', 'In the final report, one should clearly highlight the practical benefit.')),
+    V('einraeumen', 'einräumen', ['räumt ein', 'räumte ein', 'hat eingeräumt'], 'признавать (упущение, факт); предоставлять', 'to concede, admit',
+      ex('Die Leitung [[räumte]] offen [[ein]], dass die Umstellung zu kurzfristig war.', 'Руководство открыто признало, что переход был слишком поспешным.', 'Management openly conceded that the transition was too abrupt.')),
+    A('plausibel', 'adj', 'plausibel', 'правдоподобный, логически убедительный', 'plausible',
+      ex('Nach Prüfung aller Rechnungen erscheint diese Erklärung durchaus [[plausibel]].', 'После проверки всех счетов это объяснение выглядит вполне правдоподобным.', 'After checking all invoices, this explanation seems quite plausible.')),
+    A('triftig', 'adj', 'triftig', 'веский, уважительный (о причине)', 'valid, compelling (reason)',
+      ex('Ohne einen [[triftigen]] Grund lässt sich der Vertrag nicht vorzeitig lösen.', 'Без веской причины расторгнуть договор досрочно нельзя.', 'Without a compelling reason, the contract cannot be terminated early.')),
+    A('fragwuerdig', 'adj', 'fragwürdig', 'сомнительный, спорный', 'questionable, dubious',
+      ex('Statistiken ohne Quellenangabe wirken methodisch äußerst [[fragwürdig]].', 'Статистика без указания источников методологически крайне сомнительна.', 'Statistics without cited sources appear methodologically highly questionable.')),
+    A('schluessig', 'adj', 'schlüssig', 'последовательный, логически стройный', 'coherent, consistent',
+      ex('Die Argumentationskette ist von Anfang bis Ende [[schlüssig]] aufgebaut.', 'Цепочка аргументов выстроена стройно от начала до конца.', 'The line of reasoning is structured coherently from start to finish.')),
+    A('maßgeblich', 'adj', 'maßgeblich', 'определяющий, решающий', 'decisive, authoritative',
+      ex('Für die Entscheidung war vor allem das Gutachten der Fachabteilung [[maßgeblich]].', 'Решающим для решения стало прежде всего заключение профильного отдела.', 'The specialist department’s report was decisive for the outcome.')),
+    A('vorlaeufig', 'adj', 'vorläufig', 'предварительный, временный', 'provisional, preliminary',
+      ex('Alle Zahlen gelten ausdrücklich als [[vorläufig]] bis zum Jahresabschluss.', 'Все цифры явно считаются предварительными до годового закрытия.', 'All figures are expressly preliminary until year-end closing.'))
+  ] });
+})();

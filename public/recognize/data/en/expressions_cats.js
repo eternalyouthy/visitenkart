@@ -32,3 +32,23 @@
     }
   });
 })();
+
+/* === Content expansion 2026-11-27 === */
+(function () {
+  'use strict';
+  function ids(prefix, list) { return list.map(function (s) { return prefix + s; }); }
+  var I = 'en:x27:idiom:', D = 'en:x27:ev:';
+  GT.classifyExpressions({
+    'idioms-people': ids(I, ['two-peas-in-a-pod', 'thick-skin', 'wrong-side-of-bed', 'have-someones-back', 'fly-off-handle']),
+    'idioms-talk': ids(I, ['cut-to-chase', 'tip-of-tongue', 'talk-turkey', 'blue-in-face', 'word-of-mouth']),
+    'idioms-work': ids(I, ['burn-midnight-oil', 'in-full-swing', 'pull-weight', 'get-off-ground', 'drop-the-ball']),
+    'idioms-situations': ids(I, ['in-the-dark', 'silver-lining', 'knife-edge', 'tight-spot', 'up-in-the-air']),
+    'idioms-decisions': ids(I, ['play-it-safe', 'think-twice', 'cross-that-bridge', 'draw-the-line', 'turn-blind-eye']),
+
+    'everyday-respond': ids(D, ['tell-me-about-it', 'hard-to-believe', 'i-thought-as-much', 'hang-on', 'youre-kidding']),
+    'everyday-opinion': ids(D, ['in-my-view', 'couldn-t-agree-more', 'im-not-sure-about-that', 'makes-sense-to-me', 'if-you-ask-me']),
+    'everyday-arrange': ids(D, ['deal', 'what-time-suits-you', 'running-late', 'keep-me-posted', 'see-you-tomorrow']),
+    'everyday-comfort': ids(D, ['could-be-worse', 'itll-turn-out-fine', 'nothing-to-worry-about', 'hang-in-there', 'better-luck-next-time']),
+    'everyday-social': ids(D, ['congratulations', 'have-a-nice-weekend', 'enjoy-your-meal', 'take-care', 'get-well-soon'])
+  });
+})();

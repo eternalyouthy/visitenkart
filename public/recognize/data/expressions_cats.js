@@ -26,3 +26,23 @@
     }
   });
 })();
+
+/* === Content expansion 2026-11-27 === */
+(function () {
+  'use strict';
+  function ids(prefix, list) { return list.map(function (s) { return prefix + s; }); }
+  var I = 'exp-idiom-x27-', D = 'exp-day-x27-';
+  GT.classifyExpressions({
+    'idioms-people': ids(I, ['ein-herz-und-eine-seele', 'aus-der-haut-fahren', 'jemandem-den-ruecken-staerken', 'mit-dem-linken-fuss', 'ein-dickes-fell', 'jemanden-um-den-finger']),
+    'idioms-talk': ids(I, ['tacheles-reden', 'den-mund-fusselig', 'auf-der-zunge', 'kein-geheimnis-machen', 'klartext-sprechen', 'um-den-heissen-kern']),
+    'idioms-work': ids(I, ['ins-rollen-bringen', 'ueber-stunden-klagen', 'hand-in-hand', 'seinen-mann-stehen', 'schritt-fuer-schritt', 'eine-extra-meile']),
+    'idioms-situations': ids(I, ['aus-allen-wolken', 'in-der-klemme', 'glueck-im-unglueck', 'auf-messers-schneide', 'kein-blatt-zwischen', 'im-dunkeln-tappen']),
+    'idioms-decisions': ids(I, ['die-notbremse-ziehen', 'auf-nummer-sicher', 'zwei-mal-ueberlegen', 'naegel-mit-koepfen', 'ins-gewissen-reden', 'ein-auge-zudruecken']),
+
+    'everyday-respond': ids(D, ['echt-gesagt', 'kaum-zu-glauben', 'mach-sachen', 'hab-ich-mir-gedacht', 'moment-mal']),
+    'everyday-opinion': ids(D, ['meiner-ansicht-nach', 'bin-ganz-deiner-meinung', 'kann-man-so-sehen', 'da-bin-ich-skeptisch', 'auf-keinen-fall']),
+    'everyday-arrange': ids(D, ['abgemacht', 'ich-gebe-bescheid', 'verschieben-wir-das', 'ich-bin-unterwegs', 'bis-morgen']),
+    'everyday-comfort': ids(D, ['halb-so-schlimm', 'alles-wird-gut', 'kein-grund-zur-sorge', 'nimm-dir-zeit', 'ich-druecke-dir-die-daumen']),
+    'everyday-social': ids(D, ['herzlichen-glueckwunsch', 'schoenes-wochenende', 'gesundheit', 'guten-appetit', 'auf-wiedersehen'])
+  });
+})();

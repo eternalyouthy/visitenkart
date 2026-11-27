@@ -26,3 +26,23 @@
     }
   });
 })();
+
+/* === Content expansion 2026-11-27 === */
+(function () {
+  'use strict';
+  function ids(prefix, list) { return list.map(function (s) { return prefix + s; }); }
+  var I = 'ru-ex-idiom-x27-', E = 'ru-ex-ev-x27-';
+  GT.classifyExpressions({
+    'idioms-people': ids(I, ['dusha-v-dushu', 'ne-razley-voda', 'vyyti-iz-sebya', 'vstat-ne-s-toy-nogi', 'dusha-naraspashku', 'soyti-s-uma', 'ne-v-duhe', 'obvesti-vokrug-paltsa', 'priyatno-po-dushe']),
+    'idioms-talk': ids(I, ['na-chistotu', 'vertitsya-na-yazyke', 'slovo-za-slovo', 'govorit-na-raznyh-yazykah', 'pereyti-k-delu', 's-poluslova', 'ne-lezet-za-slovom', 'derzhat-yazyk-za-zubami', 'sarafannoe-radio']),
+    'idioms-work': ids(I, ['sdvinut-s-mertvoy', 'ruka-ob-ruku', 'shag-za-shagom', 'na-polnuyu-katushku', 'ne-pokladaya-ruk', 'peregibat-palku', 'delat-na-sovest', 'master-na-vse-ruki', 'sidet-slozha-ruki']),
+    'idioms-situations': ids(I, ['net-huda-bez-dobra', 'na-voloske', 'kak-grom-sredi', 'chuvstvovat-kak-ryba', 'brodit-v-potemkah', 'vyshel-suhim', 'kaplya-v-more', 'ni-sveta-ni-zari', 'kak-na-igolkah']),
+    'idioms-decisions': ids(I, ['na-svoy-strah', 'sem-raz-otmer', 'zakryt-glaza', 'vzyat-byka-za-roga', 'idti-na-ustupki', 'podstrakhovatsya', 'vzvesit-vse-za', 'splyasat-ot-pechki', 'rubit-s-plecha']),
+
+    'everyday-respond': ids(E, ['i-ne-govori', 'trudno-poverit', 'ya-tak-i-dumal', 'podozhdi-sekundu', 'ne-mozhet-byt', 'kak-raz-vovremya', 'kstati-govorya', 'slushayu-tebya']),
+    'everyday-opinion': ids(E, ['na-moy-vzglyad', 'polnostyu-soglasen', 'somnevayus', 'vpolne-logichno', 'delo-vkusa', 'zavisit-ot-situatsii', 'chestno-govorya', 'ni-v-koem-sluchae']),
+    'everyday-arrange': ids(E, ['ya-uzhe-v-puti', 'derzhi-v-kurse', 'kogda-tebe-udobno', 'mne-eto-podhodit', 'ya-zaderzhivayus', 'day-znat', 'do-zavtra', 'ya-na-sekundu-vyshla']),
+    'everyday-comfort': ids(E, ['ne-berite-v-golovu', 'vsyo-budet-horosho', 'ne-toropis', 'net-povoda-dlya', 'derzhis', 'byvaet-huzhe', 'povezet-v-sleduyushchiy', 'pustyak']),
+    'everyday-social': ids(E, ['horoshih-vyhodnyh', 'priyatnogo-appetita', 'beregi-sebya', 'vyzdoravlivay', 'dobro-pozhalovat', 'spokoynoy-nochi', 'schastlivogo-puti', 'spasibo-bolshoe'])
+  });
+})();

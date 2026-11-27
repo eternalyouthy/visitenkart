@@ -1234,3 +1234,337 @@ GT.packs.en.byId["en:it2:core-hours"].note = {
   "de": "Immer Plural (anders als dt. Singular Kernarbeitszeit); Gleitzeit = flexitime.\n\nPlural: die festgelegten Anwesenheitsstunden bei Gleitzeit.",
   "ru": "Во множественном числе (в отличие от нем. ед. ч. Kernarbeitszeit); гибкий график — flexitime.\n\nМножественное число: обязательные часы присутствия при гибком графике."
 };
+
+/* === Content expansion 2026-11-27 (+25 EN Idioms + 25 EN Everyday Phrases) === */
+(function () {
+  'use strict';
+  function ex(t, ru, de) { return { t: t, ru: ru, de: de }; }
+  function I(id, t, level, ru, de, e, note, reg) {
+    return { id: 'en:x27:idiom:' + id, type: 'chunk', pos: 'chunk', t: t, level: level || 'B2', ru: ru, de: de,
+      examples: [e], note: note ? { ru: note[0], de: note[1] } : null, register: reg || 'neutral', learnable: true };
+  }
+  function D(id, t, level, ru, de, e, note, reg) {
+    return { id: 'en:x27:ev:' + id, type: 'chunk', pos: 'chunk', t: t, level: level || 'B1', ru: ru, de: de,
+      examples: [e], note: note ? { ru: note[0], de: note[1] } : null, register: reg || 'neutral', learnable: true };
+  }
+
+  GT.register({ tab: 'expressions', topic: 'idioms', type: 'chunk', items: [
+    // idioms-people (5)
+    I('two-peas-in-a-pod', 'two peas in a pod', 'B2', 'два сапога пара, неразлучные друзья', 'ein Herz und eine Seele',
+      ex('Those two designers are [[two peas in a pod]] — they finish each other’s sentences.', 'Эти двое дизайнеров — не разлей вода, буквально с полуслова друг друга понимают.', 'Die beiden Designer sind ein Herz und eine Seele — sie vollenden die Sätze des anderen.'), null, 'informal'),
+    I('thick-skin', 'have thick skin', 'B2', 'быть толстокожим, стойко переносить критику', 'ein dickes Fell haben',
+      ex('Working in live customer support teaches you to [[have thick skin]].', 'Работа в живой поддержке учит не принимать резкие реплики близко к сердцу.', 'Im direkten Kundensupport lernt man, ein dickes Fell zu haben.')),
+    I('wrong-side-of-bed', 'get up on the wrong side of the bed', 'B2', 'встать не с той ноги', 'mit dem linken Fuß aufstehen',
+      ex('Excuse his tone — he clearly [[got up on the wrong side of the bed]] today.', 'Не обращай внимания на его тон — он сегодня явно встал не с той ноги.', 'Entschuldige seinen Ton — er ist heute eindeutig mit dem linken Fuß aufgestanden.'), null, 'informal'),
+    I('have-someones-back', 'have someone’s back', 'B2', 'прикрыть спину, поддержать в трудную минуту', 'jemandem den Rücken stärken',
+      ex('Don’t worry about the review — the whole team [[has your back]].', 'Не переживай из-за проверки — вся команда тебя поддержит.', 'Mach dir keine Sorgen wegen der Prüfung — das ganze Team stärkt dir den Rücken.'), null, 'informal'),
+    I('fly-off-handle', 'fly off the handle', 'C1', 'выйти из себя, вспылить', 'aus der Haut fahren',
+      ex('He tends to [[fly off the handle]] whenever schedules change last minute.', 'Он склонен выходить из себя, когда график меняют в последний момент.', 'Er fährt leicht aus der Haut, wenn sich Zeitpläne in letzter Minute ändern.'), null, 'informal'),
+
+    // idioms-talk (5)
+    I('cut-to-chase', 'cut to the chase', 'B2', 'перейти сразу к сути дела', 'auf den Punkt kommen',
+      ex('We only have five minutes before the next call, so let’s [[cut to the chase]].', 'У нас всего пять минут до следующего созвона, так что перейдём сразу к делу.', 'Wir haben nur fünf Minuten bis zum nächsten Anruf, also kommen wir gleich zum Punkt.'), null, 'informal'),
+    I('tip-of-tongue', 'on the tip of my tongue', 'B1', 'вертится на языке', 'es liegt mir auf der Zunge',
+      ex('I know the German word for receipt — it’s right [[on the tip of my tongue]]!', 'Я знаю немецкое слово для чека — оно прямо на языке вертится!', 'Ich kenne das deutsche Wort für Quittung — es liegt mir auf der Zunge!')),
+    I('talk-turkey', 'speak your mind', 'B2', 'говорить прямо то, что думаешь', 'offen seine Meinung sagen',
+      ex('In our retrospectives, everyone is encouraged to [[speak their mind]].', 'На наших ретроспективах каждого просят говорить открыто.', 'In unseren Retrospektiven soll jeder offen seine Meinung sagen.')),
+    I('blue-in-face', 'until you’re blue in the face', 'C1', 'до изнеможения, без толку повторять одно и то же', 'sich den Mund fusselig reden',
+      ex('You can warn users [[until you’re blue in the face]], yet some still reuse passwords.', 'Можно предупреждать пользователей до посинения, но кто-то всё равно повторяет пароли.', 'Man kann sich den Mund fusselig reden, manche nutzen trotzdem dieselben Passwörter.'), null, 'informal'),
+    I('word-of-mouth', 'by word of mouth', 'B2', 'по сарафанному радио, из уст в уста', 'durch Mundpropaganda',
+      ex('Most of our freelance clients find us [[by word of mouth]].', 'Большинство наших клиентов на фрилансе находят нас по сарафанному радио.', 'Die meisten unserer Freelance-Kunden finden uns durch Mundpropaganda.')),
+
+    // idioms-work (5)
+    I('burn-midnight-oil', 'burn the midnight oil', 'C1', 'засиживаться за работой допоздна', 'bis spät in die Nacht arbeiten',
+      ex('The engineers had to [[burn the midnight oil]] to patch the bug before morning.', 'Инженерам пришлось сидеть до глубокой ночи, чтобы закрыть баг к утру.', 'Die Entwickler mussten bis tief in die Nacht arbeiten, um den Fehler vor dem Morgen zu beheben.')),
+    I('in-full-swing', 'in full swing', 'B2', 'в самом разгаре, полным ходом', 'auf Hochtouren laufen',
+      ex('Preparations for the annual trade fair are already [[in full swing]].', 'Подготовка к ежегодной выставке уже идёт полным ходом.', 'Die Vorbereitungen für die jährliche Fachmesse laufen bereits auf Hochtouren.')),
+    I('pull-weight', 'pull your weight', 'B2', 'добросовестно делать свою часть работы', 'seinen Teil beitragen',
+      ex('A small project team only works when everyone [[pulls their weight]].', 'Небольшая проектная команда работает, только когда каждый выкладывается на своей задаче.', 'Ein kleines Projektteam funktioniert nur, wenn alle ihren Teil beitragen.')),
+    I('get-off-ground', 'get something off the ground', 'B2', 'сдвинуть с места, запустить проект', 'etwas ins Rollen bringen',
+      ex('It took two months of talks to [[get]] the pilot scheme [[off the ground]].', 'Потребовалось два месяца переговоров, чтобы запустить пилотный проект.', 'Es brauchte zwei Monate Gespräche, um das Pilotprojekt ins Rollen zu bringen.')),
+    I('drop-the-ball', 'drop the ball', 'B2', 'допустить оплошность, упустить ответственность', 'einen Fehler machen, etwas vermasseln',
+      ex('Someone [[dropped the ball]] and forgot to send the signed invoice.', 'Кто-то оплошал и забыл отправить подписанный счёт.', 'Jemand hat es versäumt und vergessen, die unterschriebene Rechnung zu schicken.'), null, 'informal'),
+
+    // idioms-situations (5)
+    I('in-the-dark', 'in the dark', 'B2', 'в неведении, в потёмках', 'im Dunkeln tappen',
+      ex('Without error logs, support was completely [[in the dark]] about the outage.', 'Без журналов ошибок поддержка была в полном неведении о причине сбоя.', 'Ohne Fehlerprotokolle tappte der Support bei dem Ausfall völlig im Dunkeln.')),
+    I('silver-lining', 'every cloud has a silver lining', 'B2', 'нет худа без добра', 'jedes Unglück hat auch sein Gutes',
+      ex('The flight delay gave us time to fix the slides — [[every cloud has a silver lining]].', 'Задержка рейса дала время поправить слайды — нет худа без добра.', 'Die Flugverspätung gab uns Zeit, die Folien zu korrigieren — alles hat auch sein Gutes.')),
+    I('knife-edge', 'on a knife-edge', 'C1', 'на волоске, на острие ножа', 'auf Messers Schneide stehen',
+      ex('The final budget vote remained [[on a knife-edge]] until midnight.', 'Итоговое голосование по бюджету висело на волоске до самой полуночи.', 'Die abschließende Budgetabstimmung stand bis Mitternacht auf Messers Schneide.')),
+    I('tight-spot', 'in a tight spot', 'B2', 'в затруднительном положении, в переплёте', 'in der Klemme stecken',
+      ex('Losing our backup laptop right before the demo put us [[in a tight spot]].', 'Поломка запасного ноутбука прямо перед демо поставила нас в трудное положение.', 'Der Ausfall des Ersatz-Laptops kurz vor der Demo brachte uns in die Klemme.'), null, 'informal'),
+    I('up-in-the-air', 'up in the air', 'B2', 'в подвешенном состоянии, ещё не решено', 'noch in der Schwebe',
+      ex('Our travel dates are still [[up in the air]] until the client confirms.', 'Наши даты поездки пока в подвешенном состоянии, пока клиент не подтвердит.', 'Unsere Reisedaten hängen noch in der Schwebe, bis der Kunde bestätigt.')),
+
+    // idioms-decisions (5)
+    I('play-it-safe', 'play it safe', 'B1', 'перестраховаться, действовать наверняка', 'auf Nummer sicher gehen',
+      ex('Let’s [[play it safe]] and run a full backup before updating the server.', 'Давай подстрахуемся и сделаем полный бэкап перед обновлением сервера.', 'Gehen wir auf Nummer sicher und machen vor dem Update ein vollständiges Backup.')),
+    I('think-twice', 'think twice', 'B1', 'дважды подумать (прежде чем решиться)', 'sich etwas zweimal überlegen',
+      ex('I would [[think twice]] before signing a five-year lease without a break clause.', 'Я бы дважды подумал, прежде чем подписывать пятилетнюю аренду без права досрочного выхода.', 'Ich würde es mir zweimal überlegen, einen Fünfjahresvertrag ohne Kündigungsklausel zu unterschreiben.')),
+    I('cross-that-bridge', 'cross that bridge when we come to it', 'B2', 'решать проблему по мере её поступления', 'abwarten, bis es so weit ist',
+      ex('What if autumn demand doubles? Let’s [[cross that bridge when we come to it]].', 'А что, если спрос осенью удвоится? Будем решать проблему, когда она возникнет.', 'Was, wenn die Nachfrage im Herbst steigt? Kümmern wir uns darum, wenn es so weit ist.')),
+    I('draw-the-line', 'draw the line', 'B2', 'провести черту, поставить предел', 'eine Grenze ziehen',
+      ex('I don’t mind answering quick emails, but I [[draw the line]] at weekend calls.', 'Я не против отвечать на быстрые письма, но звонки в выходные — это уже слишком.', 'Gegen kurze Mails habe ich nichts, aber bei Anrufen am Wochenende ziehe ich die Grenze.')),
+    I('turn-blind-eye', 'turn a blind eye', 'B2', 'закрыть глаза на что-л., сделать вид, что не заметил', 'ein Auge zudrücken',
+      ex('Managers must not [[turn a blind eye]] to basic safety rules on site.', 'Руководители не должны закрывать глаза на базовые правила безопасности на объекте.', 'Führungskräfte dürfen bei grundlegenden Sicherheitsregeln kein Auge zudrücken.'))
+  ] });
+
+  GT.register({ tab: 'expressions', topic: 'everyday', type: 'chunk', items: [
+    // everyday-respond (5)
+    D('tell-me-about-it', 'Tell me about it!', 'B2', 'и не говори! сам(а) знаю!', 'Wem sagst du das!, Du sagst es!',
+      ex('This commute gets worse every winter. — [[Tell me about it!]]', 'Эта дорога на работу с каждой зимой всё хуже. — И не говори!', 'Der Arbeitsweg wird jeden Winter schlimmer. — Wem sagst du das!'), null, 'informal'),
+    D('hard-to-believe', 'Hard to believe!', 'B1', 'трудно поверить!', 'Kaum zu glauben!',
+      ex('They finished the audit two days ahead of schedule — [[hard to believe]]!', 'Они закончили аудит на два дня раньше срока — трудно поверить!', 'Sie haben das Audit zwei Tage früher beendet — kaum zu glauben!')),
+    D('i-thought-as-much', 'I thought as much.', 'B2', 'я так и думал(а)', 'Das habe ich mir schon gedacht.',
+      ex('The meeting ran over again. — [[I thought as much]].', 'Встреча снова затянулась. — Я так и думал.', 'Das Meeting hat wieder überzogen. — Das habe ich mir schon gedacht.')),
+    D('hang-on', 'Hang on a second.', 'B1', 'подожди секунду', 'Moment mal!, Warte kurz.',
+      ex('[[Hang on a second]], let me grab a pen before you read the code.', 'Подожди секунду, дай возьму ручку, прежде чем ты продиктуешь код.', 'Warte kurz, ich hole einen Stift, bevor du den Code vorliest.'), null, 'informal'),
+    D('youre-kidding', 'You’re kidding!', 'B1', 'ты шутишь! да ну!', 'Das gibt’s doch nicht!, Im Ernst?',
+      ex('The train is cancelled again? [[You’re kidding]]!', 'Поезд снова отменили? Ты шутишь!', 'Der Zug fällt schon wieder aus? Im Ernst?'), null, 'informal'),
+
+    // everyday-opinion (5)
+    D('in-my-view', 'In my view, …', 'B2', 'на мой взгляд…', 'Meiner Ansicht nach …',
+      ex('[[In my view]], clear documentation saves more time than extra meetings.', 'На мой взгляд, понятная документация экономит больше времени, чем лишние встречи.', 'Meiner Ansicht nach spart klare Dokumentation mehr Zeit als zusätzliche Meetings.')),
+    D('couldn-t-agree-more', 'I see your point.', 'B2', 'понимаю твою мысль / в этом есть смысл', 'Da ist was dran., Ich verstehe deinen Punkt.',
+      ex('Clearer headings do save time. — [[I see your point]].', 'Более чёткие заголовки правда экономят время. — Понимаю твою мысль.', 'Klarere Überschriften sparen wirklich Zeit. — Da ist was dran.')),
+    D('im-not-sure-about-that', 'I’m not so sure about that.', 'B1', 'я в этом не уверен(а)', 'Da bin ich mir nicht so sicher.',
+      ex('Can we skip testing on Friday? — [[I’m not so sure about that]].', 'Можем пропустить тестирование в пятницу? — Я в этом не уверен.', 'Können wir die Tests am Freitag auslassen? — Da bin ich mir nicht so sicher.')),
+    D('makes-sense-to-me', 'Makes sense to me.', 'B1', 'по-моему, логично / понятно', 'Klingt für mich logisch.',
+      ex('We split the shift in half so nobody works late. — [[Makes sense to me]].', 'Разделим смену пополам, чтобы никто не засиживался допоздна. — Логично.', 'Wir teilen die Schicht, damit niemand spät bleibt. — Klingt für mich logisch.'), null, 'informal'),
+    D('if-you-ask-me', 'If you ask me, …', 'B1', 'если хочешь знать моё мнение… / по-моему…', 'Wenn du mich fragst, …',
+      ex('[[If you ask me]], the shorter layout looks far cleaner.', 'По-моему, более короткий макет выглядит намного аккуратнее.', 'Wenn du mich fragst, sieht das kürzere Layout viel sauberer aus.')),
+
+    // everyday-arrange (5)
+    D('deal', 'Deal!', 'B1', 'договорились! по рукам!', 'Abgemacht!',
+      ex('You draft the agenda and I’ll book the room. — [[Deal!]]', 'Ты готовишь повестку, а я бронирую переговорную. — Договорились!', 'Du entwirfst die Agenda und ich buche den Raum. — Abgemacht!'), null, 'informal'),
+    D('what-time-suits-you', 'What time suits you?', 'B1', 'во сколько тебе удобно?', 'Wann passt es dir?',
+      ex('We can review the contract tomorrow — [[what time suits you]]?', 'Можем посмотреть договор завтра — во сколько тебе удобно?', 'Wir können den Vertrag morgen durchgehen — wann passt es dir?')),
+    D('running-late', 'I’m running a few minutes late.', 'B1', 'я задерживаюсь на пару минут', 'Ich verspäte mich um ein paar Minuten.',
+      ex('Sorry, traffic is heavy — [[I’m running a few minutes late]].', 'Извини, плотный трафик — я задерживаюсь на несколько минут.', 'Entschuldigung, viel Verkehr — ich verspäte mich um ein paar Minuten.')),
+    D('keep-me-posted', 'Keep me posted.', 'B2', 'держи меня в курсе', 'Halte mich auf dem Laufenden.',
+      ex('[[Keep me posted]] once the supplier confirms the new delivery date.', 'Держи меня в курсе, как только поставщик подтвердит новую дату доставки.', 'Halte mich auf dem Laufenden, sobald der Lieferant den neuen Termin bestätigt.')),
+    D('see-you-tomorrow', 'See you tomorrow!', 'A2', 'до завтра!', 'Bis morgen!',
+      ex('Have a restful evening — [[see you tomorrow]]!', 'Хорошего отдыха вечером — до завтра!', 'Schönen Feierabend — bis morgen!')),
+
+    // everyday-comfort (5)
+    D('could-be-worse', 'It could be worse.', 'B1', 'могло быть и хуже (бывает хуже)', 'Es könnte schlimmer sein.',
+      ex('Only a ten-minute delay in the rain? Well, [[it could be worse]].', 'Всего десять минут задержки под дождём? Ну, могло быть и хуже.', 'Nur zehn Minuten Verspätung im Regen? Na ja, es könnte schlimmer sein.')),
+    D('itll-turn-out-fine', 'It’ll turn out fine.', 'B1', 'всё обойдётся / всё получится', 'Das wird schon gut gehen.',
+      ex('Don’t stress over the Q&A — [[it’ll turn out fine]].', 'Не переживай из-за вопросов после презентации — всё пройдёт хорошо.', 'Mach dir keinen Stress wegen der Fragerunde — das wird schon gut gehen.')),
+    D('nothing-to-worry-about', 'Nothing to worry about.', 'B1', 'переживать не о чем', 'Kein Grund zur Sorge.',
+      ex('The test passed cleanly — [[nothing to worry about]].', 'Тест прошёл чисто — переживать не о чем.', 'Der Test lief sauber durch — kein Grund zur Sorge.')),
+    D('hang-in-there', 'Hang in there!', 'B2', 'держись! не сдавайся!', 'Halte durch!, Kopf hoch!',
+      ex('Just two more days until the break — [[hang in there]]!', 'Всего два дня до перерыва — держись!', 'Nur noch zwei Tage bis zur Pause — halte durch!'), null, 'informal'),
+    D('better-luck-next-time', 'Better luck next time.', 'B1', 'повезёт в следующий раз', 'Beim nächsten Mal klappt es bestimmt.',
+      ex('Shame the pitch didn’t win this round — [[better luck next time]].', 'Жаль, что в этот раз питч не выиграл — повезёт в следующий раз.', 'Schade, dass der Pitch diesmal nicht gewonnen hat — beim nächsten Mal klappt es.')),
+
+    // everyday-social (5)
+    D('congratulations', 'Congratulations!', 'A2', 'поздравляю!', 'Herzlichen Glückwunsch!',
+      ex('You passed the B2 exam on your first try — [[congratulations]]!', 'Ты сдал экзамен B2 с первой попытки — поздравляю!', 'Du hast die B2-Prüfung beim ersten Versuch bestanden — herzlichen Glückwunsch!')),
+    D('have-a-nice-weekend', 'Have a nice weekend!', 'A2', 'хороших выходных!', 'Schönes Wochenende!',
+      ex('Logging off now — [[have a nice weekend]] everyone!', 'Выхожу из сети — всем хороших выходных!', 'Ich melde mich ab — allen ein schönes Wochenende!')),
+    D('enjoy-your-meal', 'Enjoy your meal!', 'B1', 'приятного аппетита!', 'Guten Appetit!',
+      ex('Here are your plates — [[enjoy your meal]]!', 'Вот ваши блюда — приятного аппетита!', 'Hier sind Ihre Teller — guten Appetit!')),
+    D('take-care', 'Take care!', 'B1', 'береги себя! всего доброго!', 'Mach’s gut!, Pass auf dich auf!',
+      ex('Have a safe train ride home and [[take care]]!', 'Спокойной дороги домой на поезде и береги себя!', 'Gute Heimfahrt mit dem Zug und pass auf dich auf!')),
+    D('get-well-soon', 'Get well soon!', 'B1', 'скорейшего выздоровления! поправляйся!', 'Gute Besserung!',
+      ex('Sorry to hear about the flu — [[get well soon]]!', 'Жаль слышать про грипп — поправляйся скорее!', 'Tut mir leid wegen der Grippe — gute Besserung!'))
+  ] });
+})();
+
+/* === Content expansion Wave 2 (2026-11-27): +30 EN C1/diplomatic & workplace chunks === */
+(function () {
+  'use strict';
+  function ch(id, topic, t, level, register, ru, de, exT, exRu, exDe, nRu, nDe) {
+    return {
+      id: 'en:w2:ch:' + id,
+      tab: 'chunks',
+      topic: topic,
+      type: 'chunk',
+      pos: 'phrase',
+      learnable: true,
+      level: level,
+      register: register,
+      t: t,
+      ru: ru,
+      de: de,
+      examples: [{ t: exT, ru: exRu, de: exDe }],
+      note: (nRu || nDe) ? { ru: nRu || '', de: nDe || '' } : undefined
+    };
+  }
+
+  GT.register({ tab: 'chunks', items: [
+    // opinion (4)
+    ch('there-is-no-denying', 'opinion', 'There is no denying that [X].', 'C1', 'formal',
+      'Нельзя отрицать, что [X].', 'Es lässt sich nicht leugnen, dass [X].',
+      '[[There is no denying that]] clearer onboarding reduces early churn.',
+      'Нельзя отрицать, что понятная адаптация снижает ранний отток.',
+      'Es lässt sich nicht leugnen, dass klares Onboarding frühe Abgänge senkt.'),
+    ch('on-balance', 'opinion', 'On balance, I’d argue that [X].', 'C1', 'formal',
+      'Взвесив все «за» и «против», я бы сказал(а), что [X].', 'Unterm Strich würde ich sagen, dass [X].',
+      '[[On balance, I’d argue that]] simplicity outweighs extra features.',
+      'Взвесив всё, я бы сказал, что простота важнее лишних функций.',
+      'Unterm Strich würde ich sagen, dass Einfachheit mehr zählt als Zusatzfunktionen.'),
+    ch('its-worth-bearing-in-mind', 'opinion', 'It’s worth bearing in mind that [X].', 'B2', 'neutral',
+      'Стоит иметь в виду, что [X].', 'Es lohnt sich zu bedenken, dass [X].',
+      '[[It’s worth bearing in mind that]] bank transfers take two working days.',
+      'Стоит помнить, что банковские переводы занимают два рабочих дня.',
+      'Es lohnt sich zu bedenken, dass Überweisungen zwei Werktage dauern.'),
+    ch('broadly-speaking', 'opinion', 'Broadly speaking, [X].', 'C1', 'neutral',
+      'Если говорить в общих чертах / в широком смысле, [X].', 'Im Großen und Ganzen / Allgemein gesprochen [X].',
+      '[[Broadly speaking]], both proposals lead to the same annual savings.',
+      'В широком смысле оба предложения дают одинаковую годовую экономию.',
+      'Allgemein gesprochen führen beide Vorschläge zur selben jährlichen Ersparnis.'),
+
+    // agree (3)
+    ch('fair-point', 'agree', 'That’s a fair point, though [X].', 'B2', 'neutral',
+      'Справедливое замечание, однако [X].', 'Das ist ein berechtigter Punkt, allerdings [X].',
+      '[[That’s a fair point, though]] our budget doesn’t cover extra hardware yet.',
+      'Справедливое замечание, однако наш бюджет пока не покрывает новое железо.',
+      'Das ist ein berechtigter Punkt, allerdings deckt unser Budget noch keine neue Hardware.'),
+    ch('with-all-due-respect', 'agree', 'With all due respect, I see it differently.', 'C1', 'formal',
+      'При всём уважении я вижу это иначе.', 'Bei allem Respekt, das sehe ich anders.',
+      '[[With all due respect, I see it differently]] — rushing QA will cost us twice as much.',
+      'При всём уважении я вижу это иначе: спешка на тестировании обойдётся вдвое дороже.',
+      'Bei allem Respekt, das sehe ich anders — überstürztes Testen kostet doppelt.'),
+    ch('wouldnt-go-so-far', 'agree', 'I wouldn’t go quite that far, because [X].', 'C1', 'neutral',
+      'Я бы не заходил(а) так далеко, потому что [X].', 'Ganz so weit würde ich nicht gehen, weil [X].',
+      'The layout needs polish, yet [[I wouldn’t go quite that far]] as to rebuild from scratch.',
+      'Макет стоит доработать, но я бы не заходил так далеко, чтобы переделывать с нуля.',
+      'Das Layout braucht Feinschliff, doch so weit würde ich nicht gehen, alles neu zu bauen.'),
+
+    // clarify (4)
+    ch('could-you-elaborate', 'clarify', 'Could you elaborate slightly on [X]?', 'C1', 'formal',
+      'Не могли бы вы чуть подробнее раскрыть [X]?', 'Könnten Sie [X] kurz näher ausführen?',
+      '[[Could you elaborate slightly on]] the retention figures for Q3?',
+      'Не могли бы вы подробнее раскрыть цифры по удержанию за 3-й квартал?',
+      'Könnten Sie die Bindungszahlen für Q3 kurz näher ausführen?'),
+    ch('just-to-avoid-ambiguity', 'clarify', 'Just to avoid any ambiguity: [X]', 'C1', 'formal',
+      'Просто чтобы избежать двусмысленности: [X]', 'Nur um jede Unklarheit auszuschließen: [X]',
+      '[[Just to avoid any ambiguity:]] the deadline is noon CET, not midnight.',
+      'Во избежание недопонимания: дедлайн в полдень по CET, а не в полночь.',
+      'Um Unklarheiten auszuschließen: Frist ist 12 Uhr MEZ, nicht Mitternacht.'),
+    ch('where-do-we-draw-line', 'clarify', 'Where exactly do we draw the line on scope?', 'C1', 'neutral',
+      'Где именно мы проводим границу объёма работ?', 'Wo genau ziehen wir beim Umfang die Grenze?',
+      'Before quoting a fixed price, [[where exactly do we draw the line on scope?]]',
+      'До озвучивания фиксированной цены: где именно граница задач?',
+      'Bevor wir einen Festpreis nennen: Wo ziehen wir beim Umfang die Grenze?'),
+    ch('am-i-right-in-thinking', 'clarify', 'Am I right in thinking that [X]?', 'B2', 'neutral',
+      'Правильно ли я понимаю, что [X]?', 'Verstehe ich es richtig, dass [X]?',
+      '[[Am I right in thinking that]] invoices go to accounts@company.de?',
+      'Правильно ли я понимаю, что счета идут на accounts@company.de?',
+      'Verstehe ich es richtig, dass Rechnungen an accounts@company.de gehen?'),
+
+    // problem (3)
+    ch('currently-blocked-by', 'problem', 'We’re currently blocked by [X].', 'B2', 'neutral',
+      'Сейчас нас тормозит / блокирует [X].', 'Wir werden derzeit durch [X] blockiert.',
+      'The release is ready, yet [[we’re currently blocked by]] missing legal sign-off.',
+      'Релиз готов, но нас сейчас блокирует отсутствие подписи юристов.',
+      'Das Release steht, doch fehlende juristische Freigabe blockiert uns gerade.'),
+    ch('working-on-workaround', 'problem', 'In the meantime, we’ve put a workaround in place.', 'C1', 'neutral',
+      'Пока же мы настроили временный обходной вариант.', 'Inzwischen haben wir eine Übergangslösung eingerichtet.',
+      '[[In the meantime, we’ve put a workaround in place]] so customers aren’t delayed.',
+      'Временный обход уже включили, чтобы клиенты не ждали.',
+      'Wir haben vorübergehend eine Übergangslösung aktiviert, damit Kunden nicht warten.'),
+    ch('get-to-bottom-of', 'problem', 'We need to get to the bottom of why [X].', 'B2', 'neutral',
+      'Нам нужно докопаться до сути, почему [X].', 'Wir müssen der Sache auf den Grund gehen, warum [X].',
+      'Before deploying again, [[we need to get to the bottom of why]] memory spiked.',
+      'До повторного деплоя нужно докопаться до причины скачка памяти.',
+      'Vor dem nächsten Deploy müssen wir klären, warum der Speicherverbrauch stieg.'),
+
+    // phone (3)
+    ch('line-is-breaking-up', 'phone', 'Sorry, you’re breaking up a little.', 'B1', 'neutral',
+      'Извините, связь немного прерывается.', 'Entschuldigung, die Verbindung reißt etwas ab.',
+      '[[Sorry, you’re breaking up a little]] — could you repeat the last sentence?',
+      'Простите, связь прерывается — повторите, пожалуйста, последнюю фразу?',
+      'Entschuldigung, Sie kommen abgehackt an — könnten Sie den letzten Satz wiederholen?'),
+    ch('hop-on-quick-call', 'phone', 'Shall we hop on a quick call to sort this out?', 'B2', 'informal',
+      'Давай быстро созвонимся, чтобы это разрулить?', 'Sollen wir kurz telefonieren, um das zu klären?',
+      'This thread is getting long — [[shall we hop on a quick call to sort this out?]]',
+      'Переписка затягивается — давай быстро созвонимся и решим?',
+      'Der Thread wird lang — sollen wir kurz telefonieren und das klären?'),
+    ch('ill-put-you-through', 'phone', 'Hold the line, I’ll put you straight through.', 'B1', 'formal',
+      'Оставайтесь на линии, сейчас переключу вас напрямую.', 'Bleiben Sie dran, ich stelle Sie direkt durch.',
+      'One moment please — [[hold the line, I’ll put you straight through]] to billing.',
+      'Секунду, пожалуйста — оставайтесь на линии, переключаю в расчётный отдел.',
+      'Einen Moment bitte — ich stelle Sie direkt zur Buchhaltung durch.'),
+
+    // email (2)
+    ch('following-up-on-thread', 'email', 'Just following up on my previous email regarding [X].', 'B2', 'formal',
+      'Напоминаю о своём предыдущем письме по поводу [X].', 'Ich hake kurz bezüglich meiner vorherigen E-Mail zu [X] nach.',
+      '[[Just following up on my previous email regarding]] the updated contract.',
+      'Коротко напоминаю о прошлом письме по поводу обновлённого договора.',
+      'Ich frage kurz wegen meiner letzten E-Mail zum aktualisierten Vertrag nach.'),
+    ch('gentle-reminder-deadline', 'email', 'This is a gentle reminder that [X] is due by Friday.', 'C1', 'formal',
+      'Вежливо напоминаем, что [X] нужно сдать до пятницы.', 'Dies ist eine freundliche Erinnerung, dass [X] bis Freitag fällig ist.',
+      '[[This is a gentle reminder that]] timesheets are due by Friday afternoon.',
+      'Вежливое напоминание, что табели нужно подать до вечера пятницы.',
+      'Eine freundliche Erinnerung, dass die Stundenzettel bis Freitagnachmittag fällig sind.'),
+
+    // smalltalk (2)
+    ch('how-did-weekend-go', 'smalltalk', 'How did your weekend go? Get much rest?', 'B1', 'informal',
+      'Как прошли выходные? Удалось отдохнуть?', 'Wie war dein Wochenende? Konntest du dich ausruhen?',
+      'Morning! [[How did your weekend go? Get much rest]] after Friday’s launch?',
+      'Доброе утро! Как прошли выходные? Получилось отдохнуть после пятничного запуска?',
+      'Guten Morgen! Wie war dein Wochenende? Konntest du dich etwas ausruhen?'),
+    ch('time-flies-this-quarter', 'smalltalk', 'Hard to believe it’s already the end of the month.', 'B2', 'neutral',
+      'Трудно поверить, что уже конец месяца.', 'Kaum zu glauben, dass schon Monatsende ist.',
+      'Look at the calendar — [[hard to believe it’s already the end of the month]].',
+      'Глянь на календарь — не верится, что месяц уже заканчивается.',
+      'Schau auf den Kalender — kaum zu glauben, dass schon Monatsende ist.'),
+
+    // it-standup (2)
+    ch('wrapping-up-qa', 'it-standup', 'I’m wrapping up QA and should merge by noon.', 'B2', 'neutral',
+      'Доделываю проверку и к полудню планирую влить ветку.', 'Ich schließe gerade die Tests ab und merge gegen Mittag.',
+      'For ticket 412, [[I’m wrapping up QA and should merge by noon]].',
+      'По задаче 412 доделываю QA и к полудню планирую смержить.',
+      'Für Ticket 412 beende ich gerade QA und merge voraussichtlich gegen Mittag.'),
+    ch('on-track-no-blockers', 'it-standup', 'Everything’s on track — no blockers on my side.', 'B1', 'neutral',
+      'Всё по плану — с моей стороны блокеров нет.', 'Alles läuft nach Plan — bei mir gibt es keine Blocker.',
+      'Short update from me: [[everything’s on track — no blockers on my side]].',
+      'Коротко от меня: всё идёт по плану, блокеров нет.',
+      'Kurzes Update von mir: Alles im Plan, keine Blocker auf meiner Seite.'),
+
+    // it-bug (3)
+    ch('regression-since-update', 'it-bug', 'This looks like a regression from yesterday’s deploy.', 'C1', 'neutral',
+      'Похоже, это регрессия после вчерашнего деплоя.', 'Das sieht nach einer Regression seit dem gestrigen Deploy aus.',
+      'Nothing else changed in config, so [[this looks like a regression from yesterday’s deploy]].',
+      'В конфигах больше ничего не меняли — похоже на регрессию после вчерашнего выката.',
+      'Sonst hat sich nichts geändert, das wirkt wie eine Regression vom gestrigen Deploy.'),
+    ch('reproducible-only-in-prod', 'it-bug', 'It passes locally, yet fails under production load.', 'B2', 'neutral',
+      'Локально всё проходит, а под продакшн-нагрузкой падает.', 'Lokal läuft es durch, scheitert aber unter Produktionslast.',
+      '[[It passes locally, yet fails under production load]] once traffic doubles.',
+      'Локально тесты проходят, но под реальной нагрузкой всё падает при удвоении трафика.',
+      'Lokal besteht der Test, bricht aber unter echter Last zusammen.'),
+    ch('flushing-cache-resolved', 'it-bug', 'Clearing the cache resolved the glitch.', 'B2', 'neutral',
+      'Очистка кэша устранила этот сбой.', 'Das Leeren des Caches hat das Problem behoben.',
+      'Turned out stale assets caused it — [[clearing the cache resolved the glitch]].',
+      'Виноваты оказались устаревшие ассеты — очистка кэша всё починила.',
+      'Veraltete Dateien waren schuld — Cache leeren hat den Fehler behoben.'),
+
+    // it-help (2)
+    ch('second-pair-of-eyes', 'it-help', 'Could I grab a second pair of eyes on this config?', 'B2', 'informal',
+      'Можешь свежим взглядом глянуть на эту конфигурацию?', 'Kannst du dir diese Konfiguration kurz mit frischem Blick ansehen?',
+      'Staring at the YAML too long — [[could I grab a second pair of eyes on this config?]]',
+      'Слишком долго смотрю в этот YAML — взглянешь свежим взглядом?',
+      'Ich starre schon zu lang auf das YAML — hast du einen zweiten Blick darauf?'),
+    ch('which-branch-base', 'it-help', 'Which branch should I cut my feature branch from?', 'B2', 'neutral',
+      'От какой ветки лучше отвести мою рабочую ветку?', 'Von welchem Branch soll ich meinen Feature-Branch abzweigen?',
+      'Quick question before coding: [[which branch should I cut my feature branch from?]]',
+      'Быстрый вопрос перед началом: от какой ветки отпочковаться?',
+      'Kurze Frage vorab: Von welchem Branch soll ich meinen Feature-Branch erstellen?'),
+
+    // it-meeting (2)
+    ch('can-i-chime-in', 'it-meeting', 'May I chime in briefly before we move on?', 'C1', 'neutral',
+      'Можно коротко вставить реплику, прежде чем пойдём дальше?', 'Darf ich kurz einhaken, bevor wir weitergehen?',
+      '[[May I chime in briefly before we move on?]] The mobile team hit that same constraint.',
+      'Можно коротко дополнить, пока мы не перешли дальше? Мобильная команда с этим уже сталкивалась.',
+      'Darf ich kurz einhaken, bevor wir weitergehen? Das Mobile-Team hatte dasselbe Problem.'),
+    ch('park-this-offline', 'it-meeting', 'Let’s park that detail and follow up offline.', 'C1', 'neutral',
+      'Давайте отложим эту деталь и обсудим её отдельно после встречи.', 'Stellen wir das Detail zurück und klären es nach dem Meeting.',
+      'To stay within our thirty minutes, [[let’s park that detail and follow up offline]].',
+      'Чтобы уложиться в полчаса, вынесем эту деталь за рамки созвона.',
+      'Um im Zeitrahmen zu bleiben, klären wir dieses Detail nach dem Termin bilateral.')
+  ] });
+})();

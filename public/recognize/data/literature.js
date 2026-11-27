@@ -332,3 +332,188 @@
         ex('Nach Monaten mit diesen Akten hatte sie das Gefühl, [[in einen Abgrund zu blicken]].', 'После нескольких месяцев работы с этими делами у неё было чувство, будто она смотрит в бездну.', 'After months with those case files she felt as though she was gazing into an abyss.')])
   ]);
 })();
+
+/* === Content expansion 2026-11-27 (+15 DE Literary Phrases) === */
+(function () {
+  'use strict';
+  function pair(ru, en) { return { ru: ru, en: en }; }
+  function ex(t, ru, en) { return { t: t, ru: ru, en: en }; }
+  function part(t, ru, en) { return [t, pair(ru, en)]; }
+  function card(id, t, level, register, source, meaning, literal, breakdown, context, tone, parts, examples) {
+    return {
+      id: 'lit-de-' + id, t: t, type: 'chunk', level: level, register: register,
+      ru: meaning.ru, en: meaning.en, examples: examples, parts: parts,
+      lit: { author: source.author, work: source.work, workOrig: source.workOrig, year: source.year,
+        quote: t, literal: literal, breakdown: breakdown, context: context, tone: tone }
+    };
+  }
+  function source(ru, en, workOrig, year, workRu, workEn) {
+    return { author: pair(ru, en), work: pair(workRu, workEn), workOrig: workOrig, year: year };
+  }
+  function add(topic, items) { GT.register({ tab: 'literature', topic: topic, items: items }); }
+
+  add('love', [
+    card('seele-herz', 'Du meine Seele, du mein Herz', 'B2', 'literary',
+      source('Фридрих Рюккерт', 'Friedrich Rückert', 'Liebesfrühling', 1821, 'Весна любви', 'Spring of Love'),
+      pair('ты — всё, что мне дорого и близко', 'you are everything dear to me'),
+      pair('ты моя душа, ты моё сердце', 'you my soul, you my heart'),
+      pair('Безглагольное обращение ставит «ты» и «душа/сердце» рядом как одно целое.', 'The verbless address places “you” directly beside “my soul, my heart”.'),
+      pair('Стихотворение «Widmung», ставшее знаменитой песней Шумана.', 'The opening line of the poem “Widmung”, famously set to music by Schumann.'),
+      pair('Классическое поэтическое признание, узнаваемое по музыке и тексту.', 'A classic poetic declaration recognisable both as verse and song.'),
+      [part('Du meine Seele', 'обращение без глагола-связки', 'direct address without a copula verb')],
+      [ex('In seinem alten Brief stand gleich am Anfang: „[[Du meine Seele, du mein Herz]].“', 'В его старом письме с самого начала стояло: «Ты моя душа, ты моё сердце».', 'Right at the start of his old letter it read: “You my soul, you my heart.”'),
+        ex('Die Sängerin eröffnete den Liederabend mit „[[Du meine Seele, du mein Herz]]“.', 'Певица открыла вечер романсов словами «Ты моя душа, ты моё сердце».', 'The singer opened the recital with “Du meine Seele, du mein Herz”.')]),
+    card('ewig-bindet', 'Drum prüfe, wer sich ewig bindet', 'B2', 'elevated',
+      source('Фридрих Шиллер', 'Friedrich Schiller', 'Das Lied von der Glocke', 1799, 'Песнь о колоколе', 'The Song of the Bell'),
+      pair('подумай как следует, прежде чем связать с кем-то жизнь', 'think carefully before committing for life'),
+      pair('потому пусть проверит тот, кто связывает себя навеки', 'therefore let test who binds themselves forever'),
+      pair('Drum (darum) в начале подводит итог. Косвенное обращение через «wer» звучит как общая мудрость.', 'Drum (darum) draws a conclusion; the impersonal “wer” clause turns it into a maxim.'),
+      pair('Шиллер советует не торопиться с браком, чтобы не жалеть потом.', 'Schiller cautions against rushing into marriage before checking if two hearts match.'),
+      pair('В Германии цитируют на свадьбах и с лёгкой иронией при выборе долгого договора.', 'Quoted at weddings and with wry humour before signing any long-term commitment.'),
+      [part('sich binden', 'связать себя обязательством', 'to commit oneself, tie the knot')],
+      [ex('Ein Fünfjahresvertrag ist lang — [[drum prüfe, wer sich ewig bindet]].', 'Пятилетний договор — это надолго, так что семь раз проверь, прежде чем связывать себя.', 'A five-year contract is a long time — think carefully before binding yourself.'),
+        ex('Auf der Hochzeitskarte stand augenzwinkernd: „[[Drum prüfe, wer sich ewig bindet]].“', 'На свадебной открытке с улыбкой написали: «Подумай, кто связывает себя навек».', 'The wedding card read tongue-in-cheek: “Let him test who binds himself forever.”')]),
+    card('tibet-teppich', 'Deine Seele, die die meine liebet', 'C1', 'literary',
+      source('Эльза Ласкер-Шюлер', 'Else Lasker-Schüler', 'Ein alter Tibetteppich', 1910, 'Старый тибетский ковёр', 'An Old Tibetan Carpet'),
+      pair('твоя душа, которая любит мою', 'your soul, which loves mine'),
+      pair('твоя душа, которая мою любит', 'your soul, which loves mine'),
+      pair('Субстантивированное «die meine» (моя) и поэтическая форма «liebet» создают торжественный ритм.', 'The nominalised “die meine” (mine) and archaic “liebet” create a solemn cadence.'),
+      pair('Поэтесса сравнивает связь двух душ с переплетением шёлковых нитей ковра.', 'The poet likens two intertwined souls to silk threads woven into a carpet.'),
+      pair('Высокая экспрессионистская лирика начала XX века.', 'High early-20th-century expressionist lyricism.'),
+      [part('die meine', 'поэтич. вместо meine Seele', 'poetic form for meine Seele')],
+      [ex('Sie notierte die Zeile „[[Deine Seele, die die meine liebet]]“ an den Rand des Gedichtbands.', 'Она выписала на поля сборника строку: «Твоя душа, что любит мою».', 'She jotted down the line “Your soul, which loves mine” in the margin of the book.'),
+        ex('Im Seminar sprachen wir darüber, wie [[deine Seele, die die meine liebet]], den Rhythmus trägt.', 'На семинаре мы обсуждали, как эта строка держит ритм стихотворения.', 'In the seminar we discussed how that line carries the poem’s rhythm.')])
+  ]);
+
+  add('longing', [
+    card('sehnsucht-kennt', 'Nur wer die Sehnsucht kennt, weiß, was ich leide', 'C1', 'literary',
+      source('Иоганн Вольфганг фон Гёте', 'Johann Wolfgang von Goethe', 'Wilhelm Meisters Lehrjahre', 1795, 'Годы учения Вильгельма Мейстера', 'Wilhelm Meister’s Apprenticeship'),
+      pair('только тот, кто сам тосковал, поймёт мою боль', 'only someone who has felt longing knows how much I suffer'),
+      pair('лишь кто знает тоску, знает, что я страдаю', 'only he who knows longing knows what I suffer'),
+      pair('Параллелизм «wer … kennt, weiß …» и сдержанное «leide» подчёркивают глубину одиночества.', 'The parallel structure “wer … kennt, weiß …” underscores shared solitary ache.'),
+      pair('Знаменитая песня Миньоны, положенная на музыку Шубертом и Чайковским.', 'Mignon’s famous song, famously set to music by Schubert and Tchaikovsky.'),
+      pair('Высокая, но предельно понятная формула тоски и разлуки.', 'Elevated yet instantly understandable expression of longing and separation.'),
+      [part('Sehnsucht kennen', 'знать тоску по опыту', 'to know longing first-hand')],
+      [ex('Nach dem Abschied am Bahnhof dachte sie an die Zeile: „[[Nur wer die Sehnsucht kennt, weiß, was ich leide]].“', 'После прощания на вокзале она вспомнила строку: «Лишь тот, кто знает тоску, поймёт, как я страдаю».', 'After saying goodbye at the station, she recalled: “Only one who knows longing knows what I suffer.”'),
+        ex('Ein Jahr im Ausland lehrt einen, [[was Sehnsucht bedeutet]].', 'Год за границей учит человека, что такое настоящая тоска.', 'A year abroad teaches you what true longing feels like.')]),
+    card('nebel-wandern', 'Seltsam, im Nebel zu wandern', 'B2', 'literary',
+      source('Герман Гессе', 'Hermann Hesse', 'Im Nebel', 1905, 'В тумане', 'In the Fog'),
+      pair('странное чувство одиночества и потерянности, как в тумане', 'a strange feeling of solitude and disorientation, as in fog'),
+      pair('странно бродить в тумане', 'strange to wander in the fog'),
+      pair('Безличное начало «Seltsam, … zu wandern» сразу погружает в тихую задумчивость.', 'The verbless opening “Seltsam, … zu wandern” sets a quiet, meditative mood.'),
+      pair('Гессе пишет о том, как в тумане каждый куст и камень кажутся одинокими — как и люди.', 'Hesse reflects on how in fog every bush and stone stands alone, just like people.'),
+      pair('Очень популярное стихотворение, которое немцы часто учат в школе.', 'One of Germany’s best-known poems, widely read in schools.'),
+      [part('im Nebel wandern', 'брести в тумане', 'to wander through fog')],
+      [ex('An diesem grauen Novembermorgen fiel mir sofort ein: „[[Seltsam, im Nebel zu wandern]].“', 'Этим серым ноябрьским утром мне сразу вспомнилось: «Странно бродить в тумане».', 'On that grey November morning, “Strange to wander in the fog” came straight to mind.'),
+        ex('Ohne klaren Plan fühlte sich die ganze Woche an wie ein [[Wandern im Nebel]].', 'Без чёткого плана вся неделя ощущалась как блуждание в тумане.', 'Without a clear plan, the whole week felt like wandering in the fog.')]),
+    card('golden-sterne', 'Es schienen so golden die Sterne', 'B2', 'literary',
+      source('Йозеф фон Эйхендорф', 'Joseph von Eichendorff', 'Sehnsucht', 1834, 'Тоска', 'Longing'),
+      pair('романтическое воспоминание о тихой ночи и мечтах о дальних странах', 'a romantic memory of a quiet night and dreams of distant places'),
+      pair('так золотисто светили звёзды', 'so golden shone the stars'),
+      pair('Обратный порядок с «Es schienen … die Sterne» выносит на первый план мягкий блеск ночи.', 'The introductory “Es” puts the soft golden glow of the stars in focus.'),
+      pair('Герой стоит у окна и слышит издалека почтовый рожок, зовущий в путь.', 'Standing by the window, the speaker hears a post horn in the distance calling him to travel.'),
+      pair('Классика немецкого романтизма, символ тяги к дороге (Fernweh).', 'A cornerstone of German Romanticism and wanderlust (Fernweh).'),
+      [part('so golden scheinen', 'светить золотистым светом', 'to shine with a golden glow')],
+      [ex('Auf dem Balkon über dem Tal dachte er an Eichendorff: „[[Es schienen so golden die Sterne]].“', 'На балконе над долиной он вспомнил Эйхендорфа: «Так золотисто светили звёзды».', 'On the balcony above the valley he thought of Eichendorff: “So golden shone the stars.”'),
+        ex('In jener klaren Sommernacht [[schienen die Sterne]] über dem See besonders hell.', 'В ту ясную летнюю ночь звёзды над озером светили особенно ярко.', 'On that clear summer night, the stars shone especially brightly over the lake.')])
+  ]);
+
+  add('atmosphere', [
+    card('blaues-band', 'Frühling lässt sein blaues Band wieder flattern durch die Lüfte', 'B2', 'literary',
+      source('Эдуард Мёрике', 'Eduard Mörike', 'Er ist’s', 1829, 'Это он (Весна)', 'It Is Spring'),
+      pair('пришла весна, стало светло и легко', 'spring has arrived, bringing light and freshness'),
+      pair('весна вновь пускает свою голубую ленту развеваться по воздуху', 'spring lets its blue ribbon flutter through the breezes again'),
+      pair('Олицетворение весны и конструкция «lässt … flattern» передают лёгкое движение воздуха.', 'Personifying spring with “lässt … flattern” conveys effortless motion in the air.'),
+      pair('Первое четверостишие одного из самых известных весенних стихотворений на немецком.', 'The opening of one of the best-known spring poems in German.'),
+      pair('Лёгкий, радостный образ первых тёплых дней после зимы.', 'A light, joyful image for the first warm days after winter.'),
+      [part('flattern lassen', 'давать развеваться (по ветру)', 'to let flutter in the breeze')],
+      [ex('Kaum schien im März die erste Sonne, zitierte sie: „[[Frühling lässt sein blaues Band]]…“', 'Едва в марте выглянуло первое солнце, она процитировала: «Весна вновь пускает свою голубую ленту…»', 'As soon as the first March sun appeared, she quoted: “Spring lets its blue ribbon…”'),
+        ex('Bunte Fahnen [[flatterten durch die Lüfte]] über dem Straßenfest.', 'Разноцветные флаги развевались в воздухе над уличным праздником.', 'Colourful flags fluttered through the air above the street festival.')]),
+    card('grauer-strand', 'Am grauen Strand, am grauen Meer', 'B2', 'literary',
+      source('Теодор Шторм', 'Theodor Storm', 'Die Stadt', 1852, 'Город', 'The Town'),
+      pair('суровая, приглушённая приморская атмосфера в серых тонах', 'a stark, muted coastal atmosphere in shades of grey'),
+      pair('на сером берегу, у серого моря', 'on the grey shore, by the grey sea'),
+      pair('Повтор «am grauen …» без глагола сразу рисует туманный северный пейзаж.', 'The verbless repetition “am grauen …” immediately paints a misty northern coast.'),
+      pair('Шторм описывает свой родной северный приморский городок Хузум на берегу Северного моря.', 'Storm describes his native coastal town of Husum on the North Sea.'),
+      pair('Лаконичное описание пасмурного побережья и меланхоличной погоды.', 'A concise evocation of overcast coastal weather.'),
+      [part('am Strand / am Meer', 'дательный места на вопросе «где?»', 'dative of location answering “where?”')],
+      [ex('Im November sah die Küste genauso aus: „[[Am grauen Strand, am grauen Meer]].“', 'В ноябре побережье выглядело точь-в-точь так: «На сером берегу, у серого моря».', 'In November the coast looked just like that: “On the grey shore, by the grey sea.”'),
+        ex('Wir gingen eine Stunde [[am grauen Strand]] entlang und hörten nur den Wind.', 'Мы час шли вдоль серого берега и слышали только ветер.', 'We walked along the grey shore for an hour, hearing only the wind.')]),
+    card('herbsttag', 'Herr: es ist Zeit. Der Sommer war sehr groß.', 'C1', 'literary',
+      source('Райнер Мария Рильке', 'Rainer Maria Rilke', 'Herbsttag', 1902, 'Осенний день', 'Autumn Day'),
+      pair('пора подводить итоги, лето закончилось и наступает осень', 'the season has turned; summer was full and now autumn arrives'),
+      pair('Господи, пора. Лето было очень велико.', 'Lord, it is time. The summer was very great.'),
+      pair('Короткие предложения и простое «sehr groß» придают концу лета почти эпический масштаб.', 'Short sentences and the plain “sehr groß” lend an almost epic weight to summer’s end.'),
+      pair('Первая строка «Осеннего дня», за которой следует просьба положить тень на солнечные часы.', 'The opening line of “Autumn Day”, followed by a plea to cast shadows on the sundials.'),
+      pair('Классическая цитата для первых прохладных дней сентября.', 'A classic quote for the first crisp days of September.'),
+      [part('es ist Zeit', 'пора, настало время', 'it is time')],
+      [ex('Als die ersten Blätter fielen, schrieb sie in ihr Notizbuch: „[[Herr: es ist Zeit. Der Sommer war sehr groß.]]“', 'Когда упали первые листья, она записала в блокнот: «Господи, пора. Лето было очень велико».', 'When the first leaves fell, she wrote in her notebook: “Lord, it is time. The summer was very great.”'),
+        ex('Nach drei intensiven Monaten spürten alle: [[Es ist Zeit]] für den Herbst.', 'После трёх насыщенных месяцев все почувствовали: пришла пора осени.', 'After three intense months, everyone felt it was time for autumn.')])
+  ]);
+
+  add('irony', [
+    card('vater-werden', 'Vater werden ist nicht schwer, Vater sein dagegen sehr', 'B2', 'ironic',
+      source('Вильгельм Буш', 'Wilhelm Busch', 'Julchen', 1877, 'Юльхен', 'Julchen'),
+      pair('начать дело или стать родителем просто, а нести ответственность потом — трудно', 'starting something or becoming a parent is easy; living up to it is hard'),
+      pair('стать отцом нетрудно, а вот быть отцом — очень', 'becoming a father is not hard, being a father on the other hand very much so'),
+      pair('Противопоставление инфинитивов «werden» (стать) и «sein» (быть) с рифмой «schwer / sehr».', 'The contrast between “werden” (become) and “sein” (be) locked in a crisp rhyme.'),
+      pair('Юмористическая стихотворная повесть Буша о семейных заботах.', 'From Wilhelm Busch’s humorous verse story about family life.'),
+      pair('Крылатая ироничная поговорка, понятная каждому носителю немецкого.', 'A household humorous proverb known to virtually every German speaker.'),
+      [part('dagegen', 'напротив, зато', 'on the other hand, by contrast')],
+      [ex('Ein Projekt zu starten geht schnell, die Pflege danach kostet Kraft — [[Vater werden ist nicht schwer, Vater sein dagegen sehr]].', 'Запустить проект легко, а поддерживать его потом трудно — как в поговорке про отцовство.', 'Launching a project is easy, maintaining it takes effort — becoming a father isn’t hard, being one is.'),
+        ex('Nach der ersten schlaflosen Woche lachte er: „[[Vater werden ist nicht schwer, Vater sein dagegen sehr]].“', 'После первой бессонной недели он усмехнулся: «Стать отцом легко, а вот быть им — совсем другое дело».', 'After the first sleepless week he laughed: “Becoming a father is easy; being one is quite another thing.”')]),
+    card('deutschland-nacht', 'Denk ich an Deutschland in der Nacht', 'C1', 'ironic',
+      source('Генрих Гейне', 'Heinrich Heine', 'Nachtgedanken', 1844, 'Ночные думы', 'Night Thoughts'),
+      pair('тревожная и ироничная бессонница от мыслей о положении дел дома / в стране', 'restless, wry sleeplessness over how things are going back home'),
+      pair('когда я думаю о Германии в ночи (я лишён сна)', 'when I think of Germany in the night'),
+      pair('Условное предложение без «wenn» («Denk ich…») задаёт тревожный тон с первых слов.', 'The conjunctionless conditional (“Denk ich…”) creates urgency from the first syllable.'),
+      pair('Эмигрировавший в Париж Гейне признаётся, что мысли о родине не дают ему спать.', 'Writing from Paris exile, Heine confesses thoughts of home keep him awake.'),
+      pair('Знаменитейшее начало политической лирики, часто шутливо перефразируемое в заголовках.', 'One of the most famous lines in German political verse, often echoed in headlines.'),
+      [part('Denk ich an…', 'условие без wenn (= Wenn ich an … denke)', 'conditional without wenn')],
+      [ex('„[[Denk ich an Deutschland in der Nacht]]“ — mit diesem Zitat begann der Kommentar über die Bahnreform.', '«Когда я думаю о Германии в ночи…» — с этой цитаты начиналась колонка о реформе железных дорог.', '“When I think of Germany at night” — that quote opened the column on rail reform.'),
+        ex('[[Denke ich an die Steuererklärung in der Nacht]], bin ich sofort wieder wach.', 'Как подумаю ночью о налоговой декларации — сразу просыпаюсь.', 'When I think of my tax return at night, I’m wide awake immediately.')]),
+    card('reise-verzaehlen', 'Wenn jemand eine Reise tut, so kann er was verzählen', 'B2', 'ironic',
+      source('Маттиас Клаудиус', 'Matthias Claudius', 'Urians Reise um die Welt', 1786, 'Путешествие Уриана вокруг света', 'Urian’s Journey Round the World'),
+      pair('кто много ездит, у того всегда есть куча историй и баек', 'anyone who travels always comes back with plenty of stories'),
+      pair('если кто-то совершает поездку, то может кое-что рассказать', 'when someone takes a journey, they have something to tell'),
+      pair('Разговорное «was» (= etwas) и диалектное «verzählen» (= erzählen) придают добродушную иронию.', 'Colloquial “was” and regional “verzählen” (erzählen) give it playful charm.'),
+      pair('Герой Уриан объезжает весь мир и с важным видом рассказывает очевидные вещи.', 'The character Urian travels the globe only to report obvious sights with great pride.'),
+      pair('Шутливая присказка о дорожных приключениях и рассказчиках.', 'A cheerful proverb about travel stories and tall tales.'),
+      [part('eine Reise tun', 'книжн./уст. совершить путешествие', 'to take a journey')],
+      [ex('Drei Stunden im Ersatzbus statt im ICE — [[wenn jemand eine Reise tut, so kann er was verzählen]].', 'Три часа в подменном автобусе вместо скоростного поезда — кто путешествует, тому есть что рассказать.', 'Three hours on a replacement bus instead of the ICE — when someone travels, they have stories to tell.'),
+        ex('Nach jeder Dienstreise bringt Lukas eine Anekdote mit: [[Wenn jemand eine Reise tut]], hat er eben viel erlebt.', 'После каждой командировки Лукас привозит байку: кто ездит, тому всегда есть что вспомнить.', 'After every business trip Lukas brings back an anecdote: travel always leaves you with stories.')])
+  ]);
+
+  add('fate', [
+    card('jedem-anfang', 'Jedem Anfang wohnt ein Zauber inne', 'B2', 'elevated',
+      source('Герман Гессе', 'Hermann Hesse', 'Stufen', 1941, 'Ступени', 'Stages'),
+      pair('в любом новом начинании есть особое вдохновение и сила', 'every new beginning carries a special magic and promise'),
+      pair('в каждом начале обитает волшебство', 'within every beginning dwells a magic'),
+      pair('Глагол «innewohnen» с дательным падежом («jedem Anfang») звучит возвышенно и лаконично.', 'The formal verb “innewohnen” with dative (“jedem Anfang”) sounds elevated and memorable.'),
+      pair('Из стихотворения «Ступени» о смелости прощаться и начинать новый этап жизни.', 'From “Stages”, a poem about having the courage to part and start anew.'),
+      pair('Самая цитируемая в Германии строка для переезда, новой работы или Нового года.', 'Germany’s go-to quote for moving house, starting a new job or entering a new chapter.'),
+      [part('innewohnen + Dat.', 'быть присущим чему-л., таиться внутри', 'to dwell within, be inherent in')],
+      [ex('Am ersten Tag im neuen Job dachte sie an Hesse: „[[Jedem Anfang wohnt ein Zauber inne]].“', 'В первый день на новой работе она вспомнила Гессе: «В каждом начале живёт волшебство».', 'On her first day at the new job she recalled Hesse: “Within every beginning dwells a magic.”'),
+        ex('Auch wenn der Umzug anstrengend war: [[jedem Anfang wohnt ein Zauber inne]].', 'Пусть переезд и был утомительным, но в каждом новом начале есть своё очарование.', 'Even though moving was exhausting, every new beginning has its magic.')]),
+    card('verweile-doch', 'Verweile doch! du bist so schön!', 'C1', 'literary',
+      source('Иоганн Вольфганг фон Гёте', 'Johann Wolfgang von Goethe', 'Faust I', 1808, 'Фауст I', 'Faust, Part One'),
+      pair('остановись, мгновенье, ты прекрасно — редкий момент абсолютной полноты жизни', 'linger awhile, moment, you are so fair — a moment you wish would never end'),
+      pair('задержись же! ты так прекрасно!', 'linger awhile! you are so fair!'),
+      pair('Устаревший глагол «verweilen» (помедлить) и частица «doch» (же) создают высокую мольбу.', 'The literary verb “verweilen” (linger) with the particle “doch” forms an urgent plea.'),
+      pair('Фауст заключает пари с Мефистофелем: если он скажет эти слова мгновению, тот заберёт его душу.', 'Faust’s famous wager with Mephistopheles: if he ever bids a moment stay, he loses his soul.'),
+      pair('Одна из главных цитат немецкой культуры о ценности настоящего момента.', 'One of German literature’s defining quotes about savouring the present moment.'),
+      [part('verweilen', 'книжн. медлить, задерживаться', 'to linger, stay awhile')],
+      [ex('Bei diesem Sonnenuntergang am Meer möchte man rufen: „[[Verweile doch! du bist so schön!]]“', 'На таком закате у моря хочется воскликнуть: «Остановись, мгновенье, ты прекрасно!»', 'Watching a sunset like this by the sea makes you want to cry: “Linger awhile, you are so fair!”'),
+        ex('Manchmal wünscht man einem ruhigen Urlaubstag, er möge noch ein wenig [[verweilen]].', 'Иногда хочется, чтобы спокойный отпускной день ещё немного задержался.', 'Sometimes you wish a quiet holiday afternoon would linger just a little longer.')]),
+    card('wo-gefahr-ist', 'Wo aber Gefahr ist, wächst das Rettende auch', 'C1', 'elevated',
+      source('Фридрих Гёльдерлин', 'Friedrich Hölderlin', 'Patmos', 1803, 'Патмос', 'Patmos'),
+      pair('именно в кризисе рождаются пути выхода и спасения', 'precisely where danger lies, the saving remedy grows as well'),
+      pair('но где есть опасность, там растёт и спасительное', 'yet where danger is, grows the saving power also'),
+      pair('Субстантивированное причастие «das Rettende» (то, что спасает) звучит философски и собранно.', 'The nominalised participle “das Rettende” (that which saves) gives the line philosophical weight.'),
+      pair('Знаменитое двустишие из гимна «Патмос» о надежде среди кризиса.', 'The celebrated opening lines of Hölderlin’s hymn “Patmos”.'),
+      pair('Часто цитируется в эссе и речах о преодолении кризисов.', 'Frequently quoted in essays and speeches about overcoming crises.'),
+      [part('das Rettende', 'субст. причастие: спасительное начало', 'nominalised participle: the saving force')],
+      [ex('In Krisenzeiten erinnert man gern an Hölderlin: „[[Wo aber Gefahr ist, wächst das Rettende auch]].“', 'Во времена кризисов любят вспоминать Гёльдерлина: «Где опасность, там растёт и спасительное».', 'In times of crisis people like to quote Hölderlin: “Where danger is, the saving power grows too.”'),
+        ex('Aus der akuten Notlage entstand unerwartet [[etwas Rettendes]] für den Betrieb.', 'Из острой кризисной ситуации неожиданно выросло спасительное решение для компании.', 'Out of the acute crisis came an unexpected saving solution for the business.')])
+  ]);
+})();
