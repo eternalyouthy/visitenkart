@@ -3027,7 +3027,7 @@
   function rootsSubTabs(active) {
     var loadedRoots = Object.keys(GT.roots).length;
     var loadedPfx = Object.keys(GT.prefixes).length;
-    return '<nav class="seg-tabs" aria-label="Roots sections">' +
+    return '<nav class="seg-tabs roots-tabs" aria-label="Roots sections">' +
       [
         ['families', 'Word Families (' + loadedRoots + ')', '#/roots'],
         ['prefixes', GT.cfg('prefixTab', 'Prefixes') + ' (' + loadedPfx + ')', '#/roots/prefixes'],
