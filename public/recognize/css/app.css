@@ -1728,10 +1728,19 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 }
 @media (max-width: 640px) {
   .rr-modes .seg-tabs { flex-wrap: wrap; width: 100%; }
+  .roots-play-btn { width: 100%; min-width: 0; min-height: 48px; }
 }
 
 /* ---------- Root roulette ---------- */
 .roots-play-row { display: flex; flex-wrap: wrap; gap: 10px; margin: -12px 0 18px; }
+.roots-play-btn {
+  min-width: 300px;
+  min-height: 48px;
+  padding: 13px 28px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  justify-content: center;
+}
 .rr-slot {
   display: inline-block; padding: 1px 10px;
   border: 1px solid var(--line-ice); background: var(--ice-soft); color: var(--ice);

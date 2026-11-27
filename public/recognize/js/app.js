@@ -3045,7 +3045,7 @@
   function viewRootsLanding(section) {
     section = section || 'families';
     var h = '<header class="page-head"><span class="eyebrow">Language · Roots</span><h1>Roots & Word Formation</h1><p class="lead">' + intro('roots') + '</p></header>';
-    if (GT.feature('rootRoulette')) h += '<div class="roots-play-row"><a class="btn small" href="#/roots/roulette">Play Root roulette →</a></div>';
+    if (GT.feature('rootRoulette')) h += '<div class="roots-play-row"><a class="btn primary roots-play-btn" href="#/roots/roulette">Play Root roulette →</a></div>';
     h += rootsSubTabs(section);
     if (section === 'families') {
       var groupIntro = GT.cfg('rootGroupIntro') || {};
