@@ -226,8 +226,8 @@
     PRO_GROUPS: [
       { key: 'for-everyone', title: 'For Everyone', badge: 'Start here', desc: 'Essential for every profession: office communication, meetings, clients, presentations, careers and modern work. Complete this track first, then pick your field below.' },
       { key: 'it', title: 'IT Professions', desc: 'Software engineering, cloud infrastructure, cybersecurity, UX design, AI/data and agile product work.' },
-      { key: 'bureaucracy', title: 'Bureaucracy & Administration', desc: 'Public offices, permits, taxes, payroll, social security, official notices and formal records (B2–C2).' },
       { key: 'legal', title: 'Legal & Law', desc: 'Contracts, intellectual property, criminal law & courts, labour law and corporate compliance (B2–C2).' },
+      { key: 'bureaucracy', title: 'Bureaucracy & Administration', desc: 'Public offices, permits, taxes, payroll, social security, official notices and formal records (B2–C2).' },
       { key: 'service', title: 'Service, Hospitality & Retail', desc: 'Hotels & front desk, gastronomy & catering, retail sales and customer support (B2–C1).' },
       { key: 'business', title: 'Finance, HR & Marketing', desc: 'Accounting & finance, sales, marketing & PR, recruiting and HR operations (B2–C2).' },
       { key: 'operations', title: 'Healthcare, Logistics & Trades', desc: 'Clinical healthcare, logistics & supply chain, engineering, construction and technical trades (B2–C2).' }
