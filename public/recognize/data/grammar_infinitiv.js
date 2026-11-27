@@ -104,7 +104,7 @@ GT.registerGrammar({
     },
     {
       id: 'g-inf-d6', kind: 'gap',
-      q: 'Sie ist aus dem Büro gegangen, ___ sich zu verabschieden. (не попрощавшись)',
+      q: { ru: 'Sie ist aus dem Büro gegangen, ___ sich zu verabschieden. (не попрощавшись)', en: 'Sie ist aus dem Büro gegangen, ___ sich zu verabschieden. (without saying goodbye)' },
       hint: { ru: 'оборот «не сделав чего-то»: ... zu + Inf.', en: '“without doing”: ... zu + Inf.' },
       answer: 'ohne',
       explain: { ru: 'Отсутствие действия → ohne … zu.', en: 'Without doing something → ohne … zu.' }

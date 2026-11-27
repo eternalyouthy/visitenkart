@@ -110,11 +110,12 @@
     var esc = api.esc, lang = GT.learn, m = modeOf(d, G.mode), gm = d.games[m.game];
     function tab(mo) { return '<button class="seg-tab' + (G.mode === mo.id ? ' active' : '') + '" type="button" role="tab" aria-selected="' + (G.mode === mo.id) + '" data-ag="mode" data-v="' + esc(mo.id) + '">' + esc(mo.label) + '</button>'; }
     var modes = modesOf(d), main = modes.filter(function (x) { return !x.solo; });
-    var patterns = modes.find(function (x) { return x.solo && !comparisonMode(x); });
-    var patternButton = patterns ? '<button type="button" class="seg-tab ag-patterns' + (m.id === patterns.id ? ' active' : '') +
-      '" data-ag="mode" data-v="' + esc(patterns.id) + '" aria-pressed="' + (m.id === patterns.id) + '">' + esc(patterns.label) + '</button>' : '';
+    var soloButtons = modes.filter(function (x) { return x.solo; }).map(function (so) {
+      return '<button type="button" class="seg-tab ag-patterns' + (m.id === so.id ? ' active' : '') +
+        '" data-ag="mode" data-v="' + esc(so.id) + '" aria-pressed="' + (m.id === so.id) + '">' + esc(so.label) + '</button>';
+    }).join('');
     var h = '<div class="ag-modes"><div class="seg-tabs ag-filter" role="tablist">' + main.map(tab).join('') + '</div>' +
-      patternButton + '</div>';
+      (soloButtons ? '<div class="ag-solo-row">' + soloButtons + '</div>' : '') + '</div>';
     var note = d.modeNote ? d.modeNote(m.id) : '';
     if (note) h += '<p class="mono-muted ag-mode-note">' + esc(note) + '</p>';
     if (G.cur < 0) return h + '<div class="empty-state"><p>No tasks in this mode yet.</p></div>';

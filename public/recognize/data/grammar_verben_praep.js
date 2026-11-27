@@ -141,14 +141,14 @@ GT.registerGrammar({
     },
     {
       id: 'g-vp-d6', kind: 'gap',
-      q: 'Hast du dich schon ___ den neuen Computer gewöhnt? (предлог)',
+      q: { ru: 'Hast du dich schon ___ den neuen Computer gewöhnt? (предлог)', en: 'Hast du dich schon ___ den neuen Computer gewöhnt? (preposition)' },
       hint: { ru: 'sich gewöhnen + ... + Akk.', en: 'sich gewöhnen + ... + Akk.' },
       answer: 'an',
       explain: { ru: 'sich gewöhnen an + Akkusativ — привыкать к чему-либо.', en: 'sich gewöhnen an + Akkusativ — to get used to something.' }
     },
     {
       id: 'g-vp-d7', kind: 'gap',
-      q: 'Morgen ist die Prüfung. Ich denke die ganze Zeit ___. (da-слово для an)',
+      q: { ru: 'Morgen ist die Prüfung. Ich denke die ganze Zeit ___. (da-слово для an)', en: 'Morgen ist die Prüfung. Ich denke die ganze Zeit ___. (da-word for an)' },
       hint: { ru: 'da + r + an', en: 'da + r + an' },
       answer: 'daran',
       explain: { ru: 'denken an + событие → daran (вставляется -r-, так как an начинается на гласную).', en: 'denken an + event → daran (insert -r- before the vowel in an).' }

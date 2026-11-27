@@ -99,13 +99,13 @@
       },
       missing: 'Перевод ещё не готов — показан оригинал.',
       prompt: {
-        intro: 'Давай потренируем разговорный {ADJ} язык. Обо мне: я живу в Германии, работаю в IT аналитиком SOC и общаюсь не только с технарями, но и с коллегами из других отделов. Читаю и понимаю на слух лучше, чем говорю; активный словарный запас слабее.',
+        intro: 'Давай потренируем разговорный {ADJ} язык. Читаю и понимаю на слух лучше, чем говорю; активный словарный запас слабее.',
         topic: 'Тема: ', scenario: 'Сценарий: ', scenarioDefault: 'реалистичная бытовая ситуация, в которой эти слова нужны естественным образом. Роль выбери сам.',
         words: 'Слова, которые я только что выучил(а):', chunks: 'Фразы, которые я хочу использовать:', rules: 'Правила:',
         r1: '1. Разыграй со мной этот сценарий. Говори со мной ТОЛЬКО на языке, который я учу ({LN}), и оставайся в роли. Начни с одной короткой реплики.',
         r2: '2. Заставляй меня активно использовать слова и фразы из списка: создавай ситуации и задавай вопросы, где они нужны. Сам(а) их все не используй. Если я какие-то избегаю — мягко подталкивай к ним.',
         r3: '3. Твой язык — уровня {LVL}: короткие предложения, частотная лексика, без редких идиом. Говори естественно, как носитель.',
-        r4: '4. НЕ перебивай и не исправляй меня посреди фразы. Сначала ответь в роли. Потом, в КОНЦЕ каждого обмена репликами, добавь короткий блок «Korrektur:» — максимум 3 главные ошибки: мой вариант → правильный вариант + короткое объяснение ПО-РУССКИ. Если ошибок нет, напиши «Korrektur: ✓».',
+        r4: '4. НЕ перебивай и не исправляй меня посреди фразы. Сначала ответь в роли. Потом, в КОНЦЕ каждого обмена репликами, добавь короткий блок «Исправления:» — максимум 3 главные ошибки: мой вариант → правильный вариант + короткое объяснение ПО-РУССКИ. Если ошибок нет, напиши «Исправления: ✓».',
         r5: '5. Примерно через 10 обменов заверши сцену и скажи по-русски, какие слова и фразы я использовал(а) правильно, а какие избегал(а) или употребил(а) с ошибками.',
         start: 'Начинай. Сама ролевая игра — только на изучаемом языке.'
       }
@@ -178,7 +178,7 @@
       },
       missing: 'Translation not available yet — showing the original.',
       prompt: {
-        intro: 'Let’s practise spoken {ADJ}. About me: I live in Germany, work in IT as a SOC analyst and talk not only to techies but also to colleagues from other departments. I read and understand better than I speak; my active vocabulary is weaker.',
+        intro: 'Let’s practise spoken {ADJ}. I read and understand better than I speak; my active vocabulary is weaker.',
         topic: 'Topic: ', scenario: 'Scenario: ', scenarioDefault: 'a realistic everyday situation in which these words come up naturally. Choose the roles yourself.',
         words: 'Words I have just learned:', chunks: 'Phrases I want to use:', rules: 'Rules:',
         r1: '1. Play this scenario with me. Speak to me ONLY in the language I am learning ({LN}) and stay in your role. Start with one short line.',
@@ -257,7 +257,7 @@
       },
       missing: 'Übersetzung noch nicht vorhanden — Original wird angezeigt.',
       prompt: {
-        intro: 'Lass uns gesprochenes {ADJ} üben. Über mich: Ich lebe in Deutschland, arbeite in der IT als SOC-Analyst und spreche nicht nur mit Technikern, sondern auch mit Kollegen aus anderen Abteilungen. Ich lese und verstehe besser, als ich spreche; mein aktiver Wortschatz ist schwächer.',
+        intro: 'Lass uns gesprochenes {ADJ} üben. Ich lese und verstehe besser, als ich spreche; mein aktiver Wortschatz ist schwächer.',
         topic: 'Thema: ', scenario: 'Szenario: ', scenarioDefault: 'eine realistische Alltagssituation, in der diese Wörter natürlich vorkommen. Wähle die Rollen selbst.',
         words: 'Wörter, die ich gerade gelernt habe:', chunks: 'Wendungen, die ich benutzen möchte:', rules: 'Regeln:',
         r1: '1. Spiel dieses Szenario mit mir. Sprich mit mir NUR in der Sprache, die ich lerne ({LN}), und bleib in deiner Rolle. Beginne mit einem kurzen Satz.',

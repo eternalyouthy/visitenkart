@@ -42,7 +42,7 @@
   reg('home', [
     N('zvonok', 'звон+ок', 'm', 'B1', 'doorbell', 'Klingel',
       ex('Наш дверн+ой [[звон+ок]] слом+ался, так что пр+осто позвон+и, когд+а б+удешь у дв+ери.', 'Our doorbell is broken, so just give me a call when you’re at the door.', 'Unsere Klingel ist kaputt, ruf einfach kurz an, wenn du vor der Tür stehst.'),
-      ['Also “phone call” (звон+ок д+ругу); verb звон+ить.', 'Auch „Anruf“ (звон+ок д+ругу); Verb звон+ить.']),
+      ['Also “phone call” (звон+ок др+угу); verb звон+ить.', 'Auch „Anruf“ (звон+ок др+угу); Verb звон+ить.']),
     N('pochtovyy-yashchik', 'почт+овый +ящик', 'm', 'B1', 'letterbox', 'Briefkasten',
       ex('П+осле пере+езда на [[почт+овом +ящике]] всё ещё сто+яла н+аша пр+ежняя фам+илия.', 'After the move, our old name was still on the letterbox.', 'Nach dem Umzug stand unser alter Name noch am Briefkasten.')),
     N('truba', 'труб+а', 'f', 'B1', 'pipe', 'Leitung',

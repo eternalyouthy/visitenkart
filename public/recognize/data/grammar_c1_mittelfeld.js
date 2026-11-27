@@ -110,14 +110,14 @@ GT.registerGrammar({
     },
     {
       id: 'g-mf-d3', kind: 'choice',
-      q: 'Wo ist „nicht“ richtig? (Я не жду автобус / I’m not waiting for the bus)',
+      q: { ru: 'Wo ist „nicht“ richtig? (Я не жду автобус)', en: 'Wo ist „nicht“ richtig? (I’m not waiting for the bus)' },
       options: ['Ich warte nicht auf den Bus.', 'Ich warte auf den Bus nicht.', 'Ich nicht warte auf den Bus.'],
       answer: 0,
       explain: { ru: 'nicht перед предложным дополнением.', en: 'nicht goes before a prepositional object.' }
     },
     {
       id: 'g-mf-d4', kind: 'choice',
-      q: 'Wo ist „nicht“ richtig? (Я не знаю этого человека / I don’t know this man)',
+      q: { ru: 'Wo ist „nicht“ richtig? (Я не знаю этого человека)', en: 'Wo ist „nicht“ richtig? (I don’t know this man)' },
       options: ['Ich kenne diesen Mann nicht.', 'Ich kenne nicht diesen Mann.', 'Ich nicht kenne diesen Mann.'],
       answer: 0,
       explain: { ru: 'После определённого прямого дополнения.', en: 'After a definite direct object.' }

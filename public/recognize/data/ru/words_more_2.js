@@ -89,7 +89,7 @@
 
   reg('words', 'b2_relations', [
     N('pomolvka', 'пом+олвка', 'f', 'B2', 'engagement', 'die Verlobung',
-      ex('[[Пом+олвку]] отпразд+новали в узк+ом круг+у.', 'They celebrated the engagement with just close friends and family.', 'Die Verlobung wurde im kleinen Kreis gefeiert.')),
+      ex('[[Пом+олвку]] отпр+аздновали в +узком круг+у.', 'They celebrated the engagement with just close friends and family.', 'Die Verlobung wurde im kleinen Kreis gefeiert.')),
     N('suprug', 'супр+уг', 'm', 'B2', 'spouse, husband (formal)', 'der Ehepartner, der Gatte',
       ex('Укаж+ите в анк+ете д+анные [[супр+уга]].', 'Enter your spouse’s details on the form.', 'Geben Sie im Formular die Daten Ihres Ehepartners an.'),
       ['Feminine: супруга. Formal; in speech: муж / жена.', 'Feminin: супруга. Förmlich; im Alltag: муж / жена.'])

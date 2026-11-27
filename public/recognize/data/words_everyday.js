@@ -10,7 +10,7 @@ GT.register({ tab: 'words', topic: 'everyday', items: [
   morph: 'ob-wohl',
   parts: [['ob', '«если» (старое значение; сегодня — «ли»)'], ['wohl', '«правда, хоть и» (уступительная частица)']],
   transparency: 'opaque',
-  family: ['obgleich, obschon (то же строение: ob + «уже/всё же»)', 'trotzdem (наречие, та же идея)', 'trotz + Gen.'],
+  family: ['obgleich', 'obschon', 'trotzdem', 'trotz + Gen.'],
   note: 'Подчинительный союз: спрягаемый глагол уходит в КОНЕЦ («…, obwohl alle Tests grün waren»). Если придаточное с obwohl стоит первым, главное начинается с глагола: «Obwohl es regnet, gehe ich spazieren». Смысл тот же, что у trotzdem, но порядок слов другой: «Es regnet. Trotzdem gehe ich spazieren».',
   why: {
     confidence: 'medium',

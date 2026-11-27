@@ -111,7 +111,7 @@ GT.registerGrammar({
     },
     {
       id: 'g-kc-d5', kind: 'gap',
-      q: '___ der hohen Kosten wurde das Stadion gebaut. (несмотря на / regardless of, formell)',
+      q: { ru: '___ der hohen Kosten wurde das Stadion gebaut. (несмотря на, формально)', en: '___ der hohen Kosten wurde das Stadion gebaut. (regardless of, formal)' },
       answer: 'Ungeachtet',
       explain: { ru: 'ungeachtet + Genitiv.', en: 'ungeachtet + Genitiv.' }
     }

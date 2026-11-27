@@ -281,13 +281,13 @@
     features: { rootMapVerbs: true, prefixDrill: true, rootRoulette: true, goetheB1: false, ruLink: false },
     prefixWord: 'Particle',
     prefixTab: 'Particles & Prefixes',
-    prefixMatchTitle: 'Parallels in Russian and German',
+    prefixMatchTitle: { ru: 'Parallels in Russian', de: 'Parallels in German', en: 'Parallels & pitfalls' },
     rootGroupIntro: {
       'Verbs + particles': { ru: 'Глагольная основа английского: один частый глагол + частица (up, off, out…) дают десятки значений — как nehmen → annehmen, aufnehmen в немецком.', de: 'Das verbale Grundgerüst des Englischen: ein häufiges Verb + Partikel (up, off, out …) ergibt Dutzende Bedeutungen — wie nehmen → annehmen, aufnehmen im Deutschen.' },
       'Word-building families': { ru: 'Словообразование: от одной основы — существительные, прилагательные, наречия (act → action, active, actor).', de: 'Wortbildung: von einem Stamm zu Substantiven, Adjektiven, Adverbien (act → action, active, actor).' }
     },
     NAV: [
-      { id: 'language', label: 'Language', short: 'Grund', icon: 'book', href: '#/words',
+      { id: 'language', label: 'Language', short: 'Lang', icon: 'book', href: '#/words',
         items: [{ label: 'Words', href: '#/words', match: ['words'] }, { label: 'Roots', href: '#/roots', match: ['roots'] }, { label: 'Grammar', href: '#/grammar', match: ['grammar'] }] },
       { id: 'professional', label: 'Professional', short: 'Job', icon: 'shield', href: '#/professional',
         items: [
@@ -368,6 +368,31 @@
       literature: 'Lines from English-language literature with a short explanation of their meaning and examples.',
       grammar: 'English grammar by level — B1, B2 and C1: explanations, examples, pitfalls, and recognition and typed drills you can add to Review.',
       roots: 'Start with verbs + particles (take up, take off, take over): the core of everyday English. Then word-building families, prefixes, suffixes and classical Latin/Greek roots.'
-    }
+    },
+    afterLoad: [function (pack) {
+      pack.items.forEach(function (it) {
+        if (!it.structNote || (it.i18n && it.i18n.de && it.i18n.de.structNote)) return;
+        if (!/[А-Яа-яЁё]/.test(it.structNote)) return;
+        var s = it.structNote;
+        var deNote = it.i18n && it.i18n.de && it.i18n.de.note;
+        if (it.note && deNote && s.indexOf(it.note) >= 0) s = s.replace(it.note, deNote);
+        s = s
+          .replace(/Показаны части написанной формы; изменения основы и продуктивность рассматриваются отдельно\./g,
+            'Gezeigt werden die Teile der geschriebenen Form; Stammänderungen und Produktivität werden separat betrachtet.')
+          .replace(/Самостоятельная современная основа\./g, 'Eigenständiger moderner Stamm.')
+          .replace(/Учебная связь: ([^.]+)\./g, 'Lernverbindung: $1.')
+          .replace(/Лексическая связь; свободное словообразовательное правило не утверждается\./g,
+            'Lexikalische Verbindung; es wird keine freie Wortbildungsregel behauptet.')
+          .replace(/Отдельное значение слова ([^.]+)\./g, 'Eigene Bedeutung des Wortes $1.')
+          .replace(/Разбор написания не устанавливает историческое происхождение\./g,
+            'Die Zerlegung der Schreibung behauptet keine historische Herkunft.')
+          .replace('Неисчисляемое; take care of — заботиться.', 'Nicht zählbar; take care of — sich kümmern um.');
+        if (!/[А-Яа-яЁё]/.test(s)) {
+          it.i18n = it.i18n || {};
+          it.i18n.de = it.i18n.de || {};
+          it.i18n.de.structNote = s;
+        }
+      });
+    }]
   });
 })();

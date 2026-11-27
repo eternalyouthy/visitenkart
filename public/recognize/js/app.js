@@ -49,7 +49,7 @@
     return esc(s).replace(/\[\[(.+?)\]\]/g, '<mark class="hl">$1</mark>').replace(/\[([^\[\]]+?)\]/g, '<span class="slot">$1</span>');
   }
   function clozeHTML(s) {
-    return esc(s).replace(/\[\[(.+?)\]\]/g, '<span class="blank">$1</span>').replace(/\[([^\[\]]+?)\]/g, '<span class="slot">$1</span>');
+    return esc(s).replace(/\[\[(.+?)\]\]/g, '<span class="blank" aria-label="blank"><span aria-hidden="true">$1</span></span>').replace(/\[([^\[\]]+?)\]/g, '<span class="slot">$1</span>');
   }
   function clozeAnswers(s) {
     var out = [], re = /\[\[(.+?)\]\]/g, m;
@@ -786,7 +786,7 @@
   /* Author links: under the article on desktop, after Latest updates on phones (CSS shows one copy). */
   function authorLinks(cls) {
     return '<div class="bys-author ' + cls + '" lang="en"><a class="btn" href="https://etrnl.world/" target="_blank" rel="noopener">About the author ↗</a>' +
-      '<a class="btn" href="https://github.com/eternalyouthy/etrnl.recognize" target="_blank" rel="noopener">Project on GitHub ↗</a></div>';
+      '<a class="btn" href="https://github.com/eternalyouthy/recognize" target="_blank" rel="noopener">Project on GitHub ↗</a></div>';
   }
   function viewStart(requested) {
     var languages = GT.KNOW_ORDER.filter(function (lang) { return GT.ABOUT[lang]; });
@@ -1106,8 +1106,8 @@
     } else if (it.morph && it.morph.indexOf('-') >= 0) {
       segs = it.morph.split('-').map(function (x) { return '<span class="seg root">' + esc(x) + '</span>'; }).join('');
     } else return '';
-    var sn = lxText(it, 'structNote');
-    return '<div class="box"><span class="label">Structure</span><div class="segs" lang="' + GT.learn + '">' + segs + '</div>' + dl + (sn ? '<p class="note muted" style="margin-top:14px">' + esc(sn) + '</p>' : '') + '</div>';
+    var sn = lxText(it, 'structNote'), snLang = GT.lxLang(it, 'structNote');
+    return '<div class="box"><span class="label">Structure</span><div class="segs" lang="' + GT.learn + '">' + segs + '</div>' + dl + (sn ? '<p class="note muted" lang="' + snLang + '" style="margin-top:14px">' + esc(sn) + fbTag(snLang) + '</p>' : '') + '</div>';
   }
   function familyBox(it) {
     if (!it.family || !it.family.length) return '';
@@ -1649,10 +1649,10 @@
     var dir = S.settings.reviewDirection || 'both';
     var keys = dueKeys(filter, dir);
     if (!keys.length && dir !== 'both') keys = dueKeys(filter, 'both');
+    if (!keys.length) { rev = null; return viewReviewLanding(filter); }
     keys = shuffle(keys);
     keys.sort(function (a, b) { var ca = S.card(a), cb = S.card(b); return (ca.state === 'review' ? 1 : 0) - (cb.state === 'review' ? 1 : 0); });
     rev = { filter: filter, queue: keys.map(makeQ), i: 0, revealed: false, typed: null, verdict: null, ds: {}, done: 0, counts: { 1: 0, 2: 0, 3: 0, 4: 0 }, seen: [] };
-    if (!rev.queue.length) return viewReviewLanding(filter);
     drawReview();
   }
   function expected(it, q) {
@@ -1865,7 +1865,7 @@
     var h = '<header class="page-head"><span class="eyebrow">04 · Overview</span><h1>Grammar</h1><p class="lead">' + intro('grammar') + '</p></header>';
     h += '<div class="grid">' + GT.TOPICS.grammar.filter(visibleTopic).map(function (t, i) {
       var pg = GT.grammar[t.id];
-      return '<a class="tile' + (pg ? '' : ' empty') + '" href="#/grammar/' + t.id + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + (pg ? pg.drills.filter(function (d) { return S.card(d.id); }).length + '/' + pg.drills.length + ' drills' : 'soon') + '</span></div><h4>' + esc(t.name) + '</h4><p>' + (pg ? esc(lxText(pg, 'summary') || '') : 'Coming in a grammar batch.') + '</p></a>';
+      return '<a class="tile' + (pg ? '' : ' empty') + '" href="#/grammar/' + encodeURIComponent(t.id) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + (pg ? pg.drills.filter(function (d) { return S.card(d.id); }).length + '/' + pg.drills.length + ' drills' : 'soon') + '</span></div><h4>' + esc(t.name) + '</h4><p>' + (pg ? esc(lxText(pg, 'summary') || '') : 'Coming in a grammar batch.') + '</p></a>';
     }).join('') + '</div>';
     page(h);
   }
@@ -2257,7 +2257,6 @@
         renderSidebar('review', ['review', el.dataset.filter || 'all']);
         viewReviewLanding(el.dataset.filter || 'all');
         break;
-      case 'show-ru': el.outerHTML = '<p class="mean-ru" lang="' + GT.know + '">' + esc(el.dataset.ru) + '</p>'; break;
       case 'reveal': if (rev && rev.i < rev.queue.length) reveal(); break;
       case 'rate': if (rev && rev.i < rev.queue.length) rate(Number(el.dataset.g)); break;
       case 'r-end': if (!rev) break; rev.queue = rev.queue.slice(0, rev.i); drawReviewDone(); break;
@@ -2518,6 +2517,8 @@
       }
     }
     if (e.target.closest('.tab-menu-item')) closeNavMenus();
+    var navPractice = e.target.closest('a[href="#/practice"]');
+    if (navPractice && location.hash === '#/practice' && studio) { e.preventDefault(); viewPractice({}); return; }
     var sp = e.target.closest('[data-speak]');
     if (sp) { e.preventDefault(); e.stopPropagation(); speak(sp.dataset.speak, sp, sp.dataset.speakLang); return; }
     var el = e.target.closest('[data-act]');
@@ -2836,10 +2837,14 @@
   if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fitEyebrows);
   // The content column can change width without a window resize (sidebar collapse): re-fit then too.
   if (window.ResizeObserver) {
-    var mainW = 0;
+    var mainW = 0, roRaf = 0;
     new ResizeObserver(function (entries) {
       var w = Math.round(entries[0].contentRect.width);
-      if (w !== mainW) { mainW = w; fitEyebrows(); }   // runs after layout, so measuring here is safe
+      if (w !== mainW) {
+        mainW = w;
+        if (roRaf) cancelAnimationFrame(roRaf);
+        roRaf = requestAnimationFrame(function () { roRaf = 0; fitEyebrows(); });
+      }
     }).observe(mainEl);
   }
   window.addEventListener('resize', fitEyebrows);
@@ -3058,20 +3063,20 @@
       prefixGroups().forEach(function (g, gi) {
         h += '<h3 class="section-title"' + (gi ? '' : ' style="margin-top:0"') + '>' + esc(g.name) + '</h3><div class="grid">' + g.ids.map(function (id, i) {
           var pf = GT.prefixes[id];
-          return '<a class="tile' + (pf ? '' : ' empty') + '" href="#/roots/p-' + id + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + (pf ? esc(affixTagText(pf)) : 'soon') + '</span></div><h4>' + esc(pf ? pf.label : id + '-') + '</h4>' + (pf ? '<p lang="' + GT.glLang(pf) + '">' + esc(GT.gl(pf)) + '</p>' : '') + '</a>';
+          return '<a class="tile' + (pf ? '' : ' empty') + '" href="#/roots/p-' + encodeURIComponent(id) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + (pf ? esc(affixTagText(pf)) : 'soon') + '</span></div><h4>' + esc(pf ? pf.label : id + '-') + '</h4>' + (pf ? '<p lang="' + GT.glLang(pf) + '">' + esc(GT.gl(pf)) + '</p>' : '') + '</a>';
         }).join('') + '</div>';
       });
       h += '<div class="actions">' + (GT.feature('prefixDrill') ? '<a class="btn primary" href="#/roots/drill">' + PW() + ' drill →</a>' : '') + '<a class="btn" href="#/practice?kind=affix">Practice affixes →</a></div>';
     } else if (section === 'suffixes') {
       h += '<h3 class="section-title" style="margin-top:0">Suffixes · Word Formation</h3><div class="grid">' + GT.suffixOrder.map(function (id, i) {
         var sf = GT.suffixes[id];
-        return '<a class="tile" href="#/roots/s-' + esc(id) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + esc(affixTagText(sf) || 'suffix') + '</span></div><h4>' + esc(sf.label) + '</h4><p lang="' + GT.glLang(sf) + '">' + esc(GT.gl(sf)) + '</p></a>';
+        return '<a class="tile" href="#/roots/s-' + encodeURIComponent(id) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + esc(affixTagText(sf) || 'suffix') + '</span></div><h4>' + esc(sf.label) + '</h4><p lang="' + GT.glLang(sf) + '">' + esc(GT.gl(sf)) + '</p></a>';
       }).join('') + '</div>';
       h += '<div class="actions"><a class="btn primary" href="#/practice?kind=affix">Practice suffixes & prefixes →</a></div>';
     } else if (section === 'classical') {
       h += '<h3 class="section-title" style="margin-top:0">Classical Roots · Latin & Greek</h3><div class="grid">' + GT.classicalOrder.map(function (id, i) {
         var cl = GT.classical[id];
-        return '<a class="tile" href="#/roots/c-' + esc(id) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + esc(cl.origin) + '</span></div><h4>' + esc(cl.label) + '</h4><p lang="' + GT.glLang(cl) + '">' + esc(GT.gl(cl)) + '</p></a>';
+        return '<a class="tile" href="#/roots/c-' + encodeURIComponent(id) + '"><div class="tile-top"><span>' + pad2(i + 1) + '</span><span class="ct">' + esc(cl.origin) + '</span></div><h4>' + esc(cl.label) + '</h4><p lang="' + GT.glLang(cl) + '">' + esc(GT.gl(cl)) + '</p></a>';
       }).join('') + '</div>';
     }
     page(h);
@@ -3256,7 +3261,9 @@
         '<p class="note" lang="' + GT.glLang(m) + '" style="margin-bottom:16px"><b>' + esc(GT.gl(m)) + '</b>' + (m.note ? ' — ' + esc(lxText(m, 'note')) : '') + '</p><div class="fam">' + m.examples.map(prefixExampleLink).join('') + '</div></div>';
     }).join('') + '</div>';
     if (pf.match && (GT.know === 'ru' || GT.lxLang(pf, 'match') === GT.know)) {
-      var matchTitle = GT.lx(pf, 'matchTitle') || GT.cfg('prefixMatchTitle', GT.know === 'ru' ? 'Russian prefixes: match / no match' : 'Patterns & false friends');
+      var cfgTitle = GT.cfg('prefixMatchTitle');
+      var cfgTitleStr = cfgTitle && typeof cfgTitle === 'object' ? (cfgTitle[GT.know] || cfgTitle.en || cfgTitle.ru || '') : cfgTitle;
+      var matchTitle = GT.lx(pf, 'matchTitle') || cfgTitleStr || (GT.know === 'ru' ? 'Russian prefixes: match / no match' : 'Patterns & false friends');
       h += '<h3 class="section-title">' + esc(matchTitle) + '</h3><div class="box"><div class="prose" lang="' + GT.lxLang(pf, 'match') + '">' + lxText(pf, 'match') + '</div></div>';
     }
     if (pf.grammar) h += '<h3 class="section-title">Grammar</h3><div class="box"><div class="prose" lang="' + GT.lxLang(pf, 'grammar') + '">' + fbTag(GT.lxLang(pf, 'grammar')) + lxText(pf, 'grammar') + '</div></div>';
@@ -4469,6 +4476,10 @@
     return h;
   }
   function mistakeLine(q) {
+    if (q.kind === 'recognition') {
+      var word = q.entry ? plainHead(q.entry) : (q.word || '');
+      return '<div class="st-pair"><span lang="' + GT.learn + '">' + esc(plain(word)) + '</span><span class="muted" lang="' + GT.know + '">' + esc(plain(q.answer || '')) + (q.yours ? ' · yours: <s>' + esc(q.yours) + '</s>' : '') + '</span></div>';
+    }
     var ask = q.kind === 'gender' || q.kind === 'match' || q.kind === 'family' || q.kind === 'blitz' ? (q.word || '') :
       q.entry && q.entry.type !== 'drill' ? meaningOf(q.entry) : (q.prompt || q.context || q.translation || '');
     return '<div class="st-pair"><span lang="' + GT.learn + '">' + esc(plain(q.answer || '')) + '</span><span class="muted">' + esc(plain(ask)) + (q.yours ? ' · yours: <s>' + esc(q.yours) + '</s>' : '') + '</span></div>';
@@ -4532,7 +4543,7 @@
   function route(opts) {
     opts = opts || {};
     if (!ready) return;
-    if (!opts.keep) { closeSidebar(); closeSheet(); }
+    if (!opts.keep) { closeSidebar(); closeSheet(); closeLangPop(); }
     closeNavMenus();
     ui.keyHandler = null;
     var raw = location.hash.replace(/^#\/?/, '');
@@ -4845,7 +4856,7 @@
     renderBrand();
     if (p[2] === 'learn' && learn && learn.tab === p[0] && learn.id === p[1] && learn.i < learn.queue.length) {
       renderNav(p[0], p); renderSidebar(p[0], p); drawLearn();
-    } else if (p[0] === 'review' && p[2] === 'go' && rev) {
+    } else if (p[0] === 'review' && p[2] === 'go' && rev && rev.queue.length) {
       rev.queue.forEach(function (q, i) {
         if (i < rev.i || q.ex == null) return;
         var it = GT.byId[q.id], ex = it && it.examples && it.examples[q.ex];
@@ -4952,7 +4963,16 @@
         // same screen as when we left this language: resume its session
         learn = saved.learn; rev = saved.rev; studio = saved.studio; rd = saved.rd; ui.lastStudioParams = saved.params;
         if (p[2] === 'learn' && learn && learn.i < learn.queue.length) { renderNav(p[0], p); renderSidebar(p[0], p); drawLearn(); return; }
-        if (p[0] === 'review' && p[2] === 'go' && rev) { renderNav('review', p); renderSidebar('review', p); drawReview(); return; }
+        if (p[0] === 'review' && p[2] === 'go' && rev && rev.queue.length) {
+          if (saved.know !== GT.know) {
+            rev.queue.forEach(function (q, i) {
+              if (i < rev.i || q.ex == null) return;
+              var it = GT.byId[q.id], ex = it && it.examples && it.examples[q.ex];
+              if (ex && ex.sense) q.sense = lxText(ex, 'sense');
+            });
+          }
+          renderNav('review', p); renderSidebar('review', p); drawReview(); return;
+        }
         if (p[0] === 'practice' && studio) {
           if (saved.know !== GT.know) studio.questions = studio.questions.map(function (q, i) {
             return i >= studio.i ? relocalizeStudioQuestion(q, i === studio.i && studio.checked) : q;
@@ -4992,7 +5012,12 @@
         var sel = pop.querySelector('[data-lang="' + focusKey + '"]');
         if (sel) sel.focus();
       }
-      document.querySelectorAll('.sheet [data-lang]').forEach(function (s) { s.innerHTML = langOptions(s.dataset.lang); });
+      if (!sheetEl.classList.contains('open') && sheetEl.dataset.mode === 'settings') {
+        sheetBody.innerHTML = '';
+        sheetEl.dataset.mode = '';
+      } else {
+        document.querySelectorAll('.sheet [data-lang]').forEach(function (s) { s.innerHTML = langOptions(s.dataset.lang); });
+      }
       GT.toast(GT.LANGS[know].name + ' → ' + GT.LANGS[learnL].name);
     });
   }

@@ -24,7 +24,10 @@ GT.registerGrammar({
     { caption: { en: 'Typical signals', de: 'Typische Signale' },
       head: { en: ['Imperfective', 'Perfective'], de: ['Imperfektiv', 'Perfektiv'] },
       deCols: [0, 1],
-      rows: [['ка́ждый день, обы́чно, ча́сто, всегда́', 'вдруг, сра́зу, уже́ (+ result), наконе́ц'], ['до́лго, весь день, два часа́', 'за два часа́ (within)'], ['не на́до / нельзя́ (+ impf: don’t)', 'на́до (+ pf: get it done)']] }
+      rows: {
+        en: [['ка́ждый день, обы́чно, ча́сто, всегда́', 'вдруг, сра́зу, уже́ (+ result), наконе́ц'], ['до́лго, весь день, два часа́', 'за два часа́ (within)'], ['не на́до / нельзя́ (+ impf: don’t)', 'на́до (+ pf: get it done)']],
+        de: [['ка́ждый день, обы́чно, ча́сто, всегда́', 'вдруг, сра́зу, уже́ (+ Ergebnis), наконе́ц'], ['до́лго, весь день, два часа́', 'за два часа́ (innerhalb von)'], ['не на́до / нельзя́ (+ ipf.: nicht tun)', 'на́до (+ pf.: erledigen)']]
+      } }
   ],
   examples: [
     { t: 'Я [[чита́л]] докуме́нтацию весь ве́чер.', en: 'I was reading the documentation all evening.', de: 'Ich habe den ganzen Abend die Doku gelesen.' },
@@ -50,10 +53,10 @@ GT.registerGrammar({
       explain: { en: 'One concrete task finished tomorrow → perfective future сделаю. «Буду» never combines with a perfective infinitive.', de: 'Eine konkrete Aufgabe, morgen erledigt → perfektives Futur сделаю. «Буду» nie mit perfektivem Infinitiv.' } },
     { id: 'ru-g-aspect-5', kind: 'choice', q: 'Пожа́луйста, не ___ э́ту ссы́лку — э́то фи́шинг!', options: ['открыва́йте', 'откро́йте'], answer: 0,
       explain: { en: 'A negated instruction (“don’t do it”) normally uses the imperfective imperative.', de: 'Ein verneinter Hinweis („tun Sie es nicht“) steht normalerweise im imperfektiven Imperativ.' } },
-    { id: 'ru-g-aspect-6', kind: 'gap', q: 'Я ___ тебе́ за́втра у́тром. (позвони́ть, pf., я-form)', answer: 'позвоню́',
+    { id: 'ru-g-aspect-6', kind: 'gap', q: { en: 'Я ___ тебе́ за́втра у́тром. (позвони́ть, pf., я-form)', de: 'Я ___ тебе́ за́втра у́тром. (позвони́ть, pf., я-Form)' }, answer: 'позвоню́',
       hint: { en: 'Put the perfective verb into the form that means “I will …”.', de: 'Setze das perfektive Verb in die Form für „ich werde …“.' },
       explain: { en: 'Perfective “present” = future: позвонить → (я) позвоню́ — I will call.', de: 'Perfektives „Präsens“ = Zukunft: позвонить → (я) позвоню́ — ich werde anrufen.' } },
-    { id: 'ru-g-aspect-7', kind: 'gap', q: 'Мы ___ рабо́тать над прое́ктом весь ме́сяц. (быть + infinitive, мы-form)', answer: 'бу́дем',
+    { id: 'ru-g-aspect-7', kind: 'gap', q: { en: 'Мы ___ рабо́тать над прое́ктом весь ме́сяц. (быть + infinitive, мы-form)', de: 'Мы ___ рабо́тать над прое́ктом весь ме́сяц. (быть + Infinitiv, мы-Form)' }, answer: 'бу́дем',
       hint: { en: 'Imperfective future = form of быть + infinitive.', de: 'Imperfektives Futur = Form von быть + Infinitiv.' },
       explain: { en: '“All month” = a process → imperfective future: (мы) бу́дем рабо́тать.', de: '„Den ganzen Monat“ = Vorgang → imperfektives Futur: (мы) бу́дем рабо́тать.' } },
     { id: 'ru-g-aspect-8', kind: 'choice', q: 'Вдруг се́рвер ___.', options: ['па́дал', 'упа́л'], answer: 1,

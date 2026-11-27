@@ -42,7 +42,7 @@ GT.registerGrammar({
   drills: [
     { id: 'ru-g-mp-1', kind: 'choice', q: 'Г+ости уж+е ___ — откр+ой дверь!', options: ['пришл+и', 'приход+или', 'ушл+и'], answer: 0, explain: { en: 'They have arrived (result) → perfective пришл+и.', de: 'Sie sind angekommen (Ergebnis) → perfektiv пришл+и.' } },
     { id: 'ru-g-mp-2', kind: 'choice', q: 'Осторожно, не ___ д+орогу на кр+асный!', options: ['переход+и', 'перейд+и', 'перешёл'], answer: 0, explain: { en: 'не + imperative → imperfective переход+и.', de: 'не + Imperativ → imperfektiv переход+и.' } },
-    { id: 'ru-g-mp-3', kind: 'gap', q: 'Мы ___ из д+ома в семь утр+а. (выйти, мы, past)', answer: 'в+ышли', explain: { en: 'вы- = out, stress on вы-: в+ышли.', de: 'вы- = hinaus, Betonung auf вы-: в+ышли.' } },
+    { id: 'ru-g-mp-3', kind: 'gap', q: { en: 'Мы ___ из д+ома в семь утр+а. (выйти, мы, past)', de: 'Мы ___ из д+ома в семь утр+а. (выйти, мы, Präteritum)' }, answer: 'в+ышли', explain: { en: 'вы- = out, stress on вы-: в+ышли.', de: 'вы- = hinaus, Betonung auf вы-: в+ышли.' } },
     { id: 'ru-g-mp-4', kind: 'choice', q: 'Я ___ в апт+еку и куп+ил лек+арство.', options: ['зашёл', 'ушёл', 'обошёл'], answer: 0, explain: { en: 'Drop in somewhere → за-.', de: 'Kurz irgendwo hineingehen → за-.' } },
     { id: 'ru-g-mp-5', kind: 'choice', q: 'П+оезд ___ из Москв+ы к+аждый час.', options: ['отх+одит', 'отойдёт', 'ушёл'], answer: 0, explain: { en: 'Regular → imperfective отх+одит.', de: 'Regelmäßig → imperfektiv отх+одит.' } }
   ]
@@ -93,7 +93,7 @@ GT.registerGrammar({
   drills: [
     { id: 'ru-g-prt-1', kind: 'choice', q: 'Магаз+ин ___ на рем+онт.', options: ['закр+ыт', 'закр+ытый', 'закрыв+ающий'], answer: 0, explain: { en: 'A predicate state → short passive participle.', de: 'Zustand als Prädikat → kurzes Passivpartizip.' } },
     { id: 'ru-g-prt-2', kind: 'choice', q: 'Д+ети, ___ во двор+е, +очень шумят.', options: ['игр+ающие', 'с+ыгранные', 'игр+авший'], answer: 0, explain: { en: 'Who are playing (now), plural → игр+ающие.', de: 'Die (gerade) spielen, Plural → игр+ающие.' } },
-    { id: 'ru-g-prt-3', kind: 'gap', q: 'Письм+о уж+е ___. (напис+ать, short form)', answer: 'напис+ано', explain: { en: 'Neuter short passive: напис+ано.', de: 'Neutrale Kurzform: напис+ано.' } },
+    { id: 'ru-g-prt-3', kind: 'gap', q: { en: 'Письм+о уж+е ___. (напис+ать, short form)', de: 'Письм+о уж+е ___. (напис+ать, Kurzform)' }, answer: 'напис+ано', explain: { en: 'Neuter short passive: напис+ано.', de: 'Neutrale Kurzform: напис+ано.' } },
     { id: 'ru-g-prt-4', kind: 'choice', q: '«Студ+ент, сд+авший экз+амен» = студ+ент, ___', options: ['кот+орый сдал экз+амен', 'кот+орый сдаёт экз+амен', 'кот+орому сд+али экз+амен'], answer: 0, explain: { en: '-вший = active past.', de: '-вший = Aktiv Präteritum.' } }
   ]
 });
@@ -173,7 +173,7 @@ GT.registerGrammar({
     { id: 'ru-g-cht-1', kind: 'choice', q: 'Я хоч+у, чт+обы ты ___ мне правду.', options: ['сказ+ал', 'ск+ажешь', 'сказ+ать'], answer: 0, explain: { en: 'Different subject → past form.', de: 'Anderes Subjekt → Präteritumform.' } },
     { id: 'ru-g-cht-2', kind: 'choice', q: 'Он к+упит велосип+ед, чт+обы ___ на раб+оту.', options: ['+ездить', '+ездил', '+ездит'], answer: 0, explain: { en: 'Same subject → infinitive.', de: 'Gleiches Subjekt → Infinitiv.' } },
     { id: 'ru-g-cht-3', kind: 'choice', q: 'Вр+ач сказ+ал, ___ я б+ольше сп+ал.', options: ['чт+обы', 'что', 'чем'], answer: 0, explain: { en: 'An instruction (he told me to) → чтобы.', de: 'Eine Aufforderung → чтобы.' } },
-    { id: 'ru-g-cht-4', kind: 'gap', q: 'Нужн+о, чт+обы вы ___ ф+орму. (з+аполнить → past, вы)', answer: 'з+аполнили', explain: { en: 'вы → plural past: з+аполнили.', de: 'вы → Plural Präteritum: з+аполнили.' } }
+    { id: 'ru-g-cht-4', kind: 'gap', q: { en: 'Н+ужно, чт+обы вы ___ ф+орму. (зап+олнить → past, вы)', de: 'Н+ужно, чт+обы вы ___ ф+орму. (зап+олнить → Präteritum, вы)' }, answer: 'зап+олнили', explain: { en: 'вы → plural past: зап+олнили.', de: 'вы → Plural Präteritum: зап+олнили.' } }
   ]
 });
 
@@ -206,7 +206,7 @@ GT.registerGrammar({
   ],
   drills: [
     { id: 'ru-g-wo-1', kind: 'choice', q: 'Кто звон+ил? — ___', options: ['Звон+ил Пётр.', 'Пётр звон+ил.'], answer: 0, explain: { en: 'The answer (new) goes last.', de: 'Die Antwort (neu) steht am Ende.' } },
-    { id: 'ru-g-wo-2', kind: 'choice', q: '“A letter came for you.” →', options: ['Теб+е пришл+о письм+о.', 'Письм+о пришл+о теб+е.'], answer: 0, explain: { en: 'A new noun (“a letter”) goes at the end.', de: 'Neues Nomen („ein Brief“) ans Ende.' } },
+    { id: 'ru-g-wo-2', kind: 'choice', q: { en: '“A letter came for you.” →', de: '„Für dich ist ein Brief gekommen.“ →' }, options: ['Теб+е пришл+о письм+о.', 'Письм+о пришл+о теб+е.'], answer: 0, explain: { en: 'A new noun (“a letter”) goes at the end.', de: 'Neues Nomen („ein Brief“) ans Ende.' } },
     { id: 'ru-g-wo-3', kind: 'choice', q: 'Где ключ+и? — ___', options: ['Ключ+и на стол+е.', 'На стол+е ключ+и.'], answer: 0, explain: { en: 'The keys are known; the new part is “on the table”.', de: 'Die Schlüssel sind bekannt; neu ist „auf dem Tisch“.' } }
   ]
 });

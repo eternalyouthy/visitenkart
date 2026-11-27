@@ -86,7 +86,7 @@ GT.registerGrammar({
     },
     {
       id: 'g-k2-d14', kind: 'gap',
-      q: '___ du kurz Zeit? Ich brauche deine Hilfe. (haben, вежливо)',
+      q: { ru: '___ du kurz Zeit? Ich brauche deine Hilfe. (haben, вежливо)', en: '___ du kurz Zeit? Ich brauche deine Hilfe. (haben, polite)' },
       hint: { ru: 'вежливая форма', en: 'polite form' },
       answer: 'Hättest',
       explain: { ru: 'Вежливый вопрос: Hättest du …?', en: 'Polite question: Hättest du …?' }

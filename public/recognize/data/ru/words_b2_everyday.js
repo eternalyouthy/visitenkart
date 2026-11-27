@@ -20,7 +20,7 @@
       ex('[[Арендод+атель]] обещ+ал почин+ить кран до п+ятницы.', 'The landlord promised to fix the tap by Friday.', 'Der Vermieter hat versprochen, den Wasserhahn bis Freitag zu reparieren.'),
       ['The tenant is арендатор (formal) or жилец; in speech people often say хозяин / хозяйка квартиры.', 'Der Mieter heißt арендатор (formell) oder жилец; im Alltag sagt man oft хозяин / хозяйка квартиры.']),
     A('syomny', 'adj', 'съёмный', 'B2', 'rented', 'gemietet, Miet-',
-      ex('Пок+а мы жив+ём в [[съёмной]] кварт+ире.', 'For now we live in a rented flat.', 'Vorerst wohnen wir in einer Mietwohnung.')),
+      ex('Пок+а мы живём в [[съёмной]] кварт+ире.', 'For now we live in a rented flat.', 'Vorerst wohnen wir in einer Mietwohnung.')),
     N('novostroyka', 'новостр+ойка', 'f', 'B2', 'new-build (flat or block)', 'der Neubau',
       ex('Мы пере+ехали в [[новостр+ойку]] на окр+аине.', 'We moved into a new-build on the edge of town.', 'Wir sind in einen Neubau am Stadtrand gezogen.')),
     N('propiska', 'проп+иска', 'f', 'B2', 'registered address, residence registration', 'die Meldeadresse, die Anmeldung',
@@ -84,7 +84,7 @@
     N('reabilitatsiya', 'реабилит+ация', 'f', 'B2', 'rehabilitation, rehab', 'die Reha, die Rehabilitation',
       ex('П+осле тр+авмы ем+у нужн+а д+олгая [[реабилит+ация]].', 'After the injury he needs a long period of rehab.', 'Nach der Verletzung braucht er eine lange Reha.')),
     A('zozh', 'phrase', 'здор+овый +образ ж+изни', 'B2', 'healthy lifestyle', 'gesunder Lebensstil',
-      ex('Он вед+ёт [[здор+овый +образ ж+изни]]: не к+урит и мн+ого гул+яет.', 'He lives a healthy life: he doesn’t smoke and walks a lot.', 'Er lebt gesund: Er raucht nicht und geht viel spazieren.'),
+      ex('Он ведёт [[здор+овый +образ ж+изни]]: не к+урит и мн+ого гул+яет.', 'He lives a healthy life: he doesn’t smoke and walks a lot.', 'Er lebt gesund: Er raucht nicht und geht viel spazieren.'),
       ['Often abbreviated ЗОЖ (зож).', 'Oft abgekürzt: ЗОЖ.'])
   ]);
 

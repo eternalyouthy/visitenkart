@@ -220,7 +220,7 @@
       pair('Dolly discovers Stiva’s affair, and the household stops functioning as usual.', 'Dolly entdeckt Stiwas Affäre, und der Haushalt funktioniert nicht mehr wie gewohnt.'),
       pair('A lightly ironic comment on domestic or organisational chaos.', 'Eine leicht ironische Bemerkung zu häuslichem oder organisatorischem Chaos.'),
       'смеш+алось', pair('got mixed up, reflexive perfective past', 'geriet durcheinander, reflexive perfektive Vergangenheitsform'),
-      [ex('Отмен+или три в+стречи, а одн+у перенесл+и на н+очь. [[Всё смеш+алось в д+оме Обл+онских]].', 'Three meetings were cancelled and one moved to the evening. Everything was thrown into chaos.', 'Drei Termine wurden abgesagt, einer auf den Abend verschoben. Alles geriet durcheinander.'),
+      [ex('Отмен+или три встр+ечи, а одн+у перенесл+и на н+очь. [[Всё смеш+алось в д+оме Обл+онских]].', 'Three meetings were cancelled and one moved to the evening. Everything was thrown into chaos.', 'Drei Termine wurden abgesagt, einer auf den Abend verschoben. Alles geriet durcheinander.'),
         ex('П+осле пере+езда [[всё смеш+алось]]: докум+енты леж+али в кор+обке с пос+удой.', 'After the move everything got mixed up: the documents were in the box with the dishes.', 'Nach dem Umzug war alles durcheinander: Die Unterlagen lagen im Karton mit dem Geschirr.')]),
     card('trembled', 'Жил — дрож+ал, и умир+ал — дрож+ал', 'B2', 'ironic',
       source('Михаил Салтыков-Щедрин', 'Mikhail Saltykov-Shchedrin', 'Michail Saltykow-Schtschedrin', 'Премудрый пискарь', 1883, 'The Wise Minnow', 'Der überkluge Gründling'),

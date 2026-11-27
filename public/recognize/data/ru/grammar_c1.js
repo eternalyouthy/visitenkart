@@ -103,7 +103,7 @@ GT.registerGrammar({
   explanation: {
     en: '<p>In the nominative/accusative, numbers govern the noun (<em>пять друз+ей</em>). In <b>all other cases</b> it’s the other way round: the <b>numeral declines</b>, and the noun takes the <b>same case in the plural</b>:</p>' +
       '<ul><li>Genitive: <em>от пят+и друз+ей, +около двух час+ов</em></li>' +
-      '<li>Dative: <em>к пят+и друзь+ям, по тр+ём сторон+ам</em></li>' +
+      '<li>Dative: <em>к пят+и друзь+ям, по трём сторон+ам</em></li>' +
       '<li>Instrumental: <em>с пять+ю друзь+ями, с двум+я колл+егами</em></li>' +
       '<li>Prepositional: <em>о пят+и друзь+ях, в двух город+ах</em></li></ul>' +
       '<p><b>Two, three, four</b> decline like adjectives in the plural: <em>двух, двум, двумя, (о) двух</em>. <b>5–20, 30</b> decline like <em>тетрадь</em>: <em>пят+и, пять+ю</em>. <b>40, 90, 100</b> have only two forms: <em>сорок / сорок+а, сто / ст+а</em>. <b>тысяча</b> is a feminine noun: <em>с т+ысячей</em> (or <em>т+ысячью</em>), <em>+около т+ысячи</em>. In compound numbers <b>every part</b> declines: <em>с двадцать+ю пять+ю</em>.</p>' +
@@ -180,7 +180,7 @@ GT.registerGrammar({
   drills: [
     { id: 'ru-g-imp-c1-1', kind: 'choice', q: '___ ск+учно на +этой лекции.', options: ['Мне', 'Я', 'Мен+я'], answer: 0, explain: { en: 'State → dative experiencer.', de: 'Zustand → Dativ der Person.' } },
     { id: 'ru-g-imp-c1-2', kind: 'choice', q: 'Вчер+а нам ___ повезл+о.', options: ['+очень', 'был', 'он+о'], answer: 0, explain: { en: 'Impersonal: no subject, neuter verb повезло.', de: 'Unpersönlich: kein Subjekt, Verb im Neutrum.' } },
-    { id: 'ru-g-imp-c1-3', kind: 'gap', q: 'Мне ___ уйт+и р+аньше. (прийт+ись, past)', answer: 'пришл+ось', explain: { en: 'Neuter past: пришлось.', de: 'Neutrum Präteritum: пришлось.' } },
+    { id: 'ru-g-imp-c1-3', kind: 'gap', q: { en: 'Мне ___ уйт+и р+аньше. (прийт+ись, past)', de: 'Мне ___ уйт+и р+аньше. (прийт+ись, Präteritum)' }, answer: 'пришл+ось', explain: { en: 'Neuter past: пришлось.', de: 'Neutrum Präteritum: пришлось.' } },
     { id: 'ru-g-imp-c1-4', kind: 'choice', q: 'Что-то мне не ___ сег+одня.', options: ['сп+ится', 'сплю', 'спал'], answer: 0, explain: { en: 'Involuntary state: dative + -ся verb.', de: 'Unwillkürlicher Zustand: Dativ + -ся-Verb.' } }
   ]
 });
@@ -227,7 +227,7 @@ GT.registerGrammar({
     { id: 'ru-g-pas-1', kind: 'choice', q: 'Мост ___ в пр+ошлом год+у.', options: ['был постр+оен', 'стр+оился постр+оен', 'постр+оился'], answer: 0, explain: { en: 'Perfective, completed → был построен.', de: 'Perfektiv, abgeschlossen → был построен.' } },
     { id: 'ru-g-pas-2', kind: 'choice', q: 'В +этом магаз+ине ___ св+ежий хлеб.', options: ['прод+аётся', 'пр+одан', 'продалс+я'], answer: 0, explain: { en: 'Regular process → imperfective -ся.', de: 'Regelmäßiger Vorgang → imperfektiv -ся.' } },
     { id: 'ru-g-pas-3', kind: 'gap', q: 'Догов+ор подп+исан ___. (дир+ектор)', answer: 'дир+ектором', explain: { en: 'Doer in the instrumental.', de: 'Handelnder im Instrumental.' } },
-    { id: 'ru-g-pas-4', kind: 'choice', q: '“I was told to wait.” →', options: ['Мне сказ+али подожд+ать.', 'Я был сказ+ан подожд+ать.', 'Я сказ+ался подожд+ать.'], answer: 0, explain: { en: 'Indefinite-personal: 3rd person plural without a subject.', de: 'Unbestimmt-persönlich: 3. Plural ohne Subjekt.' } }
+    { id: 'ru-g-pas-4', kind: 'choice', q: { en: '“I was told to wait.” →', de: '„Mir wurde gesagt zu warten.“ →' }, options: ['Мне сказ+али подожд+ать.', 'Я был сказ+ан подожд+ать.', 'Я сказ+ался подожд+ать.'], answer: 0, explain: { en: 'Indefinite-personal: 3rd person plural without a subject.', de: 'Unbestimmt-persönlich: 3. Plural ohne Subjekt.' } }
   ]
 });
 
@@ -236,7 +236,7 @@ GT.registerGrammar({
   var wo = GT._target.grammar.word_order;
   if (!wo) return;
   [
-    { id: 'ru-g-wo-4', kind: 'choice', q: '“The guests arrived at seven.” (we were expecting them) →', options: ['Г+ости пришл+и в семь.', 'В семь пришл+и г+ости.'], answer: 0, explain: { en: 'Known guests → theme at the start; the time is new.', de: 'Bekannte Gäste → Thema am Anfang; die Zeit ist neu.' } },
+    { id: 'ru-g-wo-4', kind: 'choice', q: { en: '“The guests arrived at seven.” (we were expecting them) →', de: '„Die Gäste kamen um sieben.“ (wir haben sie erwartet) →' }, options: ['Г+ости пришл+и в семь.', 'В семь пришл+и г+ости.'], answer: 0, explain: { en: 'Known guests → theme at the start; the time is new.', de: 'Bekannte Gäste → Thema am Anfang; die Zeit ist neu.' } },
     { id: 'ru-g-wo-5', kind: 'choice', q: 'Что случ+илось? — ___', options: ['Слом+ался лифт.', 'Лифт слом+ался.'], answer: 0, explain: { en: 'The whole event is new → verb first, subject last is natural.', de: 'Das ganze Ereignis ist neu → Verb vorne, Subjekt am Ende ist natürlich.' } }
   ].forEach(function (d) { GT.registerDrill(d, 'grammar', 'word_order'); wo.drills.push(d); });
   wo.tables = [{ caption: { en: 'Theme → rheme', de: 'Thema → Rhema' },

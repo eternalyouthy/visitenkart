@@ -393,8 +393,7 @@
       ['p', { ru: 'в / на + где?; о (об)', en: 'в / на + where?; о (about)', de: 'в / на + wo?; о (über)' }, 'Я жив+у в Москв+е.']
     ];
     h += title({ ru: 'Какой падеж?', en: 'Which case?', de: 'Welcher Fall?' }, 'cases') + '<div class="table-wrap"><table><thead><tr><th>' + esc(T({ ru: 'Падеж', en: 'Case', de: 'Kasus' })) + '</th><th>' + esc(T({ ru: 'Когда', en: 'When', de: 'Wann' })) + '</th><th>' + esc(T({ ru: 'Пример', en: 'Example', de: 'Beispiel' })) + '</th></tr></thead><tbody>' +
-      rows.map(function (r) { return '<tr>' + caseCell(r[0]) + '<td>' + esc(T(r[1])) + '</td><td class="de" lang="ru">' + esc(show(r[2])) + '</td></tr>'; }).join('') + '</tbody></table></div>' +
-      '<p class="note muted ag-note" id="ag-cross-link"></p>';
+      rows.map(function (r) { return '<tr>' + caseCell(r[0]) + '<td>' + esc(T(r[1])) + '</td><td class="de" lang="ru">' + esc(show(r[2])) + '</td></tr>'; }).join('') + '</tbody></table></div>';
 
     h += title({ ru: 'Одушевлённость в винительном', en: 'Animate accusative', de: 'Belebtheit im Akkusativ' }, 'anim') + list([
       { ru: 'Мужской род и мн. ч.: одушевлённые (люди, животные) — винительный = родительный: ' + ru('в+ижу бр+ата, моег+о др+уга, н+аших дет+ей') + '.', en: 'Masculine and plural: for people and animals the accusative = genitive: ' + ru('в+ижу бр+ата, моег+о др+уга, н+аших дет+ей') + '.', de: 'Maskulinum und Plural: bei Menschen und Tieren ist Akkusativ = Genitiv: ' + ru('в+ижу бр+ата, моег+о др+уга, н+аших дет+ей') + '.' },
@@ -403,8 +402,8 @@
     ].map(function (x) { return { ru: x.ru, en: x.en, de: x.de }; }));
 
     h += title({ ru: 'Правила написания', en: 'Spelling rules', de: 'Schreibregeln' }, 'spelling') + list([
-      { ru: 'После <b>г, к, х, ж, ш, щ, ч</b> пишется <b>и</b>, а не ы: ' + ru('кн+иги, р+усские, х+орошие') + '.', en: 'After <b>г, к, х, ж, ш, щ, ч</b> write <b>и</b>, never ы: ' + ru('кн+иги, р+усские, х+орошие') + '.', de: 'Nach <b>г, к, х, ж, ш, щ, ч</b> steht <b>и</b>, nie ы: ' + ru('кн+иги, р+усские, х+орошие') + '.' },
-      { ru: 'После <b>ж, ш, щ, ч, ц</b> безударное о → <b>е</b>: ' + ru('х+орошего, тов+арищем, +улицей') + '; под ударением о остаётся: ' + ru('больш+ого, нож+ом') + '.', en: 'After <b>ж, ш, щ, ч, ц</b> an unstressed о → <b>е</b>: ' + ru('х+орошего, тов+арищем, +улицей') + '; stressed о stays: ' + ru('больш+ого, нож+ом') + '.', de: 'Nach <b>ж, ш, щ, ч, ц</b> wird unbetontes о → <b>е</b>: ' + ru('х+орошего, тов+арищем, +улицей') + '; betontes о bleibt: ' + ru('больш+ого, нож+ом') + '.' },
+      { ru: 'После <b>г, к, х, ж, ш, щ, ч</b> пишется <b>и</b>, а не ы: ' + ru('кн+иги, р+усские, хор+ошие') + '.', en: 'After <b>г, к, х, ж, ш, щ, ч</b> write <b>и</b>, never ы: ' + ru('кн+иги, р+усские, хор+ошие') + '.', de: 'Nach <b>г, к, х, ж, ш, щ, ч</b> steht <b>и</b>, nie ы: ' + ru('кн+иги, р+усские, хор+ошие') + '.' },
+      { ru: 'После <b>ж, ш, щ, ч, ц</b> безударное о → <b>е</b>: ' + ru('хор+ошего, тов+арищем, +улицей') + '; под ударением о остаётся: ' + ru('больш+ого, нож+ом') + '.', en: 'After <b>ж, ш, щ, ч, ц</b> an unstressed о → <b>е</b>: ' + ru('хор+ошего, тов+арищем, +улицей') + '; stressed о stays: ' + ru('больш+ого, нож+ом') + '.', de: 'Nach <b>ж, ш, щ, ч, ц</b> wird unbetontes о → <b>е</b>: ' + ru('хор+ошего, тов+арищем, +улицей') + '; betontes о bleibt: ' + ru('больш+ого, нож+ом') + '.' },
       { ru: 'После <b>г, к, х</b> о остаётся: ' + ru('р+усского, м+аленького') + '.', en: 'After <b>г, к, х</b> о stays: ' + ru('р+усского, м+аленького') + '.', de: 'Nach <b>г, к, х</b> bleibt о: ' + ru('р+усского, м+аленького') + '.' }
     ]);
 

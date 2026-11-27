@@ -16,7 +16,7 @@ GT.registerRoot({
     { id: 'ru-r-del-peredelyvat', core: true, pos: 'verb', aspect: 'impf', level: 'B1', prefix: 'пере', t: 'перед+елывать',
       forms: { praes: 'перед+елываю, перед+елываешь', praet: 'перед+елывал', perf: 'pf. перед+елать' },
       en: 'to redo, to remake; to alter', de: 'umarbeiten, neu machen; ändern',
-      examples: [{ t: 'Нач+альник поп+росил [[перед+елать]] презент+ацию.', en: 'The boss asked me to redo the presentation.', de: 'Der Chef hat mich gebeten, die Präsentation zu überarbeiten.' }],
+      examples: [{ t: 'Нач+альник попрос+ил [[перед+елать]] презент+ацию.', en: 'The boss asked me to redo the presentation.', de: 'Der Chef hat mich gebeten, die Präsentation zu überarbeiten.' }],
       prefixDrill: { ex: 0, meaning: 1, explain: { en: 'пере- = again, anew: the presentation is done a second time.', de: 'пере- = noch einmal: die Präsentation wird neu gemacht.' } },
       transparency: 'transparent' },
     { id: 'ru-r-del-dodelyvat', core: true, pos: 'verb', aspect: 'impf', level: 'B1', prefix: 'до', t: 'дод+елывать',

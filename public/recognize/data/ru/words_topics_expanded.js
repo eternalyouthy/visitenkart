@@ -91,7 +91,7 @@ GT.register({ tab: 'words', topic: 'home', items: [
     id: 'ru-w-etazh', pos: 'noun', level: 'A2', t: "эт+аж", gender: 'm', plural: "этаж+и",
     en: "floor, storey", de: "das Stockwerk",
     examples: [{ t: "Я жив+у на тр+етьем [[этаж+е]].", en: "I live on the third floor (counting the ground floor as the first).", de: "Ich wohne im zweiten Stock (über dem Erdgeschoss)." }],
-    note: { en: "Preposition is на: на +эт+ом этаж+е (stress shifts to ending!); Russian ground floor is п+ервый эт+аж.", de: "Mit на + Präpositiv (на этаж+е); anders als in DE ist п+ервый эт+аж das Erdgeschoss!" }
+    note: { en: "Preposition is на: на +этом этаж+е (stress shifts to ending!); Russian ground floor is п+ервый эт+аж.", de: "Mit на + Präpositiv (на этаж+е); anders als in DE ist п+ервый эт+аж das Erdgeschoss!" }
   },
   {
     id: 'ru-w-lift', pos: 'noun', level: 'A2', t: "л+ифт", gender: 'm', plural: "л+ифты",

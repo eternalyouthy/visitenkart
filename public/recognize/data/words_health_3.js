@@ -332,7 +332,7 @@ GT.register({ tab: 'words', topic: 'health', items: [
     { de: 'Für viele Jugendliche ist das Handy fast eine [[Sucht]].', ru: 'Для многих подростков телефон — почти зависимость.' }
   ],
   morph: 'Sucht',
-  family: ['süchtig', 'die Eifersucht', 'die Sehnsucht', 'das Suchtmittel', 'siech (устар.: больной)'],
+  family: ['süchtig', 'die Eifersucht', 'die Sehnsucht', 'das Suchtmittel', 'siech'],
   note: 'Не от «suchen» (искать), хотя похоже: слово родственно старому «siech» (больной). «Süchtig nach + Dat.» — зависимый от. Тот же элемент в «Eifersucht» (ревность) и «Sehnsucht» (тоска).',
   why: {
     confidence: 'high',

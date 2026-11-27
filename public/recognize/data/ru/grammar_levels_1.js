@@ -131,7 +131,7 @@ GT.registerGrammar({
       html: { en: 'A concrete request with <em>пожалуйста</em> is normally perfective: <span class="right">Откр+ойте окн+о, пож+алуйста.</span> The imperfective can sound like urging: <span class="right">Открыв+айте!</span> = “Go on, open it!”', de: 'Eine konkrete Bitte mit <em>пожалуйста</em> ist meist perfektiv: <span class="right">Откр+ойте окн+о, пож+алуйста.</span> Imperfektiv kann drängend klingen: <span class="right">Открыв+айте!</span>' } }
   ],
   drills: [
-    { id: 'ru-g-imp-1', kind: 'choice', q: '___, пож+алуйста, дв+ерь. (one request)', options: ['Закр+ойте', 'Закрыв+айте', 'Закр+оете'], answer: 0, explain: { en: 'A single concrete request → perfective.', de: 'Einmalige konkrete Bitte → perfektiv.' } },
+    { id: 'ru-g-imp-1', kind: 'choice', q: { en: '___, пож+алуйста, дв+ерь. (one request)', de: '___, пож+алуйста, дв+ерь. (einmalige Bitte)' }, options: ['Закр+ойте', 'Закрыв+айте', 'Закр+оете'], answer: 0, explain: { en: 'A single concrete request → perfective.', de: 'Einmalige konkrete Bitte → perfektiv.' } },
     { id: 'ru-g-imp-2', kind: 'choice', q: 'Не ___ +этот файл!', options: ['удал+яй', 'удал+и', 'удал+ишь'], answer: 0, explain: { en: 'не + imperfective imperative.', de: 'не + imperfektiver Imperativ.' } },
     { id: 'ru-g-imp-3', kind: 'gap', q: '___ мне +адрес, пож+алуйста. (дать, ты)', answer: 'Дай', explain: { en: 'дать → дай.', de: 'дать → дай.' } },
     { id: 'ru-g-imp-4', kind: 'gap', q: '___ здор+овы! (быть, вы)', answer: 'Б+удьте', explain: { en: 'быть → будь / б+удьте.', de: 'быть → будь / б+удьте.' } },
