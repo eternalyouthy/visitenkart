@@ -4069,7 +4069,7 @@
         href: '#/roots/roulette',
         tag: 'Roots',
         title: 'Root roulette',
-        desc: 'Spin a ' + PW().toLowerCase() + ' onto a root — guess the meaning or build the word.'
+        desc: 'See the meaning and base root — pick the right ' + PW().toLowerCase() + ' to build the word.'
       });
     }
     if (GT.feature('prefixDrill')) {

@@ -1,16 +1,14 @@
 /* ROOT ROULETTE — sandbox word-building game for Roots (#/roots/roulette).
  * Reuses the visual layout and controls of js/whichform.js (Endings / Articles "Which form?").
  * Modes:
- *   meaning — base root + prefix/particle -> pick the meaning of the resulting word
- *   build   — meaning + base root -> pick the right prefix/particle
- *   same    — one root stays fixed while its prefixes/particles rotate
+ *   build — meaning + base root -> pick the right prefix/particle
+ *   same  — one root stays fixed while meanings rotate -> pick the right prefix/particle
  * Sandbox only: never writes to GT.store / FSRS Review. */
 (function () {
   'use strict';
 
   var STATES = {}, lastApi = null;
   var MODES = [
-    { id: 'meaning', label: 'Guess the meaning' },
     { id: 'build', label: 'Build the word' },
     { id: 'same', label: 'Same root' }
   ];
@@ -18,7 +16,7 @@
   function state(lang) {
     if (!STATES[lang]) {
       STATES[lang] = {
-        mode: 'meaning',
+        mode: 'build',
         cur: null,
         lockedRoot: null,
         chosen: null,
@@ -55,7 +53,6 @@
   function normKey(s) { return String(s || '').trim().toLowerCase(); }
   function PW() { return GT.cfg('prefixWord', 'Prefix'); }
   function pwLower() { return PW().toLowerCase(); }
-  function pwPluralLower() { return PW() === 'Particle' ? 'particles' : 'prefixes'; }
   function isVerbPos(p) { return p === 'verb' || p === 'phrasal verb'; }
   function pfLabel(id) { var pf = GT.prefixes[id]; return pf ? pf.label : id + '-'; }
 
@@ -91,14 +88,6 @@
     return parts[0] || g;
   }
 
-  function firstWordCue(text) {
-    var s = String(text || '').trim();
-    if (!s) return '';
-    var m = /^(to\s+)(\S)/i.exec(s);
-    if (m) return m[1] + m[2] + '…';
-    return s.charAt(0) + '…';
-  }
-
   function buildPool() {
     var all = [], byRoot = Object.create(null), multiRoots = [];
     Object.keys(GT.roots).forEach(function (rid) {
@@ -127,43 +116,25 @@
     return cands.length ? cands[Math.floor(Math.random() * cands.length)] : null;
   }
 
-  function makeOptions(w, r, mode, pool) {
+  function makeOptions(w, r, pool) {
     var siblings = pool.byRoot[w.rootId] || [];
-    if (mode === 'build') {
-      var ans = pfxDisplayOf(w, r);
-      var used = Object.create(null);
-      used[normKey(ans)] = 1;
-      var opts = [ans];
-      shuffle(siblings).forEach(function (x) {
+    var ans = pfxDisplayOf(w, r);
+    var used = Object.create(null);
+    used[normKey(ans)] = 1;
+    var opts = [ans];
+    shuffle(siblings).forEach(function (x) {
+      if (opts.length >= 4) return;
+      var d = pfxDisplayOf(x, r), k = normKey(d);
+      if (!used[k]) { used[k] = 1; opts.push(d); }
+    });
+    if (opts.length < 4) {
+      shuffle(pool.all).forEach(function (x) {
         if (opts.length >= 4) return;
-        var d = pfxDisplayOf(x, r), k = normKey(d);
+        var d = pfxDisplayOf(x, GT.roots[x.rootId]), k = normKey(d);
         if (!used[k]) { used[k] = 1; opts.push(d); }
       });
-      if (opts.length < 4) {
-        shuffle(pool.all).forEach(function (x) {
-          if (opts.length >= 4) return;
-          var d = pfxDisplayOf(x, GT.roots[x.rootId]), k = normKey(d);
-          if (!used[k]) { used[k] = 1; opts.push(d); }
-        });
-      }
-      return { optPfx: shuffle(opts), optIds: null };
     }
-    var usedText = Object.create(null);
-    usedText[normKey(shortGloss(w))] = 1;
-    var ids = [w.id];
-    shuffle(siblings).forEach(function (x) {
-      if (ids.length >= 4 || x.id === w.id || x.prefix === w.prefix) return;
-      var k = normKey(shortGloss(x));
-      if (!usedText[k]) { usedText[k] = 1; ids.push(x.id); }
-    });
-    if (ids.length < 4) {
-      shuffle(pool.all).forEach(function (x) {
-        if (ids.length >= 4 || x.id === w.id) return;
-        var k = normKey(shortGloss(x));
-        if (!usedText[k]) { usedText[k] = 1; ids.push(x.id); }
-      });
-    }
-    return { optIds: shuffle(ids), optPfx: null };
+    return { optPfx: shuffle(opts) };
   }
 
   function nextTask(G) {
@@ -190,13 +161,12 @@
     G.recent.push(w.id);
     var cap = Math.min(30, Math.floor(candidates.length / 2));
     if (G.recent.length > cap) G.recent.shift();
-    var built = makeOptions(w, r, G.mode, pool);
+    var built = makeOptions(w, r, pool);
     G.cur = {
       wid: w.id,
       rid: w.rootId,
       pfxKey: w.prefix,
       pfxDisplay: pfxDisplayOf(w, r),
-      optIds: built.optIds,
       optPfx: built.optPfx
     };
     G.chosen = null;
@@ -234,7 +204,7 @@
     return null;
   }
 
-  function hintsFor(mode, w, pfxDisplay) {
+  function hintsFor(w, pfxDisplay) {
     var hints = [];
     var pfxHint = prefixHintText(w);
     if (pfxHint) {
@@ -243,30 +213,19 @@
         html: escHTML(PW()) + ' meaning: <b>' + escHTML(pfxHint) + '</b>'
       });
     }
-    if (mode === 'build') {
-      var ch = pfxDisplay.replace(/^…\s*/, '').charAt(0);
-      if (ch) {
-        hints.push({
-          label: 'Hint · first letter',
-          html: escHTML(PW()) + ' starts with <b>' + escHTML(ch) + '…</b>'
-        });
-      }
-    } else {
-      var cue = firstWordCue(shortGloss(w));
-      if (cue) {
-        hints.push({
-          label: 'Hint · meaning',
-          html: 'Starts with <b>' + escHTML(cue) + '</b>'
-        });
-      }
+    var ch = pfxDisplay.replace(/^…\s*/, '').charAt(0);
+    if (ch) {
+      hints.push({
+        label: 'Hint · first letter',
+        html: escHTML(PW()) + ' starts with <b>' + escHTML(ch) + '…</b>'
+      });
     }
     return hints;
   }
 
   function modeNote(modeId) {
-    if (modeId === 'build') return 'The meaning and base verb are shown — pick the ' + pwLower() + ' that builds the word.';
-    if (modeId === 'same') return 'One root stays fixed while ' + pwPluralLower() + ' rotate — see how each ' + pwLower() + ' shifts the meaning.';
-    return 'A root and a ' + pwLower() + ' land together — pick what the resulting word means.';
+    if (modeId === 'same') return 'One root stays fixed while meanings rotate — pick the ' + pwLower() + ' that builds each word.';
+    return 'The translation and base verb are shown — pick the ' + pwLower() + ' that builds the word.';
   }
 
   function modeOf(id) {
@@ -275,7 +234,7 @@
   }
 
   function answerKeyOf(G) {
-    return G.mode === 'build' ? G.cur.pfxDisplay : G.cur.wid;
+    return G.cur.pfxDisplay;
   }
 
   function gameHTML(G, api) {
@@ -295,9 +254,7 @@
     var pfxDisplay = G.cur.pfxDisplay;
     var refl = reflSuffix(w, r);
     var total = G.ok + G.bad;
-    var kindLabel = G.mode === 'build'
-      ? (G.revealed ? PW() + ' · ' + pfxDisplay : PW() + ' · ' + baseVerb)
-      : (G.mode === 'same' ? 'Same root · ' + baseVerb : 'Root · ' + baseVerb);
+    var kindLabel = G.mode === 'same' ? 'Same root · ' + baseVerb : 'Root · ' + baseVerb;
 
     var spinCls = G.spinSeq !== G.drawnSpinSeq ? ' rr-spin' : '';
     G.drawnSpinSeq = G.spinSeq;
@@ -305,44 +262,27 @@
     h += '<div class="drill ag-card"><div class="ag-top"><p class="drill-kind">' + esc(kindLabel) + '</p>' +
       '<p class="drill-kind ag-score">✓ ' + G.ok + ' · ✗ ' + G.bad + (total ? ' · streak ' + G.streak : '') + '</p></div>';
 
-    if (G.mode === 'build') {
-      var pfxBlank = G.revealed ? '<mark class="hl" lang="' + lang + '">' + esc(pfxDisplay) + '</mark>' : '<span class="blank">____</span>';
-      h += '<p class="rr-prompt-mean" lang="' + GT.glLang(w) + '">' + esc(shortGloss(w)) + '</p>';
-      h += '<p class="drill-q ag-q-text" lang="' + lang + '">';
-      if (w.particle) {
-        h += '<span class="rr-base">' + esc(baseVerb) + '</span> <span class="rr-op">+</span> <span class="rr-slot' + spinCls + '">' + pfxBlank + '</span>';
-      } else {
-        h += '<span class="rr-slot' + spinCls + '">' + pfxBlank + '</span> <span class="rr-op">+</span> <span class="rr-base">' + esc(baseVerb) + '</span>' +
-          (refl ? ' <span class="mono-muted">' + esc(refl) + '</span>' : '');
-      }
-      h += '</p>';
+    var pfxBlank = G.revealed ? '<mark class="hl" lang="' + lang + '">' + esc(pfxDisplay) + '</mark>' : '<span class="blank">____</span>';
+    h += '<p class="rr-prompt-mean" lang="' + GT.glLang(w) + '">' + esc(shortGloss(w)) + '</p>';
+    h += '<p class="drill-q ag-q-text" lang="' + lang + '">';
+    if (w.particle) {
+      h += '<span class="rr-base">' + esc(baseVerb) + '</span> <span class="rr-op">+</span> <span class="rr-slot' + spinCls + '">' + pfxBlank + '</span>';
     } else {
-      var wordBlank = G.revealed ? '<mark class="hl">' + esc(w.t) + '</mark>' : '<span class="blank">____</span>';
-      h += '<p class="drill-q ag-q-text" lang="' + lang + '">';
-      if (w.particle) {
-        h += '<span class="rr-base">' + esc(baseVerb) + '</span> <span class="rr-op">+</span> <span class="rr-slot' + spinCls + '">' + esc(pfxDisplay) + '</span> <span class="rr-op">→</span> ' + wordBlank;
-      } else {
-        h += '<span class="rr-slot' + spinCls + '">' + esc(pfxDisplay) + '</span> <span class="rr-op">+</span> <span class="rr-base">' + esc(baseVerb) + '</span>' +
-          (refl ? ' <span class="mono-muted">' + esc(refl) + '</span>' : '') + ' <span class="rr-op">→</span> ' + wordBlank;
-      }
-      h += '</p>';
-      if (GT.gl(r)) h += '<p class="rr-base-gl" lang="' + GT.glLang(r) + '">' + esc(baseVerb) + ' = ' + esc(GT.gl(r)) + '</p>';
+      h += '<span class="rr-slot' + spinCls + '">' + pfxBlank + '</span> <span class="rr-op">+</span> <span class="rr-base">' + esc(baseVerb) + '</span>' +
+        (refl ? ' <span class="mono-muted">' + esc(refl) + '</span>' : '');
     }
+    h += '</p>';
+    if (GT.gl(r)) h += '<p class="rr-base-gl" lang="' + GT.glLang(r) + '">' + esc(baseVerb) + ' = ' + esc(GT.gl(r)) + '</p>';
 
-    var hints = hintsFor(G.mode, w, pfxDisplay);
+    var hints = hintsFor(w, pfxDisplay);
     if (G.hint && !G.revealed && hints.length) {
       h += '<p class="ag-hint" lang="' + GT.know + '">Hint: ' + hints.slice(0, G.hint).map(function (x) { return x.html; }).join(' · ') + '</p>';
     }
 
     var ans = answerKeyOf(G);
-    var opts = G.mode === 'build'
-      ? (G.cur.optPfx || []).map(function (p) { return { val: p, label: p, lang: lang }; })
-      : (G.cur.optIds || []).map(function (id) {
-          var ow = GT.byId[id];
-          return { val: id, label: ow ? shortGloss(ow) : '', lang: ow ? GT.glLang(ow) : GT.know };
-        });
+    var opts = (G.cur.optPfx || []).map(function (p) { return { val: p, label: p, lang: lang }; });
 
-    h += '<div class="options rr-opts ' + (G.mode === 'build' ? 'rr-opts-pfx' : 'rr-opts-mean') + '">' + opts.map(function (o, i) {
+    h += '<div class="options rr-opts rr-opts-pfx">' + opts.map(function (o, i) {
       var cls = '';
       if (G.revealed) {
         if (o.val === ans) cls = ' ok';
@@ -381,39 +321,10 @@
     return h;
   }
 
-  function fitOptions() {
-    if (typeof getComputedStyle !== 'function') return;
-    var grid = document.querySelector('#rrGame .rr-opts-mean');
-    if (!grid || !grid.clientWidth) return;
-    var opts = Array.prototype.slice.call(grid.querySelectorAll('.opt'));
-    if (!opts.length) return;
-    function fits(maxLines) {
-      return opts.every(function (bt) {
-        var cs = getComputedStyle(bt);
-        var lh = parseFloat(cs.lineHeight) || 22;
-        var pv = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
-        return bt.scrollWidth <= bt.clientWidth + 1 && bt.offsetHeight <= Math.ceil(pv + lh * (maxLines + 0.35));
-      });
-    }
-    grid.classList.remove('rr-grid-1', 'rr-compact');
-    if (fits(2)) return;
-    grid.classList.add('rr-compact');
-    if (fits(grid.clientWidth >= 460 ? 3 : 2)) return;
-    grid.classList.remove('rr-compact');
-    grid.classList.add('rr-grid-1');
-    if (!fits(2)) grid.classList.add('rr-compact');
-  }
-
-  function scheduleFit() {
-    fitOptions();
-    if (typeof requestAnimationFrame === 'function') requestAnimationFrame(fitOptions);
-  }
-
   function drawGame() {
     var el = document.getElementById('rrGame');
     if (el && lastApi) {
       el.innerHTML = gameHTML(state(GT.learn), lastApi);
-      scheduleFit();
     }
   }
 
@@ -436,7 +347,7 @@
       case 'hint': {
         if (G.revealed || !G.cur) return;
         var w = GT.byId[G.cur.wid];
-        var maxH = w ? hintsFor(G.mode, w, G.cur.pfxDisplay).length : 0;
+        var maxH = w ? hintsFor(w, G.cur.pfxDisplay).length : 0;
         if (G.hint >= maxH) return;
         G.hint++;
         break;
@@ -474,10 +385,9 @@
     if (!G.cur || !GT.byId[G.cur.wid] || !GT.roots[G.cur.rid]) nextTask(G);
     G.drawnSpinSeq = -1;
     var h = api.crumbs('<a href="#/roots">Roots</a> · Root roulette');
-    h += '<header class="page-head"><h1>Root roulette</h1><p class="lead">A root spins, a ' + api.esc(pwLower()) + ' lands on it — guess the meaning or build the word. Endless sandbox: nothing is saved to Review.</p></header>';
+    h += '<header class="page-head"><h1>Root roulette</h1><p class="lead">See the meaning and base root — pick the right ' + api.esc(pwLower()) + ' to build the word. Endless sandbox: nothing is saved to Review.</p></header>';
     h += '<div id="rrGame">' + gameHTML(G, api) + '</div>';
     api.page(h, 'mid');
-    scheduleFit();
     api.setKeys(function (e) {
       var k = e.key, G2 = state(GT.learn);
       if (/^[1-4]$/.test(k)) {
@@ -497,19 +407,6 @@
     e.preventDefault();
     act(el.dataset.rr, el);
   });
-
-  var resizeRaf = 0;
-  if (typeof window !== 'undefined' && window.addEventListener) {
-    window.addEventListener('resize', function () {
-      if (!document.querySelector('#rrGame .rr-opts-mean')) return;
-      if (typeof requestAnimationFrame === 'function') {
-        if (resizeRaf) cancelAnimationFrame(resizeRaf);
-        resizeRaf = requestAnimationFrame(function () { resizeRaf = 0; fitOptions(); });
-      } else {
-        fitOptions();
-      }
-    });
-  }
 
   GT.roulette = {
     render: render,
