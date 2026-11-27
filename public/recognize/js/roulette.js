@@ -507,25 +507,17 @@
 
     h += '</div><div class="rr-actions">';
     if (!G.revealed) {
-      h += '<div class="rr-tools">';
       if (hints.length) {
         var nextHint = G.hint < hints.length ? hints[G.hint] : null;
         var hintLbl = nextHint ? nextHint.btn : 'All hints';
-        h += '<button class="btn small" type="button" data-rr="hint"' + (!nextHint ? ' disabled' : '') + '>' + esc(hintLbl) + '</button>';
+        h += '<button class="btn rr-tool" type="button" data-rr="hint"' + (!nextHint ? ' disabled' : '') + '>' + esc(hintLbl) + '</button>';
       }
-      h += '<button class="btn small" type="button" data-rr="show">Show answer</button>';
-      if (G.mode === 'same') {
-        h += '<button class="btn small" type="button" data-rr="newroot">Switch root ↻</button>';
-      }
-      h += '</div>';
-      h += '<button class="btn primary rr-next" type="button" data-rr="next">Next →</button>';
-    } else {
-      h += '<button class="btn primary rr-next" type="button" data-rr="next">Next →</button>';
-      if (G.mode === 'same') {
-        h += '<div class="rr-tools"><button class="btn small" type="button" data-rr="newroot">Switch root ↻</button></div>';
-      }
+      h += '<button class="btn rr-tool" type="button" data-rr="show">Show answer</button>';
     }
-    h += '</div>';
+    if (G.mode === 'same') {
+      h += '<button class="btn rr-tool" type="button" data-rr="newroot">Switch root ↻</button>';
+    }
+    h += '<button class="btn primary rr-next" type="button" data-rr="next">Next →</button></div>';
     h += '<p class="mono-muted ag-keys">1–' + opts.length + ' · H hint · Enter next</p>';
     return h;
   }

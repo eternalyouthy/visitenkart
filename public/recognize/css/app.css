@@ -1812,29 +1812,30 @@ body.pack-loading .main { opacity: 0.55; transition: opacity 0.15s; }
 .rr-opts-pfx { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .rr-actions {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
   gap: 10px;
   margin-top: 14px;
 }
-.rr-tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.rr-next {
-  width: 100%;
+.rr-actions .btn {
   min-height: 48px;
-  padding: 13px 20px;
+  padding: 13px 18px;
   font-size: 13px;
   letter-spacing: 0.14em;
   justify-content: center;
+  white-space: nowrap;
 }
+.rr-tool { flex: 0 0 auto; }
+.rr-actions [data-rr="hint"] { min-width: 132px; }
+.rr-next { flex: 1 1 auto; }
 @media (max-width: 760px) {
   .rr-opts .opt { padding: 10px 14px; }
-  .rr-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .rr-tools .btn { width: 100%; min-height: 44px; }
-  .rr-tools [data-rr="newroot"] { grid-column: 1 / -1; }
-  .rr-next { min-height: 50px; }
+}
+@media (max-width: 640px) {
+  .rr-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .rr-actions .btn { width: 100%; min-width: 0; min-height: 46px; padding: 11px 14px; }
+  .rr-actions [data-rr="newroot"],
+  .rr-actions .rr-next { grid-column: 1 / -1; }
+  .rr-actions .rr-next { min-height: 50px; }
 }
 @media (max-width: 560px) {
   .rr-opts-pfx { grid-template-columns: repeat(2, minmax(0, 1fr)); }
