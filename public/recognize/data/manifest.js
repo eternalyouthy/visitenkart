@@ -135,7 +135,8 @@ self.GT_DATA_FILES = [
   'i18n/de.en.grammar_practice.js',
   // Late topic memberships (must stay last)
   'basics.js',
-  'memberships.js'
+  'memberships.js',
+  'roots_more.js'
 ];
 
 self.GT_PACKS = {
@@ -187,7 +188,8 @@ self.GT_PACKS = {
       'data/en/grammar_expand_2.js',
       'data/en/grammar_expand_3.js',
       'data/en/grammar_expand_4.js',
-      'data/en/grammar_c1.js'
+      'data/en/grammar_c1.js',
+      'data/en/verbs_families_3.js'
     ]
   },
   // Russian: written natively for the shared engine (target `t`, glosses en/de, explanations { en, de }).
@@ -236,6 +238,7 @@ self.GT_PACKS = {
       'roots_bit.js',
       'affixes.js',
       'roots_layout.js',
+      'roots_more.js',
       'grammar_aspect.js',
       'grammar_cases.js',
       'grammar_motion.js',
