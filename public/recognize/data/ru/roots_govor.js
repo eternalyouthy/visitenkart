@@ -43,7 +43,7 @@ GT.registerRoot({
       examples: [{ t: 'Он случ+айно [[проговор+ился]] о сюрпр+изе.', en: 'He accidentally let slip about the surprise.', de: 'Er hat sich versehentlich wegen der Überraschung verplappert.' }],
       prefixDrill: { ex: 0, meaning: 1, explain: { en: 'про- = by mistake, overlooking: the words slipped out.', de: 'про- = versehentlich: die Worte sind herausgerutscht.' } },
       transparency: 'figurative' },
-    { id: 'ru-r-govor-vygovarivat', pos: 'verb', aspect: 'impf', level: 'B2', prefix: 'вы', t: 'выгов+аривать',
+    { id: 'ru-r-govor-vygovarivat', core: true, pos: 'verb', aspect: 'impf', level: 'B2', prefix: 'вы', t: 'выгов+аривать',
       forms: { praes: 'выгов+ариваю, выгов+ариваешь', praet: 'выгов+аривал', perf: 'pf. в+ыговорить (в+ыговорю, в+ыговоришь)' },
       en: 'to pronounce; to tell off', de: 'aussprechen; zurechtweisen',
       examples: [{ t: 'Я до сих пор не мог+у [[в+ыговорить]] +это сл+ово.', en: 'I still can’t pronounce this word.', de: 'Ich kann dieses Wort immer noch nicht aussprechen.' }],

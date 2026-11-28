@@ -1,6 +1,8 @@
 /* Extra topic memberships for cards defined in files that load late (roots). Loaded last in the German pack,
  * so every id exists. One card, shared progress — no duplicate headwords. */
 GT.addMember('r-setzen-umsetzen', 'it', 'dev');           // umsetzen — to implement
+GT.addMember('r-laufen-ablaufen', 'it', 'security');    // ablaufen — to expire / proceed
+GT.addMember('pro-office-abstimmen', 'it', 'b2_arbeitswelt'); // abstimmen — to coordinate / vote
 GT.addMember('r-halten-aufenthalt', 'words', 'b2_reisen'); // der Aufenthalt — stay
 GT.addMember('pro-office-schnittstelle', 'it', 'dev');    // die Schnittstelle — API / interface
 GT.addMember('b2-wiss-stichprobe', 'it', 'ai_data');      // die Stichprobe — statistical sample

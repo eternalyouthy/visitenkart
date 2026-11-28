@@ -348,31 +348,6 @@ GT.register({ tab: 'it', topic: 'security', items: [
   ru_link: { type: 'internationalism', text: 'сертификат: оба от средневекового латинского certificatum.' }
 },
 {
-  id: 'it-sec-ablaufen', pos: 'verb',
-  de: 'ablaufen', forms: { praes: 'läuft ab', praet: 'lief ab', perf: 'ist abgelaufen' },
-  ru: 'истекать (о сроке); проходить, протекать (о процессе)',
-  usage: { says: 'german', note: '«Das Zertifikat / Passwort läuft ab» — стандарт. «Expiren» — сленг, редкость.' },
-  examples: [
-    { sense: 'истекать (о сроке)', de: 'Dein Passwort [[läuft]] in drei Tagen [[ab]].', ru: 'Твой пароль истекает через три дня.' },
-    { sense: 'протекать, проходить (о процессе)', de: 'Wie ist der Angriff genau [[abgelaufen]]?', ru: 'Как именно протекала атака?' }
-  ],
-  morph: 'ab-lauf-en', root: 'laufen',
-  parts: [['ab-', 'прочь, до конца (отделяемая)'], ['lauf', 'основа laufen — бежать, идти'], ['-en', 'окончание инфинитива']],
-  transparency: 'figurative',
-  family: ['laufen', 'der Ablauf', 'das Ablaufdatum', 'abgelaufen', 'verlaufen'],
-  meaningType: 'polysemous',
-  meaningExplanation: 'У ablaufen два частых словарных значения: «истекать» (о сроке действия сертификата, договора) и «протекать, проходить» (о процессе, встрече).',
-  meaningExamples: [{ de: 'Das Zertifikat läuft morgen ab.', ru: 'Сертификат истекает завтра.' }, { de: 'Wie ist das Audit abgelaufen?', ru: 'Как прошёл аудит?' }],
-  note: 'Perfekt с sein: «Das Zertifikat ist abgelaufen». «Der Ablauf» — процесс, последовательность действий («der Ablauf eines Incidents»). «Das Ablaufdatum» — срок годности / истечения.',
-  why: {
-    confidence: 'high',
-    text: 'Состав: отделяемая приставка ab- («вниз, до конца») + laufen («бежать, течь»).\nПроисхождение: от физического «стекать вниз до конца» (как песок в песочных часах или вода) развились два значения: «протекать» (о процессе) и «истечь» (о сроке действия, ср. русское «срок истёк»).\nПрозрачность: переносная, метафора часов делает смысл наглядным.',
-    source: 'DWDS (Pfeifer), s.v. ablaufen / laufen',
-    evidence: 'ab- + laufen («стекать, пробегать до конца»): образ песочных/водяных часов → «истечь (о сроке)».'
-  },
-  ru_link: null
-},
-{
   id: 'it-sec-signatur', pos: 'noun',
   de: 'Signatur', article: 'die', plural: 'die Signaturen',
   ru: 'подпись (электронная); сигнатура (в антивирусе)',

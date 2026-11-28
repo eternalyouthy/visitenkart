@@ -94,31 +94,6 @@ GT.register({ tab: 'words', topic: 'health', items: [
   ru_link: null
 },
 {
-  id: 'b1-health-verschreiben', pos: 'verb',
-  de: 'verschreiben', forms: { praes: 'verschreibt', praet: 'verschrieb', perf: 'hat verschrieben' }, gov: 'jdm. (Dat.) etw. (Akk.)',
-  ru: 'выписывать (лекарство); (sich verschreiben) ошибиться при письме, сделать опечатку',
-  examples: [
-    { sense: 'выписывать (лекарство)', de: 'Der Arzt hat mir ein Antibiotikum [[verschrieben]].', ru: 'Врач выписал мне антибиотик.' },
-    { sense: 'описаться, сделать опечатку (sich)', de: 'Sorry, ich habe mich [[verschrieben]]: Die IP endet auf .12, nicht auf .21.', ru: 'Извини, опечатался: IP заканчивается на .12, а не на .21.' }
-  ],
-  morph: 'ver-schreib-en', root: 'schreiben',
-  parts: [['ver-', 'неотделяемая приставка (назначить / ошибка с sich)'], ['schreib', 'основа schreiben — писать'], ['-en', 'окончание инфинитива']],
-  transparency: 'figurative',
-  family: ['schreiben', 'die Schrift', 'beschreiben', 'unterschreiben', 'die Unterschrift', 'verschreibungspflichtig'],
-  meaningType: 'polysemous',
-  meaningExplanation: 'Без возвратного sich глагол значит «выписывать лекарство», а с sich (sich verschreiben) — «описаться, сделать опечатку».',
-  meaningExamples: [{ de: 'Der Arzt verschreibt ein Antibiotikum.', ru: 'Врач выписывает антибиотик.' }, { de: 'Entschuldigung, ich habe mich verschrieben.', ru: 'Извините, я опечатался.' }],
-  note: 'Два значения. Приставка ver- с возвратным глаголом часто значит «сделать неправильно»: sich verschreiben (описаться), sich versprechen (оговориться), sich verhören (ослышаться), sich verlaufen (заблудиться). «Verschreibungspflichtig» — только по рецепту.',
-  why: {
-    confidence: 'high',
-    root: 'schreiben',
-    text: 'Состав: ver- + schreiben + -en.\nПроисхождение: schreiben — раннее заимствование из латинского scribere («писать»). В средневерхненемецком verschrīben значило «письменно закрепить, назначить кому-то», откуда врачебное «выписать рецепт». Возвратное sich verschreiben («описаться») следует продуктивной модели ver- со значением ошибки.\nПрозрачность: sich verschreiben прозрачно, а «выписывать лекарство» — переносное.',
-    source: 'DWDS (Pfeifer), s.v. verschreiben / schreiben',
-    evidence: 'schreiben < лат. scribere; ср.-в.-нем. verschrīben «письменно назначить»; sich verschreiben по модели ошибочного ver-.'
-  },
-  ru_link: null
-},
-{
   id: 'b1-health-rezept', pos: 'noun',
   de: 'Rezept', article: 'das', plural: 'die Rezepte',
   ru: 'рецепт (врача и кулинарный)',

@@ -73,13 +73,6 @@ GT.register({ tab: 'it', topic: 'dev', items: [
   note: { en: 'In IT speech also «баг». «По ошибке» — by mistake.', de: 'Im IT-Jargon auch «баг». «По ошибке» — versehentlich.' }
 },
 {
-  id: 'ru-pro-ispravlyat', pos: 'verb', level: 'B1', aspect: 'impf', t: 'исправл+ять',
-  forms: { praes: 'исправл+яю, исправл+яешь', praet: 'исправл+ял', perf: 'pf. испр+авить (испр+авлю)' },
-  en: 'to fix, to correct', de: 'beheben, korrigieren',
-  examples: [{ t: 'Мы уже́ [[испр+авили]] уязви́мость.', en: 'We have already fixed the vulnerability.', de: 'Wir haben die Schwachstelle schon behoben.' }],
-  note: { en: 'Root -прав- “right, straight”: to make right. Noun: исправле́ние (fix, correction).', de: 'Wurzel -прав- „richtig, gerade“: richtig machen. Substantiv: исправле́ние (Korrektur).' }
-},
-{
   id: 'ru-pro-testirovat', pos: 'verb', level: 'B1', aspect: 'impf', t: 'тест+ировать',
   forms: { praes: 'тест+ирую, тест+ируешь', praet: 'тест+ировал', perf: 'pf. протест+ировать' },
   en: 'to test', de: 'testen',

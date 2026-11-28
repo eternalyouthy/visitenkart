@@ -184,6 +184,21 @@
     T.sort(function (a, b) { return (a._o - b._o) || (a._i - b._i); });
     T.forEach(function (t) { delete t._i; delete t._o; });
   };
+  /** Keep Roots and Words mutually exclusive: any card in a root family belongs to Roots (and Professional if attached), never Words. */
+  GT.setupRootsExclusivity = function (p) {
+    if (!p || !p.items) return;
+    p.items.forEach(function (it) {
+      if (!it.tabs || !it.tabs.roots || !it.tabs.words) return;
+      Object.keys(it.memberOf || {}).forEach(function (k) {
+        if (k.indexOf('words.') === 0) dropMember(p, it, k);
+      });
+      delete it.tabs.words;
+      if (it.tab === 'words') {
+        it.tab = 'roots';
+        it.topic = it.rootId || it.topic;
+      }
+    });
+  };
   GT.setupExpressions = function (p) {
     var T = p.config.TOPICS;
     if (!T) return;

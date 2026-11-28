@@ -145,6 +145,74 @@
     return { cards: out, changed: changed };
   }
 
+  /* ---- legacy duplicate id migration (preserves progress when duplicate cards are consolidated) ---- */
+  var LEGACY_ID_MAP = {
+    de: {
+      'b1-health-verschreiben': 'r-schreiben-verschreiben',
+      'b1-health-zustand': 'r-stehen-zustand',
+      'b1-health-brechen': 'r-brechen-brechen',
+      'b1-health-einnehmen': 'r-nehmen-einnehmen',
+      'b1-health-abnehmen': 'r-nehmen-abnehmen',
+      'b1-health-zunehmen': 'r-nehmen-zunehmen',
+      'b2-gesellschaft-einsetzen': 'r-setzen-einsetzen',
+      'it-sec-ablaufen': 'r-laufen-ablaufen',
+      'b1-m2-streiten': 'b1-people-streiten',
+      'b2-arbeitswelt-abstimmen': 'pro-office-abstimmen'
+    },
+    ru: {
+      'ru-w-delo': 'ru-r-del-delo',
+      'ru-w-podezd': 'ru-r-ezd-podezd',
+      'ru-w-raspisanie': 'ru-r-pis-raspisanie',
+      'ru-w-ostavatsya': 'ru-r28-stan-ostatsya',
+      'ru-w-zakazyvat': 'ru-r27-kaz-zakazat',
+      'ru-w2-zaderzhat-reys': 'ru-r27-derzh-zaderzhat',
+      'ru-pro-ispravlyat': 'ru-r27-r-prav-ispravit',
+      'ru-pro4-dorabatyvat': 'ru-r28-rabot-dorabotat',
+      'ru-w3-marshrut': 'ru-w-marshrut',
+      'ru-w2-dostovernyy': 'ru-w-dostoverny'
+    }
+  };
+  function mapLegacyKey(key, map) {
+    var m = /^(.+?)(#(rec|prod))?$/.exec(String(key || ''));
+    if (!m || !map[m[1]]) return null;
+    return map[m[1]] + (m[2] || '');
+  }
+  function migrateLegacyIds(cards, later, deleted, lang) {
+    var map = LEGACY_ID_MAP[lang];
+    if (!map) return false;
+    var changed = false, touchedKeys = Object.create(null);
+    Object.keys(cards).forEach(function (k) {
+      var nk = mapLegacyKey(k, map);
+      if (!nk || !safeKey(nk)) return;
+      changed = true; touchedKeys[nk] = true;
+      cards[nk] = cards[nk] ? mergeCard(cards[nk], cards[k]) : cleanObj(cards[k]);
+      delete cards[k];
+    });
+    Object.keys(deleted).forEach(function (k) {
+      var nk = mapLegacyKey(k, map);
+      if (!nk || !safeKey(nk)) return;
+      changed = true; touchedKeys[nk] = true;
+      deleted[nk] = Math.max(deleted[nk] || 0, deleted[k]);
+      delete deleted[k];
+    });
+    Object.keys(later).forEach(function (id) {
+      var nid = map[id];
+      if (!nid || !safeKey(nid)) return;
+      changed = true;
+      later[nid] = Math.max(later[nid] || 0, later[id]);
+      delete later[id];
+    });
+    Object.keys(touchedKeys).forEach(function (nk) {
+      if (cards[nk] && deleted[nk]) {
+        if (cardTs(cards[nk]) > deleted[nk]) delete deleted[nk];
+        else delete cards[nk];
+      }
+      var nid = baseId(nk);
+      if (cards[nk] && later[nid]) delete later[nid];
+    });
+    return changed;
+  }
+
   function normalize(d, lang) {
     var f = fresh(lang);
     if (!isPlainObj(d)) return { data: f, migrated: false, settings: null };
@@ -152,16 +220,18 @@
     // Modern ids are opaque. An unknown drill from a newer catalogue must not be renamed.
     var needsMig = (d.version || 1) < SCHEMA_VERSION;
     var mig = needsMig ? migrateCards(rawCards) : { cards: rawCards, changed: false };
+    var later = safeTimeMap(d.later), deleted = safeTimeMap(d.deleted);
+    var legChanged = migrateLegacyIds(mig.cards, later, deleted, lang);
     return {
-      migrated: (d.version || 1) < SCHEMA_VERSION || mig.changed,
+      migrated: (d.version || 1) < SCHEMA_VERSION || mig.changed || legChanged,
       settings: isPlainObj(d.settings) ? d.settings : null,
       data: Object.assign(extraFields(d, PROGRESS_FIELDS), {
         version: SCHEMA_VERSION,
         language: lang,
         created: Number.isSafeInteger(d.created) && d.created > 0 ? d.created : f.created,
         cards: mig.cards,
-        later: safeTimeMap(d.later),
-        deleted: safeTimeMap(d.deleted),
+        later: later,
+        deleted: deleted,
         resetAt: safeTs(d.resetAt, 0),
         log: safeLogMap(d.log),
         lastPractice: safeTs(d.lastPractice, null),

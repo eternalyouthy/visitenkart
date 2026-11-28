@@ -1024,28 +1024,6 @@
         "evidence": "From Med. Lat. certificātum (“that which is certified”, from certus + facere)."
       }
     },
-    "it-sec-ablaufen": {
-      "note": "Perfekt with sein: “Das Zertifikat ist abgelaufen”. “Der Ablauf” — process, procedure, sequence of events (“der Ablauf eines Incidents”). “Das Ablaufdatum” — expiry date.",
-      "usageNote": "“Das Zertifikat / Passwort läuft ab” is standard. “Expiren” is rare slang.",
-      "why": {
-        "text": "Composition: separable prefix ab- (“down, to the end”) + laufen (“to run, flow”).\nOrigin: from the physical sense “to run/flow down to the end” (like sand in an hourglass or water in a water clock) two meanings developed: “to proceed, unfold” (of a process) and “to expire” (of a validity period).\nTransparency: figurative, the hourglass metaphor makes the meaning vivid.",
-        "evidence": "ab- + laufen (“to flow down, run to the end”): image of an hourglass/water clock → “to expire (of a term)”."
-      },
-      "meaningExplanation": "ablaufen has two frequent dictionary meanings: “to expire” (of a certificate, contract, password) and “to run, proceed, take place” (of a process, meeting).",
-      "meaningExamples": [
-        "The certificate expires tomorrow.",
-        "How did the audit go?"
-      ],
-      "senses": [
-        "to expire (of a period/certificate)",
-        "to proceed, go (of a process)"
-      ],
-      "parts": [
-        "off, to the end (separable)",
-        "stem of laufen — to run",
-        "infinitive ending"
-      ]
-    },
     "it-sec-signatur": {
       "note": "A handwritten signature is “die Unterschrift”. “Signaturbasierte Erkennung” — signature-based detection. “Die E-Mail-Signatur” — signature block at the end of an email.",
       "usageNote": "“Signatur” is used for an electronic signature, a malware signature, and an email signature block. “Signieren” — to sign (cryptographically).",

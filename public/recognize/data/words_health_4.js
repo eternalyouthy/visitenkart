@@ -81,55 +81,6 @@ GT.register({ tab: 'words', topic: 'health', items: [
   ru_link: null
 },
 {
-  id: 'b1-health-brechen', pos: 'verb',
-  de: 'brechen', forms: { praes: 'bricht', praet: 'brach', perf: 'hat / ist gebrochen' }, gov: 'sich (Dat.) etw. (Akk.)',
-  ru: 'ломать; ломаться; (мед.) рвать, тошнить',
-  examples: [
-    { sense: 'ломать (с haben)', de: 'Beim Skifahren hat sie sich das Bein [[gebrochen]].', ru: 'Катаясь на лыжах, она сломала ногу.' },
-    { sense: 'ломаться (с sein)', de: 'Das Eis ist unter ihm [[gebrochen]].', ru: 'Лёд под ним проломился.' },
-    { sense: 'рвать, тошнить (мед.)', de: 'Das Kind musste gestern Abend zweimal [[brechen]].', ru: 'Вчера вечером ребёнка дважды вырвало.' }
-  ],
-  morph: 'brech-en',
-  family: ['der Bruch', 'der Knochenbruch', 'unterbrechen', 'einbrechen', 'abbrechen', 'sich erbrechen'],
-  meaningType: 'polysemous',
-  meaningExplanation: 'Глагол brechen объединяет несколько словарных значений: «ломать» (с haben), «ломаться» (с sein) и медицинское «рвать, тошнить».',
-  meaningExamples: [{ de: 'Er hat sich den Arm gebrochen.', ru: 'Он сломал руку.' }, { de: 'Das Kind musste die ganze Nacht brechen.', ru: 'Ребёнка рвало всю ночь.' }],
-  note: 'Кто-то ломает → haben: «Ich habe mir den Arm gebrochen» (возвратное в Dativ + часть тела). Ломается само → sein: «Das Eis ist gebrochen». В медицине «brechen / sich erbrechen» — ещё и «рвать» (о рвоте). Сильный: e→i, brach, gebrochen.',
-  why: {
-    confidence: 'high',
-    text: 'Состав: корневой сильный глагол brech- + -en.\nПроисхождение: общегерманский глагол (др.-в.-нем. brehhan, родственно английскому break), восходит к индоевропейскому корню *bʰreg- («ломать»), к которому относится и латинское frangere (отсюда «фрагмент», «фракция»).\nПрозрачность: базовый корень (медицинское «рвать» развилось из образа резкого прорыва наружу).',
-    source: 'DWDS (Pfeifer), s.v. brechen',
-    evidence: 'Др.-в.-нем. brehhan < герм. *brekaną (англ. break) < и.-е. *bʰreg- (родственно лат. frangere).'
-  },
-  ru_link: null
-},
-{
-  id: 'b1-health-einnehmen', pos: 'verb',
-  de: 'einnehmen', forms: { praes: 'nimmt ein', praet: 'nahm ein', perf: 'hat eingenommen' }, gov: '+ Akk.',
-  ru: 'принимать (лекарство); получать (доход)',
-  examples: [
-    { sense: 'принимать лекарство', de: '[[Nehmen]] Sie die Tabletten bitte vor dem Frühstück [[ein]].', ru: 'Принимайте таблетки, пожалуйста, перед завтраком.' },
-    { sense: 'принимать курс лекарства', de: 'Wie lange muss ich das Antibiotikum noch [[einnehmen]]?', ru: 'Сколько ещё мне нужно принимать антибиотик?' },
-    { sense: 'получать доход, выручку', de: 'Der Verein hat auf dem Fest fast 2000 Euro [[eingenommen]].', ru: 'Объединение выручило на празднике почти 2000 евро.' }
-  ],
-  morph: 'ein-nehm-en', root: 'nehmen',
-  parts: [['ein-', 'внутрь (отделяемая)'], ['nehm', 'основа nehmen — брать'], ['-en', 'окончание инфинитива']],
-  transparency: 'figurative',
-  family: ['nehmen', 'die Einnahme', 'die Einnahmen', 'zunehmen', 'abnehmen', 'aufnehmen'],
-  meaningType: 'polysemous',
-  meaningExplanation: 'einnehmen в медицине значит «принимать лекарство внутрь», а в экономике и быту — «получать доход/выручку» или «занимать место».',
-  meaningExamples: [{ de: 'Tabletten vor dem Essen einnehmen', ru: 'принимать таблетки до еды' }, { de: 'Die Firma hat mehr Geld eingenommen.', ru: 'Компания получила больше выручки.' }],
-  note: 'Официальное слово — в инструкциях и у врача; в разговоре просто «nehmen». «Die Einnahme» — приём (лекарства); «die Einnahmen» (мн. ч.) — доходы. Сильный: nimmt ein, nahm ein, eingenommen.',
-  why: {
-    confidence: 'high',
-    root: 'nehmen',
-    text: 'Состав: отделяемая приставка ein- («внутрь») + nehmen («брать»).\nПроисхождение: буквальное «брать внутрь» дало медицинское значение (принимать лекарство внутрь) и финансовое (принимать деньги в кассу → получать доход, отсюда die Einnahmen).\nПрозрачность: переносная, но логика «внутрь + брать» хорошо просматривается.',
-    source: 'DWDS (Pfeifer), s.v. einnehmen',
-    evidence: 'ein- («внутрь») + nehmen («брать»): «принимать внутрь» и «принимать в кассу / получать доход».'
-  },
-  ru_link: null
-},
-{
   id: 'b1-health-leiden', pos: 'verb',
   de: 'leiden', forms: { praes: 'leidet', praet: 'litt', perf: 'hat gelitten' }, gov: 'an + Dat. / unter + Dat.',
   ru: 'страдать (болезнью, от чего-то)',
@@ -167,58 +118,6 @@ GT.register({ tab: 'words', topic: 'health', items: [
     text: 'Состав: корневой глагол pfleg- + -en.\nПроисхождение: древневерхненемецкое pflegan значило «ручаться, нести ответственность, заботиться». Из «заботиться и поддерживать в порядке» вышли и медицинский уход, и IT-значение «вести, поддерживать документацию/данные».\nПрозрачность: оба значения объединены идеей заботливого поддержания.',
     source: 'DWDS (Pfeifer), s.v. pflegen',
     evidence: 'Др.-в.-нем. pflegan «ручаться, заботиться, ухаживать».'
-  },
-  ru_link: null
-},
-{
-  id: 'b1-health-abnehmen', pos: 'verb',
-  de: 'abnehmen', forms: { praes: 'nimmt ab', praet: 'nahm ab', perf: 'hat abgenommen' },
-  ru: 'худеть; снимать; брать трубку; уменьшаться',
-  examples: [
-    { sense: 'худеть', de: 'Ich habe in drei Monaten fünf Kilo [[abgenommen]].', ru: 'Я похудел на пять килограммов за три месяца.' },
-    { sense: 'брать трубку', de: 'Ich rufe seit einer Stunde an, aber keiner [[nimmt ab]].', ru: 'Я звоню уже час, но никто не берёт трубку.' },
-    { sense: 'снимать (крышку, очки)', de: 'Bitte [[nehmen]] Sie vor der Untersuchung die Brille [[ab]].', ru: 'Пожалуйста, снимите очки перед обследованием.' },
-    { sense: 'брать (кровь на анализ)', de: 'Die Arzthelferin hat mir heute Morgen Blut [[abgenommen]].', ru: 'Медсестра взяла у меня сегодня утром кровь на анализ.' }
-  ],
-  morph: 'ab-nehm-en', root: 'nehmen',
-  parts: [['ab-', 'прочь, вниз, уменьшение (отделяемая)'], ['nehm', 'основа nehmen — брать'], ['-en', 'окончание инфинитива']],
-  transparency: 'figurative',
-  family: ['nehmen', 'zunehmen', 'die Abnahme', 'einnehmen', 'annehmen'],
-  meaningType: 'polysemous',
-  meaningExplanation: 'У abnehmen несколько самостоятельных словарных значений: худеть, снимать предмет, брать телефонную трубку, брать кровь на анализ, снижаться.',
-  meaningExamples: [{ de: 'fünf Kilo abnehmen', ru: 'похудеть на пять килограммов' }, { de: 'den Hörer abnehmen', ru: 'взять трубку' }, { de: 'Blut abnehmen', ru: 'взять кровь на анализ' }],
-  note: 'Много значений, решает контекст: худеть, брать трубку, снимать (крышку, очки), а также «Blut abnehmen» — брать кровь. В IT: «die Abnahme» — приёмка (приёмочное тестирование).',
-  why: {
-    confidence: 'high',
-    root: 'nehmen',
-    text: 'Состав: отделяемая приставка ab- («прочь, вниз, уменьшение») + nehmen («брать»).\nПроисхождение: от буквального «снять сверху» развились «снять телефонную трубку с рычага → ответить на звонок» и непереходное «убывать, уменьшаться» → «худеть».\nПрозрачность: переносная — часть значений прозрачна («снять очки»), но «худеть» и «брать трубку» лучше запоминать через примеры.',
-    source: 'DWDS (Pfeifer), s.v. abnehmen',
-    evidence: 'ab- + nehmen: «снимать сверху» → «снимать трубку»; непереходное «убывать, уменьшаться» → «худеть».'
-  },
-  ru_link: null
-},
-{
-  id: 'b1-health-zunehmen', pos: 'verb',
-  de: 'zunehmen', forms: { praes: 'nimmt zu', praet: 'nahm zu', perf: 'hat zugenommen' },
-  ru: 'поправляться, набирать вес; увеличиваться',
-  examples: [
-    { sense: 'набирать вес', de: 'Im Homeoffice habe ich leider ein paar Kilo [[zugenommen]].', ru: 'На удалёнке я, к сожалению, набрал пару килограммов.' },
-    { sense: 'увеличиваться, расти (о числе)', de: 'Die Zahl der Angriffe hat stark [[zugenommen]].', ru: 'Число атак сильно выросло.' }
-  ],
-  morph: 'zu-nehm-en', root: 'nehmen',
-  parts: [['zu-', 'к, прибавление (отделяемая)'], ['nehm', 'основа nehmen — брать'], ['-en', 'окончание инфинитива']],
-  transparency: 'figurative',
-  family: ['nehmen', 'abnehmen', 'die Zunahme', 'zunehmend'],
-  meaningType: 'polysemous',
-  meaningExplanation: 'zunehmen обозначает как набор веса у человека, так и рост количества или интенсивности явления (атак, жалоб, нагрузки).',
-  meaningExamples: [{ de: 'im Urlaub zwei Kilo zunehmen', ru: 'поправиться в отпуске на два килограмма' }, { de: 'Phishing-Angriffe nehmen ständig zu.', ru: 'Фишинговые атаки постоянно растут.' }],
-  note: 'И про вес, и про числа: «Die Zahl der Fälle nimmt zu». «Zunehmend» — всё больше (очень частое слово в отчётах). Противоположность — abnehmen.',
-  why: {
-    confidence: 'high',
-    root: 'nehmen',
-    text: 'Состав: отделяемая приставка zu- («прибавление, к») + nehmen («брать»).\nПроисхождение: уже в средневерхненемецком zuonemen значило «прибывать, расти, увеличиваться» — прямая пара-антоним к abnehmen («убывать»).\nПрозрачность: переносная, легко запоминается в паре abnehmen ↔ zunehmen.',
-    source: 'DWDS (Pfeifer), s.v. zunehmen',
-    evidence: 'Ср.-в.-нем. zuonemen «прирастать, увеличиваться» (zu- + nehmen), антоним к abnehmen.'
   },
   ru_link: null
 },

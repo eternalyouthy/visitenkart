@@ -476,27 +476,6 @@ GT.register({ tab: 'words', topic: 'health', items: [
   ru_link: { type: 'internationalism', text: 'медицина: оба слова от латинского medicina.' }
 },
 {
-  id: 'b1-health-zustand', pos: 'noun',
-  de: 'Zustand', article: 'der', plural: 'die Zustände',
-  ru: 'состояние',
-  examples: [
-    { de: 'Sein [[Zustand]] ist stabil.', ru: 'Его состояние стабильное.' },
-    { de: 'In diesem [[Zustand]] solltest du nicht Auto fahren.', ru: 'В таком состоянии тебе не стоит садиться за руль.' }
-  ],
-  morph: 'Zu-stand', root: 'stehen',
-  parts: [['Zu-', 'приставка'], ['Stand', 'der Stand — положение (от stehen — стоять)']],
-  transparency: 'figurative',
-  family: ['stehen', 'der Stand', 'zuständig', 'der Umstand', 'der Abstand'],
-  note: 'О здоровье: «Sein Zustand hat sich verbessert / verschlechtert». О вещах: «Das Auto ist in gutem Zustand». Мн. ч. «Zustände» часто с негативом: «Das sind ja Zustände hier!» — ну и бардак тут!',
-  why: {
-    confidence: 'high',
-    text: 'Состав: приставка Zu- + der Stand («положение», от stehen «стоять»).\nПроисхождение: закрепилось в XVII в. как немецкий эквивалент латинского status («положение дел, состояние»); ср. русское «со-стояние» (от «стоять»), которое также повторяет образ латинского status.\nПрозрачность: переносная — корень Stand/stehen хорошо узнаётся.',
-    source: 'DWDS (Pfeifer), s.v. Zustand',
-    evidence: 'Образование XVII в. (zu + Stand, к stehen) как немецкий эквивалент лат. status.'
-  },
-  ru_link: null
-},
-{
   id: 'b1-health-krankheit', pos: 'noun',
   de: 'Krankheit', article: 'die', plural: 'die Krankheiten',
   ru: 'болезнь, заболевание',

@@ -2912,8 +2912,6 @@ GT.register({
       ex('После проверки архивов прежняя те+ория оказалась [[несосто+ятельной]].', 'After checking the archives, the former theory proved untenable.', 'Nach Prüfung der Archive erwies sich die alte Theorie als unhaltbar.')),
     A('predvaritelnyy', 'adj', 'предвар+ительный', 'B2', 'preliminary, tentative', 'vorläufig',
       ex('Пока это лишь [[предвар+ительный]] расчёт до в+ыхода квартального отчёта.', 'So far this is only a preliminary estimate ahead of the quarterly report.', 'Vorerst ist dies nur eine vorläufige Schätzung vor dem Quartalsbericht.')),
-    A('dostovernyy', 'adj', 'достов+ерный', 'C1', 'reliable, authentic, verified', 'verlässlich, glaubwürdig',
-      ex('Журнал+исты опираются исключительно на [[достов+ерные]] первоист+очники.', 'Journalists rely exclusively on verified primary sources.', 'Journalisten stützen sich ausschließlich auf verlässliche Primärquellen.')),
     A('neobhodimyy-uslov', 'adj', 'неотъ+емлемый', 'C1', 'integral, inalienable', 'unverzichtbar, untrennbar',
       ex('Регулярное ревью — [[неотъ+емлемый]] элемент спокойной разработки.', 'Regular review is an integral part of calm software engineering.', 'Regelmäßige Reviews sind ein unverzichtbarer Teil ruhiger Entwicklung.')),
     A('neprednamerenno', 'adv', 'непреднам+еренно', 'C1', 'inadvertently, unintentionally', 'unbeabsichtigt, versehentlich',
@@ -2941,9 +2939,7 @@ GT.register({
     N('tamozhennyy-kontrol', 'там+оженный контр+оль', 'm', '', 'B2', 'customs control', 'die Zollkontrolle',
       ex('При ввозе техники нужно пройти [[там+оженный контр+оль]].', 'When importing equipment you must pass through customs control.', 'Bei der Einfuhr von Geräten muss man durch die Zollkontrolle.')),
     N('putevoj-list', 'маршр+утная квит+анция', 'f', 'маршр+утные квит+анции', 'B2', 'itinerary receipt, flight ticket receipt', 'der Reiseplan, Ticketbeleg',
-      ex('Для возмещения билета сохраните электронную [[маршр+утную квит+анцию]].', 'Keep your electronic itinerary receipt to claim ticket reimbursement.', 'Bewahren Sie den elektronischen Ticketbeleg für die Erstattung auf.')),
-    V('zaderzhat-reys', 'зад+ерживать', 'impf', 'B2', ['зад+ерживаю, зад+ерживаешь', 'зад+ерживал', 'pf. задерж+ать'], 'to delay (a train, flight)', 'verzögern, aufhalten',
-      ex('Сильный встречный ветер может [[зад+ерживать]] вылет на сорок мин+ут.', 'Strong headwinds can delay departure by forty minutes.', 'Starker Gegenwind kann den Abflug um vierzig Minuten verzögern.'))
+      ex('Для возмещения билета сохраните электронную [[маршр+утную квит+анцию]].', 'Keep your electronic itinerary receipt to claim ticket reimbursement.', 'Bewahren Sie den elektronischen Ticketbeleg für die Erstattung auf.'))
   ]);
 
   reg('b2_science', [

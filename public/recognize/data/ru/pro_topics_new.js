@@ -129,9 +129,6 @@
     N('iteratsiya', 'итер+ация', 'f', 'C1', 'iteration', 'die Iteration',
       ex('К+аждая [[итер+ация]] заним+ает две нед+ели и зак+анчивается д+емо.', 'Each iteration lasts two weeks and ends with a demo.', 'Jede Iteration dauert zwei Wochen und endet mit einer Demo.'),
       ['Used for both Agile sprint cycles and programming loops.', 'Sowohl für agile Entwicklungszyklen als auch für Schleifen im Code.']),
-    V('dorabatyvat', 'дораб+атывать', 'impf', 'B2', ['дораб+атываю, дораб+атываешь', 'дораб+атывал', 'pf. дораб+отать'], 'to refine, polish, rework', 'überarbeiten, nachbessern',
-      ex('По оц+енкам б+ета-т+еста мы продолж+аем [[дораб+атывать]] п+оиск.', 'Based on beta feedback we keep refining search.', 'Auf Basis des Beta-Feedbacks verbessern wir die Suche weiter.'),
-      ['Prefix до- adds “finish/polish up”; related noun: дораб+отка (follow-up fix).', 'Vorsilbe до- drückt Nachbesserung aus; Substantiv: дораб+отка.']),
     A('gibky', 'adj', 'г+ибкий', 'B1', 'agile, flexible', 'flexibel, agil',
       ex('[[Г+ибкий]] план позвол+яет б+ыстро мен+ять курс при н+овых д+анных.', 'An agile plan makes it easy to change course when new data arrives.', 'Ein agiler Plan erlaubt es, bei neuen Daten schnell umzusteuern.'),
       ['Describes both physical bendability and Agile schedules/methodology (г+ибкий график).', 'Sowohl physisch „biegsam“ als auch übertragen für flexible Arbeitszeiten und Agile.'])

@@ -70,6 +70,7 @@ GT.register({ tab: 'words', topic: 'b2_media', items: [
 },
 {
   id: 'ru-w-dostoverny', pos: 'adj', level: 'B2', t: 'дост+оверный',
+  alsoIn: [['words', 'c1_argumentation']],
   en: 'reliable, credible (information)', de: 'glaubwürdig, verlässlich',
   examples: [{ t: 'Э́то [[дост+оверный]] исто́чник?', en: 'Is that a reliable source?', de: 'Ist das eine verlässliche Quelle?' }],
   parts: [['досто-', { en: 'worthy (cf. дост+ойный)', de: 'würdig (vgl. дост+ойный)' }], ['-вер-', { en: 'belief (cf. в+ерить)', de: 'Glaube (vgl. в+ерить)' }], ['-ный', { en: 'adjective', de: 'Adjektiv' }]],

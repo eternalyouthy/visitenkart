@@ -2099,4 +2099,6 @@ GT.packs.ru.byId["ru-r-da-peredavat"].note = {
       ex('Вдоль новой велодорожки уже смонтировали уличное [[освещ+ение]].', 'Street lighting has already been installed along the new cycle path.', 'Entlang des neuen Radwegs wurde bereits Straßenbeleuchtung montiert.'),
       { level: 'B2' })
   ]);
+  GT.addMember('ru-r27-r-prav-ispravit', 'it', 'dev');
+  GT.addMember('ru-r28-rabot-dorabotat', 'it', 'product');
 })();

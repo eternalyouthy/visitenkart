@@ -9,7 +9,6 @@
   T('b1-health-praxis', ['The practice is on the second floor, right above the pharmacy.', 'In theory that sounds good, but in practice it unfortunately doesn’t work.']);
   T('b1-health-untersuchung', ['Before the operation I have to go to the hospital for an examination.', 'An internal investigation is under way after the incident. We don’t yet know how the attackers got in.']);
   T('b1-health-behandeln', ['Which doctor has been treating you so far?', 'Please treat this information as confidential.', 'In today’s session we’ll deal with item three first.']);
-  T('b1-health-verschreiben', ['The doctor prescribed me an antibiotic.', 'Sorry, typo: the IP ends in .12, not .21.']);
   T('b1-health-rezept', ['You need a doctor’s prescription for this medicine.', 'My colleague sent me the recipe for the cake.']);
   T('b1-health-erkaeltung', ['I’ve caught a cold and I’m working from home today.', 'For an ordinary cold, rest and lots of tea help most.']);
   T('b1-health-verletzen', ['I hurt my knee playing football.', 'I hurt my hand while cooking.', 'This measure must not violate data protection.']);
@@ -38,7 +37,6 @@
   T('b1-health-ergebnis', ['You’ll get the results of the blood test next week.', 'The scan result was clear: the computer was infected.']);
   T('b1-health-temperatur', ['Have you taken your temperature today?', 'At the weekend temperatures will rise above 30 degrees.']);
   T('b1-health-medizin', ['My sister is studying medicine in Leipzig.', 'Have you taken your medicine today?']);
-  T('b1-health-zustand', ['His condition is stable.', 'You shouldn’t drive in this state.']);
   T('b1-health-krankheit', ['Because of a long illness he couldn’t work for six months.', 'Fortunately this disease is not contagious.']);
   T('b1-health-grippe', ['Half the department is in bed with flu.', 'That’s not a cold, that’s real flu.']);
   T('b1-health-schnupfen', ['I’ve had a runny nose and a sore throat since yesterday.', 'With a slight cold I still go to the office.']);
@@ -67,12 +65,8 @@
   T('b1-health-erholen', ['He has recovered well from the operation.', 'On holiday I just want to relax.']);
   T('b1-health-atmen', ['Breathe in deeply … and out again.', 'I can hardly breathe through my nose.']);
   T('b1-health-bluten', ['Your finger is bleeding!', 'The wound bled heavily.']);
-  T('b1-health-brechen', ['She broke her leg skiing.', 'The ice broke under him.', 'The child was sick twice last night.']);
-  T('b1-health-einnehmen', ['Please take the tablets before breakfast.', 'How much longer do I have to take the antibiotic?', 'The club took almost 2,000 euros at the fair.']);
   T('b1-health-leiden', ['My father suffers from diabetes.', 'Many colleagues are suffering from the stress in the project.']);
   T('b1-health-pflegen', ['She cares for her sick mother at home.', 'Who actually maintains the documentation in the wiki?']);
-  T('b1-health-abnehmen', ['I lost five kilos in three months.', 'I’ve been calling for an hour, but nobody answers.', 'Please take off your glasses before the examination.', 'The doctor’s assistant took a blood sample this morning.']);
-  T('b1-health-zunehmen', ['Working from home, I’ve unfortunately put on a few kilos.', 'The number of attacks has increased sharply.']);
   T('b1-health-schwitzen', ['At night I sweat a lot and have a fever.', 'You sweat when you do sport — that’s normal.']);
   T('b1-health-frieren', ['I’m cold even though the heating is on. Maybe I’m getting a fever.', 'You must have been cold without a jacket.', 'The little lake froze over completely overnight.']);
   T('b1-health-sterben', ['Her grandfather died last year.', 'He died of a heart attack.']);

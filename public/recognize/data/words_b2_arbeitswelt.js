@@ -119,16 +119,6 @@ GT.register({ tab: 'it', topic: 'b2_arbeitswelt', items: [
     ]
   },
   {
-    id: 'b2-arbeitswelt-abstimmen', level: 'b2', pos: 'verb', de: "sich abstimmen",
-    forms: { praes: "stimmt sich ab", praet: "stimmte sich ab", perf: "hat sich abgestimmt" }, gov: "mit + Dat. / über + Akk.",
-    ru: "согласовывать действия, договариваться", en: "to coordinate, to align with someone",
-    examples: [
-      { de: "Vor der Umstellung müssen wir uns mit dem Support [[abstimmen]].", ru: "Перед переходом нам нужно согласовать действия со службой поддержки.", en: "Before the changeover, we need to coordinate with support." }
-    ],
-    note: "Sich mit jemandem abstimmen — согласовать действия. Über einen Vorschlag abstimmen — голосовать по предложению.",
-    i18n: { en: { note: "Sich mit jemandem abstimmen means to coordinate. Über einen Vorschlag abstimmen means to vote on a proposal." } }
-  },
-  {
     id: 'b2-arbeitswelt-ortsunabhaengig', level: 'b2', pos: 'adj', de: "ortsunabhängig",
     ru: "без привязки к месту", en: "location-independent, from any location",
     examples: [

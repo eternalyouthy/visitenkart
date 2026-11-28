@@ -89,7 +89,6 @@
   T('it-sec-schulung', ['IT security training is mandatory for everyone.', 'After the training far fewer colleagues click on phishing links.']);
   T('it-sec-sensibilisierung', ['Raising staff awareness is just as important as the technology.', 'With this campaign we want to raise awareness of phishing.']);
   T('it-sec-zertifikat', ['The website’s certificate expires next week.', 'The browser shows a warning because the certificate is invalid.']);
-  T('it-sec-ablaufen', ['Your password expires in three days.', 'How exactly did the attack unfold?']);
   T('it-sec-signatur', ['The email has a valid digital signature.', 'There is no signature yet for this new malware.']);
   T('it-sec-segmentierung', ['Thanks to segmentation, the malware couldn’t spread any further.', 'The production systems need strict segmentation.']);
   T('it-sec-aktualisieren', ['Please update your browser to the latest version.', 'The virus signatures are updated every hour.']);

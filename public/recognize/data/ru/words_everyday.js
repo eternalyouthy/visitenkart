@@ -2,18 +2,6 @@
  * t = Russian ("+" before the stressed vowel), en / de = meaning; explanations { en, de }. */
 GT.register({ tab: 'words', topic: 'everyday', items: [
 {
-  id: 'ru-w-delo', pos: 'noun', level: 'A2', t: 'д+ело', gender: 'n', plural: 'дел+а',
-  en: 'matter, affair; (pl.) things to do; (legal) case', de: 'die Sache, die Angelegenheit; (Pl.) Erledigungen; (jur.) der Fall',
-  examples: [
-    { sense: { en: 'things to do', de: 'Erledigungen' }, t: 'У меня́ сего́дня мно́го [[дел]].', en: 'I have a lot to do today.', de: 'Ich habe heute viel zu erledigen.' },
-    { sense: { en: 'affair, business of someone', de: 'Angelegenheit' }, t: 'Э́то не твоё [[д+ело]].', en: 'That’s none of your business.', de: 'Das geht dich nichts an.' }
-  ],
-  meaningType: 'polysemous',
-  meaningExplanation: { en: 'дело covers a whole range: a task or errand, someone’s business, the point of a matter («в чём дело?» — what’s the matter?) and a legal or police case.', de: 'дело deckt viel ab: eine Aufgabe oder Erledigung, jemandes Angelegenheit, den Kern einer Sache («в чём дело?» — was ist los?) und einen Rechts- oder Kriminalfall.' },
-  meaningExamples: [{ t: 'В чём д+ело?', en: 'What’s the matter?', de: 'Was ist los?' }, { t: 'уголо́вное д+ело', en: 'a criminal case', de: 'ein Strafverfahren' }],
-  note: { en: '«Как дела́?» — How are you? is the most frequent use. The plural дела́ is stressed on the ending.', de: '«Как дела́?» — Wie geht’s? ist die häufigste Verwendung. Im Plural дела́ liegt die Betonung auf der Endung.' }
-},
-{
   id: 'ru-w-uspevat', pos: 'verb', level: 'B1', aspect: 'impf', t: 'успев+ать',
   forms: { praes: 'успев+аю, успев+аешь', praet: 'успев+ал', perf: 'pf. усп+еть (усп+ею)' },
   en: 'to manage (in time), to make it', de: 'es (rechtzeitig) schaffen',
@@ -85,13 +73,6 @@ GT.register({ tab: 'words', topic: 'everyday', items: [
   en: 'time', de: 'die Zeit',
   examples: [{ t: 'У меня́ нет [[вр+емени]].', en: 'I have no time.', de: 'Ich habe keine Zeit.' }],
   note: { en: 'One of ten neuter nouns in -мя with the stem -мен-: вре́мя → вре́мени, и́мя → и́мени. Plural времена́ means “times, eras” or grammatical tenses.', de: 'Eines von zehn Neutra auf -мя mit Stamm -мен-: вре́мя → вре́мени, и́мя → и́мени. Plural времена́ = „Zeiten, Epochen“ oder grammatische Tempora.' }
-},
-{
-  id: 'ru-w-ostavatsya', pos: 'verb', level: 'B1', aspect: 'impf', t: 'остав+аться',
-  forms: { praes: 'оста+юсь, остаёшься', praet: 'остав+ался', perf: 'pf. ост+аться (ост+анусь)' },
-  en: 'to stay, to remain; to be left', de: 'bleiben; übrig bleiben',
-  examples: [{ t: 'До рели́за [[ост+алось]] два дня.', en: 'Two days are left until the release.', de: 'Bis zum Release bleiben noch zwei Tage.' }],
-  note: { en: 'Impersonal «осталось / остался» = there is … left. «Оставаться дома» — to stay at home.', de: 'Unpersönlich «осталось / остался» = es bleibt / ist übrig. «Оставаться дома» — zu Hause bleiben.' }
 }
 ]});
 
@@ -179,13 +160,6 @@ GT.register({ tab: 'words', topic: 'home', items: [
   en: 'to tidy up, to clean; to put away', de: 'aufräumen, putzen; wegräumen',
   examples: [{ t: 'По суббо́там мы [[убир+аем]] кварти́ру.', en: 'On Saturdays we clean the flat.', de: 'Samstags putzen wir die Wohnung.' }],
   note: { en: 'Prefix у- “away” + -бир- “take”: literally “take away”. Noun: убо́рка (cleaning).', de: 'Präfix у- „weg“ + -бир- „nehmen“: wörtlich „wegnehmen“. Substantiv: убо́рка (Putzen).' }
-},
-{
-  id: 'ru-w-podezd', pos: 'noun', level: 'B1', t: 'подъ+езд', gender: 'm', plural: 'подъ+езды',
-  en: 'entrance (of a block of flats), stairwell', de: 'der Hauseingang, das Treppenhaus',
-  examples: [{ t: 'Встре́тимся у [[подъ+езда]].', en: 'Let’s meet at the entrance.', de: 'Treffen wir uns am Hauseingang.' }],
-  parts: [['под-', { en: 'up to, approach', de: 'heran' }], ['-ъезд', { en: 'driving', de: 'Fahren' }]],
-  note: { en: 'Literally “the place you drive up to”. Big blocks have several подъезды, each with its own number.', de: 'Wörtlich „wo man vorfährt“. Große Wohnblöcke haben mehrere подъезды mit eigener Nummer.' }
 }
 ]});
 
@@ -218,12 +192,6 @@ GT.register({ tab: 'words', topic: 'food', items: [
   id: 'ru-w-skidka', pos: 'noun', level: 'B1', t: 'ск+идка', gender: 'f', plural: 'ск+идки',
   en: 'discount', de: 'der Rabatt',
   examples: [{ t: 'Сего́дня на всё [[ск+идка]] два́дцать проце́нтов.', en: 'Today everything is 20% off.', de: 'Heute gibt es auf alles zwanzig Prozent Rabatt.' }]
-},
-{
-  id: 'ru-w-zakazyvat', pos: 'verb', level: 'A2', aspect: 'impf', t: 'зак+азывать',
-  forms: { praes: 'зак+азываю, зак+азываешь', praet: 'зак+азывал', perf: 'pf. заказ+ать (закаж+у)' },
-  en: 'to order; to book', de: 'bestellen; buchen',
-  examples: [{ t: 'Я [[заказ+ал]] сто́лик на семь.', en: 'I booked a table for seven.', de: 'Ich habe einen Tisch für sieben reserviert.' }]
 },
 {
   id: 'ru-w-nalichnye', pos: 'noun', level: 'B1', t: 'нал+ичные', gender: 'pl',

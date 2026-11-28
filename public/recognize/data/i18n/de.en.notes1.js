@@ -358,23 +358,6 @@
       ],
       parts: ['inseparable prefix, makes the verb transitive (+ acc.)', 'stem of handeln — to act (historically from Hand)', 'infinitive ending']
     },
-    'b1-health-verschreiben': {
-      note: 'Two meanings. With a reflexive verb the prefix ver- often means “to do wrongly by mistake”: sich verschreiben (to make a slip of the pen / typo), sich versprechen (to misspeak), sich verhören (to mishear), sich verlaufen (to get lost). “Verschreibungspflichtig” — prescription-only.',
-      why: {
-        text: 'Composition: ver- + schreiben + -en.\nOrigin: schreiben is an early borrowing from Latin scribere (“to write”). In Middle High German verschrīben meant “to assign or commit in writing”, whence the medical sense “to write a prescription”. Reflexive sich verschreiben (“to make a slip of the pen”) follows the productive ver- pattern of error.\nTransparency: sich verschreiben is transparent, while “to prescribe medicine” is figurative.',
-        evidence: 'schreiben < Lat. scribere; MHG verschrīben “to assign in writing”; sich verschreiben follows the error pattern of ver-.'
-      },
-      meaningExplanation: 'Without reflexive sich the verb means “to prescribe medication”, whereas with sich (sich verschreiben) it means “to make a slip of the pen or a typo”.',
-      meaningExamples: [
-        'The doctor prescribes an antibiotic.',
-        'Sorry, I made a typo.'
-      ],
-      senses: [
-        'to prescribe (medicine)',
-        'to make a slip of the pen / typo (sich)'
-      ],
-      parts: ['inseparable prefix (assign / error with sich)', 'stem of schreiben — to write', 'infinitive ending']
-    },
     'b1-health-rezept': {
       note: 'Covers both a medical prescription and a cooking recipe! “Rezeptfrei” — over-the-counter; “rezeptpflichtig” — prescription-only. Today doctors usually issue an “E-Rezept”, which the pharmacy reads directly from your insurance card. At the pharmacy: “ein Rezept einlösen” — to fill a prescription.',
       why: {
@@ -653,14 +636,6 @@
         'medicine, medication (colloq.)'
       ]
     },
-    'b1-health-zustand': {
-      note: 'Of health: “Sein Zustand hat sich verbessert / verschlechtert”. Of objects: “Das Auto ist in gutem Zustand”. The plural “Zustände” often carries a negative tone: “Das sind ja Zustände hier!” — what a state of affairs / what chaos!',
-      why: {
-        text: 'Composition: prefix Zu- + der Stand (“standing, state”, from stehen “to stand”).\nOrigin: became established in the 17th century as the German equivalent of Latin status (“state of affairs, condition”, from stāre “to stand”).\nTransparency: figurative — the root Stand/stehen is easy to recognise.',
-        evidence: '17th-century formation (zu + Stand, from stehen) as a German equivalent of Lat. status.'
-      },
-      parts: ['prefix', 'der Stand — standing, position (from stehen — to stand)']
-    },
     'b1-health-krankheit': {
       note: '“An einer Krankheit leiden” (dative) — to suffer from an illness. “Chronisch” — chronic, “ansteckend” — contagious. Nouns ending in -heit / -keit are always feminine.',
       why: {
@@ -896,41 +871,6 @@
         evidence: 'Denominative verb from das Blut (< Gmc. *blōþą, cognate with Eng. blood / bleed).'
       }
     },
-    'b1-health-brechen': {
-      note: 'Transitive “to break something” → haben: “Ich habe mir den Arm gebrochen” (dative reflexive + body part). Intransitive “something breaks” → sein: “Das Eis ist gebrochen”. In medicine “brechen / sich erbrechen” also means “to vomit”. Strong verb: e→i, brach, gebrochen.',
-      why: {
-        text: 'Composition: strong root verb brech- + -en.\nOrigin: a Common Germanic verb (OHG brehhan, cognate with English break), going back to the Indo-European root *bʰreg- (“to break”), to which Latin frangere (whence fragment, fraction) also belongs.\nTransparency: basic root (the medical sense “to vomit” developed from the image of a sudden violent expulsion).',
-        evidence: 'OHG brehhan < Gmc. *brekaną (Eng. break) < IE *bʰreg- (cognate with Lat. frangere).'
-      },
-      meaningExplanation: 'The verb brechen combines several dictionary meanings: transitive “to break” (with haben), intransitive “to break” (with sein), and medical “to vomit, throw up”.',
-      meaningExamples: [
-        'He broke his arm.',
-        'The child was vomiting all night.'
-      ],
-      senses: [
-        'to break something (with haben)',
-        'to break, snap (with sein)',
-        'to vomit, throw up (med.)'
-      ]
-    },
-    'b1-health-einnehmen': {
-      note: 'A formal word used on package leaflets and by doctors; in everyday speech people simply say “nehmen”. “Die Einnahme” — taking (of medication); “die Einnahmen” (plural) — revenue, income. Strong verb: nimmt ein, nahm ein, eingenommen.',
-      why: {
-        text: 'Composition: separable prefix ein- (“in, inward”) + nehmen (“to take”).\nOrigin: literal “to take in” gave rise both to the medical sense (taking medication internally) and to the financial sense (taking money into the till → earning revenue, whence die Einnahmen).\nTransparency: figurative, though the logic of “in + take” is easy to follow.',
-        evidence: 'ein- (“inward”) + nehmen (“to take”): “to take internally” and “to take in money / earn revenue”.'
-      },
-      meaningExplanation: 'In medicine einnehmen means “to take medication internally”, while in economics and general usage it means “to earn revenue/takings” or “to occupy a place/role”.',
-      meaningExamples: [
-        'to take tablets before meals',
-        'The company took in more money.'
-      ],
-      senses: [
-        'to take medication',
-        'to take a course of medication',
-        'to earn revenue, take in money'
-      ],
-      parts: ['in, inward (separable)', 'stem of nehmen — to take', 'infinitive ending']
-    },
     'b1-health-leiden': {
       note: '“An + dat.” — to suffer from an illness (an Migräne leiden); “unter + dat.” — to suffer under a situation (unter der Hitze, unter Stress). “Ich kann ihn nicht leiden” — I can’t stand him. Strong verb: litt, gelitten.',
       why: {
@@ -957,43 +897,6 @@
         'to care for, nurse a person',
         'to maintain, keep up to date (data, documentation)'
       ]
-    },
-    'b1-health-abnehmen': {
-      note: 'Has many meanings depending on context: to lose weight, to pick up the phone, to take off (a lid, glasses), and also “Blut abnehmen” — to take a blood sample. In IT: “die Abnahme” — acceptance testing / sign-off.',
-      why: {
-        text: 'Composition: separable prefix ab- (“off, down, decrease”) + nehmen (“to take”).\nOrigin: from literal “to take off from the top” developed “to lift the telephone receiver off its hook → to answer a call” and intransitive “to diminish, decrease” → “to lose weight”.\nTransparency: figurative — some senses are transparent (“to take off one’s glasses”), while “to lose weight” and “to answer the phone” are best learned through examples.',
-        evidence: 'ab- + nehmen: “to take off from above” → “to pick up the receiver”; intransitive “to decrease” → “to lose weight”.'
-      },
-      meaningExplanation: 'abnehmen has several distinct dictionary meanings: to lose weight, to remove/take off an object, to pick up the phone, to take a blood sample, and to decrease.',
-      meaningExamples: [
-        'to lose five kilos',
-        'to pick up the receiver',
-        'to take a blood sample'
-      ],
-      senses: [
-        'to lose weight',
-        'to pick up the phone',
-        'to take off (a lid, glasses)',
-        'to take (a blood sample)'
-      ],
-      parts: ['off, down, decrease (separable)', 'stem of nehmen — to take', 'infinitive ending']
-    },
-    'b1-health-zunehmen': {
-      note: 'Used both for body weight and for numbers: “Die Zahl der Fälle nimmt zu”. “Zunehmend” — increasingly (a very common word in reports). Opposite: abnehmen.',
-      why: {
-        text: 'Composition: separable prefix zu- (“addition, towards”) + nehmen (“to take”).\nOrigin: already in Middle High German zuonemen meant “to grow, increase, wax” — the direct antonym pair to abnehmen (“to wane, decrease”).\nTransparency: figurative, easily remembered as the pair abnehmen ↔ zunehmen.',
-        evidence: 'MHG zuonemen “to grow, increase” (zu- + nehmen), antonym of abnehmen.'
-      },
-      meaningExplanation: 'zunehmen denotes both gaining body weight and an increase in the number or intensity of a phenomenon (attacks, complaints, workload).',
-      meaningExamples: [
-        'to put on two kilos on holiday',
-        'Phishing attacks are constantly increasing.'
-      ],
-      senses: [
-        'to gain weight',
-        'to increase, grow (in number)'
-      ],
-      parts: ['to, addition (separable)', 'stem of nehmen — to take', 'infinitive ending']
     },
     'b1-health-schwitzen': {
       note: '“Der Schweiß” — sweat. “Verschwitzt” — sweaty. “Ich bin schweißgebadet” — I’m drenched in sweat. Night sweats (Nachtschweiß) are worth mentioning to a doctor.',

@@ -101,10 +101,7 @@
       ['Counting cars: нумерация с голов+ы / хвост+а п+оезда (from front / tail).', 'Wagenreihung: с голов+ы (= von vorn) oder с хвост+а (= von hinten) п+оезда.']),
     N('provodnik', 'проводн+ик', 'm', 'B1', 'train attendant, conductor', 'der Schaffner, der Zugbegleiter',
       ex('[[Проводн+ик]] пров+ерил бил+еты и паспорт+а.', 'The conductor checked the tickets and passports.', 'Der Schaffner kontrollierte die Fahrkarten und Pässe.'),
-      ['Female form: проводн+ица; in physics also “electrical conductor”.', 'Weiblich: проводн+ица; in der Physik auch „elektrischer Leiter“.']),
-    N('marshrut', 'маршр+ут', 'm', 'B1', 'route', 'die Route, die Strecke',
-      ex('Навиг+атор постр+оил б+олее б+ыстрый [[маршр+ут]].', 'The satnav plotted a faster route.', 'Das Navi hat eine schnellere Route berechnet.'),
-      ['Common verbs: пролож+ить / постр+оить маршр+ут (plot a route).', 'Typische Verben: постр+оить / пролож+ить маршр+ут (eine Route planen).'])
+      ['Female form: проводн+ица; in physics also “electrical conductor”.', 'Weiblich: проводн+ица; in der Physik auch „elektrischer Leiter“.'])
   ]);
 
   reg('work', [

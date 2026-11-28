@@ -31,9 +31,6 @@
       ex('Unsere Nachbarn sind sehr [[hilfsbereit]].', 'Наши соседи очень отзывчивые.', 'Our neighbours are very helpful.')),
     A('grosszuegig', 'adj', 'großzügig', 'щедрый; великодушный', 'generous',
       ex('Sie war sehr [[großzügig]] und hat für alle bezahlt.', 'Она была очень щедрой и заплатила за всех.', 'She was very generous and paid for everyone.')),
-    V('streiten', 'streiten', ['streitet', 'stritt', 'hat gestritten'], 'mit + Dat. / über + Akk.', 'ссориться, спорить', 'to argue, to quarrel',
-      ex('Die Geschwister [[streiten]] oft über Kleinigkeiten.', 'Братья и сёстры часто ссорятся из-за мелочей.', 'The siblings often argue over little things.'),
-      ['Также возвратно: sich streiten. Существительное: der Streit.', 'Also reflexive: sich streiten. Noun: der Streit.']),
     V('vermissen', 'vermissen', ['vermisst', 'vermisste', 'hat vermisst'], '+ Akk.', 'скучать по (кому-то / чему-то)', 'to miss (someone / something)',
       ex('Ich [[vermisse]] meine Familie und meine alten Freunde.', 'Я скучаю по своей семье и старым друзьям.', 'I miss my family and my old friends.'),
       ['Без предлога! Не «vermissen nach», а прямое дополнение: ich vermisse dich.', 'No preposition! Direct object in accusative: ich vermisse dich.'])

@@ -196,12 +196,6 @@ GT.register({ tab: 'words', topic: 'travel', items: [
     note: { en: "Common collocations: прямой р+ейс (direct flight), посадка на р+ейс.", de: "Gängig für Flüge und Buslinien: прямой р+ейс (= Direktflug), отм+ена р+ейса." }
   },
   {
-    id: 'ru-w-raspisanie', pos: 'noun', level: 'A2', t: "распис+ание", gender: 'n', plural: "распис+ания",
-    en: "timetable, schedule", de: "der Fahrplan; der Zeitplan",
-    examples: [{ t: "По [[распис+анию]] п+оезд отпр+авится в семь.", en: "According to the timetable, the train leaves at seven.", de: "Laut Fahrplan fährt der Zug um sieben ab." }],
-    note: { en: "On schedule = по распис+анию (+ Dat.); also school class timetable!", de: "Pünktlich nach Plan: по распис+анию (+ Dat.); gilt für Züge wie Stundenpläne." }
-  },
-  {
     id: 'ru-w-bagazh', pos: 'noun', level: 'A2', t: "баг+аж", gender: 'm',
     en: "luggage, baggage", de: "das Gepäck",
     examples: [{ t: "Где м+ожно получ+ить [[баг+аж]]?", en: "Where can I collect my luggage?", de: "Wo kann ich mein Gepäck abholen?" }],

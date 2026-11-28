@@ -75,14 +75,6 @@ GT.register({ tab: 'words', topic: 'b2_gesellschaft', items: [
     ]
   },
   {
-    id: 'b2-gesellschaft-einsetzen', level: 'b2', pos: 'verb', de: "sich einsetzen",
-    forms: { praes: "setzt sich ein", praet: "setzte sich ein", perf: "hat sich eingesetzt" }, gov: "für + Akk.",
-    ru: "выступать в поддержку, прилагать усилия ради чего-либо", en: "to advocate for, to work to support",
-    examples: [
-      { de: "Der Verein will sich für bezahlbaren Wohnraum [[einsetzen]].", ru: "Объединение хочет выступить в поддержку доступного жилья.", en: "The association wants to advocate for affordable housing." }
-    ]
-  },
-  {
     id: 'b2-gesellschaft-beruecksichtigen', level: 'b2', pos: 'verb', de: "berücksichtigen",
     forms: { praes: "berücksichtigt", praet: "berücksichtigte", perf: "hat berücksichtigt" }, gov: "+ Akk.",
     ru: "учитывать, принимать во внимание", en: "to take into account, to consider",

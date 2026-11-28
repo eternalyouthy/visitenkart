@@ -4915,11 +4915,71 @@
     if (t === 'practice' && /scope=root(:|%3A)/.test(location.hash)) return '#/practice';
     return null;
   }
+  /** Find an equivalent item in `toLang` (direct cross-language link first, else 1-hop via third language). */
+  function findCrossLangTarget(sourceIds, fromLang, toLang, preferRoot, baseId, preferHash) {
+    if (!GT.linksFor || !sourceIds || !sourceIds.length) return null;
+    function hashFor(it) {
+      return (preferRoot && it.rootId && GT.roots[it.rootId])
+        ? '#/roots/' + encodeURIComponent(it.rootId)
+        : '#/item/' + encodeURIComponent(it.id);
+    }
+    function pickBest(cands, isBase) {
+      if (!cands.length) return null;
+      var best = null, bestScore = -1;
+      cands.forEach(function (it) {
+        var inRoot = !!(it.rootId && GT.roots[it.rootId]);
+        var score = (preferHash && hashFor(it) === preferHash ? 4 : 0) +
+          (preferRoot ? ((inRoot ? 2 : 0) + (inRoot && isBase && it.base ? 1 : 0)) : 0);
+        if (score > bestScore) { bestScore = score; best = it; }
+      });
+      return best;
+    }
+    for (var i = 0; i < sourceIds.length; i++) {
+      var sid = sourceIds[i], isBase = sid === baseId;
+      var direct = [];
+      GT.linksFor(sid, fromLang).forEach(function (g) {
+        var e = g.entries && g.entries[toLang];
+        var it = e && GT.byId[e.id];
+        if (it && direct.indexOf(it) < 0) direct.push(it);
+      });
+      var hit = pickBest(direct, isBase);
+      if (hit) return hit;
+      var transitive = [];
+      GT.linksFor(sid, fromLang).forEach(function (g) {
+        (g.langs || []).forEach(function (mid) {
+          if (mid === fromLang || mid === toLang) return;
+          var me = g.entries && g.entries[mid];
+          if (!me) return;
+          GT.linksFor(me.id, mid).forEach(function (g2) {
+            var e2 = g2.entries && g2.entries[toLang];
+            var it2 = e2 && GT.byId[e2.id];
+            if (it2 && transitive.indexOf(it2) < 0) transitive.push(it2);
+          });
+        });
+      });
+      hit = pickBest(transitive, isBase);
+      if (hit) return hit;
+    }
+    return null;
+  }
   function switchLearn(lang, targetHash) {
     var prev = GT.learn;
     if (lang === prev) {
       if (targetHash && location.hash !== targetHash) { location.hash = targetHash; route(); }
       return Promise.resolve();
+    }
+    var jumpCtx = null;
+    if (!targetHash) {
+      var prevPath = curPath();
+      if (prevPath[0] === 'roots' && prevPath[1] && GT.roots[prevPath[1]]) {
+        var prevRid = prevPath[1], prevWords = rootWords(prevRid);
+        var prevBase = prevWords.filter(function (w) { return w.base; })[0] || prevWords[0];
+        var prevSel = ui.rootSel[prevRid] && GT.byId[ui.rootSel[prevRid]] ? ui.rootSel[prevRid] : null;
+        var ids = [prevSel, prevBase && prevBase.id].filter(function (x, i, a) { return x && a.indexOf(x) === i; });
+        if (ids.length) jumpCtx = { fromLang: prev, preferRoot: true, ids: ids, baseId: prevBase ? prevBase.id : null };
+      } else if (prevPath[0] === 'item' && prevPath[1] && GT.byId[prevPath[1]]) {
+        jumpCtx = { fromLang: prev, preferRoot: false, ids: [prevPath[1]], baseId: null };
+      }
     }
     if (studio && !studio.checked && studio.questions[studio.i] && studio.questions[studio.i].endsAt) {
       studio.questions[studio.i]._remMs = Math.max(1000, studio.questions[studio.i].endsAt - Date.now());
@@ -4940,6 +5000,27 @@
         if (location.hash !== targetHash) location.hash = targetHash;
         route();
         return;
+      }
+      if (jumpCtx) {
+        var savedTo = sessions[lang];
+        var matched = findCrossLangTarget(jumpCtx.ids, jumpCtx.fromLang, lang, jumpCtx.preferRoot, jumpCtx.baseId, savedTo && savedTo.hash);
+        if (matched) {
+          var resolvedHash;
+          if (jumpCtx.preferRoot && matched.rootId && GT.roots[matched.rootId]) {
+            resolvedHash = '#/roots/' + encodeURIComponent(matched.rootId);
+            ui.rootSel[matched.rootId] = matched.id;
+            if (!matched.base && !matched.core && matched.mapAs !== 'chip') ui.rootAll[matched.rootId] = true;
+          } else {
+            resolvedHash = '#/item/' + encodeURIComponent(matched.id);
+          }
+          autoRedirect = null;
+          try { history.replaceState(Object.assign({}, history.state || {}, { learn: lang, know: GT.know }), '', resolvedHash); }
+          catch (e) { location.replace(resolvedHash); return; }
+          var sOpen = sheetEl.classList.contains('open') && sheetEl.dataset.mode === 'settings';
+          route({ keep: true });
+          if (sOpen) openSettings();
+          return;
+        }
       }
       var saved = sessions[lang];
       var canRestoreRedirect = saved && autoRedirect && autoRedirect.fromLang === lang && autoRedirect.toLang === prev && location.hash === autoRedirect.toHash;
